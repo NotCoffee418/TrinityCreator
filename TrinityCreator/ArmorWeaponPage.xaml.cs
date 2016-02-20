@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace TrinityCreator
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ArmorWeaponPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ArmorWeaponPage : UserControl
     {
-        public MainWindow()
+        public ArmorWeaponPage()
         {
             InitializeComponent();
-
-            // Check for updates
-            #if !DEBUG
-                Updater.CheckForUpdates();
-            #endif
-
-            armorWeaponsTab.Content = new ArmorWeaponPage();
         }
     }
 }
