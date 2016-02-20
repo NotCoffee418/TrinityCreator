@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="TrinityCreator.ItemPreview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Width="421.475" Height="502">
+
+    <Grid Background="#0b0b17">
+        <Border BorderBrush="#fff" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8" />
+        <StackPanel Margin="10,5">
+            <Label Name="itemNameLbl" Content="Item Name" Foreground="Gray" FontSize="18"/>
+            <Label Name="itemBoundsLbl" Content="BoP/BoE/BoU" Foreground="White" FontSize="14" />
+            <!-- Only visible on weapon item -->
+            <StackPanel Name="weaponPanel" Visibility="Visible">
+                <DockPanel Margin="0,-10,0,0">
+                    <Label Name="weaponEquipLbl" Content="One-handed" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
+                    <Label Name="weaponTypeLbl" Content="Mace" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
+                </DockPanel>
+                <DockPanel Margin="0,-10,0,0">
+                    <Label Name="weaponMinMaxDmgLbl" Content="x - x Damage" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
+                    <Label Name="weaponSpeedLbl" Content="Speed x.xx" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
+                </DockPanel>
+                <Label Name="weaponDpsLbl" Content="(xx.x damage per second)" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+            </StackPanel>
+            <!-- Only visible on armor item -->
+            <StackPanel Name="armorPanel" Visibility="Collapsed">
+                <DockPanel Name="armorPropertyPanel" Visibility="Visible" Margin="0,-10,0,0">
+                    <Label Name="armorEquip" Content="Chest" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
+                    <Label Name="armorMaterial" Content="Cloth" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
+                </DockPanel>
+            </StackPanel>
+            <Label Name="itemArmorLbl" Content="xxxx Armor" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+            <Label Name="itemBlockLbl" Content="xxx Block" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+            <Label Name="otherStatsLbl" Content="+ xx Agility" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+            
+            <!-- Only visible when sockets available -->
+            <!-- todo: Ensure you can for example have two yellow sockets -->
+            <StackPanel>
+                <DockPanel Name="socket1" Margin="5,0,0,0">
+                    <Image Source="pack://siteoforigin:,,,/Resources/metasocket.png" Width="15" Height="15" />
+                    <Label Content="Color Socket" Foreground="Gray" />
+                </DockPanel>
+                <DockPanel Name="socket2" Margin="5,0,0,0">
+                    <Image Source="pack://siteoforigin:,,,/Resources/metasocket.png" Width="15" Height="15" />
+                    <Label Content="Color Socket" Foreground="Gray" Margin="0,-5,0,0" />
+                </DockPanel>
+                <DockPanel Name="socket3" Margin="5,0,0,0">
+                    <Image Source="pack://siteoforigin:,,,/Resources/metasocket.png" Width="15" Height="15" />
+                    <Label Content="Color Socket" Foreground="Gray" Margin="0,-5,0,0" />
+                </DockPanel>
+                <DockPanel Name="socket4" Margin="5,0,0,0">
+                    <Image Source="pack://siteoforigin:,,,/Resources/metasocket.png" Width="15" Height="15" />
+                    <Label Content="Color Socket" Foreground="Gray" Margin="0,-5,0,0" />
+                </DockPanel>
+                <Label Content="Socket Bonus: +5 Spell Damage" Foreground="#0c0" Margin="0,-5,0,0" />
+
+            </StackPanel>
+            
+            <Label Name="itemClassRequirementsLbl" Content="Classes: class, class, class" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+            <Label Name="itemRaceRequirementsLbl" Content="Races: Human, Orc, Something" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+            <Label Name="itemLevelRequiredLbl" Content="Requires Level xx" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+            <Label Name="itemIlevelLbl" Content="Item Level xxx" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+
+            <Label Name="itemBonusStatsLbl" Content="Equip: Improves hit chance by 8." Foreground="#0c0" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+
+
+            <!-- Only visible when repairable -->
+            <Label Name="itemDurabilityLbl" Content="(Durability xx / xx)" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+            <Label Name="itemQuoteLbl" Content="''This is a quote for your item''" Foreground="#ddcba5" FontSize="14" Visibility="Visible" />
+
+            <!-- Buy price -->
+            <DockPanel>
+                <Label Content="Buy Price:" Foreground="White" Width="100"/>
+                <Label Content="xx" Name="buyGoldLbl" Foreground="White" HorizontalAlignment="Left" />
+                <Image Source="pack://siteoforigin:,,,/Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
+                <Label Content="xx" Name="buySilverLbl" Foreground="White" HorizontalAlignment="Left" />
+                <Image Source="pack://siteoforigin:,,,/Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
+                <Label Content="xx" Name="buyCopperLbl" Foreground="White" HorizontalAlignment="Left" />
+                <Image Source="pack://siteoforigin:,,,/Resources/copper.gif" Width="15" Height="15" HorizontalAlignment="Left" />
+            </DockPanel>
+            
+            <!-- Sell price -->
+            <DockPanel Margin="0,-10,0,0">
+                <Label Content="Sell Price:" Foreground="White" Width="100"/>
+                <Label Content="xx" Name="sellGoldLbl" Foreground="White" HorizontalAlignment="Left" />
+                <Image Source="pack://siteoforigin:,,,/Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
+                <Label Content="xx" Name="sellSilverLbl" Foreground="White" HorizontalAlignment="Left" />
+                <Image Source="pack://siteoforigin:,,,/Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
+                <Label Content="xx" Name="sellCopperLbl" Foreground="White" HorizontalAlignment="Left" />
+                <Image Source="pack://siteoforigin:,,,/Resources/copper.gif" Width="15" Height="15" HorizontalAlignment="Left" />
+            </DockPanel>
+
+        </StackPanel>
+    </Grid>
+</UserControl>
