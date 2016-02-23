@@ -23,6 +23,11 @@ namespace TrinityCreator
         public ArmorWeaponPage()
         {
             InitializeComponent();
+
+            preview = new ItemPreview();
+            previewBox.Content = preview;
         }
+
+        ItemPreview preview;
     }
 }

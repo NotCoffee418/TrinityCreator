@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Trinity Creator by RStijn" Height="439.975" Width="603">
     <TabControl x:Name="tabControl">
-        <TabItem Header="Armor &amp; Weapons" Name="armorWeaponsTab"/>
+        <TabItem Header="Armor &amp; Weapons" Name="armorWeaponsTab" />
         <TabItem Header="Creature" />
         <TabItem Header="More..." />
     </TabControl>

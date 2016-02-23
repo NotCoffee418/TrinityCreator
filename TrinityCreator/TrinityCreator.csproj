@@ -56,15 +56,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ArmorWeaponItem.cs" />
-    <Compile Include="ArmorWeaponPage.xaml.cs">
-      <DependentUpon>ArmorWeaponPage.xaml</DependentUpon>
+    <Compile Include="ArmorWeaponItemPage.xaml.cs">
+      <DependentUpon>ArmorWeaponItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="BonusStat.cs" />
     <Compile Include="Socket.cs" />
     <Compile Include="SocketBonus.cs" />
     <Compile Include="Stat.cs" />
     <Compile Include="Updater.cs" />
-    <Page Include="ArmorWeaponPage.xaml">
+    <Page Include="ArmorWeaponItemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

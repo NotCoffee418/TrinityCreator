@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Width="421.475" Height="502">
+             mc:Ignorable="d" Width="350" Height="502">
 
-    <Grid Background="#0b0b17">
-        <Border BorderBrush="#fff" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8" />
+    <Grid>
+        <Border BorderBrush="#fff" BorderThickness="2" CornerRadius="8,8,8,8" Margin="2" Background="#0b0b17"/>
         <StackPanel Margin="10,5">
             <Label Name="itemNameLbl" Content="Item Name" Foreground="Gray" FontSize="18"/>
             <Label Name="itemBoundsLbl" Content="BoP/BoE/BoU" Foreground="White" FontSize="14" />
