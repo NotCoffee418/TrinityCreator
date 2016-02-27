@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    class Stat
+    public class Stat
     {
        
     }

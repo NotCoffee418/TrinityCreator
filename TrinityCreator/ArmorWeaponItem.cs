@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    class ArmorWeaponItem
+    public class ArmorWeaponItem
     {
         private string _name;
         private string _quote;
-        private int _quality;
+        private ItemQuality _quality;
         private int _displayid;
         private int _entryid;
         private int _weaponequip;
@@ -33,7 +33,6 @@ namespace TrinityCreator
         private List<BonusStat> _bonusstats;
         private List<Socket> _sockets;
         private List<SocketBonus> _socketbonus;
-        private int _itembuyvalue;
         private int _valuesell;
         private int _valuebuy;
     
@@ -66,7 +65,7 @@ namespace TrinityCreator
             }
         }
 
-        public int Quality
+        public ItemQuality Quality
         {
             get
             {
@@ -77,6 +76,8 @@ namespace TrinityCreator
                 _quality = value;
             }
         }
+
+
 
         public int DisplayId
         {

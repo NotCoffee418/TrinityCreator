@@ -7,43 +7,78 @@
       <FileName>App.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TrinityCreator.ArmorWeaponItem">
-    <Position X="2" Y="3.5" Width="1.75" />
+  <Class Name="TrinityCreator.ArmorWeaponItem" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AnoQMAAwhAAAACVIAEgEWwwwogACGgA2AACgBjgAKQA=</HashCode>
       <FileName>ArmorWeaponItem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TrinityCreator.ArmorWeaponPage" Collapsed="true">
-    <Position X="4.75" Y="0.5" Width="2" />
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ArmorWeaponItemPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrinityCreator.BonusStat" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ArmorWeaponPage.xaml.cs</FileName>
+      <FileName>BonusStat.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TrinityCreator.ItemPreview" Collapsed="true">
     <Position X="0.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ItemPreview.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TrinityCreator.MainWindow" Collapsed="true">
+  <Class Name="TrinityCreator.ItemQuality">
     <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAAAAAAAABABAAAQAAAAAABAAAAAAAAEAAAA=</HashCode>
+      <FileName>ItemQuality.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrinityCreator.MainWindow" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="TrinityCreator.Socket" Collapsed="true">
+    <Position X="4" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Socket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrinityCreator.SocketBonus" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SocketBonus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrinityCreator.Stat" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Stat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="TrinityCreator.Updater" Collapsed="true">
-    <Position X="2.25" Y="2.5" Width="1.5" />
+    <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAABAAAAAAAAAAAAAAAAACAAAAAAAAAEA=</HashCode>
       <FileName>Updater.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TrinityCreator.Properties.Resources" Collapsed="true">
-    <Position X="4" Y="1.5" Width="1.5" />
+    <Position X="5.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAQAAAAACAAAAAAABEAIAAQAAAAAAAgQAAAAACIA=</HashCode>
     </TypeIdentifier>

@@ -23,7 +23,7 @@
                 <Label Name="weaponDpsLbl" Content="(xx.x damage per second)" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
             </StackPanel>
             <!-- Only visible on armor item -->
-            <StackPanel Name="armorPanel" Visibility="Collapsed">
+            <StackPanel Name="armorPanel" Visibility="Visible">
                 <DockPanel Name="armorPropertyPanel" Visibility="Visible" Margin="0,-10,0,0">
                     <Label Name="armorEquip" Content="Chest" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
                     <Label Name="armorMaterial" Content="Cloth" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
@@ -66,7 +66,7 @@
 
             <!-- Only visible when repairable -->
             <Label Name="itemDurabilityLbl" Content="(Durability xx / xx)" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
-            <Label Name="itemQuoteLbl" Content="''This is a quote for your item''" Foreground="#ddcba5" FontSize="14" Visibility="Visible" />
+            <Label Name="itemQuoteLbl" Content="''This is a quote for your item''" Foreground="#ddcba5" FontSize="14" Visibility="Collapsed" />
 
             <!-- Buy price -->
             <DockPanel>

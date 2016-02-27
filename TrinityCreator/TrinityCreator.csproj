@@ -59,7 +59,9 @@
     <Compile Include="ArmorWeaponItemPage.xaml.cs">
       <DependentUpon>ArmorWeaponItemPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Bonus.cs" />
     <Compile Include="BonusStat.cs" />
+    <Compile Include="ItemQuality.cs" />
     <Compile Include="Socket.cs" />
     <Compile Include="SocketBonus.cs" />
     <Compile Include="Stat.cs" />

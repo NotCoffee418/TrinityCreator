@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +22,22 @@ namespace TrinityCreator
         public ItemPreview()
         {
             InitializeComponent();
+
+        }
+        public ItemPreview(ArmorWeaponItem item) : this()
+        {
+            UpdatePreview(item);
+        }
+
+
+        /// <summary>
+        /// Display ArmorWeaponItem info in the preview 
+        /// </summary>
+        /// <param name="item"></param>
+        public void UpdatePreview(ArmorWeaponItem item)
+        {
+            itemNameLbl.Content = item.Name;
+            itemNameLbl.Foreground = new SolidColorBrush(item.Quality.QualityColor);
         }
     }
 }
