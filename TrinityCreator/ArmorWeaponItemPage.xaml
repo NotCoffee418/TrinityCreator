@@ -4,42 +4,44 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="1152.55" d:DesignWidth="750">
+             d:DesignHeight="1152.55" MinWidth="655">
     <ScrollViewer>
         <Grid Background="#fff">
-            <GroupBox Header="Item Details" Margin="10,10,381,0" VerticalAlignment="Top" Height="216">
-                <Grid>
-                    <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                    <TextBox x:Name="entryIdTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
+            <StackPanel Margin="0,0,385,0">
+                <GroupBox Header="Item Details">
+                    <Grid>
+                        <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
+                        <TextBox x:Name="entryIdTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
 
-                    <Label FontSize="12" Content="Item Name" Height="30" Margin="0,31,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                    <TextBox x:Name="itemNameTxt" Height="25" Margin="85,33,9,0" VerticalAlignment="Top" TextChanged="itemNameTxt_TextChanged"/>
+                        <Label FontSize="12" Content="Item Name" Height="30" Margin="0,31,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
+                        <TextBox x:Name="itemNameTxt" Height="25" Margin="85,33,9,0" VerticalAlignment="Top" TextChanged="itemNameTxt_TextChanged"/>
 
-                    <Label FontSize="12" Content="Item Quote" Height="30" Margin="0,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                    <TextBox x:Name="itemQuoteTxt" Height="25" Margin="85,63,9,0" VerticalAlignment="Top" TextChanged="itemQuoteTxt_TextChanged"/>
+                        <Label FontSize="12" Content="Item Quote" Height="30" Margin="0,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
+                        <TextBox x:Name="itemQuoteTxt" Height="25" Margin="85,63,9,0" VerticalAlignment="Top" TextChanged="itemQuoteTxt_TextChanged"/>
 
-                    <Label FontSize="12" Content="Quality" Height="30" Margin="0,91,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                    <ComboBox x:Name="itemQualityCb" Height="25" Margin="85,93,9,0" VerticalAlignment="Top" SelectionChanged="itemQualityCb_SelectionChanged" IsReadOnly="True"/>
-
-
-                    <Label FontSize="12" Content="Display ID" Height="30" Margin="0,122,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                    <TextBox x:Name="displayIdTxt" Height="25" Margin="85,123,85,0" VerticalAlignment="Top"/>
-                    <Button x:Name="findDisplayIdBtn" Content="Find" HorizontalAlignment="Right" Margin="0,123,10,0" VerticalAlignment="Top" Width="70" Height="25" IsEnabled="False"/>
-
-                    <Label FontSize="12" Content="Item Type" Height="30" Margin="0,152,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                    <ComboBox x:Name="itemTypeCb" Height="25" Margin="85,153,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemTypeCb_SelectionChanged">
-                        <ComboBoxItem Content="Weapon"/>
-                        <ComboBoxItem Content="Armor"/>
-                    </ComboBox>
+                        <Label FontSize="12" Content="Quality" Height="30" Margin="0,91,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
+                        <ComboBox x:Name="itemQualityCb" Height="25" Margin="85,93,9,0" VerticalAlignment="Top" SelectionChanged="itemQualityCb_SelectionChanged" IsReadOnly="True"/>
 
 
-                </Grid>
-            </GroupBox>
-            <GroupBox x:Name="weaponBox" Header="Weapon Properties" HorizontalAlignment="Left" Margin="10,231,0,0" VerticalAlignment="Top" Height="148" Width="342"/>
-            <GroupBox x:Name="armorBox" Header="Armor Properties" HorizontalAlignment="Left" Margin="10,231,0,0" VerticalAlignment="Top" Height="148" Width="342"/>
-            
-            <GroupBox x:Name="previewBox" Header="Item Preview" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="365"/>
-            
+                        <Label FontSize="12" Content="Display ID" Height="30" Margin="0,122,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
+                        <TextBox x:Name="displayIdTxt" Height="25" Margin="85,123,85,0" VerticalAlignment="Top"/>
+                        <Button x:Name="findDisplayIdBtn" Content="Find" HorizontalAlignment="Right" Margin="0,123,10,0" VerticalAlignment="Top" Width="70" Height="25" IsEnabled="False"/>
+
+                        <Label FontSize="12" Content="Item Type" Height="30" Margin="0,152,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
+                        <ComboBox x:Name="itemTypeCb" Height="25" Margin="85,153,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemTypeCb_SelectionChanged">
+                            <ComboBoxItem Content="Weapon"/>
+                            <ComboBoxItem Content="Armor"/>
+                        </ComboBox>
+
+
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="weaponBox" Header="Weapon Properties" />
+                <GroupBox x:Name="armorBox" Header="Armor Properties"/>
+            </StackPanel>
+            <StackPanel Width="375" HorizontalAlignment="Right">
+                <GroupBox x:Name="previewBox" Header="Item Preview"/>
+            </StackPanel>
         </Grid>
     </ScrollViewer>
 </UserControl>

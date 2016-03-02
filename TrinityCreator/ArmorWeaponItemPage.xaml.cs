@@ -32,6 +32,7 @@ namespace TrinityCreator
             itemQualityCb.ItemsSource = ItemQuality.GetQualityList();
             itemQualityCb.SelectedIndex = 0;
             itemTypeCb.SelectedIndex = 0;
+            armorBox.Visibility = Visibility.Collapsed;
 
         }
 
