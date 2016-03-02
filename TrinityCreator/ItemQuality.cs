@@ -77,7 +77,7 @@ namespace TrinityCreator
 
         public static ItemQuality[] GetQualityList()
         {
-            return new ItemQuality[8] {
+            return new ItemQuality[] {
                 new ItemQuality(0, "Poor", Colors.Gray),
                 new ItemQuality(1, "Common", Colors.White),
                 new ItemQuality(2, "Uncommon", Colors.Green),
