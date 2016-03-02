@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="ArmorWeaponItem.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="ItemBonding.cs" />
     <Compile Include="ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>

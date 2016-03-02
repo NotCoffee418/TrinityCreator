@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    class ItemBonding
+    public class ItemBonding
     {
         public ItemBonding(int id, string name)
         {

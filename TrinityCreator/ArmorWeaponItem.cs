@@ -22,9 +22,9 @@ namespace TrinityCreator
         private int _mindamage;
         private int _maxdamage;
         private List<Stat> _stats;
-        private List<BonusStat> _bonusstats;
+        private BonusStat _bonusstats;
         private List<Socket> _sockets;
-        private List<SocketBonus> _socketbonus;
+        private SocketBonus _socketbonus;
     
         public ArmorWeaponItem()
         {
@@ -177,7 +177,7 @@ namespace TrinityCreator
             }
         }
 
-        public List<BonusStat> BonusStats
+        public BonusStat BonusStats
         {
             get
             {
@@ -201,7 +201,7 @@ namespace TrinityCreator
             }
         }
 
-        public List<SocketBonus> SocketBonus
+        public SocketBonus SocketBonus
         {
             get
             {
@@ -211,6 +211,27 @@ namespace TrinityCreator
             {
                 _socketbonus = value;
             }
+        }
+
+        /// <summary>
+        /// Generates keyvaluepairs of the database table name and value to insert
+        /// </summary>
+        /// <returns></returns>
+        protected override Dictionary<string, string> GenerateQueryValues()
+        {
+            var kvplist = base.GenerateQueryValues();
+            // todo add armor & weapon values
+
+            return kvplist;
+        }
+
+        /// <summary>
+        /// Generates SQL query for the item
+        /// </summary>
+        /// <returns></returns>
+        public override string GenerateSqlQuery(Dictionary<string, string> kvplist = null)
+        {
+            return base.GenerateSqlQuery(GenerateQueryValues());
         }
     }
 }
