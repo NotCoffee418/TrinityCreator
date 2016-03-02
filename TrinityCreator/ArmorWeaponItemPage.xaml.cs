@@ -33,6 +33,7 @@ namespace TrinityCreator
             itemQualityCb.SelectedIndex = 0;
             itemTypeCb.SelectedIndex = 0;
             armorBox.Visibility = Visibility.Collapsed;
+            entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
 
         }
 
@@ -77,12 +78,33 @@ namespace TrinityCreator
             catch (NullReferenceException)
             { /* Happens on load when not everything is initialized */ }
         }
+
+
+
+
+
         #endregion
 
-        
+        private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not implemented yet");
 
-        
+            // Increase next item's entry id
+            Properties.Settings.Default.nextid_item = int.Parse(entryIdTxt.Text) + 1;
+            Properties.Settings.Default.Save();
+        }
 
-       
+        private void newItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to discard this item and clear the form?", "Discard item", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+                ClearForm();
+        }
+
+        private void ClearForm()
+        {
+            entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
+            MessageBox.Show("Not implemented yet");
+        }
     }
 }

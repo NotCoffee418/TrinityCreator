@@ -10,9 +10,7 @@
             <StackPanel Margin="0,0,385,0">
                 <GroupBox Header="Item Details">
                     <Grid>
-                        <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <TextBox x:Name="entryIdTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
-
+                       
                         <Label FontSize="12" Content="Item Name" Height="30" Margin="0,31,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
                         <TextBox x:Name="itemNameTxt" Height="25" Margin="85,33,9,0" VerticalAlignment="Top" TextChanged="itemNameTxt_TextChanged"/>
 
@@ -41,6 +39,15 @@
             </StackPanel>
             <StackPanel Width="375" HorizontalAlignment="Right">
                 <GroupBox x:Name="previewBox" Header="Item Preview"/>
+                <GroupBox x:Name="createBox" Header="Export Item">
+                    <Grid>
+                        <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
+                        <TextBox x:Name="entryIdTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
+
+                        <Button x:Name="exportSqlBtn" Content="Export to SQL file" Margin="10,35,153,5" Click="exportSqlBtn_Click" FontWeight="Bold"></Button>
+                        <Button x:Name="newItemBtn" Content="Create new item" Margin="218,35,10,5" Click="newItemBtn_Click"></Button>
+                    </Grid>
+                </GroupBox>
             </StackPanel>
         </Grid>
     </ScrollViewer>
