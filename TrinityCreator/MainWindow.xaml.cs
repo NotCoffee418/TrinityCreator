@@ -29,7 +29,7 @@ namespace TrinityCreator
                 Updater.CheckForUpdates();
             #endif
 
-            armorWeaponsTab.Content = new ArmorWeaponPage();
+            armorWeaponsTab.Content = new ItemPage();
         }
     }
 }

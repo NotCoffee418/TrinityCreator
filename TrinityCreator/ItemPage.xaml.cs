@@ -18,9 +18,9 @@ namespace TrinityCreator
     /// <summary>
     /// Interaction logic for ArmorWeaponPage.xaml
     /// </summary>
-    public partial class ArmorWeaponPage : UserControl
+    public partial class ItemPage : UserControl
     {
-        public ArmorWeaponPage()
+        public ItemPage()
         {
             InitializeComponent();
 

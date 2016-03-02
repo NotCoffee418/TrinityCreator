@@ -56,8 +56,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ArmorWeaponItem.cs" />
-    <Compile Include="ArmorWeaponItemPage.xaml.cs">
-      <DependentUpon>ArmorWeaponItemPage.xaml</DependentUpon>
+    <Compile Include="Item.cs" />
+    <Compile Include="ItemPage.xaml.cs">
+      <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bonus.cs" />
     <Compile Include="BonusStat.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="SocketBonus.cs" />
     <Compile Include="Stat.cs" />
     <Compile Include="Updater.cs" />
-    <Page Include="ArmorWeaponItemPage.xaml">
+    <Page Include="ItemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
