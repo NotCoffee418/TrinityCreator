@@ -232,7 +232,7 @@ namespace TrinityCreator
 
             // generate query
             query1 += string.Join(", ", kvplist.Keys);
-            query1 += string.Join(", ", kvplist.Values) + ");" + Environment.NewLine;
+            query2 += string.Join(", ", kvplist.Values) + ");" + Environment.NewLine;
 
             return query1 + query2;
         }
