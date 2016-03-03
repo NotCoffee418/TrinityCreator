@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    public class ArmorWeaponItem : Item
+    /*public class ArmorWeaponItem : Item
     {
-        
-        
         private int _weaponequip;
-        private int _weapontype;
         private bool _repairable;
         private int _durability;
         private double _weaponspeed;
@@ -31,8 +28,6 @@ namespace TrinityCreator
 
         }
 
-        
-
         public int WeaponEquip
         {
             get
@@ -42,18 +37,6 @@ namespace TrinityCreator
             set
             {
                 _weaponequip = value;
-            }
-        }
-
-        public int WeaponType
-        {
-            get
-            {
-                return _weapontype;
-            }
-            set
-            {
-                _weapontype = value;
             }
         }
 
@@ -220,7 +203,26 @@ namespace TrinityCreator
         protected override Dictionary<string, string> GenerateQueryValues()
         {
             var kvplist = base.GenerateQueryValues();
-            // todo add armor & weapon values
+
+            /*private int _weaponequip;
+        private bool _repairable;
+        private int _durability;
+        private double _weaponspeed;
+        private int _armorblock;
+        private int _armorarmor;
+        private int _itemlevel;
+        private int _stackable;
+        private int _mindamage;
+        private int _maxdamage;
+        private List<Stat> _stats;
+        private BonusStat _bonusstats;
+        private List<Socket> _sockets;
+        private SocketBonus _socketbonus;
+
+        kvplist.Add("entry", EntryId.ToString());       // int
+        kvplist.Add("name", "'" + Name + "'");          // string
+
+
 
             return kvplist;
         }
@@ -233,5 +235,5 @@ namespace TrinityCreator
         {
             return base.GenerateSqlQuery(GenerateQueryValues());
         }
-    }
+    }*/
 }

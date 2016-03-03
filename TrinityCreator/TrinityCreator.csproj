@@ -59,12 +59,14 @@
     <Compile Include="Currency.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemBonding.cs" />
+    <Compile Include="ItemClass.cs" />
     <Compile Include="ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bonus.cs" />
     <Compile Include="BonusStat.cs" />
     <Compile Include="ItemQuality.cs" />
+    <Compile Include="ItemSubClass.cs" />
     <Compile Include="Socket.cs" />
     <Compile Include="SocketBonus.cs" />
     <Compile Include="Stat.cs" />

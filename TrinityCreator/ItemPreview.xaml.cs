@@ -24,7 +24,7 @@ namespace TrinityCreator
             InitializeComponent();
 
         }
-        public ItemPreview(ArmorWeaponItem item) : this()
+        public ItemPreview(Item item) : this()
         {
             UpdatePreview(item);
         }
@@ -34,7 +34,7 @@ namespace TrinityCreator
         /// Display ArmorWeaponItem info in the preview 
         /// </summary>
         /// <param name="item"></param>
-        public void UpdatePreview(ArmorWeaponItem item)
+        public void UpdatePreview(Item item)
         {
             itemNameLbl.Content = item.Name;
             itemNameLbl.Foreground = new SolidColorBrush(item.Quality.QualityColor);

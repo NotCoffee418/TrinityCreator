@@ -10,6 +10,8 @@ namespace TrinityCreator
     {
         private string _name;
         private string _quote;
+        private ItemClass _itemclass;
+        private ItemSubClass _itemsubclass;
         private ItemQuality _quality;
         private int _displayid;
         private int _entryid;
@@ -20,6 +22,7 @@ namespace TrinityCreator
         private int _allowedrace;
         private int _valuesell;
         private int _valuebuy;
+        private ItemClass _class;
 
         public string Name
         {
@@ -42,6 +45,30 @@ namespace TrinityCreator
             set
             {
                 _quote = value;
+            }
+        }
+
+        public ItemClass Class
+        {
+            get
+            {
+                return _itemclass;
+            }
+            set
+            {
+                _itemclass = value;
+            }
+        }
+
+        public ItemSubClass ItemSubClass
+        {
+            get
+            {
+                return _itemsubclass;
+            }
+            set
+            {
+                _itemsubclass = value;
             }
         }
 
@@ -165,7 +192,6 @@ namespace TrinityCreator
             }
         }
 
-        
 
 
         /// <summary>
@@ -176,10 +202,12 @@ namespace TrinityCreator
         {
             var kvplist = new Dictionary<string, string>();
             kvplist.Add("entry", EntryId.ToString());
-            kvplist.Add("name", "'" + Name + "'");
             kvplist.Add("description", "'" + Quote + "'");
-            kvplist.Add("Quality", Quality.Id.ToString());
+            kvplist.Add("class", Class.Id.ToString());
+            kvplist.Add("subclass", ItemSubClass.Id.ToString());
+            kvplist.Add("name", "'" + Name + "'");
             kvplist.Add("displayid", DisplayId.ToString());
+            kvplist.Add("Quality", Quality.Id.ToString());
             kvplist.Add("bonding", Binds.Id.ToString());
             kvplist.Add("RequiredLevel", MinLevel.ToString());
             kvplist.Add("maxcount", MaxAllowed.ToString());
