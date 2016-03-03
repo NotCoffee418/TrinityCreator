@@ -165,33 +165,7 @@ namespace TrinityCreator
             }
         }
 
-        public void SetBuyPrice(string g, string s, string c)
-        {
-            ValueBuy = StringToCurrency(g, s, c);
-        }
-        public void SetSellPrice(string g, string s, string c)
-        {
-            ValueSell = StringToCurrency(g, s, c);
-        }
-        private int StringToCurrency(string g, string s, string c)
-        {
-            if (s.Count() > 2 || c.Count() > 2)
-                throw new Exception("Silver and copper can only contain two numbers characters each.");
-            try
-            {
-                // add 0 for correct value on blank or single character values
-                for (int i = s.Count(); s.Count() < 2; i++)
-                    s = "0" + s;
-                for (int i = c.Count(); c.Count() < 2; i++)
-                    c = "0" + c;
-
-                return int.Parse(g.ToString() + s.ToString() + c.ToString());
-            }
-            catch
-            {
-                throw new Exception("Currency must be numeric.");
-            }
-        }
+        
 
 
         /// <summary>
