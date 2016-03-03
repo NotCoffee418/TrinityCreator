@@ -60,6 +60,7 @@
     <Compile Include="Item.cs" />
     <Compile Include="ItemBonding.cs" />
     <Compile Include="ItemClass.cs" />
+    <Compile Include="ItemInventoryType.cs" />
     <Compile Include="ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>

@@ -8,7 +8,7 @@
     <ScrollViewer>
         <Grid Background="#fff">
             <StackPanel Margin="0,0,385,0">
-                <GroupBox Header="Item Details" Height="239">
+                <GroupBox Header="Item Details" Height="234">
                     <Grid>
 
                         <Label FontSize="12" Content="Item Name" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
@@ -25,14 +25,14 @@
                         <TextBox x:Name="displayIdTxt" Height="25" Margin="85,93,85,0" VerticalAlignment="Top"/>
                         <Button x:Name="findDisplayIdBtn" Content="Find" HorizontalAlignment="Right" Margin="0,93,10,0" VerticalAlignment="Top" Width="70" Height="25" IsEnabled="False"/>
 
-                        <Label FontSize="12" Content="Item Class" Height="30" Margin="0,122,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <ComboBox x:Name="itemClassCb" Height="25" Margin="85,123,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemClassCb_SelectionChanged" />
+                        <Label FontSize="12" Content="Item Class" Height="30" Margin="0,152,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
+                        <ComboBox x:Name="itemClassCb" Height="25" Margin="85,153,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemClassCb_SelectionChanged" />
 
-                        <Label FontSize="12" Content="Item SubClass" Height="30" Margin="0,152,0,-2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
-                        <ComboBox x:Name="itemSubClassCb" Height="25" Margin="85,153,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemSubClassCb_SelectionChanged" />
+                        <Label FontSize="12" Content="Item SubClass" Height="30" Margin="0,182,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
+                        <ComboBox x:Name="itemSubClassCb" Height="25" Margin="85,183,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemSubClassCb_SelectionChanged" />
 
-                        <Label FontSize="12" Content="Bounds" Height="30" Margin="0,183,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
-                        <ComboBox x:Name="itemBoundsCb" Height="25" Margin="85,184,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemBoundsCb_SelectionChanged"/>
+                        <Label FontSize="12" Content="Bounds" Height="30" Margin="0,122,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
+                        <ComboBox x:Name="itemBoundsCb" Height="25" Margin="85,123,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemBoundsCb_SelectionChanged"/>
                     </Grid>
                 </GroupBox>
                 <GroupBox x:Name="weaponBox" Header="Weapon Properties" />

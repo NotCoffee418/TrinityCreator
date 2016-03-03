@@ -101,6 +101,8 @@ namespace TrinityCreator
         private void itemSubClassCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ItemSubClass sc = (ItemSubClass)itemSubClassCb.SelectedValue;
+            if (sc == null)
+                return;
 
             if (sc.PreviewNoteLeft == "")
                 preview.subclassLeftNoteLbl.Visibility = Visibility.Collapsed;

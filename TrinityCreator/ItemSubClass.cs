@@ -8,18 +8,20 @@ namespace TrinityCreator
 {
     public class ItemSubClass
     {
-        public ItemSubClass(int id, string description, string previewNoteLeft = "", string previewNoteRight = "")
+        public ItemSubClass(int id, string description, string previewNoteLeft = "", string previewNoteRight = "", ItemInventoryType[] lockedInventoryType = null)
         {
             Id = id;
             Description = description;
-            _previewNoteLeft = previewNoteLeft;
-            _previewNoteRight = previewNoteRight;
+            PreviewNoteLeft = previewNoteLeft;
+            PreviewNoteRight = previewNoteRight;
+            LockedInventoryType = lockedInventoryType;
         }
 
         private int _id;
         private string _description;
         private string _previewNoteLeft;
         private string _previewNoteRight;
+        private ItemInventoryType[] _lockedInventoryType;
 
         public int Id
         {
@@ -49,9 +51,13 @@ namespace TrinityCreator
         {
             get
             {
-                if (_previewNoteLeft == "" && _previewNoteRight == "")
-                    return Description;
-                else return _previewNoteLeft;
+                if (LockedInventoryType == null)
+                {
+                    if (_previewNoteLeft == "")
+                        return Description;
+                    else return PreviewNoteLeft;
+                }
+                else return LockedInventoryType[0].Description;
             }
             set
             {
@@ -63,11 +69,28 @@ namespace TrinityCreator
         {
             get
             {
-                return _previewNoteRight;
+
+                if (_previewNoteRight == "" && _previewNoteRight != PreviewNoteLeft)
+                    return Description;
+                else return _previewNoteRight;
             }
             set
             {
                 _previewNoteRight = value;
+            }
+        }
+
+        public ItemInventoryType[] LockedInventoryType
+        {
+            get
+            {
+                if (_lockedInventoryType == null)
+                    return ItemInventoryType.GetNonEquipable();
+                return _lockedInventoryType;
+            }
+            set
+            {
+                _lockedInventoryType = value;
             }
         }
 
@@ -205,10 +228,11 @@ namespace TrinityCreator
 
         public static ItemSubClass[] GetProjectileList()
         {
+            ItemInventoryType[] ammoType = ItemInventoryType.GetAmmo();
             return new ItemSubClass[]
             {
-                new ItemSubClass(2, "Arrow"),
-                new ItemSubClass(3, "Bullet"),
+                new ItemSubClass(2, "Arrow", lockedInventoryType:ammoType),
+                new ItemSubClass(3, "Bullet", lockedInventoryType:ammoType),
             };
         }
 
@@ -222,19 +246,21 @@ namespace TrinityCreator
 
         public static ItemSubClass[] GetArmorList()
         {
+            ItemInventoryType[] armorType = ItemInventoryType.GetArmor();
+            ItemInventoryType[] relicType = ItemInventoryType.GetArmor();
+
             return new ItemSubClass[]
             {
-                new ItemSubClass(0, "Miscellaneous"),
-                new ItemSubClass(1, "Cloth"),
-                new ItemSubClass(2, "Leather"),
-                new ItemSubClass(3, "Mail"),
-                new ItemSubClass(4, "Plate"),
-                //new ItemSubClass(5, "Buckler(OBSOLETE)"),
-                new ItemSubClass(6, "Shield"),
-                new ItemSubClass(7, "Libram"),
-                new ItemSubClass(8, "Idol"),
-                new ItemSubClass(9, "Totem"),
-                new ItemSubClass(10, "Sigil"),
+                new ItemSubClass(1, "Cloth", lockedInventoryType:armorType),
+                new ItemSubClass(2, "Leather", lockedInventoryType:armorType),
+                new ItemSubClass(3, "Mail", lockedInventoryType:armorType),
+                new ItemSubClass(4, "Plate", lockedInventoryType:armorType),
+                new ItemSubClass(6, "Shield", lockedInventoryType:ItemInventoryType.GetShield()),
+                new ItemSubClass(7, "Libram", lockedInventoryType:relicType),
+                new ItemSubClass(8, "Idol", lockedInventoryType:relicType),
+                new ItemSubClass(9, "Totem", lockedInventoryType:relicType),
+                new ItemSubClass(10, "Sigil", lockedInventoryType:relicType),
+                new ItemSubClass(0, "Miscellaneous", lockedInventoryType:ItemInventoryType.GetAllInventoryTypes()),
             };
         }
 
@@ -258,40 +284,40 @@ namespace TrinityCreator
         {
             return new ItemSubClass[]
             {
-                new ItemSubClass(0, "1h Axe", "One-hand", "Axe"),
-                new ItemSubClass(1, "2h Axe", "Two-hand", "Axe"),
-                new ItemSubClass(2, "Bow","Ranged","Bow"),
-                new ItemSubClass(3, "Gun","Ranged","Gun"),
-                new ItemSubClass(4, "1h Mace", "One-hand", "Mace"),
-                new ItemSubClass(5, "2h Mace", "Two-hand", "Mace"),
-                new ItemSubClass(6, "Polearm","","Polearm"),
-                new ItemSubClass(7, "1h Sword", "One-hand", "Sword"),
-                new ItemSubClass(8, "2h Sword", "Two-hand", "Sword"),
-                new ItemSubClass(10,"Staff","","Staff"),
-                new ItemSubClass(13,"Fist Weapon","One-hand","Fist Weapon"),
-                new ItemSubClass(14,"Miscellaneous","","Miscellaneous"),
-                new ItemSubClass(15,"Dagger","One-hand","Dagger"),
-                new ItemSubClass(16,"Thrown","Ranged","Thrown"),
-                //new ItemSubClass(17,"Spear"), // Don't think this exists anymore
-                new ItemSubClass(18,"Crossbow","Ranged","Crossbow"),
-                new ItemSubClass(19,"Wand","Ranged","Wand"),
-                new ItemSubClass(20,"Fishing Pole","Two-hand","Fishing Pole"),
+                new ItemSubClass(0, "1h Axe", previewNoteRight: "Axe", lockedInventoryType:ItemInventoryType.GetOneHandWeapon()),
+                new ItemSubClass(1, "2h Axe", previewNoteRight: "Axe", lockedInventoryType:ItemInventoryType.GetTwoHandWeapon()),
+                new ItemSubClass(2, "Bow", lockedInventoryType:ItemInventoryType.GetRangedBow()),
+                new ItemSubClass(3, "Gun", lockedInventoryType:ItemInventoryType.GetRangedWandGun()),
+                new ItemSubClass(4, "1h Mace", previewNoteRight: "Mace",lockedInventoryType:ItemInventoryType.GetOneHandWeapon()),
+                new ItemSubClass(5, "2h Mace", previewNoteRight:"Mace", lockedInventoryType:ItemInventoryType.GetTwoHandWeapon()),
+                new ItemSubClass(6, "Polearm", lockedInventoryType:ItemInventoryType.GetTwoHandWeapon()),
+                new ItemSubClass(7, "1h Sword", previewNoteRight:"Sword", lockedInventoryType:ItemInventoryType.GetOneHandWeapon()),
+                new ItemSubClass(8, "2h Sword", previewNoteRight: "Sword", lockedInventoryType:ItemInventoryType.GetTwoHandWeapon()),
+                new ItemSubClass(10,"Staff", lockedInventoryType:ItemInventoryType.GetStaff()),
+                new ItemSubClass(13,"Fist Weapon",lockedInventoryType:ItemInventoryType.GetOneHandWeapon()),
+                new ItemSubClass(14,"Miscellaneous",lockedInventoryType:ItemInventoryType.GetAllInventoryTypes()),
+                new ItemSubClass(15,"Dagger", lockedInventoryType:ItemInventoryType.GetOneHandWeapon()),
+                new ItemSubClass(16,"Thrown", lockedInventoryType:ItemInventoryType.GetThrown()),
+                new ItemSubClass(18,"Crossbow", lockedInventoryType:ItemInventoryType.GetRangedBow()),
+                new ItemSubClass(19,"Wand", lockedInventoryType:ItemInventoryType.GetRangedWandGun()),
+                new ItemSubClass(20,"Fishing Pole", lockedInventoryType:ItemInventoryType.GetTwoHandWeapon()),
             };
         }
 
         public static ItemSubClass[] GetContainerList()
         {
+            ItemInventoryType[] bagType = ItemInventoryType.GetBag();
             return new ItemSubClass[]
             {
-                new ItemSubClass(0, "Bag"),
-                new ItemSubClass(1, "Soul Bag"),
-                new ItemSubClass(2, "Herb Bag"),
-                new ItemSubClass(3, "Enchanting Bag"),
-                new ItemSubClass(4, "Engeneering Bag"),
-                new ItemSubClass(5, "Gem Bag"),
-                new ItemSubClass(6, "Mining Bag"),
-                new ItemSubClass(7, "Leatherworking Bag"),
-                new ItemSubClass(8, "Inscription  Bag"),
+                new ItemSubClass(0, "Bag", lockedInventoryType:bagType),
+                new ItemSubClass(1, "Soul Bag", lockedInventoryType:bagType),
+                new ItemSubClass(2, "Herb Bag", lockedInventoryType:bagType),
+                new ItemSubClass(3, "Enchanting Bag", lockedInventoryType:bagType),
+                new ItemSubClass(4, "Engeneering Bag", lockedInventoryType:bagType),
+                new ItemSubClass(5, "Gem Bag", lockedInventoryType:bagType),
+                new ItemSubClass(6, "Mining Bag", lockedInventoryType:bagType),
+                new ItemSubClass(7, "Leatherworking Bag", lockedInventoryType:bagType),
+                new ItemSubClass(8, "Inscription  Bag", lockedInventoryType:bagType),
             };
         }
 

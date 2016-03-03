@@ -21,7 +21,7 @@ namespace TrinityCreator
     {
         public ItemPreview()
         {
-            InitializeComponent();
+             InitializeComponent();
 
         }
         public ItemPreview(Item item) : this()
