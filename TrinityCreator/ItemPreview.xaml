@@ -10,12 +10,13 @@
         <StackPanel Margin="10,5">
             <Label Name="itemNameLbl" Content="Item Name" Foreground="Gray" FontSize="18"/>
             <Label Name="itemBoundsLbl" Content="BoP/BoE/BoU" Foreground="White" FontSize="14" />
+            <DockPanel Margin="0,-10,0,0">
+                <Label Name="subclassLeftNoteLbl" Content="One-handed" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
+                <Label Name="subclassRightNoteLbl" Content="Mace" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
+            </DockPanel>
+            
             <!-- Only visible on weapon item -->
             <StackPanel Name="weaponPanel" Visibility="Visible">
-                <DockPanel Margin="0,-10,0,0">
-                    <Label Name="weaponEquipLbl" Content="One-handed" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
-                    <Label Name="weaponTypeLbl" Content="Mace" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
-                </DockPanel>
                 <DockPanel Margin="0,-10,0,0">
                     <Label Name="weaponMinMaxDmgLbl" Content="x - x Damage" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
                     <Label Name="weaponSpeedLbl" Content="Speed x.xx" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>

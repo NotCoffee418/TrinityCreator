@@ -8,14 +8,18 @@ namespace TrinityCreator
 {
     public class ItemSubClass
     {
-        public ItemSubClass(int id, string description)
+        public ItemSubClass(int id, string description, string previewNoteLeft = "", string previewNoteRight = "")
         {
             Id = id;
             Description = description;
+            _previewNoteLeft = previewNoteLeft;
+            _previewNoteRight = previewNoteRight;
         }
 
         private int _id;
         private string _description;
+        private string _previewNoteLeft;
+        private string _previewNoteRight;
 
         public int Id
         {
@@ -38,6 +42,32 @@ namespace TrinityCreator
             set
             {
                 _description = value;
+            }
+        }
+
+        public string PreviewNoteLeft
+        {
+            get
+            {
+                if (_previewNoteLeft == "" && _previewNoteRight == "")
+                    return Description;
+                else return _previewNoteLeft;
+            }
+            set
+            {
+                _previewNoteLeft = value;
+            }
+        }
+
+        public string PreviewNoteRight
+        {
+            get
+            {
+                return _previewNoteRight;
+            }
+            set
+            {
+                _previewNoteRight = value;
             }
         }
 
@@ -228,26 +258,24 @@ namespace TrinityCreator
         {
             return new ItemSubClass[]
             {
-                new ItemSubClass(0, "1h Axe"),
-                new ItemSubClass(1, "2h Axe"),
-                new ItemSubClass(2, "Bow"),
-                new ItemSubClass(3, "Gun"),
-                new ItemSubClass(4, "1h Mace"),
-                new ItemSubClass(5, "2h Mace"),
-                new ItemSubClass(6, "Polearm"),
-                new ItemSubClass(7, "1h Sword"),
-                new ItemSubClass(8, "2h Sword"),
-                new ItemSubClass(10,"Staff"),
-                //new ItemSubClass(11,"Exotic"), // no idea what this is
-                //new ItemSubClass(12,"Exotic"),
-                new ItemSubClass(13,"Fist Weapon"),
-                new ItemSubClass(14,"Miscellaneous"),
-                new ItemSubClass(15,"Dagger"),
-                new ItemSubClass(16,"Thrown"),
-                new ItemSubClass(17,"Spear"),
-                new ItemSubClass(18,"Crossbow"),
-                new ItemSubClass(19,"Wand"),
-                new ItemSubClass(20,"Fishing Pole"),
+                new ItemSubClass(0, "1h Axe", "One-hand", "Axe"),
+                new ItemSubClass(1, "2h Axe", "Two-hand", "Axe"),
+                new ItemSubClass(2, "Bow","Ranged","Bow"),
+                new ItemSubClass(3, "Gun","Ranged","Gun"),
+                new ItemSubClass(4, "1h Mace", "One-hand", "Mace"),
+                new ItemSubClass(5, "2h Mace", "Two-hand", "Mace"),
+                new ItemSubClass(6, "Polearm","","Polearm"),
+                new ItemSubClass(7, "1h Sword", "One-hand", "Sword"),
+                new ItemSubClass(8, "2h Sword", "Two-hand", "Sword"),
+                new ItemSubClass(10,"Staff","","Staff"),
+                new ItemSubClass(13,"Fist Weapon","One-hand","Fist Weapon"),
+                new ItemSubClass(14,"Miscellaneous","","Miscellaneous"),
+                new ItemSubClass(15,"Dagger","One-hand","Dagger"),
+                new ItemSubClass(16,"Thrown","Ranged","Thrown"),
+                //new ItemSubClass(17,"Spear"), // Don't think this exists anymore
+                new ItemSubClass(18,"Crossbow","Ranged","Crossbow"),
+                new ItemSubClass(19,"Wand","Ranged","Wand"),
+                new ItemSubClass(20,"Fishing Pole","Two-hand","Fishing Pole"),
             };
         }
 

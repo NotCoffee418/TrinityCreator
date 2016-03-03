@@ -28,13 +28,37 @@ namespace TrinityCreator
             preview = new ItemPreview();
             previewBox.Content = preview;
 
-            // load form data
+            // Set quality
             itemQualityCb.ItemsSource = ItemQuality.GetQualityList();
             itemQualityCb.SelectedIndex = 0;
-            itemTypeCb.SelectedIndex = 0;
+
+            // Set class & subclass
+            itemClassCb.ItemsSource = ItemClass.GetClassList();
+            itemClassCb.SelectedIndex = 0;
+
+            ShowCorrectClassBox();
             armorBox.Visibility = Visibility.Collapsed;
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
 
+        }
+
+        private void ShowCorrectClassBox()
+        {
+            // Hide everything
+            weaponBox.Visibility = Visibility.Collapsed;
+            armorBox.Visibility = Visibility.Collapsed;
+
+            // Show selected
+            ItemClass selectedClass = (ItemClass)itemClassCb.SelectedValue;
+            switch (selectedClass.Id)
+            {
+                case 2:
+                    weaponBox.Visibility = Visibility.Visible;
+                    break;
+                case 4:
+                    armorBox.Visibility = Visibility.Visible;
+                    break;
+            }
         }
 
         ItemPreview preview;
@@ -59,32 +83,42 @@ namespace TrinityCreator
             ItemQuality q = (ItemQuality)itemQualityCb.SelectedValue;
             preview.itemNameLbl.Foreground = new SolidColorBrush(q.QualityColor);
         }
-
-        private void itemTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        
+        private void itemClassCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
-            {
-                if (itemTypeCb.SelectedIndex == 0) // weapon
-                {
-                    weaponBox.Visibility = Visibility.Visible;
-                    armorBox.Visibility = Visibility.Collapsed;
-                }
-                else if (itemTypeCb.SelectedIndex == 1) // armor
-                {
-                    weaponBox.Visibility = Visibility.Collapsed;
-                    armorBox.Visibility = Visibility.Visible;
-                }
-            }
-            catch (NullReferenceException)
-            { /* Happens on load when not everything is initialized */ }
+            ItemClass c = (ItemClass)itemClassCb.SelectedValue;
+            itemSubClassCb.ItemsSource = ItemSubClass.GetSubclassList(c);
+            itemSubClassCb.SelectedIndex = 0;
+            ShowCorrectClassBox();
         }
 
+        private void itemSubClassCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ItemSubClass sc = (ItemSubClass)itemSubClassCb.SelectedValue;
+
+            if (sc.PreviewNoteLeft == "")
+                preview.subclassLeftNoteLbl.Visibility = Visibility.Collapsed;
+            else
+            {
+                preview.subclassLeftNoteLbl.Content = sc.PreviewNoteLeft;
+                preview.subclassRightNoteLbl.Visibility = Visibility.Visible;
+            }
+
+            if (sc.PreviewNoteRight == "")
+                preview.subclassRightNoteLbl.Visibility = Visibility.Collapsed;
+            else
+            {
+                preview.subclassRightNoteLbl.Content = sc.PreviewNoteRight;
+                preview.subclassRightNoteLbl.Visibility = Visibility.Visible;
+            }
+        }
 
 
 
 
         #endregion
 
+        #region Click event handlers
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Not implemented yet");
@@ -100,11 +134,14 @@ namespace TrinityCreator
             if (result == MessageBoxResult.Yes)
                 ClearForm();
         }
+        #endregion
 
         private void ClearForm()
         {
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
-            MessageBox.Show("Not implemented yet");
+            MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
         }
+
+        
     }
 }

@@ -22,7 +22,6 @@ namespace TrinityCreator
         private int _allowedrace;
         private int _valuesell;
         private int _valuebuy;
-        private ItemClass _class;
 
         public string Name
         {
