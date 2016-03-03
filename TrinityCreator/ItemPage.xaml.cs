@@ -104,6 +104,10 @@ namespace TrinityCreator
             if (sc == null)
                 return;
 
+            // Load equip
+            inventoryTypeCb.ItemsSource = sc.LockedInventoryType;
+
+            // Load correct box
             if (sc.PreviewNoteLeft == "")
                 preview.subclassLeftNoteLbl.Visibility = Visibility.Collapsed;
             else
@@ -158,6 +162,12 @@ namespace TrinityCreator
         {
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
+        }
+
+        private void inventoryTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ItemInventoryType it = (ItemInventoryType)inventoryTypeCb.SelectedValue;
+            preview.subclassLeftNoteLbl.Content = it.Description;
         }
     }
 }

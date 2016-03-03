@@ -55,12 +55,26 @@ namespace TrinityCreator
             }
         }
 
+        public override string ToString()
+        {
+            return Description;
+        }
+
         internal static ItemInventoryType[] GetAllInventoryTypes()
         {
-            return new ItemInventoryType[]
-            {
-                //todo
-            };
+            var result = new List<ItemInventoryType>();
+            result.AddRange(GetNonEquipable());
+            result.AddRange(GetArmor());
+            result.AddRange(GetOneHandWeapon());
+            result.AddRange(GetShield());
+            result.AddRange(GetRangedWandGun());
+            result.AddRange(GetRangedBow());
+            result.AddRange(GetTwoHandWeapon());
+            result.AddRange(GetStaff());
+            result.AddRange(GetBag());
+            result.AddRange(GetThrown());
+            result.AddRange(GetAmmo());
+            return result.ToArray();
         }
 
         public static ItemInventoryType[] GetNonEquipable()

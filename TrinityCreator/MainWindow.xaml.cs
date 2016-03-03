@@ -26,7 +26,7 @@ namespace TrinityCreator
 
             // Check for updates
             #if !DEBUG
-                Updater.CheckForUpdates();
+                Updater.CheckLatestVersion();
             #endif
 
             armorWeaponsTab.Content = new ItemPage();

@@ -20,8 +20,9 @@ namespace TrinityCreator
         private int _maxallowed;
         private int _allowedclass;
         private int _allowedrace;
-        private int _valuesell;
         private int _valuebuy;
+        private int _valuesell;
+        private ItemInventoryType _inventoryType;
 
         public string Name
         {
@@ -167,6 +168,18 @@ namespace TrinityCreator
             }
         }
 
+        public int ValueBuy
+        {
+            get
+            {
+                return _valuebuy;
+            }
+            set
+            {
+                _valuebuy = value;
+            }
+        }
+
         public int ValueSell
         {
             get
@@ -179,17 +192,18 @@ namespace TrinityCreator
             }
         }
 
-        public int ValueBuy
+        public ItemInventoryType InventoryType
         {
             get
             {
-                return _valuebuy;
+                return _inventoryType;
             }
             set
             {
-                _valuebuy = value;
+                _inventoryType = value;
             }
         }
+
 
 
 
@@ -214,6 +228,9 @@ namespace TrinityCreator
             kvplist.Add("AllowableRace", AllowedRace.ToString());
             kvplist.Add("BuyPrice", ValueBuy.ToString());
             kvplist.Add("SellPrice", ValueSell.ToString());
+            kvplist.Add("InventoryType", InventoryType.Id.ToString());
+            kvplist.Add("sheath", InventoryType.Sheath.ToString());
+
 
             return kvplist;
         }
