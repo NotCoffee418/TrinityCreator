@@ -40,8 +40,14 @@ namespace TrinityCreator
             armorBox.Visibility = Visibility.Collapsed;
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
 
+            // Set item bounds
+            itemBoundsCb.ItemsSource = ItemBonding.GetItemBondingList();
+
         }
 
+        /// <summary>
+        /// Shows & hides UI groupboxes for certain item classes
+        /// </summary>
         private void ShowCorrectClassBox()
         {
             // Hide everything
@@ -113,7 +119,17 @@ namespace TrinityCreator
             }
         }
 
+        private void itemBoundsCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ItemBonding b = (ItemBonding)itemBoundsCb.SelectedValue;
+            preview.itemBoundsLbl.Content = b.Name;
 
+            // Don't display when no bounds
+            if (b.Id == 0)
+                preview.itemBoundsLbl.Visibility = Visibility.Collapsed;
+            else
+                preview.itemBoundsLbl.Visibility = Visibility.Visible;
+        }
 
 
         #endregion
@@ -141,7 +157,5 @@ namespace TrinityCreator
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
         }
-
-        
     }
 }
