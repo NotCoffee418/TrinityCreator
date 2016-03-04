@@ -229,6 +229,7 @@ namespace TrinityCreator
             kvplist.Add("BuyPrice", ValueBuy.ToString());
             kvplist.Add("SellPrice", ValueSell.ToString());
             kvplist.Add("InventoryType", InventoryType.Id.ToString());
+            kvplist.Add("Material", ItemSubClass.Material.Id.ToString());
             kvplist.Add("sheath", InventoryType.Sheath.ToString());
 
 

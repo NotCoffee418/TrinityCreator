@@ -68,6 +68,7 @@
     <Compile Include="BonusStat.cs" />
     <Compile Include="ItemQuality.cs" />
     <Compile Include="ItemSubClass.cs" />
+    <Compile Include="ItemMaterial.cs" />
     <Compile Include="Socket.cs" />
     <Compile Include="SocketBonus.cs" />
     <Compile Include="Stat.cs" />

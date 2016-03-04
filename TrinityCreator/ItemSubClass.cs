@@ -8,13 +8,15 @@ namespace TrinityCreator
 {
     public class ItemSubClass
     {
-        public ItemSubClass(int id, string description, string previewNoteLeft = "", string previewNoteRight = "", ItemInventoryType[] lockedInventoryType = null)
+        public ItemSubClass(int id, string description, string previewNoteLeft = "", string previewNoteRight = "", 
+            ItemInventoryType[] lockedInventoryType = null, ItemMaterial material = null)
         {
             Id = id;
             Description = description;
             PreviewNoteLeft = previewNoteLeft;
             PreviewNoteRight = previewNoteRight;
             LockedInventoryType = lockedInventoryType;
+            Material = material;
         }
 
         private int _id;
@@ -22,7 +24,8 @@ namespace TrinityCreator
         private string _previewNoteLeft;
         private string _previewNoteRight;
         private ItemInventoryType[] _lockedInventoryType;
-
+        private ItemMaterial _material;
+        
         public int Id
         {
             get
@@ -91,6 +94,22 @@ namespace TrinityCreator
             set
             {
                 _lockedInventoryType = value;
+            }
+        }
+
+        public ItemMaterial Material
+        {
+            get
+            {
+                if (_material == null)
+                {
+                    return ItemMaterial.GetUndefined();
+                }
+                else return _material;
+            }
+            set
+            {
+                _material = value;
             }
         }
 
@@ -251,11 +270,11 @@ namespace TrinityCreator
 
             return new ItemSubClass[]
             {
-                new ItemSubClass(1, "Cloth", lockedInventoryType:armorType),
-                new ItemSubClass(2, "Leather", lockedInventoryType:armorType),
-                new ItemSubClass(3, "Mail", lockedInventoryType:armorType),
-                new ItemSubClass(4, "Plate", lockedInventoryType:armorType),
-                new ItemSubClass(6, "Shield", lockedInventoryType:ItemInventoryType.GetShield()),
+                new ItemSubClass(1, "Cloth", lockedInventoryType:armorType, material: ItemMaterial.GetCloth()),
+                new ItemSubClass(2, "Leather", lockedInventoryType:armorType, material: ItemMaterial.GetLeather()),
+                new ItemSubClass(3, "Mail", lockedInventoryType:armorType, material: ItemMaterial.GetChain()),
+                new ItemSubClass(4, "Plate", lockedInventoryType:armorType, material: ItemMaterial.GetPlate()),
+                new ItemSubClass(6, "Shield", lockedInventoryType:ItemInventoryType.GetShield(), material: ItemMaterial.GetPlate()),
                 new ItemSubClass(7, "Libram", lockedInventoryType:relicType),
                 new ItemSubClass(8, "Idol", lockedInventoryType:relicType),
                 new ItemSubClass(9, "Totem", lockedInventoryType:relicType),
@@ -325,15 +344,15 @@ namespace TrinityCreator
         {
             return new ItemSubClass[]
             {
-                new ItemSubClass(0, "Consumable"),
-                new ItemSubClass(1, "Potion"),
-                new ItemSubClass(2, "Elixir"),
-                new ItemSubClass(3, "Flask"),
-                new ItemSubClass(4, "Scroll"),
-                new ItemSubClass(5, "Food & Drink"),
-                new ItemSubClass(6, "Item Enhancement"),
-                new ItemSubClass(7, "Bandage"),
-                new ItemSubClass(8, "Other"),
+                new ItemSubClass(0, "Consumable", material: ItemMaterial.GetConsumable()),
+                new ItemSubClass(1, "Potion", material: ItemMaterial.GetConsumable()),
+                new ItemSubClass(2, "Elixir", material: ItemMaterial.GetConsumable()),
+                new ItemSubClass(3, "Flask", material: ItemMaterial.GetConsumable()),
+                new ItemSubClass(4, "Scroll", material: ItemMaterial.GetConsumable()),
+                new ItemSubClass(5, "Food & Drink", material: ItemMaterial.GetConsumable()),
+                new ItemSubClass(6, "Item Enhancement", material: ItemMaterial.GetConsumable()),
+                new ItemSubClass(7, "Bandage", material: ItemMaterial.GetConsumable()),
+                new ItemSubClass(8, "Other", material: ItemMaterial.GetConsumable()),
             };
         }
     }
