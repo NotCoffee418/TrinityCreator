@@ -20,13 +20,13 @@ namespace TrinityCreator
     /// </summary>
     public partial class ItemPage : UserControl
     {
-        public ItemPage()
+        public ItemPage(ItemPreview _preview)
         {
             InitializeComponent();
             item = new Item();
 
             // load preview
-            preview = new ItemPreview();
+            preview = _preview;
             previewBox.Content = preview;
 
             // Set quality
@@ -46,8 +46,18 @@ namespace TrinityCreator
 
             // Load flags groupbox
             item.Flags = BitmaskStackPanel.GetItemFlags();
-            flagsBitMaskGroupBox.Content = BitmaskStackPanel.GetItemFlags();
+            flagsBitMaskGroupBox.Content = item.Flags;
             flagsBitMaskGroupBox.Visibility = Visibility.Collapsed; // by default
+
+            // load allowedclass groupbox
+            item.AllowedClass = BitmaskStackPanel.GetClassFlags();
+            limitClassBitMaskGroupBox.Content = item.AllowedClass;
+            limitClassBitMaskGroupBox.Visibility = Visibility.Collapsed;
+
+            // load allowedrace groupbox
+            item.AllowedRace = BitmaskStackPanel.GetRaceFlags();
+            limitRaceBitMaskGroupBox.Content = item.AllowedRace;
+            limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
         }
 
         Item item;
@@ -83,13 +93,17 @@ namespace TrinityCreator
         }
         private void itemQuoteTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (itemQuoteTxt.Text == "")
-                preview.itemQuoteLbl.Visibility = Visibility.Collapsed;
-            else
+            try
             {
-                preview.itemQuoteLbl.Visibility = Visibility.Visible;
-                preview.itemQuoteLbl.Content = '"' + itemQuoteTxt.Text + '"';
+                if (itemQuoteTxt.Text == "")
+                    preview.itemQuoteLbl.Visibility = Visibility.Collapsed;
+                else
+                {
+                    preview.itemQuoteLbl.Visibility = Visibility.Visible;
+                    preview.itemQuoteLbl.Content = '"' + itemQuoteTxt.Text + '"';
+                }
             }
+            catch { /* Exception on initial load */ }
         }
         private void itemQualityCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -175,16 +189,43 @@ namespace TrinityCreator
         {
             flagsBitMaskGroupBox.Visibility = Visibility.Collapsed;
         }
+
+        private void limitClassCb_Checked(object sender, RoutedEventArgs e)
+        {
+            limitClassBitMaskGroupBox.Visibility = Visibility.Visible;
+        }
+        private void limitClassCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            limitClassBitMaskGroupBox.Visibility = Visibility.Collapsed;
+        }
+        private void limitRaceCb_Checked(object sender, RoutedEventArgs e)
+        {
+            limitRaceBitMaskGroupBox.Visibility = Visibility.Visible;
+        }
+        private void limitRaceCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
+        }
         #endregion
 
         #region Click event handlers
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
-            
             MessageBox.Show("Not implemented yet");
-            // item.xxx = (class)someCb.Value.Property;
-            // item.xxx = (class)someCb.Value.Property;
-            // ...
+            item.EntryId = int.Parse(entryIdTxt.Text);
+            item.Quote = itemQuoteTxt.Text;
+            item.Class = (ItemClass)itemClassCb.SelectedValue;
+            item.ItemSubClass = (ItemSubClass)itemSubClassCb.SelectedValue;
+            item.Name = itemNameTxt.Text;
+            item.DisplayId = int.Parse(displayIdTxt.Text);
+            item.Quality = (ItemQuality)itemQualityCb.SelectedValue;
+            item.Binds = (ItemBonding)itemBoundsCb.SelectedValue;
+            item.MinLevel = int.Parse(itemPlayerLevelTxt.Text);
+            item.MaxAllowed = int.Parse(itemMaxCountTxt.Text);
+            //item.AllowedClass; Already set in constructor
+            //item.AllowedRace; Already set in constructor
+
+
 
             item.GenerateSqlQuery();
             // todo: Save query to sql file
@@ -207,7 +248,6 @@ namespace TrinityCreator
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
         }
-
         
     }
 }

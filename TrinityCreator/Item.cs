@@ -18,8 +18,8 @@ namespace TrinityCreator
         private ItemBonding _binds;
         private int _minlevel;
         private int _maxallowed;
-        private int _allowedclass;
-        private int _allowedrace;
+        private BitmaskStackPanel _allowedclass;
+        private BitmaskStackPanel _allowedrace;
         private int _valuebuy;
         private int _valuesell;
         private ItemInventoryType _inventoryType;
@@ -145,7 +145,7 @@ namespace TrinityCreator
             }
         }
 
-        public int AllowedClass
+        public BitmaskStackPanel AllowedClass
         {
             get
             {
@@ -157,7 +157,7 @@ namespace TrinityCreator
             }
         }
 
-        public int AllowedRace
+        public BitmaskStackPanel AllowedRace
         {
             get
             {
@@ -235,8 +235,8 @@ namespace TrinityCreator
             kvplist.Add("bonding", Binds.Id.ToString());
             kvplist.Add("RequiredLevel", MinLevel.ToString());
             kvplist.Add("maxcount", MaxAllowed.ToString());
-            kvplist.Add("AllowableClass", AllowedClass.ToString());
-            kvplist.Add("AllowableRace", AllowedRace.ToString());
+            kvplist.Add("AllowableClass", AllowedClass.BitmaskValue.ToString());
+            kvplist.Add("AllowableRace", AllowedRace.BitmaskValue.ToString());
             kvplist.Add("BuyPrice", ValueBuy.ToString());
             kvplist.Add("SellPrice", ValueSell.ToString());
             kvplist.Add("InventoryType", InventoryType.Id.ToString());

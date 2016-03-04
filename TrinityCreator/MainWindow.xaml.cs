@@ -25,11 +25,12 @@ namespace TrinityCreator
             InitializeComponent();
 
             // Check for updates
-            #if !DEBUG
+#if !DEBUG
                 Updater.CheckLatestVersion();
-            #endif
+#endif
 
-            armorWeaponsTab.Content = new ItemPage();
+            ItemPreview preview = new ItemPreview();
+            armorWeaponsTab.Content = new ItemPage(preview);
         }
     }
 }

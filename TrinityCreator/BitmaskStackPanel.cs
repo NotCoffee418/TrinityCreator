@@ -36,7 +36,7 @@ namespace TrinityCreator
                 uint bitmask = 0;
                 foreach (CheckBox cb in Checkboxes)
                 {
-                    if (cb.Tag.ToString() != "")
+                    if (cb.IsChecked == true)
                         bitmask += (uint)cb.Tag;
                 }
                 return bitmask;
@@ -67,6 +67,47 @@ namespace TrinityCreator
 
             return new BitmaskStackPanel("itemFlagsSp", cbs);
         }
+        
+        public static BitmaskStackPanel GetClassFlags()
+        {
+            var cbs = new BitmaskCheckBox[] {
+                new BitmaskCheckBox(1, "Warrior"),
+                new BitmaskCheckBox(2, "Paladin"),
+                new BitmaskCheckBox(4, "Hunter"),
+                new BitmaskCheckBox(8, "Rogue"),
+                new BitmaskCheckBox(16, "Priest"),
+                new BitmaskCheckBox(32, "Death Knight"),
+                new BitmaskCheckBox(64, "Shaman"),
+                new BitmaskCheckBox(128, "Mage"),
+                new BitmaskCheckBox(256, "Warlock"),
+                new BitmaskCheckBox(512, "Monk (5.x)"),
+                new BitmaskCheckBox(1024, "Druid"),
+            };
+
+            return new BitmaskStackPanel("classesSp", cbs);
+        }
+
+        public static BitmaskStackPanel GetRaceFlags()
+        {
+            var cbs = new BitmaskCheckBox[] {
+                new BitmaskCheckBox(1, "Human"),
+                new BitmaskCheckBox(2, "Orc"),
+                new BitmaskCheckBox(4, "Dwarf"),
+                new BitmaskCheckBox(8, "Night Elf"),
+                new BitmaskCheckBox(16, "Undead"),
+                new BitmaskCheckBox(32, "Tauren"),
+                new BitmaskCheckBox(64, "Gnome"),
+                new BitmaskCheckBox(128, "Troll"),
+                new BitmaskCheckBox(512, "Blood Elf"),
+                new BitmaskCheckBox(1024, "Draenei"),
+                new BitmaskCheckBox(256, "Goblin (4.x)+"),
+                new BitmaskCheckBox(2097152, "Worgen (4.x)+"),
+                new BitmaskCheckBox(58720256, "Pandaren (5.x)"),
+            };
+
+            return new BitmaskStackPanel("racesSp", cbs);
+        }
+
     }
 
     public class BitmaskCheckBox : CheckBox

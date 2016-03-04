@@ -22,13 +22,7 @@ namespace TrinityCreator
         public ItemPreview()
         {
              InitializeComponent();
-
         }
-        public ItemPreview(Item item) : this()
-        {
-            UpdatePreview(item);
-        }
-
 
         /// <summary>
         /// Display ArmorWeaponItem info in the preview 

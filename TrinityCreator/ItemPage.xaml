@@ -37,19 +37,34 @@
                         <Label FontSize="12" Content="Equip" Height="30" Margin="0,213,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
                         <ComboBox x:Name="inventoryTypeCb" Height="25" Margin="85,214,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="inventoryTypeCb_SelectionChanged" />
 
+                        <Label FontSize="12" Content="Max count" Height="30" Margin="0,243,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77" ToolTip="0 is unlimited"/>
+                        <TextBox x:Name="itemMaxCountTxt" Height="25" Margin="85,244,9,0" VerticalAlignment="Top" TextChanged="itemQuoteTxt_TextChanged" Text="0"/>
+
 
                     </Grid>
                 </GroupBox>
+                <GroupBox x:Name="equipmentBox" Header="Equipment Properties">
+                    <Grid>
+                        <Label FontSize="12" Content="Level required" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
+                        <TextBox x:Name="itemPlayerLevelTxt" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" />
+
+                    </Grid>
+                </GroupBox>
+
                 <GroupBox x:Name="weaponBox" Header="Weapon Properties" />
                 <GroupBox x:Name="armorBox" Header="Armor Properties"/>
 
-                <GroupBox x:Name="advancedOptionsBox" Header="Advanced Options" Height="46">
-                    <Grid>
-                        <CheckBox x:Name="changeFlagsCb" FontSize="12" Content="Change Flags" Height="20" Margin="0,4,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="122" Checked="changeFlagsCb_Checked" Unchecked="changeFlagsCb_Unchecked" />
-                    </Grid>
+                <GroupBox x:Name="advancedOptionsBox" Header="Extra Options">
+                    <StackPanel>
+                        <CheckBox x:Name="changeFlagsCb" FontSize="12" Content="Change Flags (advanced)" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="changeFlagsCb_Checked" Unchecked="changeFlagsCb_Unchecked" />
+                        <CheckBox x:Name="limitClassCb" FontSize="12" Content="Add class limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitClassCb_Checked" Unchecked="limitClassCb_Unchecked" />
+                        <CheckBox x:Name="limitRaceCb" FontSize="12" Content="Add race limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitRaceCb_Checked" Unchecked="limitRaceCb_Unchecked" />
+                    </StackPanel>
                 </GroupBox>
-                <GroupBox x:Name="flagsBitMaskGroupBox" Header="Item flags (advanced users only)" Visibility="Visible" />
-            
+                <GroupBox x:Name="flagsBitMaskGroupBox" Header="Item flags"/>
+                <GroupBox x:Name="limitClassBitMaskGroupBox" Header="Classes allowed" />
+                <GroupBox x:Name="limitRaceBitMaskGroupBox" Header="Races allowed" />
+
             </StackPanel>
             <StackPanel Width="375" HorizontalAlignment="Right">
                 <GroupBox x:Name="previewBox" Header="Item Preview"/>
