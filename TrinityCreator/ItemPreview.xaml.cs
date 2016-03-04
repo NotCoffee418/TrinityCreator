@@ -39,5 +39,17 @@ namespace TrinityCreator
             itemNameLbl.Content = item.Name;
             itemNameLbl.Foreground = new SolidColorBrush(item.Quality.QualityColor);
         }
+
+        private void screenshotClipboardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not implemented yet");
+        }
+
+        private void screenshotDiskBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not implemented yet");
+        }
+
+        
     }
 }

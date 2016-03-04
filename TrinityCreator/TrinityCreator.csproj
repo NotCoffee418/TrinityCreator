@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ArmorWeaponItem.cs" />
+    <Compile Include="BitmaskStackPanel.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemBonding.cs" />

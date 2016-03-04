@@ -23,6 +23,7 @@ namespace TrinityCreator
         public ItemPage()
         {
             InitializeComponent();
+            item = new Item();
 
             // load preview
             preview = new ItemPreview();
@@ -43,7 +44,13 @@ namespace TrinityCreator
             // Set item bounds
             itemBoundsCb.ItemsSource = ItemBonding.GetItemBondingList();
 
+            // Load flags groupbox
+            item.Flags = BitmaskStackPanel.GetItemFlags();
+            flagsBitMaskGroupBox.Content = BitmaskStackPanel.GetItemFlags();
+            flagsBitMaskGroupBox.Visibility = Visibility.Collapsed; // by default
         }
+
+        Item item;
 
         /// <summary>
         /// Shows & hides UI groupboxes for certain item classes
@@ -88,6 +95,19 @@ namespace TrinityCreator
         {
             ItemQuality q = (ItemQuality)itemQualityCb.SelectedValue;
             preview.itemNameLbl.Foreground = new SolidColorBrush(q.QualityColor);
+
+            // set/unset account bound flags
+            try
+            {
+                var bmcbr = from cb in item.Flags.Children.OfType<BitmaskCheckBox>()
+                            where (uint)cb.Tag == 134217728
+                            select cb;
+                if (q.Id == 7)
+                    bmcbr.FirstOrDefault().IsChecked = true;
+                else bmcbr.FirstOrDefault().IsChecked = false;
+            }
+            catch
+            { /* Exception on initial load */ }
         }
         
         private void itemClassCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -146,16 +166,28 @@ namespace TrinityCreator
 
             preview.subclassLeftNoteLbl.Content = it.Description;
         }
+
+        private void changeFlagsCb_Checked(object sender, RoutedEventArgs e)
+        {
+            flagsBitMaskGroupBox.Visibility = Visibility.Visible;
+        }
+        private void changeFlagsCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            flagsBitMaskGroupBox.Visibility = Visibility.Collapsed;
+        }
         #endregion
 
         #region Click event handlers
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
+            
             MessageBox.Show("Not implemented yet");
-            // Item i == new Item();
-            // i.xxx = (class)someCb.Value.Property;
-            // i.xxx = (class)someCb.Value.Property;
+            // item.xxx = (class)someCb.Value.Property;
+            // item.xxx = (class)someCb.Value.Property;
             // ...
+
+            item.GenerateSqlQuery();
+            // todo: Save query to sql file
 
             // Increase next item's entry id
             Properties.Settings.Default.nextid_item = int.Parse(entryIdTxt.Text) + 1;
@@ -175,5 +207,7 @@ namespace TrinityCreator
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
         }
+
+        
     }
 }

@@ -23,6 +23,7 @@ namespace TrinityCreator
         private int _valuebuy;
         private int _valuesell;
         private ItemInventoryType _inventoryType;
+        private BitmaskStackPanel _flags;
 
         public string Name
         {
@@ -204,7 +205,17 @@ namespace TrinityCreator
             }
         }
 
-
+        public BitmaskStackPanel Flags
+        {
+            get
+            {
+                return _flags;
+            }
+            set
+            {
+                _flags = value;
+            }
+        }
 
 
         /// <summary>
@@ -231,8 +242,8 @@ namespace TrinityCreator
             kvplist.Add("InventoryType", InventoryType.Id.ToString());
             kvplist.Add("Material", ItemSubClass.Material.Id.ToString());
             kvplist.Add("sheath", InventoryType.Sheath.ToString());
-
-
+            kvplist.Add("Flags", Flags.BitmaskValue.ToString());
+            
             return kvplist;
         }
 

@@ -42,6 +42,14 @@
                 </GroupBox>
                 <GroupBox x:Name="weaponBox" Header="Weapon Properties" />
                 <GroupBox x:Name="armorBox" Header="Armor Properties"/>
+
+                <GroupBox x:Name="advancedOptionsBox" Header="Advanced Options" Height="46">
+                    <Grid>
+                        <CheckBox x:Name="changeFlagsCb" FontSize="12" Content="Change Flags" Height="20" Margin="0,4,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="122" Checked="changeFlagsCb_Checked" Unchecked="changeFlagsCb_Unchecked" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="flagsBitMaskGroupBox" Header="Item flags (advanced users only)" Visibility="Visible" />
+            
             </StackPanel>
             <StackPanel Width="375" HorizontalAlignment="Right">
                 <GroupBox x:Name="previewBox" Header="Item Preview"/>
