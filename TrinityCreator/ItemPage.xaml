@@ -6,12 +6,12 @@
              xmlns:Properties="clr-namespace:TrinityCreator.Properties" x:Class="TrinityCreator.ItemPage" 
              mc:Ignorable="d" 
              d:DesignHeight="1152.55" MinWidth="655">
-    <ScrollViewer>
-        <Grid Background="#fff">
-            <StackPanel Margin="0,0,385,0">
+
+    <Grid Background="#fff">
+        <ScrollViewer Margin="0,0,380,0">
+            <StackPanel>
                 <GroupBox Header="Item Details" Height="301">
                     <Grid>
-
                         <Label FontSize="12" Content="Item Name" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
                         <TextBox x:Name="itemNameTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" TextChanged="itemNameTxt_TextChanged"/>
 
@@ -87,20 +87,20 @@
                 <GroupBox x:Name="flagsExtraBitMaskGroupBox" Header="Item flags Extra"/>
                 <GroupBox x:Name="limitClassBitMaskGroupBox" Header="Classes allowed" />
                 <GroupBox x:Name="limitRaceBitMaskGroupBox" Header="Races allowed" />
+        </StackPanel>
+        </ScrollViewer>
+        
+        <StackPanel Width="375" HorizontalAlignment="Right">
+            <GroupBox x:Name="previewBox" Header="Item Preview"/>
+            <GroupBox x:Name="createBox" Header="Export Item">
+                <Grid>
+                    <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
+                    <TextBox x:Name="entryIdTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
 
-            </StackPanel>
-            <StackPanel Width="375" HorizontalAlignment="Right">
-                <GroupBox x:Name="previewBox" Header="Item Preview"/>
-                <GroupBox x:Name="createBox" Header="Export Item">
-                    <Grid>
-                        <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <TextBox x:Name="entryIdTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
-
-                        <Button x:Name="exportSqlBtn" Content="Export to SQL file" Margin="10,35,153,5" Click="exportSqlBtn_Click" FontWeight="Bold"/>
-                        <Button x:Name="newItemBtn" Content="Create new item" Margin="218,35,10,5" Click="newItemBtn_Click"/>
-                    </Grid>
-                </GroupBox>
-            </StackPanel>
-        </Grid>
-    </ScrollViewer>
+                    <Button x:Name="exportSqlBtn" Content="Export to SQL file" Margin="10,35,153,5" Click="exportSqlBtn_Click" FontWeight="Bold"/>
+                    <Button x:Name="newItemBtn" Content="Create new item" Margin="218,35,10,5" Click="newItemBtn_Click"/>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
 </UserControl>
