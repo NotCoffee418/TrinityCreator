@@ -53,11 +53,13 @@ namespace TrinityCreator
             item.AllowedClass = BitmaskStackPanel.GetClassFlags();
             limitClassBitMaskGroupBox.Content = item.AllowedClass;
             limitClassBitMaskGroupBox.Visibility = Visibility.Collapsed;
+            preview.PrepareClassLimitations(item.AllowedClass);
 
             // load allowedrace groupbox
             item.AllowedRace = BitmaskStackPanel.GetRaceFlags();
             limitRaceBitMaskGroupBox.Content = item.AllowedRace;
             limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
+            preview.PrepareRaceLimitations(item.AllowedRace);
         }
 
         Item item;
@@ -193,7 +195,7 @@ namespace TrinityCreator
         private void limitClassCb_Checked(object sender, RoutedEventArgs e)
         {
             limitClassBitMaskGroupBox.Visibility = Visibility.Visible;
-            preview.ShowClassLimitations(item.AllowedClass);
+            preview.itemClassRequirementsLbl.Visibility = Visibility.Visible;
         }
         private void limitClassCb_Unchecked(object sender, RoutedEventArgs e)
         {
@@ -204,7 +206,7 @@ namespace TrinityCreator
         private void limitRaceCb_Checked(object sender, RoutedEventArgs e)
         {
             limitRaceBitMaskGroupBox.Visibility = Visibility.Visible;
-            preview.ShowRaceLimitations(item.AllowedRace);
+            preview.itemRaceRequirementsLbl.Visibility = Visibility.Visible;
         }
         private void limitRaceCb_Unchecked(object sender, RoutedEventArgs e)
         {

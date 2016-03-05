@@ -45,10 +45,8 @@ namespace TrinityCreator
 
 
 
-        internal void ShowClassLimitations(BitmaskStackPanel bitmaskStackPanel)
+        internal void PrepareClassLimitations(BitmaskStackPanel bitmaskStackPanel)
         {
-            itemClassRequirementsLbl.Visibility = Visibility.Visible;
-            
             foreach (BitmaskCheckBox c in bitmaskStackPanel.Children)
             {
                 c.Checked += UpdateClassLimitations;
@@ -56,17 +54,14 @@ namespace TrinityCreator
             }
         }
 
-        internal void ShowRaceLimitations(BitmaskStackPanel bitmaskStackPanel)
+        internal void PrepareRaceLimitations(BitmaskStackPanel bitmaskStackPanel)
         {
-            itemRaceRequirementsLbl.Visibility = Visibility.Visible;
-
             foreach (BitmaskCheckBox c in bitmaskStackPanel.Children)
             {
                 c.Checked += UpdateRaceLimitations;
                 c.Unchecked += UpdateRaceLimitations;
             }
         }
-
 
         private void UpdateClassLimitations(object sender, RoutedEventArgs e)
         {
