@@ -30,6 +30,8 @@ namespace TrinityCreator
         private int _stackable;
         private int _containerSlots;
         private Damage _damageInfo;
+        private DynamicDataControl _resistances;
+
 
         public string Name
         {
@@ -295,6 +297,18 @@ namespace TrinityCreator
             }
         }
 
+        public DynamicDataControl Resistances
+        {
+            get
+            {
+                return _resistances;
+            }
+            set
+            {
+                _resistances = value;
+            }
+        }
+
 
         /// <summary>
         /// Generates keyvaluepairs of the database table name and value to insert
@@ -330,6 +344,22 @@ namespace TrinityCreator
             kvplist.Add("dmg_max", DamageInfo.MaxDamage.ToString());
             kvplist.Add("dmg_type", DamageInfo.Type.Id.ToString());
             kvplist.Add("delay", DamageInfo.Speed.ToString());
+
+            // resistances
+            try
+            {
+                // loops unique keys
+                foreach (var kvp in Resistances.GetUserInput())
+                {
+                    DamageType type = (DamageType)kvp.Key;
+                    int value = int.Parse(kvp.Value);
+                    kvplist.Add(type + "_res", value.ToString());
+                }
+            }
+            catch
+            {
+                throw new Exception("Invalid value in resistances.");
+            }
 
 
             return kvplist;

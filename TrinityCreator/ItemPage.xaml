@@ -108,22 +108,25 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox x:Name="advancedOptionsBox" Header="Extra Options">
-                    <StackPanel>
-                        <CheckBox x:Name="changeFlagsCb" FontSize="12" Content="Change Flags (advanced)" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="changeFlagsCb_Checked" Unchecked="changeFlagsCb_Unchecked" />
-                        <CheckBox x:Name="limitClassCb" FontSize="12" Content="Add class limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitClassCb_Checked" Unchecked="limitClassCb_Unchecked" />
-                        <CheckBox x:Name="limitRaceCb" FontSize="12" Content="Add race limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitRaceCb_Checked" Unchecked="limitRaceCb_Unchecked" />
-                    </StackPanel>
-                </GroupBox>
+
                 <GroupBox x:Name="flagsBitMaskGroupBox" Header="Item flags"/>
                 <GroupBox x:Name="flagsExtraBitMaskGroupBox" Header="Item flags Extra"/>
                 <GroupBox x:Name="limitClassBitMaskGroupBox" Header="Classes allowed" />
                 <GroupBox x:Name="limitRaceBitMaskGroupBox" Header="Races allowed" />
+                <GroupBox x:Name="addResistanceGroupBox" Header="Magic resistance" />
             </StackPanel>
         </ScrollViewer>
 
         <StackPanel Width="375" HorizontalAlignment="Right">
             <GroupBox x:Name="previewBox" Header="Item Preview"/>
+            <GroupBox x:Name="advancedOptionsBox" Header="Extra Options">
+                <StackPanel>
+                    <CheckBox x:Name="changeFlagsCb" FontSize="12" Content="Change Flags (advanced)" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="changeFlagsCb_Checked" Unchecked="changeFlagsCb_Unchecked" />
+                    <CheckBox x:Name="limitClassCb" FontSize="12" Content="Add class limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitClassCb_Checked" Unchecked="limitClassCb_Unchecked" />
+                    <CheckBox x:Name="limitRaceCb" FontSize="12" Content="Add race limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitRaceCb_Checked" Unchecked="limitRaceCb_Unchecked" />
+                    <CheckBox x:Name="addResistancesCb" FontSize="12" Content="Add magic resistance" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="addResistancesCb_Checked" Unchecked="addResistancesCb_Unchecked" />
+                </StackPanel>
+            </GroupBox>
             <GroupBox x:Name="createBox" Header="Export Item">
                 <Grid>
                     <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
@@ -133,6 +136,7 @@
                     <Button x:Name="newItemBtn" Content="Create new item" Margin="218,35,10,5" Click="newItemBtn_Click"/>
                 </Grid>
             </GroupBox>
+            
         </StackPanel>
     </Grid>
 </UserControl>

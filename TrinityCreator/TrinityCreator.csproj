@@ -75,6 +75,9 @@
     <Compile Include="Currency.cs" />
     <Compile Include="Damage.cs" />
     <Compile Include="DamageType.cs" />
+    <Compile Include="DynamicDataControl.xaml.cs">
+      <DependentUpon>DynamicDataControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Item.cs" />
     <Compile Include="ItemBonding.cs" />
     <Compile Include="ItemClass.cs" />
@@ -91,6 +94,10 @@
     <Compile Include="SocketBonus.cs" />
     <Compile Include="Stat.cs" />
     <Compile Include="Updater.cs" />
+    <Page Include="DynamicDataControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ItemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

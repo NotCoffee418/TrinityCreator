@@ -71,6 +71,12 @@ namespace TrinityCreator
             item.DamageInfo = new Damage();
             damageTypeCb.ItemsSource = DamageType.GetDamageTypes();
             damageTypeCb.SelectedIndex = 0;
+
+            // Set resistance groupbox
+            item.Resistances = new DynamicDataControl(
+                DamageType.GetDamageTypes(magicOnly: true), 6, unique: true);
+            addResistanceGroupBox.Visibility = Visibility.Collapsed;
+            addResistanceGroupBox.Content = item.Resistances;
         }
 
         Item item;
@@ -237,6 +243,15 @@ namespace TrinityCreator
             if (preview.itemRaceRequirementsLbl.Content.ToString().Contains(": All"))
                 preview.itemRaceRequirementsLbl.Visibility = Visibility.Collapsed;
         }
+        private void addResistancesCb_Checked(object sender, RoutedEventArgs e)
+        {
+            addResistanceGroupBox.Visibility = Visibility.Visible;
+        }
+        private void addResistancesCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            addResistanceGroupBox.Visibility = Visibility.Collapsed;
+        }
+
 
         private void buyPriceGTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -424,6 +439,7 @@ namespace TrinityCreator
                 item.ContainerSlots = 0;
             }
             // dmg_min, dmg_max, dmg_type, delay is changed in item with valid changedevents
+            // resistances set in constructor
 
             item.GenerateSqlQuery();
             // todo: Save query to sql file
@@ -446,5 +462,7 @@ namespace TrinityCreator
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
         }
+
+        
     }
 }

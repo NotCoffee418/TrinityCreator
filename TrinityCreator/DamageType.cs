@@ -47,17 +47,22 @@ namespace TrinityCreator
             return Description;
         }
 
-        public static DamageType[] GetDamageTypes()
+        public static DamageType[] GetDamageTypes(bool magicOnly = false)
         {
-            return new DamageType[] {
-                new DamageType(0, "Physical"),
+            List<DamageType> list = new List<DamageType>();
+            if (!magicOnly)
+                list.Add(new DamageType(0, "Physical"));
+
+            list.AddRange(new DamageType[] {
                 new DamageType(1, "Holy"),
                 new DamageType(2, "Fire"),
                 new DamageType(3, "Nature"),
                 new DamageType(4, "Frost"),
                 new DamageType(5, "Shadow"),
                 new DamageType(6, "Arcane"),
-            };
+            });
+
+            return list.ToArray();
         }
     }
 }
