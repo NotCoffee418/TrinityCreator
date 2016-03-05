@@ -89,7 +89,7 @@ namespace TrinityCreator
         {
             return new ItemInventoryType[]
             {
-                new ItemInventoryType(13, "Weapon", 3),
+                new ItemInventoryType(13, "One-Hand", 3),
                 new ItemInventoryType(21, "Main Hand", 3),
                 new ItemInventoryType(22, "Off hand", 6),
                 new ItemInventoryType(23, "Holdable (Tome)", 6),

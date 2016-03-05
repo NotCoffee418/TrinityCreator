@@ -145,7 +145,7 @@ namespace TrinityCreator
         {
             get
             {
-                return MaxAllowed;
+                return _maxallowed;
             }
             set
             {
@@ -348,13 +348,13 @@ namespace TrinityCreator
             kvplist.Add("sheath", InventoryType.Sheath.ToString());
             kvplist.Add("Flags", Flags.BitmaskValue.ToString());
             kvplist.Add("FlagsExtra", FlagsExtra.BitmaskValue.ToString());
-            kvplist.Add("Flags", BuyCount.ToString());
+            kvplist.Add("BuyCount", BuyCount.ToString());
             kvplist.Add("ItemLevel", ItemLevel.ToString());
             kvplist.Add("stackable", Stackable.ToString());
             kvplist.Add("ContainerSlots", ContainerSlots.ToString());
-            kvplist.Add("dmg_min", DamageInfo.MinDamage.ToString());
-            kvplist.Add("dmg_max", DamageInfo.MaxDamage.ToString());
-            kvplist.Add("dmg_type", DamageInfo.Type.Id.ToString());
+            kvplist.Add("dmg_min1", DamageInfo.MinDamage.ToString());
+            kvplist.Add("dmg_max1", DamageInfo.MaxDamage.ToString());
+            kvplist.Add("dmg_type1", DamageInfo.Type.Id.ToString());
             kvplist.Add("delay", DamageInfo.Speed.ToString());
 
             // resistances

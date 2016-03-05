@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace TrinityCreator
 {
@@ -354,107 +355,119 @@ namespace TrinityCreator
 
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Not implemented yet");
-            try
-            {
-                item.EntryId = int.Parse(entryIdTxt.Text);
-            }
-            catch
-            {
-                throw new Exception("Invalid entry ID");
-            }
-            item.Quote = itemQuoteTxt.Text;
-            item.Class = (ItemClass)itemClassCb.SelectedValue;
-            item.ItemSubClass = (ItemSubClass)itemSubClassCb.SelectedValue;
-            item.Name = itemNameTxt.Text;
-            try
-            {
-                item.DisplayId = int.Parse(displayIdTxt.Text);
-            }
-            catch
-            {
-                throw new Exception("Invalid display ID");
-            }
-            item.Quality = (ItemQuality)itemQualityCb.SelectedValue;
-            item.Binds = (ItemBonding)itemBoundsCb.SelectedValue;
-            try
-            {
-                item.MinLevel = int.Parse(itemPlayerLevelTxt.Text);
-            }
-            catch
-            {
-                item.MinLevel = 0;
-            }
+            try {
+                try
+                {
+                    item.EntryId = int.Parse(entryIdTxt.Text);
+                }
+                catch
+                {
+                    throw new Exception("Invalid entry ID");
+                }
+                item.Quote = itemQuoteTxt.Text;
+                item.Class = (ItemClass)itemClassCb.SelectedValue;
+                item.ItemSubClass = (ItemSubClass)itemSubClassCb.SelectedValue;
+                item.Name = itemNameTxt.Text;
+                try
+                {
+                    item.DisplayId = int.Parse(displayIdTxt.Text);
+                }
+                catch
+                {
+                    throw new Exception("Invalid display ID");
+                }
+                item.Quality = (ItemQuality)itemQualityCb.SelectedValue;
+                item.Binds = (ItemBonding)itemBoundsCb.SelectedValue;
+                try
+                {
+                    item.MinLevel = int.Parse(itemPlayerLevelTxt.Text);
+                }
+                catch
+                {
+                    item.MinLevel = 0;
+                }
 
-            try
-            {
-                item.MaxAllowed = int.Parse(itemMaxCountTxt.Text);
-            }
-            catch
-            {
-                item.MaxAllowed = 0;
-            }
-            //item.AllowedClass; Already set in constructor
-            //item.AllowedRace; Already set in constructor
-            item.ValueBuy = new Currency(buyPriceGTxt.Text, buyPriceSTxt.Text, buyPriceCTxt.Text).Amount;
-            item.ValueSell = new Currency(sellPriceGTxt.Text, sellPriceSTxt.Text, sellPriceCTxt.Text).Amount;
-            item.InventoryType = (ItemInventoryType)inventoryTypeCb.SelectedValue;
-            // Material set in ItemSubClass
-            // sheath set in InventoryType
-            // Flags set in constructor
-            // FlagsExtra set in constructor
-            try
-            {
-                item.BuyCount = int.Parse(buyCountTxt.Text);
-            }
-            catch
-            {
-                item.BuyCount = 1;
-            }
+                try
+                {
+                    item.MaxAllowed = int.Parse(itemMaxCountTxt.Text);
+                }
+                catch
+                {
+                    item.MaxAllowed = 0;
+                }
+                //item.AllowedClass; Already set in constructor
+                //item.AllowedRace; Already set in constructor
+                item.ValueBuy = new Currency(buyPriceGTxt.Text, buyPriceSTxt.Text, buyPriceCTxt.Text).Amount;
+                item.ValueSell = new Currency(sellPriceGTxt.Text, sellPriceSTxt.Text, sellPriceCTxt.Text).Amount;
+                item.InventoryType = (ItemInventoryType)inventoryTypeCb.SelectedValue;
+                // Material set in ItemSubClass
+                // sheath set in InventoryType
+                // Flags set in constructor
+                // FlagsExtra set in constructor
+                try
+                {
+                    item.BuyCount = int.Parse(buyCountTxt.Text);
+                }
+                catch
+                {
+                    item.BuyCount = 1;
+                }
 
-            try
-            {
-                item.ItemLevel = int.Parse(itemILevelTxt.Text);
-            }
-            catch
-            {
-                item.ItemLevel = 0;
-            }
+                try
+                {
+                    item.ItemLevel = int.Parse(itemILevelTxt.Text);
+                }
+                catch
+                {
+                    item.ItemLevel = 0;
+                }
 
-            try
-            {
-                item.Stackable = int.Parse(itemStackCountTxt.Text);
-            }
-            catch
-            {
-                item.Stackable = 1;
-            }
+                try
+                {
+                    item.Stackable = int.Parse(itemStackCountTxt.Text);
+                }
+                catch
+                {
+                    item.Stackable = 1;
+                }
 
-            try
-            {
-                item.ContainerSlots = int.Parse(containerSlotsTxt.Text);
+                try
+                {
+                    item.ContainerSlots = int.Parse(containerSlotsTxt.Text);
+                }
+                catch
+                {
+                    item.ContainerSlots = 0;
+                }
+                // dmg_min, dmg_max, dmg_type, delay is changed in item with valid changedevents
+                // resistances set in constructor
+
+                // set ammo_type if needed
+                ItemSubClass isc = (ItemSubClass)itemSubClassCb.SelectedValue;
+                if (isc.Description == "Bow")
+                    item.AmmoType = 2;
+                else if (isc.Description == "Gun")
+                    item.AmmoType = 3;
+                else item.AmmoType = 0;
+
+                string query = item.GenerateSqlQuery();
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.DefaultExt = ".sql";
+                sfd.FileName = "Item " + item.EntryId;
+                sfd.Filter = "SQL File (.sql)|*.sql";
+                if (sfd.ShowDialog() == true)
+                    System.IO.File.WriteAllText(sfd.FileName, query);
+                
+                // Increase next item's entry id
+                Properties.Settings.Default.nextid_item = int.Parse(entryIdTxt.Text) + 1;
+                Properties.Settings.Default.Save();
+
+                MessageBox.Show("Your item has been saved.", "Complete", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch
+            catch (Exception ex)
             {
-                item.ContainerSlots = 0;
+                MessageBox.Show(ex.Message, "Failed to generate query.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            // dmg_min, dmg_max, dmg_type, delay is changed in item with valid changedevents
-            // resistances set in constructor
-
-            // set ammo_type if needed
-            ItemSubClass isc = (ItemSubClass)itemSubClassCb.SelectedValue;
-            if (isc.Description == "Bow")
-                item.AmmoType = 2;
-            else if (isc.Description == "Gun")
-                item.AmmoType = 3;
-            else item.AmmoType = 0;
-
-            item.GenerateSqlQuery();
-            // todo: Save query to sql file
-
-            // Increase next item's entry id
-            Properties.Settings.Default.nextid_item = int.Parse(entryIdTxt.Text) + 1;
-            Properties.Settings.Default.Save();
         }
 
         private void newItemBtn_Click(object sender, RoutedEventArgs e)
