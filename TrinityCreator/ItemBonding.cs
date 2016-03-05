@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    public class ItemBonding
+    public class ItemBonding : IKeyValue
     {
         public ItemBonding(int id, string name)
         {
             Id = id;
-            Name = name;
+            Description = name;
         }
 
         private int _id;
-        private string _name;
+        private string _description;
 
 
         public int Id
@@ -30,21 +30,21 @@ namespace TrinityCreator
             }
         }
 
-        public string Name
+        public string Description
         {
             get
             {
-                return _name;
+                return _description;
             }
             set
             {
-                _name = value;
+                _description = value;
             }
         }
 
         public override string ToString()
         {
-            return Name;
+            return Description;
         }
 
         public static ItemBonding[] GetItemBondingList()

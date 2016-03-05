@@ -78,6 +78,7 @@
     <Compile Include="DynamicDataControl.xaml.cs">
       <DependentUpon>DynamicDataControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IKeyValue.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemBonding.cs" />
     <Compile Include="ItemClass.cs" />
@@ -85,7 +86,6 @@
     <Compile Include="ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Bonus.cs" />
     <Compile Include="BonusStat.cs" />
     <Compile Include="ItemQuality.cs" />
     <Compile Include="ItemSubClass.cs" />
@@ -140,7 +140,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

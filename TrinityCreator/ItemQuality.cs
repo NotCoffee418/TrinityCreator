@@ -7,17 +7,17 @@ using System.Windows.Media;
 
 namespace TrinityCreator
 {
-    public class ItemQuality
+    public class ItemQuality : IKeyValue
     {
         public ItemQuality(int id, string name, Color color)
         {
             Id = id;
-            Name = name;
+            Description = name;
             QualityColor = color; 
         }
 
         private int _id;
-        private string _name;
+        private string _description;
         private Color _color;
 
 
@@ -33,15 +33,15 @@ namespace TrinityCreator
             }
         }
 
-        public string Name
+        public string Description
         {
             get
             {
-                return _name;
+                return _description;
             }
             set
             {
-                _name = value;
+                _description = value;
             }
         }
 
@@ -60,19 +60,19 @@ namespace TrinityCreator
 
         public static int FindQualityId(string name)
         {
-            var found = from q in GetQualityList() where q.Name == name select q.Id;
+            var found = from q in GetQualityList() where q.Description == name select q.Id;
             return found.First();
         }
 
         public string FindQualityName(int id)
         {
-            var found = from q in GetQualityList() where q.Id == id select q.Name;
+            var found = from q in GetQualityList() where q.Id == id select q.Description;
             return found.First();
         }
 
         public override string ToString()
         {
-            return Name;
+            return Description;
         }
 
         public static ItemQuality[] GetQualityList()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    public class BonusStat : Bonus
+    public class BonusStat : IKeyValue
     {
         private int _id;
         private string _description;
@@ -34,13 +34,7 @@ namespace TrinityCreator
                 _description = value;
             }
         }
-
-
-        public List<Bonus> GetBonusList()
-        {
-            return null;
-        }
-
+        
         
     }
 }

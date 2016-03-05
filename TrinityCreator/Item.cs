@@ -31,7 +31,7 @@ namespace TrinityCreator
         private int _containerSlots;
         private Damage _damageInfo;
         private DynamicDataControl _resistances;
-
+        private int _ammoType;
 
         public string Name
         {
@@ -309,6 +309,18 @@ namespace TrinityCreator
             }
         }
 
+        public int AmmoType
+        {
+            get
+            {
+                return _ammoType;
+            }
+            set
+            {
+                _ammoType = value;
+            }
+        }
+
 
         /// <summary>
         /// Generates keyvaluepairs of the database table name and value to insert
@@ -352,15 +364,16 @@ namespace TrinityCreator
                 foreach (var kvp in Resistances.GetUserInput())
                 {
                     DamageType type = (DamageType)kvp.Key;
-                    int value = int.Parse(kvp.Value);
-                    kvplist.Add(type + "_res", value.ToString());
+                    int value = int.Parse(kvp.Value); // validate int
+                    kvplist.Add(type.Description + "_res", value.ToString());
                 }
             }
             catch
             {
-                throw new Exception("Invalid value in resistances.");
+                throw new Exception("Invalid value in magic resistance.");
             }
 
+            kvplist.Add("ammo_type", AmmoType.ToString());
 
             return kvplist;
         }

@@ -192,7 +192,7 @@ namespace TrinityCreator
         private void itemBoundsCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ItemBonding b = (ItemBonding)itemBoundsCb.SelectedValue;
-            preview.itemBoundsLbl.Content = b.Name;
+            preview.itemBoundsLbl.Content = b.Description;
 
             // Don't display when no bounds
             if (b.Id == 0)
@@ -440,6 +440,14 @@ namespace TrinityCreator
             }
             // dmg_min, dmg_max, dmg_type, delay is changed in item with valid changedevents
             // resistances set in constructor
+
+            // set ammo_type if needed
+            ItemSubClass isc = (ItemSubClass)itemSubClassCb.SelectedValue;
+            if (isc.Description == "Bow")
+                item.AmmoType = 2;
+            else if (isc.Description == "Gun")
+                item.AmmoType = 3;
+            else item.AmmoType = 0;
 
             item.GenerateSqlQuery();
             // todo: Save query to sql file

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    public class ItemInventoryType
+    public class ItemInventoryType : IKeyValue
     {
         public ItemInventoryType(int id, string description, int sheath = 0)
         {

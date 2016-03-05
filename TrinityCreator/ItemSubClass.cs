@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    public class ItemSubClass
+    public class ItemSubClass : IKeyValue
     {
         public ItemSubClass(int id, string description, string previewNoteLeft = "", string previewNoteRight = "", 
             ItemInventoryType[] lockedInventoryType = null, ItemMaterial material = null)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    public class DamageType
+    public class DamageType : IKeyValue
     {
         public DamageType(int id, string description)
         {

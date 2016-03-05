@@ -6,8 +6,34 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    public class Stat
+    public class Stat : IKeyValue
     {
-       
+        public int Id
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        
     }
 }

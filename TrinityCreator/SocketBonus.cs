@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    public class SocketBonus : Bonus
+    public class SocketBonus : IKeyValue
     {
         public SocketBonus(int id, string description)
         {
