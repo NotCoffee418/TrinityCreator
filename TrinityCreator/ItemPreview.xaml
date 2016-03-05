@@ -73,22 +73,22 @@
                 <!-- Buy price -->
                 <DockPanel x:Name="buyDockPanel">
                     <Label Content="Buy Price:" Foreground="White" Width="100"/>
-                    <Label Content="xx" Name="buyGoldLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="0" Name="buyGoldLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
-                    <Label Content="xx" Name="buySilverLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="0" Name="buySilverLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
-                    <Label Content="xx" Name="buyCopperLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="0" Name="buyCopperLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/copper.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                 </DockPanel>
             
                 <!-- Sell price -->
                 <DockPanel Margin="0,-10,0,0" x:Name="sellDockPanel">
                     <Label Content="Sell Price:" Foreground="White" Width="100"/>
-                    <Label Content="xx" Name="sellGoldLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="0" Name="sellGoldLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
-                    <Label Content="xx" Name="sellSilverLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="0" Name="sellSilverLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
-                    <Label Content="xx" Name="sellCopperLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="0" Name="sellCopperLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/copper.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                 </DockPanel>
 

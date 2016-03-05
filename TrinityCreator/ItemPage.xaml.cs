@@ -277,15 +277,19 @@ namespace TrinityCreator
 
         private void itemPlayerLevelTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (itemPlayerLevelTxt.Text == "")
+            try
             {
-                preview.itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
+                if (itemPlayerLevelTxt.Text == "")
+                {
+                    preview.itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    preview.itemLevelRequiredLbl.Content = "Requires Level " + itemPlayerLevelTxt.Text;
+                    preview.itemLevelRequiredLbl.Visibility = Visibility.Visible;
+                }
             }
-            else
-            {
-                preview.itemLevelRequiredLbl.Content = "Requires Level " + itemPlayerLevelTxt.Text;
-                preview.itemLevelRequiredLbl.Visibility = Visibility.Visible;
-            }
+            catch { /* Exception on initial load */ }
         }
         #endregion
 
@@ -341,6 +345,14 @@ namespace TrinityCreator
             // sheath set in InventoryType
             // Flags set in constructor
             // FlagsExtra set in constructor
+            try
+            {
+                item.BuyCount = int.Parse(buyCountTxt.Text);
+            }
+            catch
+            {
+                item.BuyCount = 1;
+            }
 
 
 
