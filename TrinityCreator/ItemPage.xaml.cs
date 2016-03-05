@@ -66,6 +66,11 @@ namespace TrinityCreator
             limitRaceBitMaskGroupBox.Content = item.AllowedRace;
             limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
             preview.PrepareRaceLimitations(item.AllowedRace);
+
+            // Set weapon groupbox
+            item.DamageInfo = new Damage();
+            damageTypeCb.ItemsSource = DamageType.GetDamageTypes();
+            damageTypeCb.SelectedIndex = 0;
         }
 
         Item item;
@@ -292,6 +297,38 @@ namespace TrinityCreator
             }
             catch { /* Exception on initial load */ }
         }
+
+        private void damageTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                item.DamageInfo.MinDamage = int.Parse(damageMinTxt.Text);
+                item.DamageInfo.MaxDamage = int.Parse(damageMaxTxt.Text);
+                preview.weaponMinMaxDmgLbl.Content = string.Format("({0} - {1} Damage)", damageMinTxt.Text, damageMaxTxt.Text);
+                preview.weaponDpsLbl.Content = item.DamageInfo.GetDpsString();
+            }
+            catch { /* Exception on initial load or invalid value*/ }
+        }
+        private void weaponSpeedTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                item.DamageInfo.Speed = int.Parse(weaponSpeedTxt.Text);
+                double viewSpeed = (double)item.DamageInfo.Speed / 1000;
+                preview.weaponSpeedLbl.Content = string.Format("Speed {0}", viewSpeed.ToString("0.00"));
+                preview.weaponDpsLbl.Content = item.DamageInfo.GetDpsString();
+            }
+            catch
+            {
+                preview.weaponSpeedLbl.Content = "Speed INVALID";
+            }
+        }
+        private void damageTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            item.DamageInfo.Type = (DamageType)damageTypeCb.SelectedValue;
+            preview.weaponDpsLbl.Content = item.DamageInfo.GetDpsString();
+        }
+
         #endregion
 
         #region Click event handlers
@@ -386,7 +423,7 @@ namespace TrinityCreator
             {
                 item.ContainerSlots = 0;
             }
-
+            // dmg_min, dmg_max, dmg_type, delay is changed in item with valid changedevents
 
             item.GenerateSqlQuery();
             // todo: Save query to sql file
@@ -409,7 +446,5 @@ namespace TrinityCreator
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
         }
-
-        
     }
 }

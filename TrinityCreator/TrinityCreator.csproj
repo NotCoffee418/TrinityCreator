@@ -73,6 +73,8 @@
     <Compile Include="ArmorWeaponItem.cs" />
     <Compile Include="BitmaskStackPanel.cs" />
     <Compile Include="Currency.cs" />
+    <Compile Include="Damage.cs" />
+    <Compile Include="DamageType.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemBonding.cs" />
     <Compile Include="ItemClass.cs" />

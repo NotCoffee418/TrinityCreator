@@ -75,9 +75,26 @@
                         <Label FontSize="12" Content="Bag Slots" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
                         <TextBox x:Name="containerSlotsTxt" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" />
 
-                        
+
                     </Grid>
                 </GroupBox>
+
+                <GroupBox x:Name="weaponBox" Header="Weapon Properties" >
+                    <Grid>
+                        <Label FontSize="12" Content="Damage" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
+                        <TextBox x:Name="damageMinTxt" Height="25" Margin="85,6,0,0" VerticalAlignment="Top" ToolTip="Minimum damage" HorizontalAlignment="Left" Width="60" Text="0" TextChanged="damageTxt_TextChanged"/>
+                        <Label FontSize="12" Content="-" Height="30" Margin="151,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="17" ToolTip="Maximum damage"/>
+                        <TextBox x:Name="damageMaxTxt" Height="25" Margin="172,6,10,0" VerticalAlignment="Top" Text="0" TextChanged="damageTxt_TextChanged"/>
+
+                        <Label FontSize="12" Content="Speed (ms)" Height="30" Margin="0,36,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" ToolTip="Weapon speed in miliseconds"/>
+                        <TextBox x:Name="weaponSpeedTxt" Height="25" Margin="85,37,9,0" VerticalAlignment="Top" TextChanged="weaponSpeedTxt_TextChanged" />
+
+                        <Label FontSize="12" Content="Damage Type" Height="30" Margin="0,67,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
+                        <ComboBox x:Name="damageTypeCb" Height="25" Margin="85,68,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="damageTypeCb_SelectionChanged" />
+
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="armorBox" Header="Armor Properties"/>
 
                 <GroupBox x:Name="equipmentBox" Header="Equipment Properties" Height="121">
                     <Grid>
@@ -90,9 +107,6 @@
 
                     </Grid>
                 </GroupBox>
-
-                <GroupBox x:Name="weaponBox" Header="Weapon Properties" />
-                <GroupBox x:Name="armorBox" Header="Armor Properties"/>
 
                 <GroupBox x:Name="advancedOptionsBox" Header="Extra Options">
                     <StackPanel>

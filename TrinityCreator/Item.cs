@@ -29,6 +29,7 @@ namespace TrinityCreator
         private int _itemLevel;
         private int _stackable;
         private int _containerSlots;
+        private Damage _damageInfo;
 
         public string Name
         {
@@ -282,6 +283,18 @@ namespace TrinityCreator
             }
         }
 
+        public Damage DamageInfo
+        {
+            get
+            {
+                return _damageInfo;
+            }
+            set
+            {
+                _damageInfo = value;
+            }
+        }
+
 
         /// <summary>
         /// Generates keyvaluepairs of the database table name and value to insert
@@ -313,6 +326,10 @@ namespace TrinityCreator
             kvplist.Add("ItemLevel", ItemLevel.ToString());
             kvplist.Add("stackable", Stackable.ToString());
             kvplist.Add("ContainerSlots", ContainerSlots.ToString());
+            kvplist.Add("dmg_min", DamageInfo.MinDamage.ToString());
+            kvplist.Add("dmg_max", DamageInfo.MaxDamage.ToString());
+            kvplist.Add("dmg_type", DamageInfo.Type.Id.ToString());
+            kvplist.Add("delay", DamageInfo.Speed.ToString());
 
 
             return kvplist;

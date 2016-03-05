@@ -19,10 +19,10 @@
                 <!-- Only visible on weapon item -->
                 <StackPanel Name="weaponPanel" Visibility="Visible">
                     <DockPanel Margin="0,-10,0,0">
-                        <Label Name="weaponMinMaxDmgLbl" Content="x - x Damage" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
-                        <Label Name="weaponSpeedLbl" Content="Speed x.xx" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
+                        <Label Name="weaponMinMaxDmgLbl" Content="0 - 0 Damage" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
+                        <Label Name="weaponSpeedLbl" Content="Speed 0.00" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
                     </DockPanel>
-                    <Label Name="weaponDpsLbl" Content="(xx.x damage per second)" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+                    <Label Name="weaponDpsLbl" Content="(0 damage per second)" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                 </StackPanel>
                 <!-- Only visible on armor item -->
                 <StackPanel Name="armorPanel" Visibility="Visible">
