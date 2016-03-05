@@ -93,9 +93,9 @@ namespace TrinityCreator
                 new BitmaskCheckBox(4, "Item for ExtendedCost Vendor"),
                 new BitmaskCheckBox(768, "Disable need roll"),
                 new BitmaskCheckBox(131072, "BNET_ACCOUNT_BOUND", visibility: Visibility.Collapsed), // auto updated on item quality change
-                new BitmaskCheckBox(2097152, "CANNOT_BE_TRANSMOG"),
-                new BitmaskCheckBox(4194304, "CANNOT_TRANSMOG"),
-                new BitmaskCheckBox(8388608, "CAN_TRANSMOG"),    
+                new BitmaskCheckBox(2097152, "Cannot be transmog item"),
+                new BitmaskCheckBox(4194304, "Cannot transmog this item"),
+                new BitmaskCheckBox(8388608, "Can transmog"),    
             };
 
             return new BitmaskStackPanel("itemFlagsExtraSp", cbs);

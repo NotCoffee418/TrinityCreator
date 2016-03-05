@@ -274,22 +274,64 @@ namespace TrinityCreator
                 preview.sellDockPanel.Visibility = Visibility.Visible;
             } catch { /* Exception on initial load */ }
         }
+
+        private void itemPlayerLevelTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (itemPlayerLevelTxt.Text == "")
+            {
+                preview.itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                preview.itemLevelRequiredLbl.Content = "Requires Level " + itemPlayerLevelTxt.Text;
+                preview.itemLevelRequiredLbl.Visibility = Visibility.Visible;
+            }
+        }
         #endregion
 
         #region Click event handlers
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Not implemented yet");
-            item.EntryId = int.Parse(entryIdTxt.Text);
+            try
+            {
+                item.EntryId = int.Parse(entryIdTxt.Text);
+            }
+            catch
+            {
+                throw new Exception("Invalid entry ID");
+            }
             item.Quote = itemQuoteTxt.Text;
             item.Class = (ItemClass)itemClassCb.SelectedValue;
             item.ItemSubClass = (ItemSubClass)itemSubClassCb.SelectedValue;
             item.Name = itemNameTxt.Text;
-            item.DisplayId = int.Parse(displayIdTxt.Text);
+            try
+            {
+                item.DisplayId = int.Parse(displayIdTxt.Text);
+            }
+            catch
+            {
+                throw new Exception("Invalid display ID");
+            }
             item.Quality = (ItemQuality)itemQualityCb.SelectedValue;
             item.Binds = (ItemBonding)itemBoundsCb.SelectedValue;
-            item.MinLevel = int.Parse(itemPlayerLevelTxt.Text);
-            item.MaxAllowed = int.Parse(itemMaxCountTxt.Text);
+            try
+            {
+                item.MinLevel = int.Parse(itemPlayerLevelTxt.Text);
+            }
+            catch
+            {
+                item.MinLevel = 0;
+            }
+
+            try
+            {
+                item.MaxAllowed = int.Parse(itemMaxCountTxt.Text);
+            }
+            catch
+            {
+                item.MaxAllowed = 0;
+            }
             //item.AllowedClass; Already set in constructor
             //item.AllowedRace; Already set in constructor
             item.ValueBuy = new Currency(buyPriceGTxt.Text, buyPriceSTxt.Text, buyPriceCTxt.Text).Amount;
@@ -325,7 +367,6 @@ namespace TrinityCreator
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
         }
 
-        
         
     }
 }

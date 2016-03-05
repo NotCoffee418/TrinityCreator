@@ -68,7 +68,7 @@
                 <GroupBox x:Name="equipmentBox" Header="Equipment Properties">
                     <Grid>
                         <Label FontSize="12" Content="Level required" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox x:Name="itemPlayerLevelTxt" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" />
+                        <TextBox x:Name="itemPlayerLevelTxt" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" TextChanged="itemPlayerLevelTxt_TextChanged" />
 
                     </Grid>
                 </GroupBox>

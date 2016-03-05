@@ -25,6 +25,7 @@ namespace TrinityCreator
              item = _item;
 
              // hide unset values
+             itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
              buyDockPanel.Visibility = Visibility.Collapsed;
              sellDockPanel.Visibility = Visibility.Collapsed;
              itemClassRequirementsLbl.Visibility = Visibility.Collapsed;
