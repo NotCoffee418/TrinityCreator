@@ -19,20 +19,19 @@ namespace TrinityCreator
     /// </summary>
     public partial class ItemPreview : UserControl
     {
-        public ItemPreview()
+        public ItemPreview(Item _item)
         {
              InitializeComponent();
+             item = _item;
+
+             // hide unset values
+             buyDockPanel.Visibility = Visibility.Collapsed;
+             sellDockPanel.Visibility = Visibility.Collapsed;
+             itemClassRequirementsLbl.Visibility = Visibility.Collapsed;
+             itemRaceRequirementsLbl.Visibility = Visibility.Collapsed;
         }
 
-        /// <summary>
-        /// Display ArmorWeaponItem info in the preview 
-        /// </summary>
-        /// <param name="item"></param>
-        public void UpdatePreview(Item item)
-        {
-            itemNameLbl.Content = item.Name;
-            itemNameLbl.Foreground = new SolidColorBrush(item.Quality.QualityColor);
-        }
+        private Item item;
 
         private void screenshotClipboardBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -44,6 +43,40 @@ namespace TrinityCreator
             MessageBox.Show("Not implemented yet");
         }
 
-        
+
+
+        internal void ShowClassLimitations(BitmaskStackPanel bitmaskStackPanel)
+        {
+            itemClassRequirementsLbl.Visibility = Visibility.Visible;
+            
+            foreach (BitmaskCheckBox c in bitmaskStackPanel.Children)
+            {
+                c.Checked += UpdateClassLimitations;
+                c.Unchecked += UpdateClassLimitations;
+            }
+        }
+
+        internal void ShowRaceLimitations(BitmaskStackPanel bitmaskStackPanel)
+        {
+            itemRaceRequirementsLbl.Visibility = Visibility.Visible;
+
+            foreach (BitmaskCheckBox c in bitmaskStackPanel.Children)
+            {
+                c.Checked += UpdateRaceLimitations;
+                c.Unchecked += UpdateRaceLimitations;
+            }
+        }
+
+
+        private void UpdateClassLimitations(object sender, RoutedEventArgs e)
+        {
+            itemClassRequirementsLbl.Content = "Classes: " + item.AllowedClass.ToString();
+        }
+
+        private void UpdateRaceLimitations(object sender, RoutedEventArgs e)
+        {
+            itemRaceRequirementsLbl.Content = "Races: " + item.AllowedRace.ToString();
+        }
+
     }
 }

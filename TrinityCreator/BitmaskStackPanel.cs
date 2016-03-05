@@ -43,6 +43,23 @@ namespace TrinityCreator
             }
         }
 
+        /// <summary>
+        /// Gets clean comma seperated text from checked BitmaskCheckboxes
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            List<string> list = new List<string>();
+            foreach (BitmaskCheckBox c in Children)
+                if (c.IsChecked == true)
+                    list.Add(c.Content.ToString());
+
+            if (list.Count == 0)
+                list.Add("All");
+
+            return string.Join(", ", list);
+        }
+
 
         public static BitmaskStackPanel GetItemFlags()
         {

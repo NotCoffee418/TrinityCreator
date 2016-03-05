@@ -20,10 +20,10 @@ namespace TrinityCreator
     /// </summary>
     public partial class ItemPage : UserControl
     {
-        public ItemPage(ItemPreview _preview)
+        public ItemPage(Item _item, ItemPreview _preview)
         {
             InitializeComponent();
-            item = new Item();
+            item = _item;
 
             // load preview
             preview = _preview;
@@ -58,10 +58,6 @@ namespace TrinityCreator
             item.AllowedRace = BitmaskStackPanel.GetRaceFlags();
             limitRaceBitMaskGroupBox.Content = item.AllowedRace;
             limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
-
-            // hide buy & sell preview
-            preview.buyDockPanel.Visibility = Visibility.Collapsed;
-            preview.sellDockPanel.Visibility = Visibility.Collapsed;
         }
 
         Item item;
@@ -197,18 +193,24 @@ namespace TrinityCreator
         private void limitClassCb_Checked(object sender, RoutedEventArgs e)
         {
             limitClassBitMaskGroupBox.Visibility = Visibility.Visible;
+            preview.ShowClassLimitations(item.AllowedClass);
         }
         private void limitClassCb_Unchecked(object sender, RoutedEventArgs e)
         {
             limitClassBitMaskGroupBox.Visibility = Visibility.Collapsed;
+            if (preview.itemClassRequirementsLbl.Content.ToString().Contains(": All"))
+                preview.itemClassRequirementsLbl.Visibility = Visibility.Collapsed;
         }
         private void limitRaceCb_Checked(object sender, RoutedEventArgs e)
         {
             limitRaceBitMaskGroupBox.Visibility = Visibility.Visible;
+            preview.ShowRaceLimitations(item.AllowedRace);
         }
         private void limitRaceCb_Unchecked(object sender, RoutedEventArgs e)
         {
             limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
+            if (preview.itemRaceRequirementsLbl.Content.ToString().Contains(": All"))
+                preview.itemRaceRequirementsLbl.Visibility = Visibility.Collapsed;
         }
 
         private void buyPriceGTxt_TextChanged(object sender, TextChangedEventArgs e)
@@ -273,6 +275,10 @@ namespace TrinityCreator
             //item.AllowedRace; Already set in constructor
             item.ValueBuy = new Currency(buyPriceGTxt.Text, buyPriceSTxt.Text, buyPriceCTxt.Text).Amount;
             item.ValueSell = new Currency(sellPriceGTxt.Text, sellPriceSTxt.Text, sellPriceCTxt.Text).Amount;
+            item.InventoryType = (ItemInventoryType)inventoryTypeCb.SelectedValue;
+            // Material set in ItemSubClass
+            // sheath set in InventoryType
+            // Flags set in constructor
 
 
 

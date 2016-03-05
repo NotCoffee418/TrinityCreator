@@ -29,8 +29,9 @@ namespace TrinityCreator
                 Updater.CheckLatestVersion();
 #endif
 
-            ItemPreview preview = new ItemPreview();
-            armorWeaponsTab.Content = new ItemPage(preview);
+            Item item = new Item();
+            ItemPreview preview = new ItemPreview(item);
+            armorWeaponsTab.Content = new ItemPage(item, preview);
         }
     }
 }
