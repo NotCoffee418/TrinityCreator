@@ -58,6 +58,10 @@ namespace TrinityCreator
             item.AllowedRace = BitmaskStackPanel.GetRaceFlags();
             limitRaceBitMaskGroupBox.Content = item.AllowedRace;
             limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
+
+            // hide buy & sell preview
+            preview.buyDockPanel.Visibility = Visibility.Collapsed;
+            preview.sellDockPanel.Visibility = Visibility.Collapsed;
         }
 
         Item item;
@@ -206,6 +210,49 @@ namespace TrinityCreator
         {
             limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
         }
+
+        private void buyPriceGTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try {
+                preview.buyGoldLbl.Content = buyPriceGTxt.Text;
+                preview.buyDockPanel.Visibility = Visibility.Visible;
+            } catch { /* Exception on initial load */ }
+        }
+        private void buyPriceSTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try {
+                preview.buySilverLbl.Content = buyPriceSTxt.Text;
+                preview.buyDockPanel.Visibility = Visibility.Visible;
+            } catch { /* Exception on initial load */ }
+        }
+        private void buyPriceCTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try {
+                preview.buyCopperLbl.Content = buyPriceCTxt.Text;
+                preview.buyDockPanel.Visibility = Visibility.Visible;
+            } catch { /* Exception on initial load */ }
+        }
+        private void sellPriceGTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try {
+                preview.sellGoldLbl.Content = sellPriceGTxt.Text;
+                preview.sellDockPanel.Visibility = Visibility.Visible;
+            } catch { /* Exception on initial load */ }
+        }
+        private void sellPriceSTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try {
+                preview.sellSilverLbl.Content = sellPriceSTxt.Text;
+                preview.sellDockPanel.Visibility = Visibility.Visible;
+            } catch { /* Exception on initial load */ }
+        }
+        private void sellPriceCTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try {
+                preview.sellCopperLbl.Content = sellPriceCTxt.Text;
+                preview.sellDockPanel.Visibility = Visibility.Visible;
+            } catch { /* Exception on initial load */ }
+        }
         #endregion
 
         #region Click event handlers
@@ -224,6 +271,9 @@ namespace TrinityCreator
             item.MaxAllowed = int.Parse(itemMaxCountTxt.Text);
             //item.AllowedClass; Already set in constructor
             //item.AllowedRace; Already set in constructor
+            item.ValueBuy = new Currency(buyPriceGTxt.Text, buyPriceSTxt.Text, buyPriceCTxt.Text).Amount;
+            item.ValueSell = new Currency(sellPriceGTxt.Text, sellPriceSTxt.Text, sellPriceCTxt.Text).Amount;
+
 
 
 
@@ -248,6 +298,8 @@ namespace TrinityCreator
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
         }
+
+        
         
     }
 }

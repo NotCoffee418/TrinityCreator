@@ -39,19 +39,19 @@
                 <!-- todo: Ensure you can for example have two yellow sockets -->
                 <StackPanel>
                     <DockPanel Name="socket1" Margin="5,0,0,0">
-                        <Image Source="pack://siteoforigin:,,,/Resources/metasocket.png" Width="15" Height="15" />
+                        <Image Source="Resources/metasocket.png" Width="15" Height="15" />
                         <Label Content="Color Socket" Foreground="Gray" />
                     </DockPanel>
                     <DockPanel Name="socket2" Margin="5,0,0,0">
-                        <Image Source="pack://siteoforigin:,,,/Resources/metasocket.png" Width="15" Height="15" />
+                        <Image Source="Resources/metasocket.png" Width="15" Height="15" />
                         <Label Content="Color Socket" Foreground="Gray" Margin="0,-5,0,0" />
                     </DockPanel>
                     <DockPanel Name="socket3" Margin="5,0,0,0">
-                        <Image Source="pack://siteoforigin:,,,/Resources/metasocket.png" Width="15" Height="15" />
+                        <Image Source="Resources/metasocket.png" Width="15" Height="15" />
                         <Label Content="Color Socket" Foreground="Gray" Margin="0,-5,0,0" />
                     </DockPanel>
                     <DockPanel Name="socket4" Margin="5,0,0,0">
-                        <Image Source="pack://siteoforigin:,,,/Resources/metasocket.png" Width="15" Height="15" />
+                        <Image Source="Resources/metasocket.png" Width="15" Height="15" />
                         <Label Content="Color Socket" Foreground="Gray" Margin="0,-5,0,0" />
                     </DockPanel>
                     <Label Content="Socket Bonus: +5 Spell Damage" Foreground="#0c0" Margin="0,-5,0,0" />
@@ -71,25 +71,25 @@
                 <Label Name="itemQuoteLbl" Content="''This is a quote for your item''" Foreground="#ddcba5" FontSize="14" Visibility="Collapsed" />
 
                 <!-- Buy price -->
-                <DockPanel>
+                <DockPanel x:Name="buyDockPanel">
                     <Label Content="Buy Price:" Foreground="White" Width="100"/>
                     <Label Content="xx" Name="buyGoldLbl" Foreground="White" HorizontalAlignment="Left" />
-                    <Image Source="pack://siteoforigin:,,,/Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
+                    <Image Source="Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                     <Label Content="xx" Name="buySilverLbl" Foreground="White" HorizontalAlignment="Left" />
-                    <Image Source="pack://siteoforigin:,,,/Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
+                    <Image Source="Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                     <Label Content="xx" Name="buyCopperLbl" Foreground="White" HorizontalAlignment="Left" />
-                    <Image Source="pack://siteoforigin:,,,/Resources/copper.gif" Width="15" Height="15" HorizontalAlignment="Left" />
+                    <Image Source="Resources/copper.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                 </DockPanel>
             
                 <!-- Sell price -->
-                <DockPanel Margin="0,-10,0,0">
+                <DockPanel Margin="0,-10,0,0" x:Name="sellDockPanel">
                     <Label Content="Sell Price:" Foreground="White" Width="100"/>
                     <Label Content="xx" Name="sellGoldLbl" Foreground="White" HorizontalAlignment="Left" />
-                    <Image Source="pack://siteoforigin:,,,/Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
+                    <Image Source="Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                     <Label Content="xx" Name="sellSilverLbl" Foreground="White" HorizontalAlignment="Left" />
-                    <Image Source="pack://siteoforigin:,,,/Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
+                    <Image Source="Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                     <Label Content="xx" Name="sellCopperLbl" Foreground="White" HorizontalAlignment="Left" />
-                    <Image Source="pack://siteoforigin:,,,/Resources/copper.gif" Width="15" Height="15" HorizontalAlignment="Left" />
+                    <Image Source="Resources/copper.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                 </DockPanel>
 
             </StackPanel>

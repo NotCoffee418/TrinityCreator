@@ -1,8 +1,9 @@
-﻿<UserControl x:Class="TrinityCreator.ItemPage"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Properties="clr-namespace:TrinityCreator.Properties" x:Class="TrinityCreator.ItemPage" 
              mc:Ignorable="d" 
              d:DesignHeight="1152.55" MinWidth="655">
     <ScrollViewer>
@@ -43,6 +44,27 @@
 
                     </Grid>
                 </GroupBox>
+                <GroupBox x:Name="priceBox" Header="Equipment Properties">
+                    <Grid>
+                        <Label FontSize="12" Content="Buy price" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
+                        <TextBox x:Name="buyPriceGTxt" Height="25" Margin="84,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="buyPriceGTxt_TextChanged" />
+                        <Image Margin="137,11,0,49" Width="15" Source="Resources/gold.gif" HorizontalAlignment="Left" />
+                        <TextBox x:Name="buyPriceSTxt" Height="25" Margin="157,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceSTxt_TextChanged" />
+                        <Image Margin="182,11,0,49" Width="15" Source="Resources/silver.gif" HorizontalAlignment="Left" />
+                        <TextBox x:Name="buyPriceCTxt" Height="25" Margin="202,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceCTxt_TextChanged" Text="0" />
+                        <Image Margin="228,11,0,49" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left" />
+
+                        <Label FontSize="12" Content="Sell price" Height="30" Margin="0,38,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
+                        <TextBox x:Name="sellPriceGTxt" Height="25" Margin="84,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="sellPriceGTxt_TextChanged" />
+                        <Image Margin="137,44,0,16" Width="15" Source="Resources/gold.gif" HorizontalAlignment="Left" />
+                        <TextBox x:Name="sellPriceSTxt" Height="25" Margin="157,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceSTxt_TextChanged" />
+                        <Image Margin="182,44,0,16" Width="15" Source="Resources/silver.gif" HorizontalAlignment="Left" />
+                        <TextBox x:Name="sellPriceCTxt" Height="25" Margin="202,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceCTxt_TextChanged" Text="0" />
+                        <Image Margin="228,44,0,16" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left" />
+
+
+                    </Grid>
+                </GroupBox>
                 <GroupBox x:Name="equipmentBox" Header="Equipment Properties">
                     <Grid>
                         <Label FontSize="12" Content="Level required" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
@@ -73,8 +95,8 @@
                         <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
                         <TextBox x:Name="entryIdTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
 
-                        <Button x:Name="exportSqlBtn" Content="Export to SQL file" Margin="10,35,153,5" Click="exportSqlBtn_Click" FontWeight="Bold"></Button>
-                        <Button x:Name="newItemBtn" Content="Create new item" Margin="218,35,10,5" Click="newItemBtn_Click"></Button>
+                        <Button x:Name="exportSqlBtn" Content="Export to SQL file" Margin="10,35,153,5" Click="exportSqlBtn_Click" FontWeight="Bold"/>
+                        <Button x:Name="newItemBtn" Content="Create new item" Margin="218,35,10,5" Click="newItemBtn_Click"/>
                     </Grid>
                 </GroupBox>
             </StackPanel>
