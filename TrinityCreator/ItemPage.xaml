@@ -84,6 +84,7 @@
                     </StackPanel>
                 </GroupBox>
                 <GroupBox x:Name="flagsBitMaskGroupBox" Header="Item flags"/>
+                <GroupBox x:Name="flagsExtraBitMaskGroupBox" Header="Item flags Extra"/>
                 <GroupBox x:Name="limitClassBitMaskGroupBox" Header="Classes allowed" />
                 <GroupBox x:Name="limitRaceBitMaskGroupBox" Header="Races allowed" />
 

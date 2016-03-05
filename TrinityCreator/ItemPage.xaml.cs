@@ -49,6 +49,11 @@ namespace TrinityCreator
             flagsBitMaskGroupBox.Content = item.Flags;
             flagsBitMaskGroupBox.Visibility = Visibility.Collapsed; // by default
 
+            // Load FlagsExtra
+            item.FlagsExtra = BitmaskStackPanel.GetItemFlagsExtra();
+            flagsExtraBitMaskGroupBox.Content = item.FlagsExtra;
+            flagsExtraBitMaskGroupBox.Visibility = Visibility.Collapsed; // by default
+
             // load allowedclass groupbox
             item.AllowedClass = BitmaskStackPanel.GetClassFlags();
             limitClassBitMaskGroupBox.Content = item.AllowedClass;
@@ -115,12 +120,22 @@ namespace TrinityCreator
             // set/unset account bound flags
             try
             {
-                var bmcbr = from cb in item.Flags.Children.OfType<BitmaskCheckBox>()
+                var bmcbr1 = from cb in item.Flags.Children.OfType<BitmaskCheckBox>()
                             where (uint)cb.Tag == 134217728
                             select cb;
+                var bmcbr2 = from cb in item.FlagsExtra.Children.OfType<BitmaskCheckBox>()
+                             where (uint)cb.Tag == 131072
+                             select cb;
                 if (q.Id == 7)
-                    bmcbr.FirstOrDefault().IsChecked = true;
-                else bmcbr.FirstOrDefault().IsChecked = false;
+                {
+                    bmcbr1.FirstOrDefault().IsChecked = true;
+                    bmcbr2.FirstOrDefault().IsChecked = true;
+                }
+                else
+                {
+                    bmcbr1.FirstOrDefault().IsChecked = false;
+                    bmcbr2.FirstOrDefault().IsChecked = false;
+                }
             }
             catch
             { /* Exception on initial load */ }
@@ -186,10 +201,12 @@ namespace TrinityCreator
         private void changeFlagsCb_Checked(object sender, RoutedEventArgs e)
         {
             flagsBitMaskGroupBox.Visibility = Visibility.Visible;
+            flagsExtraBitMaskGroupBox.Visibility = Visibility.Visible;
         }
         private void changeFlagsCb_Unchecked(object sender, RoutedEventArgs e)
         {
             flagsBitMaskGroupBox.Visibility = Visibility.Collapsed;
+            flagsExtraBitMaskGroupBox.Visibility = Visibility.Collapsed;
         }
 
         private void limitClassCb_Checked(object sender, RoutedEventArgs e)
@@ -281,6 +298,7 @@ namespace TrinityCreator
             // Material set in ItemSubClass
             // sheath set in InventoryType
             // Flags set in constructor
+            // FlagsExtra set in constructor
 
 
 

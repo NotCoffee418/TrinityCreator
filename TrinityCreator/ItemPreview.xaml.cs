@@ -43,8 +43,6 @@ namespace TrinityCreator
             MessageBox.Show("Not implemented yet");
         }
 
-
-
         internal void PrepareClassLimitations(BitmaskStackPanel bitmaskStackPanel)
         {
             foreach (BitmaskCheckBox c in bitmaskStackPanel.Children)

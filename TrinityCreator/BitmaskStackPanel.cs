@@ -84,6 +84,22 @@ namespace TrinityCreator
 
             return new BitmaskStackPanel("itemFlagsSp", cbs);
         }
+
+        internal static BitmaskStackPanel GetItemFlagsExtra()
+        {
+            var cbs = new BitmaskCheckBox[] {
+                new BitmaskCheckBox(1, "Horde Only"),
+                new BitmaskCheckBox(2, "Alliance Only"),
+                new BitmaskCheckBox(4, "Item for ExtendedCost Vendor"),
+                new BitmaskCheckBox(768, "Disable need roll"),
+                new BitmaskCheckBox(131072, "BNET_ACCOUNT_BOUND", visibility: Visibility.Collapsed), // auto updated on item quality change
+                new BitmaskCheckBox(2097152, "CANNOT_BE_TRANSMOG"),
+                new BitmaskCheckBox(4194304, "CANNOT_TRANSMOG"),
+                new BitmaskCheckBox(8388608, "CAN_TRANSMOG"),    
+            };
+
+            return new BitmaskStackPanel("itemFlagsExtraSp", cbs);
+        }
         
         public static BitmaskStackPanel GetClassFlags()
         {
