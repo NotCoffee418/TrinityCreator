@@ -27,6 +27,8 @@ namespace TrinityCreator
         private BitmaskStackPanel _flagsExtra;
         private int _buyCount;
         private int _itemLevel;
+        private int _stackable;
+        private int _containerSlots;
 
         public string Name
         {
@@ -256,6 +258,30 @@ namespace TrinityCreator
             }
         }
 
+        public int Stackable
+        {
+            get
+            {
+                return _stackable;
+            }
+            set
+            {
+                _stackable = value;
+            }
+        }
+
+        public int ContainerSlots
+        {
+            get
+            {
+                return _containerSlots;
+            }
+            set
+            {
+                _containerSlots = value;
+            }
+        }
+
 
         /// <summary>
         /// Generates keyvaluepairs of the database table name and value to insert
@@ -285,6 +311,8 @@ namespace TrinityCreator
             kvplist.Add("FlagsExtra", FlagsExtra.BitmaskValue.ToString());
             kvplist.Add("Flags", BuyCount.ToString());
             kvplist.Add("ItemLevel", ItemLevel.ToString());
+            kvplist.Add("stackable", Stackable.ToString());
+            kvplist.Add("ContainerSlots", ContainerSlots.ToString());
 
 
             return kvplist;

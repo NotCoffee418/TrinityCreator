@@ -369,6 +369,24 @@ namespace TrinityCreator
                 item.ItemLevel = 0;
             }
 
+            try
+            {
+                item.Stackable = int.Parse(itemStackCountTxt.Text);
+            }
+            catch
+            {
+                item.Stackable = 1;
+            }
+
+            try
+            {
+                item.ContainerSlots = int.Parse(containerSlotsTxt.Text);
+            }
+            catch
+            {
+                item.ContainerSlots = 0;
+            }
+
 
             item.GenerateSqlQuery();
             // todo: Save query to sql file

@@ -10,7 +10,7 @@
     <Grid Background="#fff">
         <ScrollViewer Margin="0,0,380,0">
             <StackPanel>
-                <GroupBox Header="Item Details" Height="301">
+                <GroupBox Header="Item Details" Height="325">
                     <Grid>
                         <Label FontSize="12" Content="Item Name" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
                         <TextBox x:Name="itemNameTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" TextChanged="itemNameTxt_TextChanged"/>
@@ -41,6 +41,8 @@
                         <Label FontSize="12" Content="Max count" Height="30" Margin="0,243,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77" ToolTip="0 is unlimited"/>
                         <TextBox x:Name="itemMaxCountTxt" Height="25" Margin="85,244,9,0" VerticalAlignment="Top" TextChanged="itemQuoteTxt_TextChanged" Text="0"/>
 
+                        <Label FontSize="12" Content="Stack count" Height="30" Margin="0,273,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77" ToolTip="Max amount of this item in the same bag slot."/>
+                        <TextBox x:Name="itemStackCountTxt" Height="25" Margin="85,274,9,0" VerticalAlignment="Top" Text="1"/>
 
                     </Grid>
                 </GroupBox>
@@ -63,10 +65,20 @@
                         <Image Margin="228,44,0,0" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Buy count" Height="30" Margin="0,71,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" ToolTip="The size of the item stack when sold by vendors. Also if a vendor has limited copies of this item available, everytime the vendor list is refreshed."/>
-                        <TextBox x:Name="buyCountTxt" Height="25" Margin="85,72,9,0" VerticalAlignment="Top" TextChanged="itemPlayerLevelTxt_TextChanged" Text="1" />
+                        <TextBox x:Name="buyCountTxt" Height="25" Margin="85,72,9,0" VerticalAlignment="Top" Text="1" />
 
                     </Grid>
                 </GroupBox>
+
+                <GroupBox x:Name="containerBox" Header="Container Properties" Height="56">
+                    <Grid>
+                        <Label FontSize="12" Content="Bag Slots" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
+                        <TextBox x:Name="containerSlotsTxt" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" />
+
+                        
+                    </Grid>
+                </GroupBox>
+
                 <GroupBox x:Name="equipmentBox" Header="Equipment Properties" Height="121">
                     <Grid>
                         <Label FontSize="12" Content="Level required" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
