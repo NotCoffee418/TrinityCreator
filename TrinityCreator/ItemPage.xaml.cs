@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace TrinityCreator
 {
@@ -294,6 +295,11 @@ namespace TrinityCreator
         #endregion
 
         #region Click event handlers
+        private void findIlevelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("http://wow.gamepedia.com/Item_level#Wrath_of_the_Lich_King_.28minLevel_.3D_70-80.29");
+        }
+
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Not implemented yet");
@@ -354,7 +360,14 @@ namespace TrinityCreator
                 item.BuyCount = 1;
             }
 
-
+            try
+            {
+                item.ItemLevel = int.Parse(itemILevelTxt.Text);
+            }
+            catch
+            {
+                item.ItemLevel = 0;
+            }
 
 
             item.GenerateSqlQuery();
