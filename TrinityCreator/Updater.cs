@@ -43,7 +43,7 @@ namespace TrinityCreator
             {
                 string updateFile = Path.GetTempFileName() + ".exe";
                 WebClient c = new WebClient();
-                c.DownloadFile("https://github.com/RStijn/TrinityCreator/blob/master/Updater/bin/Release/TrinityUpdater.exe?raw=true", updateFile);
+                c.DownloadFile("https://github.com/RStijn/TrinityCreator/blob/master/Updater/bin/Release/TrinityCreatorUpdater.exe?raw=true", updateFile);
                 string currentExe = Assembly.GetExecutingAssembly().Location;
 
                 ProcessStartInfo proc = new ProcessStartInfo(updateFile);
