@@ -46,7 +46,7 @@
 
                     </Grid>
                 </GroupBox>
-                
+
                 <GroupBox x:Name="containerBox" Header="Container Properties" Height="56">
                     <Grid>
                         <Label FontSize="12" Content="Bag Slots" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
@@ -72,16 +72,16 @@
                     </Grid>
                 </GroupBox>
                 <GroupBox x:Name="armorBox" Header="Armor Properties"/>
-                <GroupBox x:Name="statsBox" Header="Stats Properties"/>
+                <GroupBox x:Name="statsBox" Header="Stats"/>
+                <GroupBox x:Name="bonusStatsBox" Header="Bonus Stats"/>
 
-                <GroupBox x:Name="equipmentBox" Header="Equipment Properties" Height="121">
+                <GroupBox x:Name="equipmentBox" Header="Equipment Properties" Height="86">
                     <Grid>
                         <Label FontSize="12" Content="Level required" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
                         <TextBox x:Name="itemPlayerLevelTxt" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" TextChanged="itemPlayerLevelTxt_TextChanged" />
 
-                        <Label FontSize="12" Content="Item Level" Height="30" Margin="0,36,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox x:Name="itemILevelTxt" Height="25" Margin="85,37,87,0" VerticalAlignment="Top" TextChanged="itemPlayerLevelTxt_TextChanged" />
-                        <Button x:Name="findIlevelBtn" FontSize="12" Content="Find" Height="25" Margin="0,37,11,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="70" Click="findIlevelBtn_Click"/>
+                        <Label FontSize="12" Content="Durability" Height="30" Margin="0,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
+                        <TextBox x:Name="durabilityTxt" Height="25" Margin="85,36,9,0" VerticalAlignment="Top" TextChanged="durabilityTxt_TextChanged" />
 
                     </Grid>
                 </GroupBox>
@@ -116,7 +116,7 @@
                 <GroupBox x:Name="limitClassBitMaskGroupBox" Header="Classes allowed" />
                 <GroupBox x:Name="limitRaceBitMaskGroupBox" Header="Races allowed" />
                 <GroupBox x:Name="addResistanceGroupBox" Header="Magic resistance" />
-                
+
             </StackPanel>
         </ScrollViewer>
 
@@ -140,7 +140,7 @@
                     <Button x:Name="newItemBtn" Content="Create new item" Margin="218,35,10,5" Click="newItemBtn_Click"/>
                 </Grid>
             </GroupBox>
-            
+
         </StackPanel>
     </Grid>
 </UserControl>

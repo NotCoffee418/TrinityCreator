@@ -82,6 +82,12 @@ namespace TrinityCreator
             // Set gems groupbox
             gemSocketsGroupBox.Visibility = Visibility.Collapsed;
             preview.gemsPanel.Visibility = Visibility.Collapsed;
+
+            // set min level
+            preview.itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
+
+            // set durability
+            preview.itemDurabilityLbl.Visibility = Visibility.Collapsed;
         }
 
         Item item;
@@ -279,23 +285,6 @@ namespace TrinityCreator
             } catch { /* Exception on initial load */ }
         }
 
-        private void itemPlayerLevelTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                if (itemPlayerLevelTxt.Text == "")
-                {
-                    preview.itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    preview.itemLevelRequiredLbl.Content = "Requires Level " + itemPlayerLevelTxt.Text;
-                    preview.itemLevelRequiredLbl.Visibility = Visibility.Visible;
-                }
-            }
-            catch { /* Exception on initial load */ }
-        }
-
         private void damageTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -337,14 +326,36 @@ namespace TrinityCreator
             gemSocketsGroupBox.Visibility = Visibility.Collapsed;
             preview.gemsPanel.Visibility = Visibility.Collapsed;
         }
+
+        private void durabilityTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                if (durabilityTxt.Text != "" && durabilityTxt.Text != "0")
+                {
+                    preview.itemDurabilityLbl.Content = string.Format("(Durability {0} / {0})", durabilityTxt.Text);
+                    preview.itemDurabilityLbl.Visibility = Visibility.Visible;
+                }
+                else
+                    preview.itemDurabilityLbl.Visibility = Visibility.Collapsed;
+            }
+            catch { /* Exception on initial load or invalid value*/ }
+        }
+
+        private void itemPlayerLevelTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (itemPlayerLevelTxt.Text != "0" && itemPlayerLevelTxt.Text != "")
+            {
+                preview.itemLevelRequiredLbl.Content = "Requires Level " + itemPlayerLevelTxt.Text;
+                preview.itemLevelRequiredLbl.Visibility = Visibility.Visible;
+            }
+            else
+                preview.itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
+
+        }
         #endregion
 
         #region Click event handlers
-        private void findIlevelBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start("http://wow.gamepedia.com/Item_level#Wrath_of_the_Lich_King_.28minLevel_.3D_70-80.29");
-        }
-
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
             try {
@@ -407,15 +418,6 @@ namespace TrinityCreator
 
                 try
                 {
-                    item.ItemLevel = int.Parse(itemILevelTxt.Text);
-                }
-                catch
-                {
-                    item.ItemLevel = 0;
-                }
-
-                try
-                {
                     item.Stackable = int.Parse(itemStackCountTxt.Text);
                 }
                 catch
@@ -441,6 +443,17 @@ namespace TrinityCreator
                 else if (isc.Description == "Gun")
                     item.AmmoType = 3;
                 else item.AmmoType = 0;
+
+                // set durability
+                try
+                {
+                    item.Durability = int.Parse(durabilityTxt.Text);
+                }
+                catch
+                {
+                    item.Durability = 0;
+                }
+
 
                 string query = item.GenerateSqlQuery();
                 SaveFileDialog sfd = new SaveFileDialog();
@@ -487,6 +500,8 @@ namespace TrinityCreator
             preview.armorPanel.Visibility = Visibility.Collapsed;
             addGemSocketsCb.Visibility = Visibility.Collapsed;
             statsBox.Visibility = Visibility.Collapsed;
+            preview.otherStatsLbl.Visibility = Visibility.Collapsed;
+            preview.itemDurabilityLbl.Visibility = Visibility.Collapsed;
 
             // Show selected
             ItemClass selectedClass = (ItemClass)itemClassCb.SelectedValue;
@@ -507,6 +522,8 @@ namespace TrinityCreator
                     preview.weaponPanel.Visibility = Visibility.Visible;
                     addGemSocketsCb.Visibility = Visibility.Visible;
                     statsBox.Visibility = Visibility.Visible;
+                    preview.otherStatsLbl.Visibility = Visibility.Visible;
+                    preview.itemDurabilityLbl.Visibility = Visibility.Visible;
                     break;
                 case 3: // Gems
                     vendorBox.Visibility = Visibility.Visible;
@@ -519,6 +536,8 @@ namespace TrinityCreator
                     preview.armorPanel.Visibility = Visibility.Visible;
                     addGemSocketsCb.Visibility = Visibility.Visible;
                     statsBox.Visibility = Visibility.Visible;
+                    preview.otherStatsLbl.Visibility = Visibility.Visible;
+                    preview.itemDurabilityLbl.Visibility = Visibility.Visible;
                     break;
                 case 5: // Reagent
                     vendorBox.Visibility = Visibility.Visible;
@@ -555,6 +574,5 @@ namespace TrinityCreator
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
         }
-        
     }
 }
