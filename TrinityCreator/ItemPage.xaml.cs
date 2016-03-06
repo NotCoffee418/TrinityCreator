@@ -78,16 +78,21 @@ namespace TrinityCreator
                 DamageType.GetDamageTypes(magicOnly: true), 6, unique: true);
             addResistanceGroupBox.Visibility = Visibility.Collapsed;
             addResistanceGroupBox.Content = item.Resistances;
-
-            // Set gems groupbox
-            gemSocketsGroupBox.Visibility = Visibility.Collapsed;
-            preview.gemsPanel.Visibility = Visibility.Collapsed;
-
+            
             // set min level
             preview.itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
 
             // set durability
             preview.itemDurabilityLbl.Visibility = Visibility.Collapsed;
+
+            // Set gemSockets groupbox
+            item.GemSockets = new DynamicDataControl(
+                Socket.GetSocketList(), 3, unique: false, header1:"Socket Type", header2:"Amount");
+            gemsGroupBox.Visibility = Visibility.Collapsed;
+            preview.gemsPanel.Visibility = Visibility.Collapsed;
+            gemSocketsSp.Content = item.GemSockets;
+            socketBonusCb.ItemsSource = SocketBonus.GetBonusList();
+            socketBonusCb.SelectedIndex = 0;
         }
 
         Item item;
@@ -318,12 +323,12 @@ namespace TrinityCreator
 
         private void addGemSocketsCb_Checked(object sender, RoutedEventArgs e)
         {
-            gemSocketsGroupBox.Visibility = Visibility.Visible;
+            gemsGroupBox.Visibility = Visibility.Visible;
             preview.gemsPanel.Visibility = Visibility.Visible;
         }
         private void addGemSocketsCb_Unchecked(object sender, RoutedEventArgs e)
         {
-            gemSocketsGroupBox.Visibility = Visibility.Collapsed;
+            gemsGroupBox.Visibility = Visibility.Collapsed;
             preview.gemsPanel.Visibility = Visibility.Collapsed;
         }
 
@@ -453,6 +458,8 @@ namespace TrinityCreator
                 {
                     item.Durability = 0;
                 }
+                // sockets set in constructor
+                item.SocketBonus = (SocketBonus)socketBonusCb.SelectedValue;
 
 
                 string query = item.GenerateSqlQuery();

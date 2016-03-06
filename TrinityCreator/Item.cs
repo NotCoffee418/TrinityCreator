@@ -32,6 +32,8 @@ namespace TrinityCreator
         private DynamicDataControl _resistances;
         private int _ammoType;
         private int _durability;
+        private DynamicDataControl _gemSockets;
+        private SocketBonus _socketBonus;
 
         public string Name
         {
@@ -321,6 +323,30 @@ namespace TrinityCreator
             }
         }
 
+        public DynamicDataControl GemSockets
+        {
+            get
+            {
+                return _gemSockets;
+            }
+            set
+            {
+                _gemSockets = value;
+            }
+        }
+
+        public SocketBonus SocketBonus
+        {
+            get
+            {
+                return _socketBonus;
+            }
+            set
+            {
+                _socketBonus = value;
+            }
+        }
+
 
         /// <summary>
         /// Generates keyvaluepairs of the database table name and value to insert
@@ -356,6 +382,31 @@ namespace TrinityCreator
             kvplist.Add("dmg_type1", DamageInfo.Type.Id.ToString());
             kvplist.Add("delay", DamageInfo.Speed.ToString());
             kvplist.Add("MaxDurability", Durability.ToString());
+
+            // Add gem sockets
+            int socketId = 1;
+            foreach (var gem in GemSockets.GetUserInput())
+            {
+                if (gem.Value != "0" && gem.Value != "")
+                {
+                    try
+                    {
+                        Socket s = (Socket)gem.Key;
+                        int sCount = int.Parse(s.Description); // validate
+
+                        kvplist.Add("socketColor_" + socketId, s.Id.ToString());
+                        kvplist.Add("socketContent_" + socketId, sCount.ToString());
+                        socketId++;
+                    }
+                    catch
+                    {
+                        throw new Exception("Invalid gem socket data.");
+                    }
+                }
+            }
+            // Socket bonus
+            kvplist.Add("socketBonus", SocketBonus.Id.ToString());
+
 
             // resistances
             try

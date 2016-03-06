@@ -20,11 +20,12 @@ namespace TrinityCreator
     /// </summary>
     public partial class DynamicDataControl : UserControl
     {
-        public DynamicDataControl(object[] keyOptions, int maxLines, bool unique = false)
+        public DynamicDataControl(object[] keyOptions, int maxLines, bool unique = false, string header1="", string header2 = "")
         {
             InitializeComponent();
             MaxLines = maxLines;
             KeyOptions = keyOptions;
+            AddHeaders(header1, header2);
 
             if (unique)
             {
@@ -85,6 +86,26 @@ namespace TrinityCreator
             if (lines.Count() < MaxLines)
                 AddLine();
         }
+        
+        private void AddHeaders(string header1, string header2)
+        {
+            if (header1 != "" && header2 != "")
+            {
+                DockPanel dp = new DockPanel();
+                dp.Margin = new Thickness(0, 2, 0, 2);
+
+                Label l1 = new Label();
+                l1.Content = header1;
+                l1.Width = 150;
+                dp.Children.Add(l1);
+
+                Label l2 = new Label();
+                l2.Content = header2;
+                dp.Children.Add(l2);
+
+                dynamicSp.Children.Add(dp);
+            }
+        }
 
         private void AddLine(object key = null)
         {
@@ -97,9 +118,9 @@ namespace TrinityCreator
             else
             {
                 cb.Items.Add(key);
-                cb.SelectedIndex = 0;
                 cb.IsEnabled = false;
             }
+            cb.SelectedIndex = 0;
             cb.Width = 150;
             dp.Children.Add(cb);
 

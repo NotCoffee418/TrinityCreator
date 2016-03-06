@@ -110,7 +110,15 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox x:Name="gemSocketsGroupBox" Header="Gem Sockets" />
+                <GroupBox x:Name="gemsGroupBox" Header="Gem Sockets">
+                    <StackPanel>
+                        <GroupBox x:Name="gemSocketsSp" />
+                        <Grid x:Name="socketBonusGrid">
+                            <Label FontSize="12" Content="Socket Bonus" Height="30" Margin="0,4,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81"/>
+                            <ComboBox x:Name="socketBonusCb" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" IsReadOnly="True"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
                 <GroupBox x:Name="flagsBitMaskGroupBox" Header="Item flags"/>
                 <GroupBox x:Name="flagsExtraBitMaskGroupBox" Header="Item flags Extra"/>
                 <GroupBox x:Name="limitClassBitMaskGroupBox" Header="Classes allowed" />
