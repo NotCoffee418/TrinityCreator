@@ -93,6 +93,7 @@ namespace TrinityCreator
             gemSocketsSp.Content = item.GemSockets;
             socketBonusCb.ItemsSource = SocketBonus.GetBonusList();
             socketBonusCb.SelectedIndex = 0;
+            item.GemSockets.Changed += GemDataChangedHander;
         }
 
         Item item;
@@ -357,6 +358,42 @@ namespace TrinityCreator
             else
                 preview.itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
 
+        }
+
+        private void GemDataChangedHander(object sender, EventArgs e)
+        {
+            preview.gemsPanel.Children.Clear();
+            try
+            {
+                foreach (var line in item.GemSockets.GetUserInput())
+                {
+                    int count = int.Parse(line.Value);
+                    Socket sock = (Socket)line.Key;
+                    for (int i = 0; i < count; i++)
+                    {
+                        DockPanel dp = new DockPanel();
+                        dp.Margin = new Thickness(5, 0, 0, 0);
+
+                        Image img = new Image();
+                        img.Source = sock.SocketImage;
+                        img.Width = 15;
+                        img.Height = 15;
+                        dp.Children.Add(img);
+
+                        Label lab = new Label();
+                        lab.Content = sock.Description + " Socket";
+                        lab.Foreground = Brushes.Gray;
+                        lab.Margin = new Thickness(0, -5, 0, 0);
+                        dp.Children.Add(img);
+
+                        preview.gemsPanel.Children.Add(dp);
+                    }
+                }
+            }
+            catch
+            {
+                preview.gemsPanel.Children.Clear();
+            }
         }
         #endregion
 

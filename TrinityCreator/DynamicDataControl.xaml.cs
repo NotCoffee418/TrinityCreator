@@ -36,6 +36,8 @@ namespace TrinityCreator
             else AddLine();
         }
 
+        public event EventHandler Changed;
+
         private int _maxLines;
         private object[] _keyOptions;
         private List<DockPanel> lines = new List<DockPanel>();
@@ -122,14 +124,21 @@ namespace TrinityCreator
             }
             cb.SelectedIndex = 0;
             cb.Width = 150;
+            cb.SelectionChanged += TriggerChangedEvent;
             dp.Children.Add(cb);
 
             TextBox tb = new TextBox();
             tb.Margin = new Thickness(5, 0, 0, 0);
+            tb.TextChanged += TriggerChangedEvent;
             dp.Children.Add(tb);
 
             lines.Add(dp);
             dynamicSp.Children.Add(dp);
+        }
+
+        private void TriggerChangedEvent(object sender, EventArgs e)
+        {
+            Changed(sender, e);
         }
     }
 }
