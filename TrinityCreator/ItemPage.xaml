@@ -46,30 +46,7 @@
 
                     </Grid>
                 </GroupBox>
-                <GroupBox x:Name="vendorBox" Header="Vendor Properties">
-                    <Grid>
-                        <Label FontSize="12" Content="Buy price" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox x:Name="buyPriceGTxt" Height="25" Margin="84,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="buyPriceGTxt_TextChanged" />
-                        <Image Margin="137,11,0,0" Width="15" Source="Resources/gold.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-                        <TextBox x:Name="buyPriceSTxt" Height="25" Margin="157,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceSTxt_TextChanged" />
-                        <Image Margin="182,11,0,0" Width="15" Source="Resources/silver.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-                        <TextBox x:Name="buyPriceCTxt" Height="25" Margin="202,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceCTxt_TextChanged" Text="0" />
-                        <Image Margin="228,11,0,0" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-
-                        <Label FontSize="12" Content="Sell price" Height="30" Margin="0,38,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox x:Name="sellPriceGTxt" Height="25" Margin="84,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="sellPriceGTxt_TextChanged" />
-                        <Image Margin="137,44,0,0" Width="15" Source="Resources/gold.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-                        <TextBox x:Name="sellPriceSTxt" Height="25" Margin="157,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceSTxt_TextChanged" />
-                        <Image Margin="182,44,0,0" Width="15" Source="Resources/silver.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-                        <TextBox x:Name="sellPriceCTxt" Height="25" Margin="202,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceCTxt_TextChanged" Text="0" />
-                        <Image Margin="228,44,0,0" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-
-                        <Label FontSize="12" Content="Buy count" Height="30" Margin="0,71,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" ToolTip="The size of the item stack when sold by vendors. Also if a vendor has limited copies of this item available, everytime the vendor list is refreshed."/>
-                        <TextBox x:Name="buyCountTxt" Height="25" Margin="85,72,9,0" VerticalAlignment="Top" Text="1" />
-
-                    </Grid>
-                </GroupBox>
-
+                
                 <GroupBox x:Name="containerBox" Header="Container Properties" Height="56">
                     <Grid>
                         <Label FontSize="12" Content="Bag Slots" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
@@ -95,6 +72,7 @@
                     </Grid>
                 </GroupBox>
                 <GroupBox x:Name="armorBox" Header="Armor Properties"/>
+                <GroupBox x:Name="statsBox" Header="Stats Properties"/>
 
                 <GroupBox x:Name="equipmentBox" Header="Equipment Properties" Height="121">
                     <Grid>
@@ -108,12 +86,37 @@
                     </Grid>
                 </GroupBox>
 
+                <GroupBox x:Name="vendorBox" Header="Vendor Properties">
+                    <Grid>
+                        <Label FontSize="12" Content="Buy price" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
+                        <TextBox x:Name="buyPriceGTxt" Height="25" Margin="84,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="buyPriceGTxt_TextChanged" />
+                        <Image Margin="137,11,0,0" Width="15" Source="Resources/gold.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
+                        <TextBox x:Name="buyPriceSTxt" Height="25" Margin="157,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceSTxt_TextChanged" />
+                        <Image Margin="182,11,0,0" Width="15" Source="Resources/silver.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
+                        <TextBox x:Name="buyPriceCTxt" Height="25" Margin="202,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceCTxt_TextChanged" Text="0" />
+                        <Image Margin="228,11,0,0" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
 
+                        <Label FontSize="12" Content="Sell price" Height="30" Margin="0,38,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
+                        <TextBox x:Name="sellPriceGTxt" Height="25" Margin="84,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="sellPriceGTxt_TextChanged" />
+                        <Image Margin="137,44,0,0" Width="15" Source="Resources/gold.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
+                        <TextBox x:Name="sellPriceSTxt" Height="25" Margin="157,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceSTxt_TextChanged" />
+                        <Image Margin="182,44,0,0" Width="15" Source="Resources/silver.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
+                        <TextBox x:Name="sellPriceCTxt" Height="25" Margin="202,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceCTxt_TextChanged" Text="0" />
+                        <Image Margin="228,44,0,0" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
+
+                        <Label FontSize="12" Content="Buy count" Height="30" Margin="0,71,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" ToolTip="The size of the item stack when sold by vendors. Also if a vendor has limited copies of this item available, everytime the vendor list is refreshed."/>
+                        <TextBox x:Name="buyCountTxt" Height="25" Margin="85,72,9,0" VerticalAlignment="Top" Text="1" />
+
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox x:Name="gemSocketsGroupBox" Header="Gem Sockets" />
                 <GroupBox x:Name="flagsBitMaskGroupBox" Header="Item flags"/>
                 <GroupBox x:Name="flagsExtraBitMaskGroupBox" Header="Item flags Extra"/>
                 <GroupBox x:Name="limitClassBitMaskGroupBox" Header="Classes allowed" />
                 <GroupBox x:Name="limitRaceBitMaskGroupBox" Header="Races allowed" />
                 <GroupBox x:Name="addResistanceGroupBox" Header="Magic resistance" />
+                
             </StackPanel>
         </ScrollViewer>
 
@@ -125,6 +128,7 @@
                     <CheckBox x:Name="limitClassCb" FontSize="12" Content="Add class limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitClassCb_Checked" Unchecked="limitClassCb_Unchecked" />
                     <CheckBox x:Name="limitRaceCb" FontSize="12" Content="Add race limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitRaceCb_Checked" Unchecked="limitRaceCb_Unchecked" />
                     <CheckBox x:Name="addResistancesCb" FontSize="12" Content="Add magic resistance" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="addResistancesCb_Checked" Unchecked="addResistancesCb_Unchecked" />
+                    <CheckBox x:Name="addGemSocketsCb" FontSize="12" Content="Add Gem sockets" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="addGemSocketsCb_Checked" Unchecked="addGemSocketsCb_Unchecked" />
                 </StackPanel>
             </GroupBox>
             <GroupBox x:Name="createBox" Header="Export Item">

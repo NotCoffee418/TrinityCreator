@@ -78,33 +78,15 @@ namespace TrinityCreator
                 DamageType.GetDamageTypes(magicOnly: true), 6, unique: true);
             addResistanceGroupBox.Visibility = Visibility.Collapsed;
             addResistanceGroupBox.Content = item.Resistances;
+
+            // Set gems groupbox
+            gemSocketsGroupBox.Visibility = Visibility.Collapsed;
+            preview.gemsPanel.Visibility = Visibility.Collapsed;
         }
 
         Item item;
-
-        /// <summary>
-        /// Shows & hides UI groupboxes for certain item classes
-        /// </summary>
-        private void ShowCorrectClassBox()
-        {
-            // Hide everything
-            weaponBox.Visibility = Visibility.Collapsed;
-            armorBox.Visibility = Visibility.Collapsed;
-
-            // Show selected
-            ItemClass selectedClass = (ItemClass)itemClassCb.SelectedValue;
-            switch (selectedClass.Id)
-            {
-                case 2:
-                    weaponBox.Visibility = Visibility.Visible;
-                    break;
-                case 4:
-                    armorBox.Visibility = Visibility.Visible;
-                    break;
-            }
-        }
-
         ItemPreview preview;
+
 
         #region Changed event handlers
         private void itemNameTxt_TextChanged(object sender, TextChangedEventArgs e)
@@ -345,6 +327,16 @@ namespace TrinityCreator
             preview.weaponDpsLbl.Content = item.DamageInfo.GetDpsString();
         }
 
+        private void addGemSocketsCb_Checked(object sender, RoutedEventArgs e)
+        {
+            gemSocketsGroupBox.Visibility = Visibility.Visible;
+            preview.gemsPanel.Visibility = Visibility.Visible;
+        }
+        private void addGemSocketsCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            gemSocketsGroupBox.Visibility = Visibility.Collapsed;
+            preview.gemsPanel.Visibility = Visibility.Collapsed;
+        }
         #endregion
 
         #region Click event handlers
@@ -478,12 +470,91 @@ namespace TrinityCreator
         }
         #endregion
 
+
+        /// <summary>
+        /// Shows & hides UI groupboxes for certain item classes
+        /// </summary>
+        private void ShowCorrectClassBox()
+        {
+            // Hide everything
+            weaponBox.Visibility = Visibility.Collapsed;
+            armorBox.Visibility = Visibility.Collapsed;
+            equipmentBox.Visibility = Visibility.Collapsed;
+            containerBox.Visibility = Visibility.Collapsed;
+            vendorBox.Visibility = Visibility.Collapsed;
+            addResistancesCb.Visibility = Visibility.Collapsed;
+            preview.weaponPanel.Visibility = Visibility.Collapsed;
+            preview.armorPanel.Visibility = Visibility.Collapsed;
+            addGemSocketsCb.Visibility = Visibility.Collapsed;
+            statsBox.Visibility = Visibility.Collapsed;
+
+            // Show selected
+            ItemClass selectedClass = (ItemClass)itemClassCb.SelectedValue;
+            switch (selectedClass.Id)
+            {
+                case 0: // Consumable
+
+                    break;
+                case 1: // Container
+                    containerBox.Visibility = Visibility.Visible;
+                    vendorBox.Visibility = Visibility.Visible;
+                    break;
+                case 2: // Weapon
+                    weaponBox.Visibility = Visibility.Visible;
+                    equipmentBox.Visibility = Visibility.Visible;
+                    vendorBox.Visibility = Visibility.Visible;
+                    addResistancesCb.Visibility = Visibility.Visible;
+                    preview.weaponPanel.Visibility = Visibility.Visible;
+                    addGemSocketsCb.Visibility = Visibility.Visible;
+                    statsBox.Visibility = Visibility.Visible;
+                    break;
+                case 3: // Gems
+                    vendorBox.Visibility = Visibility.Visible;
+                    break;
+                case 4: // Armor
+                    armorBox.Visibility = Visibility.Visible;
+                    equipmentBox.Visibility = Visibility.Visible;
+                    vendorBox.Visibility = Visibility.Visible;
+                    addResistancesCb.Visibility = Visibility;
+                    preview.armorPanel.Visibility = Visibility.Visible;
+                    addGemSocketsCb.Visibility = Visibility.Visible;
+                    statsBox.Visibility = Visibility.Visible;
+                    break;
+                case 5: // Reagent
+                    vendorBox.Visibility = Visibility.Visible;
+                    break;
+                case 6: // Projectile
+                    vendorBox.Visibility = Visibility.Visible;
+                    break;
+                case 7: // Trade goods
+
+                    break;
+                case 9: // Recipe
+
+                    break;
+                case 11: // Quiver
+
+                    break;
+                case 12: // Quest
+
+                    break;
+                case 13: // Key
+
+                    break;
+                case 15: // Miscellaneous
+
+                    break;
+                case 16: // Glyph
+
+                    break;
+            }
+        }
+
         private void ClearForm()
         {
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
         }
-
         
     }
 }

@@ -63,7 +63,7 @@ namespace TrinityCreator
                 new ItemClass(6, "Projectile"),
                 new ItemClass(7, "Trade Goods"),
                 new ItemClass(9, "Recipe"),
-                //new ItemClass(11, "Quiver"),     // Removed in WotLK?
+                new ItemClass(11, "Quiver"),
                 new ItemClass(12, "Quest"),
                 new ItemClass(13, "Key"),
                 new ItemClass(15, "Miscellaneous"),
