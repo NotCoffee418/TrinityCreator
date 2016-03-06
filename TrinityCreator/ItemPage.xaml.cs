@@ -79,15 +79,9 @@ namespace TrinityCreator
             addResistanceGroupBox.Visibility = Visibility.Collapsed;
             addResistanceGroupBox.Content = item.Resistances;
             
-            // set min level
-            preview.itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
-
-            // set durability
-            preview.itemDurabilityLbl.Visibility = Visibility.Collapsed;
-
             // Set gemSockets groupbox
             item.GemSockets = new DynamicDataControl(
-                Socket.GetSocketList(), 3, unique: false, header1:"Socket Type", header2:"Amount");
+                Socket.GetSocketList(), 3, unique: false, header1:"Socket Type", header2:"Amount", defaultValue: "0");
             gemsGroupBox.Visibility = Visibility.Collapsed;
             preview.gemsPanel.Visibility = Visibility.Collapsed;
             gemSocketsSp.Content = item.GemSockets;
@@ -384,7 +378,7 @@ namespace TrinityCreator
                         lab.Content = sock.Description + " Socket";
                         lab.Foreground = Brushes.Gray;
                         lab.Margin = new Thickness(0, -5, 0, 0);
-                        dp.Children.Add(img);
+                        dp.Children.Add(lab);
 
                         preview.gemsPanel.Children.Add(dp);
                     }
@@ -394,6 +388,18 @@ namespace TrinityCreator
             {
                 preview.gemsPanel.Children.Clear();
             }
+        }
+
+        private void socketBonusCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SocketBonus sb = (SocketBonus)socketBonusCb.SelectedValue;
+            if (sb.Id != 0)
+            {
+                preview.socketBonusLbl.Visibility = Visibility.Visible;
+                preview.socketBonusLbl.Content = "Socket Bonus: " + sb.Description;
+            }
+            else
+                preview.socketBonusLbl.Visibility = Visibility.Collapsed;
         }
         #endregion
 
@@ -617,6 +623,6 @@ namespace TrinityCreator
         {
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
-        }
+        }       
     }
 }

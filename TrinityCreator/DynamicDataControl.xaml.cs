@@ -20,12 +20,13 @@ namespace TrinityCreator
     /// </summary>
     public partial class DynamicDataControl : UserControl
     {
-        public DynamicDataControl(object[] keyOptions, int maxLines, bool unique = false, string header1="", string header2 = "")
+        public DynamicDataControl(object[] keyOptions, int maxLines, bool unique = false, string header1="", string header2 = "", string defaultValue = "")
         {
             InitializeComponent();
             MaxLines = maxLines;
             KeyOptions = keyOptions;
             AddHeaders(header1, header2);
+            _defaultValue = defaultValue;
 
             if (unique)
             {
@@ -40,6 +41,7 @@ namespace TrinityCreator
 
         private int _maxLines;
         private object[] _keyOptions;
+        private string _defaultValue;
         private List<DockPanel> lines = new List<DockPanel>();
             
         public int MaxLines
@@ -109,7 +111,7 @@ namespace TrinityCreator
             }
         }
 
-        private void AddLine(object key = null)
+        private void AddLine(object key = null, string value = "")
         {
             DockPanel dp = new DockPanel();
             dp.Margin = new Thickness(0, 2, 0, 2);
@@ -129,6 +131,7 @@ namespace TrinityCreator
 
             TextBox tb = new TextBox();
             tb.Margin = new Thickness(5, 0, 0, 0);
+            tb.Text = _defaultValue;
             tb.TextChanged += TriggerChangedEvent;
             dp.Children.Add(tb);
 
@@ -136,7 +139,7 @@ namespace TrinityCreator
             dynamicSp.Children.Add(dp);
         }
 
-        private void TriggerChangedEvent(object sender, EventArgs e)
+        private void TriggerChangedEvent(object sender, EventArgs e = null)
         {
             Changed(sender, e);
         }

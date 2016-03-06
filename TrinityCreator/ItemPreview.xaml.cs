@@ -21,15 +21,18 @@ namespace TrinityCreator
     {
         public ItemPreview(Item _item)
         {
-             InitializeComponent();
-             item = _item;
+            InitializeComponent();
+            item = _item;
 
-             // hide unset values
-             itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
-             buyDockPanel.Visibility = Visibility.Collapsed;
-             sellDockPanel.Visibility = Visibility.Collapsed;
-             itemClassRequirementsLbl.Visibility = Visibility.Collapsed;
-             itemRaceRequirementsLbl.Visibility = Visibility.Collapsed;
+            // hide unset values
+            itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
+            buyDockPanel.Visibility = Visibility.Collapsed;
+            sellDockPanel.Visibility = Visibility.Collapsed;
+            itemClassRequirementsLbl.Visibility = Visibility.Collapsed;
+            itemRaceRequirementsLbl.Visibility = Visibility.Collapsed;
+            itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
+            itemDurabilityLbl.Visibility = Visibility.Collapsed;
+            socketBonusLbl.Visibility = Visibility.Collapsed;
         }
 
         private Item item;

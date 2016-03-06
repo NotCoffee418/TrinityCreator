@@ -115,7 +115,7 @@
                         <GroupBox x:Name="gemSocketsSp" />
                         <Grid x:Name="socketBonusGrid">
                             <Label FontSize="12" Content="Socket Bonus" Height="30" Margin="0,4,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81"/>
-                            <ComboBox x:Name="socketBonusCb" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" IsReadOnly="True"/>
+                            <ComboBox x:Name="socketBonusCb" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="socketBonusCb_SelectionChanged"/>
                         </Grid>
                     </StackPanel>
                 </GroupBox>

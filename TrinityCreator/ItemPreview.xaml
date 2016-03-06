@@ -37,26 +37,8 @@
             
                 <!-- Only visible when sockets available -->
                 <!-- todo: Ensure you can for example have two yellow sockets -->
-                <StackPanel Name="gemsPanel">
-                    <DockPanel Name="socket1" Margin="5,0,0,0">
-                        <Image Source="Resources/metasocket.png" Width="15" Height="15" />
-                        <Label Content="Color Socket" Foreground="Gray" />
-                    </DockPanel>
-                    <DockPanel Name="socket2" Margin="5,0,0,0">
-                        <Image Source="Resources/metasocket.png" Width="15" Height="15" />
-                        <Label Content="Color Socket" Foreground="Gray" Margin="0,-5,0,0" />
-                    </DockPanel>
-                    <DockPanel Name="socket3" Margin="5,0,0,0">
-                        <Image Source="Resources/metasocket.png" Width="15" Height="15" />
-                        <Label Content="Color Socket" Foreground="Gray" Margin="0,-5,0,0" />
-                    </DockPanel>
-                    <DockPanel Name="socket4" Margin="5,0,0,0">
-                        <Image Source="Resources/metasocket.png" Width="15" Height="15" />
-                        <Label Content="Color Socket" Foreground="Gray" Margin="0,-5,0,0" />
-                    </DockPanel>
-                    <Label Content="Socket Bonus: +5 Spell Damage" Foreground="#0c0" Margin="0,-5,0,0" />
-
-                </StackPanel>
+                <StackPanel Name="gemsPanel" />
+                <Label x:Name="socketBonusLbl" Content="Socket Bonus: +5 Spell Damage" Foreground="#0c0" Margin="0,-5,0,10" />
             
                 <Label Name="itemClassRequirementsLbl" Content="Classes: All" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                 <Label Name="itemRaceRequirementsLbl" Content="Races: All" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
@@ -66,7 +48,7 @@
 
 
                 <!-- Only visible when repairable -->
-                <Label Name="itemDurabilityLbl" Content="(Durability 100 / 100)" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+                <Label Name="itemDurabilityLbl" Content="(Durability 0 / 0)" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                 <Label Name="itemQuoteLbl" Content="''This is a quote for your item''" Foreground="#ddcba5" FontSize="14" Visibility="Collapsed" />
 
                 <!-- Buy price -->
