@@ -34,6 +34,7 @@ namespace TrinityCreator
         private int _durability;
         private DynamicDataControl _gemSockets;
         private SocketBonus _socketBonus;
+        private DynamicDataControl _stat;
 
         public string Name
         {
@@ -347,6 +348,18 @@ namespace TrinityCreator
             }
         }
 
+        public DynamicDataControl Stats
+        {
+            get
+            {
+                return _stat;
+            }
+            set
+            {
+                _stat = value;
+            }
+        }
+
 
         /// <summary>
         /// Generates keyvaluepairs of the database table name and value to insert
@@ -425,6 +438,24 @@ namespace TrinityCreator
             }
 
             kvplist.Add("ammo_type", AmmoType.ToString());
+
+            // Stats
+            try
+            {
+                int count = 1;
+                foreach (var kvp in Stats.GetUserInput())
+                {
+                    Stat stat = (Stat)kvp.Key;
+                    int value = int.Parse(kvp.Value); // validate int
+                    kvplist.Add("stat_type" + count, stat.Id.ToString());
+                    kvplist.Add("stat_value" + count, value.ToString());
+                    count++;
+                }
+            }
+            catch
+            {
+                throw new Exception("Invalid value in magic resistance.");
+            }
 
             return kvplist;
         }

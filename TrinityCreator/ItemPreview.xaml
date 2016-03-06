@@ -33,8 +33,8 @@
                     <Label Name="itemArmorLbl" Content="xxxx Armor" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                     <Label Name="itemBlockLbl" Content="xxx Block" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                 </StackPanel>
-                    <Label Name="otherStatsLbl" Content="+ xx Agility" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
-            
+                <StackPanel Name="statsSp" />
+
                 <!-- Only visible when sockets available -->
                 <!-- todo: Ensure you can for example have two yellow sockets -->
                 <StackPanel Name="gemsPanel" />

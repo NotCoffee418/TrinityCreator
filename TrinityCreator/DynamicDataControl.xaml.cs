@@ -139,7 +139,7 @@ namespace TrinityCreator
             dynamicSp.Children.Add(dp);
         }
 
-        private void TriggerChangedEvent(object sender, EventArgs e = null)
+        private void TriggerChangedEvent(object sender, EventArgs e)
         {
             Changed(sender, e);
         }

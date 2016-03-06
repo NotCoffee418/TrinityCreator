@@ -88,7 +88,13 @@ namespace TrinityCreator
             socketBonusCb.ItemsSource = SocketBonus.GetBonusList();
             socketBonusCb.SelectedIndex = 0;
             item.GemSockets.Changed += GemDataChangedHander;
+
+            // set statsBox
+            item.Stats = new DynamicDataControl(Stat.GetStatList(), 10, unique: false, header1: "Stat", header2: "Value", defaultValue: "0");
+            statsBox.Content = item.Stats;
+            item.Stats.Changed += StatsChangedHandler;
         }
+        
 
         Item item;
         ItemPreview preview;
@@ -401,6 +407,31 @@ namespace TrinityCreator
             else
                 preview.socketBonusLbl.Visibility = Visibility.Collapsed;
         }
+
+        private void StatsChangedHandler(object sender, EventArgs e)
+        {
+            preview.statsSp.Children.Clear();
+            try
+            {
+                foreach (var line in item.Stats.GetUserInput())
+                {
+                    Stat stat = (Stat)line.Key;
+                    if (line.Value != "0")
+                    {
+                        Label lab = new Label();
+                        string amount = int.Parse(line.Value).ToString("+#;-#"); // Validate, add + or -
+                        lab.Content = amount + " " + stat.Description;
+                        lab.Foreground = Brushes.White;
+                        lab.Margin = new Thickness(0, -5, 0, 0);
+                        preview.statsSp.Children.Add(lab);
+                    }
+                }
+            }
+            catch
+            {
+                preview.statsSp.Children.Clear();
+            }
+        }
         #endregion
 
         #region Click event handlers
@@ -550,7 +581,7 @@ namespace TrinityCreator
             preview.armorPanel.Visibility = Visibility.Collapsed;
             addGemSocketsCb.Visibility = Visibility.Collapsed;
             statsBox.Visibility = Visibility.Collapsed;
-            preview.otherStatsLbl.Visibility = Visibility.Collapsed;
+            preview.statsSp.Visibility = Visibility.Collapsed;
             preview.itemDurabilityLbl.Visibility = Visibility.Collapsed;
 
             // Show selected
@@ -572,7 +603,7 @@ namespace TrinityCreator
                     preview.weaponPanel.Visibility = Visibility.Visible;
                     addGemSocketsCb.Visibility = Visibility.Visible;
                     statsBox.Visibility = Visibility.Visible;
-                    preview.otherStatsLbl.Visibility = Visibility.Visible;
+                    preview.statsSp.Visibility = Visibility.Visible;
                     preview.itemDurabilityLbl.Visibility = Visibility.Visible;
                     break;
                 case 3: // Gems
@@ -586,7 +617,7 @@ namespace TrinityCreator
                     preview.armorPanel.Visibility = Visibility.Visible;
                     addGemSocketsCb.Visibility = Visibility.Visible;
                     statsBox.Visibility = Visibility.Visible;
-                    preview.otherStatsLbl.Visibility = Visibility.Visible;
+                    preview.statsSp.Visibility = Visibility.Visible;
                     preview.itemDurabilityLbl.Visibility = Visibility.Visible;
                     break;
                 case 5: // Reagent
