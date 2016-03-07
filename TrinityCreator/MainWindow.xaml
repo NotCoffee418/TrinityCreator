@@ -1,10 +1,23 @@
 ﻿<Window x:Class="TrinityCreator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Trinity Creator by RStijn" Height="800" Width="750" MinWidth="675" Icon="Resources/tclogo.png">
-    <TabControl x:Name="tabControl">
-        <TabItem Header="Armor &amp; Weapons" Name="armorWeaponsTab" />
-        <TabItem Header="Creature" />
-        <TabItem Header="More..." />
-    </TabControl>
+        Title="Trinity Creator" Height="800" Width="750" MinWidth="675" Icon="Resources/tclogo.png">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Configuration">
+                <MenuItem Header="Configure DB_C Path" />
+                <MenuItem Header="Configure _MySQL" />
+            </MenuItem>
+
+            <MenuItem Header="Support the creator by donating!" Foreground="Orange" FontWeight="Bold">
+                <MenuItem Header="Why should I donate?" Click="WhyDonate_Click" Foreground="Black"/>
+                <MenuItem Header="Donate" Click="Donate_Click" Foreground="Black"/>
+            </MenuItem>
+        </Menu>
+        <TabControl x:Name="tabControl">
+            <TabItem Header="Armor &amp; Weapons" Name="armorWeaponsTab" />
+            <TabItem Header="Creature" />
+            <TabItem Header="More..." />
+        </TabControl>
+    </DockPanel>
 </Window>
