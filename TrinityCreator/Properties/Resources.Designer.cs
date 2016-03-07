@@ -123,6 +123,16 @@ namespace TrinityCreator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap tclogo {
+            get {
+                object obj = ResourceManager.GetObject("tclogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap yellowsocket {
             get {
                 object obj = ResourceManager.GetObject("yellowsocket", resourceCulture);

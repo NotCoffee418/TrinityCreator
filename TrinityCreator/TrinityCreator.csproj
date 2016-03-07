@@ -48,6 +48,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>tclogo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -187,6 +190,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\yellowsocket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Database\" />
+    <Folder Include="WowClient\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\tclogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="tclogo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
