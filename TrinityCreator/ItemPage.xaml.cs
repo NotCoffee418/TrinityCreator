@@ -179,7 +179,6 @@ namespace TrinityCreator
                 preview.subclassLeftNoteLbl.Content = sc.PreviewNoteLeft;
                 preview.subclassRightNoteLbl.Visibility = Visibility.Visible;
             }
-
             if (sc.PreviewNoteRight == "")
                 preview.subclassRightNoteLbl.Visibility = Visibility.Collapsed;
             else
@@ -187,6 +186,10 @@ namespace TrinityCreator
                 preview.subclassRightNoteLbl.Content = sc.PreviewNoteRight;
                 preview.subclassRightNoteLbl.Visibility = Visibility.Visible;
             }
+
+            // Show only left if right == left
+            if (preview.subclassRightNoteLbl.Content.ToString() == preview.subclassLeftNoteLbl.Content.ToString())
+                preview.subclassRightNoteLbl.Content = "";
         }
 
         private void itemBoundsCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -701,6 +704,12 @@ namespace TrinityCreator
         {
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
-        }        
+        }
+
+        private void containerSlotsTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ItemSubClass isc = (ItemSubClass)itemSubClassCb.SelectedValue;
+            preview.subclassLeftNoteLbl.Content = containerSlotsTxt.Text + " slot " + isc.Description;
+        }
     }
 }
