@@ -47,13 +47,14 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox x:Name="containerBox" Header="Container Properties" Height="56">
-                    <Grid>
-                        <Label FontSize="12" Content="Bag Slots" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox x:Name="containerSlotsTxt" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" />
+                <GroupBox x:Name="containerBox" Header="Container Properties">
+                    <StackPanel>
+                        <DockPanel>
+                            <Label FontSize="12" Content="Bag Slots" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
+                            <TextBox x:Name="containerSlotsTxt" Height="25" Margin="0,6,9,0" VerticalAlignment="Top" />
+                        </DockPanel>
 
-
-                    </Grid>
+                    </StackPanel>
                 </GroupBox>
 
                 <GroupBox x:Name="weaponBox" Header="Weapon Properties" >

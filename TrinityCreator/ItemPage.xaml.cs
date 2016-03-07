@@ -93,6 +93,11 @@ namespace TrinityCreator
             item.Stats = new DynamicDataControl(Stat.GetStatList(), 10, unique: false, header1: "Stat", header2: "Value", defaultValue: "0");
             statsBox.Content = item.Stats;
             item.Stats.Changed += StatsChangedHandler;
+
+            // BagFamily
+            item.BagFamily = BitmaskStackPanel.GetBagFamilies();
+            StackPanel containerContent = (StackPanel)containerBox.Content;
+            containerContent.Children.Add(item.BagFamily);
         }
         
 

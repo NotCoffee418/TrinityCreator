@@ -385,6 +385,8 @@ namespace TrinityCreator
             }
         }
 
+        public BitmaskStackPanel BagFamily { get; internal set; }
+
 
         /// <summary>
         /// Generates keyvaluepairs of the database table name and value to insert
@@ -482,9 +484,10 @@ namespace TrinityCreator
                 throw new Exception("Invalid value in magic resistance.");
             }
 
-            // armor
-            kvplist.Add("armor", Armor.ToString());
-            kvplist.Add("block", Block.ToString());
+            
+            kvplist.Add("armor", Armor.ToString());     // armor
+            kvplist.Add("block", Block.ToString());     // block
+            kvplist.Add("BagFamily", BagFamily.BitmaskValue.ToString()); // bag family
 
             return kvplist;
         }

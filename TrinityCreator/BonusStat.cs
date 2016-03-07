@@ -34,7 +34,12 @@ namespace TrinityCreator
                 _description = value;
             }
         }
-        
-        
+
+
+        public override string ToString()
+        {
+            return Description;
+        }
+
     }
 }

@@ -141,6 +141,28 @@ namespace TrinityCreator
             return new BitmaskStackPanel("racesSp", cbs);
         }
 
+        public static BitmaskStackPanel GetBagFamilies()
+        {
+            var cbs = new BitmaskCheckBox[] {
+                new BitmaskCheckBox(1, "Arrows"),
+                new BitmaskCheckBox(2, "Bullets"),
+                new BitmaskCheckBox(4, "Soul Shards"),
+                new BitmaskCheckBox(8, "Leatherworking Supplies"),
+                new BitmaskCheckBox(16, "Inscription Supplies"),
+                new BitmaskCheckBox(32, "Herbs"),
+                new BitmaskCheckBox(64, "Enchanting Supplies"),
+                new BitmaskCheckBox(128, "Engineering Supplies"),
+                new BitmaskCheckBox(256, "Keys"),
+                new BitmaskCheckBox(512, "Gems"),
+                new BitmaskCheckBox(1024, "Mining Supplies"),
+                new BitmaskCheckBox(2048, "Soulbound Equipment"),
+                new BitmaskCheckBox(4096, "Vanity Pets"),
+                new BitmaskCheckBox(8192, "Currency Tokens"),
+                new BitmaskCheckBox(16384, "Quest Items"),
+            };
+
+            return new BitmaskStackPanel("bagFamilySp", cbs);
+        }
     }
 
     public class BitmaskCheckBox : CheckBox
