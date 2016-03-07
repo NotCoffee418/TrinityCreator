@@ -432,6 +432,30 @@ namespace TrinityCreator
                 preview.statsSp.Children.Clear();
             }
         }
+
+        private void itemArmorTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (itemArmorTxt.Text == "0" ||  itemArmorTxt.Text == "")
+                preview.itemArmorLbl.Visibility = Visibility.Collapsed;
+            else
+            {
+                preview.itemArmorLbl.Content = itemArmorTxt.Text + " Armor";
+                preview.itemArmorLbl.Visibility = Visibility.Visible;
+            }
+            
+        }
+
+        private void itemBlockTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            if (itemBlockTxt.Text == "0" || itemBlockTxt.Text == "")
+                preview.itemBlockLbl.Visibility = Visibility.Collapsed;
+            else
+            {
+                preview.itemBlockLbl.Content = itemBlockTxt.Text + " Block";
+                preview.itemBlockLbl.Visibility = Visibility.Visible;
+            }
+        }
         #endregion
 
         #region Click event handlers
@@ -534,6 +558,24 @@ namespace TrinityCreator
                 }
                 // sockets set in constructor
                 item.SocketBonus = (SocketBonus)socketBonusCb.SelectedValue;
+
+                try
+                {
+                    item.Armor = int.Parse(itemArmorTxt.Text);
+                }
+                catch
+                {
+                    item.Armor = 0;
+                }
+
+                try
+                {
+                    item.Block = int.Parse(itemBlockTxt.Text);
+                }
+                catch
+                {
+                    item.Block = 0;
+                }
 
 
                 string query = item.GenerateSqlQuery();
@@ -654,6 +696,6 @@ namespace TrinityCreator
         {
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
-        }       
+        }        
     }
 }

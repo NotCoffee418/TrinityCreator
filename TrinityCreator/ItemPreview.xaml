@@ -26,12 +26,9 @@
                 </StackPanel>
                 <!-- Only visible on armor item -->
                 <StackPanel Name="armorPanel" Visibility="Visible">
-                    <DockPanel Name="armorPropertyPanel" Visibility="Visible" Margin="0,-10,0,0">
-                        <Label Name="armorEquip" Content="Chest" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
-                        <Label Name="armorMaterial" Content="Cloth" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
-                    </DockPanel>
-                    <Label Name="itemArmorLbl" Content="xxxx Armor" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
-                    <Label Name="itemBlockLbl" Content="xxx Block" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+
+                    <Label Name="itemArmorLbl" Content="0 Armor" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+                    <Label Name="itemBlockLbl" Content="0 Block" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                 </StackPanel>
                 <StackPanel Name="statsSp" />
 

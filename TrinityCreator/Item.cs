@@ -35,6 +35,8 @@ namespace TrinityCreator
         private DynamicDataControl _gemSockets;
         private SocketBonus _socketBonus;
         private DynamicDataControl _stat;
+        private int _armor;
+        private int _block;
 
         public string Name
         {
@@ -360,6 +362,29 @@ namespace TrinityCreator
             }
         }
 
+        public int Armor
+        {
+            get
+            {
+                return _armor;
+            }
+            set
+            {
+                _armor = value;
+            }
+        }
+        public int Block
+        {
+            get
+            {
+                return _block;
+            }
+            set
+            {
+                _block = value;
+            }
+        }
+
 
         /// <summary>
         /// Generates keyvaluepairs of the database table name and value to insert
@@ -456,6 +481,10 @@ namespace TrinityCreator
             {
                 throw new Exception("Invalid value in magic resistance.");
             }
+
+            // armor
+            kvplist.Add("armor", Armor.ToString());
+            kvplist.Add("block", Block.ToString());
 
             return kvplist;
         }

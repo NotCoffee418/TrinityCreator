@@ -71,7 +71,15 @@
 
                     </Grid>
                 </GroupBox>
-                <GroupBox x:Name="armorBox" Header="Armor Properties"/>
+                <GroupBox x:Name="armorBox" Header="Armor Properties">
+                    <Grid>
+                        <Label FontSize="12" Content="Armor" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
+                        <TextBox x:Name="itemArmorTxt" Height="25" Margin="85,5,6,0" VerticalAlignment="Top" TextChanged="itemArmorTxt_TextChanged" />
+
+                        <Label FontSize="12" Content="Item Block" Height="30" Margin="0,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
+                        <TextBox x:Name="itemBlockTxt" Height="25" Margin="85,36,9,0" VerticalAlignment="Top" TextChanged="itemBlockTxt_TextChanged" />
+                    </Grid>
+                </GroupBox>
                 <GroupBox x:Name="statsBox" Header="Stats"/>
                 <GroupBox x:Name="bonusStatsBox" Header="Bonus Stats"/>
 
