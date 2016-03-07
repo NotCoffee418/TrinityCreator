@@ -67,12 +67,9 @@ namespace TrinityCreator
         {
             if (done)
                 return true;
-
-            // make visible in case user enables while app is running
+            
             //questTab.Content = new Quest();
-            questTab.Visibility = Visibility.Visible;
             //Creature.Content = new Creature();
-            creatureTab.Visibility = Visibility.Visible;
 
             return true;
         }
@@ -91,7 +88,10 @@ namespace TrinityCreator
                     "Are you sure you want to view Unfinished creators?", Environment.NewLine);
                 var result = MessageBox.Show(msg, "View unfinished creators", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
+                {
                     Properties.Settings.Default.viewUnfinishedCreators = true;
+                    MessageBox.Show("Restart Trinity Creator to view changes.", "Setting saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
                 else settingViewUnfinished.IsChecked = false;
             }
                 
