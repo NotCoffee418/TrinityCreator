@@ -392,7 +392,7 @@ namespace TrinityCreator
         /// Generates keyvaluepairs of the database table name and value to insert
         /// </summary>
         /// <returns></returns>
-        protected virtual Dictionary<string, string> GenerateQueryValues()
+        private Dictionary<string, string> GenerateQueryValues()
         {
             var kvplist = new Dictionary<string, string>();
             kvplist.Add("entry", EntryId.ToString());
@@ -496,7 +496,7 @@ namespace TrinityCreator
         /// Generates SQL query for the item
         /// </summary>
         /// <returns></returns>
-        public virtual string GenerateSqlQuery(Dictionary<string, string> kvplist = null)
+        public string GenerateSqlQuery(Dictionary<string, string> kvplist = null)
         {
             string query1 = "INSERT INTO item_template (";
             string query2 = ") VALUES (";

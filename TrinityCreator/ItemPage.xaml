@@ -82,7 +82,6 @@
                     </Grid>
                 </GroupBox>
                 <GroupBox x:Name="statsBox" Header="Stats"/>
-                <GroupBox x:Name="bonusStatsBox" Header="Bonus Stats"/>
 
                 <GroupBox x:Name="equipmentBox" Header="Equipment Properties" Height="86">
                     <Grid>

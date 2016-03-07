@@ -86,7 +86,6 @@
     <Compile Include="ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BonusStat.cs" />
     <Compile Include="ItemQuality.cs" />
     <Compile Include="ItemSubClass.cs" />
     <Compile Include="ItemMaterial.cs" />
