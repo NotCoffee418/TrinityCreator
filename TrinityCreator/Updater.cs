@@ -30,7 +30,9 @@ namespace TrinityCreator
 
             if (local != latest)
             {
-                MessageBoxResult result = MessageBox.Show("A newer version of Trinity Creator is available. Would you like to quick-install it?", "Update available",
+                string msg = string.Format("A newer version of Trinity Creator is available.{0}You are using v{1} while v{2} is available.{0}Click yes to update within seconds.",
+                    Environment.NewLine, local, latest);
+                MessageBoxResult result = MessageBox.Show(msg, "Update available",
                     MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                     StartUpdate();
