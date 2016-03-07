@@ -9,15 +9,25 @@
                 <MenuItem Header="Configure _MySQL" />
             </MenuItem>
 
-            <MenuItem Header="Support the creator by donating!" Foreground="Orange" FontWeight="Bold">
+            <MenuItem Header="Settings">
+                <MenuItem Name ="settingViewUnfinished" Header="View unfinished creators" IsCheckable="True" Click="settingViewUnfinished_Click" />
+            </MenuItem>
+
+            <MenuItem Header="Support the creator by donating!" Foreground="DarkOrange" FontWeight="Bold">
                 <MenuItem Header="Why should I donate?" Click="WhyDonate_Click" Foreground="Black"/>
                 <MenuItem Header="Donate" Click="Donate_Click" Foreground="Black"/>
             </MenuItem>
         </Menu>
         <TabControl x:Name="tabControl">
-            <TabItem Header="Armor &amp; Weapons" Name="armorWeaponsTab" />
-            <TabItem Header="Creature" />
-            <TabItem Header="More..." />
+            <TabItem Header="Item" Name="itemTab" />
+            <TabItem Header="Quest (UNFINISHED)" Name="questTab" Tag="unfinished" />
+            <TabItem Header="Creature (UNFINISHED)" Name="creatureTab" Tag="unfinished" />
+            <TabItem Header="More coming soon!">
+                <Grid Margin="0,0,0,0">
+                    <TextBlock TextWrapping="Wrap" Text="I'm working on this application almost daily so check back for updates regularly! You will be asked to update when starting Trinity Creator if an update is available." FontSize="18" VerticalAlignment="Top"/>
+                    <WebBrowser Name="updatesBrowser" Margin="0,50,0,0"/>
+                </Grid>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>

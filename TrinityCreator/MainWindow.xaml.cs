@@ -27,13 +27,77 @@ namespace TrinityCreator
 
             // Check for updates
 #if !DEBUG
-                Updater.CheckLatestVersion();
+            Updater.CheckLatestVersion();
 #endif
+            // presist settings on version change
+            if (Properties.Settings.Default.UpgradeRequired)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpgradeRequired = false;
+                Properties.Settings.Default.Save();
+            }
 
+            // Load usable creators
             Item item = new Item();
             ItemPreview preview = new ItemPreview(item);
-            armorWeaponsTab.Content = new ItemPage(item, preview);
+            itemTab.Content = new ItemPage(item, preview);
+
+
+
+            // view unfinished when set & on debug
+            try
+            {
+                updatesBrowser.Navigate("https://github.com/RStijn/TrinityCreator/commits/master");
+            }
+            catch
+            { /* too bad */ }
+            bool unfinishedLoaded = false;
+            if (Properties.Settings.Default.viewUnfinishedCreators)
+                unfinishedLoaded = LoadUnfinishedPages(unfinishedLoaded);
+#if DEBUG
+            unfinishedLoaded = LoadUnfinishedPages(unfinishedLoaded);
+#endif
+            if (!unfinishedLoaded)
+                HideUnfinishedPages();
         }
+
+        
+
+        private bool LoadUnfinishedPages(bool done)
+        {
+            if (done)
+                return true;
+
+            // make visible in case user enables while app is running
+            //questTab.Content = new Quest();
+            questTab.Visibility = Visibility.Visible;
+            //Creature.Content = new Creature();
+            creatureTab.Visibility = Visibility.Visible;
+
+            return true;
+        }
+        private void HideUnfinishedPages()
+        {
+            questTab.Visibility = Visibility.Collapsed;
+            creatureTab.Visibility = Visibility.Collapsed;
+        }
+
+        private void settingViewUnfinished_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.viewUnfinishedCreators = false;
+            if (settingViewUnfinished.IsChecked)
+            {
+                string msg = string.Format("Not all displayed features in unfinished creators will work correctly.{0}" +
+                    "Are you sure you want to view Unfinished creators?", Environment.NewLine);
+                var result = MessageBox.Show(msg, "View unfinished creators", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                    Properties.Settings.Default.viewUnfinishedCreators = true;
+                else settingViewUnfinished.IsChecked = false;
+            }
+                
+            Properties.Settings.Default.Save();
+        }
+
 
         private void Donate_Click(object sender, RoutedEventArgs e)
         {
