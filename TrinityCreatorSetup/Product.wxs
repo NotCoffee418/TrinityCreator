@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*"
+    Name="Trinity Creator"
+    Language="1033" Version="1.0.0.0"
+    Manufacturer="RStijn"
+    UpgradeCode="7F3D3555-6622-43BB-A57B-3ADD4D2AFB0F">
+
+    <Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Trinity Creator is already installed." />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="APPLICATIONROOTDIRECTORY" Name="Trinity Creator"/>
+      </Directory>
+      <!-- Step 1: Define the directory structure -->
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Trinity Creator"/>
+      </Directory>
+    </Directory>
+
+    <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+      <Component Id="TrinityCreator.exe">
+        <File Id="TrinityCreator.exe" Source="$(var.TrinityCreator.TargetDir)TrinityCreator.exe" KeyPath="yes" />
+      </Component>
+      <Component Id="MySql.Data.dll">
+        <File Id="MySql.Data.dll" Source="$(var.TrinityCreator.TargetDir)MySql.Data.dll" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Step 2: Add the shortcut to your installer package -->
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+             Name="Trinity Creator"
+            Target="[#TrinityCreator.exe]"
+              WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\RStijn\TrinityCreator" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+        <RegistryValue Root="HKCU" Key="Software\RStijn\TrinityCreator" Name="installDirectory" Type="string" Value="[APPLICATIONROOTDIRECTORY]" />
+      </Component>
+    </DirectoryRef>
+
+    <Feature Id="MainApplication" Title="Main Application" Level="1">
+      <ComponentRef Id="TrinityCreator.exe" />
+      <ComponentRef Id="MySql.Data.dll" />
+      <!-- Step 3: Tell WiX to install the shortcut -->
+      <ComponentRef Id="ApplicationShortcut" />
+    </Feature>
+
+    <!-- Step 2: Add UI to your installer / Step 4: Trigger the custom action -->
+    <UI>
+      <UIRef Id="WixUI_Minimal" />
+      <Publish Dialog="ExitDialog"
+          Control="Finish"
+          Event="DoAction"
+          Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+      <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1"/>
+    </UI>
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Start Trinity Creator" />
+
+    <!-- Step 3: Include the custom action -->
+    <Property Id="WixShellExecTarget" Value="[#TrinityCreator.exe]" />
+    <CustomAction Id="LaunchApplication"
+        BinaryKey="WixCA"
+        DllEntry="WixShellExec"
+        Impersonate="yes" />
+  </Product>
+</Wix>
