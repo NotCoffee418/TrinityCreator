@@ -2,6 +2,10 @@
 This tool allows you to easily create items, creatures and quests for TrinityCore 3.3.5a.
 Trinity Creator can be used by beginners to learn emulator server customization and by experts who just want to do it easier and faster.
 
+### Getting started ###
+* [Download & install] (https://github.com/RStijn/TrinityCreator/blob/master/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi?raw=true)
+* Start creating!
+
 ### Requirements ###
 * TrinityCore or cMangos
 * Windows 7 or newer
