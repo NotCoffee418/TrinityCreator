@@ -58,5 +58,16 @@ namespace TrinityCreator.Properties {
                 this["UpgradeRequired"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::MySql.Data.MySqlClient.MySqlConnectionStringBuilder worldDb {
+            get {
+                return ((global::MySql.Data.MySqlClient.MySqlConnectionStringBuilder)(this["worldDb"]));
+            }
+            set {
+                this["worldDb"] = value;
+            }
+        }
     }
 }

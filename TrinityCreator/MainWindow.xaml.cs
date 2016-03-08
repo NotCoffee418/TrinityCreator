@@ -79,6 +79,12 @@ namespace TrinityCreator
             creatureTab.Visibility = Visibility.Collapsed;
         }
 
+        private void configureMysql_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new Database.DbConfigWindow();
+            win.Show();
+        }
+
         private void settingViewUnfinished_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.viewUnfinishedCreators = false;
@@ -119,5 +125,6 @@ namespace TrinityCreator
         {
             Process.Start("https://paypal.me/RStijn");
         }
+
     }
 }

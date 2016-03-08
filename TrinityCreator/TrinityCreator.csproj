@@ -52,6 +52,10 @@
     <ApplicationIcon>tclogo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -73,11 +77,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ArmorWeaponItem.cs" />
     <Compile Include="BitmaskStackPanel.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="Damage.cs" />
     <Compile Include="DamageType.cs" />
+    <Compile Include="Database\Connection.cs" />
+    <Compile Include="Database\DbConfigWindow.xaml.cs">
+      <DependentUpon>DbConfigWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DynamicDataControl.xaml.cs">
       <DependentUpon>DynamicDataControl.xaml</DependentUpon>
     </Compile>
@@ -96,6 +103,10 @@
     <Compile Include="SocketBonus.cs" />
     <Compile Include="Stat.cs" />
     <Compile Include="Updater.cs" />
+    <Page Include="Database\DbConfigWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DynamicDataControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,6 +153,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -192,7 +204,6 @@
     <Resource Include="Resources\yellowsocket.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Database\" />
     <Folder Include="WowClient\" />
   </ItemGroup>
   <ItemGroup>
