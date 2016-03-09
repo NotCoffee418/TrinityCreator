@@ -511,5 +511,19 @@ namespace TrinityCreator
 
             return query1 + query2;
         }
+
+        public void LoadItemFromDatabase(int entryId)
+        {
+            // test connection
+            Exception ex = Database.Connection.Test();
+            if (ex != null)
+                throw ex;
+        }
+
+        public static Item[] GetAllItemsFromDatabase()
+        {
+
+            return null;
+        }
     }
 }
