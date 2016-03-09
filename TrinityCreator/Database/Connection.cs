@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows;
+using System.Data;
 
 namespace TrinityCreator.Database
 {
@@ -71,6 +72,7 @@ namespace TrinityCreator.Database
             try
             {
                 conn = new MySqlConnection(Properties.Settings.Default.worldDb.ToString());
+                conn.Open();
                 IsAlive = true;
             }
             catch (Exception ex)
@@ -92,7 +94,7 @@ namespace TrinityCreator.Database
             IsAlive = false;
         }
 
-        private static void RequestConfiguration()
+        internal static void RequestConfiguration()
         {
             var r = MessageBox.Show("You can only use this feature by configuring and connecting to your world database. Would you like to configure your connection now?",
                 "Failed to connect", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
@@ -113,6 +115,19 @@ namespace TrinityCreator.Database
             else if (Properties.Settings.Default.worldDb == null)
                 return true;
             else return false;
+        }
+
+        protected static DataTable ExecuteQuery(string query)
+        {
+            Open();
+
+            DataTable result = new DataTable();
+            var cmd = new MySqlCommand(query, conn);
+            using (MySqlDataReader rdr = cmd.ExecuteReader())
+            {
+                result.Load(rdr);
+            }
+            return result;
         }
     }
 }

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using Microsoft.Win32;
+using System.Data;
 
 namespace TrinityCreator
 {
@@ -22,13 +23,13 @@ namespace TrinityCreator
     /// </summary>
     public partial class ItemPage : UserControl
     {
-        public ItemPage(Item _item, ItemPreview _preview)
+        public ItemPage()
         {
             InitializeComponent();
-            item = _item;
 
-            // load preview
-            preview = _preview;
+            // load preview & set item
+            item = new Item();
+            preview = new ItemPreview(item);
             previewBox.Content = preview;
 
             // Set quality
@@ -99,11 +100,34 @@ namespace TrinityCreator
             StackPanel containerContent = (StackPanel)containerBox.Content;
             containerContent.Children.Add(item.BagFamily);
         }
-        
+
+        public ItemPage(DataRow dr) : this()
+        {
+            entryIdTxt.Text = dr["entry"].ToString();
+            itemQuoteTxt.Text = dr["description"].ToString();
+            SetIndexOfId((int)dr["class"], itemClassCb);
+            SetIndexOfId((int)dr["subclass"], itemSubClassCb);
+            itemNameTxt.Text = dr["name"].ToString();
+            displayIdTxt.Text = dr["displayid"].ToString();
+            SetIndexOfId((int)dr["Quality"], itemQualityCb);
+            SetIndexOfId((int)dr["bonding"], itemBoundsCb);
+            itemPlayerLevelTxt.Text = dr["RequiredLevel"].ToString();
+            itemMaxCountTxt.Text = dr["maxcount"].ToString();
+            item.AllowedClass.BitmaskValue = (uint)dr["AllowableClass"];
+        }        
 
         Item item;
         ItemPreview preview;
 
+        private void SetIndexOfId(int requestId, ComboBox cb)
+        {
+            for (int i = 0; i < cb.Items.Count; i++)
+                if (((IKeyValue)cb.Items[i]).Id == requestId)
+                {
+                    cb.SelectedIndex = i;
+                    return;
+                }
+        }
 
         #region Changed event handlers
         private void itemNameTxt_TextChanged(object sender, TextChangedEventArgs e)

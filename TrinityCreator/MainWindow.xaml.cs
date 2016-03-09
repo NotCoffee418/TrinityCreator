@@ -38,9 +38,8 @@ namespace TrinityCreator
             }
 
             // Load usable creators
-            Item item = new Item();
-            ItemPreview preview = new ItemPreview(item);
-            itemTab.Content = new ItemPage(item, preview);
+            
+            itemTab.Content = new ItemPage();
 
 
 

@@ -85,6 +85,7 @@
     <Compile Include="Database\DbConfigWindow.xaml.cs">
       <DependentUpon>DbConfigWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Database\ItemTemplateQuery.cs" />
     <Compile Include="DynamicDataControl.xaml.cs">
       <DependentUpon>DynamicDataControl.xaml</DependentUpon>
     </Compile>

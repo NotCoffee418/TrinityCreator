@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace TrinityCreator
         private DynamicDataControl _stat;
         private int _armor;
         private int _block;
-
+        
         public string Name
         {
             get
@@ -510,20 +511,6 @@ namespace TrinityCreator
             query2 += string.Join(", ", kvplist.Values) + ");" + Environment.NewLine;
 
             return query1 + query2;
-        }
-
-        public void LoadItemFromDatabase(int entryId)
-        {
-            // test connection
-            Exception ex = Database.Connection.Test();
-            if (ex != null)
-                throw ex;
-        }
-
-        public static Item[] GetAllItemsFromDatabase()
-        {
-
-            return null;
         }
     }
 }

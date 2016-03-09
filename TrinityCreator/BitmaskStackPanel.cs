@@ -41,6 +41,34 @@ namespace TrinityCreator
                 }
                 return bitmask;
             }
+            set
+            {
+                SetBitmaskValue(value);
+            }
+        }
+
+        private void SetBitmaskValue(uint bmv)
+        {
+
+            List<uint> bitValues = new List<uint>();
+            bitValues.Add(0);
+            bitValues.Add(1);
+            for (uint i = 0; i < 31; i++)
+            {
+                bitValues.Add(bitValues.Last() * 2);
+                Console.WriteLine(bitValues.Last());
+            }
+            bitValues.Reverse();
+
+            foreach (uint bitmask in bitValues)
+                if (bmv >= bitmask)
+                    foreach (BitmaskCheckBox cb in Checkboxes)
+                        if ((uint)cb.Tag >= bitmask)
+                        {
+                            cb.IsChecked = true;
+                            bmv -= bitmask;
+                            break;
+                        }
         }
 
         /// <summary>
