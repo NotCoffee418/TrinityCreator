@@ -115,7 +115,30 @@ namespace TrinityCreator
             itemPlayerLevelTxt.Text = dr["RequiredLevel"].ToString();
             itemMaxCountTxt.Text = dr["maxcount"].ToString();
             item.AllowedClass.BitmaskValue = (uint)dr["AllowableClass"];
-        }        
+            item.AllowedRace.BitmaskValue = (uint)dr["AllowableRace"];
+
+            Currency buyPrice = new Currency((int)dr["BuyPrice"]);
+            buyPriceGTxt.Text = buyPrice.Gold.ToString();
+            buyPriceSTxt.Text = buyPrice.Silver.ToString();
+            buyPriceCTxt.Text = buyPrice.Copper.ToString();
+
+            Currency sellPrice = new Currency((int)dr["SellPrice"]);
+            sellPriceGTxt.Text = sellPrice.Gold.ToString();
+            sellPriceSTxt.Text = sellPrice.Silver.ToString();
+            sellPriceCTxt.Text = sellPrice.Copper.ToString();
+            
+            SetIndexOfId((int)dr["InventoryType"], inventoryTypeCb);
+            // Material auto?
+            // sheath auto?
+            item.Flags.BitmaskValue = (uint)dr["Flags"];
+            item.Flags.BitmaskValue = (uint)dr["FlagsExtra"];
+            buyCountTxt.Text = dr["BuyCount"].ToString();
+            itemStackCountTxt.Text = dr["stackable"].ToString();
+            containerSlotsTxt.Text = dr["ContainerSlots"].ToString();
+            damageMinTxt.Text = dr["dmg_min1"].ToString();
+            damageMaxTxt.Text = dr["dmg_max1"].ToString();
+            SetIndexOfId((int)dr["dmg_type1"], damageTypeCb);
+        }
 
         TrinityItem item;
         ItemPreview preview;
