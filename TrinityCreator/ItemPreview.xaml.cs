@@ -41,6 +41,8 @@ namespace TrinityCreator
 
         private TrinityItem item;
 
+
+
         private void screenshotClipboardBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Not implemented yet");
@@ -80,5 +82,6 @@ namespace TrinityCreator
         {
             itemRaceRequirementsLbl.Content = "Races: " + item.AllowedRace.ToString();
         }
+        
     }
 }

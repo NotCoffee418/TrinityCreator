@@ -5,11 +5,18 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace TrinityCreator
 {
-    public class TrinityItem : INotifyPropertyChanged, IDataErrorInfo
+    public class TrinityItem : INotifyPropertyChanged
     {
+        public TrinityItem()
+        {
+            ValueBuy = new Currency(0);
+            ValueSell = new Currency(0);
+        }
+
         private string _name;
         private string _quote;
         private ItemClass _itemclass;
@@ -553,26 +560,6 @@ namespace TrinityCreator
             query2 += string.Join(", ", kvplist.Values) + ");" + Environment.NewLine;
 
             return query1 + query2;
-        }
-
-        public string Error
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string this[string columnName]
-        {
-            get
-            {
-                string result = null;
-                if (columnName == "Quote")
-                {
-                    if (string.IsNullOrEmpty(Quote))
-                        result = "Geef een naam in";
-
-                }
-                return result;
-            }
         }
     }
 }

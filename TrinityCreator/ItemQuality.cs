@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Windows.Media;
 
 namespace TrinityCreator
 {
-    public class ItemQuality : IKeyValue
+    public class ItemQuality : IKeyValue, INotifyPropertyChanged
     {
         public ItemQuality(int id, string name, Color color)
         {
@@ -20,6 +21,7 @@ namespace TrinityCreator
         private string _description;
         private Color _color;
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public int Id
         {
@@ -30,6 +32,7 @@ namespace TrinityCreator
             set
             {
                 _id = value;
+                RaisePropertyChanged("Id");
             }
         }
 
@@ -42,6 +45,7 @@ namespace TrinityCreator
             set
             {
                 _description = value;
+                RaisePropertyChanged("Description");
             }
         }
 
@@ -54,8 +58,15 @@ namespace TrinityCreator
             set
             {
                 _color = value;
+                RaisePropertyChanged("QualityColor");
             }
 
+        }
+
+        private void RaisePropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
 
         public static int FindQualityId(string name)

@@ -9,23 +9,27 @@
         <Grid>
             <Border BorderBrush="#fff" BorderThickness="2" CornerRadius="8,8,8,8" Margin="2" Background="#0b0b17"/>
             <StackPanel Margin="10,5">
-                <Label Name="itemNameLbl" Content="{Binding Name}" Foreground="Gray" FontSize="18"/>
-                <Label Name="itemBoundsLbl" Content="{Binding Binds.Name}" Foreground="White" FontSize="14" />
+                <Label Name="itemNameLbl" Content="{Binding Name}" Foreground="Gray" FontSize="18" />
+                <Label Name="itemBoundsLbl" Content="{Binding Binds.Description}" Foreground="White" FontSize="14" />
                 <DockPanel>
                     <Label Name="subclassLeftNoteLbl" Content="{Binding SubClass.PreviewNoteLeft}" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
                     <Label Name="subclassRightNoteLbl" Content="{Binding SubClass.PreviewNoteRight}" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
                 </DockPanel>
             
                 <!-- Only visible on weapon item -->
-                <StackPanel Name="weaponPanel" Visibility="Visible">
-                    <DockPanel Margin="0,-10,0,0">
-                        <Label Name="weaponMinMaxDmgLbl" Content="{Binding DamageInfo.MinMaxDamage}" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
+                <StackPanel Name="weaponPanel">
+                    <DockPanel>
+                        <TextBlock Foreground="White" FontSize="14" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding DamageInfo.MinDamage}" />
+                            <TextBlock Text=" - " />
+                            <TextBlock Text="{Binding DamageInfo.MaxDamage}" />
+                        </TextBlock>
                         <Label Name="weaponSpeedLbl" Content="{Binding DamageInfo.Speed}" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
                     </DockPanel>
                     <Label Name="weaponDpsLbl" Content="{Binding DamageInfo.Dps}" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                 </StackPanel>
                 <!-- Only visible on armor item -->
-                <StackPanel Name="armorPanel" Visibility="Visible">
+                <StackPanel Name="armorPanel">
 
                     <Label Name="itemArmorLbl" Content="{Binding DamageInfo.Armor}" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                     <Label Name="itemBlockLbl" Content="{Binding DamageInfo.Block}" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
@@ -43,12 +47,12 @@
 
                 <!-- Only visible when repairable -->
                 <Label Name="itemDurabilityLbl" Content="(Durability 0 / 0)" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
-                <Label Name="itemQuoteLbl" Content="{Binding Quote}" Foreground="#ddcba5" FontSize="14" Visibility="Collapsed" />
+                <Label Name="itemQuoteLbl" Content="{Binding Quote}" ContentStringFormat="''{0}''" Foreground="#ddcba5" FontSize="14"/>
 
                 <!-- Buy price -->
                 <DockPanel x:Name="buyDockPanel">
                     <Label Content="Buy Price:" Foreground="White" Width="100"/>
-                    <Label Content="{Binding ValueBuy.Gold}" Name="buyGoldLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label DataContext="ValueBuy" Content="{Binding ValueBuy.Gold}" Name="buyGoldLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                     <Label Content="{Binding ValueBuy.Silver}" Name="buySilverLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
@@ -74,4 +78,5 @@
             <Button x:Name="screenshotDiskBtn" Content="Save screenshot to disk" Margin="0,5,0,0" Click="screenshotDiskBtn_Click"></Button>
         </StackPanel>
     </StackPanel>
+    
 </UserControl>

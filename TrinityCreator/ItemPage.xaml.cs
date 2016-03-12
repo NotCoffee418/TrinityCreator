@@ -33,66 +33,7 @@ namespace TrinityCreator
             preview = new ItemPreview(item);
             previewBox.Content = preview;
 
-            // Set quality
-            itemQualityCb.ItemsSource = ItemQuality.GetQualityList();
-            itemQualityCb.SelectedIndex = 0;
-
-            // Set class & subclass
-            itemClassCb.ItemsSource = ItemClass.GetClassList();
-            itemClassCb.SelectedIndex = 0;
-
-            ShowCorrectClassBox();
-            armorBox.Visibility = Visibility.Collapsed;
-            entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
-
-            // Set item bounds
-            itemBoundsCb.ItemsSource = ItemBonding.GetItemBondingList();
-
-            // Load flags groupbox
-            item.Flags = BitmaskStackPanel.GetItemFlags();
-            flagsBitMaskGroupBox.Visibility = Visibility.Collapsed; // by default
-
-            // Load FlagsExtra
-            item.FlagsExtra = BitmaskStackPanel.GetItemFlagsExtra();
-            flagsExtraBitMaskGroupBox.Visibility = Visibility.Collapsed; // by default
-
-            // load allowedclass groupbox
-            item.AllowedClass = BitmaskStackPanel.GetClassFlags();
-            limitClassBitMaskGroupBox.Visibility = Visibility.Collapsed;
-            preview.PrepareClassLimitations(item.AllowedClass);
-
-            // load allowedrace groupbox
-            item.AllowedRace = BitmaskStackPanel.GetRaceFlags();
-            limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
-            preview.PrepareRaceLimitations(item.AllowedRace);
-
-            // Set weapon groupbox
-            item.DamageInfo = new Damage();
-            damageTypeCb.ItemsSource = DamageType.GetDamageTypes();
-            damageTypeCb.SelectedIndex = 0;
-
-            // Set resistance groupbox
-            item.Resistances = new DynamicDataControl(
-                DamageType.GetDamageTypes(magicOnly: true), 6, unique: true);
-            addResistanceGroupBox.Visibility = Visibility.Collapsed;
-            
-            // Set gemSockets groupbox
-            item.GemSockets = new DynamicDataControl(
-                Socket.GetSocketList(), 3, unique: false, header1:"Socket Type", header2:"Amount", defaultValue: "0");
-            gemsGroupBox.Visibility = Visibility.Collapsed;
-            preview.gemsPanel.Visibility = Visibility.Collapsed;
-            socketBonusCb.ItemsSource = SocketBonus.GetBonusList();
-            socketBonusCb.SelectedIndex = 0;
-            item.GemSockets.Changed += GemDataChangedHander;
-
-            // set statsBox
-            item.Stats = new DynamicDataControl(Stat.GetStatList(), 10, unique: false, header1: "Stat", header2: "Value", defaultValue: "0");
-            item.Stats.Changed += StatsChangedHandler;
-
-            // BagFamily
-            item.BagFamily = BitmaskStackPanel.GetBagFamilies();
-            StackPanel containerContent = (StackPanel)containerBox.Content;
-            containerContent.Children.Add(item.BagFamily);
+            Loaded += ItemPage_Loaded;
         }
 
         public ItemPage(DataRow dr) : this()
@@ -135,6 +76,71 @@ namespace TrinityCreator
 
         TrinityItem item;
         ItemPreview preview;
+
+        private void ItemPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Set quality
+            itemQualityCb.ItemsSource = ItemQuality.GetQualityList();
+            itemQualityCb.SelectedIndex = 0;
+
+            // Set class & subclass
+            itemClassCb.ItemsSource = ItemClass.GetClassList();
+            itemClassCb.SelectedIndex = 0;
+
+            ShowCorrectClassBox();
+            armorBox.Visibility = Visibility.Collapsed;
+            entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
+
+            // Set item bounds
+            itemBoundsCb.ItemsSource = ItemBonding.GetItemBondingList();
+            itemBoundsCb.SelectedIndex = 0;
+
+            // Load flags groupbox
+            item.Flags = BitmaskStackPanel.GetItemFlags();
+            flagsBitMaskGroupBox.Visibility = Visibility.Collapsed; // by default
+
+            // Load FlagsExtra
+            item.FlagsExtra = BitmaskStackPanel.GetItemFlagsExtra();
+            flagsExtraBitMaskGroupBox.Visibility = Visibility.Collapsed; // by default
+
+            // load allowedclass groupbox
+            item.AllowedClass = BitmaskStackPanel.GetClassFlags();
+            limitClassBitMaskGroupBox.Visibility = Visibility.Collapsed;
+            preview.PrepareClassLimitations(item.AllowedClass);
+
+            // load allowedrace groupbox
+            item.AllowedRace = BitmaskStackPanel.GetRaceFlags();
+            limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
+            preview.PrepareRaceLimitations(item.AllowedRace);
+
+            // Set weapon groupbox
+            item.DamageInfo = new Damage();
+            damageTypeCb.ItemsSource = DamageType.GetDamageTypes();
+            damageTypeCb.SelectedIndex = 0;
+
+            // Set resistance groupbox
+            item.Resistances = new DynamicDataControl(
+                DamageType.GetDamageTypes(magicOnly: true), 6, unique: true);
+            addResistanceGroupBox.Visibility = Visibility.Collapsed;
+
+            // Set gemSockets groupbox
+            item.GemSockets = new DynamicDataControl(
+                Socket.GetSocketList(), 3, unique: false, header1: "Socket Type", header2: "Amount", defaultValue: "0");
+            gemsGroupBox.Visibility = Visibility.Collapsed;
+            preview.gemsPanel.Visibility = Visibility.Collapsed;
+            socketBonusCb.ItemsSource = SocketBonus.GetBonusList();
+            socketBonusCb.SelectedIndex = 0;
+            item.GemSockets.Changed += GemDataChangedHander;
+
+            // set statsBox
+            item.Stats = new DynamicDataControl(Stat.GetStatList(), 10, unique: false, header1: "Stat", header2: "Value", defaultValue: "0");
+            item.Stats.Changed += StatsChangedHandler;
+
+            // BagFamily
+            item.BagFamily = BitmaskStackPanel.GetBagFamilies();
+            StackPanel containerContent = (StackPanel)containerBox.Content;
+            containerContent.Children.Add(item.BagFamily);
+        }
 
         private void SetIndexOfId(int requestId, ComboBox cb)
         {
@@ -199,22 +205,21 @@ namespace TrinityCreator
                 preview.subclassLeftNoteLbl.Visibility = Visibility.Collapsed;
             else
             {
+                preview.subclassLeftNoteLbl.Content = sc.PreviewNoteLeft;
                 preview.subclassRightNoteLbl.Visibility = Visibility.Visible;
             }
             if (sc.PreviewNoteRight == "")
                 preview.subclassRightNoteLbl.Visibility = Visibility.Collapsed;
             else
             {
+                preview.subclassRightNoteLbl.Content = sc.PreviewNoteRight;
                 preview.subclassRightNoteLbl.Visibility = Visibility.Visible;
             }
 
             // Show only left if right == left
-            try
-            {
-                if (preview.subclassRightNoteLbl.Content.ToString() == preview.subclassLeftNoteLbl.Content.ToString())
-                    preview.subclassRightNoteLbl.Content = "";
-            }
-            catch { }
+            if (preview.subclassRightNoteLbl.Content.ToString() == preview.subclassLeftNoteLbl.Content.ToString())
+                preview.subclassRightNoteLbl.Content = "";
+
         }
 
         private void itemBoundsCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -227,6 +232,16 @@ namespace TrinityCreator
             else
                 preview.itemBoundsLbl.Visibility = Visibility.Visible;
         }
+
+        private void inventoryTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ItemInventoryType it = (ItemInventoryType)inventoryTypeCb.SelectedValue;
+            if (it == null)
+                return;
+            
+            preview.subclassLeftNoteLbl.Content = it.Description;
+        }
+
 
         private void changeFlagsCb_Checked(object sender, RoutedEventArgs e)
         {
@@ -692,21 +707,6 @@ namespace TrinityCreator
                 preview.subclassLeftNoteLbl.Content = containerSlotsTxt.Text + " slot " + isc.Description;
             }
             catch { /* fix this*/ }
-        }
-
-        private void itemQuoteTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                if (itemQuoteTxt.Text == "")
-                    preview.itemQuoteLbl.Visibility = Visibility.Collapsed;
-                else
-                {
-                    preview.itemQuoteLbl.Visibility = Visibility.Visible;
-                    preview.itemQuoteLbl.Content = '"' + itemQuoteTxt.Text + '"';
-                }
-            }
-            catch { /* Exception on initial load */ }
         }
     }
 }

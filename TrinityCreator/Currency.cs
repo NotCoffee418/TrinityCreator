@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    public class Currency
+    public class Currency : INotifyPropertyChanged
     {
         public Currency(string g, string s, string c)
         {
@@ -34,6 +35,8 @@ namespace TrinityCreator
         private int _copper;
         private int _amount;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public int Gold
         {
             get
@@ -42,6 +45,8 @@ namespace TrinityCreator
             }
             set
             {
+                _gold = value;
+                RaisePropertyChanged("Gold");
                 UpdateAmount();
             }
         }
@@ -54,7 +59,9 @@ namespace TrinityCreator
             }
             set
             {
-
+                _silver = value;
+                RaisePropertyChanged("Silver");
+                UpdateAmount();
             }
         }
         public int Copper
@@ -65,6 +72,8 @@ namespace TrinityCreator
             }
             set
             {
+                _copper = value;
+                RaisePropertyChanged("Copper");
                 UpdateAmount();
             }
         }
@@ -111,6 +120,12 @@ namespace TrinityCreator
             {
                 throw new Exception("Currency must be numeric.");
             }
-        }    
+        }
+
+        private void RaisePropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
     }
 }

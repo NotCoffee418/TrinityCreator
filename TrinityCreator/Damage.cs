@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    public class Damage
+    public class Damage : INotifyPropertyChanged
     {
         private int _minDamage;
         private int _maxDamage;
         private int _speed;
         private DamageType _type;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public int MinDamage
         {
@@ -22,6 +25,8 @@ namespace TrinityCreator
             set
             {
                 _minDamage = value;
+                RaisePropertyChanged("MinDamage");
+                RaisePropertyChanged("Dps");
             }
         }
 
@@ -34,6 +39,8 @@ namespace TrinityCreator
             set
             {
                 _maxDamage = value;
+                RaisePropertyChanged("MaxDamage");
+                RaisePropertyChanged("Dps");
             }
         }
 
@@ -46,6 +53,8 @@ namespace TrinityCreator
             set
             {
                 _speed = value;
+                RaisePropertyChanged("Speed");
+                RaisePropertyChanged("Dps");
             }
         }
 
@@ -58,17 +67,11 @@ namespace TrinityCreator
             set
             {
                 _type = value;
+                RaisePropertyChanged("Type");
+                RaisePropertyChanged("Dps");
             }
         }
-
-        public string MinMaxDamage
-        {
-            get
-            {
-                return string.Format("{0} - {1} Damage", MinDamage, MaxDamage);
-            }
-        }
-
+        
         public string Dps
         {
             get
@@ -89,7 +92,10 @@ namespace TrinityCreator
                 }
             }
         }
-
-       
+        private void RaisePropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
     }
 }

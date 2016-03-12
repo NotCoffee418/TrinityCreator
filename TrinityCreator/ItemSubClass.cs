@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    public class ItemSubClass : IKeyValue
+    public class ItemSubClass : IKeyValue, INotifyPropertyChanged
     {
         public ItemSubClass(int id, string description, string previewNoteLeft = "", string previewNoteRight = "", 
             ItemInventoryType[] lockedInventoryType = null, ItemMaterial material = null)
@@ -25,7 +26,14 @@ namespace TrinityCreator
         private string _previewNoteRight;
         private ItemInventoryType[] _lockedInventoryType;
         private ItemMaterial _material;
-        
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void RaisePropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+
         public int Id
         {
             get
@@ -35,6 +43,7 @@ namespace TrinityCreator
             set
             {
                 _id = value;
+                RaisePropertyChanged("Id");
             }
         }
 
@@ -47,6 +56,7 @@ namespace TrinityCreator
             set
             {
                 _description = value;
+                RaisePropertyChanged("Description");
             }
         }
 
@@ -65,6 +75,7 @@ namespace TrinityCreator
             set
             {
                 _previewNoteLeft = value;
+                RaisePropertyChanged("PreviewNoteLeft");
             }
         }
 
@@ -80,6 +91,7 @@ namespace TrinityCreator
             set
             {
                 _previewNoteRight = value;
+                RaisePropertyChanged("PreviewNoteRight");
             }
         }
 
@@ -94,6 +106,7 @@ namespace TrinityCreator
             set
             {
                 _lockedInventoryType = value;
+                RaisePropertyChanged("LockedInventoryType");
             }
         }
 
@@ -110,6 +123,7 @@ namespace TrinityCreator
             set
             {
                 _material = value;
+                RaisePropertyChanged("Material");
             }
         }
 

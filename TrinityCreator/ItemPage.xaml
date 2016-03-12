@@ -13,17 +13,17 @@
                 <GroupBox Header="Item Details" Height="325">
                     <Grid>
                         <Label FontSize="12" Content="Item Name" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <TextBox Name="itemNameTxt" Text="{Binding Name}" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
+                        <TextBox Name="itemNameTxt" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Item Quote" Height="30" Margin="0,32,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <TextBox Name="itemQuoteTxt" Text="{Binding Quote}" Height="25" Margin="85,33,9,0" VerticalAlignment="Top" TextChanged="itemQuoteTxt_TextChanged" />
+                        <TextBox Name="itemQuoteTxt" Text="{Binding Quote, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,33,9,0" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Quality" Height="30" Margin="0,61,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
                         <ComboBox Name="itemQualityCb" SelectedValue="{Binding Quality}" Height="25" Margin="85,63,9,0" VerticalAlignment="Top" SelectionChanged="itemQualityCb_SelectionChanged" IsReadOnly="True"/>
 
 
                         <Label FontSize="12" Content="Display ID" Height="30" Margin="0,92,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <TextBox Name="displayIdTxt" Height="25" Margin="85,93,85,0" VerticalAlignment="Top" Text="{Binding DisplayId}" />
+                        <TextBox Name="displayIdTxt" Height="25" Margin="85,93,85,0" VerticalAlignment="Top" Text="{Binding DisplayId, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Name="findDisplayIdBtn" Content="Find" HorizontalAlignment="Right" Margin="0,93,10,0" VerticalAlignment="Top" Width="70" Height="25" IsEnabled="False"/>
 
                         <Label FontSize="12" Content="Bounds" Height="30" Margin="0,122,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
@@ -36,13 +36,13 @@
                         <ComboBox Name="itemSubClassCb" SelectedValue="{Binding ItemSubClass}" Height="25" Margin="85,183,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemSubClassCb_SelectionChanged" />
 
                         <Label FontSize="12" Content="Equip" Height="30" Margin="0,213,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
-                        <ComboBox Name="inventoryTypeCb" SelectedValue="{Binding ItemSubClass.LockedInventoryType}" Height="25" Margin="85,214,9,0" VerticalAlignment="Top" IsReadOnly="True" />
+                        <ComboBox Name="inventoryTypeCb" SelectedValue="{Binding InventoryType}" Height="25" Margin="85,214,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="inventoryTypeCb_SelectionChanged"/>
 
                         <Label FontSize="12" Content="Max count" Height="30" Margin="0,243,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77" ToolTip="0 is unlimited"/>
-                        <TextBox Name="itemMaxCountTxt" Text="{Binding MaxAllowed}" Height="25" Margin="85,244,9,0" VerticalAlignment="Top" />
+                        <TextBox Name="itemMaxCountTxt" Text="{Binding MaxAllowed, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,244,9,0" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Stack count" Height="30" Margin="0,273,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77" ToolTip="Max amount of this item in the same bag slot."/>
-                        <TextBox Name="itemStackCountTxt" Text="{Binding Stackable}" Height="25" Margin="85,274,9,0" VerticalAlignment="Top" />
+                        <TextBox Name="itemStackCountTxt" Text="{Binding Stackable, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,274,9,0" VerticalAlignment="Top" />
 
                     </Grid>
                 </GroupBox>
@@ -51,7 +51,7 @@
                     <StackPanel>
                         <DockPanel>
                             <Label FontSize="12" Content="Bag Slots" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                            <TextBox Name="containerSlotsTxt" Text="{Binding ContainerSlots}" Height="25" Margin="0,6,9,0" VerticalAlignment="Top" TextChanged="containerSlotsTxt_TextChanged" />
+                            <TextBox Name="containerSlotsTxt" Text="{Binding ContainerSlots, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="0,6,9,0" VerticalAlignment="Top" TextChanged="containerSlotsTxt_TextChanged" />
                         </DockPanel>
                         <Label FontSize="12" Content="Check to add limits" Height="23" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="121"/>
 
@@ -62,12 +62,12 @@
                 <GroupBox x:Name="weaponBox" Header="Weapon Properties" >
                     <Grid>
                         <Label FontSize="12" Content="Damage" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox Name="damageMinTxt" Text="{Binding DamageInfo.MinDamage}" Height="25" Margin="85,6,0,0" VerticalAlignment="Top" ToolTip="Minimum damage" HorizontalAlignment="Left" Width="60"/>
+                        <TextBox Name="damageMinTxt" Text="{Binding DamageInfo.MinDamage, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,6,0,0" VerticalAlignment="Top" ToolTip="Minimum damage" HorizontalAlignment="Left" Width="60"/>
                         <Label FontSize="12" Content="-" Height="30" Margin="151,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="17" ToolTip="Maximum damage"/>
-                        <TextBox Name="damageMaxTxt" Text="{Binding DamageInfo.MaxDamage}" Height="25" Margin="172,6,10,0" VerticalAlignment="Top"/>
+                        <TextBox Name="damageMaxTxt" Text="{Binding DamageInfo.MaxDamage, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="172,6,10,0" VerticalAlignment="Top"/>
 
                         <Label FontSize="12" Content="Speed (ms)" Height="30" Margin="0,36,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" ToolTip="Weapon speed in miliseconds"/>
-                        <TextBox Name="weaponSpeedTxt" Text="{Binding DamageInfo.MaxDamage}" Height="25" Margin="85,37,9,0" VerticalAlignment="Top" />
+                        <TextBox Name="weaponSpeedTxt" Text="{Binding DamageInfo.Speed, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,37,9,0" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Damage Type" Height="30" Margin="0,67,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
                         <ComboBox Name="damageTypeCb" SelectedValue="{Binding DamageInfo.Type}" Height="25" Margin="85,68,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" />
@@ -77,21 +77,21 @@
                 <GroupBox x:Name="armorBox" Header="Armor Properties">
                     <Grid>
                         <Label FontSize="12" Content="Armor" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox Name="itemArmorTxt" Text="{Binding Armor}" Height="25" Margin="85,5,6,0" VerticalAlignment="Top" TextChanged="itemArmorTxt_TextChanged" />
+                        <TextBox Name="itemArmorTxt" Text="{Binding Armor, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,5,6,0" VerticalAlignment="Top" TextChanged="itemArmorTxt_TextChanged" />
 
                         <Label FontSize="12" Content="Item Block" Height="30" Margin="0,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox Name="itemBlockTxt" Text="{Binding Block}" Height="25" Margin="85,36,9,0" VerticalAlignment="Top" TextChanged="itemBlockTxt_TextChanged" />
+                        <TextBox Name="itemBlockTxt" Text="{Binding Block, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,36,9,0" VerticalAlignment="Top" TextChanged="itemBlockTxt_TextChanged" />
                     </Grid>
                 </GroupBox>
-                <GroupBox x:Name="statsBox" Header="Stats" Content="{Binding Stats}"/>
+                <GroupBox x:Name="statsBox" Header="Stats" Content="{Binding Stats, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <GroupBox x:Name="equipmentBox" Header="Equipment Properties" Height="86">
                     <Grid>
                         <Label FontSize="12" Content="Level required" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox Name="itemPlayerLevelTxt" Text="{Binding MinLevel}" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" TextChanged="itemPlayerLevelTxt_TextChanged" />
+                        <TextBox Name="itemPlayerLevelTxt" Text="{Binding MinLevel, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" TextChanged="itemPlayerLevelTxt_TextChanged" />
 
                         <Label FontSize="12" Content="Durability" Height="30" Margin="0,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox Name="durabilityTxt" Text="{Binding Durability}" Height="25" Margin="85,36,9,0" VerticalAlignment="Top" TextChanged="durabilityTxt_TextChanged" />
+                        <TextBox Name="durabilityTxt" Text="{Binding Durability, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,36,9,0" VerticalAlignment="Top" TextChanged="durabilityTxt_TextChanged" />
 
                     </Grid>
                 </GroupBox>
@@ -99,23 +99,23 @@
                 <GroupBox x:Name="vendorBox" Header="Vendor Properties">
                     <Grid>
                         <Label FontSize="12" Content="Buy price" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox Name="buyPriceGTxt" Text="{Binding ValueBuy.Gold}" Height="25" Margin="84,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="buyPriceGTxt_TextChanged" />
+                        <TextBox Name="buyPriceGTxt" Text="{Binding ValueBuy.Gold, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="84,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="buyPriceGTxt_TextChanged" />
                         <Image Margin="137,11,0,0" Width="15" Source="Resources/gold.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-                        <TextBox Name="buyPriceSTxt" Text="{Binding ValueBuy.Silver}" Height="25" Margin="157,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceSTxt_TextChanged" />
+                        <TextBox Name="buyPriceSTxt" Text="{Binding ValueBuy.Silver, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="157,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceSTxt_TextChanged" />
                         <Image Margin="182,11,0,0" Width="15" Source="Resources/silver.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-                        <TextBox Name="buyPriceCTxt" Text="{Binding ValueBuy.Copper}" Height="25" Margin="202,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceCTxt_TextChanged" />
+                        <TextBox Name="buyPriceCTxt" Text="{Binding ValueBuy.Copper, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="202,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceCTxt_TextChanged" />
                         <Image Margin="228,11,0,0" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Sell price" Height="30" Margin="0,38,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox Name="sellPriceGTxt" Text="{Binding ValueSell.Gold}" Height="25" Margin="84,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="sellPriceGTxt_TextChanged" />
+                        <TextBox Name="sellPriceGTxt" Text="{Binding ValueSell.Gold, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="84,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="sellPriceGTxt_TextChanged" />
                         <Image Margin="137,44,0,0" Width="15" Source="Resources/gold.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-                        <TextBox Name="sellPriceSTxt" Text="{Binding ValueSell.Silver}" Height="25" Margin="157,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceSTxt_TextChanged" />
+                        <TextBox Name="sellPriceSTxt" Text="{Binding ValueSell.Silver, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="157,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceSTxt_TextChanged" />
                         <Image Margin="182,44,0,0" Width="15" Source="Resources/silver.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-                        <TextBox Name="sellPriceCTxt" Text="{Binding ValueSell.Copper}" Height="25" Margin="202,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceCTxt_TextChanged" />
+                        <TextBox Name="sellPriceCTxt" Text="{Binding ValueSell.Copper, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="202,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceCTxt_TextChanged" />
                         <Image Margin="228,44,0,0" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Buy count" Height="30" Margin="0,71,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" ToolTip="The size of the item stack when sold by vendors. Also if a vendor has limited copies of this item available, everytime the vendor list is refreshed."/>
-                        <TextBox Name="buyCountTxt" Text="{Binding BuyCount}" Height="25" Margin="85,72,9,0" VerticalAlignment="Top" />
+                        <TextBox Name="buyCountTxt" Text="{Binding BuyCount, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,72,9,0" VerticalAlignment="Top" />
 
                     </Grid>
                 </GroupBox>
@@ -152,7 +152,7 @@
             <GroupBox x:Name="createBox" Header="Export Item">
                 <Grid>
                     <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                    <TextBox Name="entryIdTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
+                    <TextBox Name="entryIdTxt" Text="{Binding EntryId, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
                     <Label Content="{Binding (Validation.Errors)[0].ErrorContent}" />
                     <Button x:Name="exportSqlBtn" Content="Export to SQL file" Margin="10,35,153,5" Click="exportSqlBtn_Click" FontWeight="Bold"/>
                     <Button x:Name="newItemBtn" Content="Create new item" Margin="218,35,10,5" Click="newItemBtn_Click"/>
