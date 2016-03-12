@@ -9,8 +9,8 @@
         <Grid>
             <Border BorderBrush="#fff" BorderThickness="2" CornerRadius="8,8,8,8" Margin="2" Background="#0b0b17"/>
             <StackPanel Margin="10,5">
-                <Label Name="itemNameLbl" Content="Item Name" Foreground="Gray" FontSize="18"/>
-                <Label Name="itemBoundsLbl" Content="BoP/BoE/BoU" Foreground="White" FontSize="14" />
+                <Label Name="itemNameLbl" Content="{Binding Name}" Foreground="Gray" FontSize="18"/>
+                <Label Name="itemBoundsLbl" Content="{Binding Binds.Name}" Foreground="White" FontSize="14" />
                 <DockPanel>
                     <Label Name="subclassLeftNoteLbl" Content="One-handed" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
                     <Label Name="subclassRightNoteLbl" Content="Mace" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>

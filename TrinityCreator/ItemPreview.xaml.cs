@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,12 +18,13 @@ namespace TrinityCreator
     /// <summary>
     /// Interaction logic for ItemPreview.xaml
     /// </summary>
-    public partial class ItemPreview : UserControl
+    public partial class ItemPreview : UserControl, INotifyPropertyChanged
     {
-        public ItemPreview(Item _item)
+        public ItemPreview(TrinityItem _item)
         {
             InitializeComponent();
             item = _item;
+            DataContext = item;
 
             // hide unset values
             itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
@@ -35,7 +37,9 @@ namespace TrinityCreator
             socketBonusLbl.Visibility = Visibility.Collapsed;
         }
 
-        private Item item;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private TrinityItem item;
 
         private void screenshotClipboardBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -46,6 +50,8 @@ namespace TrinityCreator
         {
             MessageBox.Show("Not implemented yet");
         }
+
+
 
         internal void PrepareClassLimitations(BitmaskStackPanel bitmaskStackPanel)
         {
@@ -74,6 +80,5 @@ namespace TrinityCreator
         {
             itemRaceRequirementsLbl.Content = "Races: " + item.AllowedRace.ToString();
         }
-
     }
 }

@@ -28,7 +28,8 @@ namespace TrinityCreator
             InitializeComponent();
 
             // load preview & set item
-            item = new Item();
+            item = new TrinityItem();
+            DataContext = item;
             preview = new ItemPreview(item);
             previewBox.Content = preview;
 
@@ -116,7 +117,7 @@ namespace TrinityCreator
             item.AllowedClass.BitmaskValue = (uint)dr["AllowableClass"];
         }        
 
-        Item item;
+        TrinityItem item;
         ItemPreview preview;
 
         private void SetIndexOfId(int requestId, ComboBox cb)
@@ -130,24 +131,6 @@ namespace TrinityCreator
         }
 
         #region Changed event handlers
-        private void itemNameTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            preview.itemNameLbl.Content = itemNameTxt.Text;
-        }
-        private void itemQuoteTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                if (itemQuoteTxt.Text == "")
-                    preview.itemQuoteLbl.Visibility = Visibility.Collapsed;
-                else
-                {
-                    preview.itemQuoteLbl.Visibility = Visibility.Visible;
-                    preview.itemQuoteLbl.Content = '"' + itemQuoteTxt.Text + '"';
-                }
-            }
-            catch { /* Exception on initial load */ }
-        }
         private void itemQualityCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ItemQuality q = (ItemQuality)itemQualityCb.SelectedValue;
@@ -732,8 +715,17 @@ namespace TrinityCreator
 
         private void containerSlotsTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ItemSubClass isc = (ItemSubClass)itemSubClassCb.SelectedValue;
-            preview.subclassLeftNoteLbl.Content = containerSlotsTxt.Text + " slot " + isc.Description;
+            try
+            {
+                ItemSubClass isc = (ItemSubClass)itemSubClassCb.SelectedValue;
+                preview.subclassLeftNoteLbl.Content = containerSlotsTxt.Text + " slot " + isc.Description;
+            }
+            catch { /* fix this*/ }
+        }
+
+        private void displayIdTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
         }
     }
 }

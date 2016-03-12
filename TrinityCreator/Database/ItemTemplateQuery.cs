@@ -35,7 +35,7 @@ namespace TrinityCreator.Database
             return result;           
         }
 
-        internal static Item[] FindItemsByName(string partialName)
+        internal static TrinityItem[] FindItemsByName(string partialName)
         {
             throw new NotImplementedException();
         }

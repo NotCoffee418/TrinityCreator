@@ -13,36 +13,36 @@
                 <GroupBox Header="Item Details" Height="325">
                     <Grid>
                         <Label FontSize="12" Content="Item Name" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <TextBox x:Name="itemNameTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" TextChanged="itemNameTxt_TextChanged"/>
+                        <TextBox Name="itemNameTxt" Text="{Binding Name}" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Item Quote" Height="30" Margin="0,32,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <TextBox x:Name="itemQuoteTxt" Height="25" Margin="85,33,9,0" VerticalAlignment="Top" TextChanged="itemQuoteTxt_TextChanged"/>
+                        <TextBox Name="itemQuoteTxt" Height="25" Margin="85,33,9,0" VerticalAlignment="Top" Text="{Binding Quote}"/>
 
                         <Label FontSize="12" Content="Quality" Height="30" Margin="0,61,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <ComboBox x:Name="itemQualityCb" Height="25" Margin="85,63,9,0" VerticalAlignment="Top" SelectionChanged="itemQualityCb_SelectionChanged" IsReadOnly="True"/>
+                        <ComboBox Name="itemQualityCb" Height="25" Margin="85,63,9,0" VerticalAlignment="Top" SelectionChanged="itemQualityCb_SelectionChanged" IsReadOnly="True" SelectedValue="{Binding Quality}"/>
 
 
                         <Label FontSize="12" Content="Display ID" Height="30" Margin="0,92,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <TextBox x:Name="displayIdTxt" Height="25" Margin="85,93,85,0" VerticalAlignment="Top"/>
-                        <Button x:Name="findDisplayIdBtn" Content="Find" HorizontalAlignment="Right" Margin="0,93,10,0" VerticalAlignment="Top" Width="70" Height="25" IsEnabled="False"/>
+                        <TextBox Name="displayIdTxt" Height="25" Margin="85,93,85,0" VerticalAlignment="Top" Text="{Binding DisplayId}" />
+                        <Button Name="findDisplayIdBtn" Content="Find" HorizontalAlignment="Right" Margin="0,93,10,0" VerticalAlignment="Top" Width="70" Height="25" IsEnabled="False"/>
 
                         <Label FontSize="12" Content="Bounds" Height="30" Margin="0,122,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
-                        <ComboBox x:Name="itemBoundsCb" Height="25" Margin="85,123,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemBoundsCb_SelectionChanged"/>
+                        <ComboBox Name="itemBoundsCb" SelectedValue="{Binding Binds}" Height="25"  Margin="85,123,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="itemBoundsCb_SelectionChanged"/>
 
                         <Label FontSize="12" Content="Item Class" Height="30" Margin="0,152,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <ComboBox x:Name="itemClassCb" Height="25" Margin="85,153,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemClassCb_SelectionChanged" />
+                        <ComboBox Name="itemClassCb" SelectedValue="{Binding Class}" Height="25"  Margin="85,153,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="itemClassCb_SelectionChanged" />
 
                         <Label FontSize="12" Content="Item Subclass" Height="30" Margin="0,182,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
-                        <ComboBox x:Name="itemSubClassCb" Height="25" Margin="85,183,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemSubClassCb_SelectionChanged" />
+                        <ComboBox Name="itemSubClassCb" SelectedValue="{Binding ItemSubClass}" Height="25" Margin="85,183,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemSubClassCb_SelectionChanged" />
 
                         <Label FontSize="12" Content="Equip" Height="30" Margin="0,213,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
-                        <ComboBox x:Name="inventoryTypeCb" Height="25" Margin="85,214,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="inventoryTypeCb_SelectionChanged" />
+                        <ComboBox Name="inventoryTypeCb" SelectedValue="{Binding ItemSubClass.LockedInventoryType}" Height="25" Margin="85,214,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="inventoryTypeCb_SelectionChanged" />
 
                         <Label FontSize="12" Content="Max count" Height="30" Margin="0,243,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77" ToolTip="0 is unlimited"/>
-                        <TextBox x:Name="itemMaxCountTxt" Height="25" Margin="85,244,9,0" VerticalAlignment="Top" TextChanged="itemQuoteTxt_TextChanged" Text="0"/>
+                        <TextBox Name="itemMaxCountTxt" Text="{Binding MaxAllowed}" Height="25" Margin="85,244,9,0" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Stack count" Height="30" Margin="0,273,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77" ToolTip="Max amount of this item in the same bag slot."/>
-                        <TextBox x:Name="itemStackCountTxt" Height="25" Margin="85,274,9,0" VerticalAlignment="Top" Text="1"/>
+                        <TextBox Name="itemStackCountTxt" Text="{Binding Stackable}" Height="25" Margin="85,274,9,0" VerticalAlignment="Top" />
 
                     </Grid>
                 </GroupBox>
@@ -51,7 +51,7 @@
                     <StackPanel>
                         <DockPanel>
                             <Label FontSize="12" Content="Bag Slots" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                            <TextBox x:Name="containerSlotsTxt" Height="25" Margin="0,6,9,0" VerticalAlignment="Top" TextChanged="containerSlotsTxt_TextChanged" />
+                            <TextBox Name="containerSlotsTxt" Text="{Binding ContainerSlots}" Height="25" Margin="0,6,9,0" VerticalAlignment="Top" TextChanged="containerSlotsTxt_TextChanged" />
                         </DockPanel>
                         <Label FontSize="12" Content="Check to add limits" Height="23" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="121"/>
 
@@ -62,15 +62,15 @@
                 <GroupBox x:Name="weaponBox" Header="Weapon Properties" >
                     <Grid>
                         <Label FontSize="12" Content="Damage" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox x:Name="damageMinTxt" Height="25" Margin="85,6,0,0" VerticalAlignment="Top" ToolTip="Minimum damage" HorizontalAlignment="Left" Width="60" Text="0" TextChanged="damageTxt_TextChanged"/>
+                        <TextBox Name="damageMinTxt" Text="{Binding DamageInfo.MinDamage}" Height="25" Margin="85,6,0,0" VerticalAlignment="Top" ToolTip="Minimum damage" HorizontalAlignment="Left" Width="60" TextChanged="damageTxt_TextChanged"/>
                         <Label FontSize="12" Content="-" Height="30" Margin="151,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="17" ToolTip="Maximum damage"/>
-                        <TextBox x:Name="damageMaxTxt" Height="25" Margin="172,6,10,0" VerticalAlignment="Top" Text="0" TextChanged="damageTxt_TextChanged"/>
+                        <TextBox Name="damageMaxTxt" Text="{Binding DamageInfo.MaxDamage}" Height="25" Margin="172,6,10,0" VerticalAlignment="Top" TextChanged="damageTxt_TextChanged"/>
 
                         <Label FontSize="12" Content="Speed (ms)" Height="30" Margin="0,36,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" ToolTip="Weapon speed in miliseconds"/>
-                        <TextBox x:Name="weaponSpeedTxt" Height="25" Margin="85,37,9,0" VerticalAlignment="Top" TextChanged="weaponSpeedTxt_TextChanged" />
+                        <TextBox Name="weaponSpeedTxt" Text="{Binding DamageInfo.MaxDamage}" Height="25" Margin="85,37,9,0" VerticalAlignment="Top" TextChanged="weaponSpeedTxt_TextChanged" />
 
                         <Label FontSize="12" Content="Damage Type" Height="30" Margin="0,67,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
-                        <ComboBox x:Name="damageTypeCb" Height="25" Margin="85,68,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="damageTypeCb_SelectionChanged" />
+                        <ComboBox Name="damageTypeCb" SelectedValue="{Binding DamageInfo.Type}" Height="25" Margin="85,68,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="damageTypeCb_SelectionChanged" />
 
                     </Grid>
                 </GroupBox>
@@ -153,7 +153,7 @@
                 <Grid>
                     <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
                     <TextBox x:Name="entryIdTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
-
+                    <Label Content="{Binding (Validation.Errors)[0].ErrorContent}" />
                     <Button x:Name="exportSqlBtn" Content="Export to SQL file" Margin="10,35,153,5" Click="exportSqlBtn_Click" FontWeight="Bold"/>
                     <Button x:Name="newItemBtn" Content="Create new item" Margin="218,35,10,5" Click="newItemBtn_Click"/>
                 </Grid>

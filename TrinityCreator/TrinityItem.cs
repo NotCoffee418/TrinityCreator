@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    public class Item
+    public class TrinityItem : INotifyPropertyChanged, IDataErrorInfo
     {
         private string _name;
         private string _quote;
@@ -48,6 +49,7 @@ namespace TrinityCreator
             set
             {
                 _name = value;
+                RaisePropertyChanged("Name");
             }
         }
 
@@ -60,6 +62,7 @@ namespace TrinityCreator
             set
             {
                 _quote = value;
+                RaisePropertyChanged("Quote");
             }
         }
 
@@ -72,6 +75,7 @@ namespace TrinityCreator
             set
             {
                 _itemclass = value;
+                RaisePropertyChanged("Class");
             }
         }
 
@@ -84,6 +88,7 @@ namespace TrinityCreator
             set
             {
                 _itemsubclass = value;
+                RaisePropertyChanged("ItemSubClass");
             }
         }
 
@@ -96,6 +101,7 @@ namespace TrinityCreator
             set
             {
                 _quality = value;
+                RaisePropertyChanged("Quality");
             }
         }
 
@@ -108,6 +114,7 @@ namespace TrinityCreator
             set
             {
                 _displayid = value;
+                RaisePropertyChanged("DisplayId");
             }
         }
 
@@ -120,6 +127,7 @@ namespace TrinityCreator
             set
             {
                 _entryid = value;
+                RaisePropertyChanged("EntryId");
             }
         }
 
@@ -132,6 +140,7 @@ namespace TrinityCreator
             set
             {
                 _binds = value;
+                RaisePropertyChanged("Binds");
             }
         }
 
@@ -144,6 +153,7 @@ namespace TrinityCreator
             set
             {
                 _minlevel = value;
+                RaisePropertyChanged("MinLevel");
             }
         }
 
@@ -156,6 +166,7 @@ namespace TrinityCreator
             set
             {
                 _maxallowed = value;
+                RaisePropertyChanged("MaxAllowed");
             }
         }
 
@@ -168,6 +179,7 @@ namespace TrinityCreator
             set
             {
                 _allowedclass = value;
+                RaisePropertyChanged("AllowedClass");
             }
         }
 
@@ -180,6 +192,7 @@ namespace TrinityCreator
             set
             {
                 _allowedrace = value;
+                RaisePropertyChanged("AllowedRace");
             }
         }
 
@@ -192,6 +205,7 @@ namespace TrinityCreator
             set
             {
                 _valuebuy = value;
+                RaisePropertyChanged("ValueBuy");
             }
         }
 
@@ -204,6 +218,7 @@ namespace TrinityCreator
             set
             {
                 _valuesell = value;
+                RaisePropertyChanged("ValueSell");
             }
         }
 
@@ -216,6 +231,7 @@ namespace TrinityCreator
             set
             {
                 _inventoryType = value;
+                RaisePropertyChanged("InventoryType");
             }
         }
 
@@ -228,6 +244,7 @@ namespace TrinityCreator
             set
             {
                 _flags = value;
+                RaisePropertyChanged("Flags");
             }
         }
 
@@ -240,6 +257,7 @@ namespace TrinityCreator
             set
             {
                 _flagsExtra = value;
+                RaisePropertyChanged("FlagsExtra");
             }
         }
 
@@ -252,6 +270,7 @@ namespace TrinityCreator
             set
             {
                 _buyCount = value;
+                RaisePropertyChanged("BuyCount");
             }
         }
 
@@ -264,6 +283,7 @@ namespace TrinityCreator
             set
             {
                 _stackable = value;
+                RaisePropertyChanged("Stackable");
             }
         }
 
@@ -276,6 +296,7 @@ namespace TrinityCreator
             set
             {
                 _containerSlots = value;
+                RaisePropertyChanged("ContainerSlots");
             }
         }
 
@@ -288,6 +309,7 @@ namespace TrinityCreator
             set
             {
                 _damageInfo = value;
+                RaisePropertyChanged("DamageInfo");
             }
         }
 
@@ -300,6 +322,7 @@ namespace TrinityCreator
             set
             {
                 _resistances = value;
+                RaisePropertyChanged("Resistances");
             }
         }
 
@@ -312,6 +335,7 @@ namespace TrinityCreator
             set
             {
                 _ammoType = value;
+                RaisePropertyChanged("AmmoType");
             }
         }
 
@@ -324,6 +348,7 @@ namespace TrinityCreator
             set
             {
                 _durability = value;
+                RaisePropertyChanged("Durability");
             }
         }
 
@@ -336,6 +361,7 @@ namespace TrinityCreator
             set
             {
                 _gemSockets = value;
+                RaisePropertyChanged("GemSockets");
             }
         }
 
@@ -348,6 +374,7 @@ namespace TrinityCreator
             set
             {
                 _socketBonus = value;
+                RaisePropertyChanged("SocketBonus");
             }
         }
 
@@ -360,6 +387,7 @@ namespace TrinityCreator
             set
             {
                 _stat = value;
+                RaisePropertyChanged("Stats");
             }
         }
 
@@ -372,6 +400,7 @@ namespace TrinityCreator
             set
             {
                 _armor = value;
+                RaisePropertyChanged("Armor");
             }
         }
         public int Block
@@ -383,10 +412,23 @@ namespace TrinityCreator
             set
             {
                 _block = value;
+                RaisePropertyChanged("Block");
             }
         }
 
+
         public BitmaskStackPanel BagFamily { get; internal set; }
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void RaisePropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
 
 
         /// <summary>
@@ -511,6 +553,26 @@ namespace TrinityCreator
             query2 += string.Join(", ", kvplist.Values) + ");" + Environment.NewLine;
 
             return query1 + query2;
+        }
+
+        public string Error
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string result = null;
+                if (columnName == "Quote")
+                {
+                    if (string.IsNullOrEmpty(Quote))
+                        result = "Geef een naam in";
+
+                }
+                return result;
+            }
         }
     }
 }

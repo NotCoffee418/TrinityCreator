@@ -90,7 +90,7 @@
       <DependentUpon>DynamicDataControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="IKeyValue.cs" />
-    <Compile Include="Item.cs" />
+    <Compile Include="TrinityItem.cs" />
     <Compile Include="ItemBonding.cs" />
     <Compile Include="ItemClass.cs" />
     <Compile Include="ItemInventoryType.cs" />
