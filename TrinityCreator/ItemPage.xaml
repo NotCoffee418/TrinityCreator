@@ -16,10 +16,10 @@
                         <TextBox Name="itemNameTxt" Text="{Binding Name}" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Item Quote" Height="30" Margin="0,32,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <TextBox Name="itemQuoteTxt" Height="25" Margin="85,33,9,0" VerticalAlignment="Top" Text="{Binding Quote}"/>
+                        <TextBox Name="itemQuoteTxt" Text="{Binding Quote}" Height="25" Margin="85,33,9,0" VerticalAlignment="Top" TextChanged="itemQuoteTxt_TextChanged" />
 
                         <Label FontSize="12" Content="Quality" Height="30" Margin="0,61,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <ComboBox Name="itemQualityCb" Height="25" Margin="85,63,9,0" VerticalAlignment="Top" SelectionChanged="itemQualityCb_SelectionChanged" IsReadOnly="True" SelectedValue="{Binding Quality}"/>
+                        <ComboBox Name="itemQualityCb" SelectedValue="{Binding Quality}" Height="25" Margin="85,63,9,0" VerticalAlignment="Top" SelectionChanged="itemQualityCb_SelectionChanged" IsReadOnly="True"/>
 
 
                         <Label FontSize="12" Content="Display ID" Height="30" Margin="0,92,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
@@ -36,7 +36,7 @@
                         <ComboBox Name="itemSubClassCb" SelectedValue="{Binding ItemSubClass}" Height="25" Margin="85,183,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="itemSubClassCb_SelectionChanged" />
 
                         <Label FontSize="12" Content="Equip" Height="30" Margin="0,213,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
-                        <ComboBox Name="inventoryTypeCb" SelectedValue="{Binding ItemSubClass.LockedInventoryType}" Height="25" Margin="85,214,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="inventoryTypeCb_SelectionChanged" />
+                        <ComboBox Name="inventoryTypeCb" SelectedValue="{Binding ItemSubClass.LockedInventoryType}" Height="25" Margin="85,214,9,0" VerticalAlignment="Top" IsReadOnly="True" />
 
                         <Label FontSize="12" Content="Max count" Height="30" Margin="0,243,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77" ToolTip="0 is unlimited"/>
                         <TextBox Name="itemMaxCountTxt" Text="{Binding MaxAllowed}" Height="25" Margin="85,244,9,0" VerticalAlignment="Top" />
@@ -62,36 +62,36 @@
                 <GroupBox x:Name="weaponBox" Header="Weapon Properties" >
                     <Grid>
                         <Label FontSize="12" Content="Damage" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox Name="damageMinTxt" Text="{Binding DamageInfo.MinDamage}" Height="25" Margin="85,6,0,0" VerticalAlignment="Top" ToolTip="Minimum damage" HorizontalAlignment="Left" Width="60" TextChanged="damageTxt_TextChanged"/>
+                        <TextBox Name="damageMinTxt" Text="{Binding DamageInfo.MinDamage}" Height="25" Margin="85,6,0,0" VerticalAlignment="Top" ToolTip="Minimum damage" HorizontalAlignment="Left" Width="60"/>
                         <Label FontSize="12" Content="-" Height="30" Margin="151,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="17" ToolTip="Maximum damage"/>
-                        <TextBox Name="damageMaxTxt" Text="{Binding DamageInfo.MaxDamage}" Height="25" Margin="172,6,10,0" VerticalAlignment="Top" TextChanged="damageTxt_TextChanged"/>
+                        <TextBox Name="damageMaxTxt" Text="{Binding DamageInfo.MaxDamage}" Height="25" Margin="172,6,10,0" VerticalAlignment="Top"/>
 
                         <Label FontSize="12" Content="Speed (ms)" Height="30" Margin="0,36,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" ToolTip="Weapon speed in miliseconds"/>
-                        <TextBox Name="weaponSpeedTxt" Text="{Binding DamageInfo.MaxDamage}" Height="25" Margin="85,37,9,0" VerticalAlignment="Top" TextChanged="weaponSpeedTxt_TextChanged" />
+                        <TextBox Name="weaponSpeedTxt" Text="{Binding DamageInfo.MaxDamage}" Height="25" Margin="85,37,9,0" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Damage Type" Height="30" Margin="0,67,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
-                        <ComboBox Name="damageTypeCb" SelectedValue="{Binding DamageInfo.Type}" Height="25" Margin="85,68,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" SelectionChanged="damageTypeCb_SelectionChanged" />
+                        <ComboBox Name="damageTypeCb" SelectedValue="{Binding DamageInfo.Type}" Height="25" Margin="85,68,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" />
 
                     </Grid>
                 </GroupBox>
                 <GroupBox x:Name="armorBox" Header="Armor Properties">
                     <Grid>
                         <Label FontSize="12" Content="Armor" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox x:Name="itemArmorTxt" Height="25" Margin="85,5,6,0" VerticalAlignment="Top" TextChanged="itemArmorTxt_TextChanged" />
+                        <TextBox Name="itemArmorTxt" Text="{Binding Armor}" Height="25" Margin="85,5,6,0" VerticalAlignment="Top" TextChanged="itemArmorTxt_TextChanged" />
 
                         <Label FontSize="12" Content="Item Block" Height="30" Margin="0,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox x:Name="itemBlockTxt" Height="25" Margin="85,36,9,0" VerticalAlignment="Top" TextChanged="itemBlockTxt_TextChanged" />
+                        <TextBox Name="itemBlockTxt" Text="{Binding Block}" Height="25" Margin="85,36,9,0" VerticalAlignment="Top" TextChanged="itemBlockTxt_TextChanged" />
                     </Grid>
                 </GroupBox>
-                <GroupBox x:Name="statsBox" Header="Stats"/>
+                <GroupBox x:Name="statsBox" Header="Stats" Content="{Binding Stats}"/>
 
                 <GroupBox x:Name="equipmentBox" Header="Equipment Properties" Height="86">
                     <Grid>
                         <Label FontSize="12" Content="Level required" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox x:Name="itemPlayerLevelTxt" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" TextChanged="itemPlayerLevelTxt_TextChanged" />
+                        <TextBox Name="itemPlayerLevelTxt" Text="{Binding MinLevel}" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" TextChanged="itemPlayerLevelTxt_TextChanged" />
 
                         <Label FontSize="12" Content="Durability" Height="30" Margin="0,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox x:Name="durabilityTxt" Height="25" Margin="85,36,9,0" VerticalAlignment="Top" TextChanged="durabilityTxt_TextChanged" />
+                        <TextBox Name="durabilityTxt" Text="{Binding Durability}" Height="25" Margin="85,36,9,0" VerticalAlignment="Top" TextChanged="durabilityTxt_TextChanged" />
 
                     </Grid>
                 </GroupBox>
@@ -99,60 +99,60 @@
                 <GroupBox x:Name="vendorBox" Header="Vendor Properties">
                     <Grid>
                         <Label FontSize="12" Content="Buy price" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox x:Name="buyPriceGTxt" Height="25" Margin="84,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="buyPriceGTxt_TextChanged" />
+                        <TextBox Name="buyPriceGTxt" Text="{Binding ValueBuy.Gold}" Height="25" Margin="84,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="buyPriceGTxt_TextChanged" />
                         <Image Margin="137,11,0,0" Width="15" Source="Resources/gold.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-                        <TextBox x:Name="buyPriceSTxt" Height="25" Margin="157,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceSTxt_TextChanged" />
+                        <TextBox Name="buyPriceSTxt" Text="{Binding ValueBuy.Silver}" Height="25" Margin="157,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceSTxt_TextChanged" />
                         <Image Margin="182,11,0,0" Width="15" Source="Resources/silver.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-                        <TextBox x:Name="buyPriceCTxt" Height="25" Margin="202,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceCTxt_TextChanged" Text="0" />
+                        <TextBox Name="buyPriceCTxt" Text="{Binding ValueBuy.Copper}" Height="25" Margin="202,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="buyPriceCTxt_TextChanged" />
                         <Image Margin="228,11,0,0" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Sell price" Height="30" Margin="0,38,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                        <TextBox x:Name="sellPriceGTxt" Height="25" Margin="84,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="sellPriceGTxt_TextChanged" />
+                        <TextBox Name="sellPriceGTxt" Text="{Binding ValueSell.Gold}" Height="25" Margin="84,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" TextChanged="sellPriceGTxt_TextChanged" />
                         <Image Margin="137,44,0,0" Width="15" Source="Resources/gold.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-                        <TextBox x:Name="sellPriceSTxt" Height="25" Margin="157,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceSTxt_TextChanged" />
+                        <TextBox Name="sellPriceSTxt" Text="{Binding ValueSell.Silver}" Height="25" Margin="157,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceSTxt_TextChanged" />
                         <Image Margin="182,44,0,0" Width="15" Source="Resources/silver.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
-                        <TextBox x:Name="sellPriceCTxt" Height="25" Margin="202,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceCTxt_TextChanged" Text="0" />
+                        <TextBox Name="sellPriceCTxt" Text="{Binding ValueSell.Copper}" Height="25" Margin="202,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" TextChanged="sellPriceCTxt_TextChanged" />
                         <Image Margin="228,44,0,0" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Buy count" Height="30" Margin="0,71,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" ToolTip="The size of the item stack when sold by vendors. Also if a vendor has limited copies of this item available, everytime the vendor list is refreshed."/>
-                        <TextBox x:Name="buyCountTxt" Height="25" Margin="85,72,9,0" VerticalAlignment="Top" Text="1" />
+                        <TextBox Name="buyCountTxt" Text="{Binding BuyCount}" Height="25" Margin="85,72,9,0" VerticalAlignment="Top" />
 
                     </Grid>
                 </GroupBox>
 
-                <GroupBox x:Name="gemsGroupBox" Header="Gem Sockets">
+                <GroupBox Name="gemsGroupBox" Header="Gem Sockets">
                     <StackPanel>
-                        <GroupBox x:Name="gemSocketsSp" />
-                        <Grid x:Name="socketBonusGrid">
+                        <GroupBox Name="gemSocketsSp" Content="{Binding GemSockets}" />
+                        <Grid Name="socketBonusGrid">
                             <Label FontSize="12" Content="Socket Bonus" Height="30" Margin="0,4,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81"/>
-                            <ComboBox x:Name="socketBonusCb" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="socketBonusCb_SelectionChanged"/>
+                            <ComboBox Name="socketBonusCb" SelectedValue="{Binding SocketBonus}" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="socketBonusCb_SelectionChanged"/>
                         </Grid>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox x:Name="flagsBitMaskGroupBox" Header="Item flags"/>
-                <GroupBox x:Name="flagsExtraBitMaskGroupBox" Header="Item flags Extra"/>
-                <GroupBox x:Name="limitClassBitMaskGroupBox" Header="Classes allowed" />
-                <GroupBox x:Name="limitRaceBitMaskGroupBox" Header="Races allowed" />
-                <GroupBox x:Name="addResistanceGroupBox" Header="Magic resistance" />
+                <GroupBox Name="flagsBitMaskGroupBox" Content="{Binding Flags}" Header="Item flags"/>
+                <GroupBox Name="flagsExtraBitMaskGroupBox" Content="{Binding FlagsExtra}" Header="Item flags Extra"/>
+                <GroupBox Name="limitClassBitMaskGroupBox" Content="{Binding AllowedClass}" Header="Classes allowed" />
+                <GroupBox Name="limitRaceBitMaskGroupBox" Content="{Binding AllowedRace}" Header="Races allowed" />
+                <GroupBox Name="addResistanceGroupBox" Content="{Binding Resistances}" Header="Magic resistance" />
 
             </StackPanel>
         </ScrollViewer>
 
         <StackPanel Width="375" HorizontalAlignment="Right">
-            <GroupBox x:Name="previewBox" Header="Item Preview"/>
-            <GroupBox x:Name="advancedOptionsBox" Header="Extra Options">
+            <GroupBox Name="previewBox" Header="Item Preview"/>
+            <GroupBox Name="advancedOptionsBox" Header="Extra Options">
                 <StackPanel>
-                    <CheckBox x:Name="changeFlagsCb" FontSize="12" Content="Change Flags (advanced)" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="changeFlagsCb_Checked" Unchecked="changeFlagsCb_Unchecked" />
-                    <CheckBox x:Name="limitClassCb" FontSize="12" Content="Add class limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitClassCb_Checked" Unchecked="limitClassCb_Unchecked" />
-                    <CheckBox x:Name="limitRaceCb" FontSize="12" Content="Add race limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitRaceCb_Checked" Unchecked="limitRaceCb_Unchecked" />
-                    <CheckBox x:Name="addResistancesCb" FontSize="12" Content="Add magic resistance" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="addResistancesCb_Checked" Unchecked="addResistancesCb_Unchecked" />
-                    <CheckBox x:Name="addGemSocketsCb" FontSize="12" Content="Add Gem sockets" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="addGemSocketsCb_Checked" Unchecked="addGemSocketsCb_Unchecked" />
+                    <CheckBox Name="changeFlagsCb" FontSize="12" Content="Change Flags (advanced)" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="changeFlagsCb_Checked" Unchecked="changeFlagsCb_Unchecked" />
+                    <CheckBox Name="limitClassCb" FontSize="12" Content="Add class limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitClassCb_Checked" Unchecked="limitClassCb_Unchecked" />
+                    <CheckBox Name="limitRaceCb" FontSize="12" Content="Add race limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitRaceCb_Checked" Unchecked="limitRaceCb_Unchecked" />
+                    <CheckBox Name="addResistancesCb" FontSize="12" Content="Add magic resistance" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="addResistancesCb_Checked" Unchecked="addResistancesCb_Unchecked" />
+                    <CheckBox Name="addGemSocketsCb" FontSize="12" Content="Add Gem sockets" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="addGemSocketsCb_Checked" Unchecked="addGemSocketsCb_Unchecked" />
                 </StackPanel>
             </GroupBox>
             <GroupBox x:Name="createBox" Header="Export Item">
                 <Grid>
                     <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                    <TextBox x:Name="entryIdTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
+                    <TextBox Name="entryIdTxt" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
                     <Label Content="{Binding (Validation.Errors)[0].ErrorContent}" />
                     <Button x:Name="exportSqlBtn" Content="Export to SQL file" Margin="10,35,153,5" Click="exportSqlBtn_Click" FontWeight="Bold"/>
                     <Button x:Name="newItemBtn" Content="Create new item" Margin="218,35,10,5" Click="newItemBtn_Click"/>

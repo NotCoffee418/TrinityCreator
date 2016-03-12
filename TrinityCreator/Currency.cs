@@ -40,12 +40,21 @@ namespace TrinityCreator
             {
                 return _gold;
             }
+            set
+            {
+                UpdateAmount();
+            }
         }
+
         public int Silver
         {
             get
             {
                 return _silver;
+            }
+            set
+            {
+
             }
         }
         public int Copper
@@ -53,6 +62,10 @@ namespace TrinityCreator
             get
             {
                 return _copper;
+            }
+            set
+            {
+                UpdateAmount();
             }
         }
 
@@ -65,9 +78,14 @@ namespace TrinityCreator
             {
                 return _amount;
             }
-        }    
-        
-        
+        }
+
+
+        private void UpdateAmount()
+        {
+            StringsToCurrency(Gold.ToString(), Silver.ToString(), Copper.ToString());
+        }
+
         private void StringsToCurrency(string g, string s, string c)
         {
             if (s.Count() > 2 || c.Count() > 2)

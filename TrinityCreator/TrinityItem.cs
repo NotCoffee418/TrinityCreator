@@ -22,8 +22,8 @@ namespace TrinityCreator
         private int _maxallowed;
         private BitmaskStackPanel _allowedclass;
         private BitmaskStackPanel _allowedrace;
-        private int _valuebuy;
-        private int _valuesell;
+        private Currency _valuebuy;
+        private Currency _valuesell;
         private ItemInventoryType _inventoryType;
         private BitmaskStackPanel _flags;
         private BitmaskStackPanel _flagsExtra;
@@ -196,7 +196,7 @@ namespace TrinityCreator
             }
         }
 
-        public int ValueBuy
+        public Currency ValueBuy
         {
             get
             {
@@ -209,7 +209,7 @@ namespace TrinityCreator
             }
         }
 
-        public int ValueSell
+        public Currency ValueSell
         {
             get
             {

@@ -50,23 +50,19 @@ namespace TrinityCreator
 
             // Load flags groupbox
             item.Flags = BitmaskStackPanel.GetItemFlags();
-            flagsBitMaskGroupBox.Content = item.Flags;
             flagsBitMaskGroupBox.Visibility = Visibility.Collapsed; // by default
 
             // Load FlagsExtra
             item.FlagsExtra = BitmaskStackPanel.GetItemFlagsExtra();
-            flagsExtraBitMaskGroupBox.Content = item.FlagsExtra;
             flagsExtraBitMaskGroupBox.Visibility = Visibility.Collapsed; // by default
 
             // load allowedclass groupbox
             item.AllowedClass = BitmaskStackPanel.GetClassFlags();
-            limitClassBitMaskGroupBox.Content = item.AllowedClass;
             limitClassBitMaskGroupBox.Visibility = Visibility.Collapsed;
             preview.PrepareClassLimitations(item.AllowedClass);
 
             // load allowedrace groupbox
             item.AllowedRace = BitmaskStackPanel.GetRaceFlags();
-            limitRaceBitMaskGroupBox.Content = item.AllowedRace;
             limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
             preview.PrepareRaceLimitations(item.AllowedRace);
 
@@ -79,21 +75,18 @@ namespace TrinityCreator
             item.Resistances = new DynamicDataControl(
                 DamageType.GetDamageTypes(magicOnly: true), 6, unique: true);
             addResistanceGroupBox.Visibility = Visibility.Collapsed;
-            addResistanceGroupBox.Content = item.Resistances;
             
             // Set gemSockets groupbox
             item.GemSockets = new DynamicDataControl(
                 Socket.GetSocketList(), 3, unique: false, header1:"Socket Type", header2:"Amount", defaultValue: "0");
             gemsGroupBox.Visibility = Visibility.Collapsed;
             preview.gemsPanel.Visibility = Visibility.Collapsed;
-            gemSocketsSp.Content = item.GemSockets;
             socketBonusCb.ItemsSource = SocketBonus.GetBonusList();
             socketBonusCb.SelectedIndex = 0;
             item.GemSockets.Changed += GemDataChangedHander;
 
             // set statsBox
             item.Stats = new DynamicDataControl(Stat.GetStatList(), 10, unique: false, header1: "Stat", header2: "Value", defaultValue: "0");
-            statsBox.Content = item.Stats;
             item.Stats.Changed += StatsChangedHandler;
 
             // BagFamily
@@ -206,41 +199,33 @@ namespace TrinityCreator
                 preview.subclassLeftNoteLbl.Visibility = Visibility.Collapsed;
             else
             {
-                preview.subclassLeftNoteLbl.Content = sc.PreviewNoteLeft;
                 preview.subclassRightNoteLbl.Visibility = Visibility.Visible;
             }
             if (sc.PreviewNoteRight == "")
                 preview.subclassRightNoteLbl.Visibility = Visibility.Collapsed;
             else
             {
-                preview.subclassRightNoteLbl.Content = sc.PreviewNoteRight;
                 preview.subclassRightNoteLbl.Visibility = Visibility.Visible;
             }
 
             // Show only left if right == left
-            if (preview.subclassRightNoteLbl.Content.ToString() == preview.subclassLeftNoteLbl.Content.ToString())
-                preview.subclassRightNoteLbl.Content = "";
+            try
+            {
+                if (preview.subclassRightNoteLbl.Content.ToString() == preview.subclassLeftNoteLbl.Content.ToString())
+                    preview.subclassRightNoteLbl.Content = "";
+            }
+            catch { }
         }
 
         private void itemBoundsCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ItemBonding b = (ItemBonding)itemBoundsCb.SelectedValue;
-            preview.itemBoundsLbl.Content = b.Description;
 
             // Don't display when no bounds
             if (b.Id == 0)
                 preview.itemBoundsLbl.Visibility = Visibility.Collapsed;
             else
                 preview.itemBoundsLbl.Visibility = Visibility.Visible;
-        }
-
-        private void inventoryTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ItemInventoryType it = (ItemInventoryType)inventoryTypeCb.SelectedValue;
-            if (it == null)
-                return;
-
-            preview.subclassLeftNoteLbl.Content = it.Description;
         }
 
         private void changeFlagsCb_Checked(object sender, RoutedEventArgs e)
@@ -289,77 +274,40 @@ namespace TrinityCreator
         private void buyPriceGTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
             try {
-                preview.buyGoldLbl.Content = buyPriceGTxt.Text;
                 preview.buyDockPanel.Visibility = Visibility.Visible;
             } catch { /* Exception on initial load */ }
         }
         private void buyPriceSTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
             try {
-                preview.buySilverLbl.Content = buyPriceSTxt.Text;
                 preview.buyDockPanel.Visibility = Visibility.Visible;
             } catch { /* Exception on initial load */ }
         }
         private void buyPriceCTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
             try {
-                preview.buyCopperLbl.Content = buyPriceCTxt.Text;
                 preview.buyDockPanel.Visibility = Visibility.Visible;
             } catch { /* Exception on initial load */ }
         }
         private void sellPriceGTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
             try {
-                preview.sellGoldLbl.Content = sellPriceGTxt.Text;
                 preview.sellDockPanel.Visibility = Visibility.Visible;
             } catch { /* Exception on initial load */ }
         }
         private void sellPriceSTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
             try {
-                preview.sellSilverLbl.Content = sellPriceSTxt.Text;
                 preview.sellDockPanel.Visibility = Visibility.Visible;
             } catch { /* Exception on initial load */ }
         }
         private void sellPriceCTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
             try {
-                preview.sellCopperLbl.Content = sellPriceCTxt.Text;
                 preview.sellDockPanel.Visibility = Visibility.Visible;
             } catch { /* Exception on initial load */ }
         }
-
-        private void damageTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                item.DamageInfo.MinDamage = int.Parse(damageMinTxt.Text);
-                item.DamageInfo.MaxDamage = int.Parse(damageMaxTxt.Text);
-                preview.weaponMinMaxDmgLbl.Content = string.Format("({0} - {1} Damage)", damageMinTxt.Text, damageMaxTxt.Text);
-                preview.weaponDpsLbl.Content = item.DamageInfo.GetDpsString();
-            }
-            catch { /* Exception on initial load or invalid value*/ }
-        }
-        private void weaponSpeedTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                item.DamageInfo.Speed = int.Parse(weaponSpeedTxt.Text);
-                double viewSpeed = (double)item.DamageInfo.Speed / 1000;
-                preview.weaponSpeedLbl.Content = string.Format("Speed {0}", viewSpeed.ToString("0.00"));
-                preview.weaponDpsLbl.Content = item.DamageInfo.GetDpsString();
-            }
-            catch
-            {
-                preview.weaponSpeedLbl.Content = "Speed INVALID";
-            }
-        }
-        private void damageTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            item.DamageInfo.Type = (DamageType)damageTypeCb.SelectedValue;
-            preview.weaponDpsLbl.Content = item.DamageInfo.GetDpsString();
-        }
-
+        
         private void addGemSocketsCb_Checked(object sender, RoutedEventArgs e)
         {
             gemsGroupBox.Visibility = Visibility.Visible;
@@ -377,7 +325,7 @@ namespace TrinityCreator
             {
                 if (durabilityTxt.Text != "" && durabilityTxt.Text != "0")
                 {
-                    preview.itemDurabilityLbl.Content = string.Format("(Durability {0} / {0})", durabilityTxt.Text);
+                    //preview.itemDurabilityLbl.Content = string.Format("(Durability {0} / {0})", durabilityTxt.Text);
                     preview.itemDurabilityLbl.Visibility = Visibility.Visible;
                 }
                 else
@@ -499,7 +447,7 @@ namespace TrinityCreator
         #region Click event handlers
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
-            try {
+            //try {
                 try
                 {
                     item.EntryId = int.Parse(entryIdTxt.Text);
@@ -541,8 +489,8 @@ namespace TrinityCreator
                 }
                 //item.AllowedClass; Already set in constructor
                 //item.AllowedRace; Already set in constructor
-                item.ValueBuy = new Currency(buyPriceGTxt.Text, buyPriceSTxt.Text, buyPriceCTxt.Text).Amount;
-                item.ValueSell = new Currency(sellPriceGTxt.Text, sellPriceSTxt.Text, sellPriceCTxt.Text).Amount;
+                item.ValueBuy = new Currency(buyPriceGTxt.Text, buyPriceSTxt.Text, buyPriceCTxt.Text);
+                item.ValueSell = new Currency(sellPriceGTxt.Text, sellPriceSTxt.Text, sellPriceCTxt.Text);
                 item.InventoryType = (ItemInventoryType)inventoryTypeCb.SelectedValue;
                 // Material set in ItemSubClass
                 // sheath set in InventoryType
@@ -629,11 +577,11 @@ namespace TrinityCreator
                 Properties.Settings.Default.Save();
 
                 MessageBox.Show("Your item has been saved.", "Complete", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            /*}
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Failed to generate query.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            }*/
         }
 
         private void newItemBtn_Click(object sender, RoutedEventArgs e)
@@ -746,9 +694,19 @@ namespace TrinityCreator
             catch { /* fix this*/ }
         }
 
-        private void displayIdTxt_TextChanged(object sender, TextChangedEventArgs e)
+        private void itemQuoteTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            try
+            {
+                if (itemQuoteTxt.Text == "")
+                    preview.itemQuoteLbl.Visibility = Visibility.Collapsed;
+                else
+                {
+                    preview.itemQuoteLbl.Visibility = Visibility.Visible;
+                    preview.itemQuoteLbl.Content = '"' + itemQuoteTxt.Text + '"';
+                }
+            }
+            catch { /* Exception on initial load */ }
         }
     }
 }

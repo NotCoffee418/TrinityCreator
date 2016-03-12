@@ -61,22 +61,35 @@ namespace TrinityCreator
             }
         }
 
-        internal object GetDpsString()
+        public string MinMaxDamage
         {
-            try
+            get
             {
-                double avgDmg = (MinDamage + MaxDamage) / 2.0;
-                double dps = avgDmg / (Speed / 1000.0);
-
-                string typeText = " ";
-                if (Type.Id != 0)
-                    typeText = " " + Type.Description.ToLower() + " ";
-                return string.Format("({0}{1}damage per second)", dps.ToString("0.00"), typeText);
-            }
-            catch
-            {
-                return "(INVALID damage per second)";
+                return string.Format("{0} - {1} Damage", MinDamage, MaxDamage);
             }
         }
+
+        public string Dps
+        {
+            get
+            {
+                try
+                {
+                    double avgDmg = (MinDamage + MaxDamage) / 2.0;
+                    double dps = avgDmg / (Speed / 1000.0);
+
+                    string typeText = " ";
+                    if (Type.Id != 0)
+                        typeText = " " + Type.Description.ToLower() + " ";
+                    return string.Format("({0}{1}damage per second)", dps.ToString("0.00"), typeText);
+                }
+                catch
+                {
+                    return "(INVALID damage per second)";
+                }
+            }
+        }
+
+       
     }
 }

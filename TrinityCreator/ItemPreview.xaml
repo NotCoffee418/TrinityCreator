@@ -12,23 +12,23 @@
                 <Label Name="itemNameLbl" Content="{Binding Name}" Foreground="Gray" FontSize="18"/>
                 <Label Name="itemBoundsLbl" Content="{Binding Binds.Name}" Foreground="White" FontSize="14" />
                 <DockPanel>
-                    <Label Name="subclassLeftNoteLbl" Content="One-handed" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
-                    <Label Name="subclassRightNoteLbl" Content="Mace" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
+                    <Label Name="subclassLeftNoteLbl" Content="{Binding SubClass.PreviewNoteLeft}" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
+                    <Label Name="subclassRightNoteLbl" Content="{Binding SubClass.PreviewNoteRight}" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
                 </DockPanel>
             
                 <!-- Only visible on weapon item -->
                 <StackPanel Name="weaponPanel" Visibility="Visible">
                     <DockPanel Margin="0,-10,0,0">
-                        <Label Name="weaponMinMaxDmgLbl" Content="0 - 0 Damage" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
-                        <Label Name="weaponSpeedLbl" Content="Speed 0.00" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
+                        <Label Name="weaponMinMaxDmgLbl" Content="{Binding DamageInfo.MinMaxDamage}" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
+                        <Label Name="weaponSpeedLbl" Content="{Binding DamageInfo.Speed}" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
                     </DockPanel>
-                    <Label Name="weaponDpsLbl" Content="(0 damage per second)" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+                    <Label Name="weaponDpsLbl" Content="{Binding DamageInfo.Dps}" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                 </StackPanel>
                 <!-- Only visible on armor item -->
                 <StackPanel Name="armorPanel" Visibility="Visible">
 
-                    <Label Name="itemArmorLbl" Content="0 Armor" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
-                    <Label Name="itemBlockLbl" Content="0 Block" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+                    <Label Name="itemArmorLbl" Content="{Binding DamageInfo.Armor}" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+                    <Label Name="itemBlockLbl" Content="{Binding DamageInfo.Block}" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                 </StackPanel>
                 <StackPanel Name="statsSp" />
 
@@ -43,27 +43,27 @@
 
                 <!-- Only visible when repairable -->
                 <Label Name="itemDurabilityLbl" Content="(Durability 0 / 0)" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
-                <Label Name="itemQuoteLbl" Content="''This is a quote for your item''" Foreground="#ddcba5" FontSize="14" Visibility="Collapsed" />
+                <Label Name="itemQuoteLbl" Content="{Binding Quote}" Foreground="#ddcba5" FontSize="14" Visibility="Collapsed" />
 
                 <!-- Buy price -->
                 <DockPanel x:Name="buyDockPanel">
                     <Label Content="Buy Price:" Foreground="White" Width="100"/>
-                    <Label Content="0" Name="buyGoldLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="{Binding ValueBuy.Gold}" Name="buyGoldLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
-                    <Label Content="0" Name="buySilverLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="{Binding ValueBuy.Silver}" Name="buySilverLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
-                    <Label Content="0" Name="buyCopperLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="{Binding ValueBuy.Copper}" Name="buyCopperLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/copper.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                 </DockPanel>
             
                 <!-- Sell price -->
                 <DockPanel Margin="0,-10,0,0" x:Name="sellDockPanel">
                     <Label Content="Sell Price:" Foreground="White" Width="100"/>
-                    <Label Content="0" Name="sellGoldLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="{Binding ValueSell.Gold}" Name="sellGoldLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
-                    <Label Content="0" Name="sellSilverLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="{Binding ValueSell.Silver}" Name="sellSilverLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
-                    <Label Content="0" Name="sellCopperLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="{Binding ValueSell.Copper}" Name="sellCopperLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/copper.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                 </DockPanel>
 
