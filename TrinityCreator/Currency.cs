@@ -47,6 +47,7 @@ namespace TrinityCreator
             {
                 _gold = value;
                 RaisePropertyChanged("Gold");
+                RaisePropertyChanged("Amount");
                 UpdateAmount();
             }
         }
@@ -61,6 +62,7 @@ namespace TrinityCreator
             {
                 _silver = value;
                 RaisePropertyChanged("Silver");
+                RaisePropertyChanged("Amount");
                 UpdateAmount();
             }
         }
@@ -74,6 +76,7 @@ namespace TrinityCreator
             {
                 _copper = value;
                 RaisePropertyChanged("Copper");
+                RaisePropertyChanged("Amount");
                 UpdateAmount();
             }
         }

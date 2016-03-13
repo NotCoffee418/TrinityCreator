@@ -284,44 +284,6 @@ namespace TrinityCreator
         {
             addResistanceGroupBox.Visibility = Visibility.Collapsed;
         }
-
-
-        private void buyPriceGTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try {
-                preview.buyDockPanel.Visibility = Visibility.Visible;
-            } catch { /* Exception on initial load */ }
-        }
-        private void buyPriceSTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try {
-                preview.buyDockPanel.Visibility = Visibility.Visible;
-            } catch { /* Exception on initial load */ }
-        }
-        private void buyPriceCTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try {
-                preview.buyDockPanel.Visibility = Visibility.Visible;
-            } catch { /* Exception on initial load */ }
-        }
-        private void sellPriceGTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try {
-                preview.sellDockPanel.Visibility = Visibility.Visible;
-            } catch { /* Exception on initial load */ }
-        }
-        private void sellPriceSTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try {
-                preview.sellDockPanel.Visibility = Visibility.Visible;
-            } catch { /* Exception on initial load */ }
-        }
-        private void sellPriceCTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try {
-                preview.sellDockPanel.Visibility = Visibility.Visible;
-            } catch { /* Exception on initial load */ }
-        }
         
         private void addGemSocketsCb_Checked(object sender, RoutedEventArgs e)
         {
@@ -333,35 +295,7 @@ namespace TrinityCreator
             gemsGroupBox.Visibility = Visibility.Collapsed;
             preview.gemsPanel.Visibility = Visibility.Collapsed;
         }
-
-        private void durabilityTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                if (durabilityTxt.Text != "" && durabilityTxt.Text != "0")
-                {
-                    //preview.itemDurabilityLbl.Content = string.Format("(Durability {0} / {0})", durabilityTxt.Text);
-                    //preview.itemDurabilityLbl.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    //preview.itemDurabilityLbl.Visibility = Visibility.Collapsed;
-                }
-            }
-            catch { /* Exception on initial load or invalid value*/ }
-        }
-
-        private void itemPlayerLevelTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (itemPlayerLevelTxt.Text != "0" && itemPlayerLevelTxt.Text != "")
-            {
-                preview.itemLevelRequiredLbl.Content = "Requires Level " + itemPlayerLevelTxt.Text;
-                preview.itemLevelRequiredLbl.Visibility = Visibility.Visible;
-            }
-            else
-                preview.itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
-
-        }
+        
 
         private void GemDataChangedHander(object sender, EventArgs e)
         {
@@ -433,30 +367,6 @@ namespace TrinityCreator
             catch
             {
                 preview.statsSp.Children.Clear();
-            }
-        }
-
-        private void itemArmorTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (itemArmorTxt.Text == "0" ||  itemArmorTxt.Text == "")
-                preview.itemArmorLbl.Visibility = Visibility.Collapsed;
-            else
-            {
-                preview.itemArmorLbl.Content = itemArmorTxt.Text + " Armor";
-                preview.itemArmorLbl.Visibility = Visibility.Visible;
-            }
-            
-        }
-
-        private void itemBlockTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-            if (itemBlockTxt.Text == "0" || itemBlockTxt.Text == "")
-                preview.itemBlockLbl.Visibility = Visibility.Collapsed;
-            else
-            {
-                preview.itemBlockLbl.Content = itemBlockTxt.Text + " Block";
-                preview.itemBlockLbl.Visibility = Visibility.Visible;
             }
         }
         #endregion

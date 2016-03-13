@@ -25,15 +25,6 @@ namespace TrinityCreator
             InitializeComponent();
             item = _item;
             DataContext = item;
-
-            // hide unset values
-            itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
-            buyDockPanel.Visibility = Visibility.Collapsed;
-            sellDockPanel.Visibility = Visibility.Collapsed;
-            itemClassRequirementsLbl.Visibility = Visibility.Collapsed;
-            itemRaceRequirementsLbl.Visibility = Visibility.Collapsed;
-            itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
-            socketBonusLbl.Visibility = Visibility.Collapsed;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

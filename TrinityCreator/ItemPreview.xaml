@@ -25,7 +25,7 @@
                     <DockPanel>
                         <TextBlock Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,0">
                             <TextBlock Text="{Binding DamageInfo.MinDamage}" />
-                            <TextBlock Text=" - " />
+                            <TextBlock Text="-" />
                             <TextBlock Text="{Binding DamageInfo.MaxDamage}" />
                         </TextBlock>
                         <Label Name="weaponSpeedLbl" Content="{Binding DamageInfo.Speed}" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
@@ -35,8 +35,14 @@
                 <!-- Only visible on armor item -->
                 <StackPanel Name="armorPanel">
 
-                    <Label Name="itemArmorLbl" Content="{Binding DamageInfo.Armor}" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
-                    <Label Name="itemBlockLbl" Content="{Binding DamageInfo.Block}" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+                    <TextBlock Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,0" Visibility="{Binding Armor, Converter={StaticResource valueVisibilityConverter}}">
+                        <TextBlock Name="itemArmorLbl" Text="{Binding Armor}" />
+                        <TextBlock Text="Armor"/>
+                    </TextBlock>
+                    <TextBlock Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,0" Visibility="{Binding Block, Converter={StaticResource valueVisibilityConverter}}">
+                        <TextBlock Name="itemBlockLbl" Text="{Binding Block}" />
+                        <TextBlock Text="Block"/>
+                    </TextBlock>
                 </StackPanel>
                 <StackPanel Name="statsSp" />
 
@@ -47,10 +53,13 @@
             
                 <Label Name="itemClassRequirementsLbl" Content="Classes: All" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                 <Label Name="itemRaceRequirementsLbl" Content="Races: All" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
-                <Label Name="itemLevelRequiredLbl" Content="Requires Level xx" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+                <TextBlock Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="5,-10,0,0" Visibility="{Binding MinLevel, Converter={StaticResource valueVisibilityConverter}}">
+                    <TextBlock Text="Requires Level" />
+                    <TextBlock Name="itemLevelRequiredLbl" Text="{Binding MinLevel}" />
+                </TextBlock>
 
                 <!-- Only visible when repairable -->
-                <TextBlock Name="itemDurabilityLbl" Visibility="{Binding Durability, Converter={StaticResource valueVisibilityConverter}}" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,-10,0,0">
+                <TextBlock Name="itemDurabilityLbl" Visibility="{Binding Durability, Converter={StaticResource valueVisibilityConverter}}" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,0">
                         <TextBlock Text="(" />
                         <TextBlock Text="{Binding Durability}" />
                         <TextBlock Text="/" />
@@ -60,7 +69,7 @@
                 <Label Name="itemQuoteLbl" Content="{Binding Quote}" ContentStringFormat="''{0}''" Foreground="#ddcba5" FontSize="14"/>
 
                 <!-- Buy price -->
-                <DockPanel x:Name="buyDockPanel">
+                <DockPanel Name="buyDockPanel" Visibility="{Binding ValueBuy.Amount, Converter={StaticResource valueVisibilityConverter}}">
                     <Label Content="Buy Price:" Foreground="White" Width="100"/>
                     <Label Content="{Binding ValueBuy.Gold}" Name="buyGoldLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
@@ -71,7 +80,7 @@
                 </DockPanel>
             
                 <!-- Sell price -->
-                <DockPanel Margin="0,-10,0,0" x:Name="sellDockPanel">
+                <DockPanel Margin="0,-10,0,0" Name="sellDockPanel" Visibility="{Binding ValueSell.Amount, Converter={StaticResource valueVisibilityConverter}}">
                     <Label Content="Sell Price:" Foreground="White" Width="100"/>
                     <Label Content="{Binding ValueSell.Gold}" Name="sellGoldLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
