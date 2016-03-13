@@ -98,18 +98,10 @@ namespace TrinityCreator
             itemBoundsCb.ItemsSource = ItemBonding.GetItemBondingList();
             itemBoundsCb.SelectedIndex = 0;
 
-            // Load flags groupbox
-            item.Flags = BitmaskStackPanel.GetItemFlags();
-
-            // Load FlagsExtra
-            item.FlagsExtra = BitmaskStackPanel.GetItemFlagsExtra();
-
             // load allowedclass groupbox
-            item.AllowedClass = BitmaskStackPanel.GetClassFlags();
             preview.PrepareClassLimitations(item.AllowedClass);
 
             // load allowedrace groupbox
-            item.AllowedRace = BitmaskStackPanel.GetRaceFlags();
             preview.PrepareRaceLimitations(item.AllowedRace);
 
             // Set weapon groupbox

@@ -11,12 +11,6 @@ namespace TrinityCreator
 {
     public class TrinityItem : INotifyPropertyChanged
     {
-        public TrinityItem()
-        {
-            ValueBuy = new Currency(0);
-            ValueSell = new Currency(0);
-        }
-
         private string _name;
         private string _quote;
         private ItemClass _itemclass;
@@ -181,6 +175,8 @@ namespace TrinityCreator
         {
             get
             {
+                if (_allowedclass == null)
+                    _allowedclass = BitmaskStackPanel.GetClassFlags();
                 return _allowedclass;
             }
             set
@@ -194,6 +190,8 @@ namespace TrinityCreator
         {
             get
             {
+                if (_allowedclass == null)
+                    _allowedclass = BitmaskStackPanel.GetRaceFlags();
                 return _allowedrace;
             }
             set
@@ -207,6 +205,8 @@ namespace TrinityCreator
         {
             get
             {
+                if (_valuebuy == null)
+                    _valuebuy = new Currency(0);
                 return _valuebuy;
             }
             set
@@ -220,6 +220,8 @@ namespace TrinityCreator
         {
             get
             {
+                if (_valuesell == null)
+                    _valuesell = new Currency(0);
                 return _valuesell;
             }
             set
@@ -246,6 +248,8 @@ namespace TrinityCreator
         {
             get
             {
+                if (_flags == null)
+                    _flags = BitmaskStackPanel.GetItemFlags();
                 return _flags;
             }
             set
@@ -259,6 +263,8 @@ namespace TrinityCreator
         {
             get
             {
+                if (_flagsExtra == null)
+                    _flagsExtra = BitmaskStackPanel.GetItemFlagsExtra();
                 return _flagsExtra;
             }
             set
