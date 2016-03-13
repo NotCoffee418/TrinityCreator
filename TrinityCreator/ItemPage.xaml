@@ -61,7 +61,7 @@
                     <StackPanel>
                         <DockPanel>
                             <Label FontSize="12" Content="Bag Slots" Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
-                            <TextBox Name="containerSlotsTxt" Text="{Binding ContainerSlots, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="0,6,9,0" VerticalAlignment="Top" TextChanged="containerSlotsTxt_TextChanged" />
+                            <TextBox Name="containerSlotsTxt" Text="{Binding ContainerSlots, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="0,6,9,0" VerticalAlignment="Top" />
                         </DockPanel>
                         <Label FontSize="12" Content="Check to add limits" Height="23" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="121"/>
                         <GroupBox Header="Bag Family" Content="{Binding BagFamily, UpdateSourceTrigger=PropertyChanged}"/>

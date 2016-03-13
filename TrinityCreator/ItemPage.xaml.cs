@@ -36,44 +36,6 @@ namespace TrinityCreator
             Loaded += ItemPage_Loaded;
         }
 
-        public ItemPage(DataRow dr) : this()
-        {
-            entryIdTxt.Text = dr["entry"].ToString();
-            itemQuoteTxt.Text = dr["description"].ToString();
-            //SetIndexOfId((int)dr["class"], itemClassCb);
-            //SetIndexOfId((int)dr["subclass"], itemSubClassCb);
-            itemNameTxt.Text = dr["name"].ToString();
-            displayIdTxt.Text = dr["displayid"].ToString();
-            SetIndexOfId((int)dr["Quality"], itemQualityCb);
-            SetIndexOfId((int)dr["bonding"], itemBoundsCb);
-            itemPlayerLevelTxt.Text = dr["RequiredLevel"].ToString();
-            itemMaxCountTxt.Text = dr["maxcount"].ToString();
-            item.AllowedClass.BitmaskValue = (uint)dr["AllowableClass"];
-            item.AllowedRace.BitmaskValue = (uint)dr["AllowableRace"];
-
-            Currency buyPrice = new Currency((int)dr["BuyPrice"]);
-            buyPriceGTxt.Text = buyPrice.Gold.ToString();
-            buyPriceSTxt.Text = buyPrice.Silver.ToString();
-            buyPriceCTxt.Text = buyPrice.Copper.ToString();
-
-            Currency sellPrice = new Currency((int)dr["SellPrice"]);
-            sellPriceGTxt.Text = sellPrice.Gold.ToString();
-            sellPriceSTxt.Text = sellPrice.Silver.ToString();
-            sellPriceCTxt.Text = sellPrice.Copper.ToString();
-            
-            //SetIndexOfId((int)dr["InventoryType"], inventoryTypeCb);
-            // Material auto?
-            // sheath auto?
-            item.Flags.BitmaskValue = (uint)dr["Flags"];
-            item.Flags.BitmaskValue = (uint)dr["FlagsExtra"];
-            buyCountTxt.Text = dr["BuyCount"].ToString();
-            itemStackCountTxt.Text = dr["stackable"].ToString();
-            containerSlotsTxt.Text = dr["ContainerSlots"].ToString();
-            damageMinTxt.Text = dr["dmg_min1"].ToString();
-            damageMaxTxt.Text = dr["dmg_max1"].ToString();
-            SetIndexOfId((int)dr["dmg_type1"], damageTypeCb);
-        }
-
         TrinityItem item;
         ItemPreview preview;
 
@@ -84,7 +46,6 @@ namespace TrinityCreator
 
             // Set socket bonus
             socketBonusCb.SelectedIndex = 0;
-            
 
             // Set quality
             itemQualityCb.ItemsSource = ItemQuality.GetQualityList();
@@ -105,16 +66,6 @@ namespace TrinityCreator
 
             // set statsBox
             item.Stats.Changed += StatsChangedHandler;
-        }
-
-        private void SetIndexOfId(int requestId, ComboBox cb)
-        {
-            for (int i = 0; i < cb.Items.Count; i++)
-                if (((IKeyValue)cb.Items[i]).Id == requestId)
-                {
-                    cb.SelectedIndex = i;
-                    return;
-                }
         }
 
         #region Changed event handlers
@@ -222,25 +173,19 @@ namespace TrinityCreator
         #region Click event handlers
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
-
-                string query = item.GenerateSqlQuery();
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.DefaultExt = ".sql";
-                sfd.FileName = "Item " + item.EntryId;
-                sfd.Filter = "SQL File (.sql)|*.sql";
-                if (sfd.ShowDialog() == true)
-                    System.IO.File.WriteAllText(sfd.FileName, query);
+            string query = item.GenerateSqlQuery();
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.DefaultExt = ".sql";
+            sfd.FileName = "Item " + item.EntryId;
+            sfd.Filter = "SQL File (.sql)|*.sql";
+            if (sfd.ShowDialog() == true)
+                System.IO.File.WriteAllText(sfd.FileName, query);
                 
-                // Increase next item's entry id
-                Properties.Settings.Default.nextid_item = int.Parse(entryIdTxt.Text) + 1;
-                Properties.Settings.Default.Save();
+            // Increase next item's entry id
+            Properties.Settings.Default.nextid_item = int.Parse(entryIdTxt.Text) + 1;
+            Properties.Settings.Default.Save();
 
-                MessageBox.Show("Your item has been saved.", "Complete", MessageBoxButton.OK, MessageBoxImage.Information);
-            /*}
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Failed to generate query.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }*/
+            MessageBox.Show("Your item has been saved.", "Complete", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void newItemBtn_Click(object sender, RoutedEventArgs e)
@@ -336,16 +281,5 @@ namespace TrinityCreator
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
         }
-
-        private void containerSlotsTxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            /*try
-            {
-                ItemSubClass isc = (ItemSubClass)itemSubClassCb.SelectedValue;
-                preview.subclassLeftNoteLbl.Content = containerSlotsTxt.Text + " slot " + isc.Description;
-            }
-            catch { /* fix this }*/
-        }
-
     }
 }
