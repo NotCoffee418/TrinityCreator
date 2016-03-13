@@ -79,13 +79,20 @@ namespace TrinityCreator
 
         private void ItemPage_Loaded(object sender, RoutedEventArgs e)
         {
+            // Set class
+            itemClassCb.SelectedIndex = 0;
+
+            // Set socket bonus
+            socketBonusCb.SelectedIndex = 0;
+            
+
             // Set quality
             itemQualityCb.ItemsSource = ItemQuality.GetQualityList();
             itemQualityCb.SelectedIndex = 0;
 
             ShowCorrectClassBox();
-            armorBox.Visibility = Visibility.Collapsed;
-            entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
+            if (item.EntryId == 0)
+                item.EntryId = Properties.Settings.Default.nextid_item;
 
             // Set item bounds
             itemBoundsCb.ItemsSource = ItemBonding.GetItemBondingList();
@@ -124,8 +131,6 @@ namespace TrinityCreator
                 Socket.GetSocketList(), 3, unique: false, header1: "Socket Type", header2: "Amount", defaultValue: "0");
             gemsGroupBox.Visibility = Visibility.Collapsed;
             preview.gemsPanel.Visibility = Visibility.Collapsed;
-            socketBonusCb.ItemsSource = SocketBonus.GetBonusList();
-            socketBonusCb.SelectedIndex = 0;
             item.GemSockets.Changed += GemDataChangedHander;
 
             // set statsBox
@@ -266,18 +271,6 @@ namespace TrinityCreator
             {
                 preview.gemsPanel.Children.Clear();
             }
-        }
-
-        private void socketBonusCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SocketBonus sb = (SocketBonus)socketBonusCb.SelectedValue;
-            if (sb.Id != 0)
-            {
-                preview.socketBonusLbl.Visibility = Visibility.Visible;
-                preview.socketBonusLbl.Content = "Socket Bonus: " + sb.Description;
-            }
-            else
-                preview.socketBonusLbl.Visibility = Visibility.Collapsed;
         }
 
         private void StatsChangedHandler(object sender, EventArgs e)
@@ -461,9 +454,6 @@ namespace TrinityCreator
         /// </summary>
         private void ShowCorrectClassBox()
         {
-            // won't listen to xaml SelectIndex="0"
-            itemClassCb.SelectedIndex = 0;
-
             // Hide everything
             armorBox.Visibility = Visibility.Collapsed;
             equipmentBox.Visibility = Visibility.Collapsed;

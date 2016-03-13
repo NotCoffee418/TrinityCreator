@@ -11,6 +11,9 @@
         <ObjectDataProvider x:Key="classList"
             ObjectType="{x:Type l:ItemClass}"
             MethodName="GetClassList" />
+        <ObjectDataProvider x:Key="socketBonusList"
+            ObjectType="{x:Type l:SocketBonus}"
+            MethodName="GetBonusList" />
     </UserControl.Resources>
 
     <Grid Background="#fff">
@@ -131,7 +134,7 @@
                         <GroupBox Name="gemSocketsSp" Content="{Binding GemSockets}" />
                         <Grid Name="socketBonusGrid">
                             <Label FontSize="12" Content="Socket Bonus" Height="30" Margin="0,4,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81"/>
-                            <ComboBox Name="socketBonusCb" SelectedValue="{Binding SocketBonus}" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectionChanged="socketBonusCb_SelectionChanged"/>
+                            <ComboBox Name="socketBonusCb" SelectedValue="{Binding SocketBonus}" ItemsSource="{Binding Source={StaticResource socketBonusList}}" Height="25" Margin="85,6,9,0" VerticalAlignment="Top" IsReadOnly="True" />
                         </Grid>
                     </StackPanel>
                 </GroupBox>

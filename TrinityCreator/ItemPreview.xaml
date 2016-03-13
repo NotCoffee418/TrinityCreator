@@ -50,8 +50,11 @@
                 <!-- Only visible when sockets available -->
                 <!-- todo: Ensure you can for example have two yellow sockets -->
                 <StackPanel Name="gemsPanel" />
-                <Label x:Name="socketBonusLbl" Content="Socket Bonus: +5 Spell Damage" Foreground="#0c0" Margin="0,-5,0,10" />
-            
+                <TextBlock Foreground="#0c0" Margin="5,0,0,5" Visibility="{Binding SocketBonus.Id, Converter={StaticResource valueVisibilityConverter}}">
+                    <TextBlock Text="Socket Bonus:" /> 
+                    <TextBlock Text="{Binding SocketBonus}" /> 
+                </TextBlock>
+
                 <Label Name="itemClassRequirementsLbl" Content="Classes: All" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                 <Label Name="itemRaceRequirementsLbl" Content="Races: All" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
                 <TextBlock Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="5,-10,0,0" Visibility="{Binding MinLevel, Converter={StaticResource valueVisibilityConverter}}">
