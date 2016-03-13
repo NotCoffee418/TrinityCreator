@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="1152.55" MinWidth="655">
     <UserControl.Resources>
+        <l:ValueToVisibilityConverter x:Key="valueVisibilityConverter"/>
         <ObjectDataProvider x:Key="classList"
             ObjectType="{x:Type l:ItemClass}"
             MethodName="GetClassList" />
@@ -129,7 +130,7 @@
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Name="gemsGroupBox" Header="Gem Sockets">
+                <GroupBox Name="gemsGroupBox" Header="Gem Sockets" Visibility="{Binding ElementName=addGemSocketsCb, Path=IsChecked, Converter={StaticResource valueVisibilityConverter}}">
                     <StackPanel>
                         <GroupBox Name="gemSocketsSp" Content="{Binding GemSockets}" />
                         <Grid Name="socketBonusGrid">
@@ -138,11 +139,11 @@
                         </Grid>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Name="flagsBitMaskGroupBox" Content="{Binding Flags}" Header="Item flags"/>
-                <GroupBox Name="flagsExtraBitMaskGroupBox" Content="{Binding FlagsExtra}" Header="Item flags Extra"/>
-                <GroupBox Name="limitClassBitMaskGroupBox" Content="{Binding AllowedClass}" Header="Classes allowed" />
-                <GroupBox Name="limitRaceBitMaskGroupBox" Content="{Binding AllowedRace}" Header="Races allowed" />
-                <GroupBox Name="addResistanceGroupBox" Content="{Binding Resistances}" Header="Magic resistance" />
+                <GroupBox Name="flagsBitMaskGroupBox" Content="{Binding Flags}" Header="Item flags" Visibility="{Binding ElementName=changeFlagsCb, Path=IsChecked, Converter={StaticResource valueVisibilityConverter}}"/>
+                <GroupBox Name="flagsExtraBitMaskGroupBox" Content="{Binding FlagsExtra}" Header="Item flags Extra" Visibility="{Binding ElementName=changeFlagsCb, Path=IsChecked, Converter={StaticResource valueVisibilityConverter}}"/>
+                <GroupBox Name="limitClassBitMaskGroupBox" Content="{Binding AllowedClass}" Header="Classes allowed" Visibility="{Binding ElementName=limitClassCb, Path=IsChecked, Converter={StaticResource valueVisibilityConverter}}"/>
+                <GroupBox Name="limitRaceBitMaskGroupBox" Content="{Binding AllowedRace}" Header="Races allowed" Visibility="{Binding ElementName=limitRaceCb, Path=IsChecked, Converter={StaticResource valueVisibilityConverter}}"/>
+                <GroupBox Name="addResistanceGroupBox" Content="{Binding Resistances}" Header="Magic resistance" Visibility="{Binding ElementName=addResistancesCb, Path=IsChecked, Converter={StaticResource valueVisibilityConverter}}"/>
 
             </StackPanel>
         </ScrollViewer>
@@ -151,11 +152,11 @@
             <GroupBox Name="previewBox" Header="Item Preview"/>
             <GroupBox Name="advancedOptionsBox" Header="Extra Options">
                 <StackPanel>
-                    <CheckBox Name="changeFlagsCb" FontSize="12" Content="Change Flags (advanced)" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="changeFlagsCb_Checked" Unchecked="changeFlagsCb_Unchecked" />
-                    <CheckBox Name="limitClassCb" FontSize="12" Content="Add class limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitClassCb_Checked" Unchecked="limitClassCb_Unchecked" />
-                    <CheckBox Name="limitRaceCb" FontSize="12" Content="Add race limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="limitRaceCb_Checked" Unchecked="limitRaceCb_Unchecked" />
-                    <CheckBox Name="addResistancesCb" FontSize="12" Content="Add magic resistance" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="addResistancesCb_Checked" Unchecked="addResistancesCb_Unchecked" />
-                    <CheckBox Name="addGemSocketsCb" FontSize="12" Content="Add Gem sockets" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="addGemSocketsCb_Checked" Unchecked="addGemSocketsCb_Unchecked" />
+                    <CheckBox Name="changeFlagsCb" FontSize="12" Content="Change Flags (advanced)" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <CheckBox Name="limitClassCb" FontSize="12" Content="Add class limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <CheckBox Name="limitRaceCb" FontSize="12" Content="Add race limitations" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <CheckBox Name="addResistancesCb" FontSize="12" Content="Add magic resistance" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <CheckBox Name="addGemSocketsCb" FontSize="12" Content="Add Gem sockets" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox x:Name="createBox" Header="Export Item">

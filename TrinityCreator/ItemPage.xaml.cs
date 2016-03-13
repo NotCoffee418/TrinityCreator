@@ -100,20 +100,16 @@ namespace TrinityCreator
 
             // Load flags groupbox
             item.Flags = BitmaskStackPanel.GetItemFlags();
-            flagsBitMaskGroupBox.Visibility = Visibility.Collapsed; // by default
 
             // Load FlagsExtra
             item.FlagsExtra = BitmaskStackPanel.GetItemFlagsExtra();
-            flagsExtraBitMaskGroupBox.Visibility = Visibility.Collapsed; // by default
 
             // load allowedclass groupbox
             item.AllowedClass = BitmaskStackPanel.GetClassFlags();
-            limitClassBitMaskGroupBox.Visibility = Visibility.Collapsed;
             preview.PrepareClassLimitations(item.AllowedClass);
 
             // load allowedrace groupbox
             item.AllowedRace = BitmaskStackPanel.GetRaceFlags();
-            limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
             preview.PrepareRaceLimitations(item.AllowedRace);
 
             // Set weapon groupbox
@@ -124,12 +120,10 @@ namespace TrinityCreator
             // Set resistance groupbox
             item.Resistances = new DynamicDataControl(
                 DamageType.GetDamageTypes(magicOnly: true), 6, unique: true);
-            addResistanceGroupBox.Visibility = Visibility.Collapsed;
 
             // Set gemSockets groupbox
             item.GemSockets = new DynamicDataControl(
                 Socket.GetSocketList(), 3, unique: false, header1: "Socket Type", header2: "Amount", defaultValue: "0");
-            gemsGroupBox.Visibility = Visibility.Collapsed;
             preview.gemsPanel.Visibility = Visibility.Collapsed;
             item.GemSockets.Changed += GemDataChangedHander;
 
@@ -181,59 +175,6 @@ namespace TrinityCreator
             }
             catch
             { /* Exception on initial load */ }
-        }
-
-        private void changeFlagsCb_Checked(object sender, RoutedEventArgs e)
-        {
-            flagsBitMaskGroupBox.Visibility = Visibility.Visible;
-            flagsExtraBitMaskGroupBox.Visibility = Visibility.Visible;
-        }
-        private void changeFlagsCb_Unchecked(object sender, RoutedEventArgs e)
-        {
-            flagsBitMaskGroupBox.Visibility = Visibility.Collapsed;
-            flagsExtraBitMaskGroupBox.Visibility = Visibility.Collapsed;
-        }
-
-        private void limitClassCb_Checked(object sender, RoutedEventArgs e)
-        {
-            limitClassBitMaskGroupBox.Visibility = Visibility.Visible;
-            preview.itemClassRequirementsLbl.Visibility = Visibility.Visible;
-        }
-        private void limitClassCb_Unchecked(object sender, RoutedEventArgs e)
-        {
-            limitClassBitMaskGroupBox.Visibility = Visibility.Collapsed;
-            if (preview.itemClassRequirementsLbl.Content.ToString().Contains(": All"))
-                preview.itemClassRequirementsLbl.Visibility = Visibility.Collapsed;
-        }
-        private void limitRaceCb_Checked(object sender, RoutedEventArgs e)
-        {
-            limitRaceBitMaskGroupBox.Visibility = Visibility.Visible;
-            preview.itemRaceRequirementsLbl.Visibility = Visibility.Visible;
-        }
-        private void limitRaceCb_Unchecked(object sender, RoutedEventArgs e)
-        {
-            limitRaceBitMaskGroupBox.Visibility = Visibility.Collapsed;
-            if (preview.itemRaceRequirementsLbl.Content.ToString().Contains(": All"))
-                preview.itemRaceRequirementsLbl.Visibility = Visibility.Collapsed;
-        }
-        private void addResistancesCb_Checked(object sender, RoutedEventArgs e)
-        {
-            addResistanceGroupBox.Visibility = Visibility.Visible;
-        }
-        private void addResistancesCb_Unchecked(object sender, RoutedEventArgs e)
-        {
-            addResistanceGroupBox.Visibility = Visibility.Collapsed;
-        }
-        
-        private void addGemSocketsCb_Checked(object sender, RoutedEventArgs e)
-        {
-            gemsGroupBox.Visibility = Visibility.Visible;
-            preview.gemsPanel.Visibility = Visibility.Visible;
-        }
-        private void addGemSocketsCb_Unchecked(object sender, RoutedEventArgs e)
-        {
-            gemsGroupBox.Visibility = Visibility.Collapsed;
-            preview.gemsPanel.Visibility = Visibility.Collapsed;
         }
         
 
