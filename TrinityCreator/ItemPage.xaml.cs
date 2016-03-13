@@ -374,6 +374,7 @@ namespace TrinityCreator
         #region Click event handlers
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
+            /*
             //try {
                 try
                 {
@@ -489,7 +490,7 @@ namespace TrinityCreator
                 {
                     item.Block = 0;
                 }
-
+                */
 
                 string query = item.GenerateSqlQuery();
                 SaveFileDialog sfd = new SaveFileDialog();
@@ -526,14 +527,11 @@ namespace TrinityCreator
         private void ShowCorrectClassBox()
         {
             // Hide everything
-            weaponBox.Visibility = Visibility.Collapsed;
             armorBox.Visibility = Visibility.Collapsed;
             equipmentBox.Visibility = Visibility.Collapsed;
             containerBox.Visibility = Visibility.Collapsed;
             vendorBox.Visibility = Visibility.Collapsed;
             addResistancesCb.Visibility = Visibility.Collapsed;
-            preview.weaponPanel.Visibility = Visibility.Collapsed;
-            preview.armorPanel.Visibility = Visibility.Collapsed;
             addGemSocketsCb.Visibility = Visibility.Collapsed;
             statsBox.Visibility = Visibility.Collapsed;
             preview.statsSp.Visibility = Visibility.Collapsed;
@@ -550,11 +548,9 @@ namespace TrinityCreator
                     vendorBox.Visibility = Visibility.Visible;
                     break;
                 case 2: // Weapon
-                    weaponBox.Visibility = Visibility.Visible;
                     equipmentBox.Visibility = Visibility.Visible;
                     vendorBox.Visibility = Visibility.Visible;
                     addResistancesCb.Visibility = Visibility.Visible;
-                    preview.weaponPanel.Visibility = Visibility.Visible;
                     addGemSocketsCb.Visibility = Visibility.Visible;
                     statsBox.Visibility = Visibility.Visible;
                     preview.statsSp.Visibility = Visibility.Visible;
@@ -567,7 +563,6 @@ namespace TrinityCreator
                     equipmentBox.Visibility = Visibility.Visible;
                     vendorBox.Visibility = Visibility.Visible;
                     addResistancesCb.Visibility = Visibility;
-                    preview.armorPanel.Visibility = Visibility.Visible;
                     addGemSocketsCb.Visibility = Visibility.Visible;
                     statsBox.Visibility = Visibility.Visible;
                     preview.statsSp.Visibility = Visibility.Visible;

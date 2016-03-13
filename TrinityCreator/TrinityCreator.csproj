@@ -78,7 +78,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BitmaskStackPanel.cs" />
-    <Compile Include="ValueToVisibilityConverter.cs" />
+    <Compile Include="Converters\ValueToVisibilityConverter.cs" />
+    <Compile Include="Converters\WeaponSpeedToStringConverter.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="Damage.cs" />
     <Compile Include="DamageType.cs" />

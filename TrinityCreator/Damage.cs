@@ -27,6 +27,7 @@ namespace TrinityCreator
                 _minDamage = value;
                 RaisePropertyChanged("MinDamage");
                 RaisePropertyChanged("Dps");
+                RaisePropertyChanged("DpsInfo");
             }
         }
 
@@ -41,6 +42,7 @@ namespace TrinityCreator
                 _maxDamage = value;
                 RaisePropertyChanged("MaxDamage");
                 RaisePropertyChanged("Dps");
+                RaisePropertyChanged("DpsInfo");
             }
         }
 
@@ -55,6 +57,7 @@ namespace TrinityCreator
                 _speed = value;
                 RaisePropertyChanged("Speed");
                 RaisePropertyChanged("Dps");
+                RaisePropertyChanged("DpsInfo");
             }
         }
 
@@ -69,22 +72,30 @@ namespace TrinityCreator
                 _type = value;
                 RaisePropertyChanged("Type");
                 RaisePropertyChanged("Dps");
+                RaisePropertyChanged("DpsInfo");
+            }
+        }
+
+        public double Dps
+        {
+            get
+            {
+                double avgDmg = (MinDamage + MaxDamage) / 2.0;
+                return avgDmg / (Speed / 1000.0);
             }
         }
         
-        public string Dps
+        public string DpsInfo
         {
             get
             {
                 try
                 {
-                    double avgDmg = (MinDamage + MaxDamage) / 2.0;
-                    double dps = avgDmg / (Speed / 1000.0);
 
                     string typeText = " ";
                     if (Type.Id != 0)
                         typeText = " " + Type.Description.ToLower() + " ";
-                    return string.Format("({0}{1}damage per second)", dps.ToString("0.00"), typeText);
+                    return string.Format("({0}{1}damage per second)", Dps.ToString("0.00"), typeText);
                 }
                 catch
                 {
