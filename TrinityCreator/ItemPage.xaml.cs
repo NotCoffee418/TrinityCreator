@@ -341,10 +341,12 @@ namespace TrinityCreator
                 if (durabilityTxt.Text != "" && durabilityTxt.Text != "0")
                 {
                     //preview.itemDurabilityLbl.Content = string.Format("(Durability {0} / {0})", durabilityTxt.Text);
-                    preview.itemDurabilityLbl.Visibility = Visibility.Visible;
+                    //preview.itemDurabilityLbl.Visibility = Visibility.Visible;
                 }
                 else
-                    preview.itemDurabilityLbl.Visibility = Visibility.Collapsed;
+                {
+                    //preview.itemDurabilityLbl.Visibility = Visibility.Collapsed;
+                }
             }
             catch { /* Exception on initial load or invalid value*/ }
         }
@@ -625,7 +627,6 @@ namespace TrinityCreator
             addGemSocketsCb.Visibility = Visibility.Collapsed;
             statsBox.Visibility = Visibility.Collapsed;
             preview.statsSp.Visibility = Visibility.Collapsed;
-            preview.itemDurabilityLbl.Visibility = Visibility.Collapsed;
 
             // Show selected
             ItemClass selectedClass = (ItemClass)itemClassCb.SelectedValue;
@@ -647,7 +648,6 @@ namespace TrinityCreator
                     addGemSocketsCb.Visibility = Visibility.Visible;
                     statsBox.Visibility = Visibility.Visible;
                     preview.statsSp.Visibility = Visibility.Visible;
-                    preview.itemDurabilityLbl.Visibility = Visibility.Visible;
                     break;
                 case 3: // Gems
                     vendorBox.Visibility = Visibility.Visible;
@@ -661,7 +661,6 @@ namespace TrinityCreator
                     addGemSocketsCb.Visibility = Visibility.Visible;
                     statsBox.Visibility = Visibility.Visible;
                     preview.statsSp.Visibility = Visibility.Visible;
-                    preview.itemDurabilityLbl.Visibility = Visibility.Visible;
                     break;
                 case 5: // Reagent
                     vendorBox.Visibility = Visibility.Visible;

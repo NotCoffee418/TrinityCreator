@@ -33,7 +33,6 @@ namespace TrinityCreator
             itemClassRequirementsLbl.Visibility = Visibility.Collapsed;
             itemRaceRequirementsLbl.Visibility = Visibility.Collapsed;
             itemLevelRequiredLbl.Visibility = Visibility.Collapsed;
-            itemDurabilityLbl.Visibility = Visibility.Collapsed;
             socketBonusLbl.Visibility = Visibility.Collapsed;
         }
 

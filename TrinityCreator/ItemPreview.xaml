@@ -3,7 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:l="clr-namespace:TrinityCreator"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <l:ValueToVisibilityConverter x:Key="valueVisibilityConverter"/>
+    </UserControl.Resources>
 
     <StackPanel>
         <Grid>
@@ -19,7 +23,7 @@
                 <!-- Only visible on weapon item -->
                 <StackPanel Name="weaponPanel">
                     <DockPanel>
-                        <TextBlock Foreground="White" FontSize="14" HorizontalAlignment="Left">
+                        <TextBlock Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,0">
                             <TextBlock Text="{Binding DamageInfo.MinDamage}" />
                             <TextBlock Text=" - " />
                             <TextBlock Text="{Binding DamageInfo.MaxDamage}" />
@@ -46,13 +50,19 @@
                 <Label Name="itemLevelRequiredLbl" Content="Requires Level xx" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
 
                 <!-- Only visible when repairable -->
-                <Label Name="itemDurabilityLbl" Content="(Durability 0 / 0)" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+                <TextBlock Name="itemDurabilityLbl" Visibility="{Binding Durability, Converter={StaticResource valueVisibilityConverter}}" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,-10,0,0">
+                        <TextBlock Text="(" />
+                        <TextBlock Text="{Binding Durability}" />
+                        <TextBlock Text="/" />
+                        <TextBlock Text="{Binding Durability}" />
+                        <TextBlock Text=")" />
+                    </TextBlock>
                 <Label Name="itemQuoteLbl" Content="{Binding Quote}" ContentStringFormat="''{0}''" Foreground="#ddcba5" FontSize="14"/>
 
                 <!-- Buy price -->
                 <DockPanel x:Name="buyDockPanel">
                     <Label Content="Buy Price:" Foreground="White" Width="100"/>
-                    <Label DataContext="ValueBuy" Content="{Binding ValueBuy.Gold}" Name="buyGoldLbl" Foreground="White" HorizontalAlignment="Left" />
+                    <Label Content="{Binding ValueBuy.Gold}" Name="buyGoldLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                     <Label Content="{Binding ValueBuy.Silver}" Name="buySilverLbl" Foreground="White" HorizontalAlignment="Left" />
                     <Image Source="Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
