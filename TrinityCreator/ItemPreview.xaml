@@ -17,7 +17,7 @@
                 <Label Name="itemNameLbl" Content="{Binding Name}" Foreground="Gray" FontSize="18" />
                 <Label Name="itemBoundsLbl" Content="{Binding Binds.Description}" Foreground="White" FontSize="14" />
                 <DockPanel>
-                    <Label Name="subclassLeftNoteLbl" Content="{Binding SubClass.PreviewNoteLeft}" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
+                    <Label Name="subclassLeftNoteLbl" Content="{Binding InventoryType.Description}" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
                     <Label Name="subclassRightNoteLbl" Content="{Binding SubClass.PreviewNoteRight}" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
                 </DockPanel>
             

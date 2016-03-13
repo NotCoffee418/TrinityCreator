@@ -190,59 +190,6 @@ namespace TrinityCreator
             ShowCorrectClassBox();
         }
 
-        private void itemSubClassCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ItemSubClass sc = (ItemSubClass)itemSubClassCb.SelectedValue;
-            if (sc == null)
-                return;
-
-            // Load equip
-            inventoryTypeCb.ItemsSource = sc.LockedInventoryType;
-            inventoryTypeCb.SelectedIndex = 0;
-
-            // Load correct box
-            if (sc.PreviewNoteLeft == "")
-                preview.subclassLeftNoteLbl.Visibility = Visibility.Collapsed;
-            else
-            {
-                preview.subclassLeftNoteLbl.Content = sc.PreviewNoteLeft;
-                preview.subclassRightNoteLbl.Visibility = Visibility.Visible;
-            }
-            if (sc.PreviewNoteRight == "")
-                preview.subclassRightNoteLbl.Visibility = Visibility.Collapsed;
-            else
-            {
-                preview.subclassRightNoteLbl.Content = sc.PreviewNoteRight;
-                preview.subclassRightNoteLbl.Visibility = Visibility.Visible;
-            }
-
-            // Show only left if right == left
-            if (preview.subclassRightNoteLbl.Content.ToString() == preview.subclassLeftNoteLbl.Content.ToString())
-                preview.subclassRightNoteLbl.Content = "";
-
-        }
-
-        private void itemBoundsCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ItemBonding b = (ItemBonding)itemBoundsCb.SelectedValue;
-
-            // Don't display when no bounds
-            if (b.Id == 0)
-                preview.itemBoundsLbl.Visibility = Visibility.Collapsed;
-            else
-                preview.itemBoundsLbl.Visibility = Visibility.Visible;
-        }
-
-        private void inventoryTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ItemInventoryType it = (ItemInventoryType)inventoryTypeCb.SelectedValue;
-            if (it == null)
-                return;
-            
-            preview.subclassLeftNoteLbl.Content = it.Description;
-        }
-
-
         private void changeFlagsCb_Checked(object sender, RoutedEventArgs e)
         {
             flagsBitMaskGroupBox.Visibility = Visibility.Visible;
@@ -605,12 +552,12 @@ namespace TrinityCreator
 
         private void containerSlotsTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            try
+            /*try
             {
                 ItemSubClass isc = (ItemSubClass)itemSubClassCb.SelectedValue;
                 preview.subclassLeftNoteLbl.Content = containerSlotsTxt.Text + " slot " + isc.Description;
             }
-            catch { /* fix this*/ }
+            catch { /* fix this }*/
         }
     }
 }

@@ -429,7 +429,7 @@ namespace TrinityCreator
 
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged(string property)
+        public void RaisePropertyChanged(string property)
         {
             if (PropertyChanged != null)
             {
