@@ -91,42 +91,20 @@ namespace TrinityCreator
             itemQualityCb.SelectedIndex = 0;
 
             ShowCorrectClassBox();
-            if (item.EntryId == 0)
-                item.EntryId = Properties.Settings.Default.nextid_item;
 
             // Set item bounds
             itemBoundsCb.ItemsSource = ItemBonding.GetItemBondingList();
             itemBoundsCb.SelectedIndex = 0;
 
-            // load allowedclass groupbox
-            preview.PrepareClassLimitations(item.AllowedClass);
-
-            // load allowedrace groupbox
-            preview.PrepareRaceLimitations(item.AllowedRace);
-
             // Set weapon groupbox
-            item.DamageInfo = new Damage();
             damageTypeCb.ItemsSource = DamageType.GetDamageTypes();
             damageTypeCb.SelectedIndex = 0;
 
-            // Set resistance groupbox
-            item.Resistances = new DynamicDataControl(
-                DamageType.GetDamageTypes(magicOnly: true), 6, unique: true);
-
             // Set gemSockets groupbox
-            item.GemSockets = new DynamicDataControl(
-                Socket.GetSocketList(), 3, unique: false, header1: "Socket Type", header2: "Amount", defaultValue: "0");
-            preview.gemsPanel.Visibility = Visibility.Collapsed;
             item.GemSockets.Changed += GemDataChangedHander;
 
             // set statsBox
-            item.Stats = new DynamicDataControl(Stat.GetStatList(), 10, unique: false, header1: "Stat", header2: "Value", defaultValue: "0");
             item.Stats.Changed += StatsChangedHandler;
-
-            // BagFamily
-            item.BagFamily = BitmaskStackPanel.GetBagFamilies();
-            StackPanel containerContent = (StackPanel)containerBox.Content;
-            containerContent.Children.Add(item.BagFamily);
         }
 
         private void SetIndexOfId(int requestId, ComboBox cb)
@@ -168,7 +146,16 @@ namespace TrinityCreator
             catch
             { /* Exception on initial load */ }
         }
-        
+
+        private void itemClassCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                ShowCorrectClassBox();
+            }
+            catch { // fix this
+            }
+        }
 
         private void GemDataChangedHander(object sender, EventArgs e)
         {
@@ -476,5 +463,6 @@ namespace TrinityCreator
             }
             catch { /* fix this }*/
         }
+
     }
 }

@@ -40,7 +40,7 @@
                         <ComboBox Name="itemBoundsCb" SelectedValue="{Binding Binds}" Height="25"  Margin="85,123,9,0" VerticalAlignment="Top" IsReadOnly="True"/>
 
                         <Label FontSize="12" Content="Item Class" Height="30" Margin="0,152,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                        <ComboBox Name="itemClassCb" SelectedValue="{Binding Class}" ItemsSource="{Binding Source={StaticResource classList}}" Height="25"  Margin="85,153,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" IsSynchronizedWithCurrentItem="True"/>
+                        <ComboBox Name="itemClassCb" SelectedValue="{Binding Class}" ItemsSource="{Binding Source={StaticResource classList}}" Height="25"  Margin="85,153,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" SelectionChanged="itemClassCb_SelectionChanged"/>
 
                         <Label FontSize="12" Content="Item Subclass" Height="30" Margin="0,182,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
                         <ComboBox SelectedValue="{Binding ItemSubClass}" ItemsSource="{Binding Class.AvailableSubClasses}" Height="25" Margin="85,183,9,0" VerticalAlignment="Top" IsReadOnly="True"  SelectedIndex="0" IsSynchronizedWithCurrentItem="True"/>
@@ -64,7 +64,7 @@
                             <TextBox Name="containerSlotsTxt" Text="{Binding ContainerSlots, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="0,6,9,0" VerticalAlignment="Top" TextChanged="containerSlotsTxt_TextChanged" />
                         </DockPanel>
                         <Label FontSize="12" Content="Check to add limits" Height="23" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="121"/>
-
+                        <GroupBox Header="Bag Family" Content="{Binding BagFamily, UpdateSourceTrigger=PropertyChanged}"/>
 
                     </StackPanel>
                 </GroupBox>

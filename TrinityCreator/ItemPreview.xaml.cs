@@ -42,36 +42,6 @@ namespace TrinityCreator
         {
             MessageBox.Show("Not implemented yet");
         }
-
-
-
-        internal void PrepareClassLimitations(BitmaskStackPanel bitmaskStackPanel)
-        {
-            foreach (BitmaskCheckBox c in bitmaskStackPanel.Children)
-            {
-                c.Checked += UpdateClassLimitations;
-                c.Unchecked += UpdateClassLimitations;
-            }
-        }
-
-        internal void PrepareRaceLimitations(BitmaskStackPanel bitmaskStackPanel)
-        {
-            foreach (BitmaskCheckBox c in bitmaskStackPanel.Children)
-            {
-                c.Checked += UpdateRaceLimitations;
-                c.Unchecked += UpdateRaceLimitations;
-            }
-        }
-
-        private void UpdateClassLimitations(object sender, RoutedEventArgs e)
-        {
-            itemClassRequirementsLbl.Content = "Classes: " + item.AllowedClass.ToString();
-        }
-
-        private void UpdateRaceLimitations(object sender, RoutedEventArgs e)
-        {
-            itemRaceRequirementsLbl.Content = "Races: " + item.AllowedRace.ToString();
-        }
         
     }
 }

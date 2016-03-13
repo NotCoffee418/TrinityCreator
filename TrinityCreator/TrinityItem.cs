@@ -40,7 +40,8 @@ namespace TrinityCreator
         private DynamicDataControl _stat;
         private int _armor;
         private int _block;
-        
+        private BitmaskStackPanel _bagFamily;
+
         public string Name
         {
             get
@@ -123,6 +124,8 @@ namespace TrinityCreator
         {
             get
             {
+                if (_entryid == 0)
+                    _entryid = Properties.Settings.Default.nextid_item;
                 return _entryid;
             }
             set
@@ -317,6 +320,8 @@ namespace TrinityCreator
         {
             get
             {
+                if (_damageInfo == null)
+                    _damageInfo = new Damage();
                 return _damageInfo;
             }
             set
@@ -330,6 +335,8 @@ namespace TrinityCreator
         {
             get
             {
+                if (_resistances == null)
+                    _resistances = new DynamicDataControl(DamageType.GetDamageTypes(magicOnly: true), 6, unique: true);
                 return _resistances;
             }
             set
@@ -369,6 +376,8 @@ namespace TrinityCreator
         {
             get
             {
+                if (_gemSockets == null)
+                    _gemSockets = new DynamicDataControl(Socket.GetSocketList(), 3, unique: false, header1: "Socket Type", header2: "Amount", defaultValue: "0");
                 return _gemSockets;
             }
             set
@@ -395,6 +404,8 @@ namespace TrinityCreator
         {
             get
             {
+                if (_stat == null)
+                    _stat = new DynamicDataControl(Stat.GetStatList(), 10, unique: false, header1: "Stat", header2: "Value", defaultValue: "0");
                 return _stat;
             }
             set
@@ -430,7 +441,18 @@ namespace TrinityCreator
         }
 
 
-        public BitmaskStackPanel BagFamily { get; internal set; }
+        public BitmaskStackPanel BagFamily {
+            get
+            {
+                if (_bagFamily == null)
+                    _bagFamily = BitmaskStackPanel.GetBagFamilies();
+                return _bagFamily;
+            }
+            set
+            {
+                _bagFamily = value;
+            }
+        }
 
 
 
