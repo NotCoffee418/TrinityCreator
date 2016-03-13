@@ -41,6 +41,44 @@ namespace TrinityCreator
             }
         }
 
+        public ItemSubClass[] AvailableSubClasses
+        {
+            get
+            {
+                switch (Id)
+                {
+                    case 0:
+                        return ItemSubClass.GetConsumableList();
+                    case 1:
+                        return ItemSubClass.GetContainerList();
+                    case 2:
+                        return ItemSubClass.GetWeaponList();
+                    case 3:
+                        return ItemSubClass.GetGemList();
+                    case 4:
+                        return ItemSubClass.GetArmorList();
+                    case 5:
+                        return ItemSubClass.GetReagentList();
+                    case 6:
+                        return ItemSubClass.GetProjectileList();
+                    case 7:
+                        return ItemSubClass.GetTradeGoodsList();
+                    case 9:
+                        return ItemSubClass.GetRecipeList();
+                    case 12:
+                        return ItemSubClass.GetQuestList();
+                    case 13:
+                        return ItemSubClass.GetKeyList();
+                    case 15:
+                        return ItemSubClass.GetMiscellaneousList();
+                    case 16:
+                        return ItemSubClass.GetGlyphList();
+                    default:
+                        throw new Exception("No correct item class was given to list subclasses.");
+                }
+            }
+        }
+
         public override string ToString()
         {
             return Description;

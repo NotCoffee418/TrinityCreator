@@ -131,45 +131,7 @@ namespace TrinityCreator
         {
             return Description;
         }
-
-        /// <summary>
-        /// Return list of supported subclasses for the used class
-        /// </summary>
-        /// <returns></returns>
-        public static ItemSubClass[] GetSubclassList(ItemClass itemclass)
-        {
-            switch (itemclass.Id)
-            {
-                case 0:
-                    return GetConsumableList();
-                case 1:
-                    return GetContainerList();
-                case 2:
-                    return GetWeaponList();
-                case 3:
-                    return GetGemList();
-                case 4:
-                    return GetArmorList();
-                case 5:
-                    return GetReagentList();
-                case 6:
-                    return GetProjectileList();
-                case 7:
-                    return GetTradeGoodsList();
-                case 9:
-                    return GetRecipeList();
-                case 12:
-                    return GetQuestList();
-                case 13:
-                    return GetKeyList();
-                case 15:
-                    return GetMiscellaneousList();
-                case 16:
-                    return GetGlyphList();
-                default:
-                    throw new Exception("No correct item class was given to list subclasses.");
-            }
-        }
+        
 
         public static ItemSubClass[] GetGlyphList()
         {

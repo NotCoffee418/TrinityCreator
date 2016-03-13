@@ -40,8 +40,8 @@ namespace TrinityCreator
         {
             entryIdTxt.Text = dr["entry"].ToString();
             itemQuoteTxt.Text = dr["description"].ToString();
-            SetIndexOfId((int)dr["class"], itemClassCb);
-            SetIndexOfId((int)dr["subclass"], itemSubClassCb);
+            //SetIndexOfId((int)dr["class"], itemClassCb);
+            //SetIndexOfId((int)dr["subclass"], itemSubClassCb);
             itemNameTxt.Text = dr["name"].ToString();
             displayIdTxt.Text = dr["displayid"].ToString();
             SetIndexOfId((int)dr["Quality"], itemQualityCb);
@@ -61,7 +61,7 @@ namespace TrinityCreator
             sellPriceSTxt.Text = sellPrice.Silver.ToString();
             sellPriceCTxt.Text = sellPrice.Copper.ToString();
             
-            SetIndexOfId((int)dr["InventoryType"], inventoryTypeCb);
+            //SetIndexOfId((int)dr["InventoryType"], inventoryTypeCb);
             // Material auto?
             // sheath auto?
             item.Flags.BitmaskValue = (uint)dr["Flags"];
@@ -82,10 +82,6 @@ namespace TrinityCreator
             // Set quality
             itemQualityCb.ItemsSource = ItemQuality.GetQualityList();
             itemQualityCb.SelectedIndex = 0;
-
-            // Set class & subclass
-            itemClassCb.ItemsSource = ItemClass.GetClassList();
-            itemClassCb.SelectedIndex = 0;
 
             ShowCorrectClassBox();
             armorBox.Visibility = Visibility.Collapsed;
@@ -180,14 +176,6 @@ namespace TrinityCreator
             }
             catch
             { /* Exception on initial load */ }
-        }
-        
-        private void itemClassCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ItemClass c = (ItemClass)itemClassCb.SelectedValue;
-            itemSubClassCb.ItemsSource = ItemSubClass.GetSubclassList(c);
-            itemSubClassCb.SelectedIndex = 0;
-            ShowCorrectClassBox();
         }
 
         private void changeFlagsCb_Checked(object sender, RoutedEventArgs e)
@@ -473,6 +461,9 @@ namespace TrinityCreator
         /// </summary>
         private void ShowCorrectClassBox()
         {
+            // won't listen to xaml SelectIndex="0"
+            itemClassCb.SelectedIndex = 0;
+
             // Hide everything
             armorBox.Visibility = Visibility.Collapsed;
             equipmentBox.Visibility = Visibility.Collapsed;
@@ -482,65 +473,68 @@ namespace TrinityCreator
             addGemSocketsCb.Visibility = Visibility.Collapsed;
             statsBox.Visibility = Visibility.Collapsed;
             preview.statsSp.Visibility = Visibility.Collapsed;
-
-            // Show selected
-            ItemClass selectedClass = (ItemClass)itemClassCb.SelectedValue;
-            switch (selectedClass.Id)
+            try
             {
-                case 0: // Consumable
+                switch (item.Class.Id)
+                {
+                    case 0: // Consumable
 
-                    break;
-                case 1: // Container
-                    containerBox.Visibility = Visibility.Visible;
-                    vendorBox.Visibility = Visibility.Visible;
-                    break;
-                case 2: // Weapon
-                    equipmentBox.Visibility = Visibility.Visible;
-                    vendorBox.Visibility = Visibility.Visible;
-                    addResistancesCb.Visibility = Visibility.Visible;
-                    addGemSocketsCb.Visibility = Visibility.Visible;
-                    statsBox.Visibility = Visibility.Visible;
-                    preview.statsSp.Visibility = Visibility.Visible;
-                    break;
-                case 3: // Gems
-                    vendorBox.Visibility = Visibility.Visible;
-                    break;
-                case 4: // Armor
-                    armorBox.Visibility = Visibility.Visible;
-                    equipmentBox.Visibility = Visibility.Visible;
-                    vendorBox.Visibility = Visibility.Visible;
-                    addResistancesCb.Visibility = Visibility;
-                    addGemSocketsCb.Visibility = Visibility.Visible;
-                    statsBox.Visibility = Visibility.Visible;
-                    preview.statsSp.Visibility = Visibility.Visible;
-                    break;
-                case 5: // Reagent
-                    vendorBox.Visibility = Visibility.Visible;
-                    break;
-                case 6: // Projectile
-                    vendorBox.Visibility = Visibility.Visible;
-                    break;
-                case 7: // Trade goods
+                        break;
+                    case 1: // Container
+                        containerBox.Visibility = Visibility.Visible;
+                        vendorBox.Visibility = Visibility.Visible;
+                        break;
+                    case 2: // Weapon
+                        equipmentBox.Visibility = Visibility.Visible;
+                        vendorBox.Visibility = Visibility.Visible;
+                        addResistancesCb.Visibility = Visibility.Visible;
+                        addGemSocketsCb.Visibility = Visibility.Visible;
+                        statsBox.Visibility = Visibility.Visible;
+                        preview.statsSp.Visibility = Visibility.Visible;
+                        break;
+                    case 3: // Gems
+                        vendorBox.Visibility = Visibility.Visible;
+                        break;
+                    case 4: // Armor
+                        armorBox.Visibility = Visibility.Visible;
+                        equipmentBox.Visibility = Visibility.Visible;
+                        vendorBox.Visibility = Visibility.Visible;
+                        addResistancesCb.Visibility = Visibility;
+                        addGemSocketsCb.Visibility = Visibility.Visible;
+                        statsBox.Visibility = Visibility.Visible;
+                        preview.statsSp.Visibility = Visibility.Visible;
+                        break;
+                    case 5: // Reagent
+                        vendorBox.Visibility = Visibility.Visible;
+                        break;
+                    case 6: // Projectile
+                        vendorBox.Visibility = Visibility.Visible;
+                        break;
+                    case 7: // Trade goods
 
-                    break;
-                case 9: // Recipe
+                        break;
+                    case 9: // Recipe
 
-                    break;
-                case 11: // Quiver
+                        break;
+                    case 11: // Quiver
 
-                    break;
-                case 12: // Quest
+                        break;
+                    case 12: // Quest
 
-                    break;
-                case 13: // Key
+                        break;
+                    case 13: // Key
 
-                    break;
-                case 15: // Miscellaneous
+                        break;
+                    case 15: // Miscellaneous
 
-                    break;
-                case 16: // Glyph
+                        break;
+                    case 16: // Glyph
 
-                    break;
+                        break;
+                }
+            }
+            catch
+            { //fix this
             }
         }
 
