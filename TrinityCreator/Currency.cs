@@ -125,6 +125,11 @@ namespace TrinityCreator
             }
         }
 
+        public override string ToString()
+        {
+            return Amount.ToString();
+        }
+
         private void RaisePropertyChanged(string property)
         {
             if (PropertyChanged != null)

@@ -193,8 +193,8 @@ namespace TrinityCreator
         {
             get
             {
-                if (_allowedclass == null)
-                    _allowedclass = BitmaskStackPanel.GetRaceFlags();
+                if (_allowedrace == null)
+                    _allowedrace = BitmaskStackPanel.GetRaceFlags();
                 return _allowedrace;
             }
             set
