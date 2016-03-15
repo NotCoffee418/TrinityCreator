@@ -30,9 +30,6 @@ namespace TrinityCreator
             // load preview & set item
             item = new TrinityItem();
             DataContext = item;
-            preview = new ItemPreview(item);
-            previewBox.Content = preview;
-
             Loaded += ItemPage_Loaded;
         }
 
@@ -41,6 +38,14 @@ namespace TrinityCreator
 
         private void ItemPage_Loaded(object sender, RoutedEventArgs e)
         {
+            PrepareItemPage();
+        }
+
+        private void PrepareItemPage()
+        {
+            preview = new ItemPreview(item);
+            previewBox.Content = preview;
+
             // Set class
             itemClassCb.SelectedIndex = 0;
 
@@ -67,6 +72,7 @@ namespace TrinityCreator
             // set statsBox
             item.Stats.Changed += StatsChangedHandler;
         }
+
 
         #region Changed event handlers
         private void itemQualityCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -214,7 +220,12 @@ namespace TrinityCreator
         {
             var result = MessageBox.Show("Are you sure you want to discard this item and clear the form?", "Discard item", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
-                ClearForm();
+            {
+                item = new TrinityItem();
+                DataContext = null;
+                DataContext = item;
+                PrepareItemPage();
+            }
         }
         #endregion
 
@@ -332,13 +343,5 @@ namespace TrinityCreator
                 preview.subclassRightNoteLbl.Text = ((ItemSubClass)itemSubClassCb.SelectedValue).Description;
             }
         }
-
-
-        private void ClearForm()
-        {
-            entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
-            MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
-        }
-
     }
 }
