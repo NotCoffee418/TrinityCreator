@@ -125,5 +125,9 @@ namespace TrinityCreator
             Process.Start("https://paypal.me/RStijn");
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
+        }
     }
 }
