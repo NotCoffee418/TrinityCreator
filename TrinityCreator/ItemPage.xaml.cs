@@ -257,6 +257,7 @@ namespace TrinityCreator
                         break;
                     case 3: // Gems
                         vendorBox.Visibility = Visibility.Visible;
+                        //GemPropertiesBox
                         break;
                     case 4: // Armor
                         armorBox.Visibility = Visibility.Visible;
@@ -277,22 +278,20 @@ namespace TrinityCreator
 
                         break;
                     case 9: // Recipe
-
+                        //Recipe spell list & box?
                         break;
                     case 11: // Quiver
-
+                        containerBox.Visibility = Visibility.Visible;
+                        // auto set BagFamily based on subclass, clear on classchange
                         break;
                     case 12: // Quest
-
+                        // empty, optional spell
                         break;
                     case 13: // Key
-
+                        // lockid, from dbc?
                         break;
                     case 15: // Miscellaneous
-
-                        break;
-                    case 16: // Glyph
-
+                        // optional spell
                         break;
                 }
             }

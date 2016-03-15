@@ -131,24 +131,6 @@ namespace TrinityCreator
         {
             return Description;
         }
-        
-
-        public static ItemSubClass[] GetGlyphList()
-        {
-            return new ItemSubClass[]
-            {
-                new ItemSubClass(1, "Warrior"),
-                new ItemSubClass(2, "Paladin"),
-                new ItemSubClass(3, "Hunter"),
-                new ItemSubClass(4, "Rogue"),
-                new ItemSubClass(5, "Priest"),
-                new ItemSubClass(6, "Death Knight"),
-                new ItemSubClass(7, "Shaman"),
-                new ItemSubClass(8, "Mage"),
-                new ItemSubClass(9, "Warlock"),
-                new ItemSubClass(11, "Druid"),
-            };
-        }
 
         public static ItemSubClass[] GetMiscellaneousList()
         {

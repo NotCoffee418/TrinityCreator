@@ -73,8 +73,6 @@ namespace TrinityCreator
                         return ItemSubClass.GetKeyList();
                     case 15:
                         return ItemSubClass.GetMiscellaneousList();
-                    case 16:
-                        return ItemSubClass.GetGlyphList();
                     default:
                         throw new Exception("No correct item class was given to list subclasses.");
                 }
