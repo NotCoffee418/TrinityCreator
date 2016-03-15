@@ -162,8 +162,7 @@
             <GroupBox x:Name="createBox" Header="Export Item">
                 <Grid>
                     <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77"/>
-                    <TextBox Name="entryIdTxt" Text="{Binding EntryId, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
-                    <Label Content="{Binding (Validation.Errors)[0].ErrorContent}" />
+                    <TextBox Name="entryIdTxt" Text="{Binding EntryId}" Height="25" Margin="85,3,9,0" VerticalAlignment="Top" />
                     <Button x:Name="exportSqlBtn" Content="Export to SQL file" Margin="10,35,153,5" Click="exportSqlBtn_Click" FontWeight="Bold"/>
                     <Button x:Name="newItemBtn" Content="Create new item" Margin="218,35,10,5" Click="newItemBtn_Click"/>
                 </Grid>
