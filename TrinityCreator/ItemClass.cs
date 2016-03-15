@@ -65,6 +65,8 @@ namespace TrinityCreator
                         return ItemSubClass.GetTradeGoodsList();
                     case 9:
                         return ItemSubClass.GetRecipeList();
+                    case 11:
+                        return ItemSubClass.GetQuiverList();
                     case 12:
                         return ItemSubClass.GetQuestList();
                     case 13:

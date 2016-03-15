@@ -17,8 +17,8 @@
                 <Label Name="itemNameLbl" Content="{Binding Name}" Foreground="Gray" FontSize="18" />
                 <Label Name="itemBoundsLbl" Content="{Binding Binds.Description}" Foreground="White" FontSize="14" />
                 <DockPanel>
-                    <Label Name="subclassLeftNoteLbl" Content="{Binding InventoryType.Description}" Foreground="White" FontSize="14" HorizontalAlignment="Left"/>
-                    <Label Name="subclassRightNoteLbl" Content="{Binding SubClass.PreviewNoteRight}" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
+                    <TextBlock Name="subclassLeftNoteLbl" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,5"/>
+                    <TextBlock Name="subclassRightNoteLbl" Foreground="White" FontSize="14" HorizontalAlignment="Right" Margin="0,0,5,5"/>
                 </DockPanel>
             
                 <!-- Only visible on weapon item -->

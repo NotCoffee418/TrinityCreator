@@ -43,10 +43,10 @@
                         <ComboBox Name="itemClassCb" SelectedValue="{Binding Class}" ItemsSource="{Binding Source={StaticResource classList}}" Height="25"  Margin="85,153,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" SelectionChanged="itemClassCb_SelectionChanged"/>
 
                         <Label FontSize="12" Content="Item Subclass" Height="30" Margin="0,182,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
-                        <ComboBox SelectedValue="{Binding ItemSubClass}" ItemsSource="{Binding Class.AvailableSubClasses}" Height="25" Margin="85,183,9,0" VerticalAlignment="Top" IsReadOnly="True"  SelectedIndex="0" IsSynchronizedWithCurrentItem="True"/>
+                        <ComboBox Name="itemSubClassCb" SelectedValue="{Binding ItemSubClass}" ItemsSource="{Binding Class.AvailableSubClasses}" Height="25" Margin="85,183,9,0" VerticalAlignment="Top" IsReadOnly="True"  SelectedIndex="0" IsSynchronizedWithCurrentItem="True" SelectionChanged="itemSubClassCb_SelectionChanged"/>
 
                         <Label FontSize="12" Content="Equip" Height="30" Margin="0,213,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"/>
-                        <ComboBox SelectedValue="{Binding InventoryType}" ItemsSource="{Binding ItemSubClass.LockedInventoryType}" Height="25" Margin="85,214,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" IsSynchronizedWithCurrentItem="True"/>
+                        <ComboBox Name="inventortyTypeCb" SelectedValue="{Binding InventoryType}" ItemsSource="{Binding ItemSubClass.LockedInventoryType}" Height="25" Margin="85,214,9,0" VerticalAlignment="Top" IsReadOnly="True" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" SelectionChanged="inventortyTypeCb_SelectionChanged"/>
 
                         <Label FontSize="12" Content="Max count" Height="30" Margin="0,243,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="77" ToolTip="0 is unlimited"/>
                         <TextBox Name="itemMaxCountTxt" Text="{Binding MaxAllowed, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="85,244,9,0" VerticalAlignment="Top" />

@@ -179,6 +179,15 @@ namespace TrinityCreator
                 new ItemSubClass(0, "Quest")
            };
         }
+        
+        public static ItemSubClass[] GetQuiverList()
+        {
+           return new ItemSubClass[]
+           {
+                new ItemSubClass(2, "Quiver"),
+                new ItemSubClass(3, "Ammo Pouch"),
+           };
+        }
 
         public static ItemSubClass[] GetRecipeList()
         {

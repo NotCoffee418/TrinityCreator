@@ -103,8 +103,30 @@ namespace TrinityCreator
             try
             {
                 ShowCorrectClassBox();
+                ShowCorrectInfoLabel();
             }
             catch { // fix this
+            }
+        }
+        private void itemSubClassCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                ShowCorrectInfoLabel();
+            }
+            catch
+            { // fix this
+            }
+        }
+
+        private void inventortyTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                ShowCorrectInfoLabel();
+            }
+            catch
+            { // fix this
             }
         }
 
@@ -203,6 +225,7 @@ namespace TrinityCreator
         private void ShowCorrectClassBox()
         {
             // Hide everything
+            weaponBox.Visibility = Visibility.Collapsed;
             armorBox.Visibility = Visibility.Collapsed;
             equipmentBox.Visibility = Visibility.Collapsed;
             containerBox.Visibility = Visibility.Collapsed;
@@ -211,6 +234,7 @@ namespace TrinityCreator
             addGemSocketsCb.Visibility = Visibility.Collapsed;
             statsBox.Visibility = Visibility.Collapsed;
             preview.statsSp.Visibility = Visibility.Collapsed;
+
             try
             {
                 switch (item.Class.Id)
@@ -223,6 +247,7 @@ namespace TrinityCreator
                         vendorBox.Visibility = Visibility.Visible;
                         break;
                     case 2: // Weapon
+                        weaponBox.Visibility = Visibility.Visible;
                         equipmentBox.Visibility = Visibility.Visible;
                         vendorBox.Visibility = Visibility.Visible;
                         addResistancesCb.Visibility = Visibility.Visible;
@@ -276,10 +301,45 @@ namespace TrinityCreator
             }
         }
 
+        private void ShowCorrectInfoLabel()
+        {
+            int clid = item.Class.Id;
+            preview.subclassLeftNoteLbl.Visibility = Visibility.Visible;
+
+            if (clid == 1)  // Container
+            {
+                Binding b = new Binding();
+                b.Source = item;
+                b.Path = new PropertyPath("ContainerSlots");
+                b.StringFormat = "{0} Slots";
+                b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                BindingOperations.SetBinding(preview.subclassLeftNoteLbl, TextBlock.TextProperty, b);
+                preview.subclassRightNoteLbl.Text = item.ItemSubClass.Description;
+            }
+            else if (clid == 2 || clid == 4)  // Weapon & armor
+            {
+                preview.subclassLeftNoteLbl.Text = item.InventoryType.Description;
+                preview.subclassRightNoteLbl.Text = item.ItemSubClass.PreviewNoteRight;
+            }
+            else if (clid >= 11 && clid <= 15) // right only
+            {
+                preview.subclassLeftNoteLbl.Visibility = Visibility.Collapsed;
+                preview.subclassRightNoteLbl.Text = item.ItemSubClass.Description;
+            }
+
+            else // default
+            {
+                preview.subclassLeftNoteLbl.Text = ((ItemClass)itemClassCb.SelectedValue).Description;
+                preview.subclassRightNoteLbl.Text = ((ItemSubClass)itemSubClassCb.SelectedValue).Description;
+            }
+        }
+
+
         private void ClearForm()
         {
             entryIdTxt.Text = Properties.Settings.Default.nextid_item.ToString();
             MessageBox.Show("Not implemented yet"); // Probably just load new ItemPage, don't clear all the fields manually :P
         }
+
     }
 }
