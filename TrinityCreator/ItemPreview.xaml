@@ -15,7 +15,7 @@
             <Border BorderBrush="#fff" BorderThickness="2" CornerRadius="8,8,8,8" Margin="2" Background="#0b0b17"/>
             <StackPanel Margin="10,5">
                 <Label Name="itemNameLbl" Content="{Binding Name}" Foreground="Gray" FontSize="18" />
-                <Label Name="itemBoundsLbl" Content="{Binding Binds.Description}" Foreground="White" FontSize="14" />
+                <Label Name="itemBoundsLbl" Content="{Binding Binds.Description}" Foreground="White" FontSize="14" Visibility="{Binding Binds.Id, Converter={StaticResource valueVisibilityConverter}}"/>
                 <DockPanel>
                     <TextBlock Name="subclassLeftNoteLbl" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,5"/>
                     <TextBlock Name="subclassRightNoteLbl" Foreground="White" FontSize="14" HorizontalAlignment="Right" Margin="0,0,5,5"/>
@@ -55,8 +55,15 @@
                     <TextBlock Text="{Binding SocketBonus}" /> 
                 </TextBlock>
 
-                <Label Name="itemClassRequirementsLbl" Content="Classes: All" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
-                <Label Name="itemRaceRequirementsLbl" Content="Races: All" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="0,-10,0,0"/>
+                <TextBlock Visibility="{Binding ElementName=allowedClassesLb, Path=Text, Converter={StaticResource valueVisibilityConverter}}" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,5">
+                    <TextBlock Text="Classes:"/>
+                    <TextBlock Name="allowedClassesLb" />
+                </TextBlock>
+                <TextBlock Visibility="{Binding ElementName=allowedRacesLb, Path=Text, Converter={StaticResource valueVisibilityConverter}}" Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,5">
+                    <TextBlock Text="Races:"/>
+                    <TextBlock Name="allowedRacesLb" />
+                </TextBlock>
+                
                 <TextBlock Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="5,-10,0,0" Visibility="{Binding MinLevel, Converter={StaticResource valueVisibilityConverter}}">
                     <TextBlock Text="Requires Level" />
                     <TextBlock Name="itemLevelRequiredLbl" Text="{Binding MinLevel}" />

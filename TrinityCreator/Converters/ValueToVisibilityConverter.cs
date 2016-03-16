@@ -28,7 +28,7 @@ namespace TrinityCreator
                 flag = true;
             else if (value is int && (int)value != 0)
                 flag = true;
-            else if (value is uint && (uint)value != 0)
+            else if (value is long && (long)value != 0)
                 flag = true;
             else if (value is double && (double)value != 0 && !double.IsNaN((double)value) && !double.IsInfinity((double)value))
                 flag = true;

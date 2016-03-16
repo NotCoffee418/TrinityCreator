@@ -39,6 +39,18 @@ namespace TrinityCreator
         private void ItemPage_Loaded(object sender, RoutedEventArgs e)
         {
             PrepareItemPage();
+            item.AllowedClass.BmspChanged += AllowedClass_BmspChanged;
+            item.AllowedRace.BmspChanged += AllowedRace_BmspChanged;
+        }
+
+        private void AllowedClass_BmspChanged(object sender, EventArgs e)
+        {
+            preview.allowedClassesLb.Text = item.AllowedClass.ToString();
+        }
+
+        private void AllowedRace_BmspChanged(object sender, EventArgs e)
+        {
+            preview.allowedRacesLb.Text = item.AllowedRace.ToString();
         }
 
         private void PrepareItemPage()
@@ -84,10 +96,10 @@ namespace TrinityCreator
             try
             {
                 var bmcbr1 = from cb in item.Flags.Children.OfType<BitmaskCheckBox>()
-                            where (uint)cb.Tag == 134217728
+                            where (long)cb.Tag == 134217728
                             select cb;
                 var bmcbr2 = from cb in item.FlagsExtra.Children.OfType<BitmaskCheckBox>()
-                             where (uint)cb.Tag == 131072
+                             where (long)cb.Tag == 131072
                              select cb;
                 if (q.Id == 7)
                 {

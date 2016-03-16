@@ -1,27 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace TrinityCreator
 {
+
     public class BitmaskStackPanel : StackPanel
     {
-        public BitmaskStackPanel(string name, BitmaskCheckBox[] checkboxes)
+        public BitmaskStackPanel(string name, List<BitmaskCheckBox> checkboxes, long defaultValue = 0)
         {
             Name = name;
             _checkboxes = checkboxes;
+            DefaultValue = defaultValue;
 
             foreach (var bmcb in Checkboxes)
+            {
                 Children.Add(bmcb);
+                bmcb.Checked += RaiseBmspChanged;
+                bmcb.Unchecked += RaiseBmspChanged;
+            }
         }
 
-        private BitmaskCheckBox[] _checkboxes;
+        private void RaiseBmspChanged(object sender, RoutedEventArgs e)
+        {
+            BmspChanged(sender, e);
+        }
 
-        public BitmaskCheckBox[] Checkboxes
+        private List<BitmaskCheckBox> _checkboxes;
+        private long _defaultValue;
+
+        public event EventHandler BmspChanged;
+
+        public List<BitmaskCheckBox> Checkboxes
         {
             get
             {
@@ -29,16 +47,30 @@ namespace TrinityCreator
             }
         }
 
-        public uint BitmaskValue
+        public string SelectionText
         {
             get
             {
-                uint bitmask = 0;
+                return ToString();
+            }
+        }
+
+        public long BitmaskValue
+        {
+            get
+            {
+                long bitmask = 0;
+                int checkedCount = 0;
                 foreach (CheckBox cb in Checkboxes)
                 {
                     if (cb.IsChecked == true)
-                        bitmask += (uint)cb.Tag;
+                    {
+                        bitmask += (long)cb.Tag;
+                        checkedCount++;
+                    }
                 }
+                if (checkedCount == 0 && bitmask != DefaultValue)
+                    bitmask = DefaultValue;
                 return bitmask;
             }
             set
@@ -47,30 +79,42 @@ namespace TrinityCreator
             }
         }
 
-        private void SetBitmaskValue(uint bmv)
+        public long DefaultValue
+        {
+            get
+            {
+                return _defaultValue;
+            }
+            set
+            {
+                _defaultValue = value;
+            }
+        }
+
+        private void SetBitmaskValue(long bmv)
         {
 
-            List<uint> bitValues = new List<uint>();
+            List<long> bitValues = new List<long>();
             bitValues.Add(0);
             bitValues.Add(1);
-            for (uint i = 0; i < 31; i++)
+            for (long i = 0; i < 31; i++)
             {
                 bitValues.Add(bitValues.Last() * 2);
                 Console.WriteLine(bitValues.Last());
             }
             bitValues.Reverse();
 
-            foreach (uint bitmask in bitValues)
+            foreach (long bitmask in bitValues)
                 if (bmv >= bitmask)
                     foreach (BitmaskCheckBox cb in Checkboxes)
-                        if ((uint)cb.Tag >= bitmask)
+                        if ((long)cb.Tag >= bitmask)
                         {
                             cb.IsChecked = true;
                             bmv -= bitmask;
                             break;
                         }
         }
-
+        
         /// <summary>
         /// Gets clean comma seperated text from checked BitmaskCheckboxes
         /// </summary>
@@ -81,17 +125,13 @@ namespace TrinityCreator
             foreach (BitmaskCheckBox c in Children)
                 if (c.IsChecked == true)
                     list.Add(c.Content.ToString());
-
-            if (list.Count == 0)
-                list.Add("All");
-
             return string.Join(", ", list);
         }
 
 
         public static BitmaskStackPanel GetItemFlags()
         {
-            var cbs = new BitmaskCheckBox[] {
+            var cbs = new List<BitmaskCheckBox> {
                 new BitmaskCheckBox(2, "Conjured item"),
                 new BitmaskCheckBox(4, "Openable"),
                 new BitmaskCheckBox(8, "Display green \"Heroic\" text"),
@@ -115,7 +155,7 @@ namespace TrinityCreator
 
         internal static BitmaskStackPanel GetItemFlagsExtra()
         {
-            var cbs = new BitmaskCheckBox[] {
+            var cbs = new List<BitmaskCheckBox> {
                 new BitmaskCheckBox(1, "Horde Only"),
                 new BitmaskCheckBox(2, "Alliance Only"),
                 new BitmaskCheckBox(4, "Item for ExtendedCost Vendor"),
@@ -131,7 +171,7 @@ namespace TrinityCreator
         
         public static BitmaskStackPanel GetClassFlags()
         {
-            var cbs = new BitmaskCheckBox[] {
+            var cbs = new List<BitmaskCheckBox> {
                 new BitmaskCheckBox(1, "Warrior"),
                 new BitmaskCheckBox(2, "Paladin"),
                 new BitmaskCheckBox(4, "Hunter"),
@@ -145,12 +185,13 @@ namespace TrinityCreator
                 new BitmaskCheckBox(1024, "Druid"),
             };
 
-            return new BitmaskStackPanel("classesSp", cbs);
+            // default value must be -1!
+            return new BitmaskStackPanel("classesSp", cbs, -1);
         }
 
         public static BitmaskStackPanel GetRaceFlags()
         {
-            var cbs = new BitmaskCheckBox[] {
+            var cbs = new List<BitmaskCheckBox> {
                 new BitmaskCheckBox(1, "Human"),
                 new BitmaskCheckBox(2, "Orc"),
                 new BitmaskCheckBox(4, "Dwarf"),
@@ -166,12 +207,13 @@ namespace TrinityCreator
                 new BitmaskCheckBox(58720256, "Pandaren (5.x)"),
             };
 
-            return new BitmaskStackPanel("racesSp", cbs);
+            // default value must be -1!
+            return new BitmaskStackPanel("racesSp", cbs, -1);
         }
 
         public static BitmaskStackPanel GetBagFamilies()
         {
-            var cbs = new BitmaskCheckBox[] {
+            var cbs = new List<BitmaskCheckBox> {
                 new BitmaskCheckBox(1, "Arrows"),
                 new BitmaskCheckBox(2, "Bullets"),
                 new BitmaskCheckBox(4, "Soul Shards"),
@@ -191,11 +233,12 @@ namespace TrinityCreator
 
             return new BitmaskStackPanel("bagFamilySp", cbs);
         }
+       
     }
 
     public class BitmaskCheckBox : CheckBox
     {
-        public BitmaskCheckBox(uint value, string details, bool isChecked = false, Visibility visibility = Visibility.Visible)
+        public BitmaskCheckBox(long value, string details, bool isChecked = false, Visibility visibility = Visibility.Visible)
         {
             Tag = value;
             Content = details;
