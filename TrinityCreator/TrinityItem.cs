@@ -509,6 +509,7 @@ namespace TrinityCreator
 
             // Add gem sockets
             int socketId = 1;
+            int totalSocketCount = 0;
             foreach (var gem in GemSockets.GetUserInput())
             {
                 if (gem.Value != "0" && gem.Value != "")
@@ -517,7 +518,7 @@ namespace TrinityCreator
                     {
                         Socket s = (Socket)gem.Key;
                         int sCount = int.Parse(gem.Value); // validate
-
+                        totalSocketCount += sCount;
                         kvplist.Add("socketColor_" + socketId, s.Id.ToString());
                         kvplist.Add("socketContent_" + socketId, sCount.ToString());
                         socketId++;
@@ -528,6 +529,8 @@ namespace TrinityCreator
                     }
                 }
             }
+            if (totalSocketCount > 3)
+                throw new Exception("You can only have 3 gem sockets in total.");
 
 
             // resistances
