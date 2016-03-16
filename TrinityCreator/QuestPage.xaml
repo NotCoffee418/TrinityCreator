@@ -6,8 +6,13 @@
       xmlns:local="clr-namespace:TrinityCreator"
       mc:Ignorable="d"
       Title="QuestPage" Height="749.589" Width="555.096">
-
-    <Grid>
-
-    </Grid>
+    <StackPanel>
+        <StackPanel Width="350" Height="440" HorizontalAlignment="Left">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="Resources/QuestGreeting.png" />
+            </StackPanel.Background>
+            <TextBlock Text="Quest Title"/>
+        </StackPanel>
+        
+    </StackPanel>
 </Page>

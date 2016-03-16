@@ -72,7 +72,7 @@ namespace TrinityCreator
             {
                 try
                 {
-                    return string.Format("({0} damage per second)", Dps.ToString("0.00"));
+                    return $"({Dps.ToString("0.00")} damage per second)";
                 }
                 catch
                 {
@@ -85,8 +85,7 @@ namespace TrinityCreator
 
         private void RaisePropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }

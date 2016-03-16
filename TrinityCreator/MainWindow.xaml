@@ -22,8 +22,12 @@
             </MenuItem>
         </Menu>
         <TabControl x:Name="TabControl">
-            <TabItem Header="Item" Name="ItemTab" />
-            <TabItem Header="Quest (UNFINISHED)" Name="QuestTab" Tag="unfinished" />
+            <TabItem Header="Item" >
+                <Frame Name="ItemTab"/>
+            </TabItem>
+            <TabItem Header="Quest (UNFINISHED)"  Tag="unfinished">
+                <Frame Name="QuestTab"></Frame>
+            </TabItem>
             <TabItem Header="Creature (UNFINISHED)" Name="CreatureTab" Tag="unfinished" />
             <TabItem Header="More coming soon!">
                 <Grid Margin="0,0,0,0">

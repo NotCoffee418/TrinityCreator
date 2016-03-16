@@ -17,6 +17,7 @@ namespace TrinityCreator
     {
         private TrinityItem _item;
         private ItemPreview _preview;
+        private bool _firstLoadComplete = false;
 
         public ItemPage()
         {
@@ -26,17 +27,21 @@ namespace TrinityCreator
             _item = new TrinityItem();
             DataContext = _item;
             Loaded += ItemPage_Loaded;
+            _preview = new ItemPreview(_item);
         }
 
         private void ItemPage_Loaded(object sender, RoutedEventArgs e)
         {
-            PrepareItemPage();
-            ShowCorrectClassBox();
+            if (!_firstLoadComplete)
+            {
+                PrepareItemPage();
+                ShowCorrectClassBox();
+                _firstLoadComplete = true;
+            }
         }
 
         private void PrepareItemPage()
         {
-            _preview = new ItemPreview(_item);
             PreviewBox.Content = _preview;
 
             // Set class

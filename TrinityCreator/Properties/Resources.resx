@@ -124,11 +124,23 @@
   <data name="copper" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\copper.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DailyActiveQuestIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DailyActiveQuestIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DailyQuestIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DailyQuestIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="gold" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gold.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="IncompleteQuestIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IncompleteQuestIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="metasocket" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\metasocket.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QuestGreeting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QuestGreeting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="redsocket" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\redsocket.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
