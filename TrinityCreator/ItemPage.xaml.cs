@@ -79,10 +79,10 @@ namespace TrinityCreator
             damageTypeCb.SelectedIndex = 0;
 
             // Set gemSockets groupbox
-            item.GemSockets.Changed += GemDataChangedHander;
+            item.GemSockets.DynamicDataChanged += GemDataChangedHander;
 
             // set statsBox
-            item.Stats.Changed += StatsChangedHandler;
+            item.Stats.DynamicDataChanged += StatsChangedHandler;
         }
 
 
@@ -213,19 +213,28 @@ namespace TrinityCreator
         #region Click event handlers
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
-            string query = item.GenerateSqlQuery();
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.DefaultExt = ".sql";
-            sfd.FileName = "Item " + item.EntryId;
-            sfd.Filter = "SQL File (.sql)|*.sql";
-            if (sfd.ShowDialog() == true)
-                System.IO.File.WriteAllText(sfd.FileName, query);
-                
-            // Increase next item's entry id
-            Properties.Settings.Default.nextid_item = int.Parse(entryIdTxt.Text) + 1;
-            Properties.Settings.Default.Save();
+            try
+            {
+                string query = item.GenerateSqlQuery();
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.DefaultExt = ".sql";
+                sfd.FileName = "Item " + item.EntryId;
+                sfd.Filter = "SQL File (.sql)|*.sql";
+                if (sfd.ShowDialog() == true)
+                {
+                    System.IO.File.WriteAllText(sfd.FileName, query);
 
-            MessageBox.Show("Your item has been saved.", "Complete", MessageBoxButton.OK, MessageBoxImage.Information);
+                    // Increase next item's entry id
+                    Properties.Settings.Default.nextid_item = int.Parse(entryIdTxt.Text) + 1;
+                    Properties.Settings.Default.Save();
+
+                    MessageBox.Show("Your item has been saved.", "Complete", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void newItemBtn_Click(object sender, RoutedEventArgs e)

@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace TrinityCreator
@@ -510,7 +511,7 @@ namespace TrinityCreator
                     try
                     {
                         Socket s = (Socket)gem.Key;
-                        int sCount = int.Parse(s.Description); // validate
+                        int sCount = int.Parse(gem.Value); // validate
 
                         kvplist.Add("socketColor_" + socketId, s.Id.ToString());
                         kvplist.Add("socketContent_" + socketId, sCount.ToString());
@@ -562,11 +563,11 @@ namespace TrinityCreator
                 throw new Exception("Invalid value in magic resistance.");
             }
 
-            
+
             kvplist.Add("armor", Armor.ToString());     // armor
             kvplist.Add("block", Block.ToString());     // block
             kvplist.Add("BagFamily", BagFamily.BitmaskValue.ToString()); // bag family
-
+            
             return kvplist;
         }
 
