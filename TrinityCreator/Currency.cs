@@ -1,18 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
     public class Currency : INotifyPropertyChanged
     {
+        private int _copper;
+
+        private int _gold;
+        private int _silver;
+
         public Currency(string g, string s, string c)
         {
             StringsToCurrency(g, s, c);
         }
+
         public Currency(int amount)
         {
             string g = "", s = "", c = "", amountstr = amount.ToString();
@@ -30,19 +33,9 @@ namespace TrinityCreator
             StringsToCurrency(g, s, c);
         }
 
-        private int _gold;
-        private int _silver;
-        private int _copper;
-        private int _amount;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public int Gold
         {
-            get
-            {
-                return _gold;
-            }
+            get { return _gold; }
             set
             {
                 _gold = value;
@@ -54,10 +47,7 @@ namespace TrinityCreator
 
         public int Silver
         {
-            get
-            {
-                return _silver;
-            }
+            get { return _silver; }
             set
             {
                 _silver = value;
@@ -66,12 +56,10 @@ namespace TrinityCreator
                 UpdateAmount();
             }
         }
+
         public int Copper
         {
-            get
-            {
-                return _copper;
-            }
+            get { return _copper; }
             set
             {
                 _copper = value;
@@ -82,15 +70,11 @@ namespace TrinityCreator
         }
 
         /// <summary>
-        /// integer value as it should be placed in the database
+        ///     integer value as it should be placed in the database
         /// </summary>
-        public int Amount
-        {
-            get
-            {
-                return _amount;
-            }
-        }
+        public int Amount { get; private set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
 
         private void UpdateAmount()
@@ -112,12 +96,12 @@ namespace TrinityCreator
                 _copper = int.Parse(c);
 
                 // add 0 for correct value on blank or single character values
-                for (int i = s.Count(); s.Count() < 2; i++)
+                for (var i = s.Count(); s.Count() < 2; i++)
                     s = "0" + s;
-                for (int i = c.Count(); c.Count() < 2; i++)
+                for (var i = c.Count(); c.Count() < 2; i++)
                     c = "0" + c;
 
-                _amount = int.Parse(g.ToString() + s.ToString() + c.ToString());
+                Amount = int.Parse(g + s + c);
             }
             catch
             {

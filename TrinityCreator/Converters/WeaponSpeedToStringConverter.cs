@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
@@ -16,10 +12,10 @@ namespace TrinityCreator
         {
             if (value is int)
             {
-                double r = (int)value / 1000.0;
+                var r = (int) value/1000.0;
                 return r.ToString("0.00");
             }
-            else return "INVALID";
+            return "INVALID";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,47 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TrinityCreator
+﻿namespace TrinityCreator
 {
     public class Stat : IKeyValue
     {
         public Stat(int id, string description)
         {
-            _id = id;
-            _description = description;
+            Id = id;
+            Description = description;
         }
 
-        private int _id;
-        private string _description;
+        public int Id { get; set; }
 
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-
-            set
-            {
-                _id = value;
-            }
-        }
-
-        public string Description
-        {
-            get
-            {
-                return _description;
-            }
-
-            set
-            {
-                _description = value;
-            }
-        }
+        public string Description { get; set; }
 
         public override string ToString()
         {
@@ -50,7 +19,7 @@ namespace TrinityCreator
 
         internal static Stat[] GetStatList()
         {
-            return new Stat[]
+            return new[]
             {
                 new Stat(0, "Mana"),
                 new Stat(1, "Health"),
@@ -86,7 +55,7 @@ namespace TrinityCreator
                 new Stat(45, "Spell power"),
                 new Stat(46, "Health regeneration"),
                 new Stat(47, "Spell penetration"),
-                new Stat(48, "Block value"),
+                new Stat(48, "Block value")
             };
         }
     }

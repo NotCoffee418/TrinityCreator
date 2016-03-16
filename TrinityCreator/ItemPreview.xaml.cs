@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TrinityCreator
 {
     /// <summary>
-    /// Interaction logic for ItemPreview.xaml
+    ///     Interaction logic for ItemPreview.xaml
     /// </summary>
     public partial class ItemPreview : UserControl, INotifyPropertyChanged
     {
+        private readonly TrinityItem item;
+
         public ItemPreview(TrinityItem _item)
         {
             InitializeComponent();
@@ -28,9 +19,6 @@ namespace TrinityCreator
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private TrinityItem item;
-
 
 
         private void screenshotClipboardBtn_Click(object sender, RoutedEventArgs e)
@@ -42,6 +30,5 @@ namespace TrinityCreator
         {
             MessageBox.Show("Not implemented yet");
         }
-        
     }
 }

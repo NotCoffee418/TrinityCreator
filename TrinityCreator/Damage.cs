@@ -1,27 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace TrinityCreator
 {
     public class Damage : INotifyPropertyChanged
     {
-        private int _minDamage;
         private int _maxDamage;
+        private int _minDamage;
         private int _speed;
         private DamageType _type;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public int MinDamage
         {
-            get
-            {
-                return _minDamage;
-            }
+            get { return _minDamage; }
             set
             {
                 _minDamage = value;
@@ -33,10 +23,7 @@ namespace TrinityCreator
 
         public int MaxDamage
         {
-            get
-            {
-                return _maxDamage;
-            }
+            get { return _maxDamage; }
             set
             {
                 _maxDamage = value;
@@ -48,10 +35,7 @@ namespace TrinityCreator
 
         public int Speed
         {
-            get
-            {
-                return _speed;
-            }
+            get { return _speed; }
             set
             {
                 _speed = value;
@@ -63,10 +47,7 @@ namespace TrinityCreator
 
         public DamageType Type
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
             set
             {
                 _type = value;
@@ -80,11 +61,11 @@ namespace TrinityCreator
         {
             get
             {
-                double avgDmg = (MinDamage + MaxDamage) / 2.0;
-                return avgDmg / (Speed / 1000.0);
+                var avgDmg = (MinDamage + MaxDamage)/2.0;
+                return avgDmg/(Speed/1000.0);
             }
         }
-        
+
         public string DpsInfo
         {
             get
@@ -99,6 +80,9 @@ namespace TrinityCreator
                 }
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private void RaisePropertyChanged(string property)
         {
             if (PropertyChanged != null)

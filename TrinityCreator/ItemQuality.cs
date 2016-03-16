@@ -1,34 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace TrinityCreator
 {
     public class ItemQuality : IKeyValue, INotifyPropertyChanged
     {
+        private Color _color;
+        private string _description;
+
+        private int _id;
+
         public ItemQuality(int id, string name, Color color)
         {
             Id = id;
             Description = name;
-            QualityColor = color; 
+            QualityColor = color;
         }
 
-        private int _id;
-        private string _description;
-        private Color _color;
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public Color QualityColor
+        {
+            get { return _color; }
+            set
+            {
+                _color = value;
+                RaisePropertyChanged("QualityColor");
+            }
+        }
 
         public int Id
         {
-            get
-            {
-                return _id;
-            }
+            get { return _id; }
             set
             {
                 _id = value;
@@ -38,10 +40,7 @@ namespace TrinityCreator
 
         public string Description
         {
-            get
-            {
-                return _description;
-            }
+            get { return _description; }
             set
             {
                 _description = value;
@@ -49,19 +48,12 @@ namespace TrinityCreator
             }
         }
 
-        public Color QualityColor
+        public override string ToString()
         {
-            get
-            {
-                return _color;
-            }
-            set
-            {
-                _color = value;
-                RaisePropertyChanged("QualityColor");
-            }
-
+            return Description;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged(string property)
         {
@@ -81,14 +73,10 @@ namespace TrinityCreator
             return found.First();
         }
 
-        public override string ToString()
-        {
-            return Description;
-        }
-
         public static ItemQuality[] GetQualityList()
         {
-            return new ItemQuality[] {
+            return new[]
+            {
                 new ItemQuality(0, "Poor", Color.FromRgb(157, 157, 157)),
                 new ItemQuality(1, "Common", Color.FromRgb(255, 255, 255)),
                 new ItemQuality(2, "Uncommon", Color.FromRgb(30, 255, 0)),
@@ -96,7 +84,7 @@ namespace TrinityCreator
                 new ItemQuality(4, "Epic", Color.FromRgb(163, 53, 238)),
                 new ItemQuality(5, "Legendary", Color.FromRgb(255, 128, 0)),
                 new ItemQuality(6, "Artifact", Colors.Red),
-                new ItemQuality(7, "Bind to Account", Color.FromRgb(229, 204, 128)),
+                new ItemQuality(7, "Bind to Account", Color.FromRgb(229, 204, 128))
             };
         }
     }

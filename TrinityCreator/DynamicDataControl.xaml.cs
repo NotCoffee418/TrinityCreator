@@ -1,26 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TrinityCreator
 {
     /// <summary>
-    /// Interaction logic for DynamicDataControl.xaml
+    ///     Interaction logic for DynamicDataControl.xaml
     /// </summary>
     public partial class DynamicDataControl : UserControl
     {
-        public DynamicDataControl(object[] keyOptions, int maxLines, bool showAll = false, string header1="", string header2 = "", string defaultValue = "")
+        private readonly string _defaultValue;
+
+        private readonly List<DockPanel> lines = new List<DockPanel>();
+
+        public DynamicDataControl(object[] keyOptions, int maxLines, bool showAll = false, string header1 = "",
+            string header2 = "", string defaultValue = "")
         {
             InitializeComponent();
             MaxLines = maxLines;
@@ -31,44 +27,20 @@ namespace TrinityCreator
             if (showAll)
             {
                 addLineBtn.Visibility = Visibility.Collapsed;
-                foreach (object key in KeyOptions)
+                foreach (var key in KeyOptions)
                     AddLine(key);
             }
             else AddLine();
         }
 
+        public int MaxLines { get; set; }
+
+        public object[] KeyOptions { get; set; }
+
         public event EventHandler DynamicDataChanged = delegate { };
 
-        private int _maxLines;
-        private object[] _keyOptions;
-        private string _defaultValue;
-        private List<DockPanel> lines = new List<DockPanel>();
-            
-        public int MaxLines
-        {
-            get
-            {
-                return _maxLines;
-            }
-            set
-            {
-                _maxLines = value;
-            }
-        }
-        public object[] KeyOptions
-        {
-            get
-            {
-                return _keyOptions;
-            }
-            set
-            {
-                _keyOptions = value;
-            }
-        }
-
         /// <summary>
-        /// Returns the user input
+        ///     Returns the user input
         /// </summary>
         /// <returns></returns>
         public Dictionary<object, string> GetUserInput()
@@ -76,8 +48,8 @@ namespace TrinityCreator
             var d = new Dictionary<object, string>();
             foreach (var line in lines)
             {
-                ComboBox cb = (ComboBox)line.Children[0];
-                TextBox tb = (TextBox)line.Children[1];
+                var cb = (ComboBox) line.Children[0];
+                var tb = (TextBox) line.Children[1];
 
                 if (tb.Text != "")
                     d.Add(cb.SelectedValue, tb.Text);
@@ -90,20 +62,20 @@ namespace TrinityCreator
             if (lines.Count() < MaxLines)
                 AddLine();
         }
-        
+
         private void AddHeaders(string header1, string header2)
         {
             if (header1 != "" && header2 != "")
             {
-                DockPanel dp = new DockPanel();
+                var dp = new DockPanel();
                 dp.Margin = new Thickness(0, 2, 0, 2);
 
-                Label l1 = new Label();
+                var l1 = new Label();
                 l1.Content = header1;
                 l1.Width = 150;
                 headerDp.Children.Add(l1);
 
-                Label l2 = new Label();
+                var l2 = new Label();
                 l2.Content = header2;
                 headerDp.Children.Add(l2);
             }
@@ -111,10 +83,10 @@ namespace TrinityCreator
 
         private void AddLine(object key = null, string value = "")
         {
-            DockPanel dp = new DockPanel();
+            var dp = new DockPanel();
             dp.Margin = new Thickness(0, 2, 0, 2);
 
-            ComboBox cb = new ComboBox();
+            var cb = new ComboBox();
             if (key == null)
                 cb.ItemsSource = KeyOptions;
             else
@@ -127,7 +99,7 @@ namespace TrinityCreator
             cb.SelectionChanged += TriggerChangedEvent;
             dp.Children.Add(cb);
 
-            TextBox tb = new TextBox();
+            var tb = new TextBox();
             tb.Margin = new Thickness(5, 0, 0, 0);
             tb.Text = _defaultValue;
             tb.TextChanged += TriggerChangedEvent;
@@ -140,12 +112,11 @@ namespace TrinityCreator
         }
 
 
-
         private void removeLineBtn_Click(object sender, RoutedEventArgs e)
         {
             if (lines.Count > 1 && lines.Count() <= MaxLines)
             {
-                int lastindex = lines.Count - 1;
+                var lastindex = lines.Count - 1;
                 lines.RemoveAt(lastindex);
                 dynamicSp.Children.RemoveAt(lastindex);
                 TriggerChangedEvent(this, new EventArgs());

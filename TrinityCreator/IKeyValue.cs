@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TrinityCreator
+﻿namespace TrinityCreator
 {
-    interface IKeyValue
+    internal interface IKeyValue
     {
-        int Id
-        {
-            get; set;
-        }
+        int Id { get; set; }
 
-        string Description
-        {
-            get; set;
-        }
+        string Description { get; set; }
 
         string ToString();
     }

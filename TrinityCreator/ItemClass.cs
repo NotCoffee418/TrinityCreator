@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
@@ -12,33 +8,6 @@ namespace TrinityCreator
         {
             Id = id;
             Description = description;
-        }
-
-        private int _id;
-        private string _description;
-
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
-
-        public string Description
-        {
-            get
-            {
-                return _description;
-            }
-            set
-            {
-                _description = value;
-            }
         }
 
         public ItemSubClass[] AvailableSubClasses
@@ -79,18 +48,22 @@ namespace TrinityCreator
             }
         }
 
+        public int Id { get; set; }
+
+        public string Description { get; set; }
+
         public override string ToString()
         {
             return Description;
         }
 
         /// <summary>
-        /// Return list of supported itemclasses
+        ///     Return list of supported itemclasses
         /// </summary>
         /// <returns></returns>
         public static ItemClass[] GetClassList()
         {
-            return new ItemClass[]
+            return new[]
             {
                 new ItemClass(2, "Weapon"),
                 new ItemClass(4, "Armor"),
@@ -105,7 +78,7 @@ namespace TrinityCreator
                 new ItemClass(12, "Quest"),
                 new ItemClass(13, "Key"),
                 new ItemClass(15, "Miscellaneous"),
-                new ItemClass(16, "Glyph"),
+                new ItemClass(16, "Glyph")
             };
         }
     }

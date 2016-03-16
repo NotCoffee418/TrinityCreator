@@ -1,7 +1,8 @@
 ﻿<Window x:Class="TrinityCreator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Trinity Creator" Height="800" Width="750" MinWidth="675" Icon="Resources/tclogo.png" Closing="Window_Closing">
+        Title="Trinity Creator" Height="800" Width="750" MinWidth="675" Icon="Resources/tclogo.png"
+        Closing="Window_Closing">
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -11,12 +12,13 @@
             </MenuItem>
 
             <MenuItem Header="Settings">
-                <MenuItem Name ="settingViewUnfinished" Header="View unfinished creators" IsCheckable="True" Click="settingViewUnfinished_Click" />
+                <MenuItem Name="settingViewUnfinished" Header="View unfinished creators" IsCheckable="True"
+                          Click="settingViewUnfinished_Click" />
             </MenuItem>
 
             <MenuItem Header="Support the creator by donating!" Foreground="DarkOrange" FontWeight="Bold">
-                <MenuItem Header="Why should I donate?" Click="WhyDonate_Click" Foreground="Black"/>
-                <MenuItem Header="Donate" Click="Donate_Click" Foreground="Black"/>
+                <MenuItem Header="Why should I donate?" Click="WhyDonate_Click" Foreground="Black" />
+                <MenuItem Header="Donate" Click="Donate_Click" Foreground="Black" />
             </MenuItem>
         </Menu>
         <TabControl x:Name="tabControl">
@@ -25,8 +27,10 @@
             <TabItem Header="Creature (UNFINISHED)" Name="creatureTab" Tag="unfinished" />
             <TabItem Header="More coming soon!">
                 <Grid Margin="0,0,0,0">
-                    <TextBlock TextWrapping="Wrap" Text="I'm working on this application almost daily so check back for updates regularly! You will be asked to update when starting Trinity Creator if an update is available." FontSize="18" VerticalAlignment="Top"/>
-                    <WebBrowser Name="updatesBrowser" Margin="0,50,0,0"/>
+                    <TextBlock TextWrapping="Wrap"
+                               Text="I'm working on this application almost daily so check back for updates regularly! You will be asked to update when starting Trinity Creator if an update is available."
+                               FontSize="18" VerticalAlignment="Top" />
+                    <WebBrowser Name="updatesBrowser" Margin="0,50,0,0" />
                 </Grid>
             </TabItem>
         </TabControl>

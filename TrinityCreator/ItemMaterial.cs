@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TrinityCreator
+﻿namespace TrinityCreator
 {
     public class ItemMaterial : IKeyValue
     {
@@ -14,32 +8,9 @@ namespace TrinityCreator
             Description = description;
         }
 
-        private int _id;
-        private string _description;
+        public int Id { get; set; }
 
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
-
-        public string Description
-        {
-            get
-            {
-                return _description;
-            }
-            set
-            {
-                _description = value;
-            }
-        }
+        public string Description { get; set; }
 
         internal static ItemMaterial GetConsumable()
         {

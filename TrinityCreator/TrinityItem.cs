@@ -1,54 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
+using TrinityCreator.Properties;
 
 namespace TrinityCreator
 {
     public class TrinityItem : INotifyPropertyChanged
     {
-        private string _name;
-        private string _quote;
-        private ItemClass _itemclass;
-        private ItemSubClass _itemsubclass;
-        private ItemQuality _quality;
-        private int _displayid;
-        private int _entryid;
-        private ItemBonding _binds;
-        private int _minlevel;
-        private int _maxallowed;
         private BitmaskStackPanel _allowedclass;
         private BitmaskStackPanel _allowedrace;
-        private Currency _valuebuy;
-        private Currency _valuesell;
-        private ItemInventoryType _inventoryType;
-        private BitmaskStackPanel _flags;
-        private BitmaskStackPanel _flagsExtra;
+        private int _ammoType;
+        private int _armor;
+        private BitmaskStackPanel _bagFamily;
+        private ItemBonding _binds;
+        private int _block;
         private int _buyCount;
-        private int _stackable;
         private int _containerSlots;
         private Damage _damageInfo;
-        private DynamicDataControl _resistances;
-        private int _ammoType;
+        private int _displayid;
         private int _durability;
+        private int _entryid;
+        private BitmaskStackPanel _flags;
+        private BitmaskStackPanel _flagsExtra;
         private DynamicDataControl _gemSockets;
+        private ItemInventoryType _inventoryType;
+        private ItemClass _itemclass;
+        private ItemSubClass _itemsubclass;
+        private int _maxallowed;
+        private int _minlevel;
+        private string _name;
+        private ItemQuality _quality;
+        private string _quote;
+        private DynamicDataControl _resistances;
         private SocketBonus _socketBonus;
+        private int _stackable;
         private DynamicDataControl _stat;
-        private int _armor;
-        private int _block;
-        private BitmaskStackPanel _bagFamily;
+        private Currency _valuebuy;
+        private Currency _valuesell;
 
         public string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
             set
             {
                 _name = value;
@@ -58,10 +50,7 @@ namespace TrinityCreator
 
         public string Quote
         {
-            get
-            {
-                return _quote;
-            }
+            get { return _quote; }
             set
             {
                 _quote = value;
@@ -71,10 +60,7 @@ namespace TrinityCreator
 
         public ItemClass Class
         {
-            get
-            {
-                return _itemclass;
-            }
+            get { return _itemclass; }
             set
             {
                 _itemclass = value;
@@ -84,10 +70,7 @@ namespace TrinityCreator
 
         public ItemSubClass ItemSubClass
         {
-            get
-            {
-                return _itemsubclass;
-            }
+            get { return _itemsubclass; }
             set
             {
                 _itemsubclass = value;
@@ -97,10 +80,7 @@ namespace TrinityCreator
 
         public ItemQuality Quality
         {
-            get
-            {
-                return _quality;
-            }
+            get { return _quality; }
             set
             {
                 _quality = value;
@@ -110,10 +90,7 @@ namespace TrinityCreator
 
         public int DisplayId
         {
-            get
-            {
-                return _displayid;
-            }
+            get { return _displayid; }
             set
             {
                 _displayid = value;
@@ -126,7 +103,7 @@ namespace TrinityCreator
             get
             {
                 if (_entryid == 0)
-                    _entryid = Properties.Settings.Default.nextid_item;
+                    _entryid = Settings.Default.nextid_item;
                 return _entryid;
             }
             set
@@ -138,10 +115,7 @@ namespace TrinityCreator
 
         public ItemBonding Binds
         {
-            get
-            {
-                return _binds;
-            }
+            get { return _binds; }
             set
             {
                 _binds = value;
@@ -151,10 +125,7 @@ namespace TrinityCreator
 
         public int MinLevel
         {
-            get
-            {
-                return _minlevel;
-            }
+            get { return _minlevel; }
             set
             {
                 _minlevel = value;
@@ -164,10 +135,7 @@ namespace TrinityCreator
 
         public int MaxAllowed
         {
-            get
-            {
-                return _maxallowed;
-            }
+            get { return _maxallowed; }
             set
             {
                 _maxallowed = value;
@@ -237,10 +205,7 @@ namespace TrinityCreator
 
         public ItemInventoryType InventoryType
         {
-            get
-            {
-                return _inventoryType;
-            }
+            get { return _inventoryType; }
             set
             {
                 _inventoryType = value;
@@ -280,10 +245,7 @@ namespace TrinityCreator
 
         public int BuyCount
         {
-            get
-            {
-                return _buyCount;
-            }
+            get { return _buyCount; }
             set
             {
                 _buyCount = value;
@@ -293,10 +255,7 @@ namespace TrinityCreator
 
         public int Stackable
         {
-            get
-            {
-                return _stackable;
-            }
+            get { return _stackable; }
             set
             {
                 _stackable = value;
@@ -306,10 +265,7 @@ namespace TrinityCreator
 
         public int ContainerSlots
         {
-            get
-            {
-                return _containerSlots;
-            }
+            get { return _containerSlots; }
             set
             {
                 _containerSlots = value;
@@ -337,7 +293,7 @@ namespace TrinityCreator
             get
             {
                 if (_resistances == null)
-                    _resistances = new DynamicDataControl(DamageType.GetDamageTypes(magicOnly: true), 6, showAll: true, defaultValue:"0");
+                    _resistances = new DynamicDataControl(DamageType.GetDamageTypes(true), 6, true, defaultValue: "0");
                 return _resistances;
             }
             set
@@ -349,10 +305,7 @@ namespace TrinityCreator
 
         public int AmmoType
         {
-            get
-            {
-                return _ammoType;
-            }
+            get { return _ammoType; }
             set
             {
                 _ammoType = value;
@@ -362,10 +315,7 @@ namespace TrinityCreator
 
         public int Durability
         {
-            get
-            {
-                return _durability;
-            }
+            get { return _durability; }
             set
             {
                 _durability = value;
@@ -378,7 +328,7 @@ namespace TrinityCreator
             get
             {
                 if (_gemSockets == null)
-                    _gemSockets = new DynamicDataControl(Socket.GetSocketList(), 3, showAll: false, header1: "Socket Type", header2: "Amount", defaultValue: "0");
+                    _gemSockets = new DynamicDataControl(Socket.GetSocketList(), 3, false, "Socket Type", "Amount", "0");
                 return _gemSockets;
             }
             set
@@ -390,10 +340,7 @@ namespace TrinityCreator
 
         public SocketBonus SocketBonus
         {
-            get
-            {
-                return _socketBonus;
-            }
+            get { return _socketBonus; }
             set
             {
                 _socketBonus = value;
@@ -406,7 +353,7 @@ namespace TrinityCreator
             get
             {
                 if (_stat == null)
-                    _stat = new DynamicDataControl(Stat.GetStatList(), 10, showAll: false, header1: "Stat", header2: "Value", defaultValue: "0");
+                    _stat = new DynamicDataControl(Stat.GetStatList(), 10, false, "Stat", "Value", "0");
                 return _stat;
             }
             set
@@ -418,22 +365,17 @@ namespace TrinityCreator
 
         public int Armor
         {
-            get
-            {
-                return _armor;
-            }
+            get { return _armor; }
             set
             {
                 _armor = value;
                 RaisePropertyChanged("Armor");
             }
         }
+
         public int Block
         {
-            get
-            {
-                return _block;
-            }
+            get { return _block; }
             set
             {
                 _block = value;
@@ -442,22 +384,20 @@ namespace TrinityCreator
         }
 
 
-        public BitmaskStackPanel BagFamily {
+        public BitmaskStackPanel BagFamily
+        {
             get
             {
                 if (_bagFamily == null)
                     _bagFamily = BitmaskStackPanel.GetBagFamilies();
                 return _bagFamily;
             }
-            set
-            {
-                _bagFamily = value;
-            }
+            set { _bagFamily = value; }
         }
 
 
-
         public event PropertyChangedEventHandler PropertyChanged;
+
         public void RaisePropertyChanged(string property)
         {
             if (PropertyChanged != null)
@@ -468,7 +408,7 @@ namespace TrinityCreator
 
 
         /// <summary>
-        /// Generates keyvaluepairs of the database table name and value to insert
+        ///     Generates keyvaluepairs of the database table name and value to insert
         /// </summary>
         /// <returns></returns>
         private Dictionary<string, string> GenerateQueryValues()
@@ -502,22 +442,22 @@ namespace TrinityCreator
             kvplist.Add("delay", DamageInfo.Speed.ToString());
             kvplist.Add("MaxDurability", Durability.ToString());
             kvplist.Add("ammo_type", AmmoType.ToString());
-            kvplist.Add("armor", Armor.ToString());     // armor
-            kvplist.Add("block", Block.ToString());     // block
+            kvplist.Add("armor", Armor.ToString()); // armor
+            kvplist.Add("block", Block.ToString()); // block
             kvplist.Add("BagFamily", BagFamily.BitmaskValue.ToString()); // bag family
             kvplist.Add("socketBonus", SocketBonus.Id.ToString());
 
             // Add gem sockets
-            int socketId = 1;
-            int totalSocketCount = 0;
+            var socketId = 1;
+            var totalSocketCount = 0;
             foreach (var gem in GemSockets.GetUserInput())
             {
                 if (gem.Value != "0" && gem.Value != "")
                 {
                     try
                     {
-                        Socket s = (Socket)gem.Key;
-                        int sCount = int.Parse(gem.Value); // validate
+                        var s = (Socket) gem.Key;
+                        var sCount = int.Parse(gem.Value); // validate
                         totalSocketCount += sCount;
                         kvplist.Add("socketColor_" + socketId, s.Id.ToString());
                         kvplist.Add("socketContent_" + socketId, sCount.ToString());
@@ -539,8 +479,8 @@ namespace TrinityCreator
                 // loops unique keys
                 foreach (var kvp in Resistances.GetUserInput())
                 {
-                    DamageType type = (DamageType)kvp.Key;
-                    int value = int.Parse(kvp.Value); // validate int
+                    var type = (DamageType) kvp.Key;
+                    var value = int.Parse(kvp.Value); // validate int
                     kvplist.Add(type.Description + "_res", value.ToString());
                 }
             }
@@ -552,12 +492,12 @@ namespace TrinityCreator
             // Stats
             try
             {
-                int count = 0;
+                var count = 0;
                 foreach (var kvp in Stats.GetUserInput())
                 {
                     count++;
-                    Stat stat = (Stat)kvp.Key;
-                    int value = int.Parse(kvp.Value); // validate int
+                    var stat = (Stat) kvp.Key;
+                    var value = int.Parse(kvp.Value); // validate int
                     kvplist.Add("stat_type" + count, stat.Id.ToString());
                     kvplist.Add("stat_value" + count, value.ToString());
                 }
@@ -567,18 +507,18 @@ namespace TrinityCreator
             {
                 throw new Exception("Invalid value in Stats.");
             }
-            
+
             return kvplist;
         }
 
         /// <summary>
-        /// Generates SQL query for the item
+        ///     Generates SQL query for the item
         /// </summary>
         /// <returns></returns>
         public string GenerateSqlQuery(Dictionary<string, string> kvplist = null)
         {
-            string query1 = "INSERT INTO item_template (";
-            string query2 = ") VALUES (";
+            var query1 = "INSERT INTO item_template (";
+            var query2 = ") VALUES (";
 
             // get correct kvplist
             if (kvplist == null)
