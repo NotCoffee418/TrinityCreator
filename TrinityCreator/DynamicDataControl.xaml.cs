@@ -37,7 +37,7 @@ namespace TrinityCreator
             else AddLine();
         }
 
-        public event EventHandler DynamicDataChanged;
+        public event EventHandler DynamicDataChanged = delegate { };
 
         private int _maxLines;
         private object[] _keyOptions;

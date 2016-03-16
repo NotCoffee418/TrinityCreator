@@ -337,7 +337,7 @@ namespace TrinityCreator
             get
             {
                 if (_resistances == null)
-                    _resistances = new DynamicDataControl(DamageType.GetDamageTypes(magicOnly: true), 6, unique: true);
+                    _resistances = new DynamicDataControl(DamageType.GetDamageTypes(magicOnly: true), 6, unique: true, defaultValue:"0");
                 return _resistances;
             }
             set

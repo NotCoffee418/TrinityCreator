@@ -39,18 +39,7 @@ namespace TrinityCreator
         private void ItemPage_Loaded(object sender, RoutedEventArgs e)
         {
             PrepareItemPage();
-            item.AllowedClass.BmspChanged += AllowedClass_BmspChanged;
-            item.AllowedRace.BmspChanged += AllowedRace_BmspChanged;
-        }
-
-        private void AllowedClass_BmspChanged(object sender, EventArgs e)
-        {
-            preview.allowedClassesLb.Text = item.AllowedClass.ToString();
-        }
-
-        private void AllowedRace_BmspChanged(object sender, EventArgs e)
-        {
-            preview.allowedRacesLb.Text = item.AllowedRace.ToString();
+            ShowCorrectClassBox();
         }
 
         private void PrepareItemPage()
@@ -68,8 +57,6 @@ namespace TrinityCreator
             itemQualityCb.ItemsSource = ItemQuality.GetQualityList();
             itemQualityCb.SelectedIndex = 0;
 
-            ShowCorrectClassBox();
-
             // Set item bounds
             itemBoundsCb.ItemsSource = ItemBonding.GetItemBondingList();
             itemBoundsCb.SelectedIndex = 0;
@@ -83,6 +70,16 @@ namespace TrinityCreator
 
             // set statsBox
             item.Stats.DynamicDataChanged += StatsChangedHandler;
+
+            // set resistance box
+            item.Resistances.DynamicDataChanged += ResistanceChangedHandler;
+
+            // Race & class allowed
+            item.AllowedClass.BmspChanged += AllowedClass_BmspChanged;
+            item.AllowedRace.BmspChanged += AllowedRace_BmspChanged;
+
+            // show resistances in preview
+            item.Resistances.DynamicDataChanged += ResistanceChangedHandler;
         }
 
 
@@ -207,6 +204,41 @@ namespace TrinityCreator
             {
                 preview.statsSp.Children.Clear();
             }
+        }
+
+        private void ResistanceChangedHandler(object sender, EventArgs e)
+        {
+            preview.resistanceSp.Children.Clear();
+            try
+            {
+                foreach (var line in item.Resistances.GetUserInput())
+                {
+                    DamageType dt = (DamageType)line.Key;
+                    if (line.Value != "0")
+                    {
+                        Label lab = new Label();
+                        string amount = int.Parse(line.Value).ToString("+#;-#"); // Validate, add + or -
+                        lab.Content = amount + " " + dt.Description;
+                        lab.Foreground = Brushes.White;
+                        lab.Margin = new Thickness(0, -5, 0, 0);
+                        preview.resistanceSp.Children.Add(lab);
+                    }
+                }
+            }
+            catch
+            {
+                preview.resistanceSp.Children.Clear();
+            }
+        }
+
+        private void AllowedClass_BmspChanged(object sender, EventArgs e)
+        {
+            preview.allowedClassesLb.Text = item.AllowedClass.ToString();
+        }
+
+        private void AllowedRace_BmspChanged(object sender, EventArgs e)
+        {
+            preview.allowedRacesLb.Text = item.AllowedRace.ToString();
         }
         #endregion
 

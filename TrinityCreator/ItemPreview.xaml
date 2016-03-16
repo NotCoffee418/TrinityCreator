@@ -46,6 +46,7 @@
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Name="statsSp" />
+                <StackPanel Name="resistanceSp" />
 
                 <!-- Only visible when sockets available -->
                 <!-- todo: Ensure you can for example have two yellow sockets -->
