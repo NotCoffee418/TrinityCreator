@@ -91,11 +91,7 @@ namespace TrinityCreator
             {
                 try
                 {
-
-                    string typeText = " ";
-                    if (Type.Id != 0)
-                        typeText = " " + Type.Description.ToLower() + " ";
-                    return string.Format("({0}{1}damage per second)", Dps.ToString("0.00"), typeText);
+                    return string.Format("({0} damage per second)", Dps.ToString("0.00"));
                 }
                 catch
                 {

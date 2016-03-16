@@ -20,7 +20,7 @@ namespace TrinityCreator
     /// </summary>
     public partial class DynamicDataControl : UserControl
     {
-        public DynamicDataControl(object[] keyOptions, int maxLines, bool unique = false, string header1="", string header2 = "", string defaultValue = "")
+        public DynamicDataControl(object[] keyOptions, int maxLines, bool showAll = false, string header1="", string header2 = "", string defaultValue = "")
         {
             InitializeComponent();
             MaxLines = maxLines;
@@ -28,7 +28,7 @@ namespace TrinityCreator
             AddHeaders(header1, header2);
             _defaultValue = defaultValue;
 
-            if (unique)
+            if (showAll)
             {
                 addLineBtn.Visibility = Visibility.Collapsed;
                 foreach (object key in KeyOptions)
@@ -101,13 +101,11 @@ namespace TrinityCreator
                 Label l1 = new Label();
                 l1.Content = header1;
                 l1.Width = 150;
-                dp.Children.Add(l1);
+                headerDp.Children.Add(l1);
 
                 Label l2 = new Label();
                 l2.Content = header2;
-                dp.Children.Add(l2);
-
-                dynamicSp.Children.Add(dp);
+                headerDp.Children.Add(l2);
             }
         }
 
@@ -137,6 +135,21 @@ namespace TrinityCreator
 
             lines.Add(dp);
             dynamicSp.Children.Add(dp);
+
+            TriggerChangedEvent(this, new EventArgs());
+        }
+
+
+
+        private void removeLineBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (lines.Count > 1 && lines.Count() <= MaxLines)
+            {
+                int lastindex = lines.Count - 1;
+                lines.RemoveAt(lastindex);
+                dynamicSp.Children.RemoveAt(lastindex);
+                TriggerChangedEvent(this, new EventArgs());
+            }
         }
 
         private void TriggerChangedEvent(object sender, EventArgs e)

@@ -7,7 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
+        <DockPanel Name="headerDp" />
         <StackPanel x:Name="dynamicSp" />
-        <Button x:Name="addLineBtn" Width="70" Height="30" HorizontalAlignment="Left" Margin="5,5,0,0" Content="Add new" Click="addLineBtn_Click"/>
+        <DockPanel>
+            <Button x:Name="addLineBtn" Width="70" Height="30" HorizontalAlignment="Left" Margin="5,5,0,0" Content="Add" Click="addLineBtn_Click"/>
+            <Button x:Name="removeLineBtn" Width="70" Height="30" HorizontalAlignment="Left" Margin="5,5,0,0" Content="Remove" Click="removeLineBtn_Click"/>
+        </DockPanel>
     </StackPanel>
 </UserControl>

@@ -28,6 +28,8 @@
                             <TextBlock Text="{Binding DamageInfo.MinDamage}" />
                             <TextBlock Text="-" />
                             <TextBlock Text="{Binding DamageInfo.MaxDamage}" />
+                            <TextBlock Text="{Binding DamageInfo.Type}" Visibility="{Binding DamageInfo.Type.Id, Converter={StaticResource valueVisibilityConverter}}"/>
+                            <TextBlock Text="Damage" />
                         </TextBlock>
                         <Label Name="weaponSpeedLbl" Content="{Binding DamageInfo.Speed, Converter={StaticResource weaponSpeedToStringConverter}}" Foreground="White" FontSize="14" HorizontalAlignment="Right"/>
                     </DockPanel>
@@ -78,7 +80,7 @@
                         <TextBlock Text="{Binding Durability}" />
                         <TextBlock Text=")" />
                     </TextBlock>
-                <Label Name="itemQuoteLbl" Content="{Binding Quote}" ContentStringFormat="''{0}''" Foreground="#ddcba5" FontSize="14"/>
+                <Label Name="itemQuoteLbl" Content="{Binding Quote}" ContentStringFormat="''{0}''" Foreground="#ffd200" FontSize="14"/>
 
                 <!-- Buy price -->
                 <DockPanel Name="buyDockPanel" Visibility="{Binding ValueBuy.Amount, Converter={StaticResource valueVisibilityConverter}}">

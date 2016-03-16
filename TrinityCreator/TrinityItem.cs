@@ -337,7 +337,7 @@ namespace TrinityCreator
             get
             {
                 if (_resistances == null)
-                    _resistances = new DynamicDataControl(DamageType.GetDamageTypes(magicOnly: true), 6, unique: true, defaultValue:"0");
+                    _resistances = new DynamicDataControl(DamageType.GetDamageTypes(magicOnly: true), 6, showAll: true, defaultValue:"0");
                 return _resistances;
             }
             set
@@ -378,7 +378,7 @@ namespace TrinityCreator
             get
             {
                 if (_gemSockets == null)
-                    _gemSockets = new DynamicDataControl(Socket.GetSocketList(), 3, unique: false, header1: "Socket Type", header2: "Amount", defaultValue: "0");
+                    _gemSockets = new DynamicDataControl(Socket.GetSocketList(), 3, showAll: false, header1: "Socket Type", header2: "Amount", defaultValue: "0");
                 return _gemSockets;
             }
             set
@@ -406,7 +406,7 @@ namespace TrinityCreator
             get
             {
                 if (_stat == null)
-                    _stat = new DynamicDataControl(Stat.GetStatList(), 10, unique: false, header1: "Stat", header2: "Value", defaultValue: "0");
+                    _stat = new DynamicDataControl(Stat.GetStatList(), 10, showAll: false, header1: "Stat", header2: "Value", defaultValue: "0");
                 return _stat;
             }
             set
@@ -548,7 +548,6 @@ namespace TrinityCreator
             {
                 throw new Exception("Invalid value in magic resistance.");
             }
-
 
             // Stats
             try
