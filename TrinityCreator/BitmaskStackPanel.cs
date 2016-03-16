@@ -37,7 +37,7 @@ namespace TrinityCreator
         private List<BitmaskCheckBox> _checkboxes;
         private long _defaultValue;
 
-        public event EventHandler BmspChanged;
+        public event EventHandler BmspChanged = delegate { };
 
         public List<BitmaskCheckBox> Checkboxes
         {

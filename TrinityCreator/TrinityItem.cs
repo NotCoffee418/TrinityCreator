@@ -501,6 +501,11 @@ namespace TrinityCreator
             kvplist.Add("dmg_type1", DamageInfo.Type.Id.ToString());
             kvplist.Add("delay", DamageInfo.Speed.ToString());
             kvplist.Add("MaxDurability", Durability.ToString());
+            kvplist.Add("ammo_type", AmmoType.ToString());
+            kvplist.Add("armor", Armor.ToString());     // armor
+            kvplist.Add("block", Block.ToString());     // block
+            kvplist.Add("BagFamily", BagFamily.BitmaskValue.ToString()); // bag family
+            kvplist.Add("socketBonus", SocketBonus.Id.ToString());
 
             // Add gem sockets
             int socketId = 1;
@@ -523,8 +528,6 @@ namespace TrinityCreator
                     }
                 }
             }
-            // Socket bonus
-            kvplist.Add("socketBonus", SocketBonus.Id.ToString());
 
 
             // resistances
@@ -543,30 +546,25 @@ namespace TrinityCreator
                 throw new Exception("Invalid value in magic resistance.");
             }
 
-            kvplist.Add("ammo_type", AmmoType.ToString());
 
             // Stats
             try
             {
-                int count = 1;
+                int count = 0;
                 foreach (var kvp in Stats.GetUserInput())
                 {
+                    count++;
                     Stat stat = (Stat)kvp.Key;
                     int value = int.Parse(kvp.Value); // validate int
                     kvplist.Add("stat_type" + count, stat.Id.ToString());
                     kvplist.Add("stat_value" + count, value.ToString());
-                    count++;
                 }
+                kvplist.Add("StatsCount", count.ToString());
             }
             catch
             {
-                throw new Exception("Invalid value in magic resistance.");
+                throw new Exception("Invalid value in Stats.");
             }
-
-
-            kvplist.Add("armor", Armor.ToString());     // armor
-            kvplist.Add("block", Block.ToString());     // block
-            kvplist.Add("BagFamily", BagFamily.BitmaskValue.ToString()); // bag family
             
             return kvplist;
         }
