@@ -92,6 +92,9 @@
       <DependentUpon>DynamicDataControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="IKeyValue.cs" />
+    <Compile Include="QuestPage.xaml.cs">
+      <DependentUpon>QuestPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TrinityItem.cs" />
     <Compile Include="ItemBonding.cs" />
     <Compile Include="ItemClass.cs" />
@@ -137,6 +140,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="QuestPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

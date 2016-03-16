@@ -8,7 +8,7 @@ namespace TrinityCreator.Database
 {
     internal class Connection
     {
-        private static MySqlConnection conn;
+        private static MySqlConnection _conn;
 
         public static bool IsAlive { get; private set; }
 
@@ -20,16 +20,16 @@ namespace TrinityCreator.Database
         /// <param name="pass"></param>
         /// <param name="dbName"></param>
         /// <returns>null on success or exception</returns>
-        internal static Exception Test(MySqlConnectionStringBuilder conn_string = null)
+        internal static Exception Test(MySqlConnectionStringBuilder connString = null)
         {
-            if (conn_string == null)
-                conn_string = Settings.Default.worldDb;
-            else if (conn_string == Settings.Default.worldDb && IsAlive)
+            if (connString == null)
+                connString = Settings.Default.worldDb;
+            else if (connString == Settings.Default.worldDb && IsAlive)
                 return null;
 
             try
             {
-                var c = new MySqlConnection(conn_string.ToString());
+                var c = new MySqlConnection(connString.ToString());
                 c.Open();
                 c.Close();
                 return null;
@@ -57,8 +57,8 @@ namespace TrinityCreator.Database
 
             try
             {
-                conn = new MySqlConnection(Settings.Default.worldDb.ToString());
-                conn.Open();
+                _conn = new MySqlConnection(Settings.Default.worldDb.ToString());
+                _conn.Open();
                 IsAlive = true;
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace TrinityCreator.Database
             if (!IsAlive)
                 return;
 
-            conn.Close();
+            _conn.Close();
             IsAlive = false;
         }
 
@@ -110,7 +110,7 @@ namespace TrinityCreator.Database
             Open();
 
             var result = new DataTable();
-            var cmd = new MySqlCommand(query, conn);
+            var cmd = new MySqlCommand(query, _conn);
             using (var rdr = cmd.ExecuteReader())
             {
                 result.Load(rdr);

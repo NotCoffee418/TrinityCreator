@@ -15,16 +15,16 @@ namespace TrinityCreator
     /// </summary>
     public partial class ItemPage : UserControl
     {
-        private TrinityItem item;
-        private ItemPreview preview;
+        private TrinityItem _item;
+        private ItemPreview _preview;
 
         public ItemPage()
         {
             InitializeComponent();
 
             // load preview & set item
-            item = new TrinityItem();
-            DataContext = item;
+            _item = new TrinityItem();
+            DataContext = _item;
             Loaded += ItemPage_Loaded;
         }
 
@@ -36,42 +36,42 @@ namespace TrinityCreator
 
         private void PrepareItemPage()
         {
-            preview = new ItemPreview(item);
-            previewBox.Content = preview;
+            _preview = new ItemPreview(_item);
+            PreviewBox.Content = _preview;
 
             // Set class
-            itemClassCb.SelectedIndex = 0;
+            ItemClassCb.SelectedIndex = 0;
 
             // Set socket bonus
-            socketBonusCb.SelectedIndex = 0;
+            SocketBonusCb.SelectedIndex = 0;
 
             // Set quality
-            itemQualityCb.ItemsSource = ItemQuality.GetQualityList();
-            itemQualityCb.SelectedIndex = 0;
+            ItemQualityCb.ItemsSource = ItemQuality.GetQualityList();
+            ItemQualityCb.SelectedIndex = 0;
 
             // Set item bounds
-            itemBoundsCb.ItemsSource = ItemBonding.GetItemBondingList();
-            itemBoundsCb.SelectedIndex = 0;
+            ItemBoundsCb.ItemsSource = ItemBonding.GetItemBondingList();
+            ItemBoundsCb.SelectedIndex = 0;
 
             // Set weapon groupbox
-            damageTypeCb.ItemsSource = DamageType.GetDamageTypes();
-            damageTypeCb.SelectedIndex = 0;
+            DamageTypeCb.ItemsSource = DamageType.GetDamageTypes();
+            DamageTypeCb.SelectedIndex = 0;
 
             // Set gemSockets groupbox
-            item.GemSockets.DynamicDataChanged += GemDataChangedHander;
+            _item.GemSockets.DynamicDataChanged += GemDataChangedHander;
 
             // set statsBox
-            item.Stats.DynamicDataChanged += StatsChangedHandler;
+            _item.Stats.DynamicDataChanged += StatsChangedHandler;
 
             // set resistance box
-            item.Resistances.DynamicDataChanged += ResistanceChangedHandler;
+            _item.Resistances.DynamicDataChanged += ResistanceChangedHandler;
 
             // Race & class allowed
-            item.AllowedClass.BmspChanged += AllowedClass_BmspChanged;
-            item.AllowedRace.BmspChanged += AllowedRace_BmspChanged;
+            _item.AllowedClass.BmspChanged += AllowedClass_BmspChanged;
+            _item.AllowedRace.BmspChanged += AllowedRace_BmspChanged;
 
             // show resistances in preview
-            item.Resistances.DynamicDataChanged += ResistanceChangedHandler;
+            _item.Resistances.DynamicDataChanged += ResistanceChangedHandler;
         }
 
 
@@ -81,54 +81,54 @@ namespace TrinityCreator
         private void ShowCorrectClassBox()
         {
             // Hide everything
-            weaponBox.Visibility = Visibility.Collapsed;
-            armorBox.Visibility = Visibility.Collapsed;
-            equipmentBox.Visibility = Visibility.Collapsed;
-            containerBox.Visibility = Visibility.Collapsed;
-            vendorBox.Visibility = Visibility.Collapsed;
-            addResistancesCb.Visibility = Visibility.Collapsed;
-            addGemSocketsCb.Visibility = Visibility.Collapsed;
-            statsBox.Visibility = Visibility.Collapsed;
-            preview.statsSp.Visibility = Visibility.Collapsed;
+            WeaponBox.Visibility = Visibility.Collapsed;
+            ArmorBox.Visibility = Visibility.Collapsed;
+            EquipmentBox.Visibility = Visibility.Collapsed;
+            ContainerBox.Visibility = Visibility.Collapsed;
+            VendorBox.Visibility = Visibility.Collapsed;
+            AddResistancesCb.Visibility = Visibility.Collapsed;
+            AddGemSocketsCb.Visibility = Visibility.Collapsed;
+            StatsBox.Visibility = Visibility.Collapsed;
+            _preview.StatsSp.Visibility = Visibility.Collapsed;
 
             try
             {
-                switch (item.Class.Id)
+                switch (_item.Class.Id)
                 {
                     case 0: // Consumable
 
                         break;
                     case 1: // Container
-                        containerBox.Visibility = Visibility.Visible;
-                        vendorBox.Visibility = Visibility.Visible;
+                        ContainerBox.Visibility = Visibility.Visible;
+                        VendorBox.Visibility = Visibility.Visible;
                         break;
                     case 2: // Weapon
-                        weaponBox.Visibility = Visibility.Visible;
-                        equipmentBox.Visibility = Visibility.Visible;
-                        vendorBox.Visibility = Visibility.Visible;
-                        addResistancesCb.Visibility = Visibility.Visible;
-                        addGemSocketsCb.Visibility = Visibility.Visible;
-                        statsBox.Visibility = Visibility.Visible;
-                        preview.statsSp.Visibility = Visibility.Visible;
+                        WeaponBox.Visibility = Visibility.Visible;
+                        EquipmentBox.Visibility = Visibility.Visible;
+                        VendorBox.Visibility = Visibility.Visible;
+                        AddResistancesCb.Visibility = Visibility.Visible;
+                        AddGemSocketsCb.Visibility = Visibility.Visible;
+                        StatsBox.Visibility = Visibility.Visible;
+                        _preview.StatsSp.Visibility = Visibility.Visible;
                         break;
                     case 3: // Gems
-                        vendorBox.Visibility = Visibility.Visible;
+                        VendorBox.Visibility = Visibility.Visible;
                         //GemPropertiesBox
                         break;
                     case 4: // Armor
-                        armorBox.Visibility = Visibility.Visible;
-                        equipmentBox.Visibility = Visibility.Visible;
-                        vendorBox.Visibility = Visibility.Visible;
-                        addResistancesCb.Visibility = Visibility;
-                        addGemSocketsCb.Visibility = Visibility.Visible;
-                        statsBox.Visibility = Visibility.Visible;
-                        preview.statsSp.Visibility = Visibility.Visible;
+                        ArmorBox.Visibility = Visibility.Visible;
+                        EquipmentBox.Visibility = Visibility.Visible;
+                        VendorBox.Visibility = Visibility.Visible;
+                        AddResistancesCb.Visibility = Visibility;
+                        AddGemSocketsCb.Visibility = Visibility.Visible;
+                        StatsBox.Visibility = Visibility.Visible;
+                        _preview.StatsSp.Visibility = Visibility.Visible;
                         break;
                     case 5: // Reagent
-                        vendorBox.Visibility = Visibility.Visible;
+                        VendorBox.Visibility = Visibility.Visible;
                         break;
                     case 6: // Projectile
-                        vendorBox.Visibility = Visibility.Visible;
+                        VendorBox.Visibility = Visibility.Visible;
                         break;
                     case 7: // Trade goods
 
@@ -137,7 +137,7 @@ namespace TrinityCreator
                         //Recipe spell list & box?
                         break;
                     case 11: // Quiver
-                        containerBox.Visibility = Visibility.Visible;
+                        ContainerBox.Visibility = Visibility.Visible;
                         // auto set BagFamily based on subclass, clear on classchange
                         break;
                     case 12: // Quest
@@ -159,34 +159,34 @@ namespace TrinityCreator
 
         private void ShowCorrectInfoLabel()
         {
-            var clid = item.Class.Id;
-            preview.subclassLeftNoteLbl.Visibility = Visibility.Visible;
+            var clid = _item.Class.Id;
+            _preview.SubclassLeftNoteLbl.Visibility = Visibility.Visible;
 
             if (clid == 1) // Container
             {
                 var b = new Binding();
-                b.Source = item;
+                b.Source = _item;
                 b.Path = new PropertyPath("ContainerSlots");
                 b.StringFormat = "{0} Slots";
                 b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                BindingOperations.SetBinding(preview.subclassLeftNoteLbl, TextBlock.TextProperty, b);
-                preview.subclassRightNoteLbl.Text = item.ItemSubClass.Description;
+                BindingOperations.SetBinding(_preview.SubclassLeftNoteLbl, TextBlock.TextProperty, b);
+                _preview.SubclassRightNoteLbl.Text = _item.ItemSubClass.Description;
             }
             else if (clid == 2 || clid == 4) // Weapon & armor
             {
-                preview.subclassLeftNoteLbl.Text = item.InventoryType.Description;
-                preview.subclassRightNoteLbl.Text = item.ItemSubClass.PreviewNoteRight;
+                _preview.SubclassLeftNoteLbl.Text = _item.InventoryType.Description;
+                _preview.SubclassRightNoteLbl.Text = _item.ItemSubClass.PreviewNoteRight;
             }
             else if (clid >= 11 && clid <= 15) // right only
             {
-                preview.subclassLeftNoteLbl.Visibility = Visibility.Collapsed;
-                preview.subclassRightNoteLbl.Text = item.ItemSubClass.Description;
+                _preview.SubclassLeftNoteLbl.Visibility = Visibility.Collapsed;
+                _preview.SubclassRightNoteLbl.Text = _item.ItemSubClass.Description;
             }
 
             else // default
             {
-                preview.subclassLeftNoteLbl.Text = ((ItemClass) itemClassCb.SelectedValue).Description;
-                preview.subclassRightNoteLbl.Text = ((ItemSubClass) itemSubClassCb.SelectedValue).Description;
+                _preview.SubclassLeftNoteLbl.Text = ((ItemClass) ItemClassCb.SelectedValue).Description;
+                _preview.SubclassRightNoteLbl.Text = ((ItemSubClass) ItemSubClassCb.SelectedValue).Description;
             }
         }
 
@@ -194,16 +194,16 @@ namespace TrinityCreator
 
         private void itemQualityCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var q = (ItemQuality) itemQualityCb.SelectedValue;
-            preview.itemNameLbl.Foreground = new SolidColorBrush(q.QualityColor);
+            var q = (ItemQuality) ItemQualityCb.SelectedValue;
+            _preview.ItemNameLbl.Foreground = new SolidColorBrush(q.QualityColor);
 
             // set/unset account bound flags
             try
             {
-                var bmcbr1 = from cb in item.Flags.Children.OfType<BitmaskCheckBox>()
+                var bmcbr1 = from cb in _item.Flags.Children.OfType<BitmaskCheckBox>()
                     where (long) cb.Tag == 134217728
                     select cb;
-                var bmcbr2 = from cb in item.FlagsExtra.Children.OfType<BitmaskCheckBox>()
+                var bmcbr2 = from cb in _item.FlagsExtra.Children.OfType<BitmaskCheckBox>()
                     where (long) cb.Tag == 131072
                     select cb;
                 if (q.Id == 7)
@@ -262,10 +262,10 @@ namespace TrinityCreator
 
         private void GemDataChangedHander(object sender, EventArgs e)
         {
-            preview.gemsPanel.Children.Clear();
+            _preview.GemsPanel.Children.Clear();
             try
             {
-                foreach (var line in item.GemSockets.GetUserInput())
+                foreach (var line in _item.GemSockets.GetUserInput())
                 {
                     var count = int.Parse(line.Value);
                     var sock = (Socket) line.Key;
@@ -286,22 +286,22 @@ namespace TrinityCreator
                         lab.Margin = new Thickness(0, -5, 0, 0);
                         dp.Children.Add(lab);
 
-                        preview.gemsPanel.Children.Add(dp);
+                        _preview.GemsPanel.Children.Add(dp);
                     }
                 }
             }
             catch
             {
-                preview.gemsPanel.Children.Clear();
+                _preview.GemsPanel.Children.Clear();
             }
         }
 
         private void StatsChangedHandler(object sender, EventArgs e)
         {
-            preview.statsSp.Children.Clear();
+            _preview.StatsSp.Children.Clear();
             try
             {
-                foreach (var line in item.Stats.GetUserInput())
+                foreach (var line in _item.Stats.GetUserInput())
                 {
                     var stat = (Stat) line.Key;
                     if (line.Value != "0")
@@ -311,22 +311,22 @@ namespace TrinityCreator
                         lab.Content = amount + " " + stat.Description;
                         lab.Foreground = Brushes.White;
                         lab.Margin = new Thickness(0, -5, 0, 0);
-                        preview.statsSp.Children.Add(lab);
+                        _preview.StatsSp.Children.Add(lab);
                     }
                 }
             }
             catch
             {
-                preview.statsSp.Children.Clear();
+                _preview.StatsSp.Children.Clear();
             }
         }
 
         private void ResistanceChangedHandler(object sender, EventArgs e)
         {
-            preview.resistanceSp.Children.Clear();
+            _preview.ResistanceSp.Children.Clear();
             try
             {
-                foreach (var line in item.Resistances.GetUserInput())
+                foreach (var line in _item.Resistances.GetUserInput())
                 {
                     var dt = (DamageType) line.Key;
                     if (line.Value != "0")
@@ -336,24 +336,24 @@ namespace TrinityCreator
                         lab.Content = amount + " " + dt.Description;
                         lab.Foreground = Brushes.White;
                         lab.Margin = new Thickness(0, -5, 0, 0);
-                        preview.resistanceSp.Children.Add(lab);
+                        _preview.ResistanceSp.Children.Add(lab);
                     }
                 }
             }
             catch
             {
-                preview.resistanceSp.Children.Clear();
+                _preview.ResistanceSp.Children.Clear();
             }
         }
 
         private void AllowedClass_BmspChanged(object sender, EventArgs e)
         {
-            preview.allowedClassesLb.Text = item.AllowedClass.ToString();
+            _preview.AllowedClassesLb.Text = _item.AllowedClass.ToString();
         }
 
         private void AllowedRace_BmspChanged(object sender, EventArgs e)
         {
-            preview.allowedRacesLb.Text = item.AllowedRace.ToString();
+            _preview.AllowedRacesLb.Text = _item.AllowedRace.ToString();
         }
 
         #endregion
@@ -364,17 +364,17 @@ namespace TrinityCreator
         {
             try
             {
-                var query = item.GenerateSqlQuery();
+                var query = _item.GenerateSqlQuery();
                 var sfd = new SaveFileDialog();
                 sfd.DefaultExt = ".sql";
-                sfd.FileName = "Item " + item.EntryId;
+                sfd.FileName = "Item " + _item.EntryId;
                 sfd.Filter = "SQL File (.sql)|*.sql";
                 if (sfd.ShowDialog() == true)
                 {
                     File.WriteAllText(sfd.FileName, query);
 
                     // Increase next item's entry id
-                    Settings.Default.nextid_item = int.Parse(entryIdTxt.Text) + 1;
+                    Settings.Default.nextid_item = int.Parse(EntryIdTxt.Text) + 1;
                     Settings.Default.Save();
 
                     MessageBox.Show("Your item has been saved.", "Complete", MessageBoxButton.OK,
@@ -393,9 +393,9 @@ namespace TrinityCreator
                 "Discard item", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                item = new TrinityItem();
+                _item = new TrinityItem();
                 DataContext = null;
-                DataContext = item;
+                DataContext = _item;
                 PrepareItemPage();
             }
         }

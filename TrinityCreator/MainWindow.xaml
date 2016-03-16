@@ -7,12 +7,12 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Configuration">
-                <MenuItem Name="configureDbc" Header="Configure DB_C Path" />
-                <MenuItem Name="configureMysql" Header="Configure _MySQL" Click="configureMysql_Click" />
+                <MenuItem Name="ConfigureDbc" Header="Configure DB_C Path" />
+                <MenuItem Name="ConfigureMysql" Header="Configure _MySQL" Click="configureMysql_Click" />
             </MenuItem>
 
             <MenuItem Header="Settings">
-                <MenuItem Name="settingViewUnfinished" Header="View unfinished creators" IsCheckable="True"
+                <MenuItem Name="SettingViewUnfinished" Header="View unfinished creators" IsCheckable="True"
                           Click="settingViewUnfinished_Click" />
             </MenuItem>
 
@@ -21,16 +21,16 @@
                 <MenuItem Header="Donate" Click="Donate_Click" Foreground="Black" />
             </MenuItem>
         </Menu>
-        <TabControl x:Name="tabControl">
-            <TabItem Header="Item" Name="itemTab" />
-            <TabItem Header="Quest (UNFINISHED)" Name="questTab" Tag="unfinished" />
-            <TabItem Header="Creature (UNFINISHED)" Name="creatureTab" Tag="unfinished" />
+        <TabControl x:Name="TabControl">
+            <TabItem Header="Item" Name="ItemTab" />
+            <TabItem Header="Quest (UNFINISHED)" Name="QuestTab" Tag="unfinished" />
+            <TabItem Header="Creature (UNFINISHED)" Name="CreatureTab" Tag="unfinished" />
             <TabItem Header="More coming soon!">
                 <Grid Margin="0,0,0,0">
                     <TextBlock TextWrapping="Wrap"
                                Text="I'm working on this application almost daily so check back for updates regularly! You will be asked to update when starting Trinity Creator if an update is available."
                                FontSize="18" VerticalAlignment="Top" />
-                    <WebBrowser Name="updatesBrowser" Margin="0,50,0,0" />
+                    <WebBrowser Name="UpdatesBrowser" Margin="0,50,0,0" />
                 </Grid>
             </TabItem>
         </TabControl>

@@ -30,13 +30,14 @@ namespace TrinityCreator
 
             // Load usable creators
 
-            itemTab.Content = new ItemPage();
+            ItemTab.Content = new ItemPage();
+            QuestTab.Content = new QuestPage();
 
 
             // view unfinished when set & on debug
             try
             {
-                updatesBrowser.Navigate("https://github.com/RStijn/TrinityCreator/commits/master");
+                UpdatesBrowser.Navigate("https://github.com/RStijn/TrinityCreator/commits/master");
             }
             catch
             {
@@ -66,8 +67,8 @@ namespace TrinityCreator
 
         private void HideUnfinishedPages()
         {
-            questTab.Visibility = Visibility.Collapsed;
-            creatureTab.Visibility = Visibility.Collapsed;
+            QuestTab.Visibility = Visibility.Collapsed;
+            CreatureTab.Visibility = Visibility.Collapsed;
         }
 
         private void configureMysql_Click(object sender, RoutedEventArgs e)
@@ -79,7 +80,7 @@ namespace TrinityCreator
         private void settingViewUnfinished_Click(object sender, RoutedEventArgs e)
         {
             Settings.Default.viewUnfinishedCreators = false;
-            if (settingViewUnfinished.IsChecked)
+            if (SettingViewUnfinished.IsChecked)
             {
                 var msg = string.Format("Not all displayed features in unfinished creators will work correctly.{0}" +
                                         "Are you sure you want to view Unfinished creators?", Environment.NewLine);
@@ -91,7 +92,7 @@ namespace TrinityCreator
                     MessageBox.Show("Restart Trinity Creator to view changes.", "Setting saved", MessageBoxButton.OK,
                         MessageBoxImage.Information);
                 }
-                else settingViewUnfinished.IsChecked = false;
+                else SettingViewUnfinished.IsChecked = false;
             }
 
             Settings.Default.Save();

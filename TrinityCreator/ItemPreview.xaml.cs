@@ -9,13 +9,13 @@ namespace TrinityCreator
     /// </summary>
     public partial class ItemPreview : UserControl, INotifyPropertyChanged
     {
-        private readonly TrinityItem item;
+        private readonly TrinityItem _item;
 
         public ItemPreview(TrinityItem _item)
         {
             InitializeComponent();
-            item = _item;
-            DataContext = item;
+            this._item = _item;
+            DataContext = this._item;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

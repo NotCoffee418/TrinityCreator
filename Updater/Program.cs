@@ -7,14 +7,14 @@ namespace TrinityCreatorUpdater
 {
     internal class Program
     {
-        private static string path = string.Empty;
+        private static string _path = string.Empty;
 
         private static void Main(string[] args)
         {
             Console.WriteLine("- Trinity Creator Updater -");
-            path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\TrinityCreator.exe";
+            _path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\TrinityCreator.exe";
             if (args.Length > 0)
-                path = args[0];
+                _path = args[0];
 
             while (Process.GetProcessesByName("TrinityCreator").Length != 0)
             {
@@ -33,11 +33,11 @@ namespace TrinityCreatorUpdater
             var c = new WebClient();
             c.DownloadFile(
                 "https://github.com/RStijn/TrinityCreator/blob/master/TrinityCreator/bin/Release/TrinityCreator.exe?raw=true",
-                path);
+                _path);
 
-            Console.WriteLine("Downloaded to {0}", path);
+            Console.WriteLine("Downloaded to {0}", _path);
             Console.WriteLine("Opening Trinity Creator...");
-            Process.Start(path);
+            Process.Start(_path);
         }
     }
 }

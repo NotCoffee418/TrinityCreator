@@ -13,7 +13,7 @@ namespace TrinityCreator
     {
         private readonly string _defaultValue;
 
-        private readonly List<DockPanel> lines = new List<DockPanel>();
+        private readonly List<DockPanel> _lines = new List<DockPanel>();
 
         public DynamicDataControl(object[] keyOptions, int maxLines, bool showAll = false, string header1 = "",
             string header2 = "", string defaultValue = "")
@@ -26,7 +26,7 @@ namespace TrinityCreator
 
             if (showAll)
             {
-                addLineBtn.Visibility = Visibility.Collapsed;
+                AddLineBtn.Visibility = Visibility.Collapsed;
                 foreach (var key in KeyOptions)
                     AddLine(key);
             }
@@ -46,7 +46,7 @@ namespace TrinityCreator
         public Dictionary<object, string> GetUserInput()
         {
             var d = new Dictionary<object, string>();
-            foreach (var line in lines)
+            foreach (var line in _lines)
             {
                 var cb = (ComboBox) line.Children[0];
                 var tb = (TextBox) line.Children[1];
@@ -59,7 +59,7 @@ namespace TrinityCreator
 
         private void addLineBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (lines.Count() < MaxLines)
+            if (_lines.Count() < MaxLines)
                 AddLine();
         }
 
@@ -73,11 +73,11 @@ namespace TrinityCreator
                 var l1 = new Label();
                 l1.Content = header1;
                 l1.Width = 150;
-                headerDp.Children.Add(l1);
+                HeaderDp.Children.Add(l1);
 
                 var l2 = new Label();
                 l2.Content = header2;
-                headerDp.Children.Add(l2);
+                HeaderDp.Children.Add(l2);
             }
         }
 
@@ -105,8 +105,8 @@ namespace TrinityCreator
             tb.TextChanged += TriggerChangedEvent;
             dp.Children.Add(tb);
 
-            lines.Add(dp);
-            dynamicSp.Children.Add(dp);
+            _lines.Add(dp);
+            DynamicSp.Children.Add(dp);
 
             TriggerChangedEvent(this, new EventArgs());
         }
@@ -114,11 +114,11 @@ namespace TrinityCreator
 
         private void removeLineBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (lines.Count > 1 && lines.Count() <= MaxLines)
+            if (_lines.Count > 1 && _lines.Count() <= MaxLines)
             {
-                var lastindex = lines.Count - 1;
-                lines.RemoveAt(lastindex);
-                dynamicSp.Children.RemoveAt(lastindex);
+                var lastindex = _lines.Count - 1;
+                _lines.RemoveAt(lastindex);
+                DynamicSp.Children.RemoveAt(lastindex);
                 TriggerChangedEvent(this, new EventArgs());
             }
         }
