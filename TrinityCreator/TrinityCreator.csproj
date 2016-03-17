@@ -80,6 +80,7 @@
     <Compile Include="BitmaskStackPanel.cs" />
     <Compile Include="Converters\ValueToVisibilityConverter.cs" />
     <Compile Include="Converters\WeaponSpeedToStringConverter.cs" />
+    <Compile Include="Coordinate.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="Damage.cs" />
     <Compile Include="DamageType.cs" />
@@ -91,10 +92,18 @@
     <Compile Include="DynamicDataControl.xaml.cs">
       <DependentUpon>DynamicDataControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Faction.cs" />
     <Compile Include="IKeyValue.cs" />
+    <Compile Include="PlayerTitle.cs" />
+    <Compile Include="QuestInfo.cs" />
     <Compile Include="QuestPage.xaml.cs">
       <DependentUpon>QuestPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QuestPreview.xaml.cs">
+      <DependentUpon>QuestPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QuestSort.cs" />
+    <Compile Include="QuestXp.cs" />
     <Compile Include="TrinityItem.cs" />
     <Compile Include="ItemBonding.cs" />
     <Compile Include="ItemClass.cs" />
@@ -108,6 +117,7 @@
     <Compile Include="Socket.cs" />
     <Compile Include="SocketBonus.cs" />
     <Compile Include="Stat.cs" />
+    <Compile Include="TrinityQuest.cs" />
     <Compile Include="Updater.cs" />
     <Page Include="Database\DbConfigWindow.xaml">
       <SubType>Designer</SubType>
@@ -141,6 +151,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="QuestPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QuestPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

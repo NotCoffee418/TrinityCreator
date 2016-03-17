@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="TrinityCreator.QuestPreview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrinityCreator"
+             mc:Ignorable="d" 
+             d:DesignHeight="440" d:DesignWidth="350">
+    <Grid Height="440" Width="350" HorizontalAlignment="Left">
+        <Grid.Background>
+            <ImageBrush ImageSource="Resources/QuestGreeting.png" />
+        </Grid.Background>
+        <Image Source="{Binding QuestStatusIcon}"/>
+        <TextBlock Text="Quest Title"/>
+    </Grid>
+</UserControl>

@@ -123,6 +123,16 @@ namespace TrinityCreator
             return new BitmaskStackPanel("itemFlagsSp", cbs);
         }
 
+        internal static BitmaskStackPanel GetQuestSpecialFlags()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static BitmaskStackPanel GetQuestFlags()
+        {
+            throw new NotImplementedException();
+        }
+
         internal static BitmaskStackPanel GetItemFlagsExtra()
         {
             var cbs = new List<BitmaskCheckBox>
@@ -141,7 +151,7 @@ namespace TrinityCreator
             return new BitmaskStackPanel("itemFlagsExtraSp", cbs);
         }
 
-        public static BitmaskStackPanel GetClassFlags()
+        public static BitmaskStackPanel GetClassFlags(int defaultValue)
         {
             var cbs = new List<BitmaskCheckBox>
             {
@@ -159,10 +169,10 @@ namespace TrinityCreator
             };
 
             // default value must be -1!
-            return new BitmaskStackPanel("classesSp", cbs, -1);
+            return new BitmaskStackPanel("classesSp", cbs, defaultValue);
         }
 
-        public static BitmaskStackPanel GetRaceFlags()
+        public static BitmaskStackPanel GetRaceFlags(int defaultValue)
         {
             var cbs = new List<BitmaskCheckBox>
             {
@@ -182,7 +192,7 @@ namespace TrinityCreator
             };
 
             // default value must be -1!
-            return new BitmaskStackPanel("racesSp", cbs, -1);
+            return new BitmaskStackPanel("racesSp", cbs, defaultValue);
         }
 
         public static BitmaskStackPanel GetBagFamilies()

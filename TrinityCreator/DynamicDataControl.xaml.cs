@@ -11,18 +11,23 @@ namespace TrinityCreator
     /// </summary>
     public partial class DynamicDataControl : UserControl
     {
-        private readonly string _defaultValue;
+        private List<DockPanel> _lines = new List<DockPanel>();
 
-        private readonly List<DockPanel> _lines = new List<DockPanel>();
-
+        /// <summary>
+        /// DDC With Combobox (key) & TextBox (value)
+        /// </summary>
+        /// <param name="keyOptions"></param>
+        /// <param name="maxLines"></param>
+        /// <param name="showAll"></param>
+        /// <param name="header1"></param>
+        /// <param name="header2"></param>
+        /// <param name="defaultValue"></param>
         public DynamicDataControl(object[] keyOptions, int maxLines, bool showAll = false, string header1 = "",
             string header2 = "", string defaultValue = "")
         {
-            InitializeComponent();
-            MaxLines = maxLines;
+            Prepare(maxLines, header1, header2, defaultValue);
             KeyOptions = keyOptions;
-            AddHeaders(header1, header2);
-            _defaultValue = defaultValue;
+            IsTextboxKey = false;
 
             if (showAll)
             {
@@ -33,38 +38,27 @@ namespace TrinityCreator
             else AddLine();
         }
 
-        public int MaxLines { get; set; }
-
-        public object[] KeyOptions { get; set; }
-
-        public event EventHandler DynamicDataChanged = delegate { };
-
         /// <summary>
-        ///     Returns the user input
+        /// DDC with TextBox as key & value
         /// </summary>
-        /// <returns></returns>
-        public Dictionary<object, string> GetUserInput()
+        /// <param name="maxLines"></param>
+        /// <param name="header1"></param>
+        /// <param name="header2"></param>
+        /// <param name="defaultValue"></param>
+        public DynamicDataControl(int maxLines, string header1 = "", string header2 = "", string defaultValue = "0")
         {
-            var d = new Dictionary<object, string>();
-            foreach (var line in _lines)
-            {
-                var cb = (ComboBox) line.Children[0];
-                var tb = (TextBox) line.Children[1];
-
-                if (tb.Text != "")
-                    d.Add(cb.SelectedValue, tb.Text);
-            }
-            return d;
+            Prepare(maxLines, header1, header2, defaultValue);
+            IsTextboxKey = true;
+            AddLine();
         }
 
-        private void addLineBtn_Click(object sender, RoutedEventArgs e)
+        private void Prepare(int maxLines, string header1, string header2, string defaultValue)
         {
-            if (_lines.Count() < MaxLines)
-                AddLine();
-        }
+            InitializeComponent();
 
-        private void AddHeaders(string header1, string header2)
-        {
+            MaxLines = maxLines;
+            DefaultValue = defaultValue;
+
             if (header1 != "" && header2 != "")
             {
                 var dp = new DockPanel();
@@ -81,29 +75,80 @@ namespace TrinityCreator
             }
         }
 
-        private void AddLine(object key = null, string value = "")
+        private string DefaultValue { get; set; }
+        private bool IsTextboxKey { get; set; }
+        public int MaxLines { get; set; }
+        public object[] KeyOptions { get; set; }
+        public event EventHandler DynamicDataChanged = delegate { };
+
+        /// <summary>
+        ///     Returns the user input
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<object, string> GetUserInput()
+        {
+            var d = new Dictionary<object, string>();
+            foreach (var line in _lines)
+            {
+                if (IsTextboxKey)
+                {
+                    var tbKey = (TextBox)line.Children[0];
+                    var tbValue = (TextBox)line.Children[1];
+                    if (tbKey.Text != "" && tbValue.Text != "")
+                        d.Add(tbKey.Text, tbValue.Text);
+                }
+                else
+                {
+                    var cb = (ComboBox)line.Children[0];
+                    var tb = (TextBox)line.Children[1];
+
+                    if (tb.Text != "")
+                        d.Add(cb.SelectedValue, tb.Text);
+                }
+            }
+            return d;
+        }
+
+        private void addLineBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (_lines.Count() < MaxLines)
+                AddLine();
+        }
+
+        private void AddLine(object key = null)
         {
             var dp = new DockPanel();
             dp.Margin = new Thickness(0, 2, 0, 2);
 
-            var cb = new ComboBox();
-            if (key == null)
-                cb.ItemsSource = KeyOptions;
-            else
+            if (IsTextboxKey)
             {
-                cb.Items.Add(key);
-                cb.IsEnabled = false;
+                TextBox tbKey = new TextBox();
+                tbKey.Width = 150;
+                tbKey.Text = DefaultValue;
+                tbKey.TextChanged += TriggerChangedEvent;
+                dp.Children.Add(tbKey);
             }
-            cb.SelectedIndex = 0;
-            cb.Width = 150;
-            cb.SelectionChanged += TriggerChangedEvent;
-            dp.Children.Add(cb);
+            else // combobox key
+            {
+                var cb = new ComboBox();
+                if (key == null)
+                    cb.ItemsSource = KeyOptions;
+                else
+                {
+                    cb.Items.Add(key);
+                    cb.IsEnabled = false;
+                }
+                cb.SelectedIndex = 0;
+                cb.Width = 150;
+                cb.SelectionChanged += TriggerChangedEvent;
+                dp.Children.Add(cb);
+            }
 
-            var tb = new TextBox();
-            tb.Margin = new Thickness(5, 0, 0, 0);
-            tb.Text = _defaultValue;
-            tb.TextChanged += TriggerChangedEvent;
-            dp.Children.Add(tb);
+            var tbValue = new TextBox();
+            tbValue.Margin = new Thickness(5, 0, 0, 0);
+            tbValue.Text = DefaultValue;
+            tbValue.TextChanged += TriggerChangedEvent;
+            dp.Children.Add(tbValue);
 
             _lines.Add(dp);
             DynamicSp.Children.Add(dp);
@@ -114,7 +159,7 @@ namespace TrinityCreator
 
         private void removeLineBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (_lines.Count > 1 && _lines.Count() <= MaxLines)
+            if (_lines.Count > 1 && _lines.Count <= MaxLines)
             {
                 var lastindex = _lines.Count - 1;
                 _lines.RemoveAt(lastindex);

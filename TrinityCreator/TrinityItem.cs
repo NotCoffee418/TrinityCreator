@@ -148,7 +148,7 @@ namespace TrinityCreator
             get
             {
                 if (_allowedclass == null)
-                    _allowedclass = BitmaskStackPanel.GetClassFlags();
+                    _allowedclass = BitmaskStackPanel.GetClassFlags(-1);
                 return _allowedclass;
             }
             set
@@ -163,7 +163,7 @@ namespace TrinityCreator
             get
             {
                 if (_allowedrace == null)
-                    _allowedrace = BitmaskStackPanel.GetRaceFlags();
+                    _allowedrace = BitmaskStackPanel.GetRaceFlags(-1);
                 return _allowedrace;
             }
             set
@@ -413,39 +413,44 @@ namespace TrinityCreator
         /// <returns></returns>
         private Dictionary<string, string> GenerateQueryValues()
         {
-            var kvplist = new Dictionary<string, string>();
-            kvplist.Add("entry", EntryId.ToString());
-            kvplist.Add("description", "'" + Quote + "'");
-            kvplist.Add("class", Class.Id.ToString());
-            kvplist.Add("subclass", ItemSubClass.Id.ToString());
-            kvplist.Add("name", "'" + Name + "'");
-            kvplist.Add("displayid", DisplayId.ToString());
-            kvplist.Add("Quality", Quality.Id.ToString());
-            kvplist.Add("bonding", Binds.Id.ToString());
-            kvplist.Add("RequiredLevel", MinLevel.ToString());
-            kvplist.Add("maxcount", MaxAllowed.ToString());
-            kvplist.Add("AllowableClass", AllowedClass.BitmaskValue.ToString());
-            kvplist.Add("AllowableRace", AllowedRace.BitmaskValue.ToString());
-            kvplist.Add("BuyPrice", ValueBuy.ToString());
-            kvplist.Add("SellPrice", ValueSell.ToString());
-            kvplist.Add("InventoryType", InventoryType.Id.ToString());
-            kvplist.Add("Material", ItemSubClass.Material.Id.ToString());
-            kvplist.Add("sheath", InventoryType.Sheath.ToString());
-            kvplist.Add("Flags", Flags.BitmaskValue.ToString());
-            kvplist.Add("FlagsExtra", FlagsExtra.BitmaskValue.ToString());
-            kvplist.Add("BuyCount", BuyCount.ToString());
-            kvplist.Add("stackable", Stackable.ToString());
-            kvplist.Add("ContainerSlots", ContainerSlots.ToString());
-            kvplist.Add("dmg_min1", DamageInfo.MinDamage.ToString());
-            kvplist.Add("dmg_max1", DamageInfo.MaxDamage.ToString());
-            kvplist.Add("dmg_type1", DamageInfo.Type.Id.ToString());
-            kvplist.Add("delay", DamageInfo.Speed.ToString());
-            kvplist.Add("MaxDurability", Durability.ToString());
-            kvplist.Add("ammo_type", AmmoType.ToString());
-            kvplist.Add("armor", Armor.ToString()); // armor
-            kvplist.Add("block", Block.ToString()); // block
-            kvplist.Add("BagFamily", BagFamily.BitmaskValue.ToString()); // bag family
-            kvplist.Add("socketBonus", SocketBonus.Id.ToString());
+            var kvplist = new Dictionary<string, string>
+            {
+                {"entry", EntryId.ToString()},
+                {"description", "'" + Quote + "'"},
+                {"class", Class.Id.ToString()},
+                {"subclass", ItemSubClass.Id.ToString()},
+                {"name", "'" + Name + "'"},
+                {"displayid", DisplayId.ToString()},
+                {"Quality", Quality.Id.ToString()},
+                {"bonding", Binds.Id.ToString()},
+                {"RequiredLevel", MinLevel.ToString()},
+                {"maxcount", MaxAllowed.ToString()},
+                {"AllowableClass", AllowedClass.BitmaskValue.ToString()},
+                {"AllowableRace", AllowedRace.BitmaskValue.ToString()},
+                {"BuyPrice", ValueBuy.ToString()},
+                {"SellPrice", ValueSell.ToString()},
+                {"InventoryType", InventoryType.Id.ToString()},
+                {"Material", ItemSubClass.Material.Id.ToString()},
+                {"sheath", InventoryType.Sheath.ToString()},
+                {"Flags", Flags.BitmaskValue.ToString()},
+                {"FlagsExtra", FlagsExtra.BitmaskValue.ToString()},
+                {"BuyCount", BuyCount.ToString()},
+                {"stackable", Stackable.ToString()},
+                {"ContainerSlots", ContainerSlots.ToString()},
+                {"dmg_min1", DamageInfo.MinDamage.ToString()},
+                {"dmg_max1", DamageInfo.MaxDamage.ToString()},
+                {"dmg_type1", DamageInfo.Type.Id.ToString()},
+                {"delay", DamageInfo.Speed.ToString()},
+                {"MaxDurability", Durability.ToString()},
+                {"ammo_type", AmmoType.ToString()},
+                {"armor", Armor.ToString()},
+                {"block", Block.ToString()},
+                {"BagFamily", BagFamily.BitmaskValue.ToString()},
+                {"socketBonus", SocketBonus.Id.ToString()}
+            };
+            // armor
+            // block
+            // bag family
 
             // Add gem sockets
             var socketId = 1;

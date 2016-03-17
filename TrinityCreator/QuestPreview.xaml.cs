@@ -16,26 +16,21 @@ using System.Windows.Shapes;
 namespace TrinityCreator
 {
     /// <summary>
-    /// Interaction logic for QuestPage.xaml
+    /// Interaction logic for QuestPreview.xaml
     /// </summary>
-    public partial class QuestPage : Page
+    public partial class QuestPreview : UserControl
     {
-        public QuestPage()
+        public QuestPreview()
         {
             InitializeComponent();
         }
 
-        TrinityQuest _quest;
+        private string _questStatusIcon;
 
-        private TrinityQuest Quest
+        public string QuestStatusIcon
         {
-            get {
-                if (_quest == null)
-                    _quest = new TrinityQuest();
-                return _quest;
-            }
-            set { _quest = value; }
+            get { return "Resources/" + _questStatusIcon + ".png"; }
+            set { _questStatusIcon = value; }
         }
-
     }
 }
