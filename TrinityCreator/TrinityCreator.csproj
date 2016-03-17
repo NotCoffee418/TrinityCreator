@@ -94,6 +94,9 @@
     </Compile>
     <Compile Include="Faction.cs" />
     <Compile Include="IKeyValue.cs" />
+    <Compile Include="LookupTool.xaml.cs">
+      <DependentUpon>LookupTool.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PlayerTitle.cs" />
     <Compile Include="QuestInfo.cs" />
     <Compile Include="QuestPage.xaml.cs">
@@ -119,6 +122,7 @@
     <Compile Include="Stat.cs" />
     <Compile Include="TrinityQuest.cs" />
     <Compile Include="Updater.cs" />
+    <Compile Include="WowClient\DbcReader.cs" />
     <Page Include="Database\DbConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ItemPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LookupTool.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,6 +191,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Resources\Faction.dbc.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -227,9 +236,7 @@
   <ItemGroup>
     <Resource Include="Resources\yellowsocket.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WowClient\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\tclogo.png" />
   </ItemGroup>

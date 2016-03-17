@@ -28,10 +28,14 @@ namespace TrinityCreator
                 Settings.Default.Save();
             }
 
-            // Load usable creators
+            // prepare lookup tool
+            ContentGrid.ColumnDefinitions[2].Width = new GridLength(25);
+            ContentGridSplitter.Visibility = Visibility.Collapsed;
+            LookupTool lt = new LookupTool();
 
-            ItemTab.Content = new ItemPage();
-            QuestTab.Content = new QuestPage();
+            // Load usable creators
+            ItemTab.Content = new ItemPage(this);
+            QuestTab.Content = new QuestPage(this);
 
 
             // view unfinished when set & on debug
@@ -52,7 +56,12 @@ namespace TrinityCreator
             if (!unfinishedLoaded)
                 HideUnfinishedPages();
         }
-
+        private double _lookupToolWidth;
+        
+        public void ShowLookupTool()
+        {
+            
+        }
 
         private bool LoadUnfinishedPages(bool done)
         {
@@ -126,6 +135,22 @@ namespace TrinityCreator
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+        }
+
+        private void LookupToolExpander_Expanded(object sender, RoutedEventArgs e)
+        {
+
+            if (_lookupToolWidth < 100)
+                _lookupToolWidth = 300;
+            ContentGrid.ColumnDefinitions[2].Width = new GridLength(_lookupToolWidth);
+            ContentGridSplitter.Visibility = Visibility.Visible;
+        }
+
+        private void LookupToolExpander_Collapsed(object sender, RoutedEventArgs e)
+        {
+            _lookupToolWidth = ContentGrid.ColumnDefinitions[2].Width.Value;
+            ContentGrid.ColumnDefinitions[2].Width = new GridLength(25);
+            ContentGridSplitter.Visibility = Visibility.Collapsed;
         }
     }
 }

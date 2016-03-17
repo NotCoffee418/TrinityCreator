@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    class Faction : IKeyValue
+    public class Faction : IKeyValue
     {
         public string Description
         {

@@ -18,8 +18,9 @@ namespace TrinityCreator
         private TrinityItem _item;
         private ItemPreview _preview;
         private bool _firstLoadComplete = false;
+        private MainWindow _mainWindow;
 
-        public ItemPage()
+        public ItemPage(MainWindow mainWindow)
         {
             InitializeComponent();
 
@@ -28,8 +29,8 @@ namespace TrinityCreator
             DataContext = _item;
             Loaded += ItemPage_Loaded;
             _preview = new ItemPreview(_item);
+            _mainWindow = mainWindow;
         }
-
         private void ItemPage_Loaded(object sender, RoutedEventArgs e)
         {
             if (!_firstLoadComplete)

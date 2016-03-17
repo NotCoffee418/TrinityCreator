@@ -16,28 +16,13 @@ using System.Windows.Shapes;
 namespace TrinityCreator
 {
     /// <summary>
-    /// Interaction logic for QuestPage.xaml
+    /// Interaction logic for LookupTool.xaml
     /// </summary>
-    public partial class QuestPage : Page
+    public partial class LookupTool : UserControl
     {
-        public QuestPage(MainWindow mainWindow)
+        public LookupTool()
         {
             InitializeComponent();
-            _mainWindow = mainWindow;
         }
-
-        TrinityQuest _quest;
-        private MainWindow _mainWindow;
-
-        private TrinityQuest Quest
-        {
-            get {
-                if (_quest == null)
-                    _quest = new TrinityQuest();
-                return _quest;
-            }
-            set { _quest = value; }
-        }
-
     }
 }
