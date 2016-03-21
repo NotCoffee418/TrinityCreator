@@ -69,5 +69,17 @@ namespace TrinityCreator.Properties {
                 this["worldDb"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500000")]
+        public int nextid_quest {
+            get {
+                return ((int)(this["nextid_quest"]));
+            }
+            set {
+                this["nextid_quest"] = value;
+            }
+        }
     }
 }

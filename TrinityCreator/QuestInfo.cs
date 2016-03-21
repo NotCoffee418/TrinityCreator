@@ -6,32 +6,32 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    class QuestInfo : IKeyValue
+    public class QuestInfo : IKeyValue
     {
-        public string Description
+        public QuestInfo(int id, string  description)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            Id = id;
+            Description = description;
         }
 
-        public int Id
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public int Id { get; set; }
+        public string Description { get; set; }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+
+        public static QuestInfo[] ListQuestInfo() => new QuestInfo[]
+        {
+            new QuestInfo(0, "None"),
+            new QuestInfo(1, "Group"),
+            new QuestInfo(21, "Life"),
+            new QuestInfo(41, "PvP"),
+            new QuestInfo(62, "Raid"),
+            new QuestInfo(81, "Dungeon"),
+            new QuestInfo(82, "World Event"),
+            new QuestInfo(83, "Legendary"),
+            new QuestInfo(84, "Escort"),
+            new QuestInfo(85, "Heroic"),
+            new QuestInfo(88, "Raid (10)"),
+            new QuestInfo(89, "Raid (25)")
+        };
     }
 }

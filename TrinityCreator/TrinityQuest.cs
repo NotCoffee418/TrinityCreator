@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    class TrinityQuest : INotifyPropertyChanged
+    public class TrinityQuest : INotifyPropertyChanged
     {
         private BitmaskStackPanel _requiredClasses;
         private BitmaskStackPanel _requiredRaces;

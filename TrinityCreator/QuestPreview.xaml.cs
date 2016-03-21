@@ -32,5 +32,6 @@ namespace TrinityCreator
             get { return "Resources/" + _questStatusIcon + ".png"; }
             set { _questStatusIcon = value; }
         }
+        
     }
 }

@@ -61,6 +61,16 @@ namespace TrinityCreator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ARIALN {
+            get {
+                object obj = ResourceManager.GetObject("ARIALN", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap bluesocket {
@@ -112,6 +122,16 @@ namespace TrinityCreator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] FRIZQT__ {
+            get {
+                object obj = ResourceManager.GetObject("FRIZQT__", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap gold {
@@ -142,6 +162,16 @@ namespace TrinityCreator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] MORPHEUS {
+            get {
+                object obj = ResourceManager.GetObject("MORPHEUS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap QuestGreeting {
@@ -168,6 +198,16 @@ namespace TrinityCreator.Properties {
             get {
                 object obj = ResourceManager.GetObject("silver", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] SKURRI {
+            get {
+                object obj = ResourceManager.GetObject("SKURRI", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

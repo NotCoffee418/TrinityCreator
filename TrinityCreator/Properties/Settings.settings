@@ -1,7 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="TrinityCreator.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TrinityCreator.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="nextid_item" Type="System.Int32" Scope="User">
@@ -15,6 +13,9 @@
     </Setting>
     <Setting Name="worldDb" Type="MySql.Data.MySqlClient.MySqlConnectionStringBuilder" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="nextid_quest" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">500000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

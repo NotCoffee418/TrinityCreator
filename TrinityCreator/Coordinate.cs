@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    class Coordinate
+    public class Coordinate
     {
         public double X { get; set; }
         public double Y { get; set; }

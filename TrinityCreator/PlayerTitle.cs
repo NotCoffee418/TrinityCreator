@@ -6,32 +6,9 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    class PlayerTitle : IKeyValue
+    public class PlayerTitle : IKeyValue
     {
-        public string Description
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int Id
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public int Id { get; set; }
+        public string Description { get; set; }
     }
 }

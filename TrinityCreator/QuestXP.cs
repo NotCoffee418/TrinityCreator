@@ -6,32 +6,10 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator
 {
-    class QuestXp : IKeyValue
+    public class QuestXp : IKeyValue
     {
-        public string Description
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public int Id { get; set; }
+        public string Description { get; set; }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int Id
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
     }
 }
