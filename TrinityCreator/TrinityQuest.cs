@@ -19,13 +19,57 @@ namespace TrinityCreator
         private DynamicDataControl _factionRewards;
         private DynamicDataControl _requiredNpcOrGos;
         private DynamicDataControl _requiredItems;
+        private string _logTitle = null;
+        private int _entryId;
+        private QuestSort _pQuestSort;
+        private QuestInfo _pQuestInfo;
+        private int _suggestedGroupNum;
+        private string _logDescription;
+        private string _questDescription;
+        private string _areaDescription;
 
 
         #region Quest info
-        public int EntryId { get; set; }
-        public QuestSort PQuestSort { get; set; }
-        public QuestInfo PQuestInfo { get; set; }
-        public int SuggestedGroupNum { get; set; }
+
+        public int EntryId
+        {
+            get { return _entryId; }
+            set
+            {
+                _entryId = value;
+                RaisePropertyChanged("EntryId");
+            }
+        }
+
+        public QuestSort PQuestSort
+        {
+            get { return _pQuestSort; }
+            set
+            {
+                _pQuestSort = value;
+                RaisePropertyChanged("PQuestSort");
+            }
+        }
+
+        public QuestInfo PQuestInfo
+        {
+            get { return _pQuestInfo; }
+            set
+            {
+                _pQuestInfo = value;
+                RaisePropertyChanged("PQuestInfo");
+            }
+        }
+
+        public int SuggestedGroupNum
+        {
+            get { return _suggestedGroupNum; }
+            set
+            {
+                _suggestedGroupNum = value;
+                RaisePropertyChanged("SuggestedGroupNum");
+            }
+        }
         public BitmaskStackPanel Flags
         {
             get
@@ -53,10 +97,50 @@ namespace TrinityCreator
             }
         }
 
-        public string LogTitle { get; set; }
-        public string LogDescription { get; set; }
-        public string QuestDescription { get; set; }
-        public string AreaDescription { get; set; }
+        public string LogTitle
+        {
+            get
+            {
+                if (_logTitle == null) // on initial load
+                    _logTitle = "Quest Name";
+                return _logTitle;
+            }
+            set
+            {
+                _logTitle = value; 
+                RaisePropertyChanged("LogTitle");
+            }
+        }
+
+        public string LogDescription
+        {
+            get { return _logDescription; }
+            set
+            {
+                _logDescription = value;
+                RaisePropertyChanged("LogDescription");
+            }
+        }
+
+        public string QuestDescription
+        {
+            get { return _questDescription; }
+            set
+            {
+                _questDescription = value;
+                RaisePropertyChanged("QuestDescription");
+            }
+        }
+
+        public string AreaDescription
+        {
+            get { return _areaDescription; }
+            set
+            {
+                _areaDescription = value;
+                RaisePropertyChanged("AreaDescription");
+            }
+        }
         public string QuestCompletionLog { get; set; }
 
         #endregion
@@ -346,9 +430,7 @@ namespace TrinityCreator
         public void RaisePropertyChanged(string property)
         {
             if (PropertyChanged != null)
-            {
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
         }
     }
 }

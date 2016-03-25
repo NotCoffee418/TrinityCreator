@@ -13,7 +13,7 @@
         <ScrollViewer Margin="20,77,8,29">
             <StackPanel Margin="5">
                 <TextBox Text="{Binding LogTitle}"  FontFamily="./Resources/#Morpheus" FontSize="21.333" Background="Transparent"/>
-                <TextBox Text="ml"  FontFamily="./Resources/#Friz Quadrata TT" FontSize="13.333" Background="Transparent" TextWrapping="Wrap" AcceptsReturn="True" />
+                <TextBox Text="ml" FontFamily="./Resources/#Friz Quadrata TT" FontSize="13.333" Background="Transparent" TextWrapping="Wrap" AcceptsReturn="True" />
 
             </StackPanel>
         </ScrollViewer>

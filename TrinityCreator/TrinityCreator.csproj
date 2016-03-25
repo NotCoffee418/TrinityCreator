@@ -98,6 +98,9 @@
       <DependentUpon>LookupTool.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlayerTitle.cs" />
+    <Compile Include="QuestControl.xaml.cs">
+      <DependentUpon>QuestControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="QuestInfo.cs" />
     <Compile Include="QuestPage.xaml.cs">
       <DependentUpon>QuestPage.xaml</DependentUpon>
@@ -158,6 +161,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="QuestControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="QuestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

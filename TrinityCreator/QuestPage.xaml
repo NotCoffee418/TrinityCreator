@@ -6,18 +6,17 @@
       xmlns:local="clr-namespace:TrinityCreator"
       mc:Ignorable="d"
       Title="QuestPage">
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Left">
-            <local:QuestPreview QuestStatusIcon="DailyQuestIcon" DataContext="Quest" />
-        </StackPanel>
-        <StackPanel DockPanel.Dock="Right">
-            <GroupBox Header="Quest Chain">
-                <Grid>
-                    <TreeView Name="ChainTree" />
-                    <Button Name="AddNewQuest" />
-                </Grid>
-            </GroupBox>
-        </StackPanel>
+    <TabControl Name="QuestTabControl">
+        <TabItem Header="Quest Chain">
+            <StackPanel>
+                <TreeView Name="ChainTreeView"/>
+                <DockPanel>
+                    <Button Name="AddQuestBtn" Content="Add Quest" Margin="5" Click="AddQuestBtn_Click" />
+                    <Button Name="RemoveQuestBtn" Content="Remove Selected Quest" Margin="5" Click="RemoveQuestBtn_Click" />
+                </DockPanel>
+                
 
-    </DockPanel>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
 </Page>

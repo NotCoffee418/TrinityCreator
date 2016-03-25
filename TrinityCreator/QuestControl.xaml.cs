@@ -17,24 +17,29 @@ using System.Windows.Shapes;
 namespace TrinityCreator
 {
     /// <summary>
-    /// Interaction logic for QuestPreview.xaml
+    /// Interaction logic for QuestControl.xaml
     /// </summary>
-    public partial class QuestPreview : UserControl, INotifyPropertyChanged
+    public partial class QuestControl : UserControl, INotifyPropertyChanged
     {
-        public QuestPreview()
+        public QuestControl()
         {
             InitializeComponent();
+            DataContext = Quest;
         }
 
-        private string _questStatusIcon;
+        TrinityQuest _quest;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string QuestStatusIcon
+        public TrinityQuest Quest
         {
-            get { return "Resources/" + _questStatusIcon + ".png"; }
-            set { _questStatusIcon = value; }
+            get
+            {
+                if (_quest == null)
+                    _quest = new TrinityQuest();
+                return _quest;
+            }
+            set { _quest = value; }
         }
-        
     }
 }
