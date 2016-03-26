@@ -64,6 +64,10 @@ namespace TrinityCreator
 
         public event EventHandler BmspChanged = delegate { };
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bmv"></param>
         private void SetBitmaskValue(long bmv)
         {
             var bitValues = new List<long>();
@@ -85,6 +89,22 @@ namespace TrinityCreator
                             bmv -= bitmask;
                             break;
                         }
+        }
+
+        /// <summary>
+        /// Sets IsChecked for one specific flag
+        /// </summary>
+        public void SetValueIsChecked(long key, bool isChecked)
+        {
+            foreach (CheckBox c in checkboxes)
+            {
+                long cbKey = (long)c.Tag;
+                if (cbKey == key)
+                {
+                    c.IsChecked = isChecked;
+                    break;
+                }
+            }
         }
 
         /// <summary>
@@ -128,14 +148,34 @@ namespace TrinityCreator
             return new BitmaskStackPanel("itemFlagsSp", cbs);
         }
 
-        internal static BitmaskStackPanel GetQuestSpecialFlags()
-        {
-            throw new NotImplementedException();
-        }
-
         internal static BitmaskStackPanel GetQuestFlags()
         {
-            throw new NotImplementedException();
+            var cbs = new List<BitmaskCheckBox>
+            {
+                new BitmaskCheckBox(1, "Stay Alive"),
+                new BitmaskCheckBox(2, "Party Accept"),
+                new BitmaskCheckBox(8, "Sharable", true),
+                new BitmaskCheckBox(32, "Epic"),
+                new BitmaskCheckBox(64, "Raid"),
+                new BitmaskCheckBox(512, "Hidden rewards", tooltip:"Item and monetary rewards are hidden in the initial quest details page and in the quest log but will appear once ready to be rewarded."),
+                new BitmaskCheckBox(4096, "Daily"),
+                new BitmaskCheckBox(8192, "Repeatable"),
+                new BitmaskCheckBox(32768, "Weekly"),
+                new BitmaskCheckBox(524288, "Auto Accept"),
+            };
+
+            return new BitmaskStackPanel("questFlagsSp", cbs);
+        }
+
+        internal static BitmaskStackPanel GetQuestSpecialFlags()
+        {
+            var cbs = new List<BitmaskCheckBox>
+            {
+                new BitmaskCheckBox(4, "Auto Accept"), // Bind to Flag 524288
+                new BitmaskCheckBox(32 ,"The quest requires RequiredOrNpcGo killcredit but NOT kill (a spell cast)"), // good luck
+            };
+
+            return new BitmaskStackPanel("questSpecialFlagsSp", cbs);
         }
 
         internal static BitmaskStackPanel GetItemFlagsExtra()
@@ -228,12 +268,13 @@ namespace TrinityCreator
     public class BitmaskCheckBox : CheckBox
     {
         public BitmaskCheckBox(long value, string details, bool isChecked = false,
-            Visibility visibility = Visibility.Visible)
+            Visibility visibility = Visibility.Visible, string tooltip = "")
         {
             Tag = value;
             Content = details;
             IsChecked = isChecked;
             Visibility = visibility;
+            ToolTip = tooltip;
         }
     }
 }

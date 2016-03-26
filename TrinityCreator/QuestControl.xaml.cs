@@ -83,5 +83,23 @@ namespace TrinityCreator
         {
             PrepareQuestControl();
         }
+
+        #region ChangedEvents
+        private void questInfoCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                QuestInfo qi = (QuestInfo)questInfoCb.SelectedValue;
+                BitmaskStackPanel bmsp = (BitmaskStackPanel)questFlagsGb.Content;
+
+                if (qi.Id == 88 || qi.Id == 89)
+                    bmsp.SetValueIsChecked(64, true);
+                else
+                    bmsp.SetValueIsChecked(64, false);
+            }
+            catch { /*fail on load*/ }
+        }
+
+        #endregion
     }
 }

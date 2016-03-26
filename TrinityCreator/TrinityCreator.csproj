@@ -108,7 +108,6 @@
     <Compile Include="QuestPreview.xaml.cs">
       <DependentUpon>QuestPreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="QuestSort.cs" />
     <Compile Include="QuestXp.cs" />
     <Compile Include="TrinityItem.cs" />
     <Compile Include="ItemBonding.cs" />

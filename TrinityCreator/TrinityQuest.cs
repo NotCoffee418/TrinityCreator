@@ -22,11 +22,11 @@ namespace TrinityCreator
         private DynamicDataControl _requiredItems;
         private string _logTitle = null;
         private int _entryId;
-        private QuestSort _pQuestSort;
+        private int _pQuestSort;
         private QuestInfo _pQuestInfo;
         private int _suggestedGroupNum;
-        private string _logDescription;
-        private string _questDescription;
+        private string _logDescription = null;
+        private string _questDescription = null;
         private string _areaDescription;
         private string _questCompletionLog;
         private TrinityQuest _prevQuest;
@@ -63,7 +63,7 @@ namespace TrinityCreator
             }
         }
 
-        public QuestSort PQuestSort
+        public int PQuestSort
         {
             get { return _pQuestSort; }
             set
@@ -124,7 +124,7 @@ namespace TrinityCreator
             get
             {
                 if (_logTitle == null) // on initial load
-                    _logTitle = "Quest Name";
+                    _logTitle = "Enter quest name here";
                 return _logTitle;
             }
             set
@@ -136,7 +136,11 @@ namespace TrinityCreator
 
         public string LogDescription
         {
-            get { return _logDescription; }
+            get {
+                if (_logDescription == null)
+                    _logDescription = "Short description & objectives";
+                return _logDescription; 
+            }
             set
             {
                 _logDescription = value;
@@ -146,7 +150,12 @@ namespace TrinityCreator
 
         public string QuestDescription
         {
-            get { return _questDescription; }
+            get
+            {
+                if (_questDescription == null)
+                    _questDescription = "Long quest description here";
+                return _questDescription; 
+            }
             set
             {
                 _questDescription = value;
@@ -485,7 +494,7 @@ namespace TrinityCreator
                 {"QuestType", "2"},
                 {"QuestLevel", QuestLevel.ToString()},
                 {"MinLevel", MinLevel.ToString()},
-                {"QuestSortID", PQuestSort.Id.ToString()},
+                {"QuestSortID", PQuestSort.ToString()},
                 {"QuestInfoID", PQuestInfo.Id.ToString()},
                 {"SuggestedGroupNum", SuggestedGroupNum.ToString()},
                 {"TimeAllowed", TimeAllowed.ToString()},

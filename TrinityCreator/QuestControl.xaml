@@ -3,11 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TrinityCreator"
+             xmlns:l="clr-namespace:TrinityCreator"
              mc:Ignorable="d" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <l:ValueToVisibilityConverter x:Key="ValueVisibilityConverter" />
+    </UserControl.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Right">
-            <local:QuestPreview QuestStatusIcon="DailyQuestIcon" />
+            <l:QuestPreview QuestStatusIcon="DailyQuestIcon" />
+            
+            <GroupBox Header="Extra options">
+                <CheckBox Name="setFlagsCb" Content="Set Flags" />
+            </GroupBox>
 
             <DockPanel>
                 <Label Content="Entry Id" DockPanel.Dock="Left" />
@@ -27,7 +34,7 @@
                     </DockPanel>
                     <DockPanel>
                         <Label Content="Quest Info" DockPanel.Dock="Left" />
-                        <ComboBox Name="questInfoCb" SelectedValue="{Binding PQuestInfo}" />
+                        <ComboBox Name="questInfoCb" SelectedValue="{Binding PQuestInfo}" SelectionChanged="questInfoCb_SelectionChanged" />
                     </DockPanel>
                     <DockPanel>
                         <Label Content="Players" DockPanel.Dock="Left" />
@@ -35,6 +42,8 @@
                     </DockPanel>
                 </StackPanel>
             </GroupBox>
+            <GroupBox Name="questFlagsGb" Header="Quest Flags" Content="{Binding Flags}" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
+            <GroupBox Name="questSpecialFlagsGb" Header="Quest Special Flags" Content="{Binding SpecialFlags}" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
         </StackPanel>
 
     </DockPanel>
