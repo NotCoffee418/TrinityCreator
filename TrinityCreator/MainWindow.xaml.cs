@@ -91,8 +91,8 @@ namespace TrinityCreator
             Settings.Default.viewUnfinishedCreators = false;
             if (SettingViewUnfinished.IsChecked)
             {
-                var msg =
-                    $"Not all displayed features in unfinished creators will work correctly.{Environment.NewLine}" +
+                string msg =
+                    "Not all displayed features in unfinished creators will work correctly.{Environment.NewLine}" +
                     "Are you sure you want to view Unfinished creators?";
                 var result = MessageBox.Show(msg, "View unfinished creators", MessageBoxButton.YesNo,
                     MessageBoxImage.Warning);

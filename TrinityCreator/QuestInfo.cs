@@ -18,20 +18,23 @@ namespace TrinityCreator
         public string Description { get; set; }
 
 
-        public static QuestInfo[] ListQuestInfo() => new QuestInfo[]
+        public static QuestInfo[] ListQuestInfo()
         {
-            new QuestInfo(0, "None"),
-            new QuestInfo(1, "Group"),
-            new QuestInfo(21, "Life"),
-            new QuestInfo(41, "PvP"),
-            new QuestInfo(62, "Raid"),
-            new QuestInfo(81, "Dungeon"),
-            new QuestInfo(82, "World Event"),
-            new QuestInfo(83, "Legendary"),
-            new QuestInfo(84, "Escort"),
-            new QuestInfo(85, "Heroic"),
-            new QuestInfo(88, "Raid (10)"),
-            new QuestInfo(89, "Raid (25)")
-        };
+            return new QuestInfo[]
+            {
+                new QuestInfo(0, "None"),
+                new QuestInfo(1, "Group"),
+                new QuestInfo(21, "Life"),
+                new QuestInfo(41, "PvP"),
+                new QuestInfo(62, "Raid"),
+                new QuestInfo(81, "Dungeon"),
+                new QuestInfo(82, "World Event"),
+                new QuestInfo(83, "Legendary"),
+                new QuestInfo(84, "Escort"),
+                new QuestInfo(85, "Heroic"),
+                new QuestInfo(88, "Raid (10)"),
+                new QuestInfo(89, "Raid (25)")
+            };
+        }
     }
 }

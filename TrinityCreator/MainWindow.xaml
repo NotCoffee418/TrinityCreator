@@ -17,7 +17,7 @@
                           Click="settingViewUnfinished_Click" />
             </MenuItem>
 
-            <MenuItem Header="Support the creator by donating!" Foreground="DarkOrange" FontWeight="Bold">
+            <MenuItem Header="Donate" Foreground="DarkOrange" FontWeight="Bold">
                 <MenuItem Header="Why should I donate?" Click="WhyDonate_Click" Foreground="Black" />
                 <MenuItem Header="Donate" Click="Donate_Click" Foreground="Black" />
             </MenuItem>

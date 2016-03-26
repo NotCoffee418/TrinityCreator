@@ -22,7 +22,12 @@ namespace TrinityCreator
             }
         }
 
-        public List<BitmaskCheckBox> Checkboxes { get; }
+        List<BitmaskCheckBox> checkboxes;
+
+        public List<BitmaskCheckBox> Checkboxes {
+            get { return checkboxes; }
+            set { checkboxes = value; }
+        }
 
         public string SelectionText
         {

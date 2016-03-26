@@ -10,6 +10,7 @@ namespace TrinityCreator
 {
     public class TrinityQuest : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         private BitmaskStackPanel _requiredClasses;
         private BitmaskStackPanel _requiredRaces;
         private BitmaskStackPanel _flags;
@@ -27,6 +28,27 @@ namespace TrinityCreator
         private string _logDescription;
         private string _questDescription;
         private string _areaDescription;
+        private string _questCompletionLog;
+        private TrinityQuest _prevQuest;
+        private TrinityQuest _nextQuest;
+        private int _nextQuestIdChain;
+        private int _questLevel;
+        private int _minLevel;
+        private int _maxLevel;
+        private int _startItem;
+        private int _providedItemCount;
+        private int _sourceSpell;
+        private Coordinate _poiCoordinate;
+        private int _timeAllowed;
+        private int _requiredPlayerKills;
+        private int _requiredSpell;
+        private QuestXp _rewardXpDifficulty;
+        private Currency _rewardMoney;
+        private int _rewardSpell;
+        private int _rewardSpellCast;
+        private int _rewardHonor;
+        private PlayerTitle _rewardTitle;
+        private int _rewardArenaPoints;
 
 
         #region Quest info
@@ -141,23 +163,74 @@ namespace TrinityCreator
                 RaisePropertyChanged("AreaDescription");
             }
         }
-        public string QuestCompletionLog { get; set; }
+        public string QuestCompletionLog {
+            get { return _questCompletionLog; }
+            set
+            {
+                _questCompletionLog = value;
+                RaisePropertyChanged("QuestCompletionLog");
+            }
+        }
 
         #endregion
 
 
         #region Quest chain data
-        public int PrevQuestId { get; set; }
-        public int NextQuestId { get; set; }
+        public TrinityQuest PrevQuest
+        {
+            get { return _prevQuest; }
+            set
+            {
+                _prevQuest = value;
+                RaisePropertyChanged("PrevQuest");
+            }
+        }
+        public TrinityQuest NextQuest {
+            get { return _nextQuest; }
+            set
+            {
+                _nextQuest = value;
+                RaisePropertyChanged("NextQuest");
+            }
+        }
         //public int ExclusiveGroup { get; set; } // Implement if it can be simplified
-        public int NextQuestIdChain { get; set; } // WARNING: This is the completer NPC or GO, not quest ID
+        public int NextQuestIdChain {
+            get { return _nextQuestIdChain; }
+            set
+            {
+                _nextQuestIdChain = value;
+                RaisePropertyChanged("NextQuestIdChain");
+            }
+        } // WARNING: This is the completer NPC or GO, not quest ID
         #endregion
 
 
         #region Prerequisites
-        public int QuestLevel { get; set; }
-        public int MinLevel { get; set; }
-        public int MaxLevel { get; set; }
+        public int QuestLevel
+        {
+            get { return _questLevel; }
+            set
+            {
+                _questLevel = value;
+                RaisePropertyChanged("QuestLevel");
+            }
+        }
+        public int MinLevel {
+            get { return _minLevel; }
+            set
+            {
+                _minLevel = value;
+                RaisePropertyChanged("MinLevel");
+            }
+        }
+        public int MaxLevel {
+            get { return _maxLevel; }
+            set
+            {
+                _maxLevel = value;
+                RaisePropertyChanged("MaxLevel");
+            }
+        }
         //public int RequiredMinRepFaction { get; set; } // Prerequisite
         //public int RequiredMinRepValue { get; set; }
         //public int RequiredMaxRepFaction { get; set; } // Prerequisite
@@ -172,7 +245,11 @@ namespace TrinityCreator
                     _requiredClasses = BitmaskStackPanel.GetClassFlags(0);
                 return _requiredClasses;
             }
-            set { _requiredClasses = value; }
+            set
+            {
+                _requiredClasses = value;
+                RaisePropertyChanged("AllowableClasses");
+            }
         }
         public BitmaskStackPanel AllowableRaces
         {
@@ -182,24 +259,72 @@ namespace TrinityCreator
                     _requiredRaces = BitmaskStackPanel.GetRaceFlags(0);
                 return _requiredRaces;
             }
-            set { _requiredRaces = value; }
+            set
+            {
+                _requiredRaces = value;
+                RaisePropertyChanged("AllowableRaces");
+            }
         }
         #endregion
 
 
         #region On quest start
-        public int StartItem { get; set; } // item given on accept
-        public int ProvidedItemCount { get; set; } // Amount of StartItem
-        public int SourceSpell { get; set; } // Cast on player on accept
-        public Coordinate PoiCoordinate { get; set; }
+        public int StartItem { 
+            get { return _startItem; }
+            set
+            {
+                _startItem = value;
+                RaisePropertyChanged("StartItem");
+            }
+        } // item given on accept
+        public int ProvidedItemCount {
+            get { return _providedItemCount; }
+            set
+            {
+                _providedItemCount = value;
+                RaisePropertyChanged("ProvidedItemCount");
+            }
+        } // Amount of StartItem
+        public int SourceSpell {
+            get { return _sourceSpell; }
+            set
+            {
+                _sourceSpell = value;
+                RaisePropertyChanged("ProvidedItemCount");
+            }
+        } // Cast on player on accept
+        public Coordinate PoiCoordinate {
+            get { return _poiCoordinate; }
+            set
+            {
+                _poiCoordinate = value;
+                RaisePropertyChanged("PoiCoordinate");
+            }
+        }
         #endregion
 
 
         #region Objectives
-        public int TimeAllowed { get; set; }
+        public int TimeAllowed
+        {
+            get { return _timeAllowed; }
+            set
+            {
+                _timeAllowed = value;
+                RaisePropertyChanged("TimeAllowed");
+            }
+        }
         //public int RepObjectiveFaction { get; set; }
         //public int RepObjectiveValue { get; set; }
-        public int RequiredPlayerKills { get; set; }
+        public int RequiredPlayerKills 
+        {
+            get { return _requiredPlayerKills; }
+            set
+            {
+                _requiredPlayerKills = value;
+                RaisePropertyChanged("RequiredPlayerKills");
+            }
+        }
         public DynamicDataControl RequiredItems
         {
             get
@@ -208,7 +333,11 @@ namespace TrinityCreator
                     _requiredItems = new DynamicDataControl(4, "Item ID", "Amount");
                 return _requiredItems;
             }
-            set { _requiredItems = value; }
+            set
+            {
+                _requiredItems = value;
+                RaisePropertyChanged("RequiredItems");
+            }
         }
         public DynamicDataControl RequiredNpcOrGos
         {
@@ -218,24 +347,91 @@ namespace TrinityCreator
                     _requiredNpcOrGos = new DynamicDataControl(4, "NPC or GObject ID", "Amount");
                 return _requiredNpcOrGos;
             }
-            set { _requiredNpcOrGos = value; }
+            set
+            {
+                _requiredNpcOrGos = value;
+                RaisePropertyChanged("RequiredNpcOrGos");
+            }
         }
-        public int RequiredSpell { get; set; } // requires spell cast on RequiredNpcOrGoIds instead of kill
+        public int RequiredSpell 
+        {
+            get { return _requiredSpell; }
+            set
+            {
+                _requiredSpell = value;
+                RaisePropertyChanged("RequiredSpell");
+            }
+        } // requires spell cast on RequiredNpcOrGoIds instead of kill
         #endregion
 
 
         #region Rewards
-        public QuestXp RewardXpDifficulty { get; set; }
-        public Currency RewardMoney { get; set; }
-        public Currency RewardBonusMoney { get; set; } // ?????
-        public int RewardSpell { get; set; }
-        public int RewardSpellCast { get; set; }
-        public int RewardHonor { get; set; }
-        public int RewardHonorMultiplier => RewardHonor == 0 ? 0 : 1;
+        public QuestXp RewardXpDifficulty 
+        {
+            get { return _rewardXpDifficulty; }
+            set
+            {
+                _rewardXpDifficulty = value;
+                RaisePropertyChanged("RewardXpDifficulty");
+            }
+        }
+        public Currency RewardMoney
+        {
+            get { return _rewardMoney; }
+            set
+            {
+                _rewardMoney = value;
+                RaisePropertyChanged("RewardMoney");
+            }
+        }
+        public int RewardSpell
+        {
+            get { return _rewardSpell; }
+            set
+            {
+                _rewardSpell = value;
+                RaisePropertyChanged("RewardSpell");
+            }
+        }
+        public int RewardSpellCast {
+            get { return _rewardSpellCast; }
+            set
+            {
+                _rewardSpellCast = value;
+                RaisePropertyChanged("RewardSpellCast");
+            }
+        }
+        public int RewardHonor {
+            get { return _rewardHonor; }
+            set
+            {
+                _rewardHonor = value;
+                RaisePropertyChanged("RewardHonor");
+                RaisePropertyChanged("RewardHonorMultiplier");
+            }
+        }
+        public int RewardHonorMultiplier
+        {
+            get { return RewardHonor == 0 ? 0 : 1; }
+        }
         //public int RewardMailTemplateId { get; set; } // Implement when DB is set up properly
         //public int RewardMailDelay { get; set; }
-        public PlayerTitle RewardTitle { get; set; }
-        public int RewardArenaPoints { get; set; }
+        public PlayerTitle RewardTitle {
+            get { return _rewardTitle; }
+            set
+            {
+                _rewardTitle = value;
+                RaisePropertyChanged("RewardTitle");
+            }
+        }
+        public int RewardArenaPoints {
+            get { return _rewardArenaPoints; }
+            set
+            {
+                _rewardArenaPoints = value;
+                RaisePropertyChanged("RewardArenaPoints");
+            }
+        }
         public DynamicDataControl RewardItems
         {
             get
@@ -244,7 +440,11 @@ namespace TrinityCreator
                     _rewardItems = new DynamicDataControl(maxLines:4, header1:"Item ID", header2:"Amount", defaultValue:"0");
                 return _rewardItems;
             }
-            set { _rewardItems = value; }
+            set
+            {
+                _rewardItems = value;
+                RaisePropertyChanged("RewardItems");
+            }
         }
         public DynamicDataControl RewardChoiceItems // additional items to choose one from
         {
@@ -254,7 +454,11 @@ namespace TrinityCreator
                     _rewardChoiceItems = new DynamicDataControl(maxLines: 6, header1: "Choice Item ID", header2: "Amount", defaultValue: "0");
                 return _rewardChoiceItems;
             }
-            set { _rewardChoiceItems = value; }
+            set
+            {
+                _rewardChoiceItems = value;
+                RaisePropertyChanged("RewardChoiceItems");
+            }
         }
         public DynamicDataControl FactionRewards
         {
@@ -262,9 +466,13 @@ namespace TrinityCreator
             {
                 if (_factionRewards == null)
                     _factionRewards = new DynamicDataControl(maxLines:5, header1:"Faction ID", header2: "Amount", defaultValue:"0");
-                return _factionRewards;;
+                return _factionRewards;
             }
-            set { _factionRewards = value; }
+            set
+            {
+                _factionRewards = value;
+                RaisePropertyChanged("FactionRewards");
+            }
         }
 
         #endregion
@@ -285,7 +493,6 @@ namespace TrinityCreator
                 {"NextQuestIdChain", NextQuestIdChain.ToString()},
                 {"RewardXPDifficulty", RewardXpDifficulty.Id.ToString()},
                 {"RewardMoney", RewardMoney.Amount.ToString()},
-                {"RewardBonusMoney", RewardBonusMoney.Amount.ToString()},
                 {"RewardSpell", RewardSpell.ToString()},
                 {"RewardSpellCast", RewardSpellCast.ToString()},
                 {"RewardHonor", RewardHonor.ToString()},
@@ -413,8 +620,8 @@ namespace TrinityCreator
                 {"ID", EntryId.ToString()},
                 {"MaxLevel", MaxLevel.ToString()},
                 {"AllowableClasses", AllowableClasses.BitmaskValue.ToString()},
-                {"PrevQuestId", PrevQuestId.ToString()},
-                {"NextQuestId", NextQuestId.ToString()},
+                {"PrevQuestId", PrevQuest.EntryId.ToString()},
+                {"NextQuestId", NextQuest.EntryId.ToString()},
                 //{"RewardMailTemplateId", RewardMailTemplateId.ToString()},
                 //{"RewardMailDelay", RewardMailDelay.ToString()},
                 {"ProvidedItemCount", ProvidedItemCount.ToString()},
@@ -424,9 +631,6 @@ namespace TrinityCreator
             return kvplist;
         }
 
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
         public void RaisePropertyChanged(string property)
         {
             if (PropertyChanged != null)
