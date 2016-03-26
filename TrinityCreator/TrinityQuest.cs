@@ -636,5 +636,26 @@ namespace TrinityCreator
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+
+        public string GenerateSqlQuery()
+        {
+            var kvplist1 = GenerateQueryValues();
+            var kvplist2 = GenerateAddonQueryValues();
+
+            // generate query1
+            var query1 = "INSERT INTO quest_template (";
+            query1 += string.Join(", ", kvplist1.Keys);
+            query1 += ") VALUES (";
+            query1 += string.Join(", ", kvplist1.Values) + ");" + Environment.NewLine;
+
+            // generate query2
+            var query2 = "INSERT INTO quest_template_addon (";
+            query2 += string.Join(", ", kvplist2.Keys);
+            query2 += ") VALUES (";
+            query2 += string.Join(", ", kvplist2.Values) + ");" + Environment.NewLine;
+
+            
+            return query1 + Environment.NewLine + query2;
+        }
     }
 }

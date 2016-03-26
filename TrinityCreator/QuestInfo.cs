@@ -18,6 +18,12 @@ namespace TrinityCreator
         public string Description { get; set; }
 
 
+        public override string ToString()
+        {
+            return Description;
+        }
+
+
         public static QuestInfo[] ListQuestInfo()
         {
             return new QuestInfo[]

@@ -4,20 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrinityCreator"
-             mc:Ignorable="d">
+             mc:Ignorable="d" Loaded="UserControl_Loaded">
     <DockPanel>
-        <StackPanel DockPanel.Dock="Left">
-            <local:QuestPreview QuestStatusIcon="DailyQuestIcon" />
-        </StackPanel>
         <StackPanel DockPanel.Dock="Right">
+            <local:QuestPreview QuestStatusIcon="DailyQuestIcon" />
+
+            <DockPanel>
+                <Label Content="Entry Id" DockPanel.Dock="Left" />
+                <TextBox Text="{Binding EntryId}" DockPanel.Dock="Right" />
+            </DockPanel>
+            
+            <Button Content="Export to SQL" Click="Button_Click" />
+        </StackPanel>
+        
+        <StackPanel DockPanel.Dock="Left">
             <GroupBox Header="Quest Info">
                 <StackPanel>
                     <DockPanel>
+                        <Label Content="Quest Sort" DockPanel.Dock="Left" />
+                        <Button Content="Find (Include QuestSort + areatable in lookup)" DockPanel.Dock="Right" Width="50" IsEnabled="False"/>
+                        <TextBox Text="{Binding PQuestSort}" DockPanel.Dock="Left" />
+                    </DockPanel>
+                    <DockPanel>
                         <Label Content="Quest Info" DockPanel.Dock="Left" />
-                        <Label Content="Quest Info" DockPanel.Dock="Right" />
+                        <ComboBox Name="questInfoCb" SelectedValue="{Binding PQuestInfo}" />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Content="Players" DockPanel.Dock="Left" />
+                        <TextBox Text="{Binding SuggestedGroupNum}" DockPanel.Dock="Left" ToolTip="Amount of players recommended to complete this quest." />
                     </DockPanel>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
+
     </DockPanel>
 </UserControl>
