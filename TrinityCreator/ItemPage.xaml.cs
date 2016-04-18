@@ -137,10 +137,10 @@ namespace TrinityCreator
                         VendorBox.Visibility = Visibility.Visible;
                         break;
                     case 7: // Trade goods
-
+                        VendorBox.Visibility = Visibility.Visible;
                         break;
                     case 9: // Recipe
-                        //Recipe spell list & box?
+                        VendorBox.Visibility = Visibility.Visible;
                         break;
                     case 11: // Quiver
                         ContainerBox.Visibility = Visibility.Visible;

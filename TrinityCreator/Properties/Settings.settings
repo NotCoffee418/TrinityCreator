@@ -17,5 +17,8 @@
     <Setting Name="nextid_quest" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">500000</Value>
     </Setting>
+    <Setting Name="emulator" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

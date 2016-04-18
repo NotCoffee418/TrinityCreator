@@ -413,6 +413,7 @@ namespace TrinityCreator
         /// <returns></returns>
         private Dictionary<string, string> GenerateQueryValues()
         {
+            // universal
             var kvplist = new Dictionary<string, string>
             {
                 {"entry", EntryId.ToString()},
@@ -433,7 +434,6 @@ namespace TrinityCreator
                 {"Material", ItemSubClass.Material.Id.ToString()},
                 {"sheath", InventoryType.Sheath.ToString()},
                 {"Flags", Flags.BitmaskValue.ToString()},
-                {"FlagsExtra", FlagsExtra.BitmaskValue.ToString()},
                 {"BuyCount", BuyCount.ToString()},
                 {"stackable", Stackable.ToString()},
                 {"ContainerSlots", ContainerSlots.ToString()},
@@ -446,8 +446,14 @@ namespace TrinityCreator
                 {"armor", Armor.ToString()},
                 {"block", Block.ToString()},
                 {"BagFamily", BagFamily.BitmaskValue.ToString()},
-                {"socketBonus", SocketBonus.Id.ToString()}
             };
+
+            if (Properties.Settings.Default.emulator == 0)
+            {
+                kvplist.Add("FlagsExtra", FlagsExtra.BitmaskValue.ToString());
+                kvplist.Add("BagFamily", BagFamily.BitmaskValue.ToString());
+            }
+
             // armor
             // block
             // bag family
@@ -506,7 +512,8 @@ namespace TrinityCreator
                     kvplist.Add("stat_type" + count, stat.Id.ToString());
                     kvplist.Add("stat_value" + count, value.ToString());
                 }
-                kvplist.Add("StatsCount", count.ToString());
+                if (Properties.Settings.Default.emulator == 0)
+                    kvplist.Add("StatsCount", count.ToString());
             }
             catch
             {

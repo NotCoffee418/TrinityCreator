@@ -33,6 +33,18 @@ namespace TrinityCreator
             ContentGridSplitter.Visibility = Visibility.Collapsed;
             LookupTool lt = new LookupTool();
 
+            // Set emulator
+            switch (Properties.Settings.Default.emulator)
+            {
+                case 0: // trinity335a
+                    trinity335aRb.IsChecked = true;
+                    break;
+                case 1: // cMangos112
+                    cMangos112Rb.IsChecked = true;
+                    break;
+            }
+
+
             // Load usable creators
             ItemTab.Content = new ItemPage(this);
             QuestTab.Content = new QuestPage(this);
@@ -86,6 +98,20 @@ namespace TrinityCreator
             win.Show();
         }
 
+        #region Settings
+        // select the emulator
+        private void trinity335aRb_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.emulator = 0;
+            Properties.Settings.Default.Save();
+        }
+        private void cMangos112Rb_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.emulator = 1;
+            Properties.Settings.Default.Save();
+        }
+
+        // show unfinished tabs
         private void settingViewUnfinished_Click(object sender, RoutedEventArgs e)
         {
             Settings.Default.viewUnfinishedCreators = false;
@@ -107,6 +133,8 @@ namespace TrinityCreator
 
             Settings.Default.Save();
         }
+
+        #endregion
 
 
         private void Donate_Click(object sender, RoutedEventArgs e)
@@ -152,5 +180,6 @@ namespace TrinityCreator
             ContentGrid.ColumnDefinitions[2].Width = new GridLength(25);
             ContentGridSplitter.Visibility = Visibility.Collapsed;
         }
+
     }
 }
