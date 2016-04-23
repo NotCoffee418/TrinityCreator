@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrinityCreator", "TrinityCreator\TrinityCreator.csproj", "{47CB1223-637A-4CBE-8842-CE204B2395B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrinityCreatorUpdater", "Updater\TrinityCreatorUpdater.csproj", "{43370AC0-0F89-4FCA-BC85-C6412E785DA6}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TrinityCreatorSetup", "TrinityCreatorSetup\TrinityCreatorSetup.wixproj", "{A39CF70B-204F-4BB0-B785-58D51BB6A996}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBCLib", "DBCLib\DBCLib.csproj", "{C4B07DEC-5A55-485C-B31B-705434DF689F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,12 @@ Global
 		{A39CF70B-204F-4BB0-B785-58D51BB6A996}.Release|Any CPU.ActiveCfg = Release|x86
 		{A39CF70B-204F-4BB0-B785-58D51BB6A996}.Release|x86.ActiveCfg = Release|x86
 		{A39CF70B-204F-4BB0-B785-58D51BB6A996}.Release|x86.Build.0 = Release|x86
+		{C4B07DEC-5A55-485C-B31B-705434DF689F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4B07DEC-5A55-485C-B31B-705434DF689F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4B07DEC-5A55-485C-B31B-705434DF689F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C4B07DEC-5A55-485C-B31B-705434DF689F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4B07DEC-5A55-485C-B31B-705434DF689F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4B07DEC-5A55-485C-B31B-705434DF689F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

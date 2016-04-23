@@ -5,8 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrinityCreator"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Background="Black">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="300" d:DesignWidth="300" >
+    <StackPanel>
+        <Label Name="targetLbl" Content="Searching in..."/>
+        <DockPanel>
+            <Button Content="Search" DockPanel.Dock="Right"/>
+            <TextBox Name="searchTxt" />
+        </DockPanel>
+        <DataGrid Name="dataGrid" />
+    </StackPanel>
 </UserControl>

@@ -161,6 +161,11 @@ namespace TrinityCreator
             Process.Start("https://paypal.me/RStijn");
         }
 
+        private void Credits_Click(object sender, RoutedEventArgs e)
+        {
+            new CreditsWindow().Show();
+        }
+
         private void Window_Closing(object sender, CancelEventArgs e)
         {
         }

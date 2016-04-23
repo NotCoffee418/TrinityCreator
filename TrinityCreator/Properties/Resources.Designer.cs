@@ -91,6 +91,18 @@ namespace TrinityCreator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creator			Stijn Raeymaekers
+        ///
+        ///External libraries:
+        ///DBC Reader		JppTheInsane.
+        /// </summary>
+        internal static string Credits {
+            get {
+                return ResourceManager.GetString("Credits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap DailyActiveQuestIcon {

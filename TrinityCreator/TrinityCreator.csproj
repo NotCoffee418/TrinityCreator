@@ -81,6 +81,9 @@
     <Compile Include="Converters\ValueToVisibilityConverter.cs" />
     <Compile Include="Converters\WeaponSpeedToStringConverter.cs" />
     <Compile Include="Coordinate.cs" />
+    <Compile Include="CreditsWindow.xaml.cs">
+      <DependentUpon>CreditsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Currency.cs" />
     <Compile Include="Damage.cs" />
     <Compile Include="DamageType.cs" />
@@ -125,6 +128,10 @@
     <Compile Include="TrinityQuest.cs" />
     <Compile Include="Updater.cs" />
     <Compile Include="WowClient\DbcReader.cs" />
+    <Page Include="CreditsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Database\DbConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -246,7 +253,9 @@
   <ItemGroup>
     <Resource Include="Resources\yellowsocket.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Credits.txt" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\tclogo.png" />
   </ItemGroup>
