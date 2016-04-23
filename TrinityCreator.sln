@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrinityCreatorUpdater", "Up
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TrinityCreatorSetup", "TrinityCreatorSetup\TrinityCreatorSetup.wixproj", "{A39CF70B-204F-4BB0-B785-58D51BB6A996}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBCLib", "DBCLib\DBCLib.csproj", "{C4B07DEC-5A55-485C-B31B-705434DF689F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,12 +39,6 @@ Global
 		{A39CF70B-204F-4BB0-B785-58D51BB6A996}.Release|Any CPU.ActiveCfg = Release|x86
 		{A39CF70B-204F-4BB0-B785-58D51BB6A996}.Release|x86.ActiveCfg = Release|x86
 		{A39CF70B-204F-4BB0-B785-58D51BB6A996}.Release|x86.Build.0 = Release|x86
-		{C4B07DEC-5A55-485C-B31B-705434DF689F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4B07DEC-5A55-485C-B31B-705434DF689F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4B07DEC-5A55-485C-B31B-705434DF689F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C4B07DEC-5A55-485C-B31B-705434DF689F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4B07DEC-5A55-485C-B31B-705434DF689F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4B07DEC-5A55-485C-B31B-705434DF689F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

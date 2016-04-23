@@ -246,7 +246,7 @@ namespace TrinityCreator
         //public int RequiredMaxRepValue { get; set; } // Prerequisite
         //public int RequiredSkillId { get; set; }
         //public int RequiredSkillPoints { get; set; }
-        public BitmaskStackPanel AllowableClasses
+        public BitmaskStackPanel AllowableClass
         {
             get
             {
@@ -260,7 +260,7 @@ namespace TrinityCreator
                 RaisePropertyChanged("AllowableClasses");
             }
         }
-        public BitmaskStackPanel AllowableRaces
+        public BitmaskStackPanel AllowableRace
         {
             get
             {
@@ -498,7 +498,7 @@ namespace TrinityCreator
                 {"QuestInfoID", PQuestInfo.Id.ToString()},
                 {"SuggestedGroupNum", SuggestedGroupNum.ToString()},
                 {"TimeAllowed", TimeAllowed.ToString()},
-                {"AllowableRaces", AllowableRaces.BitmaskValue.ToString()},
+                {"AllowableRaces", AllowableRace.BitmaskValue.ToString()},
                 {"NextQuestIdChain", NextQuestIdChain.ToString()},
                 {"RewardXPDifficulty", RewardXpDifficulty.Id.ToString()},
                 {"RewardMoney", RewardMoney.Amount.ToString()},
@@ -628,7 +628,7 @@ namespace TrinityCreator
             {
                 {"ID", EntryId.ToString()},
                 {"MaxLevel", MaxLevel.ToString()},
-                {"AllowableClasses", AllowableClasses.BitmaskValue.ToString()},
+                {"AllowableClasses", AllowableClass.BitmaskValue.ToString()},
                 {"PrevQuestId", PrevQuest.EntryId.ToString()},
                 {"NextQuestId", NextQuest.EntryId.ToString()},
                 //{"RewardMailTemplateId", RewardMailTemplateId.ToString()},

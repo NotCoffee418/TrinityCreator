@@ -38,6 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -92,6 +93,18 @@
       <DependentUpon>DbConfigWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Database\ItemTemplateQuery.cs" />
+    <Compile Include="DBCViewer\ADBReader.cs" />
+    <Compile Include="DBCViewer\BinaryFormatter.cs" />
+    <Compile Include="DBCViewer\BinaryFormatterExtensions.cs" />
+    <Compile Include="DBCViewer\DB2Reader.cs" />
+    <Compile Include="DBCViewer\DB3Reader.cs" />
+    <Compile Include="DBCViewer\DB4Reader.cs" />
+    <Compile Include="DBCViewer\DBCReader.cs" />
+    <Compile Include="DBCViewer\DBCReaderGeneric.cs" />
+    <Compile Include="DBCViewer\DBReaderFactory.cs" />
+    <Compile Include="DBCViewer\IWowClientDBReader.cs" />
+    <Compile Include="DBCViewer\STLReader.cs" />
+    <Compile Include="DBCViewer\WDBReader.cs" />
     <Compile Include="DynamicDataControl.xaml.cs">
       <DependentUpon>DynamicDataControl.xaml</DependentUpon>
     </Compile>
@@ -104,6 +117,7 @@
     <Compile Include="QuestControl.xaml.cs">
       <DependentUpon>QuestControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QuestSort.cs" />
     <Compile Include="QuestInfo.cs" />
     <Compile Include="QuestPage.xaml.cs">
       <DependentUpon>QuestPage.xaml</DependentUpon>

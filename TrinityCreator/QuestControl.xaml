@@ -13,7 +13,13 @@
             <l:QuestPreview QuestStatusIcon="DailyQuestIcon" />
             
             <GroupBox Header="Extra options">
-                <CheckBox Name="setFlagsCb" Content="Set Flags" />
+                <StackPanel>
+                    <CheckBox Name="setFlagsCb" Content="Set Flags" />
+                    <CheckBox Name="LimitClassCb" FontSize="12" Content="Add class limitations" Margin="0,5,0,0"
+                                  VerticalAlignment="Top" HorizontalAlignment="Left" />
+                    <CheckBox Name="LimitRaceCb" FontSize="12" Content="Add race limitations" Margin="0,5,0,0"
+                                  VerticalAlignment="Top" HorizontalAlignment="Left" />
+                </StackPanel>
             </GroupBox>
 
             <DockPanel>
@@ -37,13 +43,26 @@
                         <ComboBox Name="questInfoCb" SelectedValue="{Binding PQuestInfo}" SelectionChanged="questInfoCb_SelectionChanged" />
                     </DockPanel>
                     <DockPanel>
-                        <Label Content="Players" DockPanel.Dock="Left" />
+                        <Label Content="Quest Sort" DockPanel.Dock="Left" />
+                        <ComboBox Name="questsortCb" SelectedValue="{Binding PQuestSort, Mode=OneWayToSource}" SelectionChanged="questsortCb_SelectionChanged" />
+                    </DockPanel>
+                    <DockPanel Name="sortZoneDock">
+                        <Label Content="Sort Zone ID" DockPanel.Dock="Left" />
+                        <TextBox Name="questsortText" Text="{Binding PQuestSort}"  />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Content="Players amount" DockPanel.Dock="Left" />
                         <TextBox Text="{Binding SuggestedGroupNum}" DockPanel.Dock="Left" ToolTip="Amount of players recommended to complete this quest." />
                     </DockPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Name="questFlagsGb" Header="Quest Flags" Content="{Binding Flags}" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
             <GroupBox Name="questSpecialFlagsGb" Header="Quest Special Flags" Content="{Binding SpecialFlags}" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
+            <GroupBox Name="LimitClassBitMaskGroupBox" Content="{Binding AllowableClass}" Header="Classes allowed"
+                          Visibility="{Binding ElementName=LimitClassCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
+            <GroupBox Name="LimitRaceBitMaskGroupBox" Content="{Binding AllowableRace}" Header="Races allowed"
+                          Visibility="{Binding ElementName=LimitRaceCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
+
         </StackPanel>
 
     </DockPanel>

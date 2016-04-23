@@ -27,12 +27,20 @@ namespace TrinityCreator
         {
             InitializeComponent();
             DataContext = Quest;
+
+            // Prepare controls
         }
+
 
         private void PrepareQuestControl()
         {
+            // QuestInfo
             questInfoCb.ItemsSource = QuestInfo.ListQuestInfo();
             questInfoCb.SelectedIndex = 0;
+
+            // QUestSort
+            questsortCb.ItemsSource = QuestSort.ListQuestSort();
+            questsortCb.SelectedIndex = 0;
 
 
         }
@@ -85,6 +93,8 @@ namespace TrinityCreator
         }
 
         #region ChangedEvents
+
+
         private void questInfoCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -100,6 +110,18 @@ namespace TrinityCreator
             catch { /*fail on load*/ }
         }
 
+
+        private void questsortCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            QuestSort sort = (QuestSort)questsortCb.SelectedValue;
+            if (sort.Id == 0)
+                sortZoneDock.Visibility = Visibility.Visible;
+            else
+                sortZoneDock.Visibility = Visibility.Collapsed;
+
+        }
+
         #endregion
+
     }
 }
