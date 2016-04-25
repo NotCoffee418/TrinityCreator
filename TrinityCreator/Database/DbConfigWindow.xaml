@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TrinityCreator.Database"
         mc:Ignorable="d"
         Title="Configure Database" Height="300" Width="500" ResizeMode="NoResize">
-    <StackPanel>
+    <StackPanel Margin="10">
         <DockPanel Margin="0,0,0,5">
             <Label Content="MySQL Host" Width="100" HorizontalAlignment="Left" />
             <TextBox Name="HostTxt" Text="127.0.0.1" />

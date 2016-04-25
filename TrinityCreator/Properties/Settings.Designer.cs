@@ -94,5 +94,17 @@ namespace TrinityCreator.Properties {
                 this["emulator"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DbcDir {
+            get {
+                return ((string)(this["DbcDir"]));
+            }
+            set {
+                this["DbcDir"] = value;
+            }
+        }
     }
 }

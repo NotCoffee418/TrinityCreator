@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using TrinityCreator.Database;
 using TrinityCreator.Properties;
+using TrinityCreator.DBC;
 
 namespace TrinityCreator
 {
@@ -32,8 +33,6 @@ namespace TrinityCreator
             // prepare lookup tool
             ContentGrid.ColumnDefinitions[2].Width = new GridLength(25);
             ContentGridSplitter.Visibility = Visibility.Collapsed;
-            LookupTool lt = new LookupTool();
-            App.LookupTool = lt; // static global property
 
             // Set emulator
             switch (Properties.Settings.Default.emulator)
@@ -96,8 +95,12 @@ namespace TrinityCreator
 
         private void configureMysql_Click(object sender, RoutedEventArgs e)
         {
-            var win = new DbConfigWindow();
-            win.Show();
+            new DbConfigWindow().Show();
+        }
+
+        private void configureDbc_Click(object sender, RoutedEventArgs e)
+        {
+            new DBC.DbcConfigWindow().Show();
         }
 
         #region Settings

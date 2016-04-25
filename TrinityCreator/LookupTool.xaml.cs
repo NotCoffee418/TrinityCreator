@@ -27,7 +27,7 @@ namespace TrinityCreator
         public LookupTool()
         {
             InitializeComponent();
-            Target = "Find item by name";
+            App.LookupTool = this;
         }
 
         string _target = "Searching in...";    
@@ -39,8 +39,8 @@ namespace TrinityCreator
             get { return _target; }
             set
             {
-                targetLbl.Content = value;
                 _target = value;
+                targetLbl.Content = value;
             }
         }
 

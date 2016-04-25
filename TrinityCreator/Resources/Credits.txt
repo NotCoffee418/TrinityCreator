@@ -1,4 +1,5 @@
 Creator			Stijn Raeymaekers
 
-External libraries:
-DBC Viewer		tomrus88
+External libraries by:
+DBC Viewer				tomrus88
+DBC & maps extractor	cMangos

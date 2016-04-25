@@ -8,7 +8,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Configuration">
-                <MenuItem Name="ConfigureDbc" Header="Configure DB_C Path" />
+                <MenuItem Name="ConfigureDbc" Header="Configure DB_C Path" Click="configureDbc_Click" />
                 <MenuItem Name="ConfigureMysql" Header="Configure _MySQL" Click="configureMysql_Click" />
             </MenuItem>
 
