@@ -16,6 +16,7 @@ using TrinityCreator.Database;
 using System.Data;
 using System.Threading;
 using System.Windows.Threading;
+using TrinityCreator.DBC;
 
 namespace TrinityCreator
 {
@@ -41,27 +42,47 @@ namespace TrinityCreator
             {
                 _target = value;
                 targetLbl.Content = value;
+                HandleDbcQuery();
             }
         }
 
-        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        public DataTable FullDbcTable { get; set; }
+
+        public bool LocalSearch { get; set; }
+
+        /// <summary>
+        /// DBC definitions
+        /// </summary>
+        /// <param name="target"></param>
+        private void HandleDbcQuery()
         {
-            searchBtn.IsEnabled = false;
+            LocalSearch = true;
+            DataTable result = null;
+            switch (Target)
+            {
+                case "Find quest sort":
+                    result = Queries.GetQuestSort();
+                    break;
 
-            // clear
-            dataGrid.Columns.Clear();
-            dataGrid.ItemsSource = null;
+                // SQL query will be handled in searchBtn_Click
+                default:
+                    LocalSearch = false;
+                    break;
+            }
 
-            // Show searching message
-            DataGridTextColumn col = new DataGridTextColumn();
-            col.Header = "Searching...";
-            dataGrid.Columns.Add(col);
-
-            string search = searchTxt.Text;
-            SetResults(search);
+            // Copy DataTable when DBC
+            if (LocalSearch)
+            {
+                FullDbcTable = result.Copy();
+                SetGridSource(result);
+            }
         }
 
-        private void SetResults(string search)
+        /// <summary>
+        /// SQL Definitions
+        /// </summary>
+        /// <param name="search"></param>
+        private void HandleSqlQuery(string search)
         {
             Connection.Open();
             switch (Target)
@@ -78,8 +99,46 @@ namespace TrinityCreator
             }
         }
 
+
+        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            searchBtn.IsEnabled = false;
+            string search = searchTxt.Text;
+
+            if (LocalSearch)
+            {
+                DataTable filteredTable = new DataTable();
+                foreach (DataColumn dc in FullDbcTable.Columns)
+                    filteredTable.Columns.Add(dc.ColumnName, dc.DataType);
+
+                List<DataRow> filteredRows = new List<DataRow>();
+                foreach (DataRow row in FullDbcTable.Rows)
+                {
+                    for (int i = 0; i < FullDbcTable.Columns.Count; i++)
+                        if (row[i].ToString().ToLower().Contains(search.ToLower()))
+                        {
+                            filteredTable.ImportRow(row);
+                            break;
+                        }
+                }
+                SetGridSource(filteredTable);
+            }
+            else // Query SQL
+            {
+                // clear
+                dataGrid.Columns.Clear();
+                dataGrid.ItemsSource = null;
+
+                // Show searching message
+                DataGridTextColumn col = new DataGridTextColumn();
+                col.Header = "Searching...";
+                dataGrid.Columns.Add(col);
+                HandleSqlQuery(search);
+            }
+        }
+
         /// <summary>
-        /// Set the grid's itemssource from another thread
+        /// Set the grid's itemssource
         /// </summary>
         /// <param name="dt"></param>
         private void SetGridSource(DataTable dt)
@@ -88,8 +147,24 @@ namespace TrinityCreator
             dataGrid.Columns.Clear();
             dataGrid.ItemsSource = null;
 
-            // set 
-            dataGrid.ItemsSource = dt.DefaultView;
+            if (dt.Rows.Count > 200) // Limit to reduce lag
+            {
+                // import 200 rows
+                DataTable limited = new DataTable();
+                foreach (DataColumn dc in FullDbcTable.Columns)
+                    limited.Columns.Add(dc.ColumnName, dc.DataType);
+                for (int i = 0; i < 200; i++)
+                    limited.ImportRow(dt.Rows[i]);
+
+                // mesage
+                DataRow info = limited.NewRow();
+                info[1] = "Limited to 200 results. Search to filter.";
+                limited.Rows.Add(info);
+
+                // bind
+                dataGrid.ItemsSource = limited.DefaultView;
+            }
+            else dataGrid.ItemsSource = dt.DefaultView;
             searchBtn.IsEnabled = true;
         }
     }

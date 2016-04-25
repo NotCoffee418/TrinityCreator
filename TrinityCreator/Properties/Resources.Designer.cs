@@ -93,8 +93,10 @@ namespace TrinityCreator.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Creator			Stijn Raeymaekers
         ///
-        ///External libraries:
-        ///DBC Reader		JppTheInsane.
+        ///External libraries by:
+        ///DBC Viewer				tomrus88
+        ///DBC &amp; maps extractor	cMangos
+        ///.
         /// </summary>
         internal static string Credits {
             get {
@@ -119,6 +121,29 @@ namespace TrinityCreator.Properties {
             get {
                 object obj = ResourceManager.GetObject("DailyQuestIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        ///&lt;!-- $Id: dbclayout.xml 2010-18-09 0:13:00 TOM_RUS $ --&gt;
+        ///&lt;DBFilesClient&gt;
+        ///  &lt;Achievement build=&quot;13117&quot;&gt;
+        ///    &lt;index&gt;
+        ///      &lt;primary&gt;id&lt;/primary&gt;
+        ///    &lt;/index&gt;
+        ///    &lt;field type=&quot;uint&quot; name=&quot;id&quot; /&gt;
+        ///    &lt;field type=&quot;int&quot; name=&quot;factionFlag&quot; /&gt;
+        ///    &lt;field type=&quot;int&quot; name=&quot;mapId&quot; /&gt;
+        ///    &lt;field type=&quot;uint&quot; name=&quot;parentAchievement&quot; /&gt;
+        ///    &lt;field type=&quot;string&quot; name=&quot;name&quot; /&gt;
+        ///    &lt;field type=&quot;string&quot; name=&quot;description&quot; /&gt;
+        ///    &lt;field type=&quot;uint&quot; name=&quot;categoryId&quot; /&gt;
+        ///    [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string dbclayout {
+            get {
+                return ResourceManager.GetString("dbclayout", resourceCulture);
             }
         }
         

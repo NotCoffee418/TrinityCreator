@@ -35,7 +35,7 @@
                 <StackPanel>
                     <DockPanel>
                         <Label Content="Quest Sort" DockPanel.Dock="Left" />
-                        <Button Content="Find (Include QuestSort + areatable in lookup)" DockPanel.Dock="Right" Width="50" IsEnabled="False"/>
+                        <Button Name="findSortBtn" Content="Find" DockPanel.Dock="Right" Width="50" Click="findSortBtn_Click"/>
                         <TextBox Text="{Binding PQuestSort}" DockPanel.Dock="Left" />
                     </DockPanel>
                     <DockPanel>

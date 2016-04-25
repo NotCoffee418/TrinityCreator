@@ -113,6 +113,7 @@
       <DependentUpon>DbcConfigWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DBC\DbcHandler.cs" />
+    <Compile Include="DBC\Queries.cs" />
     <Compile Include="DynamicDataControl.xaml.cs">
       <DependentUpon>DynamicDataControl.xaml</DependentUpon>
     </Compile>
@@ -301,7 +302,9 @@
   <ItemGroup>
     <Resource Include="Resources\QuestGreeting.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\dbclayout.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

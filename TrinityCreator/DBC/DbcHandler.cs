@@ -7,11 +7,16 @@ using System.Windows;
 using System.IO;
 using System.Net;
 using System.Diagnostics;
+using System.Data;
+using DBCViewer;
+using System.Globalization;
+using System.Xml;
 
 namespace TrinityCreator.DBC
 {
     class DbcHandler
     {
+
         public static bool VerifyDbcDir()
         {
             string dbcDir = Properties.Settings.Default.DbcDir;
@@ -86,5 +91,173 @@ namespace TrinityCreator.DBC
                 path = Properties.Settings.Default.DbcDir;
             return string.Format("{0}\\{1}.dbc", path, name);
         }
+
+        /// <summary>
+        /// Get DataTable from DBC file, can be modified to support other versions of WoW
+        /// </summary>
+        /// <param name="DbcName">DBC file name without ext</param>
+        /// <returns></returns>
+        public static DataTable LoadDbc(string dbcName, int build = 12340)
+        {
+            if (!VerifyDbcDir())
+            {
+                DataTable error = new DataTable();
+                error.Columns.Add("Error");
+                error.Rows.Add("Failed to load DBC file.");
+                return error;
+            }
+
+            string file = GetDbcFilePath(dbcName);
+            var m_dbreader = DBReaderFactory.GetReader(file);
+
+            // Filter definitions
+            XmlDocument m_definitions = new XmlDocument();
+            m_definitions.LoadXml(Properties.Resources.dbclayout);
+
+            // Get correct definition
+            XmlElement m_definition = (XmlElement)m_definitions.SelectSingleNode("/DBFilesClient/" + dbcName + "[@build='" + build + "']");
+            if (m_definition == null) // try with build 0
+                m_definition = (XmlElement)m_definitions.SelectSingleNode("/DBFilesClient/" + dbcName + "[@build='0']");
+            if (m_definition == null) // return error
+            {
+                DataTable error = new DataTable();
+                error.Columns.Add("Error");
+                error.Rows.Add("No definitions for this table on this build.");
+                return error;
+            }
+
+            var m_fields = m_definition.GetElementsByTagName("field");
+            string[] types = new string[m_fields.Count];
+            for (int j = 0; j < m_fields.Count; ++j)
+                types[j] = m_fields[j].Attributes["type"].Value;
+            var m_dataTable = new DataTable(dbcName);
+            m_dataTable.Locale = CultureInfo.InvariantCulture;
+
+            // Create columns
+            foreach (XmlElement field in m_fields)
+            {
+                var colName = field.Attributes["name"].Value;
+
+                switch (field.Attributes["type"].Value)
+                {
+                    case "long":
+                        m_dataTable.Columns.Add(colName, typeof(long));
+                        break;
+                    case "ulong":
+                        m_dataTable.Columns.Add(colName, typeof(ulong));
+                        break;
+                    case "int":
+                        m_dataTable.Columns.Add(colName, typeof(int));
+                        break;
+                    case "uint":
+                        m_dataTable.Columns.Add(colName, typeof(uint));
+                        break;
+                    case "short":
+                        m_dataTable.Columns.Add(colName, typeof(short));
+                        break;
+                    case "ushort":
+                        m_dataTable.Columns.Add(colName, typeof(ushort));
+                        break;
+                    case "sbyte":
+                        m_dataTable.Columns.Add(colName, typeof(sbyte));
+                        break;
+                    case "byte":
+                        m_dataTable.Columns.Add(colName, typeof(byte));
+                        break;
+                    case "float":
+                        m_dataTable.Columns.Add(colName, typeof(float));
+                        break;
+                    case "double":
+                        m_dataTable.Columns.Add(colName, typeof(double));
+                        break;
+                    case "string":
+                        m_dataTable.Columns.Add(colName, typeof(string));
+                        break;
+                    default:
+                        throw new ArgumentException(String.Format(CultureInfo.InvariantCulture, "Unknown field type {0}!", field.Attributes["type"].Value));
+                }
+            }
+
+            // Create indexes
+            XmlNodeList indexes = m_definition.GetElementsByTagName("index");
+            var columns = new DataColumn[indexes.Count];
+            var idx = 0;
+            foreach (XmlElement index in indexes)
+                columns[idx++] = m_dataTable.Columns[index["primary"].InnerText];
+            m_dataTable.PrimaryKey = columns;
+            
+            // Create rows
+            foreach (var row in m_dbreader.Rows) // Add rows
+            {
+                DataRow dataRow = m_dataTable.NewRow();
+
+                using (BinaryReader br = row)
+                {
+                    for (int j = 0; j < m_fields.Count; ++j)    // Add cells
+                    {
+                        switch (types[j])
+                        {
+                            case "long":
+                                dataRow[j] = br.ReadInt64();
+                                break;
+                            case "ulong":
+                                dataRow[j] = br.ReadUInt64();
+                                break;
+                            case "int":
+                                dataRow[j] = br.ReadInt32();
+                                break;
+                            case "uint":
+                                dataRow[j] = br.ReadUInt32();
+                                break;
+                            case "short":
+                                dataRow[j] = br.ReadInt16();
+                                break;
+                            case "ushort":
+                                dataRow[j] = br.ReadUInt16();
+                                break;
+                            case "sbyte":
+                                dataRow[j] = br.ReadSByte();
+                                break;
+                            case "byte":
+                                dataRow[j] = br.ReadByte();
+                                break;
+                            case "float":
+                                dataRow[j] = br.ReadSingle();
+                                break;
+                            case "double":
+                                dataRow[j] = br.ReadDouble();
+                                break;
+                            case "string":
+                                if (m_dbreader is WDBReader)
+                                    dataRow[j] = br.ReadStringNull();
+                                else if (m_dbreader is STLReader)
+                                {
+                                    int offset = br.ReadInt32();
+                                    dataRow[j] = (m_dbreader as STLReader).ReadString(offset);
+                                }
+                                else
+                                {
+                                    try
+                                    {
+                                        dataRow[j] = m_dbreader.StringTable[br.ReadInt32()];
+                                    }
+                                    catch
+                                    {
+                                        dataRow[j] = "Invalid string index!";
+                                    }
+                                }
+                                break;
+                            default:
+                                throw new ArgumentException(String.Format(CultureInfo.InvariantCulture, "Unknown field type {0}!", types[j]));
+                        }
+                    }
+                }
+
+                m_dataTable.Rows.Add(dataRow);
+            }
+
+            return m_dataTable;
+        }
+        
     }
 }
