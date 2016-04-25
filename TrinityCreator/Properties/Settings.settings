@@ -11,7 +11,7 @@
     <Setting Name="UpgradeRequired" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="worldDb" Type="MySql.Data.MySqlClient.MySqlConnectionStringBuilder" Scope="User">
+    <Setting Name="worldDb" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="nextid_quest" Type="System.Int32" Scope="User">

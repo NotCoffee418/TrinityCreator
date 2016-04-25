@@ -6,12 +6,14 @@
              xmlns:local="clr-namespace:TrinityCreator"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" >
-    <StackPanel>
-        <Label Name="targetLbl" Content="Searching in..."/>
-        <DockPanel>
-            <Button Content="Search" DockPanel.Dock="Right"/>
-            <TextBox Name="searchTxt" />
-        </DockPanel>
-        <DataGrid Name="dataGrid" />
-    </StackPanel>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <Label Name="targetLbl" Content="Searching in..."/>
+            <DockPanel>
+                <Button Name="searchBtn" Content="Search" DockPanel.Dock="Right" Click="searchBtn_Click"/>
+                <TextBox Name="searchTxt" />
+            </DockPanel>
+            <DataGrid Name="dataGrid" IsReadOnly="True" />
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

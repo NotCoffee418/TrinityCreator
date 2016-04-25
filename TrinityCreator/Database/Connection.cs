@@ -3,6 +3,8 @@ using System.Data;
 using System.Windows;
 using MySql.Data.MySqlClient;
 using TrinityCreator.Properties;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace TrinityCreator.Database
 {
@@ -20,9 +22,9 @@ namespace TrinityCreator.Database
         /// <param name="pass"></param>
         /// <param name="dbName"></param>
         /// <returns>null on success or exception</returns>
-        internal static Exception Test(MySqlConnectionStringBuilder connString = null)
+        internal static Exception Test(string connString = "")
         {
-            if (connString == null)
+            if (connString == "")
                 connString = Settings.Default.worldDb;
             else if (connString == Settings.Default.worldDb && IsAlive)
                 return null;
@@ -44,15 +46,15 @@ namespace TrinityCreator.Database
         /// <summary>
         ///     Opens or reopens connection
         /// </summary>
-        internal static void Open()
+        internal static bool Open()
         {
             if (IsAlive)
-                Close();
+                return true;
 
             if (!IsConfigured())
             {
                 RequestConfiguration();
-                return;
+                return false;
             }
 
             try
@@ -60,6 +62,7 @@ namespace TrinityCreator.Database
                 _conn = new MySqlConnection(Settings.Default.worldDb.ToString());
                 _conn.Open();
                 IsAlive = true;
+                return true;
             }
             catch (Exception ex)
             {
@@ -67,7 +70,11 @@ namespace TrinityCreator.Database
                                         "Would you like to try again?", Environment.NewLine, ex.Message);
                 var r = MessageBox.Show(msg, "Failed to connect", MessageBoxButton.YesNo, MessageBoxImage.Error);
                 if (r == MessageBoxResult.Yes)
+                {
                     Open();
+                    return true;
+                }
+                else return false;
             }
         }
 
@@ -100,14 +107,15 @@ namespace TrinityCreator.Database
         {
             if (IsAlive)
                 return true;
-            if (Settings.Default.worldDb == null)
-                return true;
-            return false;
+            if (Settings.Default.worldDb == "")
+                return false;
+            return true;
         }
 
         protected static DataTable ExecuteQuery(string query)
         {
-            Open();
+            if (!IsAlive)
+                return new DataTable();
 
             var result = new DataTable();
             var cmd = new MySqlCommand(query, _conn);

@@ -7,6 +7,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using Microsoft.Win32;
 using TrinityCreator.Properties;
+using System.Data;
 
 namespace TrinityCreator
 {
@@ -18,9 +19,8 @@ namespace TrinityCreator
         private TrinityItem _item;
         private ItemPreview _preview;
         private bool _firstLoadComplete = false;
-        private MainWindow _mainWindow;
 
-        public ItemPage(MainWindow mainWindow)
+        public ItemPage()
         {
             InitializeComponent();
 
@@ -29,8 +29,17 @@ namespace TrinityCreator
             DataContext = _item;
             Loaded += ItemPage_Loaded;
             _preview = new ItemPreview(_item);
-            _mainWindow = mainWindow;
         }
+        public ItemPage(DataRow dr) : base()
+        {
+            LoadFromDataRow(dr);
+        }
+
+        private void LoadFromDataRow(DataRow dr)
+        {
+            throw new NotImplementedException();
+        }
+
         private void ItemPage_Loaded(object sender, RoutedEventArgs e)
         {
             if (!_firstLoadComplete)
@@ -406,6 +415,14 @@ namespace TrinityCreator
             }
         }
 
+
+        private void FindDisplayIdBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.Target = "Find item by name";
+            App._MainWindow.ShowLookupTool();
+        }
+
         #endregion
+
     }
 }

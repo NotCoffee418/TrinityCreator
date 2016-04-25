@@ -17,5 +17,8 @@ namespace TrinityCreator
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof (FrameworkElement), new FrameworkPropertyMetadata(
                 XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
         }
+
+        public static LookupTool LookupTool { get; internal set; }
+        public static MainWindow _MainWindow { get; internal set; }
     }
 }

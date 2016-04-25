@@ -57,7 +57,7 @@
 
             <GridSplitter Name="ContentGridSplitter" ResizeDirection="Columns" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Foreground="Red"/>
 
-            <Expander Name="LookupToolExpander" ExpandDirection="Left" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="0" Expanded="LookupToolExpander_Expanded" Collapsed="LookupToolExpander_Collapsed">
+            <Expander Name="LookupToolExpander" ExpandDirection="Left" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="0" Expanded="LookupToolExpander_Expanded" Collapsed="LookupToolExpander_Collapsed" IsExpanded="False">
                 <Expander.Header>
                     <TextBlock Text="Lookup Tool">
                         <TextBlock.LayoutTransform>

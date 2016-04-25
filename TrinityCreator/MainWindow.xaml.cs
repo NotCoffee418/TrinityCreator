@@ -15,6 +15,7 @@ namespace TrinityCreator
         public MainWindow()
         {
             InitializeComponent();
+            App._MainWindow = this;
 
             // Check for updates
 #if !DEBUG
@@ -32,6 +33,7 @@ namespace TrinityCreator
             ContentGrid.ColumnDefinitions[2].Width = new GridLength(25);
             ContentGridSplitter.Visibility = Visibility.Collapsed;
             LookupTool lt = new LookupTool();
+            App.LookupTool = lt; // static global property
 
             // Set emulator
             switch (Properties.Settings.Default.emulator)
@@ -46,7 +48,7 @@ namespace TrinityCreator
 
 
             // Load usable creators
-            ItemTab.Content = new ItemPage(this);
+            ItemTab.Content = new ItemPage();
             QuestTab.Content = new QuestPage(this);
 
 
@@ -72,7 +74,7 @@ namespace TrinityCreator
         
         public void ShowLookupTool()
         {
-            
+            LookupToolExpander.IsExpanded = true;
         }
 
         private bool LoadUnfinishedPages(bool done)

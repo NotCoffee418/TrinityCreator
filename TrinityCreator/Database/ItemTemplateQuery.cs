@@ -1,34 +1,29 @@
 ﻿using System;
+using System.Data;
 
 namespace TrinityCreator.Database
 {
     internal class ItemTemplateQuery : Connection
     {
-        /// <summary>
-        ///     Comma seperated list with the required values in the correct order
-        ///     (* could cause problems with core modifications)
-        /// </summary>
-        /// <returns></returns>
-        private static string[] GetRowValues()
-        {
-            return new string[]
-            {
-            };
-        }
-
         internal static ItemPage GetItemById(int entryId)
         {
-            ItemPage result = null;
-            var query = "SELECT " + string.Join(", ", GetRowValues()) + " FROM item_template WHERE entry = {entryId};";
+            Open();
+            ItemPage result = new ItemPage();
+            var query = "SELECT * FROM item_template WHERE entry = " + entryId;
             var dt = ExecuteQuery(query);
-            //if (dt.Rows.Count > 0)
-            //    result = new ItemPage(dt.Rows[0]);
+            if (dt.Rows.Count > 0)
+                result = new ItemPage(dt.Rows[0]);
             return result;
         }
 
-        internal static TrinityItem[] FindItemsByName(string partialName)
+        /// <summary>
+        /// Used for displayid lookup
+        /// </summary>
+        /// <param name="partialName"></param>
+        /// <returns></returns>
+        internal static DataTable FindItemsByName(string partialName)
         {
-            throw new NotImplementedException();
+            return ExecuteQuery("SELECT entry, displayid, name FROM item_template WHERE name LIKE '%" + partialName + "%' ORDER BY entry LIMIT 200;");
         }
     }
 }

@@ -44,7 +44,7 @@
                         <TextBox Name="DisplayIdTxt" Height="25" Margin="85,93,85,0" VerticalAlignment="Top"
                                  Text="{Binding DisplayId, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Name="FindDisplayIdBtn" Content="Find" HorizontalAlignment="Right" Margin="0,93,10,0"
-                                VerticalAlignment="Top" Width="70" Height="25" IsEnabled="False" />
+                                VerticalAlignment="Top" Width="70" Height="25" Click="FindDisplayIdBtn_Click" />
 
                         <Label FontSize="12" Content="Bounds" Height="30" Margin="0,122,0,0" VerticalAlignment="Top"
                                HorizontalAlignment="Left" Width="88" />

@@ -61,9 +61,10 @@ namespace TrinityCreator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::MySql.Data.MySqlClient.MySqlConnectionStringBuilder worldDb {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string worldDb {
             get {
-                return ((global::MySql.Data.MySqlClient.MySqlConnectionStringBuilder)(this["worldDb"]));
+                return ((string)(this["worldDb"]));
             }
             set {
                 this["worldDb"] = value;

@@ -20,23 +20,35 @@ namespace TrinityCreator.Database
         // Load saved connection info
         private void LoadSavedInfo()
         {
-            var connStrB = Settings.Default.worldDb;
-            if (connStrB != null)
+            string connStr = Settings.Default.worldDb;
+            if (connStr != "")
             {
-                HostTxt.Text = connStrB.Server;
-                UserTxt.Text = connStrB.UserID;
-                PasswordTxt.Text = connStrB.Password;
-                DatabaseTxt.Text = connStrB.Database;
+                string[] connData = connStr.Split(';');
+                foreach (string part in connData)
+                {
+                    string[] sub = part.Split('=');
+                    switch (sub[0])
+                    {
+                        case "server":
+                            HostTxt.Text = sub[1];
+                            break;
+                        case "user":
+                            UserTxt.Text = sub[1];
+                            break;
+                        case "password":
+                            PasswordTxt.Text = sub[1];
+                            break;
+                        case "database":
+                            DatabaseTxt.Text = sub[1];
+                            break;
+                    }
+                }
             }
         }
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            var connString = new MySqlConnectionStringBuilder();
-            connString.Server = HostTxt.Text;
-            connString.UserID = UserTxt.Text;
-            connString.Password = PasswordTxt.Text;
-            connString.Database = DatabaseTxt.Text;
+            string connString = "server=" + HostTxt.Text + ";user=" + UserTxt.Text + ";password=" + PasswordTxt.Text + ";database=" + DatabaseTxt.Text + ";";
 
             StatusLbl.Text = "Testing connection...";
             StatusLbl.Foreground = Brushes.Black;
