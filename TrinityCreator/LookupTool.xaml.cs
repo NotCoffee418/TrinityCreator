@@ -40,9 +40,12 @@ namespace TrinityCreator
             get { return _target; }
             set
             {
+                if (_target != value)
+                    SetGridSource(new DataTable());
                 _target = value;
                 targetLbl.Content = value;
                 HandleDbcQuery();
+                App._MainWindow.ShowLookupTool();
             }
         }
 
@@ -88,7 +91,19 @@ namespace TrinityCreator
             switch (Target)
             {
                 case "Find item by name":
-                    SetGridSource(ItemTemplateQuery.FindItemsByName(search));
+                    SetGridSource(SqlQuery.FindItemsByName(search));
+                    break;
+                case "Find quest by name":
+                    SetGridSource(SqlQuery.FindQuestByName(search));
+                    break;
+                case "Find creature by name":
+                    SetGridSource(SqlQuery.FindCreatureByName(search));
+                    break;
+                case "Find game object by name":
+                    SetGridSource(SqlQuery.FindGoByName(search));
+                    break;
+                case "Find spell by name": // Combined SQL & DBC
+                    SetGridSource(FindSpell(search));
                     break;
 
                 default:
@@ -99,7 +114,6 @@ namespace TrinityCreator
             }
         }
 
-
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
             searchBtn.IsEnabled = false;
@@ -107,6 +121,11 @@ namespace TrinityCreator
 
             if (LocalSearch)
             {
+                if (Target == "Find spell by name") // hybrid
+                {
+                    FindSpell(search);
+                }
+
                 DataTable filteredTable = new DataTable();
                 foreach (DataColumn dc in FullDbcTable.Columns)
                     filteredTable.Columns.Add(dc.ColumnName, dc.DataType);
@@ -151,7 +170,7 @@ namespace TrinityCreator
             {
                 // import 200 rows
                 DataTable limited = new DataTable();
-                foreach (DataColumn dc in FullDbcTable.Columns)
+                foreach (DataColumn dc in dt.Columns)
                     limited.Columns.Add(dc.ColumnName, dc.DataType);
                 for (int i = 0; i < 200; i++)
                     limited.ImportRow(dt.Rows[i]);
@@ -167,5 +186,48 @@ namespace TrinityCreator
             else dataGrid.ItemsSource = dt.DefaultView;
             searchBtn.IsEnabled = true;
         }
+
+
+        #region Special queries
+        private DataTable FindSpell(string search)
+        {
+            LocalSearch = true;
+            DataTable result = new DataTable();
+            List<uint> listed = new List<uint>();
+            result.Columns.Add("ID", typeof(int));
+            result.Columns.Add("Name", typeof(string));
+            result.Columns.Add("Description", typeof(string));
+
+            // Get data
+            DataTable dbc = Queries.GetSpells(); // "m_ID", "m_name_lang_1", "m_description_lang_1"
+            DataTable sql = SqlQuery.GetSpells(search); // Id, Comment(name)
+
+            // Add DBC spells
+            DataRow newRow = null;
+            foreach (DataRow dr in dbc.Rows)
+                if (dr["m_name_lang_1"].ToString().Contains(search))
+                {
+                    newRow = result.NewRow();
+                    newRow["ID"] = dr["m_ID"];
+                    newRow["Name"] = dr["m_name_lang_1"];
+                    newRow["Description"] = dr["m_description_lang_1"];
+                    result.Rows.Add(newRow);
+                    listed.Add((uint)dr["m_ID"]);
+                }
+
+            // Add unlisted SQL spells
+            foreach (DataRow dr in sql.Rows)
+                if (!listed.Contains((uint)dr["Id"]))
+                {
+                    newRow = result.NewRow();
+                    newRow["ID"] = dr["Id"];
+                    newRow["Name"] = dr["Comment"];
+                    result.Rows.Add(newRow);
+                }
+
+            FullDbcTable = result.Copy();
+            return result;
+        }
+        #endregion
     }
 }

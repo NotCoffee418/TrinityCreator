@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,51 +19,128 @@ using System.Windows.Shapes;
 namespace TrinityCreator
 {
     /// <summary>
-    /// Interaction logic for QuestPage.xaml
+    /// Interaction logic for QuestControl.xaml
     /// </summary>
-    public partial class QuestPage : Page, INotifyPropertyChanged
+    public partial class QuestPage : UserControl, INotifyPropertyChanged
     {
-        public QuestPage(MainWindow mainWindow)
+        public QuestPage()
         {
             InitializeComponent();
-            _mainWindow = mainWindow;
+            DataContext = Quest;
+
+            // Prepare controls
         }
 
-        private MainWindow _mainWindow;
+
+        private void PrepareQuestControl()
+        {
+            // QuestInfo
+            questInfoCb.ItemsSource = QuestInfo.ListQuestInfo();
+            questInfoCb.SelectedIndex = 0;
+
+        }
+
+        TrinityQuest _quest;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void AddQuestBtn_Click(object sender, RoutedEventArgs e)
+        public TrinityQuest Quest
         {
-            // Tab item content
-            TabItem ti = new TabItem();
-            QuestControl qc = new QuestControl();
-            ti.Content = qc;
-
-            // header binding
-            Binding b = new Binding();
-            b.Source = qc.Quest;
-            b.Path = new PropertyPath("LogTitle");
-            b.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-            BindingOperations.SetBinding(ti, TabItem.HeaderProperty, b);
-
-            // Add
-            QuestTabControl.Items.Add(ti);
-            UpdateQuestChain();
-        }
-
-        private void RemoveQuestBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Not implemented yet");
-        }
-
-        private void UpdateQuestChain()
-        {
-            foreach (var item in QuestTabControl.Items)
+            get
             {
-                
+                if (_quest == null)
+                    _quest = new TrinityQuest();
+                return _quest;
             }
+            set { _quest = value; }
         }
+
+        
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            PrepareQuestControl();
+        }
+
+        #region ChangedEvents
+
+
+        private void questInfoCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                QuestInfo qi = (QuestInfo)questInfoCb.SelectedValue;
+                BitmaskStackPanel bmsp = (BitmaskStackPanel)questFlagsGb.Content;
+
+                if (qi.Id == 88 || qi.Id == 89)
+                    bmsp.SetValueIsChecked(64, true);
+                else
+                    bmsp.SetValueIsChecked(64, false);
+            }
+            catch { /*fail on load*/ }
+        }
+        
+
+        #endregion
+
+        #region Click events
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //try
+            //{
+            string query = Quest.GenerateSqlQuery();
+            var sfd = new SaveFileDialog();
+            sfd.DefaultExt = ".sql";
+            sfd.FileName = "Item " + Quest.EntryId;
+            sfd.Filter = "SQL File (.sql)|*.sql";
+            if (sfd.ShowDialog() == true)
+            {
+                File.WriteAllText(sfd.FileName, query);
+
+                // Increase next item's entry id
+                Properties.Settings.Default.nextid_item = Quest.EntryId + 1;
+                Properties.Settings.Default.Save();
+
+                MessageBox.Show("Your item has been saved.", "Complete", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
+            /*}
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
+            }*/
+        }
+
+        private void findSortBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.Target = "Find quest sort";
+        }
+
+        private void findQuestBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.Target = "Find quest by name";
+        }
+
+        private void findCreatureBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.Target = "Find creature by name";
+        }
+
+        private void findGoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.Target = "Find game object by name";
+        }
+
+        private void findItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.Target = "Find item by name";
+        }
+
+        private void findSpellBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.Target = "Find spell by name";
+        }
+        #endregion        
 
     }
 }

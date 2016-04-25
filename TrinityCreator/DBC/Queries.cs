@@ -50,5 +50,10 @@ namespace TrinityCreator.DBC
         {
             return DbcHandler.LoadDbc("QuestSort").DefaultView.ToTable(false, "id", "name");
         }
+
+        internal static DataTable GetSpells()
+        {
+            return DbcHandler.LoadDbc("Spell").DefaultView.ToTable(false, "m_ID", "m_name_lang_1", "m_description_lang_1");
+        }
     }
 }

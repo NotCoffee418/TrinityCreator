@@ -10,7 +10,7 @@
         <StackPanel>
             <Label Name="targetLbl" Content="Searching in..."/>
             <DockPanel>
-                <Button Name="searchBtn" Content="Search" DockPanel.Dock="Right" Click="searchBtn_Click"/>
+                <Button Name="searchBtn" Content="Search" DockPanel.Dock="Right" Click="searchBtn_Click" IsDefault="True" Width="75"/>
                 <TextBox Name="searchTxt" />
             </DockPanel>
             <DataGrid Name="dataGrid" IsReadOnly="True" />

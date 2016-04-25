@@ -173,7 +173,12 @@ namespace TrinityCreator
             }
         }
         public string QuestCompletionLog {
-            get { return _questCompletionLog; }
+            get
+            {
+                if (_questCompletionLog == null)
+                    _questCompletionLog = "This text displays when turning in the quest.";
+                return _questCompletionLog;
+            }
             set
             {
                 _questCompletionLog = value;
@@ -299,7 +304,7 @@ namespace TrinityCreator
             set
             {
                 _sourceSpell = value;
-                RaisePropertyChanged("ProvidedItemCount");
+                RaisePropertyChanged("SourceSpell");
             }
         } // Cast on player on accept
         public Coordinate PoiCoordinate {

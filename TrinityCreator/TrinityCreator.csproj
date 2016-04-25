@@ -96,7 +96,7 @@
     <Compile Include="Database\DbConfigWindow.xaml.cs">
       <DependentUpon>DbConfigWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Database\ItemTemplateQuery.cs" />
+    <Compile Include="Database\SqlQuery.cs" />
     <Compile Include="DBCViewer\ADBReader.cs" />
     <Compile Include="DBCViewer\BinaryFormatter.cs" />
     <Compile Include="DBCViewer\BinaryFormatterExtensions.cs" />
@@ -123,14 +123,10 @@
       <DependentUpon>LookupTool.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlayerTitle.cs" />
-    <Compile Include="QuestControl.xaml.cs">
-      <DependentUpon>QuestControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="QuestSort.cs" />
-    <Compile Include="QuestInfo.cs" />
     <Compile Include="QuestPage.xaml.cs">
       <DependentUpon>QuestPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QuestInfo.cs" />
     <Compile Include="QuestPreview.xaml.cs">
       <DependentUpon>QuestPreview.xaml</DependentUpon>
     </Compile>
@@ -194,10 +190,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="QuestControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="QuestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

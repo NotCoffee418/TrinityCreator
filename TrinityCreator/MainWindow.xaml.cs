@@ -48,7 +48,7 @@ namespace TrinityCreator
 
             // Load usable creators
             ItemTab.Content = new ItemPage();
-            QuestTab.Content = new QuestPage(this);
+            QuestTab.Content = new QuestPage();
 
 
             // view unfinished when set & on debug
