@@ -116,7 +116,6 @@ namespace TrinityCreator.Database
         {
             if (!IsAlive)
                 return new DataTable();
-
             var result = new DataTable();
             var cmd = new MySqlCommand(query, _conn);
             using (var rdr = cmd.ExecuteReader())
@@ -124,6 +123,20 @@ namespace TrinityCreator.Database
                 result.Load(rdr);
             }
             return result;
+        }
+
+        private static bool Verify()
+        {
+            if (IsAlive)
+                return true;
+            else if (Test() != null)
+            {
+                var r = MessageBox.Show("Your database settings appear to be invalid. Would you like to change them now?",
+                    "Invalid database settings", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (r == MessageBoxResult.Yes)
+                    new DbConfigWindow();                
+            }
+            return false;
         }
     }
 }

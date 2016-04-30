@@ -148,17 +148,6 @@ namespace TrinityCreator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to long,long,long,long,flags,flags,long,long,flags,flags,long,long,long,long,flags,long,flags,flags,long,float,float,long,long,str,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,flags,str,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,flags,
-        ///1,-1,0,0,0x0,0x0,0,0,0x0,0x0,0,0,0,0,0x0,0,0x0,0x0,0,1.0,1.0,5,5,&quot;PLAYER, Human&quot;,,,,,,,,,,,,,,,,0xFF01FE,&quot;&quot;,,,,,,,,,,,,,,,,0xFF01FC,
-        ///2,-1,0,0,0x0,0x0,0,0,0x0,0x0,0,0,0,0,0x0,0,0x0,0x0,0,1.0,1.0,5,5,&quot;PLAYER, Orc&quot;,,,, [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string Faction_dbc {
-            get {
-                return ResourceManager.GetString("Faction_dbc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] FRIZQT__ {

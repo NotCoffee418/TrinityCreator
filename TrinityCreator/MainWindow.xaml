@@ -41,7 +41,7 @@
                 <TabItem Header="Item" >
                     <Frame Name="ItemTab"/>
                 </TabItem>
-                <TabItem Header="Quest (UNFINISHED)" Tag="unfinished">
+                <TabItem Header="Quest (UNFINISHED)" Tag="unfinished" Height="22" VerticalAlignment="Top">
                     <Frame Name="QuestTab" />
                 </TabItem>
                 <TabItem Header="Creature (UNFINISHED)" Name="CreatureTab" Tag="unfinished" />

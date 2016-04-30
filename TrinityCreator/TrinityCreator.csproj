@@ -146,7 +146,6 @@
     <Compile Include="Stat.cs" />
     <Compile Include="TrinityQuest.cs" />
     <Compile Include="Updater.cs" />
-    <Compile Include="WowClient\DbcReader.cs" />
     <Page Include="CreditsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
