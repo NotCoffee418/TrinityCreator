@@ -54,17 +54,23 @@
                         <DockPanel Margin="2">
                             <Label Content="Previous Quest" DockPanel.Dock="Left" Width="120" />
                             <Button Name="findPrevQuestBtn" Content="Find" DockPanel.Dock="Right" Width="75" Click="findQuestBtn_Click"/>
-                            <TextBox Text="{Binding PQuestSort}" DockPanel.Dock="Left" />
+                            <TextBox Text="{Binding PrevQuest}" DockPanel.Dock="Left" />
                         </DockPanel>
                         <DockPanel Margin="2">
                             <Label Content="Next Quest" DockPanel.Dock="Left" Width="120" />
                             <Button Name="findNextQuestBtn" Content="Find" DockPanel.Dock="Right" Width="75" Click="findQuestBtn_Click"/>
-                            <TextBox Text="{Binding PQuestSort}" DockPanel.Dock="Left" />
+                            <TextBox Text="{Binding NextQuest}" DockPanel.Dock="Left" />
                         </DockPanel>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Quest NPC or GameObject relations">
                     <StackPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Questgiver" DockPanel.Dock="Left" Width="120" />
+                            <Button Content="Find NPC" DockPanel.Dock="Right" Width="75" Click="findCreatureBtn_Click"/>
+                            <TextBox Text="{Binding Questgiver}" DockPanel.Dock="Left" />
+                        </DockPanel>
+ 
                         <DockPanel Margin="2">
                             <Label Content="Completer" DockPanel.Dock="Left" Width="120" />
                             <Button Name="findGoBtn" Content="Find Object" DockPanel.Dock="Right" Width="75" Click="findGoBtn_Click"/>
@@ -103,7 +109,7 @@
                         <DockPanel Margin="2">
                             <Label Content="Spell Cast" DockPanel.Dock="Left" Width="120" />
                             <Button Content="Find" DockPanel.Dock="Right" Width="75" Click="findSpellBtn_Click"/>
-                            <TextBox Text="{Binding StartItem}" DockPanel.Dock="Left" ToolTip="Spell is cast on player when quest is accepted."/>
+                            <TextBox Text="{Binding SourceSpell}" DockPanel.Dock="Left" ToolTip="Spell is cast on player when quest is accepted."/>
                         </DockPanel>
                         <DockPanel Margin="2">
                             <DockPanel DockPanel.Dock="Top" Margin="0,0,0,5">
@@ -136,9 +142,9 @@
                                 <TextBox Text="{Binding RequiredSpell}" DockPanel.Dock="Left" ToolTip="Requires spell cast on NPC instead of NPC kill!"/>
                             </DockPanel>
                             <DockPanel Margin="2">
-                            <Label Content="Player kills" DockPanel.Dock="Left" Width="120" />
-                            <TextBox Text="{Binding TimeAllowed}" DockPanel.Dock="Left" ToolTip="Amount of PVP kills required" />
-                        </DockPanel>
+                                <Label Content="Player kills" DockPanel.Dock="Left" Width="120" />
+                                <TextBox Text="{Binding TimeAllowed}" DockPanel.Dock="Left" ToolTip="Amount of PVP kills required" />
+                            </DockPanel>
                                         
                         <DockPanel Margin="2">
                             <Label Content="Time limit (seconds)" DockPanel.Dock="Left" Width="120" />
@@ -148,16 +154,53 @@
                 </GroupBox>
                 <GroupBox Header="Rewards">
                     <StackPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="XP Reward" DockPanel.Dock="Left" Width="120" />
+                            <ComboBox Name="rewardXpCb" SelectedValue="{Binding RewardXpDifficulty}" />
+                        </DockPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Money Reward" DockPanel.Dock="Left" Width="120"/>
+                            <TextBox Name="BuyPriceGTxt" Text="{Binding RewardMoney.Gold, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                            <Image Width="15" Source="Resources/gold.gif" Margin="0,0,10,0" />
+                            <TextBox Name="BuyPriceSTxt" Text="{Binding RewardMoney.Silver, UpdateSourceTrigger=PropertyChanged}" MaxLength="2" Width="25"/>
+                            <Image  Width="15" Source="Resources/silver.gif" Margin="0,0,10,0" />
+                            <TextBox Name="BuyPriceCTxt" Text="{Binding RewardMoney.Copper, UpdateSourceTrigger=PropertyChanged}" MaxLength="2" Width="25"/>
+                            <Image Width="15" Source="Resources/copper.gif" Margin="0,0,10,0" />
+                        </StackPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Spell Cast" DockPanel.Dock="Left" Width="120" />
+                            <Button Content="Find" DockPanel.Dock="Right" Width="75" Click="findSpellBtn_Click"/>
+                            <TextBox Text="{Binding RewardSpell}" DockPanel.Dock="Left" ToolTip="Spell is cast on player when quest is completed."/>
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Honorable kills" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding RewardHonor}" DockPanel.Dock="Left" ToolTip="1 honorable kill is 124 honor at level 80." />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Arena points" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding RewardArenaPoints}" DockPanel.Dock="Left" ToolTip="Amount of arena points as reward" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Title reward" DockPanel.Dock="Left" Width="120" />
+                            <Button Content="Find" DockPanel.Dock="Right" Width="75" Click="findTitleBtn_Click"/>
+                            <TextBox Text="{Binding RewardTitle}" DockPanel.Dock="Left" ToolTip="ID of title the player will earn when completing this quest."/>
+                        </DockPanel>
+                        <Button Content="Find Items" Click="findItemBtn_Click" Margin="0,10,0,0"/>
+                        <GroupBox Name="RewardItemsBox" Header="Reward items" Content="{Binding RewardItems, UpdateSourceTrigger=PropertyChanged}" />
+                        <GroupBox Name="RewardChoiceItemsBox" Header="Reward choice items" Content="{Binding RewardChoiceItems, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <Button Content="Find Faction ID" Click="findFactionBtn_Click" Margin="0,10,0,0"/>
+                        <GroupBox Name="FactionRewardsBox" Header="Reward reputation" Content="{Binding FactionRewards, UpdateSourceTrigger=PropertyChanged}" />
                         
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox Name="questFlagsGb" Header="Quest Flags" Content="{Binding Flags}" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
-                <GroupBox Name="questSpecialFlagsGb" Header="Quest Special Flags" Content="{Binding SpecialFlags}" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
-                <GroupBox Name="LimitClassBitMaskGroupBox" Content="{Binding AllowableClass}" Header="Classes allowed"
+                        <GroupBox Name="questFlagsGb" Header="Quest Flags" Content="{Binding Flags}" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
+                        <GroupBox Name="questSpecialFlagsGb" Header="Quest Special Flags" Content="{Binding SpecialFlags}" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
+                        <GroupBox Name="LimitClassBitMaskGroupBox" Content="{Binding AllowableClass}" Header="Classes allowed"
                               Visibility="{Binding ElementName=LimitClassCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
-                <GroupBox Name="LimitRaceBitMaskGroupBox" Content="{Binding AllowableRace}" Header="Races allowed"
+                        <GroupBox Name="LimitRaceBitMaskGroupBox" Content="{Binding AllowableRace}" Header="Races allowed"
                               Visibility="{Binding ElementName=LimitRaceCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
 
+                    </StackPanel>
+                </GroupBox>
             </StackPanel>
         </ScrollViewer>
     </DockPanel>

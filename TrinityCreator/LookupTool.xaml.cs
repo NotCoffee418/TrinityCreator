@@ -71,6 +71,14 @@ namespace TrinityCreator
                     result = Queries.GetMap();
                     break;
 
+                case "Find faction":
+                    result = Queries.GetFaction();
+                    break;
+
+                case "Find player title":
+                    result = Queries.GetCharTitles();
+                    break;
+
                 // SQL query will be handled in searchBtn_Click
                 default:
                     LocalSearch = false;

@@ -29,8 +29,8 @@ namespace TrinityCreator
         private string _questDescription = null;
         private string _areaDescription;
         private string _questCompletionLog;
-        private TrinityQuest _prevQuest;
-        private TrinityQuest _nextQuest;
+        private int _prevQuest;
+        private int _nextQuest;
         private int _nextQuestIdChain;
         private int _questLevel;
         private int _minLevel;
@@ -45,10 +45,10 @@ namespace TrinityCreator
         private QuestXp _rewardXpDifficulty;
         private Currency _rewardMoney;
         private int _rewardSpell;
-        private int _rewardSpellCast;
         private int _rewardHonor;
-        private PlayerTitle _rewardTitle;
+        private int _rewardTitle;
         private int _rewardArenaPoints;
+        private int _questgiver;
 
 
         #region Quest info
@@ -190,7 +190,7 @@ namespace TrinityCreator
 
 
         #region Quest chain data
-        public TrinityQuest PrevQuest
+        public int PrevQuest
         {
             get { return _prevQuest; }
             set
@@ -199,7 +199,7 @@ namespace TrinityCreator
                 RaisePropertyChanged("PrevQuest");
             }
         }
-        public TrinityQuest NextQuest {
+        public int NextQuest {
             get { return _nextQuest; }
             set
             {
@@ -216,6 +216,15 @@ namespace TrinityCreator
                 RaisePropertyChanged("NextQuestIdChain");
             }
         } // WARNING: This is the completer NPC or GO, not quest ID
+        public int Questgiver
+        {
+            get { return _questgiver; }
+            set
+            {
+                _questgiver = value;
+                RaisePropertyChanged("Questgiver");
+            }
+        }
         #endregion
 
 
@@ -395,7 +404,11 @@ namespace TrinityCreator
         }
         public Currency RewardMoney
         {
-            get { return _rewardMoney; }
+            get {
+                if (_rewardMoney == null)
+                    _rewardMoney = new Currency(0);
+                return _rewardMoney;
+            }
             set
             {
                 _rewardMoney = value;
@@ -409,14 +422,6 @@ namespace TrinityCreator
             {
                 _rewardSpell = value;
                 RaisePropertyChanged("RewardSpell");
-            }
-        }
-        public int RewardSpellCast {
-            get { return _rewardSpellCast; }
-            set
-            {
-                _rewardSpellCast = value;
-                RaisePropertyChanged("RewardSpellCast");
             }
         }
         public int RewardHonor {
@@ -434,7 +439,7 @@ namespace TrinityCreator
         }
         //public int RewardMailTemplateId { get; set; } // Implement when DB is set up properly
         //public int RewardMailDelay { get; set; }
-        public PlayerTitle RewardTitle {
+        public int RewardTitle {
             get { return _rewardTitle; }
             set
             {
@@ -512,13 +517,13 @@ namespace TrinityCreator
                 {"RewardXPDifficulty", RewardXpDifficulty.Id.ToString()},
                 {"RewardMoney", RewardMoney.Amount.ToString()},
                 {"RewardSpell", RewardSpell.ToString()},
-                {"RewardSpellCast", RewardSpellCast.ToString()},
+                {"RewardSpellCast", RewardSpell.ToString()},
                 {"RewardHonor", RewardHonor.ToString()},
                 {"RewardHonorMultiplier", RewardHonorMultiplier.ToString()},
                 {"StartItem", RewardHonor.ToString()},
                 {"SourceSpell", SourceSpell.ToString()},
                 {"Flags", Flags.BitmaskValue.ToString()},
-                {"RewardTitle", RewardTitle.Id.ToString()},
+                {"RewardTitle", RewardTitle.ToString()},
                 {"RequiredPlayerKills", RequiredPlayerKills.ToString()},
                 {"RewardArenaPoints", RewardArenaPoints.ToString()},
                 {"POIContinent", PoiCoordinate.MapId.ToString()},
@@ -638,12 +643,23 @@ namespace TrinityCreator
                 {"ID", EntryId.ToString()},
                 {"MaxLevel", MaxLevel.ToString()},
                 {"AllowableClasses", AllowableClass.BitmaskValue.ToString()},
-                {"PrevQuestId", PrevQuest.EntryId.ToString()},
-                {"NextQuestId", NextQuest.EntryId.ToString()},
+                {"PrevQuestId", PrevQuest.ToString()},
+                {"NextQuestId", NextQuest.ToString()},
                 //{"RewardMailTemplateId", RewardMailTemplateId.ToString()},
                 //{"RewardMailDelay", RewardMailDelay.ToString()},
                 {"ProvidedItemCount", ProvidedItemCount.ToString()},
                 {"SpecialFlags", SpecialFlags.BitmaskValue.ToString()},
+            };
+
+            return kvplist;
+        }
+
+        private Dictionary<string, string> GenerateRelationQueryValues()
+        {
+            var kvplist = new Dictionary<string, string>
+            {
+                {"id", Questgiver.ToString()},
+                {"quest", EntryId.ToString()},
             };
 
             return kvplist;
@@ -672,8 +688,14 @@ namespace TrinityCreator
             query2 += ") VALUES (";
             query2 += string.Join(", ", kvplist2.Values) + ");" + Environment.NewLine;
 
+            // generate query3
+            var query3 = "INSERT INTO creature_questrelation (";
+            query3 += string.Join(", ", kvplist2.Keys);
+            query3 += ") VALUES (";
+            query3 += string.Join(", ", kvplist2.Values) + ");" + Environment.NewLine;
+
             
-            return query1 + Environment.NewLine + query2;
+            return query1 + query2 + Environment.NewLine;
         }
     }
 }

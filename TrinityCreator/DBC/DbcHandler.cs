@@ -98,7 +98,7 @@ namespace TrinityCreator.DBC
         /// </summary>
         /// <param name="DbcName">DBC file name without ext</param>
         /// <returns></returns>
-        public static DataTable LoadDbc(string dbcName, int build = 12340)
+        public static DataTable LoadDbc(string dbcName, string[] returnColumns, int build = 12340)
         {
             if (!VerifyDbcDir())
             {
@@ -257,7 +257,7 @@ namespace TrinityCreator.DBC
                 m_dataTable.Rows.Add(dataRow);
             }
 
-            return m_dataTable;
+            return m_dataTable.DefaultView.ToTable(false, returnColumns);
         }
         
     }

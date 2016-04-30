@@ -5040,7 +5040,7 @@
     <field type="int" name="field2" />
     <field type="int" name="field3" />
   </LFGDungeonsGroupingmap>
-  <CharTitles build="17841">
+  <CharTitles build="0">
     <index>
       <primary>field0</primary>
     </index>

@@ -7,14 +7,9 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Configuration">
+            <MenuItem Header="Settings">
                 <MenuItem Name="ConfigureDbc" Header="Configure DB_C Path" Click="configureDbc_Click" />
                 <MenuItem Name="ConfigureMysql" Header="Configure _MySQL" Click="configureMysql_Click" />
-            </MenuItem>
-
-            <MenuItem Header="Settings">
-                <MenuItem Name="SettingViewUnfinished" Header="View unfinished creators" IsCheckable="True"
-                          Click="settingViewUnfinished_Click" />
                 <MenuItem Header="Select Emulator">
                     <RadioButton Content="TrinityCore/cMangos 3.3.5a" Name="trinity335aRb" Checked="trinity335aRb_Checked"/>
                     <RadioButton Content="cMangos 1.12" Name="cMangos112Rb" Checked="cMangos112Rb_Checked"/>
@@ -41,7 +36,7 @@
                 <TabItem Header="Item" >
                     <Frame Name="ItemTab"/>
                 </TabItem>
-                <TabItem Header="Quest (UNFINISHED)" Tag="unfinished" Height="22" VerticalAlignment="Top">
+                <TabItem Header="Quest" Height="22" VerticalAlignment="Top">
                     <Frame Name="QuestTab" />
                 </TabItem>
                 <TabItem Header="Creature (UNFINISHED)" Name="CreatureTab" Tag="unfinished" />

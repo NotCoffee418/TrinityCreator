@@ -43,22 +43,38 @@ namespace TrinityCreator.DBC
 
         public static DataTable GetAreaTableNames()
         {
-            return DbcHandler.LoadDbc("AreaTable").DefaultView.ToTable(false, "m_ID", "m_AreaName_lang");
+            return DbcHandler.LoadDbc("AreaTable", 
+                new string[] { "m_ID", "m_AreaName_lang" });
         }
 
         public static DataTable GetQuestSortNames()
         {
-            return DbcHandler.LoadDbc("QuestSort").DefaultView.ToTable(false, "id", "name");
+            return DbcHandler.LoadDbc("QuestSort", 
+                new string[] { "id", "name" });
         }
 
         internal static DataTable GetSpells()
         {
-            return DbcHandler.LoadDbc("Spell").DefaultView.ToTable(false, "m_ID", "m_name_lang_1", "m_description_lang_1");
+            return DbcHandler.LoadDbc("Spell", 
+                new string[] { "m_ID", "m_name_lang_1", "m_description_lang_1" });
         }
 
         internal static DataTable GetMap()
         {
-            return DbcHandler.LoadDbc("Map").DefaultView.ToTable(false, "m_ID", "m_MapName_lang1");
+            return DbcHandler.LoadDbc("Map", 
+                new string[] { "m_ID", "m_MapName_lang1" });
+        }
+
+        internal static DataTable GetFaction()
+        {
+            return DbcHandler.LoadDbc("Faction", 
+                new string[] { "m_ID", "m_name_lang_1" });
+        }
+
+        internal static DataTable GetCharTitles()
+        {
+            return DbcHandler.LoadDbc("CharTitles", 
+                new string[] { "field0", "field2" });
         }
     }
 }

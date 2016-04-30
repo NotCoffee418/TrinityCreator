@@ -38,6 +38,9 @@ namespace TrinityCreator
             questInfoCb.ItemsSource = QuestInfo.ListQuestInfo();
             questInfoCb.SelectedIndex = 0;
 
+            // RewardXpDifficulty
+            rewardXpCb.ItemsSource = QuestXp.GetQuestXP();
+            rewardXpCb.SelectedIndex = 0;
         }
 
         TrinityQuest _quest;
@@ -91,7 +94,7 @@ namespace TrinityCreator
             string query = Quest.GenerateSqlQuery();
             var sfd = new SaveFileDialog();
             sfd.DefaultExt = ".sql";
-            sfd.FileName = "Item " + Quest.EntryId;
+            sfd.FileName = "Quest " + Quest.EntryId;
             sfd.Filter = "SQL File (.sql)|*.sql";
             if (sfd.ShowDialog() == true)
             {
@@ -101,7 +104,7 @@ namespace TrinityCreator
                 Properties.Settings.Default.nextid_item = Quest.EntryId + 1;
                 Properties.Settings.Default.Save();
 
-                MessageBox.Show("Your item has been saved.", "Complete", MessageBoxButton.OK,
+                MessageBox.Show("Your quest has been saved.", "Complete", MessageBoxButton.OK,
                     MessageBoxImage.Information);
             }
             /*}
@@ -145,6 +148,18 @@ namespace TrinityCreator
         {
             App.LookupTool.Target = "Find map";
         }
+
+        private void findFactionBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.Target = "Find faction";
+        }
+
+        private void findTitleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.Target = "Find player title";
+        }
         #endregion
+
+
     }
 }

@@ -122,7 +122,6 @@
     <Compile Include="LookupTool.xaml.cs">
       <DependentUpon>LookupTool.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PlayerTitle.cs" />
     <Compile Include="QuestPage.xaml.cs">
       <DependentUpon>QuestPage.xaml</DependentUpon>
     </Compile>
