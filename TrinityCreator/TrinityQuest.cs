@@ -308,7 +308,11 @@ namespace TrinityCreator
             }
         } // Cast on player on accept
         public Coordinate PoiCoordinate {
-            get { return _poiCoordinate; }
+            get {
+                if (_poiCoordinate == null)
+                    _poiCoordinate = new Coordinate();
+                return _poiCoordinate;
+            }
             set
             {
                 _poiCoordinate = value;

@@ -104,6 +104,26 @@
                         <Button Content="Find" DockPanel.Dock="Right" Width="75" Click="findSpellBtn_Click"/>
                         <TextBox Text="{Binding StartItem}" DockPanel.Dock="Left" ToolTip="Spell is cast on player when quest is accepted."/>
                     </DockPanel>
+                    <DockPanel Margin="2">
+                        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,5">
+                            <Button Content="Find Map" Width="75" DockPanel.Dock="Right" Click="findMapBtn_Click"/>
+                            <Label Content="Objective Coordinates" DockPanel.Dock="Left"/>
+                        </DockPanel>
+                        <Label Content="X" DockPanel.Dock="Left" />
+                        <TextBox Text="{Binding PoiCoordinate.X, UpdateSourceTrigger=PropertyChanged}" Width="75" />
+                        <Label Content="Y"/>
+                        <TextBox Text="{Binding PoiCoordinate.Y, UpdateSourceTrigger=PropertyChanged}" Width="75" />
+                        <Label Content="Map"/>
+                        <TextBox Text="{Binding PoiCoordinate.MapId, UpdateSourceTrigger=PropertyChanged}" Width="75" />
+                    </DockPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Objectives">
+                <StackPanel>
+                    <DockPanel Margin="2">
+                        <Label Content="Time limit (seconds)" DockPanel.Dock="Left" />
+                        <TextBox Text="{Binding TimeAllowed}" DockPanel.Dock="Left" ToolTip="Time in seconds to before quest fails." />
+                    </DockPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Name="questFlagsGb" Header="Quest Flags" Content="{Binding Flags}" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />

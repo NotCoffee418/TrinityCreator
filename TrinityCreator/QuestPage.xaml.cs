@@ -140,7 +140,11 @@ namespace TrinityCreator
         {
             App.LookupTool.Target = "Find spell by name";
         }
-        #endregion        
 
+        private void findMapBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.Target = "Find map";
+        }
+        #endregion
     }
 }

@@ -15,9 +15,6 @@ namespace TrinityCreator.DBC
         /// <returns></returns>
         public static DataTable GetQuestSort()
         {
-            if (!DbcHandler.VerifyDbcDir())
-                return new DataTable();
-
             DataTable result = new DataTable();
             result.Columns.Add(new DataColumn("ID"));
             result.Columns.Add(new DataColumn("Name"));
@@ -46,23 +43,22 @@ namespace TrinityCreator.DBC
 
         public static DataTable GetAreaTableNames()
         {
-            if (!DbcHandler.VerifyDbcDir())
-                return new DataTable();
             return DbcHandler.LoadDbc("AreaTable").DefaultView.ToTable(false, "m_ID", "m_AreaName_lang");
         }
 
         public static DataTable GetQuestSortNames()
         {
-            if (!DbcHandler.VerifyDbcDir())
-                return new DataTable();
             return DbcHandler.LoadDbc("QuestSort").DefaultView.ToTable(false, "id", "name");
         }
 
         internal static DataTable GetSpells()
         {
-            if (!DbcHandler.VerifyDbcDir())
-                return new DataTable();
             return DbcHandler.LoadDbc("Spell").DefaultView.ToTable(false, "m_ID", "m_name_lang_1", "m_description_lang_1");
+        }
+
+        internal static DataTable GetMap()
+        {
+            return DbcHandler.LoadDbc("Map").DefaultView.ToTable(false, "m_ID", "m_MapName_lang1");
         }
     }
 }

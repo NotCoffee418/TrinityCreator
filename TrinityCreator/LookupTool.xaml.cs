@@ -67,6 +67,10 @@ namespace TrinityCreator
                     result = Queries.GetQuestSort();
                     break;
 
+                case "Find map":
+                    result = Queries.GetMap();
+                    break;
+
                 // SQL query will be handled in searchBtn_Click
                 default:
                     LocalSearch = false;
