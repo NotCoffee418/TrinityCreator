@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using TrinityCreator.Database;
 using TrinityCreator.Properties;
 
 namespace TrinityCreator
@@ -417,10 +418,10 @@ namespace TrinityCreator
             var kvplist = new Dictionary<string, string>
             {
                 {"entry", EntryId.ToString()},
-                {"description", "'" + Quote + "'"},
+                {"name", SqlQuery.CleanText(Name)},
+                {"description", SqlQuery.CleanText(Quote)},
                 {"class", Class.Id.ToString()},
                 {"subclass", ItemSubClass.Id.ToString()},
-                {"name", "'" + Name + "'"},
                 {"displayid", DisplayId.ToString()},
                 {"Quality", Quality.Id.ToString()},
                 {"bonding", Binds.Id.ToString()},
@@ -451,41 +452,11 @@ namespace TrinityCreator
             if (Properties.Settings.Default.emulator == 0)
             {
                 kvplist.Add("FlagsExtra", FlagsExtra.BitmaskValue.ToString());
-                kvplist.Add("BagFamily", BagFamily.BitmaskValue.ToString());
+                GemSockets.AddValues(kvplist, "socketColor_", "socketContent_");
             }
+            Stats.AddValues(kvplist, "stat_type", "stat_value");
 
-            // armor
-            // block
-            // bag family
-
-            // Add gem sockets
-            var socketId = 1;
-            var totalSocketCount = 0;
-            foreach (var gem in GemSockets.GetUserInput())
-            {
-                if (gem.Value != "0" && gem.Value != "")
-                {
-                    try
-                    {
-                        var s = (Socket) gem.Key;
-                        var sCount = int.Parse(gem.Value); // validate
-                        totalSocketCount += sCount;
-                        kvplist.Add("socketColor_" + socketId, s.Id.ToString());
-                        kvplist.Add("socketContent_" + socketId, sCount.ToString());
-                        socketId++;
-                    }
-                    catch
-                    {
-                        throw new Exception("Invalid gem socket data.");
-                    }
-                }
-            }
-            if (totalSocketCount > 3)
-                throw new Exception("You can only have 3 gem sockets in total.");
-
-
-            // resistances
-            try
+            try // resistances
             {
                 // loops unique keys
                 foreach (var kvp in Resistances.GetUserInput())
@@ -499,27 +470,7 @@ namespace TrinityCreator
             {
                 throw new Exception("Invalid value in magic resistance.");
             }
-
-            // Stats
-            try
-            {
-                var count = 0;
-                foreach (var kvp in Stats.GetUserInput())
-                {
-                    count++;
-                    var stat = (Stat) kvp.Key;
-                    var value = int.Parse(kvp.Value); // validate int
-                    kvplist.Add("stat_type" + count, stat.Id.ToString());
-                    kvplist.Add("stat_value" + count, value.ToString());
-                }
-                if (Properties.Settings.Default.emulator == 0)
-                    kvplist.Add("StatsCount", count.ToString());
-            }
-            catch
-            {
-                throw new Exception("Invalid value in Stats.");
-            }
-
+            
             return kvplist;
         }
 
@@ -529,18 +480,11 @@ namespace TrinityCreator
         /// <returns></returns>
         public string GenerateSqlQuery(Dictionary<string, string> kvplist = null)
         {
-            var query1 = "INSERT INTO item_template (";
-            var query2 = ") VALUES (";
-
             // get correct kvplist
             if (kvplist == null)
                 kvplist = GenerateQueryValues();
 
-            // generate query
-            query1 += string.Join(", ", kvplist.Keys);
-            query2 += string.Join(", ", kvplist.Values) + ");" + Environment.NewLine;
-
-            return query1 + query2;
+            return SqlQuery.GenerateInsert("item_template", kvplist);
         }
     }
 }

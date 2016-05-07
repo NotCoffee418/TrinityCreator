@@ -377,8 +377,8 @@ namespace TrinityCreator
 
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 var query = _item.GenerateSqlQuery();
                 var sfd = new SaveFileDialog();
                 sfd.DefaultExt = ".sql";
@@ -395,11 +395,11 @@ namespace TrinityCreator
                     MessageBox.Show("Your item has been saved.", "Complete", MessageBoxButton.OK,
                         MessageBoxImage.Information);
                 }
-            }
+            /*}
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            }*/
         }
 
         private void newItemBtn_Click(object sender, RoutedEventArgs e)

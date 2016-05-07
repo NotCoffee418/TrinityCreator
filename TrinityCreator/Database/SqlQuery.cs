@@ -1,10 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace TrinityCreator.Database
 {
     internal class SqlQuery : Connection
     {
+        /// <summary>
+        /// Makes text SQL ready, add quotation, fix newline & fix '
+        /// </summary>
+        /// <param name="logTitle"></param>
+        /// <returns></returns>
+        internal static string CleanText(string text)
+        {
+            if (text == null)
+                text = "";
+            return "'" + text.Replace(Environment.NewLine, "$B").Replace("'", "\'") + "'";
+        }
+
+        /// <summary>
+        /// Generate SQL query from Key,Value dictionary
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="d">Dictionary</param>
+        /// <returns></returns>
+        internal static string GenerateInsert(string tableName, Dictionary<string, string> d)
+        {
+            return string.Format("INSERT INTO {0} ({1}) VALUES ({2});{3}",
+                tableName, string.Join(", ", d.Keys), string.Join(", ", d.Values), Environment.NewLine);
+        }
+
         internal static DataTable FindItemsByName(string partialName)
         {
             return ExecuteQuery(

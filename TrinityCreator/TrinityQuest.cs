@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrinityCreator.Database;
 
 namespace TrinityCreator
 {
@@ -31,7 +32,7 @@ namespace TrinityCreator
         private string _questCompletionLog;
         private int _prevQuest;
         private int _nextQuest;
-        private int _nextQuestIdChain;
+        private int _questCompleter;
         private int _questLevel;
         private int _minLevel;
         private int _maxLevel;
@@ -41,7 +42,6 @@ namespace TrinityCreator
         private Coordinate _poiCoordinate;
         private int _timeAllowed;
         private int _requiredPlayerKills;
-        private int _requiredSpell;
         private QuestXp _rewardXpDifficulty;
         private Currency _rewardMoney;
         private int _rewardSpell;
@@ -207,15 +207,7 @@ namespace TrinityCreator
                 RaisePropertyChanged("NextQuest");
             }
         }
-        //public int ExclusiveGroup { get; set; } // Implement if it can be simplified
-        public int NextQuestIdChain {
-            get { return _nextQuestIdChain; }
-            set
-            {
-                _nextQuestIdChain = value;
-                RaisePropertyChanged("NextQuestIdChain");
-            }
-        } // WARNING: This is the completer NPC or GO, not quest ID
+        //public int ExclusiveGroup { get; set; } // Implement if it can be simplified        
         public int Questgiver
         {
             get { return _questgiver; }
@@ -223,6 +215,15 @@ namespace TrinityCreator
             {
                 _questgiver = value;
                 RaisePropertyChanged("Questgiver");
+            }
+        }
+        public int QuestCompleter
+        {
+            get { return _questCompleter; }
+            set
+            {
+                _questCompleter = value;
+                RaisePropertyChanged("QuestCompleter");
             }
         }
         #endregion
@@ -380,15 +381,6 @@ namespace TrinityCreator
                 RaisePropertyChanged("RequiredNpcOrGos");
             }
         }
-        public int RequiredSpell 
-        {
-            get { return _requiredSpell; }
-            set
-            {
-                _requiredSpell = value;
-                RaisePropertyChanged("RequiredSpell");
-            }
-        } // requires spell cast on RequiredNpcOrGoIds instead of kill
         #endregion
 
 
@@ -430,12 +422,7 @@ namespace TrinityCreator
             {
                 _rewardHonor = value;
                 RaisePropertyChanged("RewardHonor");
-                RaisePropertyChanged("RewardHonorMultiplier");
             }
-        }
-        public int RewardHonorMultiplier
-        {
-            get { return RewardHonor == 0 ? 0 : 1; }
         }
         //public int RewardMailTemplateId { get; set; } // Implement when DB is set up properly
         //public int RewardMailDelay { get; set; }
@@ -500,11 +487,21 @@ namespace TrinityCreator
 
         #endregion
 
+
+        #region Generate Query
+        public string GenerateSqlQuery()
+        {
+            return SqlQuery.GenerateInsert("quest_template", GenerateQueryValues()) +
+                SqlQuery.GenerateInsert("quest_template_addon", GenerateAddonQueryValues()) +
+                SqlQuery.GenerateInsert("creature_queststarter", GenerateQuestStarterValues()) +
+                SqlQuery.GenerateInsert("creature_questender", GenerateQuestEnderValues());
+        }
+
         private Dictionary<string, string> GenerateQueryValues()
         {
             var kvplist = new Dictionary<string, string>
             {
-                {"entry", EntryId.ToString()},
+                {"ID", EntryId.ToString()},
                 {"QuestType", "2"},
                 {"QuestLevel", QuestLevel.ToString()},
                 {"MinLevel", MinLevel.ToString()},
@@ -513,15 +510,12 @@ namespace TrinityCreator
                 {"SuggestedGroupNum", SuggestedGroupNum.ToString()},
                 {"TimeAllowed", TimeAllowed.ToString()},
                 {"AllowableRaces", AllowableRace.BitmaskValue.ToString()},
-                {"NextQuestIdChain", NextQuestIdChain.ToString()},
                 {"RewardXPDifficulty", RewardXpDifficulty.Id.ToString()},
                 {"RewardMoney", RewardMoney.Amount.ToString()},
                 {"RewardSpell", RewardSpell.ToString()},
-                {"RewardSpellCast", RewardSpell.ToString()},
+                {"RewardDisplaySpell", RewardSpell.ToString()},
                 {"RewardHonor", RewardHonor.ToString()},
-                {"RewardHonorMultiplier", RewardHonorMultiplier.ToString()},
                 {"StartItem", RewardHonor.ToString()},
-                {"SourceSpell", SourceSpell.ToString()},
                 {"Flags", Flags.BitmaskValue.ToString()},
                 {"RewardTitle", RewardTitle.ToString()},
                 {"RequiredPlayerKills", RequiredPlayerKills.ToString()},
@@ -529,108 +523,19 @@ namespace TrinityCreator
                 {"POIContinent", PoiCoordinate.MapId.ToString()},
                 {"POIx", PoiCoordinate.X.ToString()},
                 {"POIy", PoiCoordinate.Y.ToString()},
-                {"LogTitle", LogTitle},
-                {"LogDescription", LogDescription},
-                {"QuestDescription", QuestDescription},
-                {"AreaDescription", AreaDescription},
-                {"QuestCompletionLog", QuestCompletionLog},
-                {"RequiredSpell", RequiredSpell.ToString()},
+                {"LogTitle", SqlQuery.CleanText(LogTitle)},
+                {"LogDescription", SqlQuery.CleanText(LogDescription)},
+                {"QuestDescription", SqlQuery.CleanText(QuestDescription)},
+                {"AreaDescription", SqlQuery.CleanText(AreaDescription)},
+                {"QuestCompletionLog", SqlQuery.CleanText(QuestCompletionLog)},
             };
-
-            try // Reward Items
-            {
-                int i = 0;
-                foreach (KeyValuePair<object, string> line in RewardItems.GetUserInput())
-                {
-                    // parse to validate
-                    int itemId = int.Parse((string)line.Key);
-                    int itemCount = int.Parse(line.Value);
-                    i++;
-
-                    kvplist.Add("RewardItemId" + i, itemId.ToString());
-                    kvplist.Add("RewardItemCount" + i, itemCount.ToString());
-                }
-            }
-            catch
-            {
-                throw new Exception("Invalid data in Item Rewards.");
-            }
-
-            try // Reward Choice Items
-            {
-                int i = 0;
-                foreach (KeyValuePair<object, string> line in RewardChoiceItems.GetUserInput())
-                {
-                    // parse to validate
-                    int itemId = int.Parse((string)line.Key);
-                    int itemCount = int.Parse(line.Value);
-                    i++;
-
-                    kvplist.Add("RewardChoiceItemId" + i, itemId.ToString());
-                    kvplist.Add("RewardChoiceItemCount" + i, itemCount.ToString());
-                }
-            }
-            catch
-            {
-                throw new Exception("Invalid data in Item Choice Rewards.");
-            }
-
-            try // Faction Rewards
-            {
-                int i = 0;
-                foreach (KeyValuePair<object, string> line in FactionRewards.GetUserInput())
-                {
-                    // parse to validate
-                    int factionId = int.Parse((string)line.Key);
-                    int repCount = int.Parse(line.Value) * 100;
-                    i++;
-
-                    kvplist.Add("RewardFactionId" + i, factionId.ToString());
-                    kvplist.Add("RewardFactionValueIdOverride" + i, repCount.ToString());
-                }
-            }
-            catch
-            {
-                throw new Exception("Invalid data in Faction Rewards.");
-            }
-
-            try // Required Npc or Go
-            {
-                int i = 0;
-                foreach (KeyValuePair<object, string> line in RequiredNpcOrGos.GetUserInput())
-                {
-                    // parse to validate
-                    int npcGoId = int.Parse((string)line.Key);
-                    int npcGoCount = int.Parse(line.Value);
-                    i++;
-
-                    kvplist.Add("RequiredNpcOrGo" + i, npcGoId.ToString());
-                    kvplist.Add("RequiredNpcOrGoCount" + i, npcGoCount.ToString());
-                }
-            }
-            catch
-            {
-                throw new Exception("Invalid data in Npc or Go requirements.");
-            }
-
-            try // Required Npc or Go
-            {
-                int i = 0;
-                foreach (KeyValuePair<object, string> line in RequiredNpcOrGos.GetUserInput())
-                {
-                    // parse to validate
-                    int npcGoId = int.Parse((string)line.Key);
-                    int npcGoCount = int.Parse(line.Value);
-                    i++;
-
-                    kvplist.Add("RequiredItemId" + i, npcGoId.ToString());
-                    kvplist.Add("RequiredItemCount" + i, npcGoCount.ToString());
-                }
-            }
-            catch
-            {
-                throw new Exception("Invalid data in Item requirements.");
-            }
+            
+            // DDC values
+            RewardItems.AddValues(kvplist, "RewardItem", "RewardAmount");
+            RewardChoiceItems.AddValues(kvplist, "RewardChoiceItemID", "RewardChoiceItemQuantity");
+            FactionRewards.AddValues(kvplist, "RewardFactionID", "RewardFactionOverride", 100);
+            RequiredNpcOrGos.AddValues(kvplist, "RequiredNpcOrGo", "RequiredNpcOrGoCount");
+            RequiredItems.AddValues(kvplist, "RequiredItemId", "RequiredItemCount");
 
             return kvplist;
         }
@@ -649,53 +554,37 @@ namespace TrinityCreator
                 //{"RewardMailDelay", RewardMailDelay.ToString()},
                 {"ProvidedItemCount", ProvidedItemCount.ToString()},
                 {"SpecialFlags", SpecialFlags.BitmaskValue.ToString()},
+                {"SourceSpellID", SourceSpell.ToString()},
             };
 
             return kvplist;
         }
 
-        private Dictionary<string, string> GenerateRelationQueryValues()
+
+        private Dictionary<string, string> GenerateQuestStarterValues()
         {
-            var kvplist = new Dictionary<string, string>
+            return new Dictionary<string, string>
             {
                 {"id", Questgiver.ToString()},
                 {"quest", EntryId.ToString()},
             };
-
-            return kvplist;
         }
+
+        private Dictionary<string, string> GenerateQuestEnderValues()
+        {
+            return new Dictionary<string, string>
+            {
+                {"id", QuestCompleter.ToString()},
+                {"quest", EntryId.ToString()},
+            };
+        }
+
+        #endregion
 
         public void RaisePropertyChanged(string property)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
-
-        public string GenerateSqlQuery()
-        {
-            var kvplist1 = GenerateQueryValues();
-            var kvplist2 = GenerateAddonQueryValues();
-
-            // generate query1
-            var query1 = "INSERT INTO quest_template (";
-            query1 += string.Join(", ", kvplist1.Keys);
-            query1 += ") VALUES (";
-            query1 += string.Join(", ", kvplist1.Values) + ");" + Environment.NewLine;
-
-            // generate query2
-            var query2 = "INSERT INTO quest_template_addon (";
-            query2 += string.Join(", ", kvplist2.Keys);
-            query2 += ") VALUES (";
-            query2 += string.Join(", ", kvplist2.Values) + ");" + Environment.NewLine;
-
-            // generate query3
-            var query3 = "INSERT INTO creature_questrelation (";
-            query3 += string.Join(", ", kvplist2.Keys);
-            query3 += ") VALUES (";
-            query3 += string.Join(", ", kvplist2.Values) + ");" + Environment.NewLine;
-
-            
-            return query1 + query2 + Environment.NewLine;
         }
     }
 }

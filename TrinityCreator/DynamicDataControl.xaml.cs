@@ -109,6 +109,38 @@ namespace TrinityCreator
             return d;
         }
 
+        /// <summary>
+        /// Adds dictionary SQL values for incrementing SQL fields
+        /// </summary>
+        /// <param name="d">Query dictionary reference</param>
+        /// <param name="keyPrefix">field name without number</param>
+        /// <param name="valuePrefix">field name without number</param>
+        /// <param name="valueMultiplier">multiplies value by this before adding to dictionary</param>
+        /// <returns></returns>
+        public void AddValues(Dictionary<string,string> d, string keyPrefix, string valuePrefix, int valueMultiplier = 1)
+        {
+            try
+            {
+                int i = 0;
+                foreach (KeyValuePair<object, string> line in GetUserInput())
+                {
+                    int key = 0;
+                    if (IsTextboxKey) key = int.Parse((string)line.Key); // parse to validate
+                    else key = ((IKeyValue)line.Key).Id;
+
+                    int value = int.Parse(line.Value) * valueMultiplier;
+                    i++;
+
+                    d.Add(keyPrefix + i, key.ToString());
+                    d.Add(valuePrefix + i, value.ToString());
+                }
+            }
+            catch
+            {
+                throw new Exception("Invalid data in " + keyPrefix + " or " + valuePrefix);
+            }
+        }
+
         private void addLineBtn_Click(object sender, RoutedEventArgs e)
         {
             if (_lines.Count() < MaxLines)

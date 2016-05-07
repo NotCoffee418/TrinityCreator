@@ -75,7 +75,7 @@
                             <Label Content="Completer" DockPanel.Dock="Left" Width="120" />
                             <Button Name="findGoBtn" Content="Find Object" DockPanel.Dock="Right" Width="75" Click="findGoBtn_Click"/>
                             <Button Name="findCreatureBtn" Content="Find NPC" DockPanel.Dock="Right" Width="75" Click="findCreatureBtn_Click"/>
-                            <TextBox Text="{Binding NextQuestIdChain}" DockPanel.Dock="Left" />
+                            <TextBox Text="{Binding QuestCompleter}" DockPanel.Dock="Left" />
                         </DockPanel>
                     </StackPanel>
                 </GroupBox>
@@ -136,12 +136,7 @@
                     
                         <GroupBox Name="RequiredItemsBox" Header="Required Items" Content="{Binding RequiredItems, UpdateSourceTrigger=PropertyChanged}" />
                         <GroupBox Name="RequiredNpcOrGoBox" Header="Required NPC or Game Object" Content="{Binding RequiredNpcOrGos, UpdateSourceTrigger=PropertyChanged}" />
-                            <DockPanel Margin="2">
-                            <Label Content="Required Spell" DockPanel.Dock="Left" Width="120" />
-                                <Button Content="Find" DockPanel.Dock="Right" Width="75" Click="findSpellBtn_Click"/>
-                                <TextBox Text="{Binding RequiredSpell}" DockPanel.Dock="Left" ToolTip="Requires spell cast on NPC instead of NPC kill!"/>
-                            </DockPanel>
-                            <DockPanel Margin="2">
+                        <DockPanel Margin="2">
                                 <Label Content="Player kills" DockPanel.Dock="Left" Width="120" />
                                 <TextBox Text="{Binding TimeAllowed}" DockPanel.Dock="Left" ToolTip="Amount of PVP kills required" />
                             </DockPanel>
