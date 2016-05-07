@@ -2,4 +2,6 @@ Type $N to display a player's name or $C for a player's class in a quest.
 Leave the value at 0 if you don't want to use a feature.
 Use the lookup tool on the right to find ID's.
 Please report any bugs and suggestions on GitHub.
+Configure your database & dbc in settings to use the lookup tool and other features.
+You need to restart TrinityCore and sometimes delete your WoW Cache to view your creations.
 ---

@@ -16,13 +16,9 @@
                 </MenuItem>
             </MenuItem>
 
-            <MenuItem Header="Support us" FontWeight="Bold">
-                <MenuItem Header="Why should I donate?" Click="WhyDonate_Click" Foreground="Black" />
-                <MenuItem Header="Donate" Click="Donate_Click" Foreground="Black" />
-            </MenuItem>
-
             <MenuItem Header="Info" >
                 <MenuItem Header="Credits" Click="Credits_Click"/>
+                <MenuItem Header="Donate?" Click="WhyDonate_Click" Foreground="Black" />
             </MenuItem>
         </Menu>
 

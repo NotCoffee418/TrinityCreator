@@ -103,12 +103,7 @@ namespace TrinityCreator
 
         #endregion
 
-
-        private void Donate_Click(object sender, RoutedEventArgs e)
-        {
-            Donate();
-        }
-
+        
         private void WhyDonate_Click(object sender, RoutedEventArgs e)
         {
             var msg =
@@ -118,14 +113,9 @@ namespace TrinityCreator
                     "Or if you're already running a profitable server, you'll be able to save a lot of development time when releasing new content.{0}{0}" +
                     "So, do you want to motivate me to implement more features or thank me for making things easier? Then toss me a few bucks! :)",
                     Environment.NewLine);
-            var result = MessageBox.Show(msg, "Why donate?", MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
-                Donate();
-        }
-
-        private void Donate()
-        {
-            Process.Start("https://paypal.me/RStijn");
+            var result = MessageBox.Show(msg, "Would you like to support us?", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+                Process.Start("https://paypal.me/RStijn");
         }
 
         private void Credits_Click(object sender, RoutedEventArgs e)
@@ -135,6 +125,9 @@ namespace TrinityCreator
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+            var r = MessageBox.Show("You may have unsaved changed. Are you sure you want to close TrinityCreator?", "Closing", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+            if (r == MessageBoxResult.No)
+                e.Cancel = true;
         }
 
         private void LookupToolExpander_Expanded(object sender, RoutedEventArgs e)

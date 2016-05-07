@@ -8,8 +8,21 @@
              d:DesignHeight="300" d:DesignWidth="300" >
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <Label Name="targetLbl" Content="Searching in..."/>
             <DockPanel>
+                <Label Content="Find"/>
+                <ComboBox Name="targetSelectCb" SelectionChanged="targetSelectCb_SelectionChanged">
+                    <ComboBoxItem Content="Quest Sort" />
+                    <ComboBoxItem Content="Map" />
+                    <ComboBoxItem Content="Faction" />
+                    <ComboBoxItem Content="Title" />
+                    <ComboBoxItem Content="Item" />
+                    <ComboBoxItem Content="Quest" />
+                    <ComboBoxItem Content="Creature" />
+                    <ComboBoxItem Content="Game Object" />
+                    <ComboBoxItem Content="Spell" />
+                </ComboBox>
+            </DockPanel>
+            <DockPanel Margin="0,5,0,5">
                 <Button Name="searchBtn" Content="Search" DockPanel.Dock="Right" Click="searchBtn_Click" IsDefault="True" Width="75"/>
                 <TextBox Name="searchTxt" />
             </DockPanel>

@@ -31,22 +31,35 @@ namespace TrinityCreator
             App.LookupTool = this;
         }
 
-        string _target = "Searching in...";    
+        Target _target;
 
         /// <summary>
         /// Target query
         /// </summary>
-        public string Target {
+        public Target SelectedTarget {
             get { return _target; }
             set
             {
                 if (_target != value)
                     SetGridSource(new DataTable());
                 _target = value;
-                targetLbl.Content = value;
+                targetSelectCb.SelectedIndex = (int)value;
                 HandleDbcQuery();
                 App._MainWindow.ShowLookupTool();
             }
+        }
+
+        public enum Target
+        {
+            QuestSort = 0,
+            Map = 1,
+            Faction = 2,
+            Title = 3,
+            Item = 4,
+            Quest = 5,
+            Creature = 6,
+            GameObject = 7,
+            Spell = 8,
         }
 
         public DataTable FullDbcTable { get; set; }
@@ -61,21 +74,21 @@ namespace TrinityCreator
         {
             LocalSearch = true;
             DataTable result = null;
-            switch (Target)
+            switch (SelectedTarget)
             {
-                case "Find quest sort":
+                case Target.QuestSort:
                     result = Queries.GetQuestSort();
                     break;
 
-                case "Find map":
+                case Target.Map:
                     result = Queries.GetMap();
                     break;
 
-                case "Find faction":
+                case Target.Faction:
                     result = Queries.GetFaction();
                     break;
 
-                case "Find player title":
+                case Target.Title:
                     result = Queries.GetCharTitles();
                     break;
 
@@ -100,21 +113,21 @@ namespace TrinityCreator
         private void HandleSqlQuery(string search)
         {
             Connection.Open();
-            switch (Target)
+            switch (SelectedTarget)
             {
-                case "Find item by name":
+                case Target.Item:
                     SetGridSource(SqlQuery.FindItemsByName(search));
                     break;
-                case "Find quest by name":
+                case Target.Quest:
                     SetGridSource(SqlQuery.FindQuestByName(search));
                     break;
-                case "Find creature by name":
+                case Target.Creature:
                     SetGridSource(SqlQuery.FindCreatureByName(search));
                     break;
-                case "Find game object by name":
+                case Target.GameObject:
                     SetGridSource(SqlQuery.FindGoByName(search));
                     break;
-                case "Find spell by name": // Combined SQL & DBC
+                case Target.Spell: // Combined SQL & DBC
                     SetGridSource(FindSpell(search));
                     break;
 
@@ -133,7 +146,7 @@ namespace TrinityCreator
 
             if (LocalSearch)
             {
-                if (Target == "Find spell by name") // hybrid
+                if (SelectedTarget == Target.Spell) // hybrid
                 {
                     FindSpell(search);
                 }
@@ -198,8 +211,7 @@ namespace TrinityCreator
             else dataGrid.ItemsSource = dt.DefaultView;
             searchBtn.IsEnabled = true;
         }
-
-
+        
         #region Special queries
         private DataTable FindSpell(string search)
         {
@@ -241,5 +253,11 @@ namespace TrinityCreator
             return result;
         }
         #endregion
+
+        private void targetSelectCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((int)SelectedTarget != targetSelectCb.SelectedIndex)
+                SelectedTarget = (Target)targetSelectCb.SelectedIndex;
+        }
     }
 }

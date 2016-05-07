@@ -116,47 +116,47 @@ namespace TrinityCreator
 
         private void findSortBtn_Click(object sender, RoutedEventArgs e)
         {
-            App.LookupTool.Target = "Find quest sort";
+            App.LookupTool.SelectedTarget = LookupTool.Target.QuestSort;
         }
 
         private void findQuestBtn_Click(object sender, RoutedEventArgs e)
         {
-            App.LookupTool.Target = "Find quest by name";
+            App.LookupTool.SelectedTarget = LookupTool.Target.Quest;
         }
 
         private void findCreatureBtn_Click(object sender, RoutedEventArgs e)
         {
-            App.LookupTool.Target = "Find creature by name";
+            App.LookupTool.SelectedTarget = LookupTool.Target.Creature;
         }
 
         private void findGoBtn_Click(object sender, RoutedEventArgs e)
         {
-            App.LookupTool.Target = "Find game object by name";
+            App.LookupTool.SelectedTarget = LookupTool.Target.GameObject;
         }
 
         private void findItemBtn_Click(object sender, RoutedEventArgs e)
         {
-            App.LookupTool.Target = "Find item by name";
+            App.LookupTool.SelectedTarget = LookupTool.Target.Item;
         }
 
         private void findSpellBtn_Click(object sender, RoutedEventArgs e)
         {
-            App.LookupTool.Target = "Find spell by name";
+            App.LookupTool.SelectedTarget = LookupTool.Target.Spell;
         }
 
         private void findMapBtn_Click(object sender, RoutedEventArgs e)
         {
-            App.LookupTool.Target = "Find map";
+            App.LookupTool.SelectedTarget = LookupTool.Target.Map;
         }
 
         private void findFactionBtn_Click(object sender, RoutedEventArgs e)
         {
-            App.LookupTool.Target = "Find faction";
+            App.LookupTool.SelectedTarget = LookupTool.Target.Faction;
         }
 
         private void findTitleBtn_Click(object sender, RoutedEventArgs e)
         {
-            App.LookupTool.Target = "Find player title";
+            App.LookupTool.SelectedTarget = LookupTool.Target.Title;
         }
         #endregion
 

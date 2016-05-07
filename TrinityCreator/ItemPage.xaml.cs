@@ -418,7 +418,7 @@ namespace TrinityCreator
 
         private void FindDisplayIdBtn_Click(object sender, RoutedEventArgs e)
         {
-            App.LookupTool.Target = "Find item by name";
+            App.LookupTool.SelectedTarget = LookupTool.Target.Item;
         }
 
         #endregion
