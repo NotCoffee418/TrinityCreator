@@ -12,7 +12,7 @@
                 <MenuItem Name="ConfigureMysql" Header="Configure _MySQL" Click="configureMysql_Click" />
                 <MenuItem Header="Select Emulator">
                     <RadioButton Content="TrinityCore/cMangos 3.3.5a" Name="trinity335aRb" Checked="trinity335aRb_Checked"/>
-                    <RadioButton Content="cMangos 1.12" Name="cMangos112Rb" Checked="cMangos112Rb_Checked"/>
+                    <RadioButton Content="cMangos 1.12 (UNTESTED)" Name="cMangos112Rb" Checked="cMangos112Rb_Checked"/>
                 </MenuItem>
             </MenuItem>
 
@@ -26,6 +26,11 @@
             </MenuItem>
         </Menu>
 
+        <StatusBar DockPanel.Dock="Bottom" >
+            <TextBlock Text="Tip:" />
+            <TextBlock Name="randomTipTxt" />
+        </StatusBar>
+        
         <Grid Name="ContentGrid" DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="700*"/>
@@ -65,6 +70,5 @@
                 </ScrollViewer>
             </Expander>
         </Grid>
-
     </DockPanel>
 </Window>

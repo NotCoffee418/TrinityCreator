@@ -208,6 +208,16 @@ namespace TrinityCreator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type $N to display a player&apos;s name or $C for a player&apos;s class in a quest.
+        ///Leave the value at 0 if you don&apos;t want to use a feature..
+        /// </summary>
+        internal static string RandomTips {
+            get {
+                return ResourceManager.GetString("RandomTips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap redsocket {

@@ -5,6 +5,7 @@ using System.Windows;
 using TrinityCreator.Database;
 using TrinityCreator.Properties;
 using TrinityCreator.DBC;
+using System.Timers;
 
 namespace TrinityCreator
 {
@@ -60,7 +61,16 @@ namespace TrinityCreator
             {
                 /* too bad */
             }
+
+            // Load randomTip
+            tipTimer.Elapsed += ChangeRandomTip;
+            tipTimer.Interval = 200; // don't change interval here
+            tipTimer.Start();
+
         }
+
+        static Random random = new Random();
+        Timer tipTimer = new Timer();
         private double _lookupToolWidth;
         
         public void ShowLookupTool()
@@ -143,5 +153,25 @@ namespace TrinityCreator
             ContentGridSplitter.Visibility = Visibility.Collapsed;
         }
 
+
+        private void ChangeRandomTip(object sender, ElapsedEventArgs e)
+        {
+            tipTimer.Interval = 30000; // 30sec
+            string[] allTips = Properties.Resources.RandomTips.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+            string oldText = "";
+            string newText = "";
+            do
+            {
+                if (allTips.Length > 0)
+                {
+                    newText = allTips[random.Next(allTips.Length - 1)];
+                    randomTipTxt.Dispatcher.Invoke(new Action(() =>
+                    {
+                        oldText = randomTipTxt.Text;
+                        randomTipTxt.Text = newText;
+                    }));
+                }
+            } while (oldText == newText);         
+        }
     }
 }

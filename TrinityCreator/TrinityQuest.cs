@@ -50,6 +50,8 @@ namespace TrinityCreator
         private int _rewardArenaPoints;
         private int _questgiver;
         private string _rewardText;
+        private int _rewardTalents;
+        private string _incompleteText;
 
 
         #region Quest info
@@ -194,6 +196,21 @@ namespace TrinityCreator
                 if (_rewardText == null)
                     _rewardText = "Good job! Here is your reward.";
                 return _rewardText;
+            }
+            set
+            {
+                _rewardText = value;
+                RaisePropertyChanged("RewardText");
+            }
+        }
+
+        public string IncompleteText
+        {
+            get
+            {
+                if (_incompleteText == null)
+                    _incompleteText = "Greetings $N. How goes the quest?";
+                return _incompleteText;
             }
             set
             {
@@ -457,6 +474,15 @@ namespace TrinityCreator
                 RaisePropertyChanged("RewardArenaPoints");
             }
         }
+        public int RewardTalents
+        {
+            get { return _rewardTalents; }
+            set
+            {
+                _rewardTalents = value;
+                RaisePropertyChanged("RewardTalents");
+            }
+        }
         public DynamicDataControl RewardItems
         {
             get
@@ -531,6 +557,7 @@ namespace TrinityCreator
                 {"RewardSpell", RewardSpell.ToString()},
                 {"RewardDisplaySpell", RewardSpell.ToString()},
                 {"RewardHonor", RewardHonor.ToString()},
+                {"RewardTalents", RewardTalents.ToString()},
                 {"StartItem", RewardHonor.ToString()},
                 {"Flags", Flags.BitmaskValue.ToString()},
                 {"RewardTitle", RewardTitle.ToString()},
@@ -600,8 +627,18 @@ namespace TrinityCreator
             return new Dictionary<string, string>
             {
                 {"ID", EntryId.ToString()},
-                // Reward emotes
-                {"RewardText", EntryId.ToString()},
+                // Reward emotes on complete
+                {"RewardText", RewardText.ToString()},
+            };
+        }
+
+        private Dictionary<string, string> GenerateQuestRequestItemsValues()
+        {
+            return new Dictionary<string, string>
+            {
+                {"ID", EntryId.ToString()},
+                // Reward emotes on talking before complete or incomplete
+                {"CompletionText", IncompleteText.ToString()},
             };
         }
 

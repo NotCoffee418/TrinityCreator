@@ -168,12 +168,16 @@
                             <TextBox Text="{Binding RewardSpell}" DockPanel.Dock="Left" ToolTip="Spell is cast on player when quest is completed."/>
                         </DockPanel>
                         <DockPanel Margin="2">
-                            <Label Content="Honorable kills" DockPanel.Dock="Left" Width="120" />
-                            <TextBox Text="{Binding RewardHonor}" DockPanel.Dock="Left" ToolTip="1 honorable kill is 124 honor at level 80." />
+                            <Label Content="Honor" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding RewardHonor}" DockPanel.Dock="Left" />
                         </DockPanel>
                         <DockPanel Margin="2">
                             <Label Content="Arena points" DockPanel.Dock="Left" Width="120" />
                             <TextBox Text="{Binding RewardArenaPoints}" DockPanel.Dock="Left" ToolTip="Amount of arena points as reward" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Talent points" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding RewardTalents}" DockPanel.Dock="Left" ToolTip="Amount of talent as reward" />
                         </DockPanel>
                         <DockPanel Margin="2">
                             <Label Content="Title reward" DockPanel.Dock="Left" Width="120" />

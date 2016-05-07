@@ -447,6 +447,7 @@ namespace TrinityCreator
                 {"armor", Armor.ToString()},
                 {"block", Block.ToString()},
                 {"BagFamily", BagFamily.BitmaskValue.ToString()},
+                {"socketBonus", SocketBonus.Id.ToString()},
             };
 
             if (Properties.Settings.Default.emulator == 0)

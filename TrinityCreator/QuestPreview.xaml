@@ -18,6 +18,9 @@
                 <TextBlock Text="Quest Objectives" FontFamily="./Resources/#Morpheus" FontSize="21" Margin="0,15,0,0" />
                 <TextBox Text="{Binding LogDescription}" FontFamily="./Resources/#Friz Quadrata TT" FontSize="13.333" Background="Transparent" TextWrapping="Wrap" AcceptsReturn="True" />
 
+                <TextBlock Text="Incomplete Text" FontFamily="./Resources/#Morpheus" FontSize="21" Margin="0,15,0,0" ToolTip="Shown when talking to the completer NPC before quest is finished" />
+                <TextBox Text="{Binding IncompleteText}" FontFamily="./Resources/#Friz Quadrata TT" FontSize="13.333" Background="Transparent" TextWrapping="Wrap" AcceptsReturn="true"/>
+
                 <TextBlock Text="Reward Text" FontFamily="./Resources/#Morpheus" FontSize="21" Margin="0,15,0,0" />
                 <TextBox Text="{Binding RewardText}" FontFamily="./Resources/#Friz Quadrata TT" FontSize="13.333" Background="Transparent" TextWrapping="Wrap" AcceptsReturn="true"/>
 
