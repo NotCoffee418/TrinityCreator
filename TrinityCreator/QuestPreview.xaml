@@ -14,11 +14,16 @@
             <StackPanel Margin="5">
                 <TextBox Text="{Binding LogTitle}" FontFamily="./Resources/#Morpheus" FontSize="21" Background="Transparent"/>
                 <TextBox Text="{Binding QuestDescription}" FontFamily="./Resources/#Friz Quadrata TT" FontSize="13.333" Background="Transparent" TextWrapping="Wrap" AcceptsReturn="True" />
+                
                 <TextBlock Text="Quest Objectives" FontFamily="./Resources/#Morpheus" FontSize="21" Margin="0,15,0,0" />
                 <TextBox Text="{Binding LogDescription}" FontFamily="./Resources/#Friz Quadrata TT" FontSize="13.333" Background="Transparent" TextWrapping="Wrap" AcceptsReturn="True" />
-                <TextBlock Text="Completion Text" FontFamily="./Resources/#Morpheus" FontSize="21" Margin="0,15,0,0" />
-                <TextBox Text="{Binding QuestCompletionLog}" FontFamily="./Resources/#Friz Quadrata TT" FontSize="13.333" Background="Transparent" TextWrapping="Wrap" AcceptsReturn="True" />
 
+                <TextBlock Text="Reward Text" FontFamily="./Resources/#Morpheus" FontSize="21" Margin="0,15,0,0" />
+                <TextBox Text="{Binding RewardText}" FontFamily="./Resources/#Friz Quadrata TT" FontSize="13.333" Background="Transparent" TextWrapping="Wrap" AcceptsReturn="true"/>
+
+                <TextBlock Text="Alternate Objective Description" FontFamily="./Resources/#Morpheus" FontSize="21" Margin="0,15,0,0" />
+                <TextBox Text="{Binding QuestCompletionLog}" FontFamily="./Resources/#Friz Quadrata TT" FontSize="13.333" Background="Transparent" TextWrapping="Wrap" ToolTip="Optional minimap description for delivery quests with no objectives" />
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>

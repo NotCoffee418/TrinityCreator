@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*"
            Name="Trinity Creator"
-           Language="1033" Version="1.0.1.9"
+           Language="1033" Version="1.0.3.11"
            Manufacturer="RStijn"
            UpgradeCode="7F3D3555-6622-43BB-A57B-3ADD4D2AFB0F">
 

@@ -245,3 +245,4 @@ Updater/bin/Release/TrinityCreatorUpdater.exe.config
 TrinityCreator/bin/Release/TrinityCreator.vshost.exe.config
 TrinityCreator/bin/Release/TrinityCreator.vshost.exe
 *.wixpdb
+TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.wixpdb

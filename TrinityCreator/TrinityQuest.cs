@@ -49,6 +49,7 @@ namespace TrinityCreator
         private int _rewardTitle;
         private int _rewardArenaPoints;
         private int _questgiver;
+        private string _rewardText;
 
 
         #region Quest info
@@ -138,7 +139,7 @@ namespace TrinityCreator
         {
             get {
                 if (_logDescription == null)
-                    _logDescription = "Short description & objectives";
+                    _logDescription = "Short description";
                 return _logDescription; 
             }
             set
@@ -176,7 +177,7 @@ namespace TrinityCreator
             get
             {
                 if (_questCompletionLog == null)
-                    _questCompletionLog = "This text displays when turning in the quest.";
+                    _questCompletionLog = "";
                 return _questCompletionLog;
             }
             set
@@ -186,6 +187,20 @@ namespace TrinityCreator
             }
         }
 
+        public string RewardText
+        {
+            get
+            {
+                if (_rewardText == null)
+                    _rewardText = "Good job! Here is your reward.";
+                return _rewardText;
+            }
+            set
+            {
+                _rewardText = value;
+                RaisePropertyChanged("RewardText");
+            }
+        }
         #endregion
 
 
@@ -494,7 +509,8 @@ namespace TrinityCreator
             return SqlQuery.GenerateInsert("quest_template", GenerateQueryValues()) +
                 SqlQuery.GenerateInsert("quest_template_addon", GenerateAddonQueryValues()) +
                 SqlQuery.GenerateInsert("creature_queststarter", GenerateQuestStarterValues()) +
-                SqlQuery.GenerateInsert("creature_questender", GenerateQuestEnderValues());
+                SqlQuery.GenerateInsert("creature_questender", GenerateQuestEnderValues()) +
+                SqlQuery.GenerateInsert("quest_offer_reward", GenerateQuestOfferRewardValues());
         }
 
         private Dictionary<string, string> GenerateQueryValues()
@@ -576,6 +592,16 @@ namespace TrinityCreator
             {
                 {"id", QuestCompleter.ToString()},
                 {"quest", EntryId.ToString()},
+            };
+        }
+
+        private Dictionary<string, string> GenerateQuestOfferRewardValues()
+        {
+            return new Dictionary<string, string>
+            {
+                {"ID", EntryId.ToString()},
+                // Reward emotes
+                {"RewardText", EntryId.ToString()},
             };
         }
 
