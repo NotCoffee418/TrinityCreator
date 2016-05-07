@@ -86,11 +86,13 @@
     <Compile Include="Converters\ValueToVisibilityConverter.cs" />
     <Compile Include="Converters\WeaponSpeedToStringConverter.cs" />
     <Compile Include="Coordinate.cs" />
+    <Compile Include="UnitClass.cs" />
     <Compile Include="CreditsWindow.xaml.cs">
       <DependentUpon>CreditsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Currency.cs" />
     <Compile Include="Damage.cs" />
+    <Compile Include="CreatureRank.cs" />
     <Compile Include="DamageType.cs" />
     <Compile Include="Database\Connection.cs" />
     <Compile Include="Database\DbConfigWindow.xaml.cs">
@@ -130,6 +132,7 @@
       <DependentUpon>QuestPreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="QuestXp.cs" />
+    <Compile Include="TrinityCreature.cs" />
     <Compile Include="TrinityItem.cs" />
     <Compile Include="ItemBonding.cs" />
     <Compile Include="ItemClass.cs" />

@@ -40,7 +40,9 @@
                 <TabItem Header="Quest" Height="22" VerticalAlignment="Top">
                     <Frame Name="QuestTab" />
                 </TabItem>
-                <TabItem Header="Creature (UNFINISHED)" Name="CreatureTab" Tag="unfinished" />
+                <TabItem Header="Creature (UNFINISHED)"/>
+                <TabItem Header="Loot (UNFINISHED)" />
+                <TabItem Header="Vendor (UNFINISHED)" />
                 <TabItem Header="More coming soon!">
                     <Grid Margin="0,0,0,0">
                         <TextBlock TextWrapping="Wrap"

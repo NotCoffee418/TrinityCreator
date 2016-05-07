@@ -120,6 +120,10 @@ namespace TrinityCreator
             return string.Join(", ", list);
         }
 
+        internal static BitmaskStackPanel GetNpcFlags()
+        {
+            throw new NotImplementedException();
+        }
 
         public static BitmaskStackPanel GetItemFlags()
         {

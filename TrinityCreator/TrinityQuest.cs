@@ -536,7 +536,8 @@ namespace TrinityCreator
                 SqlQuery.GenerateInsert("quest_template_addon", GenerateAddonQueryValues()) +
                 SqlQuery.GenerateInsert("creature_queststarter", GenerateQuestStarterValues()) +
                 SqlQuery.GenerateInsert("creature_questender", GenerateQuestEnderValues()) +
-                SqlQuery.GenerateInsert("quest_offer_reward", GenerateQuestOfferRewardValues());
+                SqlQuery.GenerateInsert("quest_offer_reward", GenerateQuestOfferRewardValues()) +
+                SqlQuery.GenerateInsert("quest_request_items", GenerateQuestRequestItemsValues());
         }
 
         private Dictionary<string, string> GenerateQueryValues()
