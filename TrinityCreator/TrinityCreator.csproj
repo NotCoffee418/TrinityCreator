@@ -86,6 +86,10 @@
     <Compile Include="Converters\ValueToVisibilityConverter.cs" />
     <Compile Include="Converters\WeaponSpeedToStringConverter.cs" />
     <Compile Include="Coordinate.cs" />
+    <Compile Include="Emulator\cmangosZero.cs" />
+    <Compile Include="Emulator\EmulatorHandler.cs" />
+    <Compile Include="Emulator\IEmulator.cs" />
+    <Compile Include="Emulator\Trinity335a.cs" />
     <Compile Include="UnitClass.cs" />
     <Compile Include="CreditsWindow.xaml.cs">
       <DependentUpon>CreditsWindow.xaml</DependentUpon>

@@ -8,6 +8,7 @@ using System.Windows.Media;
 using Microsoft.Win32;
 using TrinityCreator.Properties;
 using System.Data;
+using TrinityCreator.Emulator;
 
 namespace TrinityCreator
 {
@@ -379,7 +380,7 @@ namespace TrinityCreator
         {
             //try
             //{
-                var query = _item.GenerateSqlQuery();
+            var query = EmulatorHandler.GenerateQuery(_item);
                 var sfd = new SaveFileDialog();
                 sfd.DefaultExt = ".sql";
                 sfd.FileName = "Item " + _item.EntryId;
