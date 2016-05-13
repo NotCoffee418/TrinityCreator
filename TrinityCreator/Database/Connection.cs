@@ -112,7 +112,7 @@ namespace TrinityCreator.Database
             return true;
         }
 
-        protected static DataTable ExecuteQuery(string query)
+        internal static DataTable ExecuteQuery(string query)
         {
             if (!IsAlive)
                 return new DataTable();

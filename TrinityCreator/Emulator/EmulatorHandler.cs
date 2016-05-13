@@ -40,12 +40,12 @@ namespace TrinityCreator.Emulator
             return SelectedEmulator.GenerateQuery(item);
         }
 
-        public static string GenerateQuestQuery(TrinityQuest quest)
+        public static string GenerateQuery(TrinityQuest quest)
         {
             return SelectedEmulator.GenerateQuery(quest);
         }
 
-        public static string GenerateCreatureQuery(TrinityCreature creature)
+        public static string GenerateQuery(TrinityCreature creature)
         {
             return SelectedEmulator.GenerateQuery(creature);
         }

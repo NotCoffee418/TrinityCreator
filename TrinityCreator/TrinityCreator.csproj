@@ -90,6 +90,7 @@
     <Compile Include="Emulator\EmulatorHandler.cs" />
     <Compile Include="Emulator\IEmulator.cs" />
     <Compile Include="Emulator\Trinity335a.cs" />
+    <Compile Include="ExportQuery.cs" />
     <Compile Include="UnitClass.cs" />
     <Compile Include="CreditsWindow.xaml.cs">
       <DependentUpon>CreditsWindow.xaml</DependentUpon>
@@ -304,6 +305,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RandomTips.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Emulator\Reference\cmangos_zero.sql.txt" />
+    <Content Include="Emulator\Reference\trinity335a.sql.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

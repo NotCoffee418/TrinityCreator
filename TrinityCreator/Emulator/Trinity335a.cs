@@ -16,12 +16,30 @@ namespace TrinityCreator.Emulator
 
         public int ID { get; set; }
 
+
+        public string GenerateQuery(TrinityItem item)
+        {
+            return SqlQuery.GenerateInsert("item_template", ItemTemplate(item));
+        }        
+
+        public string GenerateQuery(TrinityQuest quest)
+        {
+            return SqlQuery.GenerateInsert("quest_template", QuestTemplate(quest)) +
+               SqlQuery.GenerateInsert("quest_template_addon", QuestAddon(quest)) +
+               SqlQuery.GenerateInsert("creature_queststarter", QuestStarter(quest)) +
+               SqlQuery.GenerateInsert("creature_questender", QuestEnder(quest)) +
+               SqlQuery.GenerateInsert("quest_offer_reward", QuestOfferReward(quest)) +
+               SqlQuery.GenerateInsert("quest_request_items", QuestRequestItems(quest));
+        }
+
         public string GenerateQuery(TrinityCreature creature)
         {
             throw new NotImplementedException();
         }
 
-        public string GenerateQuery(TrinityItem item)
+
+
+        private Dictionary<string, string> ItemTemplate(TrinityItem item)
         {
             var kvplist = new Dictionary<string, string>
             {
@@ -58,7 +76,7 @@ namespace TrinityCreator.Emulator
                 {"socketBonus", item.SocketBonus.Id.ToString()},
                 {"FlagsExtra", item.FlagsExtra.BitmaskValue.ToString()},
             };
-            item.GemSockets.AddValues(kvplist, "socketColor_", "socketContent_");            
+            item.GemSockets.AddValues(kvplist, "socketColor_", "socketContent_");
             item.Stats.AddValues(kvplist, "stat_type", "stat_value");
 
             try // resistances
@@ -75,13 +93,110 @@ namespace TrinityCreator.Emulator
             {
                 throw new Exception("Invalid value in magic resistance.");
             }
-            
-            return SqlQuery.GenerateInsert("item_template", kvplist);
+
+            return kvplist;
         }
 
-        public string GenerateQuery(TrinityQuest quest)
+
+        private Dictionary<string, string> QuestTemplate(TrinityQuest quest)
         {
-            throw new NotImplementedException();
+            var kvplist = new Dictionary<string, string>
+            {
+                {"ID", quest.EntryId.ToString()},
+                {"QuestType", "2"},
+                {"QuestLevel", quest.QuestLevel.ToString()},
+                {"MinLevel", quest.MinLevel.ToString()},
+                {"QuestSortID", quest.PQuestSort.ToString()},
+                {"QuestInfoID", quest.PQuestInfo.Id.ToString()},
+                {"SuggestedGroupNum", quest.SuggestedGroupNum.ToString()},
+                {"TimeAllowed", quest.TimeAllowed.ToString()},
+                {"AllowableRaces", quest.AllowableRace.BitmaskValue.ToString()},
+                {"RewardXPDifficulty", quest.RewardXpDifficulty.Id.ToString()},
+                {"RewardMoney", quest.RewardMoney.Amount.ToString()},
+                {"RewardSpell", quest.RewardSpell.ToString()},
+                {"RewardDisplaySpell", quest.RewardSpell.ToString()},
+                {"RewardHonor", quest.RewardHonor.ToString()},
+                {"RewardTalents", quest.RewardTalents.ToString()},
+                {"StartItem", quest.StartItem.ToString()},
+                {"Flags", quest.Flags.BitmaskValue.ToString()},
+                {"RewardTitle", quest.RewardTitle.ToString()},
+                {"RequiredPlayerKills", quest.RequiredPlayerKills.ToString()},
+                {"RewardArenaPoints", quest.RewardArenaPoints.ToString()},
+                {"POIContinent", quest.PoiCoordinate.MapId.ToString()},
+                {"POIx", quest.PoiCoordinate.X.ToString()},
+                {"POIy", quest.PoiCoordinate.Y.ToString()},
+                {"LogTitle", SqlQuery.CleanText(quest.LogTitle)},
+                {"LogDescription", SqlQuery.CleanText(quest.LogDescription)},
+                {"QuestDescription", SqlQuery.CleanText(quest.QuestDescription)},
+                {"AreaDescription", SqlQuery.CleanText(quest.AreaDescription)},
+                {"QuestCompletionLog", SqlQuery.CleanText(quest.QuestCompletionLog)},
+            };
+
+            // DDC values
+            quest.RewardItems.AddValues(kvplist, "RewardItem", "RewardAmount");
+            quest.RewardChoiceItems.AddValues(kvplist, "RewardChoiceItemID", "RewardChoiceItemQuantity");
+            quest.FactionRewards.AddValues(kvplist, "RewardFactionID", "RewardFactionOverride", 100);
+            quest.RequiredNpcOrGos.AddValues(kvplist, "RequiredNpcOrGo", "RequiredNpcOrGoCount");
+            quest.RequiredItems.AddValues(kvplist, "RequiredItemId", "RequiredItemCount");
+
+            return kvplist;
         }
+
+        private Dictionary<string, string> QuestAddon(TrinityQuest quest)
+        {
+            var kvplist = new Dictionary<string, string>
+            {
+                {"ID", quest.EntryId.ToString()},
+                {"MaxLevel", quest.MaxLevel.ToString()},
+                {"AllowableClasses", quest.AllowableClass.BitmaskValue.ToString()},
+                {"PrevQuestId", quest.PrevQuest.ToString()},
+                {"NextQuestId", quest.NextQuest.ToString()},
+                //{"RewardMailTemplateId", RewardMailTemplateId.ToString()},
+                //{"RewardMailDelay", RewardMailDelay.ToString()},
+                {"ProvidedItemCount", quest.ProvidedItemCount.ToString()},
+                {"SpecialFlags", quest.SpecialFlags.BitmaskValue.ToString()},
+                {"SourceSpellID", quest.SourceSpell.ToString()},
+            };
+
+            return kvplist;
+        }
+
+        private Dictionary<string, string> QuestStarter(TrinityQuest quest)
+        {
+            return new Dictionary<string, string>
+            {
+                {"id", quest.Questgiver.ToString()},
+                {"quest", quest.EntryId.ToString()},
+            };
+        }
+
+        private Dictionary<string, string> QuestEnder(TrinityQuest quest)
+        {
+            return new Dictionary<string, string>
+            {
+                {"id", quest.QuestCompleter.ToString()},
+                {"quest", quest.EntryId.ToString()},
+            };
+        }
+
+        private Dictionary<string, string> QuestOfferReward(TrinityQuest quest)
+        {
+            return new Dictionary<string, string>
+            {
+                {"ID", quest.EntryId.ToString()},
+                // Reward emotes on complete
+                {"RewardText", SqlQuery.CleanText(quest.RewardText)},
+            };
+        }
+
+        private Dictionary<string, string> QuestRequestItems(TrinityQuest quest)
+        {
+            return new Dictionary<string, string>
+            {
+                {"ID", quest.EntryId.ToString()},
+                // Reward emotes on talking before complete or incomplete
+                {"CompletionText", SqlQuery.CleanText(quest.IncompleteText)},
+            };
+        }        
     }
 }

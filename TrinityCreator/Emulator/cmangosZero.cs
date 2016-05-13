@@ -11,17 +11,29 @@ namespace TrinityCreator.Emulator
     {
         public cmangosZero()
         {
-            ID = 0;
+            ID = 1;
         }
 
         public int ID { get; set; }
+
+
+        public string GenerateQuery(TrinityItem item)
+        {
+            return SqlQuery.GenerateInsert("item_template", ItemTemplate(item));
+        }
+
+        public string GenerateQuery(TrinityQuest quest)
+        {
+            return SqlQuery.GenerateInsert("quest_template", QuestTemplate(quest));
+        }
 
         public string GenerateQuery(TrinityCreature creature)
         {
             throw new NotImplementedException();
         }
+        
 
-        public string GenerateQuery(TrinityItem item)
+        private Dictionary<string, string> ItemTemplate(TrinityItem item)
         {
             var kvplist = new Dictionary<string, string>
             {
@@ -73,12 +85,64 @@ namespace TrinityCreator.Emulator
                 throw new Exception("Invalid value in magic resistance.");
             }
 
-            return SqlQuery.GenerateInsert("item_template", kvplist);
+            return kvplist;
         }
 
-        public string GenerateQuery(TrinityQuest quest)
+        private Dictionary<string, string> QuestTemplate(TrinityQuest quest)
         {
-            throw new NotImplementedException();
+            var kvplist = new Dictionary<string, string>
+            {
+                {"entry", quest.EntryId.ToString()},
+                {"Method", "2"},
+                {"QuestLevel", quest.QuestLevel.ToString()},
+                {"MinLevel", quest.MinLevel.ToString()},
+                {"ZoneOrSort", quest.PQuestSort.ToString()},
+                {"Type", quest.PQuestInfo.Id.ToString()},
+                {"RequiredClasses", quest.AllowableClass.BitmaskValue.ToString()},
+                {"RequiredRaces", quest.AllowableRace.BitmaskValue.ToString()},
+                {"SuggestedPlayers", quest.SuggestedGroupNum.ToString()},
+                {"LimitTime", quest.TimeAllowed.ToString()},
+                //{"RewardXPDifficulty", quest.RewardXpDifficulty.Id.ToString()},
+                {"RewOrReqMoney", quest.RewardMoney.Amount.ToString()},
+                {"RewSpellCast", quest.RewardSpell.ToString()},
+                //{"RewardHonor", quest.RewardHonor.ToString()},
+                //{"RewardTalents", quest.RewardTalents.ToString()},
+                {"SrcItemId", quest.StartItem.ToString()},
+                {"SrcItemCount", quest.ProvidedItemCount.ToString()},
+                {"SrcSpell", quest.SourceSpell.ToString()},
+                {"QuestFlags", quest.Flags.BitmaskValue.ToString()},
+                {"SpecialFlags", quest.SpecialFlags.BitmaskValue.ToString()},
+                {"PrevQuestId", quest.PrevQuest.ToString()},
+                {"NextQuestId", quest.NextQuest.ToString()},
+                {"NextQuestInChain", quest.QuestCompleter.ToString()}, // completer npc or object
+                //{"RewardTitle", quest.RewardTitle.ToString()},
+                //{"RequiredPlayerKills", quest.RequiredPlayerKills.ToString()},
+                //{"RewardArenaPoints", quest.RewardArenaPoints.ToString()},
+                {"PointMapId", quest.PoiCoordinate.MapId.ToString()},
+                {"PointX", quest.PoiCoordinate.X.ToString()},
+                {"PointY", quest.PoiCoordinate.Y.ToString()},
+                {"Title", SqlQuery.CleanText(quest.LogTitle)},
+                {"Objectives", SqlQuery.CleanText(quest.LogDescription)},
+                {"Details", SqlQuery.CleanText(quest.QuestDescription)},
+                //{"AreaDescription", SqlQuery.CleanText(quest.AreaDescription)},
+                //{"QuestCompletionLog", SqlQuery.CleanText(quest.QuestCompletionLog)},
+                {"OfferRewardText", SqlQuery.CleanText(quest.RewardText)},
+                {"RequestItemsText", SqlQuery.CleanText(quest.IncompleteText)},
+
+                // not implemented in creator yet
+                //{"RewMailTemplateId", RewardMailTemplateId.ToString()}, 
+                //{"RewMailDelaySecs", RewardMailDelay.ToString()},
+                //DetailsEmote1-4, DetailsEmoteDelay1-4, IncompleteEmote, CompleteEmote, OfferRewardEmote1-4, OfferRewardEmoteDelay1-4,StartScript,CompleteScript
+            };
+
+            // DDC values
+            quest.RewardItems.AddValues(kvplist, "RewItemId", "RewItemCount");
+            quest.RewardChoiceItems.AddValues(kvplist, "RewChoiceItemId", "RewChoiceItemCount");
+            quest.FactionRewards.AddValues(kvplist, "RewRepFaction", "RewRepValue", 100);
+            quest.RequiredNpcOrGos.AddValues(kvplist, "ReqCreatureOrGOId", "ReqCreatureOrGOCount");
+            quest.RequiredItems.AddValues(kvplist, "ReqItemId", "ReqItemCount");
+
+            return kvplist;
         }
     }
 }

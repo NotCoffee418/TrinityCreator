@@ -378,29 +378,15 @@ namespace TrinityCreator
 
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            var query = EmulatorHandler.GenerateQuery(_item);
-                var sfd = new SaveFileDialog();
-                sfd.DefaultExt = ".sql";
-                sfd.FileName = "Item " + _item.EntryId;
-                sfd.Filter = "SQL File (.sql)|*.sql";
-                if (sfd.ShowDialog() == true)
-                {
-                    File.WriteAllText(sfd.FileName, query);
-
-                    // Increase next item's entry id
-                    Settings.Default.nextid_item = int.Parse(EntryIdTxt.Text) + 1;
-                    Settings.Default.Save();
-
-                    MessageBox.Show("Your item has been saved.", "Complete", MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                }
-            /*}
+            try
+            {
+                string query = EmulatorHandler.GenerateQuery(_item);
+                ExportQuery.ToFile("Item " + _item.EntryId, query);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
-            }*/
+            }
         }
 
         private void newItemBtn_Click(object sender, RoutedEventArgs e)

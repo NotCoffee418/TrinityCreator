@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrinityCreator.Emulator;
 
 namespace TrinityCreator
 {
@@ -89,29 +90,15 @@ namespace TrinityCreator
         #region Click events
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            string query = Quest.GenerateSqlQuery();
-            var sfd = new SaveFileDialog();
-            sfd.DefaultExt = ".sql";
-            sfd.FileName = "Quest " + Quest.EntryId;
-            sfd.Filter = "SQL File (.sql)|*.sql";
-            if (sfd.ShowDialog() == true)
+            try
             {
-                File.WriteAllText(sfd.FileName, query);
-
-                // Increase next item's entry id
-                Properties.Settings.Default.nextid_item = Quest.EntryId + 1;
-                Properties.Settings.Default.Save();
-
-                MessageBox.Show("Your quest has been saved.", "Complete", MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                string query = EmulatorHandler.GenerateQuery(Quest);
+                ExportQuery.ToFile("Quest " + Quest.EntryId, query);
             }
-            /*}
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
-            }*/
+            }
         }
 
         private void findSortBtn_Click(object sender, RoutedEventArgs e)
