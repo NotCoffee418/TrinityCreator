@@ -225,19 +225,22 @@ namespace TrinityCreator
             // Get data
             DataTable dbc = Queries.GetSpells(); // "m_ID", "m_name_lang_1", "m_description_lang_1"
             DataTable sql = SqlQuery.GetSpells(search); // Id, Comment(name)
+            DataRow newRow = null;
 
             // Add DBC spells
-            DataRow newRow = null;
-            foreach (DataRow dr in dbc.Rows)
-                if (dr["m_name_lang_1"].ToString().Contains(search))
-                {
-                    newRow = result.NewRow();
-                    newRow["ID"] = dr["m_ID"];
-                    newRow["Name"] = dr["m_name_lang_1"];
-                    newRow["Description"] = dr["m_description_lang_1"];
-                    result.Rows.Add(newRow);
-                    listed.Add((uint)dr["m_ID"]);
-                }
+            if (dbc.Rows.Count != 1 && dbc.Columns.Count != 1) // Invalid DBC config
+            {
+                foreach (DataRow dr in dbc.Rows)
+                    if (dr["m_name_lang_1"].ToString().Contains(search))
+                    {
+                        newRow = result.NewRow();
+                        newRow["ID"] = dr["m_ID"];
+                        newRow["Name"] = dr["m_name_lang_1"];
+                        newRow["Description"] = dr["m_description_lang_1"];
+                        result.Rows.Add(newRow);
+                        listed.Add((uint)dr["m_ID"]);
+                    }
+            }
 
             // Add unlisted SQL spells
             foreach (DataRow dr in sql.Rows)

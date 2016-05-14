@@ -69,15 +69,18 @@ namespace TrinityCreator.Database
             }
             catch (Exception ex)
             {
-                var msg = string.Format("Opening the database connection resulted in the following error:{0}{1}{0}{0}" +
-                                        "Would you like to try again?", Environment.NewLine, ex.Message);
-                var r = MessageBox.Show(msg, "Failed to connect", MessageBoxButton.YesNo, MessageBoxImage.Error);
-                if (r == MessageBoxResult.Yes)
+                if (requestConfig) // important query
                 {
-                    Open();
-                    return true;
+                    var msg = string.Format("Opening the database connection resulted in the following error:{0}{1}{0}{0}" +
+                                            "Would you like to try again?", Environment.NewLine, ex.Message);
+                    var r = MessageBox.Show(msg, "Failed to connect", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                    if (r == MessageBoxResult.Yes)
+                    {
+                        Open();
+                        return true;
+                    }
                 }
-                else return false;
+                return false;
             }
         }
 
