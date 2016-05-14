@@ -220,8 +220,8 @@ namespace TrinityCreator
             }
             set
             {
-                _rewardText = DataType.LimitLength(value, 65535);
-                RaisePropertyChanged("RewardText");
+                _incompleteText = DataType.LimitLength(value, 65535);
+                RaisePropertyChanged("IncompleteText");
             }
         }
         #endregion
