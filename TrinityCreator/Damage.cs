@@ -14,7 +14,7 @@ namespace TrinityCreator
             get { return _minDamage; }
             set
             {
-                _minDamage = value;
+                _minDamage = Database.DataType.LimitLength(value, "int(10)");
                 RaisePropertyChanged("MinDamage");
                 RaisePropertyChanged("Dps");
                 RaisePropertyChanged("DpsInfo");
@@ -26,7 +26,7 @@ namespace TrinityCreator
             get { return _maxDamage; }
             set
             {
-                _maxDamage = value;
+                _maxDamage = Database.DataType.LimitLength(value, "int(10)");
                 RaisePropertyChanged("MaxDamage");
                 RaisePropertyChanged("Dps");
                 RaisePropertyChanged("DpsInfo");
@@ -38,7 +38,7 @@ namespace TrinityCreator
             get { return _speed; }
             set
             {
-                _speed = value;
+                _speed = Database.DataType.LimitLength(value, "smallint(5)");
                 RaisePropertyChanged("Speed");
                 RaisePropertyChanged("Dps");
                 RaisePropertyChanged("DpsInfo");

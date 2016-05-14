@@ -22,9 +22,11 @@ namespace TrinityCreator
         /// <param name="header1"></param>
         /// <param name="header2"></param>
         /// <param name="defaultValue"></param>
+        /// <param name="valueMySqlDt">MySql max value</param>
         public DynamicDataControl(object[] keyOptions, int maxLines, bool showAll = false, string header1 = "",
-            string header2 = "", string defaultValue = "")
+            string header2 = "", string defaultValue = "", string valueMySqlDt = "")
         {
+            ValueMySqlDt = valueMySqlDt;
             Prepare(maxLines, header1, header2, defaultValue);
             KeyOptions = keyOptions;
             IsTextboxKey = false;
@@ -45,8 +47,12 @@ namespace TrinityCreator
         /// <param name="header1"></param>
         /// <param name="header2"></param>
         /// <param name="defaultValue"></param>
-        public DynamicDataControl(int maxLines, string header1 = "", string header2 = "", string defaultValue = "0")
+        /// <param name="keyMySqlDt">MySql max value</param>
+        /// <param name="valueMySqlDt">MySql max value</param>
+        public DynamicDataControl(int maxLines, string header1 = "", string header2 = "", string defaultValue = "0", string keyMySqlDt = "", string valueMySqlDt = "")
         {
+            KeyMySqlDt = keyMySqlDt;
+            ValueMySqlDt = valueMySqlDt;
             Prepare(maxLines, header1, header2, defaultValue);
             IsTextboxKey = true;
             AddLine();
@@ -79,6 +85,9 @@ namespace TrinityCreator
         private bool IsTextboxKey { get; set; }
         public int MaxLines { get; set; }
         public object[] KeyOptions { get; set; }
+        public string KeyMySqlDt { get; private set; }
+        public string ValueMySqlDt { get; private set; }
+
         public event EventHandler DynamicDataChanged = delegate { };
 
         /// <summary>
@@ -157,7 +166,8 @@ namespace TrinityCreator
                 TextBox tbKey = new TextBox();
                 tbKey.Width = 150;
                 tbKey.Text = DefaultValue;
-                tbKey.TextChanged += TriggerChangedEvent;
+                tbKey.LostFocus += TriggerChangedEvent;
+                tbKey.LostFocus += TbKey_LostFocus;
                 dp.Children.Add(tbKey);
             }
             else // combobox key
@@ -179,7 +189,8 @@ namespace TrinityCreator
             var tbValue = new TextBox();
             tbValue.Margin = new Thickness(5, 0, 0, 0);
             tbValue.Text = DefaultValue;
-            tbValue.TextChanged += TriggerChangedEvent;
+            tbValue.LostFocus += TriggerChangedEvent;
+            tbValue.LostFocus += TbValue_LostFocus;
             dp.Children.Add(tbValue);
 
             _lines.Add(dp);
@@ -188,6 +199,37 @@ namespace TrinityCreator
             TriggerChangedEvent(this, new EventArgs());
         }
 
+        private void TbKey_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (KeyMySqlDt != "")
+                LimitValue((TextBox)sender, KeyMySqlDt);
+        }
+
+        private void TbValue_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (ValueMySqlDt != "")
+                LimitValue((TextBox)sender, ValueMySqlDt);
+        }
+
+        /// <summary>
+        /// Limit int value
+        /// </summary>
+        /// <param name="tb"></param>
+        /// <param name="MySqlDt"></param>
+        private void LimitValue(TextBox tb, string MySqlDt)
+        {
+            string oldTxt = tb.Text;
+            string newTxt = "0";
+            try {
+                newTxt = Database.DataType.LimitLength(int.Parse(oldTxt), MySqlDt).ToString();
+            }
+            catch {
+                newTxt = Database.DataType.LimitLength(2147483647, MySqlDt).ToString();
+            }
+
+            if (oldTxt != newTxt)
+                tb.Text = newTxt;
+        }
 
         private void removeLineBtn_Click(object sender, RoutedEventArgs e)
         {

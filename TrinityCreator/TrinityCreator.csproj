@@ -86,6 +86,7 @@
     <Compile Include="Converters\ValueToVisibilityConverter.cs" />
     <Compile Include="Converters\WeaponSpeedToStringConverter.cs" />
     <Compile Include="Coordinate.cs" />
+    <Compile Include="Database\DataType.cs" />
     <Compile Include="Emulator\cmangosZero.cs" />
     <Compile Include="Emulator\EmulatorHandler.cs" />
     <Compile Include="Emulator\IEmulator.cs" />

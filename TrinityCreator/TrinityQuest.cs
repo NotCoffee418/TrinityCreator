@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrinityCreator.Database;
+using TrinityCreator.Emulator;
 
 namespace TrinityCreator
 {
@@ -66,7 +67,7 @@ namespace TrinityCreator
             get { return _entryId; }
             set
             {
-                _entryId = value;
+                _entryId = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("EntryId");
             }
         }
@@ -76,7 +77,7 @@ namespace TrinityCreator
             get { return _pQuestSort; }
             set
             {
-                _pQuestSort = value;
+                _pQuestSort = DataType.LimitLength(value, "smallint(6)");
                 RaisePropertyChanged("PQuestSort");
             }
         }
@@ -96,7 +97,7 @@ namespace TrinityCreator
             get { return _suggestedGroupNum; }
             set
             {
-                _suggestedGroupNum = value;
+                _suggestedGroupNum = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("SuggestedGroupNum");
             }
         }
@@ -137,7 +138,7 @@ namespace TrinityCreator
             }
             set
             {
-                _logTitle = value; 
+                _logTitle = DataType.LimitLength(value, 65535); 
                 RaisePropertyChanged("LogTitle");
             }
         }
@@ -151,7 +152,7 @@ namespace TrinityCreator
             }
             set
             {
-                _logDescription = value;
+                _logDescription = DataType.LimitLength(value, 65535);
                 RaisePropertyChanged("LogDescription");
             }
         }
@@ -166,7 +167,7 @@ namespace TrinityCreator
             }
             set
             {
-                _questDescription = value;
+                _questDescription = DataType.LimitLength(value, 65535);
                 RaisePropertyChanged("QuestDescription");
             }
         }
@@ -176,7 +177,7 @@ namespace TrinityCreator
             get { return _areaDescription; }
             set
             {
-                _areaDescription = value;
+                _areaDescription = DataType.LimitLength(value, 65535);
                 RaisePropertyChanged("AreaDescription");
             }
         }
@@ -189,7 +190,7 @@ namespace TrinityCreator
             }
             set
             {
-                _questCompletionLog = value;
+                _questCompletionLog = DataType.LimitLength(value, 65535);
                 RaisePropertyChanged("QuestCompletionLog");
             }
         }
@@ -204,7 +205,7 @@ namespace TrinityCreator
             }
             set
             {
-                _rewardText = value;
+                _rewardText = DataType.LimitLength(value, 65535);
                 RaisePropertyChanged("RewardText");
             }
         }
@@ -219,7 +220,7 @@ namespace TrinityCreator
             }
             set
             {
-                _rewardText = value;
+                _rewardText = DataType.LimitLength(value, 65535);
                 RaisePropertyChanged("RewardText");
             }
         }
@@ -232,7 +233,7 @@ namespace TrinityCreator
             get { return _prevQuest; }
             set
             {
-                _prevQuest = value;
+                _prevQuest = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("PrevQuest");
             }
         }
@@ -240,7 +241,7 @@ namespace TrinityCreator
             get { return _nextQuest; }
             set
             {
-                _nextQuest = value;
+                _nextQuest = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("NextQuest");
             }
         }
@@ -250,7 +251,7 @@ namespace TrinityCreator
             get { return _questgiver; }
             set
             {
-                _questgiver = value;
+                _questgiver = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("Questgiver");
             }
         }
@@ -259,7 +260,7 @@ namespace TrinityCreator
             get { return _questCompleter; }
             set
             {
-                _questCompleter = value;
+                _questCompleter = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("QuestCompleter");
             }
         }
@@ -272,7 +273,7 @@ namespace TrinityCreator
             get { return _questLevel; }
             set
             {
-                _questLevel = value;
+                _questLevel = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("QuestLevel");
             }
         }
@@ -280,7 +281,7 @@ namespace TrinityCreator
             get { return _minLevel; }
             set
             {
-                _minLevel = value;
+                _minLevel = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("MinLevel");
             }
         }
@@ -288,7 +289,7 @@ namespace TrinityCreator
             get { return _maxLevel; }
             set
             {
-                _maxLevel = value;
+                _maxLevel = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("MaxLevel");
             }
         }
@@ -334,7 +335,7 @@ namespace TrinityCreator
             get { return _startItem; }
             set
             {
-                _startItem = value;
+                _startItem = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("StartItem");
             }
         } // item given on accept
@@ -342,7 +343,7 @@ namespace TrinityCreator
             get { return _providedItemCount; }
             set
             {
-                _providedItemCount = value;
+                _providedItemCount = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("ProvidedItemCount");
             }
         } // Amount of StartItem
@@ -350,7 +351,7 @@ namespace TrinityCreator
             get { return _sourceSpell; }
             set
             {
-                _sourceSpell = value;
+                _sourceSpell = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("SourceSpell");
             }
         } // Cast on player on accept
@@ -375,7 +376,7 @@ namespace TrinityCreator
             get { return _timeAllowed; }
             set
             {
-                _timeAllowed = value;
+                _timeAllowed = DataType.LimitLength(value, "int(10)");
                 RaisePropertyChanged("TimeAllowed");
             }
         }
@@ -386,7 +387,7 @@ namespace TrinityCreator
             get { return _requiredPlayerKills; }
             set
             {
-                _requiredPlayerKills = value;
+                _requiredPlayerKills = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("RequiredPlayerKills");
             }
         }
@@ -395,7 +396,7 @@ namespace TrinityCreator
             get
             {
                 if (_requiredItems == null)
-                    _requiredItems = new DynamicDataControl(4, "Item ID", "Amount");
+                    _requiredItems = new DynamicDataControl(4, "Item ID", "Amount", keyMySqlDt:"mediumint(8)", valueMySqlDt:"smallint(5)");
                 return _requiredItems;
             }
             set
@@ -409,7 +410,7 @@ namespace TrinityCreator
             get
             {
                 if (_requiredNpcOrGos == null)
-                    _requiredNpcOrGos = new DynamicDataControl(4, "NPC or GObject ID", "Amount");
+                    _requiredNpcOrGos = new DynamicDataControl(4, "NPC or GObject ID", "Amount", keyMySqlDt: "mediumint(8)", valueMySqlDt: "smallint(5)");
                 return _requiredNpcOrGos;
             }
             set
@@ -449,7 +450,7 @@ namespace TrinityCreator
             get { return _rewardSpell; }
             set
             {
-                _rewardSpell = value;
+                _rewardSpell = DataType.LimitLength(value, "int(11)"); ;
                 RaisePropertyChanged("RewardSpell");
             }
         }
@@ -457,7 +458,7 @@ namespace TrinityCreator
             get { return _rewardHonor; }
             set
             {
-                _rewardHonor = value;
+                _rewardHonor = DataType.LimitLength(value, "int(11)"); ;
                 RaisePropertyChanged("RewardHonor");
             }
         }
@@ -467,7 +468,7 @@ namespace TrinityCreator
             get { return _rewardTitle; }
             set
             {
-                _rewardTitle = value;
+                _rewardTitle = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("RewardTitle");
             }
         }
@@ -475,7 +476,7 @@ namespace TrinityCreator
             get { return _rewardArenaPoints; }
             set
             {
-                _rewardArenaPoints = value;
+                _rewardArenaPoints = DataType.LimitLength(value, "smallint(5)");
                 RaisePropertyChanged("RewardArenaPoints");
             }
         }
@@ -484,7 +485,7 @@ namespace TrinityCreator
             get { return _rewardTalents; }
             set
             {
-                _rewardTalents = value;
+                _rewardTalents = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("RewardTalents");
             }
         }
@@ -493,7 +494,7 @@ namespace TrinityCreator
             get
             {
                 if (_rewardItems == null)
-                    _rewardItems = new DynamicDataControl(maxLines:4, header1:"Item ID", header2:"Amount", defaultValue:"0");
+                    _rewardItems = new DynamicDataControl(maxLines:4, header1:"Item ID", header2:"Amount", defaultValue:"0", keyMySqlDt:"mediumint(8)", valueMySqlDt: "smallint(5)");
                 return _rewardItems;
             }
             set
@@ -507,7 +508,7 @@ namespace TrinityCreator
             get
             {
                 if (_rewardChoiceItems == null)
-                    _rewardChoiceItems = new DynamicDataControl(maxLines: 6, header1: "Choice Item ID", header2: "Amount", defaultValue: "0");
+                    _rewardChoiceItems = new DynamicDataControl(maxLines: 6, header1: "Choice Item ID", header2: "Amount", defaultValue: "0", keyMySqlDt: "mediumint(8)", valueMySqlDt: "smallint(5)");
                 return _rewardChoiceItems;
             }
             set
@@ -521,7 +522,7 @@ namespace TrinityCreator
             get
             {
                 if (_factionRewards == null)
-                    _factionRewards = new DynamicDataControl(maxLines:5, header1:"Faction ID", header2: "Amount", defaultValue:"0");
+                    _factionRewards = new DynamicDataControl(maxLines:5, header1:"Faction ID", header2: "Amount", defaultValue:"0", keyMySqlDt: "smallint(5)", valueMySqlDt: "mediumint(8)");
                 return _factionRewards;
             }
             set
@@ -530,126 +531,8 @@ namespace TrinityCreator
                 RaisePropertyChanged("FactionRewards");
             }
         }
-
-        #endregion
-
-
-        #region Generate Query
-        public string GenerateSqlQuery()
-        {
-            return SqlQuery.GenerateInsert("quest_template", GenerateQueryValues()) +
-                SqlQuery.GenerateInsert("quest_template_addon", GenerateAddonQueryValues()) +
-                SqlQuery.GenerateInsert("creature_queststarter", GenerateQuestStarterValues()) +
-                SqlQuery.GenerateInsert("creature_questender", GenerateQuestEnderValues()) +
-                SqlQuery.GenerateInsert("quest_offer_reward", GenerateQuestOfferRewardValues()) +
-                SqlQuery.GenerateInsert("quest_request_items", GenerateQuestRequestItemsValues());
-        }
-
-        private Dictionary<string, string> GenerateQueryValues()
-        {
-            var kvplist = new Dictionary<string, string>
-            {
-                {"ID", EntryId.ToString()},
-                {"QuestType", "2"},
-                {"QuestLevel", QuestLevel.ToString()},
-                {"MinLevel", MinLevel.ToString()},
-                {"QuestSortID", PQuestSort.ToString()},
-                {"QuestInfoID", PQuestInfo.Id.ToString()},
-                {"SuggestedGroupNum", SuggestedGroupNum.ToString()},
-                {"TimeAllowed", TimeAllowed.ToString()},
-                {"AllowableRaces", AllowableRace.BitmaskValue.ToString()},
-                {"RewardXPDifficulty", RewardXpDifficulty.Id.ToString()},
-                {"RewardMoney", RewardMoney.Amount.ToString()},
-                {"RewardSpell", RewardSpell.ToString()},
-                {"RewardDisplaySpell", RewardSpell.ToString()},
-                {"RewardHonor", RewardHonor.ToString()},
-                {"RewardTalents", RewardTalents.ToString()},
-                {"StartItem", RewardHonor.ToString()},
-                {"Flags", Flags.BitmaskValue.ToString()},
-                {"RewardTitle", RewardTitle.ToString()},
-                {"RequiredPlayerKills", RequiredPlayerKills.ToString()},
-                {"RewardArenaPoints", RewardArenaPoints.ToString()},
-                {"POIContinent", PoiCoordinate.MapId.ToString()},
-                {"POIx", PoiCoordinate.X.ToString()},
-                {"POIy", PoiCoordinate.Y.ToString()},
-                {"LogTitle", SqlQuery.CleanText(LogTitle)},
-                {"LogDescription", SqlQuery.CleanText(LogDescription)},
-                {"QuestDescription", SqlQuery.CleanText(QuestDescription)},
-                {"AreaDescription", SqlQuery.CleanText(AreaDescription)},
-                {"QuestCompletionLog", SqlQuery.CleanText(QuestCompletionLog)},
-            };
-            
-            // DDC values
-            RewardItems.AddValues(kvplist, "RewardItem", "RewardAmount");
-            RewardChoiceItems.AddValues(kvplist, "RewardChoiceItemID", "RewardChoiceItemQuantity");
-            FactionRewards.AddValues(kvplist, "RewardFactionID", "RewardFactionOverride", 100);
-            RequiredNpcOrGos.AddValues(kvplist, "RequiredNpcOrGo", "RequiredNpcOrGoCount");
-            RequiredItems.AddValues(kvplist, "RequiredItemId", "RequiredItemCount");
-
-            return kvplist;
-        }
-
-
-        private Dictionary<string, string> GenerateAddonQueryValues()
-        {
-            var kvplist = new Dictionary<string, string>
-            {
-                {"ID", EntryId.ToString()},
-                {"MaxLevel", MaxLevel.ToString()},
-                {"AllowableClasses", AllowableClass.BitmaskValue.ToString()},
-                {"PrevQuestId", PrevQuest.ToString()},
-                {"NextQuestId", NextQuest.ToString()},
-                //{"RewardMailTemplateId", RewardMailTemplateId.ToString()},
-                //{"RewardMailDelay", RewardMailDelay.ToString()},
-                {"ProvidedItemCount", ProvidedItemCount.ToString()},
-                {"SpecialFlags", SpecialFlags.BitmaskValue.ToString()},
-                {"SourceSpellID", SourceSpell.ToString()},
-            };
-
-            return kvplist;
-        }
-
-
-        private Dictionary<string, string> GenerateQuestStarterValues()
-        {
-            return new Dictionary<string, string>
-            {
-                {"id", Questgiver.ToString()},
-                {"quest", EntryId.ToString()},
-            };
-        }
-
-        private Dictionary<string, string> GenerateQuestEnderValues()
-        {
-            return new Dictionary<string, string>
-            {
-                {"id", QuestCompleter.ToString()},
-                {"quest", EntryId.ToString()},
-            };
-        }
-
-        private Dictionary<string, string> GenerateQuestOfferRewardValues()
-        {
-            return new Dictionary<string, string>
-            {
-                {"ID", EntryId.ToString()},
-                // Reward emotes on complete
-                {"RewardText", RewardText.ToString()},
-            };
-        }
-
-        private Dictionary<string, string> GenerateQuestRequestItemsValues()
-        {
-            return new Dictionary<string, string>
-            {
-                {"ID", EntryId.ToString()},
-                // Reward emotes on talking before complete or incomplete
-                {"CompletionText", IncompleteText.ToString()},
-            };
-        }
-
-        #endregion
-
+        #endregion       
+        
         public void RaisePropertyChanged(string property)
         {
             if (PropertyChanged != null)

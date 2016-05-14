@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 
 namespace TrinityCreator
 {
@@ -101,7 +102,16 @@ namespace TrinityCreator
                 for (var i = c.Count(); c.Count() < 2; i++)
                     c = "0" + c;
 
-                Amount = int.Parse(g + s + c);
+                try
+                {
+                    Amount = int.Parse(g + s + c);
+                }
+                catch // too big, set max
+                {
+                    Gold = 214748;
+                    Silver = 36;
+                    Copper = 47;
+                }
             }
             catch
             {

@@ -1,5 +1,5 @@
 Creator			Stijn Raeymaekers
 
 External libraries by:
-DBC Viewer				tomrus88
+DBC Viewer		tomrus88
 DBC & maps extractor	cMangos

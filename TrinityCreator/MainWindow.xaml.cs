@@ -104,7 +104,7 @@ namespace TrinityCreator
         #endregion
 
         
-        private void WhyDonate_Click(object sender, RoutedEventArgs e)
+        private void Donate_Click(object sender, RoutedEventArgs e)
         {
             var msg =
                 string.Format(
@@ -113,14 +113,19 @@ namespace TrinityCreator
                     "Or if you're already running a profitable server, you'll be able to save a lot of development time when releasing new content.{0}{0}" +
                     "So, do you want to motivate me to implement more features or thank me for making things easier? Then toss me a few bucks! :)",
                     Environment.NewLine);
-            var result = MessageBox.Show(msg, "Would you like to support us?", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
+            var result = MessageBox.Show(msg, "Would you like to support Trinity Creator?", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
                 Process.Start("https://paypal.me/RStijn");
         }
 
         private void Credits_Click(object sender, RoutedEventArgs e)
         {
             new CreditsWindow().Show();
+        }
+
+        private void ReportBugs_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/RStijn/TrinityCreator/issues/new");
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

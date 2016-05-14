@@ -49,7 +49,7 @@ namespace TrinityCreator
             get { return _name; }
             set
             {
-                _name = value;
+                _name = DataType.LimitLength(value, 255);
                 RaisePropertyChanged("Name");
             }
         }
@@ -59,7 +59,7 @@ namespace TrinityCreator
             get { return _quote; }
             set
             {
-                _quote = value;
+                _quote = DataType.LimitLength(value, 255);
                 RaisePropertyChanged("Quote");
             }
         }
@@ -99,7 +99,7 @@ namespace TrinityCreator
             get { return _displayid; }
             set
             {
-                _displayid = value;
+                _displayid = DataType.LimitLength(value, "mediumint(8)"); ;
                 RaisePropertyChanged("DisplayId");
             }
         }
@@ -112,7 +112,7 @@ namespace TrinityCreator
             }
             set
             {
-                _entryid = value;
+                _entryid = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("EntryId");
             }
         }
@@ -132,7 +132,7 @@ namespace TrinityCreator
             get { return _minlevel; }
             set
             {
-                _minlevel = value;
+                _minlevel = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("MinLevel");
             }
         }
@@ -142,7 +142,7 @@ namespace TrinityCreator
             get { return _maxallowed; }
             set
             {
-                _maxallowed = value;
+                _maxallowed = DataType.LimitLength(value, "int(11)");
                 RaisePropertyChanged("MaxAllowed");
             }
         }
@@ -187,7 +187,7 @@ namespace TrinityCreator
             }
             set
             {
-                _valuebuy = value;
+                _valuebuy = new Currency(DataType.LimitLength(value.Amount, "int(10)"));
                 RaisePropertyChanged("ValueBuy");
             }
         }
@@ -202,7 +202,7 @@ namespace TrinityCreator
             }
             set
             {
-                _valuesell = value;
+                _valuesell = new Currency(DataType.LimitLength(value.Amount, "int(10)"));
                 RaisePropertyChanged("ValueSell");
             }
         }
@@ -252,7 +252,7 @@ namespace TrinityCreator
             get { return _buyCount; }
             set
             {
-                _buyCount = value;
+                _buyCount = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("BuyCount");
             }
         }
@@ -262,7 +262,7 @@ namespace TrinityCreator
             get { return _stackable; }
             set
             {
-                _stackable = value;
+                _stackable = DataType.LimitLength(value, "int(11)");
                 RaisePropertyChanged("Stackable");
             }
         }
@@ -272,7 +272,7 @@ namespace TrinityCreator
             get { return _containerSlots; }
             set
             {
-                _containerSlots = value;
+                _containerSlots = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("ContainerSlots");
             }
         }
@@ -297,7 +297,7 @@ namespace TrinityCreator
             get
             {
                 if (_resistances == null)
-                    _resistances = new DynamicDataControl(DamageType.GetDamageTypes(true), 6, true, defaultValue: "0");
+                    _resistances = new DynamicDataControl(DamageType.GetDamageTypes(true), 6, true, defaultValue: "0", valueMySqlDt:"tinyint(3)");
                 return _resistances;
             }
             set
@@ -312,7 +312,7 @@ namespace TrinityCreator
             get { return _ammoType; }
             set
             {
-                _ammoType = value;
+                _ammoType = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("AmmoType");
             }
         }
@@ -322,7 +322,7 @@ namespace TrinityCreator
             get { return _durability; }
             set
             {
-                _durability = value;
+                _durability = DataType.LimitLength(value, "smallint(5)"); ;
                 RaisePropertyChanged("Durability");
             }
         }
@@ -332,7 +332,7 @@ namespace TrinityCreator
             get
             {
                 if (_gemSockets == null)
-                    _gemSockets = new DynamicDataControl(Socket.GetSocketList(), 3, false, "Socket Type", "Amount", "0");
+                    _gemSockets = new DynamicDataControl(Socket.GetSocketList(), 3, false, "Socket Type", "Amount", "0", valueMySqlDt:"tinyint(2)");
                 return _gemSockets;
             }
             set
@@ -357,7 +357,7 @@ namespace TrinityCreator
             get
             {
                 if (_stat == null)
-                    _stat = new DynamicDataControl(Stat.GetStatList(), 10, false, "Stat", "Value", "0");
+                    _stat = new DynamicDataControl(Stat.GetStatList(), 10, false, "Stat", "Value", "0", "smallint(6)");
                 return _stat;
             }
             set
@@ -372,7 +372,7 @@ namespace TrinityCreator
             get { return _armor; }
             set
             {
-                _armor = value;
+                _armor = DataType.LimitLength(value, "smallint(5)");
                 RaisePropertyChanged("Armor");
             }
         }
@@ -382,7 +382,7 @@ namespace TrinityCreator
             get { return _block; }
             set
             {
-                _block = value;
+                _block = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("Block");
             }
         }
