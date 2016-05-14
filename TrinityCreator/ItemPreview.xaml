@@ -11,7 +11,7 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <Grid>
+        <Grid Name="itemTooltipGrid">
             <Border BorderBrush="#fff" BorderThickness="2" CornerRadius="8,8,8,8" Margin="2" Background="#0b0b17" />
             <StackPanel Margin="10,5">
                 <Label Name="ItemNameLbl" Content="{Binding Name}" Foreground="Gray" FontSize="18" />

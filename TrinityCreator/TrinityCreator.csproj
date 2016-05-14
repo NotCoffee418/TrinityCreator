@@ -231,7 +231,6 @@
     </None>
     <AppDesigner Include="Properties\" />
     <Resource Include="Resources\ARIALN.TTF" />
-    <Resource Include="Resources\Faction.dbc.csv" />
     <Resource Include="Resources\FRIZQT__.TTF" />
     <Resource Include="Resources\MORPHEUS.TTF" />
     <Resource Include="Resources\SKURRI.TTF" />
