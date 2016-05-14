@@ -25,18 +25,6 @@ namespace TrinityCreator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500000")]
-        public int nextid_item {
-            get {
-                return ((int)(this["nextid_item"]));
-            }
-            set {
-                this["nextid_item"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool viewUnfinishedCreators {
             get {
@@ -68,18 +56,6 @@ namespace TrinityCreator.Properties {
             }
             set {
                 this["worldDb"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500000")]
-        public int nextid_quest {
-            get {
-                return ((int)(this["nextid_quest"]));
-            }
-            set {
-                this["nextid_quest"] = value;
             }
         }
         

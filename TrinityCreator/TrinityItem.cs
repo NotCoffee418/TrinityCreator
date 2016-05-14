@@ -8,6 +8,11 @@ namespace TrinityCreator
 {
     public class TrinityItem : INotifyPropertyChanged
     {
+        public TrinityItem()
+        {
+            EntryId = SqlQuery.GetNextId("item_template", "entry");
+        }
+
         private BitmaskStackPanel _allowedclass;
         private BitmaskStackPanel _allowedrace;
         private int _ammoType;
@@ -103,8 +108,6 @@ namespace TrinityCreator
         {
             get
             {
-                if (_entryid == 0)
-                    _entryid = Settings.Default.nextid_item;
                 return _entryid;
             }
             set

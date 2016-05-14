@@ -11,6 +11,11 @@ namespace TrinityCreator
 {
     public class TrinityQuest : INotifyPropertyChanged
     {
+        public TrinityQuest()
+        {
+            EntryId = SqlQuery.GetNextId("quest_template", "ID");
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private BitmaskStackPanel _requiredClasses;
         private BitmaskStackPanel _requiredRaces;

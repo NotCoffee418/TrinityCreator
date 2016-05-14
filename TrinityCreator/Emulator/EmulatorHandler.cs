@@ -37,16 +37,22 @@ namespace TrinityCreator.Emulator
 
         public static string GenerateQuery(TrinityItem item)
         {
+            if (item.EntryId == 0)
+                throw new Exception("Please choose an entry ID.");
             return SelectedEmulator.GenerateQuery(item);
         }
 
         public static string GenerateQuery(TrinityQuest quest)
         {
+            if (quest.EntryId == 0)
+                throw new Exception("Please choose an entry ID.");
             return SelectedEmulator.GenerateQuery(quest);
         }
 
         public static string GenerateQuery(TrinityCreature creature)
         {
+            if (creature.Entry == 0)
+                throw new Exception("Please choose an entry ID.");
             return SelectedEmulator.GenerateQuery(creature);
         }
     }

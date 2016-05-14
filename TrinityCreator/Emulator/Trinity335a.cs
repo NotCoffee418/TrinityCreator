@@ -16,7 +16,6 @@ namespace TrinityCreator.Emulator
 
         public int ID { get; set; }
 
-
         public string GenerateQuery(TrinityItem item)
         {
             return SqlQuery.GenerateInsert("item_template", ItemTemplate(item));

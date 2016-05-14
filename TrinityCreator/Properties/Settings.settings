@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TrinityCreator.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="nextid_item" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">500000</Value>
-    </Setting>
     <Setting Name="viewUnfinishedCreators" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -13,9 +10,6 @@
     </Setting>
     <Setting Name="worldDb" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="nextid_quest" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">500000</Value>
     </Setting>
     <Setting Name="emulator" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>

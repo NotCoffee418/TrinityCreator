@@ -375,6 +375,18 @@ namespace TrinityCreator
         #endregion
 
         #region Click event handlers
+        private void exportDbBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = EmulatorHandler.GenerateQuery(_item);
+                ExportQuery.ToDatabase(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {

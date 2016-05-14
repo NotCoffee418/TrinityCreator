@@ -265,9 +265,11 @@
                            HorizontalAlignment="Left" Width="77" />
                     <TextBox Name="EntryIdTxt" Text="{Binding EntryId}" Height="25" Margin="85,3,9,0"
                              VerticalAlignment="Top" />
-                    <Button x:Name="ExportSqlBtn" Content="Export to SQL file" Margin="10,35,153,5"
-                            Click="exportSqlBtn_Click" FontWeight="Bold" />
-                    <Button x:Name="NewItemBtn" Content="Create new item" Margin="218,35,10,5" Click="newItemBtn_Click" />
+                    <StackPanel Margin="0,35,0,0">
+                        <Button Content="Export to database" Click="exportDbBtn_Click" FontWeight="Bold" Margin="2" />
+                        <Button Content="Export to SQL file" Click="exportSqlBtn_Click" FontWeight="Bold" Margin="2" />
+                        <Button Content="Create new item" Click="newItemBtn_Click" Margin="2"/>
+                    </StackPanel>
                 </Grid>
             </GroupBox>
 

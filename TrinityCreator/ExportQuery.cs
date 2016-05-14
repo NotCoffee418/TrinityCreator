@@ -26,8 +26,7 @@ namespace TrinityCreator
             if (sfd.ShowDialog() == true)
             {
                 File.WriteAllText(sfd.FileName, query);
-
-                MessageBox.Show("Your item has been saved.", "Complete", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Your creation has been saved to a file.", "Complete", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -37,8 +36,16 @@ namespace TrinityCreator
         /// <param name="query"></param>
         public static void ToDatabase(string query)
         {
-            if (Connection.IsConfigured())
-                Connection.ExecuteQuery(query);
+            if (Connection.Open())
+            {                
+                if (Connection.IsAlive)
+                {
+                    Connection.ExecuteQuery(query);
+                    MessageBox.Show("Your creation has been saved to the database.", "Complete", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+            }
+            MessageBox.Show("Your creation was not saved to the database.", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

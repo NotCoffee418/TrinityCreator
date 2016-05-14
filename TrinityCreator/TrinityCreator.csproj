@@ -124,7 +124,6 @@
     <Compile Include="DynamicDataControl.xaml.cs">
       <DependentUpon>DynamicDataControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Faction.cs" />
     <Compile Include="IKeyValue.cs" />
     <Compile Include="LookupTool.xaml.cs">
       <DependentUpon>LookupTool.xaml</DependentUpon>

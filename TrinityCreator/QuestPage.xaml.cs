@@ -83,12 +83,24 @@ namespace TrinityCreator
             }
             catch { /*fail on load*/ }
         }
-        
+
 
         #endregion
 
         #region Click events
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void exportDbBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = EmulatorHandler.GenerateQuery(Quest);
+                ExportQuery.ToDatabase(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -98,6 +110,18 @@ namespace TrinityCreator
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void newQuestBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to discard this quest and clear the form?",
+                "Discard quest", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                Quest = new TrinityQuest();
+                DataContext = null;
+                DataContext = Quest;
+                PrepareQuestControl();
             }
         }
 

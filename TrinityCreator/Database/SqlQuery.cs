@@ -59,5 +59,19 @@ namespace TrinityCreator.Database
             return ExecuteQuery(
                 "SELECT Id, Comment FROM spell_dbc WHERE Comment LIKE '%" + partialName + "%' ORDER BY Id DESC LIMIT 200;");
         }
+
+        /// <summary>
+        /// Returns next ID for the selected table
+        /// </summary>
+        /// <param name="table">table to check</param>
+        /// <param name="primaryKey">usually id or entry</param>
+        /// <returns></returns>
+        internal static int GetNextId(string table, string primaryKey = "id")
+        {
+            object result = ExecuteScalar(string.Format("SELECT MAX({0}) FROM {1};", primaryKey, table), requestConfig:false);
+            if (result == null)
+                return 0;
+            else return Convert.ToInt32(result) + 1;
+        }
     }
 }

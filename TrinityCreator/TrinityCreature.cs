@@ -10,6 +10,11 @@ namespace TrinityCreator
 {
     class TrinityCreature : INotifyPropertyChanged
     {
+        public TrinityCreature()
+        {
+            Entry = SqlQuery.GetNextId("creature_template", "entry");
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private int _entry;
         private int _modelId1;

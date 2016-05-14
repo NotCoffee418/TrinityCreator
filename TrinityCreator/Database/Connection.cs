@@ -44,16 +44,19 @@ namespace TrinityCreator.Database
 
 
         /// <summary>
-        ///     Opens or reopens connection
+        /// Opens or reopens connection
         /// </summary>
-        internal static bool Open()
+        /// <param name="requestConfig">Asked to enter configuration?</param>
+        /// <returns></returns>
+        internal static bool Open(bool requestConfig = true)
         {
             if (IsAlive)
                 return true;
 
             if (!IsConfigured())
             {
-                RequestConfiguration();
+                if (requestConfig)
+                    RequestConfiguration();
                 return false;
             }
 
@@ -112,8 +115,9 @@ namespace TrinityCreator.Database
             return true;
         }
 
-        internal static DataTable ExecuteQuery(string query)
+        internal static DataTable ExecuteQuery(string query, bool requestConfig = true)
         {
+            Open(requestConfig);
             if (!IsAlive)
                 return new DataTable();
             var result = new DataTable();
@@ -123,6 +127,15 @@ namespace TrinityCreator.Database
                 result.Load(rdr);
             }
             return result;
+        }
+
+        internal static object ExecuteScalar(string query, bool requestConfig = true)
+        {
+            Open(requestConfig);
+            if (!IsAlive)
+                return null;
+            var cmd = new MySqlCommand(query, _conn);
+            return cmd.ExecuteScalar();
         }
     }
 }
