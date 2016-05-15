@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Threading;
 
 namespace TrinityCreatorUpdater
@@ -21,11 +22,7 @@ namespace TrinityCreatorUpdater
             int oldBuild = 0;
             if (File.Exists(path))
                 oldBuild = FileVersionInfo.GetVersionInfo(path).FilePrivatePart;
-            else
-            {
-                Reinstall();
-                return;
-            }
+
             if (oldBuild == 0)
             {
                 Reinstall();
@@ -48,7 +45,10 @@ namespace TrinityCreatorUpdater
             Console.WriteLine("Downloaded to {0}", path);
             DownloadAdditionalFiles(path, oldBuild);
             Console.WriteLine("Opening Trinity Creator...");
-            Process.Start(path);
+            var currentExe = Assembly.GetExecutingAssembly().Location;
+            var proc = new ProcessStartInfo(path);
+            proc.Arguments = "\"" + currentExe + "\"";
+            Process.Start(proc);
 
             Thread.Sleep(1000);
             Environment.Exit(0);
