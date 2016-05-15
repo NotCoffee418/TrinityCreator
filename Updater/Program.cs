@@ -66,7 +66,6 @@ namespace TrinityCreatorUpdater
                     "CefSharp.BrowserSubprocess.Core.dll",
                     "CefSharp.Core.dll",
                     "CefSharp.dll",
-                    "CefSharp.Wpf.dll",
                     "d3dcompiler_43.dll",
                     "d3dcompiler_47.dll",
                     "libcef.dll",
@@ -78,8 +77,8 @@ namespace TrinityCreatorUpdater
                     "natives_blob.bin",
                     "snapshot_blob.bin",
                 });
-            // if (build < 15)
-            // ...
+            if (build < 15)
+                newFiles.Add("CefSharp.WinForms.dll");
 
             // Download files
             Console.WriteLine("Found " + newFiles.Count + " new files.");

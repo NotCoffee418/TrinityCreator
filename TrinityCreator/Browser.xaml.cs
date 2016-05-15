@@ -12,8 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CefSharp.Wpf;
-using CefSharp;
+using System.Windows.Forms.Integration;
 
 namespace TrinityCreator
 {
@@ -22,6 +21,8 @@ namespace TrinityCreator
     /// </summary>
     public partial class Browser : UserControl
     {
+        public BrowserControl ChromiumControl { get; private set; }
+
         public Browser(string url) : this()
         {
             LoadUrl(url);
@@ -29,17 +30,27 @@ namespace TrinityCreator
         public Browser()
         {
             InitializeComponent();
-            Chromium.BrowserSettings = new BrowserSettings()
-            {
-                OffScreenTransparentBackground = false
-            };
+
+            // might need this in loaded event
+            // Use winforms because webgl issues in wpf
+            ChromiumControl = new BrowserControl("about:blank");
+            WindowsFormsHost host = new WindowsFormsHost();
+            host.Child = ChromiumControl;
+            HostGrid.Children.Add(host);
         }
 
-        public void LoadUrl(string url)
+        /// <summary>
+        /// Load url
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="blankFirst">modelViewer requires blank page first because js</param>
+        public void LoadUrl(string url, bool blankFirst = false)
         {
             try
             {
-                Chromium.Address = url;
+                if (blankFirst)
+                    ChromiumControl.Chromium.Load("about:blank");
+                ChromiumControl.Chromium.Load(url);
             }
             catch (Exception ex)
             {

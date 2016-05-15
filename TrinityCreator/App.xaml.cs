@@ -33,5 +33,6 @@ namespace TrinityCreator
 
         public static LookupTool LookupTool { get; internal set; }
         public static MainWindow _MainWindow { get; internal set; }
+        public static ModelViewerPage ModelViewer { get; internal set; }
     }
 }

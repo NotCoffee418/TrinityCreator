@@ -44,6 +44,9 @@
                 <TabItem Header="Creature (UNFINISHED)"/>
                 <TabItem Header="Loot (UNFINISHED)" />
                 <TabItem Header="Vendor (UNFINISHED)" />
+                <TabItem Header="ModelViewer">
+                    <Frame Name="ModelViewerTab" />
+                </TabItem>
                 <TabItem Header="More coming soon!">
                     <DockPanel>
                         <TextBlock TextWrapping="Wrap"

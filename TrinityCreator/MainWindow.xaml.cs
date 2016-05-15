@@ -6,7 +6,6 @@ using TrinityCreator.Database;
 using TrinityCreator.Properties;
 using TrinityCreator.DBC;
 using System.Timers;
-using CefSharp.Wpf;
 
 namespace TrinityCreator
 {
@@ -51,6 +50,7 @@ namespace TrinityCreator
             // Load usable creators
             ItemTab.Content = new ItemPage();
             QuestTab.Content = new QuestPage();
+            ModelViewerTab.Content = new ModelViewerPage();
 
 
             // view unfinished when set & on debug

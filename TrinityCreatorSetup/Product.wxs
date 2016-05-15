@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*"
            Name="Trinity Creator"
-           Language="1033" Version="1.0.4.14"
+           Language="1033" Version="1.0.4.15"
            Manufacturer="RStijn"
            UpgradeCode="7F3D3555-6622-43BB-A57B-3ADD4D2AFB0F">
 
@@ -41,8 +41,8 @@
       <Component Id="CefSharp.dll">
         <File Id="CefSharp.dll" Source="$(var.TrinityCreator.TargetDir)CefSharp.dll" KeyPath="yes" />
       </Component>
-      <Component Id="CefSharp.Wpf.dll">
-        <File Id="CefSharp.Wpf.dll" Source="$(var.TrinityCreator.TargetDir)CefSharp.Wpf.dll" KeyPath="yes" />
+      <Component Id="CefSharp.WinForms.dll">
+        <File Id="CefSharp.WinForms.dll" Source="$(var.TrinityCreator.TargetDir)CefSharp.WinForms.dll" KeyPath="yes" />
       </Component>
       <Component Id="d3dcompiler_43.dll">
         <File Id="d3dcompiler_43.dll" Source="$(var.TrinityCreator.TargetDir)d3dcompiler_43.dll" KeyPath="yes" />
@@ -98,7 +98,7 @@
       <ComponentRef Id="CefSharp.BrowserSubprocess.Core.dll" />
       <ComponentRef Id="CefSharp.Core.dll" />
       <ComponentRef Id="CefSharp.dll" />
-      <ComponentRef Id="CefSharp.Wpf.dll" />
+      <ComponentRef Id="CefSharp.WinForms.dll" />
       <ComponentRef Id="d3dcompiler_43.dll" />
       <ComponentRef Id="d3dcompiler_47.dll" />
       <ComponentRef Id="libcef.dll" />
