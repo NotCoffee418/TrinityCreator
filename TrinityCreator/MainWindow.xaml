@@ -45,12 +45,13 @@
                 <TabItem Header="Loot (UNFINISHED)" />
                 <TabItem Header="Vendor (UNFINISHED)" />
                 <TabItem Header="More coming soon!">
-                    <Grid Margin="0,0,0,0">
+                    <DockPanel>
                         <TextBlock TextWrapping="Wrap"
                                    Text="I'm working on this application almost daily so check back for updates regularly! You will be asked to update when starting Trinity Creator if an update is available."
-                                   FontSize="18" VerticalAlignment="Top" />
-                        <WebBrowser Name="UpdatesBrowser" Margin="0,50,0,0" />
-                    </Grid>
+                                   FontSize="18" DockPanel.Dock="Top"/>
+
+                        <local:Browser x:Name="commitsBrowser" />
+                    </DockPanel>
                 </TabItem>
             </TabControl>
 

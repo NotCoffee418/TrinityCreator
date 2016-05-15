@@ -6,6 +6,7 @@ using TrinityCreator.Database;
 using TrinityCreator.Properties;
 using TrinityCreator.DBC;
 using System.Timers;
+using CefSharp.Wpf;
 
 namespace TrinityCreator
 {
@@ -53,14 +54,7 @@ namespace TrinityCreator
 
 
             // view unfinished when set & on debug
-            try
-            {
-                UpdatesBrowser.Navigate("https://github.com/RStijn/TrinityCreator/commits/master");
-            }
-            catch
-            {
-                /* too bad */
-            }
+            commitsBrowser.LoadUrl("https://github.com/RStijn/TrinityCreator/commits/master");
 
             // Load randomTip
             tipTimer.Elapsed += ChangeRandomTip;
