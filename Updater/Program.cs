@@ -78,7 +78,10 @@ namespace TrinityCreatorUpdater
                     "snapshot_blob.bin",
                 });
             if (build < 15)
-                newFiles.Add("CefSharp.WinForms.dll");
+                newFiles.AddRange(new string[] {
+                    "CefSharp.WinForms.dll",
+                    "cef.pak",
+                });
 
             // Download files
             Console.WriteLine("Found " + newFiles.Count + " new files.");
