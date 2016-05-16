@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrinityCreator.CreatureTemplates;
 
 namespace TrinityCreator
 {
@@ -23,6 +24,25 @@ namespace TrinityCreator
         public CreatureTemplatePage()
         {
             InitializeComponent();
+            templateListBox.ItemsSource = TemplateHandler.ListTemplateDescriptions();
+            templateListBox.MouseDoubleClick += TemplateListBox_MouseDoubleClick;
+            templateListBox.SelectedIndex = 0;       
+        }
+
+        private void TemplateListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            LoadSelectedTemplate();
+        }
+
+        private void loadTemplateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoadSelectedTemplate();
+        }
+
+        private void LoadSelectedTemplate()
+        {
+            string description = (string)templateListBox.SelectedValue;
+            TemplateHandler.LoadTemplateByDescription(description);
         }
     }
 }

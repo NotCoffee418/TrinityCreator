@@ -10,7 +10,7 @@ namespace TrinityCreator.CreatureTemplates
     class TemplateBase : TrinityCreature
     {
         public TemplateBase() : base() { }
-
+        
         /// <summary>
         /// Set flags for the given BMSP
         /// </summary>

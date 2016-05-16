@@ -5,10 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TrinityCreator"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="300" d:DesignWidth="700"
       Title="CreatureTemplatePage">
 
-    <Grid>
-        
-    </Grid>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Left" MinWidth="250">
+            <Button DockPanel.Dock="Bottom" Content="Load selected template" Click="loadTemplateBtn_Click" IsDefault="True"/>
+            <ListBox Name="templateListBox" DockPanel.Dock="Top"/>
+        </DockPanel>
+        <TextBlock DockPanel.Dock="Right" TextWrapping="Wrap">
+            There are many different types of creatures, so it's a lot of work to enter all the required data manually.<LineBreak/>
+            By double-clicking a template on the left, some data relevant to the chosen creature will be entered in creature creator automatically .<LineBreak/>
+            You can of course still change any setting as with any all other creators creator.
+        </TextBlock>
+    </DockPanel>
 </Page>

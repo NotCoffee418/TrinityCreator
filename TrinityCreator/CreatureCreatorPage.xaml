@@ -9,6 +9,9 @@
       Title="CreatureCreatorPage">
 
     <Grid>
-        
+        <DockPanel>
+            <Label Content="Entry Id" DockPanel.Dock="Left" />
+            <TextBox Text="{Binding Entry}" DockPanel.Dock="Right" />
+        </DockPanel>
     </Grid>
 </Page>

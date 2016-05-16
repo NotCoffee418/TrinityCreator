@@ -109,8 +109,10 @@
     <Compile Include="CreatureTemplatePage.xaml.cs">
       <DependentUpon>CreatureTemplatePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CreatureTemplates\BlankTemplate.cs" />
     <Compile Include="CreatureTemplates\ExampleTemplate.cs" />
     <Compile Include="CreatureTemplates\TemplateBase.cs" />
+    <Compile Include="CreatureTemplates\TemplateHandler.cs" />
     <Compile Include="CreatureType.cs" />
     <Compile Include="Database\DataType.cs" />
     <Compile Include="Emulator\cmangosZero.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Emulator\IEmulator.cs" />
     <Compile Include="Emulator\Trinity335a.cs" />
     <Compile Include="ExportQuery.cs" />
+    <Compile Include="InhabitType.cs" />
     <Compile Include="ModelViewerPage.xaml.cs">
       <DependentUpon>ModelViewerPage.xaml</DependentUpon>
     </Compile>

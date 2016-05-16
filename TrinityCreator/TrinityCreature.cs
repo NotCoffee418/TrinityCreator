@@ -16,6 +16,8 @@ namespace TrinityCreator
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public bool CanCheckForModified = false; // protection for templates
+        public bool IsCreatureModified = false;
         private int _entry;
         private int _modelId1;
         private int _modelId2;
@@ -633,6 +635,8 @@ namespace TrinityCreator
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
+            if (CanCheckForModified)
+                IsCreatureModified = true;
         }
     }
 }
