@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrinityCreator.Emulator;
 
 namespace TrinityCreator
 {
@@ -26,9 +27,21 @@ namespace TrinityCreator
             DataContext = Creature;
             Loaded += CreatureCreatorPage_Loaded;
         }
+
+        public bool CanCheckForModified = false; // protection for templates
+        public bool IsCreatureModified = false;
+
         internal void PrepareCreaturePage()
         {
-            
+            PrepCb(rankCb, CreatureRank.GetCreatureRanks());
+        }
+
+        private void PrepCb(ComboBox cb, IKeyValue[] src)
+        {
+            if (cb.ItemsSource == null)
+                cb.ItemsSource = src;
+            if (cb.SelectedIndex == -1)
+                cb.SelectedValue = 0;
         }
 
         private TrinityCreature _creature;
@@ -46,7 +59,40 @@ namespace TrinityCreator
         #region Event Handlers
         private void CreatureCreatorPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Creature.CanCheckForModified = true;
+            PrepareCreaturePage();
+            CanCheckForModified = true;
+        }
+        #endregion
+
+        #region Button handlers
+        private void exportDbBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = EmulatorHandler.GenerateQuery(Creature);
+                ExportQuery.ToDatabase(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = EmulatorHandler.GenerateQuery(Creature);
+                ExportQuery.ToFile("Creature " + Creature.Entry, query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void newQuestBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App._MainWindow.CreatureTemplate.IsSelected = true;
         }
         #endregion
     }

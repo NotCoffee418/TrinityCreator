@@ -34,6 +34,7 @@ namespace TrinityCreator
             if (showAll)
             {
                 AddLineBtn.Visibility = Visibility.Collapsed;
+                RemoveLineBtn.Visibility = Visibility.Collapsed;
                 foreach (var key in KeyOptions)
                     AddLine(key);
             }

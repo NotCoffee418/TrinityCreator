@@ -44,7 +44,7 @@ namespace TrinityCreator.CreatureTemplates
 
             App._MainWindow.CreatureCreator.IsSelected = true;
 
-            if (creature.IsCreatureModified)
+            if (page.IsCreatureModified)
             {
                 var r = MessageBox.Show("Do you want to discard your unsaved creature changes to load " + className + "?",
                     "Overwrite creature", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning, MessageBoxResult.No);
@@ -52,10 +52,11 @@ namespace TrinityCreator.CreatureTemplates
                     return; // Don't load template
             }
 
-            Type type = Assembly.GetExecutingAssembly().GetTypes().First(t => t.Name == className);
-            page.Creature = (TrinityCreature)Activator.CreateInstance(type);
             page.DataContext = null;
-            page.DataContext = page.Creature;
+            Type type = Assembly.GetExecutingAssembly().GetTypes().First(t => t.Name == className);
+            creature = (TemplateBase)Activator.CreateInstance(type);
+            page.DataContext = creature;
+            ((TemplateBase)creature).LoadTemplate();
             page.PrepareCreaturePage();
         }
 

@@ -16,18 +16,12 @@ namespace TrinityCreator
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public bool CanCheckForModified = false; // protection for templates
-        public bool IsCreatureModified = false;
         private int _entry;
-        private int _modelId1;
-        private int _modelId2;
-        private int _modelId3;
-        private int _modelId4;
+        private DynamicDataControl _modelIds;
         private string _name;
         private string _subname;
         private int _minLevel = 1;
         private int _maxLevel = 1;
-        private int _exp;
         private int _faction;
         private BitmaskStackPanel _npcFlags;
         private float _speedWalk = 2.5f;
@@ -84,40 +78,21 @@ namespace TrinityCreator
         }
         // difficulty_entry_1-3
         // KillCredit1-2
-        public int ModelId1
+        public DynamicDataControl ModelIds
         {
-            get { return _modelId1; }
-            set
+            get
             {
-                _modelId1 = DataType.LimitLength(value, "mediumint(8)");
-                RaisePropertyChanged("ModelId1");
+                if (_modelIds == null)
+                {
+                    string[] fields = new string[] {"modelid1","modelid2","modelid3","modelid4"};
+                    _modelIds = new DynamicDataControl(fields, 4, true, defaultValue: "0", valueMySqlDt: "mediumint(8)");
+                }
+                return _modelIds;
             }
-        }
-        public int ModelId2
-        {
-            get { return _modelId2; }
             set
             {
-                _modelId2 = DataType.LimitLength(value, "mediumint(8)");
-                RaisePropertyChanged("ModelId2");
-            }
-        }
-        public int ModelId3
-        {
-            get { return _modelId3; }
-            set
-            {
-                _modelId3 = DataType.LimitLength(value, "mediumint(8)");
-                RaisePropertyChanged("ModelId3");
-            }
-        }
-        public int ModelId4
-        {
-            get { return _modelId4; }
-            set
-            {
-                _modelId4 = DataType.LimitLength(value, "mediumint(8)");
-                RaisePropertyChanged("ModelId4");
+                _modelIds = value;
+                RaisePropertyChanged("ModelIds");
             }
         }
         public string Name
@@ -158,15 +133,7 @@ namespace TrinityCreator
                 RaisePropertyChanged("MaxLevel");
             }
         }
-        public int XP
-        {
-            get { return _exp; }
-            set
-            {
-                _exp = DataType.LimitLength(value, "smallint(6)");
-                RaisePropertyChanged("XP");
-            }
-        }
+        //exp - expansion table, related to dmg
         public int Faction
         {
             get { return _faction; }
@@ -635,8 +602,11 @@ namespace TrinityCreator
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
-            if (CanCheckForModified)
-                IsCreatureModified = true;
+
+            // Set modified
+            var page = (CreatureCreatorPage)App._MainWindow.CreatureCreatorTab.Content;
+            if (page != null && page.CanCheckForModified)
+                page.IsCreatureModified = true;
         }
     }
 }

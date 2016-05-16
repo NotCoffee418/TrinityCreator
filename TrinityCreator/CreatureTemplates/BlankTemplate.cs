@@ -9,11 +9,11 @@ namespace TrinityCreator.CreatureTemplates
 {
     class BlankTemplate : TemplateBase
     {
-        public BlankTemplate() : base()
+        public BlankTemplate() : base() { }
+
+        public override void LoadTemplate()
         {
             // Blank
-        }
-
-        
+        }        
     }
 }

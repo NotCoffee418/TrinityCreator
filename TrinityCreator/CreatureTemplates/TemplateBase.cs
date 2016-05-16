@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using TrinityCreator;
 
 namespace TrinityCreator.CreatureTemplates
@@ -10,6 +11,19 @@ namespace TrinityCreator.CreatureTemplates
     class TemplateBase : TrinityCreature
     {
         public TemplateBase() : base() { }
+
+        public CreatureCreatorPage Page
+        {
+            get
+            {
+                return (CreatureCreatorPage)App._MainWindow.CreatureCreatorTab.Content;
+            }
+        }
+
+        public virtual void LoadTemplate()
+        {
+            throw new Exception("TemplateLoad() was not called.");
+        }
         
         /// <summary>
         /// Set flags for the given BMSP
@@ -22,13 +36,20 @@ namespace TrinityCreator.CreatureTemplates
         }
 
         /// <summary>
-        /// Finds index of value & sets it in TrinityCreature
+        /// Set Select combobox's index based on ID
         /// </summary>
         /// <param name="selectedValue">Value of selected item</param>
         /// <param name="creatureFamily"></param>
-        public void SetComboboxValue(int selectedValue, IKeyValue[] creatureFamily)
+        public void SetComboboxValue(ComboBox cb, int id)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < cb.Items.Count; i++)
+            {
+                if (((IKeyValue)cb.Items[i]).Id == id)
+                {
+                    cb.SelectedIndex = i;
+                    break;
+                }
+            }
         }
 
         /// <summary>

@@ -3,15 +3,79 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:TrinityCreator"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      xmlns:l="clr-namespace:TrinityCreator"
+      mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="600"
       Title="CreatureCreatorPage">
+    <Page.Resources>
+        <l:ValueToVisibilityConverter x:Key="ValueVisibilityConverter" />
+    </Page.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Right" Width="275">
+            <GroupBox Header="Extra options">
+                <StackPanel>
+                    <CheckBox Name="setFlagsCb" Content="Set Flags" />
+                </StackPanel>
+            </GroupBox>
 
-    <Grid>
-        <DockPanel>
-            <Label Content="Entry Id" DockPanel.Dock="Left" />
-            <TextBox Text="{Binding Entry}" DockPanel.Dock="Right" />
-        </DockPanel>
-    </Grid>
+            <DockPanel>
+                <Label Content="Entry Id" DockPanel.Dock="Left" />
+                <TextBox Text="{Binding Entry}" DockPanel.Dock="Right" />
+            </DockPanel>
+
+            <Button Content="Export to database" Click="exportDbBtn_Click" FontWeight="Bold" Margin="2" />
+            <Button Content="Export to SQL file" Click="exportSqlBtn_Click" FontWeight="Bold" Margin="2" />
+            <Button Content="Create new quest" Click="newQuestBtn_Click" Margin="2"/>
+        </StackPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel DockPanel.Dock="Left">
+                <GroupBox Header="Display Info">
+                    <StackPanel>                        
+                        <DockPanel Margin="2">
+                            <Label Content="Name" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding Name}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Subname" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding Subname}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Rank" DockPanel.Dock="Left" Width="120" />
+                            <ComboBox Name="rankCb" SelectedValue="{Binding Rank}" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Min. level" DockPanel.Dock="Left" Width="120" />
+                                <TextBox Text="{Binding MinLevel}" DockPanel.Dock="Left" Width="50" ToolTip="Minimum level"/>
+                                <Label Content=" - "/>
+                                <TextBox Text="{Binding MaxLevel}" DockPanel.Dock="Left" Width="50" ToolTip="Maximum level"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <GroupBox Name="ModelIdGb" Header="Display IDs" Content="{Binding ModelIds, UpdateSourceTrigger=PropertyChanged}" />
+                        <DockPanel Margin="2">
+                            <Label Content="Faction" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding Faction}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Walk speed" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding SpeedWalk}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Run speed" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding SpeedRun}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Scale" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding Scale}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Flags" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}">
+                    <StackPanel>
+                        <GroupBox Header="Npc Flags" Content="{Binding NpcFlags}" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
 </Page>
