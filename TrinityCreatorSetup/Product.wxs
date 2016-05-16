@@ -10,6 +10,7 @@
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of Trinity Creator is already installed." />
     <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)\License.rtf" />
 
 
     <Directory Id="TARGETDIR" Name="SourceDir">
