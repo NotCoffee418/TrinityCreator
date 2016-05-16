@@ -41,10 +41,19 @@
                 <TabItem Header="Quest" Height="22" VerticalAlignment="Top">
                     <Frame Name="QuestTab" />
                 </TabItem>
-                <TabItem Header="Creature (UNFINISHED)"/>
+                <TabItem Header="Creature (UNFINISHED)">
+                    <TabControl>
+                        <TabItem Name="CreatureTemplate" Header="Select Template">
+                            <Frame Name="CreatureTemplateTab" />
+                        </TabItem>
+                        <TabItem Name="CreatureCreator" Header="Create Creature">
+                            <Frame Name="CreatureCreatorTab" />
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
                 <TabItem Header="Loot (UNFINISHED)" />
                 <TabItem Header="Vendor (UNFINISHED)" />
-                <TabItem Header="Model Viewer" Name="ModelViewerTab" Selector.Selected="modelViewerTab_Selected">
+                <TabItem Header="Model Viewer" Name="ModelViewer" Selector.Selected="modelViewerTab_Selected">
                     <Frame Name="ModelViewerTabFrame" />
                 </TabItem>
                 <TabItem Header="More coming soon!">

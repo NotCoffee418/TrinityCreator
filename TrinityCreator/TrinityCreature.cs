@@ -8,7 +8,7 @@ using TrinityCreator.Database;
 
 namespace TrinityCreator
 {
-    class TrinityCreature : INotifyPropertyChanged
+    public class TrinityCreature : INotifyPropertyChanged
     {
         public TrinityCreature()
         {
@@ -36,6 +36,34 @@ namespace TrinityCreator
         private int _baseAttackTime = 1500;
         private int _rangeAttackTime = 2000;
         private UnitClass _unitClass;
+        private BitmaskStackPanel _unitFlags;
+        private BitmaskStackPanel _unitFlags2;
+        private BitmaskStackPanel _dynamicFlags;
+        private CreatureFamily _family;
+        private TrainerData _trainer;
+        private CreatureType _creatureType;
+        private BitmaskStackPanel _typeFlags;
+        private int _lootId;
+        private int _pickpocketLoot;
+        private int _skinLoot;
+        private DynamicDataControl _resistances;
+        private int _petDataId;
+        private int _vehicleId;
+        private Currency _minGold;
+        private Currency _maxGold;
+        private AI _aiName;
+        private MovementType _movement;
+        private InhabitType _inhabit;
+        private int _hoverHeight;
+        private double _healthModifier;
+        private double _manaModifier;
+        private double _damageModifier;
+        private double _armorModifier;
+        private double _experienceModifier;
+        private bool _racialLeader;
+        private bool _regenHealth;
+        private BitmaskStackPanel _mechanicImmuneMask;
+        private BitmaskStackPanel _flagsExtra;
 
 
         #region
@@ -228,33 +256,217 @@ namespace TrinityCreator
                 RaisePropertyChanged("_UnitClass");
             }
         }
-
-
-
-        #endregion
-
-        #region Generate Query
-        public string GenerateSqlQuery()
+        public BitmaskStackPanel UnitFlags
         {
-            return SqlQuery.GenerateInsert("creature_template", GenerateTemplateValues()) +
-                SqlQuery.GenerateInsert("creature_template_addon", GenerateAddonValues()) +
-                SqlQuery.GenerateInsert("creature_equip_template", GenerateEquipTemplateValues());
+            get
+            {
+                if (_unitFlags == null)
+                    _unitFlags = BitmaskStackPanel.GetUnitFlags();
+                return _unitFlags;
+            }
+            set { _unitFlags = value; }
         }
-        
-        private Dictionary<string, string> GenerateTemplateValues()
+        public BitmaskStackPanel UnitFlags2
         {
-            throw new NotImplementedException();
+            get
+            {
+                if (_unitFlags2 == null)
+                    _unitFlags2 = BitmaskStackPanel.GetUnitFlags2();
+                return _unitFlags2;
+            }
+            set { _unitFlags2 = value; }
+        }
+        public BitmaskStackPanel DynamicFlags
+        {
+            get
+            {
+                if (_dynamicFlags == null)
+                    _dynamicFlags = BitmaskStackPanel.GetCreatureDynamicFlags();
+                return _dynamicFlags;
+            }
+            set { _dynamicFlags = value; }
+        }
+        public CreatureFamily Family
+        {
+            get { return _family; }
+            set { _family = value; }
+        }
+        public TrainerData Trainer
+        {
+            get { return _trainer; }
+            set { _trainer = value; }
+        }
+        public CreatureType _CreatureType
+        {
+            get { return _creatureType; }
+            set { _creatureType = value; }
+        }
+        public BitmaskStackPanel TypeFlags
+        {
+            get {
+                if (_typeFlags == null)
+                    _typeFlags = BitmaskStackPanel.GetCreatureTypeFlags();
+                return _typeFlags;
+            }
+            set { _typeFlags = value; }
+        }
+        public int LootId
+        {
+            get { return _lootId; }
+            set { _lootId = value; }
+        }
+        public int PickpocketLoot
+        {
+            get { return _pickpocketLoot; }
+            set { _pickpocketLoot = value; }
+        }
+        public int SkinLoot
+        {
+            get { return _skinLoot; }
+            set { _skinLoot = value; }
+        }
+        public DynamicDataControl Resistances
+        {
+            get
+            {
+                if (_resistances == null)
+                    _resistances = new DynamicDataControl(DamageType.GetDamageTypes(true), 6, true, defaultValue: "0", valueMySqlDt: "smallint(6)");
+                return _resistances;
+            }
+            set
+            {
+                _resistances = value;
+                RaisePropertyChanged("Resistances");
+            }
+        }
+        public DynamicDataControl Spells
+        {
+            get
+            {
+                if (_resistances == null)
+                {
+                    string[] spellCols = new string[]
+                       {
+                           "spell1","spell2","spell3","spell4","spell5","spell6","spell7","spell8",
+                       };
+                    _resistances = new DynamicDataControl(spellCols, 8, true, defaultValue: "0", valueMySqlDt: "mediumint(8)");
+                }
+                return _resistances;
+            }
+            set
+            {
+                _resistances = value;
+                RaisePropertyChanged("Resistances");
+            }
+        }
+        public int PetDataId
+        {
+            get { return _petDataId; }
+            set { _petDataId = value; }
+        }
+        public int VehicleId
+        {
+            get { return _vehicleId; }
+            set { _vehicleId = value; }
+        }
+        public Currency MinGold
+        {
+            get
+            {
+                if (_minGold == null)
+                    _minGold = new Currency(0);
+                return _minGold;
+            }
+            set { _minGold = value; }
+        }
+        public Currency MaxGold
+        {
+            get
+            {
+                if (_maxGold == null)
+                    _maxGold = new Currency(0);
+                return _maxGold;
+            }
+            set { _maxGold = value; }
+        }
+        public AI AIName
+        {
+            get { return _aiName; }
+            set { _aiName = value; }
+        }
+        public MovementType Movement
+        {
+            get { return _movement; }
+            set { _movement = value; }
+        }
+        public InhabitType Inhabit
+        {
+            get { return _inhabit; }
+            set { _inhabit = value; }
+        }
+        public int HoverHeight // requires MOVEMENTFLAG_DISABLE_GRAVITY
+        {
+            get { return _hoverHeight; }
+            set { _hoverHeight = value; }
+        }
+        public double HealthModifier
+        {
+            get { return _healthModifier; }
+            set { _healthModifier = value; }
+        }
+        public double ManaModifier
+        {
+            get { return _manaModifier; }
+            set { _manaModifier = value; }
+        }
+        public double DamageModifier
+        {
+            get { return _damageModifier; }
+            set { _damageModifier = value; }
+        }
+        public double ArmorModifier
+        {
+            get { return _armorModifier; }
+            set { _armorModifier = value; }
+        }
+        public double ExperienceModifier
+        {
+            get { return _experienceModifier; }
+            set { _experienceModifier = value; }
+        }
+        public bool RacialLeader
+        {
+            get { return _racialLeader; }
+            set { _racialLeader = value; }
+        }
+        public bool RegenHealth
+        {
+            get { return _regenHealth; }
+            set { _regenHealth = value; }
+        }
+        public BitmaskStackPanel MechanicImmuneMask
+        {
+            get
+            {
+                if (_mechanicImmuneMask == null)
+                    _mechanicImmuneMask = BitmaskStackPanel.GetMechanicImmuneMask();
+                return _mechanicImmuneMask;
+            }
+            set { _mechanicImmuneMask = value; }
+        }
+        public BitmaskStackPanel FlagsExtra
+        {
+            get
+            {
+                if (_flagsExtra == null)
+                    _flagsExtra = BitmaskStackPanel.GetCreatureFlagsExtra();
+                return _flagsExtra;
+            }
+            set { _flagsExtra = value; }
+        }
 
-            // BaseVariance & RangeVariance always 1
-        }
-        private Dictionary<string, string> GenerateAddonValues()
-        {
-            throw new NotImplementedException();
-        }
-        private Dictionary<string, string> GenerateEquipTemplateValues()
-        {
-            throw new NotImplementedException();
-        }
+
+
         #endregion
 
         public void RaisePropertyChanged(string property)

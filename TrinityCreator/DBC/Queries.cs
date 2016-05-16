@@ -75,8 +75,13 @@ namespace TrinityCreator.DBC
 
         internal static DataTable GetFaction()
         {
-            return DbcHandler.LoadDbc("Faction", 
-                new string[] { "m_ID", "m_name_lang_1" });
+            // basic factions
+            var result = DbcHandler.LoadDbc("Faction", new string[] { "m_ID", "m_name_lang_1" });
+            result.Rows.Add(35, "Friendly to all");
+            result.Rows.Add(168, "Enemy to all");
+            result.Rows.Add(7, "Neutral Attackable");
+            result.Rows.Add(14, "Unfriendly Attackable");
+            return result;
         }
 
         internal static DataTable GetCharTitles()

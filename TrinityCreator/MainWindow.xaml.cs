@@ -51,6 +51,8 @@ namespace TrinityCreator
             ItemTab.Content = new ItemPage();
             QuestTab.Content = new QuestPage();
             ModelViewerTabFrame.Content = new ModelViewerPage();
+            CreatureTemplateTab.Content = new CreatureTemplatePage();
+            CreatureCreatorTab.Content = new CreatureCreatorPage();
 
 
             // view unfinished when set & on debug
@@ -74,7 +76,7 @@ namespace TrinityCreator
 
         public void ShowModelViewer()
         {
-            ModelViewerTab.IsSelected = true;
+            ModelViewer.IsSelected = true;
         }
 
         private void configureMysql_Click(object sender, RoutedEventArgs e)

@@ -120,11 +120,6 @@ namespace TrinityCreator
             return string.Join(", ", list);
         }
 
-        internal static BitmaskStackPanel GetNpcFlags()
-        {
-            throw new NotImplementedException();
-        }
-
         public static BitmaskStackPanel GetItemFlags()
         {
             var cbs = new List<BitmaskCheckBox>
@@ -170,7 +165,6 @@ namespace TrinityCreator
 
             return new BitmaskStackPanel("questFlagsSp", cbs);
         }
-
         internal static BitmaskStackPanel GetQuestSpecialFlags()
         {
             var cbs = new List<BitmaskCheckBox>
@@ -267,7 +261,188 @@ namespace TrinityCreator
 
             return new BitmaskStackPanel("bagFamilySp", cbs);
         }
+
+
+        internal static BitmaskStackPanel GetNpcFlags()
+        {
+            var cbs = new List<BitmaskCheckBox>
+            {
+                new BitmaskCheckBox(1, "Gossip"),
+                new BitmaskCheckBox(2, "Questgiver"),
+                new BitmaskCheckBox(16, "Trainer"),
+                new BitmaskCheckBox(32, "Class Trainer"),
+                new BitmaskCheckBox(64, "Profession Trainer"),
+                new BitmaskCheckBox(128, "Vendor"),
+                new BitmaskCheckBox(256, "Vendor Ammo"),
+                new BitmaskCheckBox(512, "Vendor Food"),
+                new BitmaskCheckBox(1024, "Vendor Poison"),
+                new BitmaskCheckBox(2048, "Vendor Reagent"),
+                new BitmaskCheckBox(4096, "Repairer"),
+                new BitmaskCheckBox(8192, "Flight Master"),
+                new BitmaskCheckBox(16384, "Only visible to dead players"),
+                new BitmaskCheckBox(32768, "Spirit Guide"),
+                new BitmaskCheckBox(65536, "Innkeeper"),
+                new BitmaskCheckBox(131072, "Banker"),
+                new BitmaskCheckBox(262144, "Petitioner"),
+                new BitmaskCheckBox(524288, "Tabard Designer"),
+                new BitmaskCheckBox(1048576, "Battlemaster"),
+                new BitmaskCheckBox(2097152, "Auctioneer"),
+                new BitmaskCheckBox(4194304, "Stable Master"),
+                new BitmaskCheckBox(8388608, "Guild Banker"),
+                new BitmaskCheckBox(16777216, "Spellclick (npc_spellclick_spells table)"),
+                new BitmaskCheckBox(67108864, "Mailbox"),
+            };
+            return new BitmaskStackPanel("npcFlagsSp", cbs);
+        }
+
+        public static BitmaskStackPanel GetUnitFlags()
+        {
+            var cbs = new List<BitmaskCheckBox>
+            {
+                new BitmaskCheckBox(1, "Server Controlled"),
+                new BitmaskCheckBox(2 + 128, "Non Attackable"),
+                new BitmaskCheckBox(8 + 4096, "PvP Attackable"),
+                new BitmaskCheckBox(4, "Disable Move"),
+                new BitmaskCheckBox(131072, "Pacified (Creature won't attack)"),
+                new BitmaskCheckBox(262144, "Stunned"),
+                new BitmaskCheckBox(4194304, "Confused"),
+                new BitmaskCheckBox(8388608, "Fleeing"),
+                new BitmaskCheckBox(16777216, "Player controlled (Vehicle, Eyes of the Beast, ...)"),
+                new BitmaskCheckBox(33554432, "Not selectable"),
+                new BitmaskCheckBox(67108864, "Skinnable"),
+                new BitmaskCheckBox(134217728, "Is mount"),
+                new BitmaskCheckBox(536870912, "Play dead"),
+                new BitmaskCheckBox(1073741824, "Sheath weapon"),
+            };
+            return new BitmaskStackPanel("unitFlagsSp", cbs);
+        }
+
+        public static BitmaskStackPanel GetUnitFlags2()
+        {
+            var cbs = new List<BitmaskCheckBox>
+            {
+                new BitmaskCheckBox(1, "Feign Death"),
+                new BitmaskCheckBox(2, "Hide (Only show equipment)"),
+                new BitmaskCheckBox(4, "Ignore Reputation (friendly-faction combat)"),
+                new BitmaskCheckBox(8, "Comprehend Language"),
+                new BitmaskCheckBox(16, "Is mirror image"),
+                new BitmaskCheckBox(64, "Force move"),
+                new BitmaskCheckBox(128, "Disarm offhand"),
+                new BitmaskCheckBox(16384, "Allow enemy interaction"),
+                new BitmaskCheckBox(262144, "Allow cheat spells with AttributesEx7"),
+            };
+            return new BitmaskStackPanel("unitFlags2Sp", cbs);
+        }
+
+        public static BitmaskStackPanel GetCreatureDynamicFlags()
+        {
+            var cbs = new List<BitmaskCheckBox>
+            {
+                new BitmaskCheckBox(1, "Lootable", true),
+                new BitmaskCheckBox(2, "Track unit on minimap"),
+                new BitmaskCheckBox(4, "Tapped (Grey name, Lua_UnitIsTapped)"),
+                new BitmaskCheckBox(8, "Tapped by player"),
+                new BitmaskCheckBox(32, "Is dead"),
+                new BitmaskCheckBox(128, "Tapped by all thread list (Lua_UnitIsTappedByAllThreatList)"),
+            };
+            return new BitmaskStackPanel("dynamicFlagsSp", cbs);
+        }
+
+        public static BitmaskStackPanel GetCreatureTypeFlags()
+        {
+            var cbs = new List<BitmaskCheckBox>
+            {
+                new BitmaskCheckBox(1, "Tamable"),
+                new BitmaskCheckBox(2, "Ghost"),
+                new BitmaskCheckBox(4, "Boss"),
+                new BitmaskCheckBox(8, "No parry wound animation"),
+                new BitmaskCheckBox(16, "Hide faction tooltip"),
+                new BitmaskCheckBox(64, "Spell attackable", true),
+                new BitmaskCheckBox(128, "Interact with players when NPC is dead"),
+                new BitmaskCheckBox(256, "Herbable"),
+                new BitmaskCheckBox(512, "Minable"),
+                new BitmaskCheckBox(32768, "Engeneer loot"),
+                new BitmaskCheckBox(1024, "Don't show death in combat log"),
+                new BitmaskCheckBox(2048, "Mounted combat"),
+                new BitmaskCheckBox(4096, "Aid players in combat"),
+                new BitmaskCheckBox(8192, "Use pet bar"),
+                new BitmaskCheckBox(65536, "Exotic tamable"),
+                new BitmaskCheckBox(262144, "Siege weapon"),
+                new BitmaskCheckBox(524288, "Takes siege damage"),
+                new BitmaskCheckBox(1048576, "Hide nameplate"),
+                new BitmaskCheckBox(2097152, "Do not play mounted animation"),
+                new BitmaskCheckBox(8388608, "Only interact with it's creator"),
+                new BitmaskCheckBox(134217728, "Force single gossip option"),
+            };
+            return new BitmaskStackPanel("dynamicFlagsSp", cbs);
+        }
+
+        internal static BitmaskStackPanel GetMechanicImmuneMask()
+        {
+            var cbs = new List<BitmaskCheckBox>
+            {
+                new BitmaskCheckBox(1, "Charm"),
+                new BitmaskCheckBox(2, "Disorient"),
+                new BitmaskCheckBox(4, "Disarm"),
+                new BitmaskCheckBox(8, "Distract"),
+                new BitmaskCheckBox(16, "Fear"),
+                new BitmaskCheckBox(32, "Grip"),
+                new BitmaskCheckBox(64, "Root"),
+                new BitmaskCheckBox(128, "Pacify"),
+                new BitmaskCheckBox(256, "Silence"),
+                new BitmaskCheckBox(512, "Sleep"),
+                new BitmaskCheckBox(1024, "Snare"),
+                new BitmaskCheckBox(2048, "Stun"),
+                new BitmaskCheckBox(4096, "Freeze"),
+                new BitmaskCheckBox(8192, "Knockout"),
+                new BitmaskCheckBox(16384, "Bleed"),
+                new BitmaskCheckBox(32768, "Bandage"),
+                new BitmaskCheckBox(65536, "Polymorph"),
+                new BitmaskCheckBox(131072, "Banish"),
+                new BitmaskCheckBox(262144, "Shield"),
+                new BitmaskCheckBox(524288, "Shackle (undead)"),
+                new BitmaskCheckBox(1048576, "Mount"),
+                new BitmaskCheckBox(2097152, "Infected"),
+                new BitmaskCheckBox(4194304, "Turn Evil"),
+                new BitmaskCheckBox(8388608, "Horror"),
+                new BitmaskCheckBox(16777216, "Invulnerability (Forbearance, Nether Protection, Diplomatic Immunity only)"),
+                new BitmaskCheckBox(33554432, "Interrupt"),
+                new BitmaskCheckBox(67108864, "Daze"),
+                new BitmaskCheckBox(134217728, "Discovery (create item effect)"),
+                new BitmaskCheckBox(268435456, "Immune shield"),
+                new BitmaskCheckBox(536870912, "Sapped"),
+                new BitmaskCheckBox(1073741824, "Enraged"),
+            };
+            return new BitmaskStackPanel("dynamicFlagsSp", cbs);
+        }
+
+        public static BitmaskStackPanel GetCreatureFlagsExtra()
+        {
+            var cbs = new List<BitmaskCheckBox>
+            {
+                new BitmaskCheckBox(1, "Instance group bind", true),
+                new BitmaskCheckBox(2, "Civilian", true),
+                new BitmaskCheckBox(4, "No parry", true),
+                new BitmaskCheckBox(8, "No counter-attack at parry", true),
+                new BitmaskCheckBox(16, "No block", true),
+                new BitmaskCheckBox(32, "No crush attacks", true),
+                new BitmaskCheckBox(64, "No XP on kill", true),
+                new BitmaskCheckBox(128, "Is trigger NPC (invisible)", true),
+                new BitmaskCheckBox(256, "Immune to Taunt", true),
+                new BitmaskCheckBox(16384, "World event", true),
+                new BitmaskCheckBox(32768, "Guard", true),
+                new BitmaskCheckBox(131072, "No critical strikes", true),
+                new BitmaskCheckBox(262144, "No weapon skill gain", true),
+                new BitmaskCheckBox(524288, "Taunt diminish", true),
+                new BitmaskCheckBox(1048576, "All diminish", true),
+                new BitmaskCheckBox(2097152, "NPC's can help kill creature & player gets credit", true),
+                new BitmaskCheckBox(536870912, "Ignore pathfinding (like disabling mmaps for 1 creature)", true),
+                new BitmaskCheckBox(1073741824, "Immune to knockback", true),
+            };
+            return new BitmaskStackPanel("dynamicFlagsSp", cbs);
+        }
     }
+
 
     public class BitmaskCheckBox : CheckBox
     {
