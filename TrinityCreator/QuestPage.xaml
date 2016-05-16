@@ -131,8 +131,8 @@
                     <StackPanel>
                         <DockPanel>
                             <Button Content="Find Items" Click="findItemBtn_Click" Width="100"/>
-                            <Button Content="Find NPC" Click="findItemBtn_Click" Width="100" DockPanel.Dock="Left"/>
-                            <Button Content="Find Object" Click="findItemBtn_Click" Width="100" DockPanel.Dock="Left"/>
+                            <Button Content="Find NPC" Click="findCreatureBtn_Click" Width="100" DockPanel.Dock="Left"/>
+                            <Button Content="Find Object" Click="findGoBtn_Click" Width="100" DockPanel.Dock="Left"/>
                             <Label />
                         </DockPanel>
                     

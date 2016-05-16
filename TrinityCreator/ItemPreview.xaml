@@ -13,21 +13,19 @@
     <StackPanel>
         <Grid Name="itemTooltipGrid">
             <Border BorderBrush="#fff" BorderThickness="2" CornerRadius="8,8,8,8" Margin="2" Background="#0b0b17" />
-            <StackPanel Margin="10,5">
-                <Label Name="ItemNameLbl" Content="{Binding Name}" Foreground="Gray" FontSize="18" />
-                <Label Name="ItemBoundsLbl" Content="{Binding Binds.Description}" Foreground="White" FontSize="14"
-                       Visibility="{Binding Binds.Id, Converter={StaticResource ValueVisibilityConverter}}" />
-                <DockPanel>
-                    <TextBlock Name="SubclassLeftNoteLbl" Foreground="White" FontSize="14" HorizontalAlignment="Left"
-                               Margin="5,0,0,5" />
-                    <TextBlock Name="SubclassRightNoteLbl" Foreground="White" FontSize="14" HorizontalAlignment="Right"
-                               Margin="0,0,5,5" />
+            <StackPanel Margin="12,12">
+                <TextBlock Name="ItemNameLbl" Text="{Binding Name}" Foreground="Gray" FontSize="18" TextWrapping="Wrap" Margin="0,0,0,5"/>
+                <TextBlock Name="ItemBoundsLbl" Text="{Binding Binds.Description}" Foreground="White" FontSize="14"
+                       Visibility="{Binding Binds.Id, Converter={StaticResource ValueVisibilityConverter}}" Margin="0,0,0,5"/>
+                <DockPanel Margin="0,0,0,5">
+                    <TextBlock Name="SubclassLeftNoteLbl" Foreground="White" FontSize="14" HorizontalAlignment="Left" />
+                    <TextBlock Name="SubclassRightNoteLbl" Foreground="White" FontSize="14" HorizontalAlignment="Right" />
                 </DockPanel>
 
                 <!-- Only visible on weapon item -->
-                <StackPanel Visibility="{Binding DamageInfo.Dps, Converter={StaticResource ValueVisibilityConverter}}">
+                <StackPanel Visibility="{Binding DamageInfo.Dps, Converter={StaticResource ValueVisibilityConverter}}" Margin="0,0,0,5">
                     <DockPanel>
-                        <TextBlock Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,0">
+                        <TextBlock Foreground="White" FontSize="14" HorizontalAlignment="Left" >
                             <TextBlock Text="{Binding DamageInfo.MinDamage}" />
                             <TextBlock Text="-" />
                             <TextBlock Text="{Binding DamageInfo.MaxDamage}" />
@@ -35,53 +33,51 @@
                                        Visibility="{Binding DamageInfo.Type.Id, Converter={StaticResource ValueVisibilityConverter}}" />
                             <TextBlock Text="Damage" />
                         </TextBlock>
-                        <Label Name="WeaponSpeedLbl"
-                               Content="{Binding DamageInfo.Speed, Converter={StaticResource WeaponSpeedToStringConverter}}"
+                        <TextBlock Name="WeaponSpeedLbl"
+                               Text="{Binding DamageInfo.Speed, Converter={StaticResource WeaponSpeedToStringConverter}}"
                                Foreground="White" FontSize="14" HorizontalAlignment="Right" />
                     </DockPanel>
                     <Label Name="WeaponDpsLbl" Content="{Binding DamageInfo.DpsInfo}" Foreground="White" FontSize="14"
-                           HorizontalAlignment="Left" Margin="0,-10,0,0" />
+                           HorizontalAlignment="Left" Margin="-5" />
                 </StackPanel>
                 <!-- Only visible on armor item -->
                 <StackPanel>
 
-                    <TextBlock Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,0"
+                    <TextBlock Foreground="White" FontSize="14" HorizontalAlignment="Left"
                                Visibility="{Binding Armor, Converter={StaticResource ValueVisibilityConverter}}">
                         <TextBlock Name="ItemArmorLbl" Text="{Binding Armor}" />
                         <TextBlock Text="Armor" />
                     </TextBlock>
-                    <TextBlock Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,0"
+                    <TextBlock Foreground="White" FontSize="14" HorizontalAlignment="Left"
                                Visibility="{Binding Block, Converter={StaticResource ValueVisibilityConverter}}">
                         <TextBlock Name="ItemBlockLbl" Text="{Binding Block}" />
                         <TextBlock Text="Block" />
                     </TextBlock>
                 </StackPanel>
-                <StackPanel Name="StatsSp" />
-                <StackPanel Name="ResistanceSp" />
+                <StackPanel Name="StatsSp" Margin="-5,0" />
+                <StackPanel Name="ResistanceSp" Margin="-5,0" />
 
                 <!-- Only visible when sockets available -->
                 <!-- todo: Ensure you can for example have two yellow sockets -->
                 <StackPanel Name="GemsPanel" />
-                <TextBlock Foreground="#0c0" Margin="5,0,0,5"
+                <TextBlock Foreground="#0c0" Margin="0,0,0,5"
                            Visibility="{Binding SocketBonus.Id, Converter={StaticResource ValueVisibilityConverter}}">
-                    <TextBlock Text="Socket Bonus:" />
-                    <TextBlock Text="{Binding SocketBonus}" />
+                    <TextBlock Text="Socket Bonus:" FontSize="14" />
+                    <TextBlock Text="{Binding SocketBonus}" FontSize="14" />
                 </TextBlock>
 
-                <TextBlock
-                    Visibility="{Binding ElementName=AllowedClassesLb, Path=Text, Converter={StaticResource ValueVisibilityConverter}}"
-                    Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,5">
-                    <TextBlock Text="Classes:" />
-                    <TextBlock Name="AllowedClassesLb" />
+                <TextBlock Visibility="{Binding ElementName=AllowedClassesLb, Path=Text, Converter={StaticResource ValueVisibilityConverter}}"
+                    Foreground="Red" HorizontalAlignment="Left" Margin="0,0,0,5" TextWrapping="Wrap">
+                    <TextBlock Text="Classes:" FontSize="14" />
+                    <TextBlock Name="AllowedClassesLb" TextWrapping="Wrap" FontSize="14" />
                 </TextBlock>
-                <TextBlock
-                    Visibility="{Binding ElementName=AllowedRacesLb, Path=Text, Converter={StaticResource ValueVisibilityConverter}}"
-                    Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,5">
-                    <TextBlock Text="Races:" />
-                    <TextBlock Name="AllowedRacesLb" />
+                <TextBlock Visibility="{Binding ElementName=AllowedRacesLb, Path=Text, Converter={StaticResource ValueVisibilityConverter}}"
+                    Foreground="Red" HorizontalAlignment="Left" Margin="0,0,0,5" TextWrapping="Wrap">
+                    <TextBlock Text="Races:"  FontSize="14"/>
+                    <TextBlock Name="AllowedRacesLb" TextWrapping="Wrap" FontSize="14" />
                 </TextBlock>
 
-                <TextBlock Foreground="Red" FontSize="14" HorizontalAlignment="Left" Margin="5,-10,0,0"
+                <TextBlock Foreground="Red" FontSize="14" HorizontalAlignment="Left"
                            Visibility="{Binding MinLevel, Converter={StaticResource ValueVisibilityConverter}}">
                     <TextBlock Text="Requires Level" />
                     <TextBlock Name="ItemLevelRequiredLbl" Text="{Binding MinLevel}" />
@@ -90,43 +86,46 @@
                 <!-- Only visible when repairable -->
                 <TextBlock Name="ItemDurabilityLbl"
                            Visibility="{Binding Durability, Converter={StaticResource ValueVisibilityConverter}}"
-                           Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="5,0,0,0">
-                    <TextBlock Text="(" />
+                           Foreground="White" FontSize="14" HorizontalAlignment="Left">
+                    <TextBlock Text="(" Margin="0,0,-5,0" />
                     <TextBlock Text="{Binding Durability}" />
-                    <TextBlock Text="/" />
+                    <TextBlock Text="/" Margin="-2,0,-2,0"/>
                     <TextBlock Text="{Binding Durability}" />
-                    <TextBlock Text=")" />
+                    <TextBlock Text=")" Margin="-5,0,0,0" />
                 </TextBlock>
-                <Label Name="ItemQuoteLbl" Content="{Binding Quote}" ContentStringFormat="''{0}''" Foreground="#ffd200"
-                       FontSize="14" />
+                <TextBlock Foreground="#ffd200" FontSize="14" TextWrapping="Wrap" Visibility="{Binding Quote, Converter={StaticResource ValueVisibilityConverter}}">
+                    <TextBlock Text="''" Margin="0,0,-5,0"/>
+                    <TextBlock Name="ItemQuoteTxt" Text="{Binding Quote}" TextWrapping="Wrap" />
+                    <TextBlock Text="''" Margin="-5,0,0,0"/>
+                </TextBlock>
 
                 <!-- Buy price -->
-                <DockPanel Name="BuyDockPanel"
+                <DockPanel Name="BuyDockPanel"  Margin="-5,0,0,0"
                            Visibility="{Binding ValueBuy.Amount, Converter={StaticResource ValueVisibilityConverter}}">
-                    <Label Content="Buy Price:" Foreground="White" Width="100" />
+                    <Label Content="Buy Price:" Foreground="White" Width="100" FontSize="14" />
                     <Label Content="{Binding ValueBuy.Gold}" Name="BuyGoldLbl" Foreground="White"
-                           HorizontalAlignment="Left" />
+                           HorizontalAlignment="Left" FontSize="14" />
                     <Image Source="Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                     <Label Content="{Binding ValueBuy.Silver}" Name="BuySilverLbl" Foreground="White"
-                           HorizontalAlignment="Left" />
+                           HorizontalAlignment="Left" FontSize="14" />
                     <Image Source="Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                     <Label Content="{Binding ValueBuy.Copper}" Name="BuyCopperLbl" Foreground="White"
-                           HorizontalAlignment="Left" />
+                           HorizontalAlignment="Left" FontSize="14" />
                     <Image Source="Resources/copper.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                 </DockPanel>
 
                 <!-- Sell price -->
-                <DockPanel Margin="0,-10,0,0" Name="SellDockPanel"
+                <DockPanel Name="SellDockPanel" Margin="-5,-10,0,0"
                            Visibility="{Binding ValueSell.Amount, Converter={StaticResource ValueVisibilityConverter}}">
-                    <Label Content="Sell Price:" Foreground="White" Width="100" />
+                    <Label Content="Sell Price:" Foreground="White" Width="100" FontSize="14" />
                     <Label Content="{Binding ValueSell.Gold}" Name="SellGoldLbl" Foreground="White"
-                           HorizontalAlignment="Left" />
+                           HorizontalAlignment="Left" FontSize="14" />
                     <Image Source="Resources/gold.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                     <Label Content="{Binding ValueSell.Silver}" Name="SellSilverLbl" Foreground="White"
-                           HorizontalAlignment="Left" />
+                           HorizontalAlignment="Left" FontSize="14" />
                     <Image Source="Resources/silver.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                     <Label Content="{Binding ValueSell.Copper}" Name="SellCopperLbl" Foreground="White"
-                           HorizontalAlignment="Left" />
+                           HorizontalAlignment="Left" FontSize="14" />
                     <Image Source="Resources/copper.gif" Width="15" Height="15" HorizontalAlignment="Left" />
                 </DockPanel>
 

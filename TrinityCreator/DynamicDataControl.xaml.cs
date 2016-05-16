@@ -166,7 +166,6 @@ namespace TrinityCreator
                 TextBox tbKey = new TextBox();
                 tbKey.Width = 150;
                 tbKey.Text = DefaultValue;
-                tbKey.LostFocus += TriggerChangedEvent;
                 tbKey.LostFocus += TbKey_LostFocus;
                 dp.Children.Add(tbKey);
             }
@@ -189,7 +188,6 @@ namespace TrinityCreator
             var tbValue = new TextBox();
             tbValue.Margin = new Thickness(5, 0, 0, 0);
             tbValue.Text = DefaultValue;
-            tbValue.LostFocus += TriggerChangedEvent;
             tbValue.LostFocus += TbValue_LostFocus;
             dp.Children.Add(tbValue);
 
@@ -203,12 +201,14 @@ namespace TrinityCreator
         {
             if (KeyMySqlDt != "")
                 LimitValue((TextBox)sender, KeyMySqlDt);
+            TriggerChangedEvent(sender, e);
         }
 
         private void TbValue_LostFocus(object sender, RoutedEventArgs e)
         {
             if (ValueMySqlDt != "")
                 LimitValue((TextBox)sender, ValueMySqlDt);
+            TriggerChangedEvent(sender, e);
         }
 
         /// <summary>

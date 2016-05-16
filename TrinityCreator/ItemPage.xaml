@@ -18,7 +18,7 @@
     </UserControl.Resources>
 
     <Grid Background="#fff">
-        <ScrollViewer Margin="0,0,380,0" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Margin="0,0,395,0" VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <GroupBox Header="Item Details" Height="325">
                     <Grid>
@@ -243,36 +243,38 @@
             </StackPanel>
         </ScrollViewer>
 
-        <StackPanel Width="375" HorizontalAlignment="Right">
-            <GroupBox Name="PreviewBox" Header="Item Preview" />
-            <GroupBox Name="AdvancedOptionsBox" Header="Extra Options">
-                <StackPanel>
-                    <CheckBox Name="ChangeFlagsCb" FontSize="12" Content="Change Flags (advanced)" Margin="0,5,0,0"
-                              VerticalAlignment="Top" HorizontalAlignment="Left" />
-                    <CheckBox Name="LimitClassCb" FontSize="12" Content="Add class limitations" Margin="0,5,0,0"
-                              VerticalAlignment="Top" HorizontalAlignment="Left" />
-                    <CheckBox Name="LimitRaceCb" FontSize="12" Content="Add race limitations" Margin="0,5,0,0"
-                              VerticalAlignment="Top" HorizontalAlignment="Left" />
-                    <CheckBox Name="AddResistancesCb" FontSize="12" Content="Add magic resistance" Margin="0,5,0,0"
-                              VerticalAlignment="Top" HorizontalAlignment="Left" />
-                    <CheckBox Name="AddGemSocketsCb" FontSize="12" Content="Add Gem sockets" Margin="0,5,0,0"
-                              VerticalAlignment="Top" HorizontalAlignment="Left" />
-                </StackPanel>
-            </GroupBox>
-            <GroupBox x:Name="CreateBox" Header="Export Item">
-                <Grid>
-                    <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top"
-                           HorizontalAlignment="Left" Width="77" />
-                    <TextBox Name="EntryIdTxt" Text="{Binding EntryId}" Height="25" Margin="85,3,9,0"
-                             VerticalAlignment="Top" />
-                    <StackPanel Margin="0,35,0,0">
-                        <Button Content="Export to database" Click="exportDbBtn_Click" FontWeight="Bold" Margin="2" />
-                        <Button Content="Export to SQL file" Click="exportSqlBtn_Click" FontWeight="Bold" Margin="2" />
-                        <Button Content="Create new item" Click="newItemBtn_Click" Margin="2"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Width="375" HorizontalAlignment="Right">
+            <StackPanel>
+                <GroupBox Name="PreviewBox" Header="Item Preview" />
+                <GroupBox Name="AdvancedOptionsBox" Header="Extra Options">
+                    <StackPanel>
+                        <CheckBox Name="ChangeFlagsCb" FontSize="12" Content="Change Flags (advanced)" Margin="0,5,0,0"
+                                  VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        <CheckBox Name="LimitClassCb" FontSize="12" Content="Add class limitations" Margin="0,5,0,0"
+                                  VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        <CheckBox Name="LimitRaceCb" FontSize="12" Content="Add race limitations" Margin="0,5,0,0"
+                                  VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        <CheckBox Name="AddResistancesCb" FontSize="12" Content="Add magic resistance" Margin="0,5,0,0"
+                                  VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        <CheckBox Name="AddGemSocketsCb" FontSize="12" Content="Add Gem sockets" Margin="0,5,0,0"
+                                  VerticalAlignment="Top" HorizontalAlignment="Left" />
                     </StackPanel>
-                </Grid>
-            </GroupBox>
+                </GroupBox>
+                <GroupBox x:Name="CreateBox" Header="Export Item">
+                    <Grid>
+                        <Label FontSize="12" Content="Entry Id" Height="30" Margin="0,1,0,0" VerticalAlignment="Top"
+                               HorizontalAlignment="Left" Width="77" />
+                        <TextBox Name="EntryIdTxt" Text="{Binding EntryId}" Height="25" Margin="85,3,9,0"
+                                 VerticalAlignment="Top" />
+                        <StackPanel Margin="0,35,0,0">
+                            <Button Content="Export to database" Click="exportDbBtn_Click" FontWeight="Bold" Margin="2" />
+                            <Button Content="Export to SQL file" Click="exportSqlBtn_Click" FontWeight="Bold" Margin="2" />
+                            <Button Content="Create new item" Click="newItemBtn_Click" Margin="2"/>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
 
-        </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

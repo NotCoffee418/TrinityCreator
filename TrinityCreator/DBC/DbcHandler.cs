@@ -103,7 +103,8 @@ namespace TrinityCreator.DBC
             if (!VerifyDbcDir())
             {
                 DataTable error = new DataTable();
-                error.Columns.Add("Error");
+                foreach (string col in returnColumns)
+                    error.Columns.Add(col);
                 error.Rows.Add("Failed to load DBC file.");
                 return error;
             }

@@ -327,6 +327,7 @@ namespace TrinityCreator
                         lab.Content = amount + " " + stat.Description;
                         lab.Foreground = Brushes.White;
                         lab.Margin = new Thickness(0, -5, 0, 0);
+                        lab.FontSize = 14;
                         _preview.StatsSp.Children.Add(lab);
                     }
                 }
@@ -349,9 +350,10 @@ namespace TrinityCreator
                     {
                         var lab = new Label();
                         var amount = int.Parse(line.Value).ToString("+#;-#"); // Validate, add + or -
-                        lab.Content = amount + " " + dt.Description;
+                        lab.Content = amount + " " + dt.Description + " Resistance";
                         lab.Foreground = Brushes.White;
                         lab.Margin = new Thickness(0, -5, 0, 0);
+                        lab.FontSize = 14;
                         _preview.ResistanceSp.Children.Add(lab);
                     }
                 }

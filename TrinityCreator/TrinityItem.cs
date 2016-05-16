@@ -332,7 +332,7 @@ namespace TrinityCreator
             get
             {
                 if (_gemSockets == null)
-                    _gemSockets = new DynamicDataControl(Socket.GetSocketList(), 3, false, "Socket Type", "Amount", "0", valueMySqlDt:"tinyint(2)");
+                    _gemSockets = new DynamicDataControl(Socket.GetSocketList(), 3, false, "Socket Type", "Amount", "0", valueMySqlDt:"tinyint(1)");
                 return _gemSockets;
             }
             set
