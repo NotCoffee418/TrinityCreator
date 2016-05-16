@@ -4,4 +4,6 @@ Use the lookup tool on the right to find ID's.
 Please report any bugs and suggestions on GitHub.
 Configure your database & dbc in settings to use the lookup tool and other features.
 You need to restart TrinityCore and sometimes delete your WoW Cache to view your creations.
+Doubleclick a row in the Lookup Tool to view it's in-game model if possible.
+You can click-drag the border of Lookup Tool to resize it.
 ---

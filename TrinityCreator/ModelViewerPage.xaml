@@ -11,12 +11,12 @@
     <DockPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
 
-            <ComboBox Name="inputIdCb" MinWidth="75" Margin="5" SelectedIndex="0">
+            <ComboBox Name="inputIdCb" MinWidth="75" Margin="5" SelectedIndex="0" x:FieldModifier="public">
                 <ComboBoxItem Content="Display ID"/>
                 <ComboBoxItem Content="Entry ID"/>
             </ComboBox>
-            <TextBox Name="displayIdTxt" MinWidth="75" Margin="0,5,0,5"/>
-            <ComboBox Name="displayTypeCb" MinWidth="75" Margin="5" SelectedIndex="0">
+            <TextBox Name="displayIdTxt" MinWidth="75" Margin="0,5,0,5" x:FieldModifier="public"/>
+            <ComboBox Name="displayTypeCb" MinWidth="75" Margin="5" SelectedIndex="0" x:FieldModifier="public">
                 <ComboBoxItem Content="Item"/>
                 <ComboBoxItem Content="Creature"/>
             </ComboBox>

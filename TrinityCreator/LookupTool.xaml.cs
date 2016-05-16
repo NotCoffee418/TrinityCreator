@@ -262,5 +262,31 @@ namespace TrinityCreator
             if ((int)SelectedTarget != targetSelectCb.SelectedIndex)
                 SelectedTarget = (Target)targetSelectCb.SelectedIndex;
         }
+
+        /// <summary>
+        /// Use model viewer when possible
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                DataRowView drv = (DataRowView)dataGrid.SelectedItem;
+                if (SelectedTarget == Target.Item) // by displayid
+                {
+                    int id = Convert.ToInt32((uint)drv.Row[1]);
+                    App.ModelViewer.LoadModel(id, "Item", "Display ID");
+                    App._MainWindow.ShowModelViewer();
+                }
+                else if (SelectedTarget == Target.Creature) // By entry id
+                {
+                    int id = Convert.ToInt32((uint)drv.Row[0]);
+                    App.ModelViewer.LoadModel(id, "Creature", "Entry ID");
+                    App._MainWindow.ShowModelViewer();
+                }
+            }
+            catch { /* Happens when clicking notification row, do nothing */ }
+        }
     }
 }

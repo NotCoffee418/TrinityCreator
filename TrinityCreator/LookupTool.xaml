@@ -26,7 +26,7 @@
                 <Button Name="searchBtn" Content="Search" DockPanel.Dock="Right" Click="searchBtn_Click" IsDefault="True" Width="75"/>
                 <TextBox Name="searchTxt" />
             </DockPanel>
-            <DataGrid Name="dataGrid" IsReadOnly="True" />
+            <DataGrid Name="dataGrid" IsReadOnly="True" MouseDoubleClick="dataGrid_MouseDoubleClick"/>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

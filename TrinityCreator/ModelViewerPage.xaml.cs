@@ -32,8 +32,9 @@ namespace TrinityCreator
             LoadModel();
         }
 
-        public void LoadModel(int displayId = 0, string type = "")
+        public void LoadModel(int displayId = 0, string type = "", string idType = "")
         {
+            // Sync with UI
             if (displayId == 0)
             {
                 try
@@ -49,27 +50,50 @@ namespace TrinityCreator
             else displayIdTxt.Text = displayId.ToString();
 
             if (type == "")
-            {
-                if (displayTypeCb.SelectedIndex == -1)
-                    displayTypeCb.SelectedIndex = 0;
-
                 type = ((ComboBoxItem)displayTypeCb.SelectedValue).Content.ToString();
+            else
+            {
+                switch (type)
+                {
+                    case "Item":
+                        displayTypeCb.SelectedIndex = 0;
+                        break;
+                    case "Creature":
+                        displayTypeCb.SelectedIndex = 1;
+                        break;
+                }
             }
-            else displayTypeCb.SelectedValue = type;
 
+            if (idType == "")
+                idType = ((ComboBoxItem)inputIdCb.SelectedValue).Content.ToString();
+            else
+            {
+                switch (idType)
+                {
+                    case "Display ID":
+                        inputIdCb.SelectedIndex = 0;
+                        break;
+                    case "Entry ID":
+                        inputIdCb.SelectedIndex = 1;
+                        break;
+                }
+            }
+
+
+            // load model
             switch (type)
             {
                 case "Item":
-                    if (inputIdCb.SelectedIndex == 1)
+                    if (idType == "Entry ID")
                         displayId = SqlQuery.GetItemDisplayFromEntry(displayId);
-                    mvBrowser.LoadUrl("http://www.wowhead.com/#modelviewer:4:13;" + displayId);
+                    mvBrowser.LoadUrl("http://www.wowhead.com/#modelviewer:4:13;" + displayId, blankFirst:true);
                     break;
                 case "Creature": // input should be entry instead of display
                     if (Connection.IsConfigured())
                     {
-                        if (inputIdCb.SelectedIndex == 0)
+                        if (idType == "Display ID")
                             displayId = SqlQuery.GetCreatureIdFromDisplayId(displayId);
-                        mvBrowser.LoadUrl("http://www.wowhead.com/npc=" + displayId + "/#modelviewer:10+0", true);
+                        mvBrowser.LoadUrl("http://www.wowhead.com/npc=" + displayId + "/#modelviewer:10+0");
                     }
                     break;
             }

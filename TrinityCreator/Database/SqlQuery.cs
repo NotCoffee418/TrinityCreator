@@ -50,7 +50,7 @@ namespace TrinityCreator.Database
         internal static DataTable FindCreatureByName(string partialName)
         {
             return ExecuteQuery(
-                "SELECT entry, name FROM creature_template WHERE name LIKE '%" + CleanText(partialName, false) + "%' ORDER BY entry DESC LIMIT 200;");
+                "SELECT entry, modelid1, name FROM creature_template WHERE name LIKE '%" + CleanText(partialName, false) + "%' ORDER BY entry DESC LIMIT 200;");
         }
 
         internal static DataTable FindGoByName(string partialName)

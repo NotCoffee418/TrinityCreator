@@ -50,7 +50,7 @@ namespace TrinityCreator
             // Load usable creators
             ItemTab.Content = new ItemPage();
             QuestTab.Content = new QuestPage();
-            ModelViewerTab.Content = new ModelViewerPage();
+            ModelViewerTabFrame.Content = new ModelViewerPage();
 
 
             // view unfinished when set & on debug
@@ -70,6 +70,11 @@ namespace TrinityCreator
         public void ShowLookupTool()
         {
             LookupToolExpander.IsExpanded = true;
+        }
+
+        public void ShowModelViewer()
+        {
+            ModelViewerTab.IsSelected = true;
         }
 
         private void configureMysql_Click(object sender, RoutedEventArgs e)
@@ -164,6 +169,11 @@ namespace TrinityCreator
                     }));
                 }
             } while (oldText == newText);         
+        }
+
+        private void modelViewerTab_Selected(object sender, RoutedEventArgs e)
+        {
+            ShowLookupTool();
         }
     }
 }
