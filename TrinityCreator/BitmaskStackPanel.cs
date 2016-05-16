@@ -374,7 +374,7 @@ namespace TrinityCreator
                 new BitmaskCheckBox(8388608, "Only interact with it's creator"),
                 new BitmaskCheckBox(134217728, "Force single gossip option"),
             };
-            return new BitmaskStackPanel("dynamicFlagsSp", cbs);
+            return new BitmaskStackPanel("creatureTypeFlagsSp", cbs);
         }
 
         internal static BitmaskStackPanel GetMechanicImmuneMask()
@@ -413,7 +413,7 @@ namespace TrinityCreator
                 new BitmaskCheckBox(536870912, "Sapped"),
                 new BitmaskCheckBox(1073741824, "Enraged"),
             };
-            return new BitmaskStackPanel("dynamicFlagsSp", cbs);
+            return new BitmaskStackPanel("mechanicImmuneMaskSp", cbs);
         }
 
         public static BitmaskStackPanel GetCreatureFlagsExtra()
@@ -439,10 +439,21 @@ namespace TrinityCreator
                 new BitmaskCheckBox(536870912, "Ignore pathfinding (like disabling mmaps for 1 creature)", true),
                 new BitmaskCheckBox(1073741824, "Immune to knockback", true),
             };
-            return new BitmaskStackPanel("dynamicFlagsSp", cbs);
+            return new BitmaskStackPanel("creatureFlagsExtraSp", cbs);
+        }
+        public static BitmaskStackPanel GetCreatureBytes1()
+        {
+            var cbs = new List<BitmaskCheckBox>
+            {
+                new BitmaskCheckBox(1, "Always stand"),
+                new BitmaskCheckBox(2, "Flying creature"),
+                new BitmaskCheckBox(4, "Not trackable on minimap"),
+                new BitmaskCheckBox(16, "Kneel"),
+                new BitmaskCheckBox(48, "Lay down"),
+            };
+            return new BitmaskStackPanel("creatureBytes1Sp", cbs);
         }
     }
-
 
     public class BitmaskCheckBox : CheckBox
     {

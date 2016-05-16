@@ -23,14 +23,14 @@ namespace TrinityCreator
         private int _modelId4;
         private string _name;
         private string _subname;
-        private int _minLevel;
-        private int _maxLevel;
+        private int _minLevel = 1;
+        private int _maxLevel = 1;
         private int _exp;
         private int _faction;
         private BitmaskStackPanel _npcFlags;
-        private double _speedWalk = 2.5;
-        private double _speedRun = 7.5;
-        private int _scale = 1;
+        private float _speedWalk = 2.5f;
+        private float _speedRun = 7.5f;
+        private float _scale = 1;
         private CreatureRank _rank;
         private DamageType _dmgSchool;
         private int _baseAttackTime = 1500;
@@ -54,16 +54,20 @@ namespace TrinityCreator
         private AI _aiName;
         private MovementType _movement;
         private InhabitType _inhabit;
-        private int _hoverHeight;
-        private double _healthModifier;
-        private double _manaModifier;
-        private double _damageModifier;
-        private double _armorModifier;
-        private double _experienceModifier;
+        private int _hoverHeight = 1;
+        private float _healthModifier = 1f;
+        private float _manaModifier = 1f;
+        private float _damageModifier = 1f;
+        private float _armorModifier = 1f;
+        private float _experienceModifier = 1f;
         private bool _racialLeader;
-        private bool _regenHealth;
+        private bool _regenHealth = true;
         private BitmaskStackPanel _mechanicImmuneMask;
         private BitmaskStackPanel _flagsExtra;
+        private int _mount;
+        private BitmaskStackPanel _bytes1;
+        private int _emote;
+        private DynamicDataControl _auras;
 
 
         #region
@@ -72,7 +76,7 @@ namespace TrinityCreator
             get { return _entry; }
             set
             {
-                _entry = value;
+                _entry = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("Entry");
             }
         }
@@ -83,7 +87,7 @@ namespace TrinityCreator
             get { return _modelId1; }
             set
             {
-                _modelId1 = value;
+                _modelId1 = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("ModelId1");
             }
         }
@@ -92,7 +96,7 @@ namespace TrinityCreator
             get { return _modelId2; }
             set
             {
-                _modelId2 = value;
+                _modelId2 = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("ModelId2");
             }
         }
@@ -101,7 +105,7 @@ namespace TrinityCreator
             get { return _modelId3; }
             set
             {
-                _modelId3 = value;
+                _modelId3 = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("ModelId3");
             }
         }
@@ -110,7 +114,7 @@ namespace TrinityCreator
             get { return _modelId4; }
             set
             {
-                _modelId4 = value;
+                _modelId4 = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("ModelId4");
             }
         }
@@ -119,7 +123,7 @@ namespace TrinityCreator
             get { return _name; }
             set
             {
-                _name = value;
+                _name = DataType.LimitLength(value, 100);
                 RaisePropertyChanged("Name");
             }
         }
@@ -128,7 +132,7 @@ namespace TrinityCreator
             get { return _subname; }
             set
             {
-                _subname = value;
+                _subname = DataType.LimitLength(value, 100);
                 RaisePropertyChanged("Subname");
             }
         }
@@ -139,7 +143,7 @@ namespace TrinityCreator
             get { return _minLevel; }
             set
             {
-                _minLevel = value;
+                _minLevel = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("MinLevel");
             }
         }
@@ -148,7 +152,7 @@ namespace TrinityCreator
             get { return _maxLevel; }
             set
             {
-                _maxLevel = value;
+                _maxLevel = DataType.LimitLength(value, "tinyint(3)");
                 RaisePropertyChanged("MaxLevel");
             }
         }
@@ -157,7 +161,7 @@ namespace TrinityCreator
             get { return _exp; }
             set
             {
-                _exp = value;
+                _exp = DataType.LimitLength(value, "smallint(6)");
                 RaisePropertyChanged("XP");
             }
         }
@@ -166,7 +170,7 @@ namespace TrinityCreator
             get { return _faction; }
             set
             {
-                _faction = value;
+                _faction = DataType.LimitLength(value, "smallint(5)");
                 RaisePropertyChanged("Faction");
             }
         }
@@ -184,7 +188,7 @@ namespace TrinityCreator
                 RaisePropertyChanged("NpcFlags");
             }
         }
-        public double SpeedWalk
+        public float SpeedWalk
         {
             get { return _speedWalk; }
             set
@@ -193,7 +197,7 @@ namespace TrinityCreator
                 RaisePropertyChanged("SpeedWalk");
             }
         }
-        public double SpeedRun
+        public float SpeedRun
         {
             get { return _speedRun; }
             set
@@ -202,7 +206,7 @@ namespace TrinityCreator
                 RaisePropertyChanged("SpeedRun");
             }
         }
-        public int Scale
+        public float Scale
         {
             get { return _scale; }
             set
@@ -234,7 +238,7 @@ namespace TrinityCreator
             get { return _baseAttackTime; }
             set
             {
-                _baseAttackTime = value;
+                _baseAttackTime = DataType.LimitLength(value, "int(10)");
                 RaisePropertyChanged("BaseAttackTime");
             }
         }
@@ -243,7 +247,7 @@ namespace TrinityCreator
             get { return _rangeAttackTime; }
             set
             {
-                _rangeAttackTime = value;
+                _rangeAttackTime = DataType.LimitLength(value, "int(10)");
                 RaisePropertyChanged("RangeAttackTime");
             }
         }
@@ -264,7 +268,11 @@ namespace TrinityCreator
                     _unitFlags = BitmaskStackPanel.GetUnitFlags();
                 return _unitFlags;
             }
-            set { _unitFlags = value; }
+            set
+            {
+                _unitFlags = value;
+                RaisePropertyChanged("UnitFlags");
+            }
         }
         public BitmaskStackPanel UnitFlags2
         {
@@ -274,7 +282,11 @@ namespace TrinityCreator
                     _unitFlags2 = BitmaskStackPanel.GetUnitFlags2();
                 return _unitFlags2;
             }
-            set { _unitFlags2 = value; }
+            set
+            {
+                _unitFlags2 = value;
+                RaisePropertyChanged("UnitFlags2");
+            }
         }
         public BitmaskStackPanel DynamicFlags
         {
@@ -284,22 +296,38 @@ namespace TrinityCreator
                     _dynamicFlags = BitmaskStackPanel.GetCreatureDynamicFlags();
                 return _dynamicFlags;
             }
-            set { _dynamicFlags = value; }
+            set
+            {
+                _dynamicFlags = value;
+                RaisePropertyChanged("DynamicFlags");
+            }
         }
         public CreatureFamily Family
         {
             get { return _family; }
-            set { _family = value; }
+            set
+            {
+                _family = value;
+                RaisePropertyChanged("Family");
+            }
         }
         public TrainerData Trainer
         {
             get { return _trainer; }
-            set { _trainer = value; }
+            set
+            {
+                _trainer = value;
+                RaisePropertyChanged("Trainer");
+            }
         }
         public CreatureType _CreatureType
         {
             get { return _creatureType; }
-            set { _creatureType = value; }
+            set
+            {
+                _creatureType = value;
+                RaisePropertyChanged("_CreatureType");
+            }
         }
         public BitmaskStackPanel TypeFlags
         {
@@ -308,29 +336,45 @@ namespace TrinityCreator
                     _typeFlags = BitmaskStackPanel.GetCreatureTypeFlags();
                 return _typeFlags;
             }
-            set { _typeFlags = value; }
+            set
+            {
+                _typeFlags = value;
+                RaisePropertyChanged("TypeFlags");
+            }
         }
         public int LootId
         {
             get { return _lootId; }
-            set { _lootId = value; }
+            set
+            {
+                _lootId = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("LootId");
+            }
         }
         public int PickpocketLoot
         {
             get { return _pickpocketLoot; }
-            set { _pickpocketLoot = value; }
+            set
+            {
+                _pickpocketLoot = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("PickpocketLoot");
+            }
         }
         public int SkinLoot
         {
             get { return _skinLoot; }
-            set { _skinLoot = value; }
+            set
+            {
+                _skinLoot = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("SkinLoot");
+            }
         }
         public DynamicDataControl Resistances
         {
             get
             {
                 if (_resistances == null)
-                    _resistances = new DynamicDataControl(DamageType.GetDamageTypes(true), 6, true, defaultValue: "0", valueMySqlDt: "smallint(6)");
+                    _resistances = new DynamicDataControl(DamageType.GetDamageTypes(true), 6, true, defaultValue: "0", valueMySqlDt: "mediumint(8)");
                 return _resistances;
             }
             set
@@ -349,25 +393,33 @@ namespace TrinityCreator
                        {
                            "spell1","spell2","spell3","spell4","spell5","spell6","spell7","spell8",
                        };
-                    _resistances = new DynamicDataControl(spellCols, 8, true, defaultValue: "0", valueMySqlDt: "mediumint(8)");
+                    _resistances = new DynamicDataControl(spellCols, 8, true, defaultValue: "0", valueMySqlDt: "smallint(6)");
                 }
                 return _resistances;
             }
             set
             {
                 _resistances = value;
-                RaisePropertyChanged("Resistances");
+                RaisePropertyChanged("Spells");
             }
         }
         public int PetDataId
         {
             get { return _petDataId; }
-            set { _petDataId = value; }
+            set
+            {
+                _petDataId = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("PetDataId");
+            }
         }
         public int VehicleId
         {
             get { return _vehicleId; }
-            set { _vehicleId = value; }
+            set
+            {
+                _vehicleId = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("VehicleId");
+            }
         }
         public Currency MinGold
         {
@@ -377,7 +429,11 @@ namespace TrinityCreator
                     _minGold = new Currency(0);
                 return _minGold;
             }
-            set { _minGold = value; }
+            set
+            {
+                _minGold = value;
+                RaisePropertyChanged("MinGold");
+            }
         }
         public Currency MaxGold
         {
@@ -387,62 +443,110 @@ namespace TrinityCreator
                     _maxGold = new Currency(0);
                 return _maxGold;
             }
-            set { _maxGold = value; }
+            set
+            {
+                _maxGold = value;
+                RaisePropertyChanged("MaxGold");
+            }
         }
         public AI AIName
         {
             get { return _aiName; }
-            set { _aiName = value; }
+            set
+            {
+                _aiName = value;
+                RaisePropertyChanged("AIName");
+            }
         }
         public MovementType Movement
         {
             get { return _movement; }
-            set { _movement = value; }
+            set
+            {
+                _movement = value;
+                RaisePropertyChanged("Movement");
+            }
         }
         public InhabitType Inhabit
         {
             get { return _inhabit; }
-            set { _inhabit = value; }
+            set
+            {
+                _inhabit = value;
+                RaisePropertyChanged("Inhabit");
+            }
         }
         public int HoverHeight // requires MOVEMENTFLAG_DISABLE_GRAVITY
         {
             get { return _hoverHeight; }
-            set { _hoverHeight = value; }
+            set
+            {
+                _hoverHeight = DataType.LimitLength(value, "smallint(4)");
+                RaisePropertyChanged("HoverHeight");
+            }
         }
-        public double HealthModifier
+        public float HealthModifier
         {
             get { return _healthModifier; }
-            set { _healthModifier = value; }
+            set
+            {
+                _healthModifier = value;
+                RaisePropertyChanged("HealthModifier");
+            }
         }
-        public double ManaModifier
+        public float ManaModifier
         {
             get { return _manaModifier; }
-            set { _manaModifier = value; }
+            set
+            {
+                _manaModifier = value;
+                RaisePropertyChanged("ManaModifier");
+            }
         }
-        public double DamageModifier
+        public float DamageModifier
         {
             get { return _damageModifier; }
-            set { _damageModifier = value; }
+            set
+            {
+                _damageModifier = value;
+                RaisePropertyChanged("DamageModifier");
+            }
         }
-        public double ArmorModifier
+        public float ArmorModifier
         {
             get { return _armorModifier; }
-            set { _armorModifier = value; }
+            set
+            {
+                _armorModifier = value;
+                RaisePropertyChanged("ArmorModifier");
+            }
         }
-        public double ExperienceModifier
+        public float ExperienceModifier
         {
             get { return _experienceModifier; }
-            set { _experienceModifier = value; }
+            set
+            {
+                _experienceModifier = value;
+                RaisePropertyChanged("ExperienceModifier");
+            }
         }
         public bool RacialLeader
         {
             get { return _racialLeader; }
-            set { _racialLeader = value; }
+            set
+            {
+                _racialLeader = value;
+                RaisePropertyChanged("RacialLeader");
+            }
         }
         public bool RegenHealth
         {
             get { return _regenHealth; }
-            set { _regenHealth = value; }
+            set
+            {
+                _regenHealth = value;
+                RaisePropertyChanged("RegenHealth");
+            }
         }
         public BitmaskStackPanel MechanicImmuneMask
         {
@@ -452,7 +556,11 @@ namespace TrinityCreator
                     _mechanicImmuneMask = BitmaskStackPanel.GetMechanicImmuneMask();
                 return _mechanicImmuneMask;
             }
-            set { _mechanicImmuneMask = value; }
+            set
+            {
+                _mechanicImmuneMask = value;
+                RaisePropertyChanged("MechanicImmuneMask");
+            }
         }
         public BitmaskStackPanel FlagsExtra
         {
@@ -462,7 +570,59 @@ namespace TrinityCreator
                     _flagsExtra = BitmaskStackPanel.GetCreatureFlagsExtra();
                 return _flagsExtra;
             }
-            set { _flagsExtra = value; }
+            set
+            {
+                _flagsExtra = value;
+                RaisePropertyChanged("FlagsExtra");
+            }
+        }
+
+        // Addon properties
+        public int Mount
+        {
+            get { return _mount; }
+            set
+            {
+                _mount = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("Mount");
+            }
+        }
+        public BitmaskStackPanel Bytes1
+        {
+            get
+            {
+                if (_bytes1 == null)
+                    _bytes1 = BitmaskStackPanel.GetCreatureBytes1();
+                return _bytes1;
+            }
+            set
+            {
+                _bytes1 = value;
+                RaisePropertyChanged("Bytes1");
+            }
+        }
+        public int Emote
+        {
+            get { return _emote; }
+            set
+            {
+                _emote = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("Emote");
+            }
+        }
+        public DynamicDataControl Auras
+        {
+            get
+            {
+                if (_auras == null)
+                    _auras = new DynamicDataControl(new string[] { "Spell" }, 999, true, defaultValue: "0", valueMySqlDt: "smallint(6)");
+                return _auras;
+            }
+            set
+            {
+                _auras = value;
+                RaisePropertyChanged("Auras");
+            }
         }
 
 

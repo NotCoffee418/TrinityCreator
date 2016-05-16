@@ -23,9 +23,9 @@ namespace TrinityCreator
         {
             return new InhabitType[]
             {
+                new InhabitType(3, "Flying"), // default in sql
                 new InhabitType(1, "Ground"),
                 new InhabitType(2, "Water"),
-                new InhabitType(3, "Flying"),
             };
         }
     }
