@@ -41,7 +41,7 @@ namespace TrinityCreator
             if (cb.ItemsSource == null)
                 cb.ItemsSource = src;
             if (cb.SelectedIndex == -1)
-                cb.SelectedValue = 0;
+                cb.SelectedIndex = 0;
         }
 
         private TrinityCreature _creature;
