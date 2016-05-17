@@ -4,16 +4,25 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:l="clr-namespace:TrinityCreator"
-      mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="600"
+      mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="600"
       Title="CreatureCreatorPage">
     <Page.Resources>
         <l:ValueToVisibilityConverter x:Key="ValueVisibilityConverter" />
     </Page.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Right" Width="275">
-            <GroupBox Header="Extra options">
+            <GroupBox Header="Flags">
                 <StackPanel>
-                    <CheckBox Name="setFlagsCb" Content="Set Flags" />
+                    <CheckBox Name="setNpcFlagsCb" Content="Set NPC Flags" />
+                    <CheckBox Name="setUnitFlagsCb" Content="Set Unit Flags" />
+                    <CheckBox Name="setDynamicFlagsCb" Content="Set Dynamic Flags" />
+                    <CheckBox Name="setTypeFlagsCb" Content="Set Type Flags" />
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Extra Options">
+                <StackPanel>
+                    <CheckBox Name="addResistanceCb" Content="Add resistances" />
                 </StackPanel>
             </GroupBox>
 
@@ -40,21 +49,55 @@
                             <TextBox Text="{Binding Subname}" DockPanel.Dock="Left" />
                         </DockPanel>
                         <DockPanel Margin="2">
+                            <Label Content="Faction" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding Faction}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Scale" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding Scale}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Creature Type" DockPanel.Dock="Left" Width="120" />
+                            <ComboBox Name="creatureTypeCb" SelectedValue="{Binding _CreatureType}" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Family" DockPanel.Dock="Left" Width="120" />
+                            <ComboBox Name="familyCb" SelectedValue="{Binding Family}" />
+                        </DockPanel>
+                        <GroupBox Name="ModelIdGb" Header="Display IDs" Content="{Binding ModelIds, UpdateSourceTrigger=PropertyChanged}" />
+                        
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Stats">
+                    <StackPanel DockPanel.Dock="Left">
+                        <DockPanel Margin="2">
                             <Label Content="Rank" DockPanel.Dock="Left" Width="120" />
                             <ComboBox Name="rankCb" SelectedValue="{Binding Rank}" />
                         </DockPanel>
                         <DockPanel Margin="2">
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="Min. level" DockPanel.Dock="Left" Width="120" />
+                                <Label Content="Level" DockPanel.Dock="Left" Width="120" />
                                 <TextBox Text="{Binding MinLevel}" DockPanel.Dock="Left" Width="50" ToolTip="Minimum level"/>
                                 <Label Content=" - "/>
                                 <TextBox Text="{Binding MaxLevel}" DockPanel.Dock="Left" Width="50" ToolTip="Maximum level"/>
                             </StackPanel>
                         </DockPanel>
-                        <GroupBox Name="ModelIdGb" Header="Display IDs" Content="{Binding ModelIds, UpdateSourceTrigger=PropertyChanged}" />
                         <DockPanel Margin="2">
-                            <Label Content="Faction" DockPanel.Dock="Left" Width="120" />
-                            <TextBox Text="{Binding Faction}" DockPanel.Dock="Left" />
+                            <Label Content="Damage Type" DockPanel.Dock="Left" Width="120" />
+                            <ComboBox Name="dmgSchoolCb" SelectedValue="{Binding DmgSchool}" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Attack Speed (ms)" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding BaseAttackTime}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Ranged Speed (ms)" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding RangedAttackTime}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Unit Class" DockPanel.Dock="Left" Width="120" />
+                            <ComboBox Name="unitClassCb" SelectedValue="{Binding _UnitClass}" />
                         </DockPanel>
                         <DockPanel Margin="2">
                             <Label Content="Walk speed" DockPanel.Dock="Left" Width="120" />
@@ -64,15 +107,47 @@
                             <Label Content="Run speed" DockPanel.Dock="Left" Width="120" />
                             <TextBox Text="{Binding SpeedRun}" DockPanel.Dock="Left" />
                         </DockPanel>
+                        <GroupBox Name="resistanceGb" Header="Resistances" Content="{Binding Resistances, UpdateSourceTrigger=PropertyChanged}" 
+                                  Visibility="{Binding ElementName=addResistanceCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
+
+                    </StackPanel>
+                </GroupBox>
+
+
+                <GroupBox Header="Function">
+                    <StackPanel DockPanel.Dock="Left">
                         <DockPanel Margin="2">
-                            <Label Content="Scale" DockPanel.Dock="Left" Width="120" />
-                            <TextBox Text="{Binding Scale}" DockPanel.Dock="Left" />
+                            <Label Content="Trainer" DockPanel.Dock="Left" Width="120" />
+                            <ComboBox Name="trainerCb" SelectedValue="{Binding Trainer}" />
+                        </DockPanel>
+                        
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Death">
+                    <StackPanel DockPanel.Dock="Left">
+                        <DockPanel Margin="2">
+                            <Label Content="Loot ID" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding LootId}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Pickpocket Loot ID" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding PickpocketLoot}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Skinning Loot ID" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding SkinLoot}" DockPanel.Dock="Left" />
                         </DockPanel>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Header="Flags" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}">
+
+                <GroupBox Header="Flags">
                     <StackPanel>
-                        <GroupBox Header="Npc Flags" Content="{Binding NpcFlags}" />
+                        <GroupBox Header="Npc Flags" Content="{Binding NpcFlags}" Visibility="{Binding ElementName=setNpcFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
+                        <GroupBox Header="Unit Flags" Content="{Binding UnitFlags}" Visibility="{Binding ElementName=setUnitFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
+                        <GroupBox Header="Unit Flags 2" Content="{Binding UnitFlags2}" Visibility="{Binding ElementName=setUnitFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
+                        <GroupBox Header="Dynamic Flags" Content="{Binding DynamicFlags}" Visibility="{Binding ElementName=setDynamicFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
+                        <GroupBox Header="Type Flags" Content="{Binding TypeFlags}" Visibility="{Binding ElementName=setTypeFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
                     </StackPanel>
                 </GroupBox>
             </StackPanel>

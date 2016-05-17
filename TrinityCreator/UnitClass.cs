@@ -20,7 +20,7 @@ namespace TrinityCreator
             return Description;
         }
 
-        public static UnitClass[] GetCreatureRanks()
+        public static UnitClass[] GetUnitClasses()
         {
             return new UnitClass[]
             {
