@@ -13,6 +13,7 @@ namespace TrinityCreator.CreatureTemplates
 
         public override void LoadTemplate()
         {
+            Name = "Beast Enemy";
             MinLevel = 80;
             MaxLevel = 80;
             Faction = 168;

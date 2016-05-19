@@ -13,9 +13,10 @@ namespace TrinityCreator.CreatureTemplates
 
         public override void LoadTemplate()
         {
+            base.LoadTemplate();
+            Name = "Profession Trainer";
             SetBmspValues(NpcFlags, new int[] { 64 });      // Class Trainer
             SetIKVPValue(Page.trainerCb, 1);                // Any profession
-            base.LoadTemplate();
         }
     }
 }

@@ -13,8 +13,9 @@ namespace TrinityCreator.CreatureTemplates
 
         public override void LoadTemplate()
         {
-            SetIKVPValue(Page.trainerCb, 15);   // Any race
             base.LoadTemplate();
+            Name = "Mount Trainer";
+            SetIKVPValue(Page.trainerCb, 15);   // Any race
         }
     }
 }

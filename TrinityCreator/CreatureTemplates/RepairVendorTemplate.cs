@@ -13,8 +13,9 @@ namespace TrinityCreator.CreatureTemplates
 
         public override void LoadTemplate()
         {
-            SetBmspValues(NpcFlags, new int[] { 4096 });     // Gossip, Vendor
             base.LoadTemplate(); // Vendor
+            Name = "Repair Vendor";
+            SetBmspValues(NpcFlags, new int[] { 4096 });     // Gossip, Vendor
         }
     }
 }

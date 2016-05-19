@@ -13,6 +13,7 @@ namespace TrinityCreator.CreatureTemplates
 
         public override void LoadTemplate()
         {
+            Name = "Vendor";
             MinLevel = 75; // He's seen some bad days but isn't exactly a legendary adventurer
             MaxLevel = 75;
             Faction = 35;

@@ -13,6 +13,7 @@ namespace TrinityCreator.CreatureTemplates
 
         public override void LoadTemplate()
         {
+            Name = "Questgiver";
             MinLevel = 80;
             MaxLevel = 80;
             Faction = 35;

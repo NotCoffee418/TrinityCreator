@@ -13,9 +13,10 @@ namespace TrinityCreator.CreatureTemplates
 
         public override void LoadTemplate()
         {
+            base.LoadTemplate();
+            Name = "Dead Questgiver";
             SetBmspValues(TypeFlags, new int[] { 128 });        // Dead interact
             SetBmspValues(DynamicFlags, new int[] { 4, 32 });   // Appear dead
-            base.LoadTemplate();
         }
     }
 }

@@ -13,9 +13,9 @@ namespace TrinityCreator.CreatureTemplates
 
         public override void LoadTemplate()
         {
+            base.LoadTemplate();
             SetBmspValues(NpcFlags, new int[] { 32 });      // Class Trainer
             SetIKVPValue(Page.trainerCb, 3);                // Any class
-            base.LoadTemplate();
         }
     }
 }

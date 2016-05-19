@@ -13,6 +13,7 @@ namespace TrinityCreator.CreatureTemplates
 
         public override void LoadTemplate()
         {
+            Name = "Raid Boss";
             MinLevel = 83;
             MaxLevel = 83;
             Faction = 168;
