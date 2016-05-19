@@ -23,9 +23,29 @@
             </MenuItem>
         </Menu>
 
-        <StatusBar DockPanel.Dock="Bottom" >
-            <TextBlock Text="Tip:" />
-            <TextBlock Name="randomTipTxt" />
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem Grid.Column="0">
+                <TextBlock>
+                    <TextBlock Text="Tip:" DockPanel.Dock="Left"/>
+                    <TextBlock Name="randomTipTxt" DockPanel.Dock="Left"/>
+                </TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="1">
+                <TextBlock Text="© 2016 Stijn Raeymaekers"  TextAlignment="Right"/>
+            </StatusBarItem>
         </StatusBar>
         
         <Grid Name="ContentGrid" DockPanel.Dock="Top">
@@ -41,15 +61,8 @@
                 <TabItem Header="Quest" Height="22" VerticalAlignment="Top">
                     <Frame Name="QuestTab" />
                 </TabItem>
-                <TabItem Header="Creature (UNFINISHED)">
-                    <TabControl>
-                        <TabItem Name="CreatureTemplate" Header="Select Template">
-                            <Frame Name="CreatureTemplateTab" />
-                        </TabItem>
-                        <TabItem Name="CreatureCreator" Header="Create Creature">
-                            <Frame Name="CreatureCreatorTab" />
-                        </TabItem>
-                    </TabControl>
+                <TabItem Header="Creature">
+                    <Frame Name="CreatureCreatorTab" />
                 </TabItem>
                 <TabItem Header="Loot (UNFINISHED)" />
                 <TabItem Header="Vendor (UNFINISHED)" />

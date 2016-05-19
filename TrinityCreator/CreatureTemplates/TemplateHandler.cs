@@ -42,7 +42,7 @@ namespace TrinityCreator.CreatureTemplates
             CreatureCreatorPage page = (CreatureCreatorPage)App._MainWindow.CreatureCreatorTab.Content;
             TrinityCreature creature = page.Creature;
 
-            App._MainWindow.CreatureCreator.IsSelected = true;
+            //App._MainWindow.CreatureCreator.IsSelected = true;
 
             if (page.IsCreatureModified)
             {

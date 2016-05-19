@@ -51,7 +51,6 @@ namespace TrinityCreator
             ItemTab.Content = new ItemPage();
             QuestTab.Content = new QuestPage();
             ModelViewerTabFrame.Content = new ModelViewerPage();
-            CreatureTemplateTab.Content = new CreatureTemplatePage();
             CreatureCreatorTab.Content = new CreatureCreatorPage();
 
 

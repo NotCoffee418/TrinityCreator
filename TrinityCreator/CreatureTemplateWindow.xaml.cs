@@ -19,14 +19,26 @@ namespace TrinityCreator
     /// <summary>
     /// Interaction logic for CreatureTemplatePage.xaml
     /// </summary>
-    public partial class CreatureTemplatePage : Page
+    public partial class CreatureTemplateWindow : Window
     {
-        public CreatureTemplatePage()
+        public CreatureTemplateWindow()
         {
             InitializeComponent();
+            if (openWindow != null)
+                openWindow.Close();
+            openWindow = this;
+            Closing += CreatureTemplateWindow_Closing;
+
             templateListBox.ItemsSource = TemplateHandler.ListTemplateDescriptions();
             templateListBox.MouseDoubleClick += TemplateListBox_MouseDoubleClick;
             templateListBox.SelectedIndex = 0;       
+        }
+
+        public static CreatureTemplateWindow openWindow = null;
+
+        private void CreatureTemplateWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            openWindow = null;
         }
 
         private void TemplateListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -43,6 +55,12 @@ namespace TrinityCreator
         {
             string description = (string)templateListBox.SelectedValue;
             TemplateHandler.LoadTemplateByDescription(description);
+            Close();
+        }
+
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

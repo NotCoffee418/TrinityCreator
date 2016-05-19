@@ -30,6 +30,7 @@ namespace TrinityCreator
 
         public bool CanCheckForModified = false; // protection for templates
         public bool IsCreatureModified = false;
+        public bool FirstLoad = true;
 
         internal void PrepareCreaturePage()
         {
@@ -64,11 +65,17 @@ namespace TrinityCreator
         }
 
 
+
         #region Event Handlers
         private void CreatureCreatorPage_Loaded(object sender, RoutedEventArgs e)
         {
             PrepareCreaturePage();
             CanCheckForModified = true;
+            if (FirstLoad)
+            {
+                FirstLoad = false;
+                ShowTemplateWindow();
+            }
         }
         #endregion
 
@@ -100,8 +107,14 @@ namespace TrinityCreator
         }
         private void newBtn_Click(object sender, RoutedEventArgs e)
         {
-            App._MainWindow.CreatureTemplate.IsSelected = true;
+            ShowTemplateWindow();
         }
         #endregion
+
+        private void ShowTemplateWindow()
+        {
+            CreatureTemplateWindow ctw = new CreatureTemplateWindow();
+            ctw.Show();
+        }
     }
 }

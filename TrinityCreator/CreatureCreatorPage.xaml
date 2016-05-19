@@ -45,7 +45,7 @@
 
             <Button Content="Export to database" Click="exportDbBtn_Click" FontWeight="Bold" Margin="2" />
             <Button Content="Export to SQL file" Click="exportSqlBtn_Click" FontWeight="Bold" Margin="2" />
-            <Button Content="Create new creature" Click="newBtn_Click" Margin="2"/>
+            <Button Content="Create new creature from template" Click="newBtn_Click" Margin="2"/>
         </StackPanel>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">

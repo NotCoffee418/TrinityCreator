@@ -106,8 +106,8 @@
       <DependentUpon>CreatureCreatorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreatureFamily.cs" />
-    <Compile Include="CreatureTemplatePage.xaml.cs">
-      <DependentUpon>CreatureTemplatePage.xaml</DependentUpon>
+    <Compile Include="CreatureTemplateWindow.xaml.cs">
+      <DependentUpon>CreatureTemplateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreatureTemplates\BlankTemplate.cs" />
     <Compile Include="CreatureTemplates\ExampleTemplate.cs" />
@@ -195,7 +195,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreatureTemplatePage.xaml">
+    <Page Include="CreatureTemplateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
