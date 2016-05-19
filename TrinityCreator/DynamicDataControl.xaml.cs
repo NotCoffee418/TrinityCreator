@@ -150,6 +150,25 @@ namespace TrinityCreator
                 throw new Exception("Invalid data in " + keyPrefix + " or " + valuePrefix);
             }
         }
+        /// <summary>
+        /// Single valued DDC
+        /// </summary>
+        /// <param name="d"></param>
+        public void AddValues(Dictionary<string, string> d, string keyPrefix = "")
+        {
+            foreach (KeyValuePair<object, string> line in GetUserInput())
+                try
+                {
+                    string key = "";
+                    if (keyPrefix == "")
+                        key = (string)line.Key;
+                    else
+                        key = keyPrefix + ((IKeyValue)line.Key).Id;
+                    d.Add(key, int.Parse(line.Value).ToString());
+                }
+                catch
+                { throw new Exception("Invalid data in " + (string)line.Key); }
+        }
 
         private void addLineBtn_Click(object sender, RoutedEventArgs e)
         {

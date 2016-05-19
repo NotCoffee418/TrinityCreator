@@ -45,7 +45,7 @@
 
             <Button Content="Export to database" Click="exportDbBtn_Click" FontWeight="Bold" Margin="2" />
             <Button Content="Export to SQL file" Click="exportSqlBtn_Click" FontWeight="Bold" Margin="2" />
-            <Button Content="Create new quest" Click="newQuestBtn_Click" Margin="2"/>
+            <Button Content="Create new creature" Click="newBtn_Click" Margin="2"/>
         </StackPanel>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -201,7 +201,7 @@
                         </DockPanel>
                         <DockPanel Margin="2">
                             <Label Content="AI Name" DockPanel.Dock="Left" Width="120" />
-                            <ComboBox Name="aiNameCb" SelectedValue="{Binding _AIName}" />
+                            <ComboBox Name="aiNameCb" SelectedValue="{Binding AIName}" />
                         </DockPanel>
                     </StackPanel>
                 </GroupBox>

@@ -98,7 +98,7 @@ namespace TrinityCreator
                 MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void newQuestBtn_Click(object sender, RoutedEventArgs e)
+        private void newBtn_Click(object sender, RoutedEventArgs e)
         {
             App._MainWindow.CreatureTemplate.IsSelected = true;
         }
