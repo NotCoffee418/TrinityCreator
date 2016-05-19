@@ -64,6 +64,7 @@ namespace TrinityCreator
         private BitmaskStackPanel _bytes1;
         private int _emote;
         private DynamicDataControl _auras;
+        private DynamicDataControl _spells;
 
 
         #region
@@ -278,6 +279,7 @@ namespace TrinityCreator
             {
                 _family = value;
                 RaisePropertyChanged("Family");
+                PetDataId = value.PetSpellDataId;
             }
         }
         public TrainerData Trainer
@@ -356,19 +358,19 @@ namespace TrinityCreator
         {
             get
             {
-                if (_resistances == null)
+                if (_spells == null)
                 {
                     string[] spellCols = new string[]
                        {
                            "spell1","spell2","spell3","spell4","spell5","spell6","spell7","spell8",
                        };
-                    _resistances = new DynamicDataControl(spellCols, 8, true, defaultValue: "0", valueMySqlDt: "smallint(6)");
+                    _spells = new DynamicDataControl(spellCols, 8, true, defaultValue: "0", valueMySqlDt: "smallint(6)");
                 }
-                return _resistances;
+                return _spells;
             }
             set
             {
-                _resistances = value;
+                _spells = value;
                 RaisePropertyChanged("Spells");
             }
         }

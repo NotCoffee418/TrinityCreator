@@ -19,7 +19,7 @@ namespace TrinityCreator
             return Description;
         }
 
-        public static InhabitType[] GetMovementTypes()
+        public static InhabitType[] GetInhabitTypes()
         {
             return new InhabitType[]
             {

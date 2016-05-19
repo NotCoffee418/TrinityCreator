@@ -39,6 +39,9 @@ namespace TrinityCreator
             PrepCb(familyCb, CreatureFamily.GetCreatureFamilies());
             PrepCb(trainerCb, TrainerData.GetTrainerData());
             PrepCb(creatureTypeCb, CreatureType.GetCreatureTypes());
+            PrepCb(aiNameCb, AI.GetCreatureAI());
+            PrepCb(movementCb, MovementType.GetMovementTypes());
+            PrepCb(inhabitCb, InhabitType.GetInhabitTypes());
         }
 
         private void PrepCb(ComboBox cb, IKeyValue[] src)
