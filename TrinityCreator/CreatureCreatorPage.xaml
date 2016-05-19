@@ -120,7 +120,7 @@
                         </DockPanel>
                         <DockPanel Margin="2">
                             <Label Content="Ranged Speed (ms)" DockPanel.Dock="Left" Width="120" />
-                            <TextBox Text="{Binding RangedAttackTime}" DockPanel.Dock="Left" />
+                            <TextBox Text="{Binding RangeAttackTime}" DockPanel.Dock="Left" />
                         </DockPanel>
                         <DockPanel Margin="2">
                             <Label Content="Unit Class" DockPanel.Dock="Left" Width="120" />
@@ -188,24 +188,6 @@
                         </DockPanel>
                     </StackPanel>
                 </GroupBox>
-
-                <GroupBox Header="Function">
-                    <StackPanel DockPanel.Dock="Left">
-                        <DockPanel Margin="2">
-                            <Label Content="Trainer" DockPanel.Dock="Left" Width="120" />
-                            <ComboBox Name="trainerCb" SelectedValue="{Binding Trainer}" />
-                        </DockPanel>
-                        <DockPanel Margin="2">
-                            <Label Content="Vehicle  ID" DockPanel.Dock="Left" Width="120" />
-                            <TextBox Text="{Binding VehicleId}" DockPanel.Dock="Left" />
-                        </DockPanel>
-                        <DockPanel Margin="2">
-                            <Label Content="AI Name" DockPanel.Dock="Left" Width="120" />
-                            <ComboBox Name="aiNameCb" SelectedValue="{Binding AIName}" />
-                        </DockPanel>
-                    </StackPanel>
-                </GroupBox>
-
                 <GroupBox Header="Movement">
                     <StackPanel DockPanel.Dock="Left">
                         <DockPanel Margin="2">
@@ -230,6 +212,22 @@
                         </DockPanel>
                     </StackPanel>
                 </GroupBox>
+                <GroupBox Header="Function">
+                    <StackPanel DockPanel.Dock="Left">
+                        <DockPanel Margin="2">
+                            <Label Content="Trainer" DockPanel.Dock="Left" Width="120" />
+                            <ComboBox Name="trainerCb" SelectedValue="{Binding Trainer}" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Vehicle  ID" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding VehicleId}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="AI Name" DockPanel.Dock="Left" Width="120" />
+                            <ComboBox Name="aiNameCb" SelectedValue="{Binding AIName}" />
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
 
                 <GroupBox Name="spellsGb" Header="Spells" Content="{Binding Spells, UpdateSourceTrigger=PropertyChanged}" 
                                   Visibility="{Binding ElementName=addSpellsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
@@ -237,7 +235,7 @@
                                   Visibility="{Binding ElementName=addAurasCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
                 <GroupBox Name="resistanceGb" Header="Resistances" Content="{Binding Resistances, UpdateSourceTrigger=PropertyChanged}" 
                                   Visibility="{Binding ElementName=addResistanceCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
-                <GroupBox Name="immunitiesGb" Header="Resistances" Content="{Binding MechanicImmuneMask, UpdateSourceTrigger=PropertyChanged}" 
+                <GroupBox Name="immunitiesGb" Header="Immunities" Content="{Binding MechanicImmuneMask, UpdateSourceTrigger=PropertyChanged}" 
                                   Visibility="{Binding ElementName=addImmunitiesCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
 
                 <GroupBox Header="Flags">

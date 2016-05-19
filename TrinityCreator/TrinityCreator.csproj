@@ -106,6 +106,18 @@
       <DependentUpon>CreatureCreatorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreatureFamily.cs" />
+    <Compile Include="CreatureTemplates\MountTrainerTemplate.cs" />
+    <Compile Include="CreatureTemplates\ProfessionTrainerTemplate.cs" />
+    <Compile Include="CreatureTemplates\EscorteeTemplate.cs" />
+    <Compile Include="CreatureTemplates\DeadQuestgiverTemplate.cs" />
+    <Compile Include="CreatureTemplates\RepairVendorTemplate.cs" />
+    <Compile Include="CreatureTemplates\QuestgiverTemplate.cs" />
+    <Compile Include="CreatureTemplates\ClassTrainerTemplate.cs" />
+    <Compile Include="CreatureTemplates\TrainerTemplate.cs" />
+    <Compile Include="CreatureTemplates\VendorTemplate.cs" />
+    <Compile Include="CreatureTemplates\BossTemplate.cs" />
+    <Compile Include="CreatureTemplates\BeastEnemyTemplate.cs" />
+    <Compile Include="CreatureTemplates\HumanoidEnemyTemplate.cs" />
     <Compile Include="CreatureTemplateWindow.xaml.cs">
       <DependentUpon>CreatureTemplateWindow.xaml</DependentUpon>
     </Compile>

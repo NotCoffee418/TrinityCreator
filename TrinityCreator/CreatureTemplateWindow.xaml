@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:TrinityCreator"
       mc:Ignorable="d" 
       ResizeMode="NoResize" WindowStyle="ToolWindow" WindowStartupLocation="CenterOwner"
-      Width="250" Height="250" Title="Select creature template">
+      Width="300" Height="400" Title="Select creature template">
 
     <DockPanel>
         <DockPanel DockPanel.Dock="Left">

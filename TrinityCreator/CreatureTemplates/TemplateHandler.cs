@@ -21,6 +21,17 @@ namespace TrinityCreator.CreatureTemplates
                 {
                     _d = new Dictionary<string, string>();
                     _d.Add("BlankTemplate", "Default");
+                    _d.Add("HumanoidEnemyTemplate", "Humanoid Enemy");
+                    _d.Add("BeastEnemyTemplate", "Beast Enemy");
+                    _d.Add("BossTemplate", "Raid Boss");
+                    _d.Add("QuestgiverTemplate", "Questgiver");
+                    _d.Add("DeadQuestgiverTemplate", "Dead Questgiver");
+                    _d.Add("EscorteeTemplate", "Quest Escort NPC");
+                    _d.Add("VendorTemplate", "Vendor");
+                    _d.Add("RepairVendorTemplate", "Repair Vendor");
+                    _d.Add("ClassTrainerTemplate", "Class Trainer");
+                    _d.Add("ProfessionTrainerTemplate", "Profession Trainer");
+                    _d.Add("MountTrainerTemplate", "Mount Trainer");
                 }
                 return _d;
             }

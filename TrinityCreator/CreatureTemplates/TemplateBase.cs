@@ -32,7 +32,8 @@ namespace TrinityCreator.CreatureTemplates
         /// <param name="flags"></param>
         public void SetBmspValues(BitmaskStackPanel bmsp, int[] flags)
         {
-            throw new NotImplementedException();
+            foreach (int flag in flags)
+                bmsp.SetValueIsChecked(flag, true);
         }
 
         /// <summary>
@@ -50,6 +51,16 @@ namespace TrinityCreator.CreatureTemplates
                     break;
                 }
             }
+        }
+
+        public void SetIKVPValue(ComboBox cb, int idValue)
+        {
+            for (int i = 0; i < cb.Items.Count; i++)
+                if (((IKeyValue)cb.Items[i]).Id == idValue)
+                {
+                    cb.SelectedIndex = i;
+                    break;
+                }
         }
 
         /// <summary>
