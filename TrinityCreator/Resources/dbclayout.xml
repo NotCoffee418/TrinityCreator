@@ -1779,6 +1779,18 @@
     <field type="int" name="field3" />
     <field type="int" name="field4" />
   </GemProperties>
+  <Emotes build="0">
+    <index>
+      <primary>id</primary>
+    </index>
+    <field type="int" name="id" />
+    <field type="string" name="description" />
+    <field type="int" name="field2" />
+    <field type="int" name="field3" />
+    <field type="int" name="field4" />
+    <field type="int" name="field5" />
+    <field type="int" name="field6" />
+  </Emotes>
   <EmotesText build="12340">
     <index>
       <primary>field0</primary>

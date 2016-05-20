@@ -109,9 +109,29 @@ namespace TrinityCreator
                 MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private void newBtn_Click(object sender, RoutedEventArgs e)
         {
             ShowTemplateWindow();
+        }
+        private void findCreatureBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.SelectedTarget = LookupTool.Target.Creature;
+        }
+
+        private void findFactionBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.SelectedTarget = LookupTool.Target.Faction;
+        }
+
+        private void findEmoteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.SelectedTarget = LookupTool.Target.Emotes;
+        }
+
+        private void createLootBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App._MainWindow.LootCreatorTabItem.IsSelected = true;
         }
         #endregion
 
@@ -120,5 +140,7 @@ namespace TrinityCreator
             CreatureTemplateWindow ctw = new CreatureTemplateWindow();
             ctw.Show();
         }
+
+        
     }
 }

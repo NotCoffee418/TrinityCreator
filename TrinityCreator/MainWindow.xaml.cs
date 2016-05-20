@@ -66,7 +66,6 @@ namespace TrinityCreator
 
         static Random random = new Random();
         Timer tipTimer = new Timer();
-        private double _lookupToolWidth;
         
         public void ShowLookupTool()
         {
@@ -137,18 +136,21 @@ namespace TrinityCreator
 
         private void LookupToolExpander_Expanded(object sender, RoutedEventArgs e)
         {
-
-            if (_lookupToolWidth < 100)
-                _lookupToolWidth = 300;
-            ContentGrid.ColumnDefinitions[2].Width = new GridLength(_lookupToolWidth);
+            ContentGrid.ColumnDefinitions[2].Width = new GridLength(Settings.Default.lookupToolWidth);
             ContentGridSplitter.Visibility = Visibility.Visible;
         }
 
         private void LookupToolExpander_Collapsed(object sender, RoutedEventArgs e)
         {
-            _lookupToolWidth = ContentGrid.ColumnDefinitions[2].Width.Value;
+            //_lookupToolWidth = ContentGrid.ColumnDefinitions[2].Width.Value;
             ContentGrid.ColumnDefinitions[2].Width = new GridLength(25);
             ContentGridSplitter.Visibility = Visibility.Collapsed;
+        }
+
+        private void ContentGridSplitter_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            Settings.Default.lookupToolWidth = ContentGrid.ColumnDefinitions[2].Width.Value;
+            Settings.Default.Save();
         }
 
 

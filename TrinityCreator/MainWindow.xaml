@@ -52,7 +52,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="700*"/>
                 <ColumnDefinition Width="10" />
-                <ColumnDefinition MinWidth="25" MaxWidth="750"/>
+                <ColumnDefinition MinWidth="25" MaxWidth="1000"/>
             </Grid.ColumnDefinitions>
             <TabControl Name="TabControl" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="0">
                 <TabItem Header="Item" >
@@ -64,7 +64,9 @@
                 <TabItem Header="Creature">
                     <Frame Name="CreatureCreatorTab" />
                 </TabItem>
-                <TabItem Header="Loot (UNFINISHED)" />
+                <TabItem Header="Loot (UNFINISHED)" Name="LootCreatorTabItem" x:FieldModifier="public">
+                    <Frame Name="LootCreatorTab" />
+                </TabItem>
                 <TabItem Header="Vendor (UNFINISHED)" />
                 <TabItem Header="Model Viewer" Name="ModelViewer" Selector.Selected="modelViewerTab_Selected">
                     <Frame Name="ModelViewerTabFrame" />
@@ -80,7 +82,7 @@
                 </TabItem>
             </TabControl>
 
-            <GridSplitter Name="ContentGridSplitter" ResizeDirection="Columns" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Foreground="Red"/>
+            <GridSplitter Name="ContentGridSplitter" ResizeDirection="Columns" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Foreground="Red" DragCompleted="ContentGridSplitter_DragCompleted"/>
 
             <Expander Name="LookupToolExpander" ExpandDirection="Left" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="0" Expanded="LookupToolExpander_Expanded" Collapsed="LookupToolExpander_Collapsed" IsExpanded="False">
                 <Expander.Header>

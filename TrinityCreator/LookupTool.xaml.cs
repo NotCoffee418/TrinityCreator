@@ -60,6 +60,7 @@ namespace TrinityCreator
             Creature = 6,
             GameObject = 7,
             Spell = 8,
+            Emotes = 9,
         }
 
         public DataTable FullDbcTable { get; set; }
@@ -90,6 +91,9 @@ namespace TrinityCreator
 
                 case Target.Title:
                     result = Queries.GetCharTitles();
+                    break;
+                case Target.Emotes:
+                    result = Queries.GetEmotes();
                     break;
 
                 // SQL query will be handled in searchBtn_Click

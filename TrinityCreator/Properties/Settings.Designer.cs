@@ -82,5 +82,17 @@ namespace TrinityCreator.Properties {
                 this["DbcDir"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("400")]
+        public double lookupToolWidth {
+            get {
+                return ((double)(this["lookupToolWidth"]));
+            }
+            set {
+                this["lookupToolWidth"] = value;
+            }
+        }
     }
 }

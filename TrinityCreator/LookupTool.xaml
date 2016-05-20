@@ -20,6 +20,7 @@
                     <ComboBoxItem Content="Creature" />
                     <ComboBoxItem Content="Game Object" />
                     <ComboBoxItem Content="Spell" />
+                    <ComboBoxItem Content="Emote" />
                 </ComboBox>
             </DockPanel>
             <DockPanel Margin="0,5,0,5">

@@ -89,5 +89,12 @@ namespace TrinityCreator.DBC
             return DbcHandler.LoadDbc("CharTitles", 
                 new string[] { "field0", "field2" });
         }
+
+
+        internal static DataTable GetEmotes()
+        {
+            return DbcHandler.LoadDbc("Emotes",
+                new string[] { "id", "description" });
+        }
     }
 }
