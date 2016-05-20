@@ -29,9 +29,9 @@ namespace TrinityCreator.CreatureTemplates
                     _d.Add("EscorteeTemplate", "Quest Escort NPC");
                     _d.Add("VendorTemplate", "Vendor");
                     _d.Add("RepairVendorTemplate", "Repair Vendor");
-                    _d.Add("ClassTrainerTemplate", "Class Trainer");
-                    _d.Add("ProfessionTrainerTemplate", "Profession Trainer");
-                    _d.Add("MountTrainerTemplate", "Mount Trainer");
+                    //_d.Add("ClassTrainerTemplate", "Class Trainer");
+                    //_d.Add("ProfessionTrainerTemplate", "Profession Trainer");
+                    //_d.Add("MountTrainerTemplate", "Mount Trainer");
                 }
                 return _d;
             }

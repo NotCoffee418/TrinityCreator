@@ -35,7 +35,6 @@ namespace TrinityCreator
                 new TrainerData(0, "Not a trainer", 0, 0, 0, 0),
                 new TrainerData(1, "Profession Trainer", 2, 0, 0, 0),
                 new TrainerData(2, "Pet Trainer for hunters", 3, 0, 3, 0), // hunter only
-                new TrainerData(3, "Any class Trainer", 0, 0, 0, 0), // untested
                 new TrainerData(4, "Warrior Trainer", 0, 0, 1, 0),
                 new TrainerData(5, "Paladin Trainer", 0, 0, 2, 0),
                 new TrainerData(6, "Hunter Trainer", 0, 0, 3, 0),
@@ -47,7 +46,6 @@ namespace TrinityCreator
                 new TrainerData(12, "Warlock Trainer", 0, 0, 9, 0),
                 new TrainerData(13, "Monk (5.x) Trainer", 0, 0, 10, 0),
                 new TrainerData(14, "Druid Trainer", 0, 0, 11, 0),
-                new TrainerData(15, "Any Race Mount Trainer", 1, 0, 0, 0), // untested
                 new TrainerData(16, "Human Mount Trainer", 1, 0, 0, 1),
                 new TrainerData(17, "Orc Mount Trainer", 1, 0, 0, 2),
                 new TrainerData(18, "Dwarf Mount Trainer", 1, 0, 0, 3),

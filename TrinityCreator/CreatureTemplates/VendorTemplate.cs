@@ -18,6 +18,7 @@ namespace TrinityCreator.CreatureTemplates
             MaxLevel = 75;
             Faction = 35;
             SetBmspValues(NpcFlags, new int[] { 1, 128 });     // Gossip, Vendor
+            SetBmspValues(TypeFlags, new int[] { 134217728 }); // Force gossip
             SetBmspValues(FlagsExtra, new int[] { 2 });        // Civilian
             SetIKVPValue(Page.creatureTypeCb, 7);              // Humanoid
         }
