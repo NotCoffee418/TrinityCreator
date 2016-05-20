@@ -24,8 +24,8 @@ namespace TrinityCreator
         private int _maxLevel = 1;
         private int _faction;
         private BitmaskStackPanel _npcFlags;
-        private float _speedWalk = 2.5f;
-        private float _speedRun = 7.5f;
+        private float _speedWalk = 1.1f;
+        private float _speedRun = 1.17f;
         private float _scale = 1;
         private CreatureRank _rank;
         private DamageType _dmgSchool;
@@ -49,7 +49,7 @@ namespace TrinityCreator
         private Currency _maxGold;
         private AI _aiName;
         private MovementType _movement;
-        private InhabitType _inhabit;
+        private BitmaskStackPanel _inhabit;
         private int _hoverHeight = 1;
         private float _healthModifier = 1f;
         private float _manaModifier = 1f;
@@ -65,6 +65,7 @@ namespace TrinityCreator
         private int _emote;
         private DynamicDataControl _auras;
         private DynamicDataControl _spells;
+        private DynamicDataControl _difficultyEntry;
 
 
         #region
@@ -438,9 +439,12 @@ namespace TrinityCreator
                 RaisePropertyChanged("Movement");
             }
         }
-        public InhabitType Inhabit
+        public BitmaskStackPanel Inhabit
         {
-            get { return _inhabit; }
+            get {
+                if (_inhabit == null)
+                    _inhabit = BitmaskStackPanel.GetInhabitTypes();
+                return _inhabit; }
             set
             {
                 _inhabit = value;
@@ -586,12 +590,30 @@ namespace TrinityCreator
             get
             {
                 if (_auras == null)
-                    _auras = new DynamicDataControl(new string[] { "Spell" }, 999, true, defaultValue: "0", valueMySqlDt: "smallint(6)");
+                    _auras = new DynamicDataControl(new string[] { "Spell" }, 999, defaultValue: "0", valueMySqlDt: "smallint(6)");
                 return _auras;
             }
             set
             {
                 _auras = value;
+                RaisePropertyChanged("Auras");
+            }
+        }
+        public int Exp // always 2
+        {
+            get { return 2; }
+        }
+        public DynamicDataControl DifficultyEntry
+        {
+            get
+            {
+                if (_difficultyEntry == null)
+                    _difficultyEntry = new DynamicDataControl(new string[] { "difficulty_entry_1", "difficulty_entry_2", "difficulty_entry_3" }, 3, true, defaultValue: "0", valueMySqlDt: "smallint(6)");
+                return _difficultyEntry;
+            }
+            set
+            {
+                _difficultyEntry = value;
                 RaisePropertyChanged("Auras");
             }
         }

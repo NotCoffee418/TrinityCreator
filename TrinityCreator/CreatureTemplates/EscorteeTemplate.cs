@@ -13,6 +13,7 @@ namespace TrinityCreator.CreatureTemplates
 
         public override void LoadTemplate()
         {
+            Name = "Escort NPC";
             MinLevel = 80;
             MaxLevel = 80;
             Faction = 250;                                  // Escort faction

@@ -34,8 +34,8 @@
 
             <GroupBox Header="Advanced Options">
                 <StackPanel>
+                    <CheckBox Name="difficultyEntryCb" Content="Set Difficulty Entry" />
                     <CheckBox Name="customPetSpellCb" Content="Custom Pet Spell Data" ToolTip="By default an ID will be set based on creature family. Use CreatureSpellData.dbc as reference." />
-
                 </StackPanel>
             </GroupBox>
             <DockPanel>
@@ -153,6 +153,8 @@
                         </DockPanel>
                     </StackPanel>
                 </GroupBox>
+                <GroupBox Name="difficultyEntryGb" Header="Difficulty Entry" Content="{Binding DifficultyEntry, UpdateSourceTrigger=PropertyChanged}" 
+                                  Visibility="{Binding ElementName=difficultyEntryCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
 
                 <GroupBox Header="Death">
                     <StackPanel DockPanel.Dock="Left">
@@ -201,15 +203,13 @@
                         <DockPanel Margin="2">
                             <Label Content="Movement Type" DockPanel.Dock="Left" Width="120" />
                             <ComboBox Name="movementCb" SelectedValue="{Binding Movement}" />
-                        </DockPanel>
-                        <DockPanel Margin="2">
-                            <Label Content="Inhabit" DockPanel.Dock="Left" Width="120" />
-                            <ComboBox Name="inhabitCb" SelectedValue="{Binding Inhabit}" />
-                        </DockPanel>
+                        </DockPanel>                        
                         <DockPanel Margin="2">
                             <Label Content="Hover height" DockPanel.Dock="Left" Width="120" />
                             <TextBox Text="{Binding HoverHeight}" DockPanel.Dock="Left" ToolTip="Requires MOVEMENTFLAG_DISABLE_GRAVITY"/>
                         </DockPanel>
+                        <GroupBox Name="inhabitTypeGb" Header="Inhabit Type" Content="{Binding Inhabit, UpdateSourceTrigger=PropertyChanged}" />
+
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Function">

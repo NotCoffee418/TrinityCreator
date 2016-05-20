@@ -51,10 +51,6 @@ namespace TrinityCreator.CreatureTemplates
         public static void LoadTemplate(string className)
         {
             CreatureCreatorPage page = (CreatureCreatorPage)App._MainWindow.CreatureCreatorTab.Content;
-            TrinityCreature creature = page.Creature;
-
-            //App._MainWindow.CreatureCreator.IsSelected = true;
-
             if (page.IsCreatureModified)
             {
                 var r = MessageBox.Show("Do you want to discard your unsaved creature changes to load " + className + "?",
@@ -62,12 +58,13 @@ namespace TrinityCreator.CreatureTemplates
                 if (r != MessageBoxResult.Yes)
                     return; // Don't load template
             }
-
-            page.DataContext = null;
+            
             Type type = Assembly.GetExecutingAssembly().GetTypes().First(t => t.Name == className);
-            creature = (TemplateBase)Activator.CreateInstance(type);
-            page.DataContext = creature;
-            ((TemplateBase)creature).LoadTemplate();
+            TrinityCreature creature = (TemplateBase)Activator.CreateInstance(type);
+            page.Creature = creature;
+            page.DataContext = null;
+            page.DataContext = page.Creature;
+            ((TemplateBase)page.Creature).LoadTemplate();
             page.PrepareCreaturePage();
         }
 

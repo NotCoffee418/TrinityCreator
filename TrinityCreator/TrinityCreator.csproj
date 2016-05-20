@@ -132,7 +132,6 @@
     <Compile Include="Emulator\IEmulator.cs" />
     <Compile Include="Emulator\Trinity335a.cs" />
     <Compile Include="ExportQuery.cs" />
-    <Compile Include="InhabitType.cs" />
     <Compile Include="ModelViewerPage.xaml.cs">
       <DependentUpon>ModelViewerPage.xaml</DependentUpon>
     </Compile>

@@ -17,6 +17,7 @@ namespace TrinityCreator.CreatureTemplates
             MinLevel = 80;
             MaxLevel = 80;
             Faction = 168;
+            SetIKVPValue(Page.movementCb, 1); // Random movement
             SetIKVPValue(Page.creatureTypeCb, 7); // humanoid type
             SetBmspValues(DynamicFlags, new int[] { 1 }); // lootable
         }

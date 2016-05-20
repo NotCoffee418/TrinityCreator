@@ -54,7 +54,12 @@ namespace TrinityCreator.Emulator
             if (creature.Entry == 0)
                 throw new Exception("Please choose an entry ID.");
             if (creature.Faction == 0)
-                throw new Exception("Please set a a faction for your creature");
+                throw new Exception("Please set a faction for your creature.");
+            if (creature.ModelIds.GetFirstValue() == 0)
+                throw new Exception("Please set a model ID for your creature.");
+            if (creature.Name == "")
+                throw new Exception("Please set a name for your creature.");
+
             return SelectedEmulator.GenerateQuery(creature);
         }
     }

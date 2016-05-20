@@ -17,6 +17,7 @@ namespace TrinityCreator.CreatureTemplates
             Name = "Dead Questgiver";
             SetBmspValues(TypeFlags, new int[] { 128 });        // Dead interact
             SetBmspValues(DynamicFlags, new int[] { 4, 32 });   // Appear dead
+            Emote = 65;                                         // state_dead
         }
     }
 }

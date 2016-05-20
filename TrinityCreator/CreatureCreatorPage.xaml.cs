@@ -28,6 +28,11 @@ namespace TrinityCreator
             Loaded += CreatureCreatorPage_Loaded;
         }
 
+        public CreatureCreatorPage(TrinityCreature creature) : this()
+        {
+            Creature = creature;
+        }
+
         public bool CanCheckForModified = false; // protection for templates
         public bool IsCreatureModified = false;
         public bool FirstLoad = true;
@@ -42,7 +47,6 @@ namespace TrinityCreator
             PrepCb(creatureTypeCb, CreatureType.GetCreatureTypes());
             PrepCb(aiNameCb, AI.GetCreatureAI());
             PrepCb(movementCb, MovementType.GetMovementTypes());
-            PrepCb(inhabitCb, InhabitType.GetInhabitTypes());
         }
 
         private void PrepCb(ComboBox cb, IKeyValue[] src)

@@ -170,6 +170,36 @@ namespace TrinityCreator
                 { throw new Exception("Invalid data in " + (string)line.Key); }
         }
 
+        /// <summary>
+        /// Seperated list of values in 1 field
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="keyPrefix"></param>
+        public void AddValues(Dictionary<string, string> d, string sqlKey, char seperator)
+        {
+            string result = "";
+            try
+            {
+                foreach (KeyValuePair<object, string> line in GetUserInput())
+                {
+                    int val = int.Parse(line.Value);
+                    if (val != 0)
+                        result += val + seperator;
+                }
+
+                if (result.Length > 0)
+                    result.Substring(0, result.Length - 1);
+                d.Add(sqlKey, Database.SqlQuery.CleanText(result));
+            }
+            catch
+            { throw new Exception("Invalid data in " + sqlKey); }
+        }
+        
+        public int GetFirstValue()
+        {
+            return int.Parse(GetUserInput().First().Value);
+        }
+
         private void addLineBtn_Click(object sender, RoutedEventArgs e)
         {
             if (_lines.Count() < MaxLines)

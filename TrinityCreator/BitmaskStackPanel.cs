@@ -317,6 +317,17 @@ namespace TrinityCreator
             return new BitmaskStackPanel("unitFlagsSp", cbs);
         }
 
+        internal static BitmaskStackPanel GetInhabitTypes()
+        {
+            var cbs = new List<BitmaskCheckBox>
+            {
+                new BitmaskCheckBox(1, "Ground", true),
+                new BitmaskCheckBox(2, "Water", true),
+                new BitmaskCheckBox(4, "Flying"),
+            };
+            return new BitmaskStackPanel("unitFlags2Sp", cbs);
+        }
+
         public static BitmaskStackPanel GetUnitFlags2()
         {
             var cbs = new List<BitmaskCheckBox>

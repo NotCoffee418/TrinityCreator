@@ -235,7 +235,7 @@ namespace TrinityCreator.Emulator
                 {"maxgold", creature.MaxGold.Amount.ToString()},
                 {"AIName", SqlQuery.CleanText(creature.AIName.Description)},
                 {"MovementType", creature.Movement.Id.ToString()},
-                {"InhabitType", creature.Inhabit.Id.ToString()},
+                {"InhabitType", creature.Inhabit.BitmaskValue.ToString()},
                 {"HoverHeight", creature.HoverHeight.ToString()},
                 {"HealthModifier", creature.HealthModifier.ToString()},
                 {"ManaModifier", creature.ManaModifier.ToString()},
@@ -244,13 +244,14 @@ namespace TrinityCreator.Emulator
                 {"ExperienceModifier", creature.ExperienceModifier.ToString()},
                 {"RacialLeader", Convert.ToInt16(creature.RacialLeader).ToString()},
                 {"RegenHealth", Convert.ToInt16(creature.RegenHealth).ToString()},
-                {"movementId", creature.Movement.Id.ToString()},
                 {"mechanic_immune_mask", creature.MechanicImmuneMask.BitmaskValue.ToString()},
                 {"flags_extra", creature.FlagsExtra.BitmaskValue.ToString()},
+                {"exp", creature.Exp.ToString()},
             };
 
             creature.ModelIds.AddValues(kvplist);
             creature.Resistances.AddValues(kvplist, "resistance");
+            creature.DifficultyEntry.AddValues(kvplist);
             creature.Spells.AddValues(kvplist);
             return kvplist;
         }
@@ -258,7 +259,13 @@ namespace TrinityCreator.Emulator
         {
             var kvplist = new Dictionary<string, string>
             {
+                {"entry", creature.Entry.ToString()},
+                {"mount", creature.Mount.ToString()},
+                {"bytes1", creature.Bytes1.BitmaskValue.ToString()},
+                {"emote", creature.Emote.ToString()},
             };
+
+            creature.Auras.AddValues(kvplist, "auras", ' ');
 
             return kvplist;
         }
