@@ -132,6 +132,12 @@
     <Compile Include="Emulator\IEmulator.cs" />
     <Compile Include="Emulator\Trinity335a.cs" />
     <Compile Include="ExportQuery.cs" />
+    <Compile Include="LootPage.xaml.cs">
+      <DependentUpon>LootPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LootRowControl.xaml.cs">
+      <DependentUpon>LootRowControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModelViewerPage.xaml.cs">
       <DependentUpon>ModelViewerPage.xaml</DependentUpon>
     </Compile>
@@ -198,6 +204,9 @@
     <Compile Include="Stat.cs" />
     <Compile Include="TrinityQuest.cs" />
     <Compile Include="Updater.cs" />
+    <Compile Include="VendorPage.xaml.cs">
+      <DependentUpon>VendorPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="Browser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -238,6 +247,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="LootPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LootRowControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -262,6 +279,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="QuestPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VendorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

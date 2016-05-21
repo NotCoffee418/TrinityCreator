@@ -62,5 +62,13 @@ namespace TrinityCreator.Emulator
 
             return SelectedEmulator.GenerateQuery(creature);
         }
+
+        public static string GenerateQuery(LootPage loot)
+        {
+            if (loot.entryTb.Text == "0")
+                throw new Exception("Please choose an entry ID.");
+
+            return SelectedEmulator.GenerateQuery(loot);
+        }
     }
 }

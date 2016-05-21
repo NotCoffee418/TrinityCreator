@@ -64,7 +64,7 @@
                 <TabItem Header="Creature">
                     <Frame Name="CreatureCreatorTab" />
                 </TabItem>
-                <TabItem Header="Loot (UNFINISHED)" Name="LootCreatorTabItem" x:FieldModifier="public">
+                <TabItem Header="Loot" Name="LootCreatorTabItem" x:FieldModifier="public">
                     <Frame Name="LootCreatorTab" />
                 </TabItem>
                 <TabItem Header="Vendor (UNFINISHED)" />

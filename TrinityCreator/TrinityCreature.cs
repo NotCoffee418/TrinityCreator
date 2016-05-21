@@ -68,7 +68,7 @@ namespace TrinityCreator
         private DynamicDataControl _difficultyEntry;
 
 
-        #region
+        #region Properties
         public int Entry
         {
             get { return _entry; }

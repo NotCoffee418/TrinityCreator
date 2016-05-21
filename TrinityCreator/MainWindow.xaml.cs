@@ -52,6 +52,7 @@ namespace TrinityCreator
             QuestTab.Content = new QuestPage();
             ModelViewerTabFrame.Content = new ModelViewerPage();
             CreatureCreatorTab.Content = new CreatureCreatorPage();
+            LootCreatorTab.Content = new LootPage();
 
 
             // view unfinished when set & on debug

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrinityCreator.Database;
+using System.Windows.Controls;
 
 namespace TrinityCreator.Emulator
 {
@@ -37,9 +38,17 @@ namespace TrinityCreator.Emulator
                SqlQuery.GenerateInsert("creature_template_addon", CreatureTemplateAddon(creature));
         }
 
+        public string GenerateQuery(LootPage loot)
+        {
+            string result = "";
+            foreach (var l in LootTemplates(loot))
+                result += SqlQuery.GenerateInsert(((ComboBoxItem)loot.lootTypeCb.SelectedValue).Content.ToString() + "_loot_template", l);
+            return result;
+        }
+        
         private Dictionary<string, string> ItemTemplate(TrinityItem item)
         {
-            var kvplist = new Dictionary<string, string>
+            var kvplist = new Dictionary<string, string> 
             {
                 {"entry", item.EntryId.ToString()},
                 {"name", SqlQuery.CleanText(item.Name)},
@@ -268,6 +277,26 @@ namespace TrinityCreator.Emulator
             creature.Auras.AddValues(kvplist, "auras", ' ');
 
             return kvplist;
+        }
+
+
+        private Dictionary<string, string>[] LootTemplates(LootPage loot)
+        {
+            List<Dictionary<string,string>> result = new List<Dictionary<string,string>>();
+            foreach (LootRowControl row in loot.lootRowSp.Children)
+            {
+                var kvplist = new Dictionary<string, string>
+                {
+                    {"Entry", loot.entryTb.Text},
+                    {"Item", row.Item.ToString()},
+                    {"Chance", row.Chance.ToString()},
+                    {"QuestRequired", Convert.ToInt16(row.QuestRequired).ToString()},
+                    {"MinCount", row.MinCount.ToString()},
+                    {"MaxCount", row.MaxCount.ToString()},
+                };
+                result.Add(kvplist);
+            }
+            return result.ToArray();
         }
     }
 }
