@@ -317,6 +317,7 @@ namespace TrinityCreator
             _preview.StatsSp.Children.Clear();
             try
             {
+                int count = 0;
                 foreach (var line in _item.Stats.GetUserInput())
                 {
                     var stat = (Stat) line.Key;
@@ -329,7 +330,9 @@ namespace TrinityCreator
                         lab.Margin = new Thickness(0, -5, 0, 0);
                         lab.FontSize = 14;
                         _preview.StatsSp.Children.Add(lab);
+                        count++;
                     }
+                    _item.StatsCount = count;
                 }
             }
             catch

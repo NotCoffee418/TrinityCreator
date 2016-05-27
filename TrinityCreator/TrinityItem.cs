@@ -43,6 +43,7 @@ namespace TrinityCreator
         private DynamicDataControl _stat;
         private Currency _valuebuy;
         private Currency _valuesell;
+        private int _statsCount;
 
         public string Name
         {
@@ -364,6 +365,16 @@ namespace TrinityCreator
             {
                 _stat = value;
                 RaisePropertyChanged("Stats");
+            }
+        }
+
+        public int StatsCount
+        {
+            get { return _statsCount; }
+            set
+            {
+                _statsCount = value;
+                RaisePropertyChanged("StatsCount");
             }
         }
 
