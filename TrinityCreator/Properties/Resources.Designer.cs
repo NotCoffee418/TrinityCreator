@@ -81,6 +81,29 @@ namespace TrinityCreator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;KeyValues&gt;
+        ///    &lt;AI&gt;
+        ///        &lt;Item Id=&quot;0&quot; Description=&quot;NullAI&quot; /&gt;
+        ///        &lt;Item Id=&quot;1&quot; Description=&quot;AggressorAI&quot; /&gt;
+        ///        &lt;Item Id=&quot;2&quot; Description=&quot;ReactorAI&quot; /&gt;
+        ///        &lt;Item Id=&quot;3&quot; Description=&quot;GuardAI&quot; /&gt;
+        ///        &lt;Item Id=&quot;4&quot; Description=&quot;PetAI&quot; /&gt;
+        ///        &lt;Item Id=&quot;5&quot; Description=&quot;TotemAI&quot; /&gt;
+        ///        &lt;Item Id=&quot;6&quot; Description=&quot;EventAI&quot; /&gt;
+        ///        &lt;Item Id=&quot;7&quot; Description=&quot;SmartAI&quot; /&gt;
+        ///    &lt;/AI&gt;
+        ///    &lt;CreatureFamily&gt;
+        ///        &lt;Item Id=&quot;0&quot; Description=&quot;None&quot; /&gt;
+        ///        [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string cb_data {
+            get {
+                return ResourceManager.GetString("cb_data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap copper {
@@ -94,9 +117,10 @@ namespace TrinityCreator.Properties {
         ///   Looks up a localized string similar to Creator			Stijn Raeymaekers
         ///
         ///External libraries by:
-        ///DBC Viewer				tomrus88
+        ///DBC Viewer		tomrus88
         ///DBC &amp; maps extractor	cMangos
-        ///.
+        ///Model Viewer		Wowhead
+        ///Web browser		CefSharp.
         /// </summary>
         internal static string Credits {
             get {
@@ -209,7 +233,13 @@ namespace TrinityCreator.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Type $N to display a player&apos;s name or $C for a player&apos;s class in a quest.
-        ///Leave the value at 0 if you don&apos;t want to use a feature..
+        ///Leave the value at 0 if you don&apos;t want to use a feature.
+        ///Use the lookup tool on the right to find ID&apos;s.
+        ///Please report any bugs and suggestions on GitHub.
+        ///Configure your database &amp; dbc in settings to use the lookup tool and other features.
+        ///You need to restart TrinityCore and sometimes delete your WoW Cache to view your creations.
+        ///Doubleclick a row in the Lookup Tool to view it&apos;s in-game model if possible.
+        ///You can click-drag the  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string RandomTips {
             get {

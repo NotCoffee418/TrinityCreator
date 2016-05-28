@@ -66,7 +66,7 @@ namespace TrinityCreator
             ItemQualityCb.SelectedIndex = 0;
 
             // Set item bounds
-            ItemBoundsCb.ItemsSource = ItemBonding.GetItemBondingList();
+            ItemBoundsCb.ItemsSource = XmlKeyValue.FromXml("ItemBonding");
             ItemBoundsCb.SelectedIndex = 0;
 
             // Set weapon groupbox
@@ -320,7 +320,7 @@ namespace TrinityCreator
                 int count = 0;
                 foreach (var line in _item.Stats.GetUserInput())
                 {
-                    var stat = (Stat) line.Key;
+                    var stat = (XmlKeyValue)line.Key;
                     if (line.Value != "0")
                     {
                         var lab = new Label();

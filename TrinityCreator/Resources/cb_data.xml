@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KeyValues>
+    <AI>
+        <Item Id="0" Description="NullAI" />
+        <Item Id="1" Description="AggressorAI" />
+        <Item Id="2" Description="ReactorAI" />
+        <Item Id="3" Description="GuardAI" />
+        <Item Id="4" Description="PetAI" />
+        <Item Id="5" Description="TotemAI" />
+        <Item Id="6" Description="EventAI" />
+        <Item Id="7" Description="SmartAI" />
+    </AI>
+    <CreatureRank>
+        <Item Id="0" Description="Normal" />
+        <Item Id="1" Description="Elite" />
+        <Item Id="2" Description="Rare Elite" />
+        <Item Id="3" Description="Boss" />
+        <Item Id="4" Description="Rare" />
+    </CreatureRank>
+    <CreatureType>
+        <Item Id="0" Description="None" />
+        <Item Id="1" Description="Beast" />
+        <Item Id="2" Description="Dragonkin" />
+        <Item Id="3" Description="Demon" />
+        <Item Id="4" Description="Elemental" />
+        <Item Id="5" Description="Giant" />
+        <Item Id="6" Description="Undead" />
+        <Item Id="7" Description="Humanoid" />
+        <Item Id="8" Description="Critter" />
+        <Item Id="9" Description="Mechanical" />
+        <Item Id="10" Description="Not specified" />
+        <Item Id="11" Description="Totem" />
+        <Item Id="12" Description="Non-Combat Pet" />
+        <Item Id="13" Description="Gas Cloud" />
+    </CreatureType>
+    <ItemBonding>
+        <Item Id="0" Description="No bounds" />
+        <Item Id="1" Description="Binds when picked up" />
+        <Item Id="2" Description="Binds when equipped" />
+        <Item Id="3" Description="Binds when used" />
+        <Item Id="4" Description="Quest item" />
+    </ItemBonding>
+    <MovementType>
+        <Item Id="0" Description="Stay in one place" />
+        <Item Id="2" Description="Waypoint Movement" />
+        <Item Id="1" Description="Random Movement inside spawn radius" />
+    </MovementType>
+    <QuestInfo>
+        <Item Id="0" Description="None" />
+        <Item Id="1" Description="Group" />
+        <Item Id="21" Description="Life" />
+        <Item Id="41" Description="PvP" />
+        <Item Id="62" Description="Raid" />
+        <Item Id="81" Description="Dungeon" />
+        <Item Id="82" Description="World Event" />
+        <Item Id="83" Description="Legendary" />
+        <Item Id="84" Description="Escort" />
+        <Item Id="85" Description="Heroic" />
+        <Item Id="88" Description="Raid (10)" />
+        <Item Id="89" Description="Raid (25)" />
+    </QuestInfo>
+    <QuestXp>
+        <Item Id="2" Description="No XP" />
+        <Item Id="4" Description="Simple delivery" />
+        <Item Id="5" Description="Long walk delivery" />
+        <Item Id="6" Description="Simple slaying quest" />
+        <Item Id="7" Description="Long slaying quest" />
+        <Item Id="8" Description="Elite &amp; group quests" />
+        <Item Id="9" Description="End of quest chain (big reward)" />
+        <Item Id="10" Description="Raid quests" />
+    </QuestXp>
+    <SocketBonus>
+        <Item Id="0" Description="No Bonus" />
+        <Item Id="69" Description="+2 Strength" />
+        <Item Id="3879" Description="+3 Strength" />
+        <Item Id="106" Description="+4 Strength" />
+        <Item Id="3357" Description="+6 Strength" />
+        <Item Id="3312" Description="+8 Strength" />
+        <Item Id="75" Description="+2 Agility" />
+        <Item Id="76" Description="+3 Agility" />
+        <Item Id="90" Description="+4 Agility" />
+        <Item Id="3355" Description="+6 Agility" />
+        <Item Id="3313" Description="+8 Agility" />
+        <Item Id="2925" Description="+3 Stamina" />
+        <Item Id="2883" Description="+4 Stamina" />
+        <Item Id="104" Description="+6 Stamina" />
+        <Item Id="3307" Description="+9 Stamina" />
+        <Item Id="3305" Description="+12 Stamina" />
+        <Item Id="3016" Description="+2 Intellect" />
+        <Item Id="2863" Description="+3 Intellect" />
+        <Item Id="2869" Description="+4 Intellect" />
+        <Item Id="3310" Description="+6 Intellect" />
+        <Item Id="3353" Description="+8 Intellect" />
+        <Item Id="2866" Description="+3 Spirit" />
+        <Item Id="2890" Description="+4 Spirit" />
+        <Item Id="3311" Description="+6 Spirit" />
+        <Item Id="3352" Description="+8 Spirit" />
+        <Item Id="2974" Description="+7 Healing" />
+        <Item Id="2872" Description="+9 Healing" />
+        <Item Id="2881" Description="+1 Mana per 5 sec" />
+        <Item Id="2865" Description="+2 Mana per 5 sec" />
+        <Item Id="2854" Description="+3 Mana per 5 sec" />
+        <Item Id="424" Description="+2 Spell Power" />
+        <Item Id="2910" Description="+3 Spell Power" />
+        <Item Id="2900" Description="+4 Spell Power" />
+        <Item Id="426" Description="+5 Spell Power" />
+        <Item Id="3602" Description="+7 Spell Power" />
+        <Item Id="3753" Description="+9 Spell Power" />
+        <Item Id="1583" Description="+4 Attack Power" />
+        <Item Id="1584" Description="+6 Attack Power" />
+        <Item Id="1585" Description="+8 Attack Power" />
+        <Item Id="3356" Description="+12 Attack Power" />
+        <Item Id="3877" Description="+16 Attack Power" />
+        <Item Id="2867" Description="+2 Resillience" />
+        <Item Id="2862" Description="+3 Resillience" />
+        <Item Id="2878" Description="+4 Resillience" />
+        <Item Id="3600" Description="+6 Resillience" />
+        <Item Id="3821" Description="+8 Resillience" />
+        <Item Id="2886" Description="+2 Hit Rating" />
+        <Item Id="2860" Description="+3 Hit Rating" />
+        <Item Id="2873" Description="+4 Hit Rating" />
+        <Item Id="3351" Description="+6 Hit Rating" />
+        <Item Id="2909" Description="+2 Spell Hit Rating" />
+        <Item Id="2880" Description="+3 Spell Hit Rating" />
+        <Item Id="2908" Description="+4 Spell Hit Rating" />
+        <Item Id="2887" Description="+3 Crit Rating" />
+        <Item Id="2874" Description="+4 Crit Rating" />
+        <Item Id="3301" Description="+6 Crit Rating" />
+        <Item Id="2787" Description="+8 Crit Rating" />
+        <Item Id="2884" Description="+2 Spell Crit Rating" />
+        <Item Id="2875" Description="+3 Spell Crit Rating" />
+        <Item Id="2864" Description="+4 Spell Crit Rating" />
+        <Item Id="2907" Description="+2 Parry" />
+        <Item Id="2870" Description="+3 Parry" />
+        <Item Id="3359" Description="+4 Parry" />
+        <Item Id="3360" Description="+8 Parry" />
+        <Item Id="2926" Description="+2 Dodge" />
+        <Item Id="2876" Description="+3 Dodge" />
+        <Item Id="2871" Description="+4 Dodge" />
+        <Item Id="3358" Description="+6 Dodge" />
+        <Item Id="2976" Description="+2 Defense Rating" />
+        <Item Id="2861" Description="+3 Defense Rating" />
+        <Item Id="2932" Description="+4 Defense Rating" />
+        <Item Id="3751" Description="+6 Defense Rating" />
+        <Item Id="3302" Description="+8 Defense Rating" />
+        <Item Id="3017" Description="+3 Block" />
+        <Item Id="2972" Description="+4 Block" />
+        <Item Id="2888" Description="+6 Block" />
+        <Item Id="3363" Description="+9 Block" />
+        <Item Id="3094" Description="+4 Expertise" />
+        <Item Id="3362" Description="+6 Expertise" />
+        <Item Id="3778" Description="+8 Expertise" />
+        <Item Id="3267" Description="+4 Haste Rating" />
+        <Item Id="3309" Description="+6 Haste Rating" />
+        <Item Id="3303" Description="+8 Haste Rating" />
+    </SocketBonus>
+    <Stat>
+        <Item Id="0" Description="Mana" />
+        <Item Id="1" Description="Health" />
+        <Item Id="3" Description="Agility" />
+        <Item Id="4" Description="Strength" />
+        <Item Id="5" Description="Intellect" />
+        <Item Id="6" Description="Spirit" />
+        <Item Id="7" Description="Stamina" />
+        <Item Id="12" Description="Defense skill" />
+        <Item Id="13" Description="Dodge" />
+        <Item Id="14" Description="Parry" />
+        <Item Id="15" Description="Block" />
+        <Item Id="31" Description="Hit" />
+        <Item Id="16" Description="Melee hit" />
+        <Item Id="17" Description="Ranged hit" />
+        <Item Id="18" Description="Spell hit" />
+        <Item Id="32" Description="Crit Rating" />
+        <Item Id="19" Description="Melee crit" />
+        <Item Id="20" Description="Ranged crit" />
+        <Item Id="21" Description="Spell crit" />
+        <Item Id="36" Description="Haste" />
+        <Item Id="28" Description="Melee haste" />
+        <Item Id="29" Description="Ranged haste" />
+        <Item Id="30" Description="Spell haste" />
+        <Item Id="35" Description="Resilience" />
+        <Item Id="37" Description="Expertise" />
+        <Item Id="38" Description="Attack power" />
+        <Item Id="39" Description="Ranged attach power" />
+        <Item Id="41" Description="Healing" />
+        <Item Id="42" Description="Spell damage" />
+        <Item Id="43" Description="Mana regeneration" />
+        <Item Id="44" Description="Armor penetration" />
+        <Item Id="45" Description="Spell power" />
+        <Item Id="46" Description="Health regeneration" />
+        <Item Id="47" Description="Spell penetration" />
+        <Item Id="48" Description="Block value" />
+    </Stat>
+    <UnitClass>
+        <Item Id="1" Description="Warrior (Health only)" />
+        <Item Id="2" Description="Paladin (Health &amp; mana)" />
+        <Item Id="8" Description="Mage (Less health &amp; more mana)" />
+    </UnitClass>
+</KeyValues>

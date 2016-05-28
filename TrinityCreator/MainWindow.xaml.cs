@@ -6,6 +6,8 @@ using TrinityCreator.Database;
 using TrinityCreator.Properties;
 using TrinityCreator.DBC;
 using System.Timers;
+using System.Collections.Generic;
+using System.Xml;
 
 namespace TrinityCreator
 {
@@ -18,6 +20,47 @@ namespace TrinityCreator
         {
             InitializeComponent();
             App._MainWindow = this;
+
+            // IKV to xml tmp
+            /* DELETE THIS!!
+            Dictionary<string, IKeyValue[]> ikv = new Dictionary<string, IKeyValue[]>();
+            ikv.Add("AI", AI.GetCreatureAI());
+            ikv.Add("CreatureFamily", CreatureFamily.GetCreatureFamilies());
+            ikv.Add("CreatureRank", CreatureRank.GetCreatureRanks());
+            ikv.Add("CreatureType", CreatureType.GetCreatureTypes());
+            ikv.Add("DamageType", DamageType.GetDamageTypes());
+            ikv.Add("ItemBonding", ItemBonding.GetItemBondingList());
+            ikv.Add("MovementType", MovementType.GetMovementTypes());
+            ikv.Add("QuestInfo", QuestInfo.ListQuestInfo());
+            ikv.Add("QuestXp", QuestXp.GetQuestXP());
+            ikv.Add("SocketBonus", SocketBonus.GetBonusList());
+            ikv.Add("Stat", Stat.GetStatList());
+            ikv.Add("UnitClass", UnitClass.GetUnitClasses());
+
+            // write>
+            using (XmlWriter w = XmlWriter.Create("ikv.xml"))
+            {
+                w.WriteStartElement("KeyValues");
+                foreach (var kvp in ikv)
+                {
+                    w.WriteStartElement(kvp.Key);
+                    foreach (IKeyValue sub in kvp.Value)
+                    {
+                        w.WriteStartElement("Item");
+                        w.WriteAttributeString("Id", sub.Id.ToString());
+                        w.WriteAttributeString("Description", sub.Description);
+                        w.WriteEndElement();
+                    }
+                    w.WriteEndElement();
+                }
+                w.WriteEndElement();
+            }
+            */
+
+
+
+
+
 
             // Check for updates
 #if !DEBUG

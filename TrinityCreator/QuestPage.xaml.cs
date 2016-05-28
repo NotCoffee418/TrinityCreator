@@ -36,11 +36,11 @@ namespace TrinityCreator
         private void PrepareQuestControl()
         {
             // QuestInfo
-            questInfoCb.ItemsSource = QuestInfo.ListQuestInfo();
+            questInfoCb.ItemsSource = XmlKeyValue.FromXml("QuestInfo");
             questInfoCb.SelectedIndex = 0;
 
             // RewardXpDifficulty
-            rewardXpCb.ItemsSource = QuestXp.GetQuestXP();
+            rewardXpCb.ItemsSource = XmlKeyValue.FromXml("QuestXp");
             rewardXpCb.SelectedIndex = 0;
         }
 
@@ -73,7 +73,7 @@ namespace TrinityCreator
         {
             try
             {
-                QuestInfo qi = (QuestInfo)questInfoCb.SelectedValue;
+                XmlKeyValue qi = (XmlKeyValue)questInfoCb.SelectedValue;
                 BitmaskStackPanel bmsp = (BitmaskStackPanel)questFlagsGb.Content;
 
                 if (qi.Id == 88 || qi.Id == 89)

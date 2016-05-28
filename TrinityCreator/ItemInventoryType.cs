@@ -5,22 +5,13 @@ namespace TrinityCreator
     public class ItemInventoryType : IKeyValue
     {
         public ItemInventoryType(int id, string description, int sheath = 0)
-        {
-            Id = id;
-            Description = description;
-            Sheath = sheath;
-        }
+            : base(id, description) { }
 
         public int Sheath { get; set; }
 
         public int Id { get; set; }
 
         public string Description { get; set; }
-
-        public override string ToString()
-        {
-            return Description;
-        }
 
         internal static ItemInventoryType[] GetAllInventoryTypes()
         {

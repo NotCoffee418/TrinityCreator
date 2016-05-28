@@ -30,7 +30,7 @@ namespace TrinityCreator
         private string _logTitle = null;
         private int _entryId;
         private int _pQuestSort;
-        private QuestInfo _pQuestInfo;
+        private XmlKeyValue _pQuestInfo;
         private int _suggestedGroupNum;
         private string _logDescription = null;
         private string _questDescription = null;
@@ -48,7 +48,7 @@ namespace TrinityCreator
         private Coordinate _poiCoordinate;
         private int _timeAllowed;
         private int _requiredPlayerKills;
-        private QuestXp _rewardXpDifficulty;
+        private XmlKeyValue _rewardXpDifficulty;
         private Currency _rewardMoney;
         private int _rewardSpell;
         private int _rewardHonor;
@@ -82,7 +82,7 @@ namespace TrinityCreator
             }
         }
 
-        public QuestInfo PQuestInfo
+        public XmlKeyValue PQuestInfo
         {
             get { return _pQuestInfo; }
             set
@@ -423,7 +423,7 @@ namespace TrinityCreator
 
 
         #region Rewards
-        public QuestXp RewardXpDifficulty 
+        public XmlKeyValue RewardXpDifficulty 
         {
             get { return _rewardXpDifficulty; }
             set

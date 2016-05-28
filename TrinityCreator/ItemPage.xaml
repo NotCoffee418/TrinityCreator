@@ -13,7 +13,7 @@
                             ObjectType="{x:Type l:ItemClass}"
                             MethodName="GetClassList" />
         <ObjectDataProvider x:Key="SocketBonusList"
-                            ObjectType="{x:Type l:SocketBonus}"
+                            ObjectType="{x:Type l:XmlKeyValue}"
                             MethodName="GetBonusList" />
     </UserControl.Resources>
 

@@ -1,11 +1,21 @@
 ﻿namespace TrinityCreator
 {
-    internal interface IKeyValue
+    public abstract class IKeyValue
     {
-        int Id { get; set; }
+        public IKeyValue() { }
+        public IKeyValue(int id, string description)
+        {
+            Id = id;
+            Description = description;
+        }
 
-        string Description { get; set; }
+        public int Id { get; set; }
 
-        string ToString();
+        public string Description { get; set; }
+
+        public override string ToString()
+        {
+            return Description;
+        }        
     }
 }

@@ -5,10 +5,7 @@ namespace TrinityCreator
     public class ItemClass : IKeyValue
     {
         public ItemClass(int id, string description)
-        {
-            Id = id;
-            Description = description;
-        }
+            : base(id, description) { }
 
         public ItemSubClass[] AvailableSubClasses
         {
@@ -52,10 +49,6 @@ namespace TrinityCreator
 
         public string Description { get; set; }
 
-        public override string ToString()
-        {
-            return Description;
-        }
 
         /// <summary>
         ///     Return list of supported itemclasses

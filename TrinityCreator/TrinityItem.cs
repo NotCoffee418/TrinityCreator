@@ -18,7 +18,7 @@ namespace TrinityCreator
         private int _ammoType;
         private int _armor;
         private BitmaskStackPanel _bagFamily;
-        private ItemBonding _binds;
+        private XmlKeyValue _binds;
         private int _block;
         private int _buyCount;
         private int _containerSlots;
@@ -38,7 +38,7 @@ namespace TrinityCreator
         private ItemQuality _quality;
         private string _quote;
         private DynamicDataControl _resistances;
-        private SocketBonus _socketBonus;
+        private XmlKeyValue _socketBonus;
         private int _stackable;
         private DynamicDataControl _stat;
         private Currency _valuebuy;
@@ -118,7 +118,7 @@ namespace TrinityCreator
             }
         }
 
-        public ItemBonding Binds
+        public XmlKeyValue Binds
         {
             get { return _binds; }
             set
@@ -343,7 +343,7 @@ namespace TrinityCreator
             }
         }
 
-        public SocketBonus SocketBonus
+        public XmlKeyValue SocketBonus
         {
             get { return _socketBonus; }
             set
@@ -358,7 +358,7 @@ namespace TrinityCreator
             get
             {
                 if (_stat == null)
-                    _stat = new DynamicDataControl(Stat.GetStatList(), 10, false, "Stat", "Value", "0", "smallint(6)");
+                    _stat = new DynamicDataControl(XmlKeyValue.FromXml("Stat"), 10, false, "Stat", "Value", "0", "smallint(6)");
                 return _stat;
             }
             set

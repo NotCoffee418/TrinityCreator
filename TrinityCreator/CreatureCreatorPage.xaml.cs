@@ -39,14 +39,14 @@ namespace TrinityCreator
 
         internal void PrepareCreaturePage()
         {
-            PrepCb(rankCb, CreatureRank.GetCreatureRanks());
+            PrepCb(rankCb, XmlKeyValue.FromXml("CreatureRank"));
             PrepCb(dmgSchoolCb, DamageType.GetDamageTypes());
-            PrepCb(unitClassCb, UnitClass.GetUnitClasses());
+            PrepCb(unitClassCb, XmlKeyValue.FromXml("UnitClass"));
             PrepCb(familyCb, CreatureFamily.GetCreatureFamilies());
             PrepCb(trainerCb, TrainerData.GetTrainerData());
-            PrepCb(creatureTypeCb, CreatureType.GetCreatureTypes());
-            PrepCb(aiNameCb, AI.GetCreatureAI());
-            PrepCb(movementCb, MovementType.GetMovementTypes());
+            PrepCb(creatureTypeCb, XmlKeyValue.FromXml("CreatureType"));
+            PrepCb(aiNameCb, XmlKeyValue.FromXml("AI"));
+            PrepCb(movementCb, XmlKeyValue.FromXml("MovementType"));
         }
 
         private void PrepCb(ComboBox cb, IKeyValue[] src)

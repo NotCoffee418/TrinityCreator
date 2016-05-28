@@ -27,17 +27,17 @@ namespace TrinityCreator
         private float _speedWalk = 1.1f;
         private float _speedRun = 1.17f;
         private float _scale = 1;
-        private CreatureRank _rank;
+        private XmlKeyValue _rank;
         private DamageType _dmgSchool;
         private int _baseAttackTime = 1500;
         private int _rangeAttackTime = 2000;
-        private UnitClass _unitClass;
+        private XmlKeyValue _unitClass;
         private BitmaskStackPanel _unitFlags;
         private BitmaskStackPanel _unitFlags2;
         private BitmaskStackPanel _dynamicFlags;
         private CreatureFamily _family;
         private TrainerData _trainer;
-        private CreatureType _creatureType;
+        private XmlKeyValue _creatureType;
         private BitmaskStackPanel _typeFlags;
         private int _lootId;
         private int _pickpocketLoot;
@@ -47,8 +47,8 @@ namespace TrinityCreator
         private int _vehicleId;
         private Currency _minGold;
         private Currency _maxGold;
-        private AI _aiName;
-        private MovementType _movement;
+        private XmlKeyValue _aiName;
+        private XmlKeyValue _movement;
         private BitmaskStackPanel _inhabit;
         private int _hoverHeight = 1;
         private float _healthModifier = 1f;
@@ -186,7 +186,7 @@ namespace TrinityCreator
                 RaisePropertyChanged("Scale");
             }
         }
-        public CreatureRank Rank
+        public XmlKeyValue Rank
         {
             get { return _rank; }
             set
@@ -222,7 +222,7 @@ namespace TrinityCreator
                 RaisePropertyChanged("RangeAttackTime");
             }
         }
-        public UnitClass _UnitClass
+        public XmlKeyValue _UnitClass
         {
             get { return _unitClass; }
             set
@@ -292,7 +292,7 @@ namespace TrinityCreator
                 RaisePropertyChanged("Trainer");
             }
         }
-        public CreatureType _CreatureType
+        public XmlKeyValue _CreatureType
         {
             get { return _creatureType; }
             set
@@ -421,7 +421,7 @@ namespace TrinityCreator
                 RaisePropertyChanged("MaxGold");
             }
         }
-        public AI AIName
+        public XmlKeyValue AIName
         {
             get { return _aiName; }
             set
@@ -430,7 +430,7 @@ namespace TrinityCreator
                 RaisePropertyChanged("AIName");
             }
         }
-        public MovementType Movement
+        public XmlKeyValue Movement
         {
             get { return _movement; }
             set

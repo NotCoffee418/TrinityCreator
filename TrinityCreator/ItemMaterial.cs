@@ -3,10 +3,7 @@
     public class ItemMaterial : IKeyValue
     {
         public ItemMaterial(int id, string description)
-        {
-            Id = id;
-            Description = description;
-        }
+            : base(id, description) { }
 
         public int Id { get; set; }
 
