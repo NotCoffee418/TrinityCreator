@@ -15,8 +15,6 @@ namespace TrinityCreator
             TrainerRace = trainerRace;
         }
 
-        public int Id { get; set; } // Only used for IKeyValue
-        public string Description { get; set; }
         public int TrainerType { get; set; }
         public int TrainerSpell { get; set; }
         public int TrainerClass { get; set; }

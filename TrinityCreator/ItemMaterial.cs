@@ -5,10 +5,6 @@
         public ItemMaterial(int id, string description)
             : base(id, description) { }
 
-        public int Id { get; set; }
-
-        public string Description { get; set; }
-
         internal static ItemMaterial GetConsumable()
         {
             return new ItemMaterial(-1, "Consumable");

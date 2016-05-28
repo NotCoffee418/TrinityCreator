@@ -45,10 +45,6 @@ namespace TrinityCreator
             }
         }
 
-        public int Id { get; set; }
-
-        public string Description { get; set; }
-
 
         /// <summary>
         ///     Return list of supported itemclasses

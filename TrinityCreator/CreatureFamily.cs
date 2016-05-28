@@ -10,11 +10,6 @@ namespace TrinityCreator
             Description = description;
             PetSpellDataId = petSpellDataId;
         }
-
-
-        public int Id { get; set; }
-
-        public string Description { get; set; }
         public int PetSpellDataId { get; internal set; }
         public override string ToString()
         {

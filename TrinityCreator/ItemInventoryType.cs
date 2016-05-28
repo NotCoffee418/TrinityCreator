@@ -9,10 +9,6 @@ namespace TrinityCreator
 
         public int Sheath { get; set; }
 
-        public int Id { get; set; }
-
-        public string Description { get; set; }
-
         internal static ItemInventoryType[] GetAllInventoryTypes()
         {
             var result = new List<ItemInventoryType>();

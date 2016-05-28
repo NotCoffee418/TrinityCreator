@@ -59,6 +59,7 @@ namespace TrinityCreator
             ItemClassCb.SelectedIndex = 0;
 
             // Set socket bonus
+            SocketBonusCb.ItemsSource = XmlKeyValue.FromXml("SocketBonus");
             SocketBonusCb.SelectedIndex = 0;
 
             // Set quality

@@ -7,9 +7,6 @@ namespace TrinityCreator
     public class ItemQuality : IKeyValue, INotifyPropertyChanged
     {
         private Color _color;
-        private string _description;
-
-        private int _id;
 
         public ItemQuality(int id, string name, Color color)
         {
@@ -30,20 +27,20 @@ namespace TrinityCreator
 
         public int Id
         {
-            get { return _id; }
+            get { return base.Id; }
             set
             {
-                _id = value;
+                base.Id = value;
                 RaisePropertyChanged("Id");
             }
         }
 
         public string Description
         {
-            get { return _description; }
+            get { return base.Description; }
             set
             {
-                _description = value;
+                base.Description = value;
                 RaisePropertyChanged("Description");
             }
         }
