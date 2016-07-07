@@ -111,7 +111,6 @@ namespace TrinityCreator.Emulator
             var kvplist = new Dictionary<string, string>
             {
                 {"ID", quest.EntryId.ToString()},
-                {"QuestType", "2"},
                 {"QuestLevel", quest.QuestLevel.ToString()},
                 {"MinLevel", quest.MinLevel.ToString()},
                 {"QuestSortID", quest.PQuestSort.ToString()},
