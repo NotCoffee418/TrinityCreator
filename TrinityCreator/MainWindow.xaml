@@ -18,7 +18,6 @@
 
             <MenuItem Header="Info" >
                 <MenuItem Header="Credits" Click="Credits_Click" />
-                <MenuItem Header="Donate" Click="Donate_Click" />
                 <MenuItem Header="Report bug" Click="ReportBugs_Click" />
             </MenuItem>
         </Menu>
@@ -44,7 +43,7 @@
                 </TextBlock>
             </StatusBarItem>
             <StatusBarItem Grid.Column="1">
-                <TextBlock Text="© 2016 Stijn Raeymaekers"  TextAlignment="Right"/>
+                <TextBlock Text="© 2017 Nadromar"  TextAlignment="Right"/>
             </StatusBarItem>
         </StatusBar>
         
@@ -67,19 +66,13 @@
                 <TabItem Header="Loot" Name="LootCreatorTabItem" x:FieldModifier="public">
                     <Frame Name="LootCreatorTab" />
                 </TabItem>
-                <TabItem Header="Vendor (UNFINISHED)" />
+                <TabItem Header="Vendor">
+                    <Frame Name="VendorCreatorTab" />
+                </TabItem>
                 <TabItem Header="Model Viewer" Name="ModelViewer" Selector.Selected="modelViewerTab_Selected">
                     <Frame Name="ModelViewerTabFrame" />
                 </TabItem>
-                <TabItem Header="More coming soon!">
-                    <DockPanel>
-                        <TextBlock TextWrapping="Wrap"
-                                   Text="I'm working on this application almost daily so check back for updates regularly! You will be asked to update when starting Trinity Creator if an update is available."
-                                   FontSize="18" DockPanel.Dock="Top"/>
-
-                        <local:Browser x:Name="commitsBrowser" />
-                    </DockPanel>
-                </TabItem>
+                
             </TabControl>
 
             <GridSplitter Name="ContentGridSplitter" ResizeDirection="Columns" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Foreground="Red" DragCompleted="ContentGridSplitter_DragCompleted"/>

@@ -45,7 +45,12 @@ namespace TrinityCreator.Emulator
                 result += SqlQuery.GenerateInsert(((ComboBoxItem)loot.lootTypeCb.SelectedValue).Content.ToString() + "_loot_template", l);
             return result;
         }
-        
+
+        public string GenerateQuery(VendorPage vendor)
+        {
+            return SqlQuery.GenerateInsert("npc_vendor", Vendor(vendor));
+        }
+
         private Dictionary<string, string> ItemTemplate(TrinityItem item)
         {
             var kvplist = new Dictionary<string, string> 
@@ -298,6 +303,20 @@ namespace TrinityCreator.Emulator
                 result.Add(kvplist);
             }
             return result.ToArray();
+        }
+
+        public Dictionary<string, string> Vendor(VendorPage vendor)
+        {
+            var kvplist = new Dictionary<string, string>
+            {
+                {"entry", vendor.npcTb.Text},
+                {"slot", vendor.slotTb.Text},
+                {"item", vendor.itemTb.Text},
+                {"maxcount", vendor.maxcountTb.Text},
+                {"incrtime", vendor.incrTimeTb.Text},
+                {"extendedcost", vendor.extendedCostTb.Text},
+            };
+            return kvplist;
         }
     }
 }

@@ -3,7 +3,7 @@
   <Product Id="*"
            Name="Trinity Creator"
            Language="1033" Version="1.0.5.16"
-           Manufacturer="RStijn"
+           Manufacturer="Nadromar"
            UpgradeCode="7F3D3555-6622-43BB-A57B-3ADD4D2AFB0F">
 
     <Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
@@ -88,9 +88,9 @@
                   Target="[#TrinityCreator.exe]"
                   WorkingDirectory="APPLICATIONROOTDIRECTORY" />
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
-        <RegistryValue Root="HKCU" Key="Software\RStijn\TrinityCreator" Name="installed" Type="integer" Value="1"
+        <RegistryValue Root="HKCU" Key="Software\Nadromar\TrinityCreator" Name="installed" Type="integer" Value="1"
                        KeyPath="yes" />
-        <RegistryValue Root="HKCU" Key="Software\RStijn\TrinityCreator" Name="installDirectory" Type="string"
+        <RegistryValue Root="HKCU" Key="Software\Nadromar\TrinityCreator" Name="installDirectory" Type="string"
                        Value="[APPLICATIONROOTDIRECTORY]" />
       </Component>
     </DirectoryRef>

@@ -36,7 +36,11 @@ namespace TrinityCreator.Emulator
         {
             throw new NotImplementedException();
         }
-        
+
+        public string GenerateQuery(VendorPage vendor)
+        {
+            throw new NotImplementedException();
+        }
 
         private Dictionary<string, string> ItemTemplate(TrinityItem item)
         {

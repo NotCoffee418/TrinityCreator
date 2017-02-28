@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrinityCreator.Emulator;
 
 namespace TrinityCreator
 {
@@ -23,6 +24,42 @@ namespace TrinityCreator
         public VendorPage()
         {
             InitializeComponent();
+        }
+
+        private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = EmulatorHandler.GenerateQuery(this);
+                ExportQuery.ToFile("Vendor"+ npcTb.Text + " Item " + itemTb.Text + ".sql", query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void exportDbBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = EmulatorHandler.GenerateQuery(this);
+                ExportQuery.ToDatabase(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void npcLookupBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.SelectedTarget = LookupTool.Target.Creature;
+        }
+
+        private void itemLookupBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.SelectedTarget = LookupTool.Target.Item;
         }
     }
 }

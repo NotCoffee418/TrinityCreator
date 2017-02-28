@@ -14,5 +14,6 @@ namespace TrinityCreator.Emulator
         string GenerateQuery(TrinityQuest quest);
         string GenerateQuery(TrinityCreature creature);
         string GenerateQuery(LootPage loot);
+        string GenerateQuery(VendorPage vendor);
     }
 }

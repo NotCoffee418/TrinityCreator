@@ -21,47 +21,6 @@ namespace TrinityCreator
             InitializeComponent();
             App._MainWindow = this;
 
-            // IKV to xml tmp
-            /* DELETE THIS!!
-            Dictionary<string, IKeyValue[]> ikv = new Dictionary<string, IKeyValue[]>();
-            ikv.Add("AI", AI.GetCreatureAI());
-            ikv.Add("CreatureFamily", CreatureFamily.GetCreatureFamilies());
-            ikv.Add("CreatureRank", CreatureRank.GetCreatureRanks());
-            ikv.Add("CreatureType", CreatureType.GetCreatureTypes());
-            ikv.Add("DamageType", DamageType.GetDamageTypes());
-            ikv.Add("ItemBonding", ItemBonding.GetItemBondingList());
-            ikv.Add("MovementType", MovementType.GetMovementTypes());
-            ikv.Add("QuestInfo", QuestInfo.ListQuestInfo());
-            ikv.Add("QuestXp", QuestXp.GetQuestXP());
-            ikv.Add("SocketBonus", SocketBonus.GetBonusList());
-            ikv.Add("Stat", Stat.GetStatList());
-            ikv.Add("UnitClass", UnitClass.GetUnitClasses());
-
-            // write>
-            using (XmlWriter w = XmlWriter.Create("ikv.xml"))
-            {
-                w.WriteStartElement("KeyValues");
-                foreach (var kvp in ikv)
-                {
-                    w.WriteStartElement(kvp.Key);
-                    foreach (IKeyValue sub in kvp.Value)
-                    {
-                        w.WriteStartElement("Item");
-                        w.WriteAttributeString("Id", sub.Id.ToString());
-                        w.WriteAttributeString("Description", sub.Description);
-                        w.WriteEndElement();
-                    }
-                    w.WriteEndElement();
-                }
-                w.WriteEndElement();
-            }
-            */
-
-
-
-
-
-
             // Check for updates
 #if !DEBUG
             Updater.CheckLatestVersion();
@@ -96,16 +55,12 @@ namespace TrinityCreator
             ModelViewerTabFrame.Content = new ModelViewerPage();
             CreatureCreatorTab.Content = new CreatureCreatorPage();
             LootCreatorTab.Content = new LootPage();
-
-
-            // view unfinished when set & on debug
-            commitsBrowser.LoadUrl("https://github.com/RStijn/TrinityCreator/commits/master");
-
+            VendorCreatorTab.Content = new VendorPage();
+            
             // Load randomTip
             tipTimer.Elapsed += ChangeRandomTip;
             tipTimer.Interval = 200; // don't change interval here
             tipTimer.Start();
-
         }
 
         static Random random = new Random();
@@ -146,21 +101,7 @@ namespace TrinityCreator
 
         #endregion
 
-        
-        private void Donate_Click(object sender, RoutedEventArgs e)
-        {
-            var msg =
-                string.Format(
-                    "Trinity Creator is released as an open source project created by a passionate IT student, so donating is completely optional.{0}{0}" +
-                    "If you're new to the emulation scene, you can use this program to create your own world and even release it as a public server.{0}" +
-                    "Or if you're already running a profitable server, you'll be able to save a lot of development time when releasing new content.{0}{0}" +
-                    "So, do you want to motivate me to implement more features or thank me for making things easier? Then toss me a few bucks! :)",
-                    Environment.NewLine);
-            var result = MessageBox.Show(msg, "Would you like to support Trinity Creator?", MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
-                Process.Start("https://paypal.me/RStijn");
-        }
-
+    
         private void Credits_Click(object sender, RoutedEventArgs e)
         {
             new CreditsWindow().Show();
@@ -168,7 +109,7 @@ namespace TrinityCreator
 
         private void ReportBugs_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://github.com/RStijn/TrinityCreator/issues/new");
+            Process.Start("https://github.com/Nadromar/TrinityCreator/issues/new");
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

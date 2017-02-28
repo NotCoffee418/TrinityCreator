@@ -114,7 +114,7 @@ namespace TrinityCreator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creator			Stijn Raeymaekers
+        ///   Looks up a localized string similar to Creator
         ///
         ///External libraries by:
         ///DBC Viewer		tomrus88

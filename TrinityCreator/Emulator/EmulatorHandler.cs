@@ -70,5 +70,15 @@ namespace TrinityCreator.Emulator
 
             return SelectedEmulator.GenerateQuery(loot);
         }
+
+        public static string GenerateQuery(VendorPage vendor)
+        {
+            if (vendor.npcTb.Text == "")
+                throw new Exception("Please enter NPC ID.");
+            else if (vendor.itemTb.Text == "")
+                throw new Exception("Please enter item ID.");
+
+            return SelectedEmulator.GenerateQuery(vendor);
+        }
     }
 }
