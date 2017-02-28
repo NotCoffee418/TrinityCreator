@@ -117,6 +117,7 @@ namespace TrinityCreator
             var r = MessageBox.Show("You may have unsaved changed. Are you sure you want to close TrinityCreator?", "Closing", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
             if (r == MessageBoxResult.No)
                 e.Cancel = true;
+            else Process.GetCurrentProcess().Kill(); // quick-fix suicide, something's hanging the program
         }
 
         private void LookupToolExpander_Expanded(object sender, RoutedEventArgs e)
