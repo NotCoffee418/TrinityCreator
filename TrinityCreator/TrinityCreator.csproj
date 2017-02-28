@@ -129,7 +129,6 @@
     <Compile Include="Emulator\cmangosZero.cs" />
     <Compile Include="Emulator\EmulatorHandler.cs" />
     <Compile Include="Emulator\IEmulator.cs" />
-    <Compile Include="Emulator\LightsDawn.cs" />
     <Compile Include="Emulator\Trinity335a.cs" />
     <Compile Include="ExportQuery.cs" />
     <Compile Include="LootPage.xaml.cs">
