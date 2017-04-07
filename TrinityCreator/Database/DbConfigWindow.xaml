@@ -12,6 +12,10 @@
             <TextBox Name="HostTxt" Text="127.0.0.1" />
         </DockPanel>
         <DockPanel Margin="0,0,0,5">
+            <Label Content="MySQL Port" Width="100" HorizontalAlignment="Left" />
+            <TextBox Name="PortTxt" Text="3306" />
+        </DockPanel>
+        <DockPanel Margin="0,0,0,5">
             <Label Content="User" Width="100" HorizontalAlignment="Left" />
             <TextBox Name="UserTxt" Text="trinity" />
         </DockPanel>

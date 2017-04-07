@@ -32,6 +32,9 @@ namespace TrinityCreator.Database
                         case "server":
                             HostTxt.Text = sub[1];
                             break;
+                        case "port":
+                            PortTxt.Text = sub[1];
+                            break;
                         case "user":
                             UserTxt.Text = sub[1];
                             break;
@@ -48,7 +51,7 @@ namespace TrinityCreator.Database
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            string connString = "server=" + HostTxt.Text + ";user=" + UserTxt.Text + ";password=" + PasswordTxt.Text + ";database=" + DatabaseTxt.Text + ";";
+            string connString = "server=" + HostTxt.Text + ";user=" + UserTxt.Text + ";password=" + PasswordTxt.Text + ";database=" + DatabaseTxt.Text + ";port=" + PortTxt.Text + ";";
 
             StatusLbl.Text = "Testing connection...";
             StatusLbl.Foreground = Brushes.Black;
