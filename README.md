@@ -3,7 +3,7 @@ This tool allows you to easily create items, creatures and quests for WoW emulat
 Trinity Creator can be used by beginners to learn emulator server customization and by experts who just want to do it easier and faster.
 
 ### Getting started ###
-* [Download & install] (https://github.com/RStijn/TrinityCreator/blob/master/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi?raw=true)
+* [Download & install](https://github.com/RStijn/TrinityCreator/blob/master/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi?raw=true)
 * Start creating!
 
 ### Supported emulators ###
