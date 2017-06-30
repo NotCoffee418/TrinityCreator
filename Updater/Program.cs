@@ -29,11 +29,18 @@ namespace TrinityCreatorUpdater
                 return;
             }
             Console.WriteLine("Old build: " + oldBuild);
-
-            while (Process.GetProcessesByName("TrinityCreator").Length != 0)
+            
+            try
             {
-                Thread.Sleep(2000);
-                Console.WriteLine("Waiting for Trinity Creator to close...");
+                while (Process.GetProcessesByName("TrinityCreator").Length != 0)
+                {
+                    Process.GetProcessesByName("TrinityCreator")[0].Kill();
+                }
+                    
+            }
+            catch
+            {
+                Console.WriteLine("Failed to close Trinity Creator. Please close it manually through Task Manager.");
             }
 
             // Start Update

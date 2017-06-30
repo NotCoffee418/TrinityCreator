@@ -34,7 +34,10 @@
             <Button Name="SaveBtn" Content="Save connection info" Width="150" HorizontalAlignment="Left"
                     Click="saveBtn_Click" IsDefault="True" />
             <Button Name="CloseBtn" Content="Close window" Width="90" HorizontalAlignment="Right"
-                    Click="closeBtn_Click" />
+                    Click="closeBtn_Click" IsCancel="True" />
+        </DockPanel>
+        <DockPanel>
+            <Button x:Name="restoreDefaultBtn" Content="Reset to default" Width="100" HorizontalAlignment="Left" Click="restoreDefaultBtn_Click"/>
         </DockPanel>
     </StackPanel>
 </Window>

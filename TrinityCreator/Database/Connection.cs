@@ -121,24 +121,40 @@ namespace TrinityCreator.Database
         internal static DataTable ExecuteQuery(string query, bool requestConfig = true)
         {
             Open(requestConfig);
-            if (!IsAlive)
-                return new DataTable();
-            var result = new DataTable();
-            var cmd = new MySqlCommand(query, _conn);
-            using (var rdr = cmd.ExecuteReader())
+            try
             {
-                result.Load(rdr);
+                if (!IsAlive)
+                    return new DataTable();
+                var result = new DataTable();
+                var cmd = new MySqlCommand(query, _conn);
+                using (var rdr = cmd.ExecuteReader())
+                {
+                    result.Load(rdr);
+                }
+                return result;
             }
-            return result;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Database Error: " + ex.Message);
+                return new DataTable();
+            }
         }
 
         internal static object ExecuteScalar(string query, bool requestConfig = true)
         {
-            Open(requestConfig);
-            if (!IsAlive)
+            try
+            {
+                Open(requestConfig);
+                if (!IsAlive)
+                    return null;
+                var cmd = new MySqlCommand(query, _conn);
+                return cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Database Error: " + ex.Message);
                 return null;
-            var cmd = new MySqlCommand(query, _conn);
-            return cmd.ExecuteScalar();
+            }
         }
     }
 }

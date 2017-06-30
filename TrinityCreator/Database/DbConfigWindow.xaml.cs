@@ -76,5 +76,20 @@ namespace TrinityCreator.Database
         {
             Close();
         }
+
+        private void restoreDefaultBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to clear your database settings? This will not affect your database.", 
+                "Reset database settings?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                Settings.Default.worldDb = "";
+                Settings.Default.Save();
+                HostTxt.Text = "";
+                PortTxt.Text = "";
+                UserTxt.Text = "";
+                PasswordTxt.Text = "";
+                DatabaseTxt.Text = "";
+            }
+        }
     }
 }
