@@ -67,7 +67,7 @@ namespace TrinityCreator.DBC
             if (!File.Exists(adPath)) // download ad.exe from cmangos repo
                 using (WebClient wc = new WebClient())
                 {
-                    wc.DownloadFile("https://github.com/cmangos/mangos-wotlk/blob/master/contrib/extractor_binary/ad.exe?raw=true", adPath);
+                    wc.DownloadFile("https://github.com/cmangos/mangos-wotlk/blob/b011fe90f20ee35ca8ef3d5a1ffa92ad0259b22c/contrib/extractor_binary/ad.exe?raw=true", adPath);
                 }
 
             // Start process
