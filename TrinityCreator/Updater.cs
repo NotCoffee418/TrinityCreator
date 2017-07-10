@@ -42,7 +42,7 @@ namespace TrinityCreator
         {
             try
             {
-                var updateFile = Path.GetTempFileName() + "-TrinityUpdater.exe";
+                var updateFile = String.Format("TrinityUpdater-{0}.exe", DateTime.Now.ToString("yyyyMMdd-HHmmss"));
                 var c = new WebClient();
                 c.DownloadFile(
                     "https://github.com/Nadromar/TrinityCreator/blob/master/Updater/bin/Release/TrinityCreatorUpdater.exe?raw=true",

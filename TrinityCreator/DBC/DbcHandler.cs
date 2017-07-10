@@ -72,7 +72,6 @@ namespace TrinityCreator.DBC
 
             // Start process
             var proc = new ProcessStartInfo(adPath);
-            proc.UserName = "admin";
             proc.WorkingDirectory = wowRoot;
             Process.Start(proc);
 
