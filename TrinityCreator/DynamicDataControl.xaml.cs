@@ -141,8 +141,11 @@ namespace TrinityCreator
                     int value = int.Parse(line.Value) * valueMultiplier;
                     i++;
 
-                    d.Add(keyPrefix + i, key.ToString());
-                    d.Add(valuePrefix + i, value.ToString());
+                    if (value != 0) // only add if socketColorX is set
+                    {
+                        d.Add(keyPrefix + i, key.ToString());
+                        d.Add(valuePrefix + i, value.ToString());
+                    }
                 }
             }
             catch
