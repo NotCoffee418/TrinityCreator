@@ -125,7 +125,8 @@ namespace TrinityCreator
                 new ItemInventoryType(9, "Wrists"),
                 new ItemInventoryType(10, "Hands"),
                 new ItemInventoryType(11, "Finger"),
-                new ItemInventoryType(12, "Trinket")
+                new ItemInventoryType(12, "Trinket"),
+                new ItemInventoryType(16, "Cloak")
             };
         }
     }
