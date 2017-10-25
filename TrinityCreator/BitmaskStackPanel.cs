@@ -477,5 +477,10 @@ namespace TrinityCreator
             Visibility = visibility;
             ToolTip = tooltip;
         }
+
+        public long GetValue()
+        {
+            return (long)Tag;
+        }
     }
 }

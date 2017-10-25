@@ -236,7 +236,10 @@ namespace TrinityCreator
             get
             {
                 if (_unitFlags == null)
+                {
                     _unitFlags = BitmaskStackPanel.GetUnitFlags();
+                    _unitFlags.BmspChanged += UnitFlags_BmspChanged;
+                }
                 return _unitFlags;
             }
             set
@@ -250,7 +253,10 @@ namespace TrinityCreator
             get
             {
                 if (_unitFlags2 == null)
+                {
                     _unitFlags2 = BitmaskStackPanel.GetUnitFlags2();
+                    _unitFlags2.BmspChanged += UnitFlags2_BmspChanged;
+                }
                 return _unitFlags2;
             }
             set
@@ -264,7 +270,10 @@ namespace TrinityCreator
             get
             {
                 if (_dynamicFlags == null)
+                {
                     _dynamicFlags = BitmaskStackPanel.GetCreatureDynamicFlags();
+                    _dynamicFlags.BmspChanged += DynamicFlags_BmspChanged;
+                }
                 return _dynamicFlags;
             }
             set
@@ -620,6 +629,37 @@ namespace TrinityCreator
 
 
 
+        #endregion
+
+
+        #region Logic
+        private void UnitFlags_BmspChanged(object sender, EventArgs e)
+        {
+            BitmaskCheckBox bmcb = (BitmaskCheckBox)sender;
+            if (bmcb.GetValue() == 536870912) // play dead sets feign dead
+                if (bmcb.IsChecked == true)
+                    UnitFlags2.SetValueIsChecked(1, true);
+                else
+                    UnitFlags2.SetValueIsChecked(1, false);
+        }
+        private void UnitFlags2_BmspChanged(object sender, EventArgs e)
+        {
+            BitmaskCheckBox bmcb = (BitmaskCheckBox)sender;
+            if (bmcb.GetValue() == 1) // feign death sets play dead
+                if (bmcb.IsChecked == true)
+                    UnitFlags.SetValueIsChecked(536870912, true);
+                else
+                    UnitFlags.SetValueIsChecked(536870912, false);
+        }
+        private void DynamicFlags_BmspChanged(object sender, EventArgs e)
+        {
+            BitmaskCheckBox bmcb = (BitmaskCheckBox)sender;
+            if (bmcb.GetValue() == 32 && bmcb.IsChecked == true) // Is dead checks sets tapped & grey name
+            {
+                DynamicFlags.SetValueIsChecked(8, true);
+                DynamicFlags.SetValueIsChecked(4, true);
+            }
+        }
         #endregion
 
         public void RaisePropertyChanged(string property)
