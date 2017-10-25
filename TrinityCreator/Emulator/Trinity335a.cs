@@ -106,6 +106,9 @@ namespace TrinityCreator.Emulator
             {
                 throw new Exception("Invalid value in magic resistance.");
             }
+            
+            if (item.InventoryType.Id == 15 || item.InventoryType.Id == 26)
+                kvplist.Add("RangedModRange", "100");
 
             return kvplist;
         }
