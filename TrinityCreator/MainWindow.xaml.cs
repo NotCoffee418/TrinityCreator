@@ -36,7 +36,15 @@ namespace TrinityCreator
             // prepare lookup tool
             ContentGrid.ColumnDefinitions[2].Width = new GridLength(25);
             ContentGridSplitter.Visibility = Visibility.Collapsed;
-
+            
+            // Load usable creators
+            ItemTab.Content = new ItemPage();
+            QuestTab.Content = new QuestPage();
+            ModelViewerTabFrame.Content = new ModelViewerPage();
+            CreatureCreatorTab.Content = new CreatureCreatorPage();
+            LootCreatorTab.Content = new LootPage();
+            VendorCreatorTab.Content = new VendorPage();
+            
             // Set emulator
             switch (Properties.Settings.Default.emulator)
             {
@@ -46,17 +54,11 @@ namespace TrinityCreator
                 case 1: // cMangos112
                     cMangos112Rb.IsChecked = true;
                     break;
+                case 2: // cMangos112
+                    azeroth335aRb.IsChecked = true;
+                    break;
             }
 
-
-            // Load usable creators
-            ItemTab.Content = new ItemPage();
-            QuestTab.Content = new QuestPage();
-            ModelViewerTabFrame.Content = new ModelViewerPage();
-            CreatureCreatorTab.Content = new CreatureCreatorPage();
-            LootCreatorTab.Content = new LootPage();
-            VendorCreatorTab.Content = new VendorPage();
-            
             // Load randomTip
             tipTimer.Elapsed += ChangeRandomTip;
             tipTimer.Interval = 200; // don't change interval here
@@ -98,10 +100,21 @@ namespace TrinityCreator
             Properties.Settings.Default.emulator = 1;
             Properties.Settings.Default.Save();
         }
+        private void azeroth335a_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.emulator = 2;
+            Properties.Settings.Default.Save();
 
+            // TODO: Lazy fix, take this out when updating emulator system
+            try
+            {
+                ((CreatureCreatorPage)CreatureCreatorTab.Content).MinMaxDmgDp.Visibility = Visibility.Visible;
+            }
+            catch { /* will fail on startup, page load event also has one */ }
+        }
         #endregion
 
-    
+
         private void Credits_Click(object sender, RoutedEventArgs e)
         {
             new CreditsWindow().Show();

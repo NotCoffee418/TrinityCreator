@@ -7,13 +7,15 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Settings">
+            <MenuItem Header="Config">
                 <MenuItem Name="ConfigureDbc" Header="Configure DB_C Path" Click="configureDbc_Click" />
                 <MenuItem Name="ConfigureMysql" Header="Configure _MySQL" Click="configureMysql_Click" />
-                <MenuItem Header="Select Emulator">
-                    <RadioButton Content="TrinityCore/cMangos 3.3.5a" Name="trinity335aRb" Checked="trinity335aRb_Checked"/>
-                    <RadioButton Content="cMangos 1.12 (UNTESTED)" Name="cMangos112Rb" Checked="cMangos112Rb_Checked"/>
-                </MenuItem>
+            </MenuItem>
+
+            <MenuItem Header="Select Emulator">
+                <RadioButton Content="TrinityCore/cMangos 3.3.5a" Name="trinity335aRb" Checked="trinity335aRb_Checked"/>
+                <RadioButton Content="AzerothCore 3.3.5a" Name="azeroth335aRb" Checked="azeroth335a_Checked"/>
+                <RadioButton Content="cMangos 1.12 (UNTESTED)" Name="cMangos112Rb" Checked="cMangos112Rb_Checked"/>
             </MenuItem>
 
             <MenuItem Header="Info" >

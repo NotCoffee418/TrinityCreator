@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:l="clr-namespace:TrinityCreator"
       mc:Ignorable="d" d:DesignHeight="1500" d:DesignWidth="600"
-      Title="CreatureCreatorPage">
+      Title="CreatureCreatorPage" Loaded="Page_Loaded">
     <Page.Resources>
         <l:ValueToVisibilityConverter x:Key="ValueVisibilityConverter" />
     </Page.Resources>
@@ -111,6 +111,14 @@
                                 <TextBox Text="{Binding MinLevel}" DockPanel.Dock="Left" Width="50" ToolTip="Minimum level"/>
                                 <Label Content=" - "/>
                                 <TextBox Text="{Binding MaxLevel}" DockPanel.Dock="Left" Width="50" ToolTip="Maximum level"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel Margin="2" Name="MinMaxDmgDp" x:FieldModifier="public" Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Damage" DockPanel.Dock="Left" Width="120" />
+                                <TextBox Text="{Binding MinDmg}" DockPanel.Dock="Left" Width="50" ToolTip="Minimum damage"/>
+                                <Label Content=" - "/>
+                                <TextBox Text="{Binding MaxDmg}" DockPanel.Dock="Left" Width="50" ToolTip="Maximum damage"/>
                             </StackPanel>
                         </DockPanel>
                         <DockPanel Margin="2">

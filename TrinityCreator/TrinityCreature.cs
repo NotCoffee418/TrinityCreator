@@ -66,6 +66,8 @@ namespace TrinityCreator
         private DynamicDataControl _auras;
         private DynamicDataControl _spells;
         private DynamicDataControl _difficultyEntry;
+        private int _minDmg;
+        private int _maxDmg;
 
 
         #region Properties
@@ -626,7 +628,24 @@ namespace TrinityCreator
                 RaisePropertyChanged("Auras");
             }
         }
-
+        public int MinDmg
+        {
+            get { return _minDmg; }
+            set
+            {
+                _minDmg = DataType.LimitLength(value, "int(10)");
+                RaisePropertyChanged("MinDmg");
+            }
+        }
+        public int MaxDmg
+        {
+            get { return _maxDmg; }
+            set
+            {
+                _maxDmg = DataType.LimitLength(value, "int(10)");
+                RaisePropertyChanged("MaxDmg");
+            }
+        }
 
 
         #endregion

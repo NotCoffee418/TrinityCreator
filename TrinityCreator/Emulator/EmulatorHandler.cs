@@ -32,6 +32,9 @@ namespace TrinityCreator.Emulator
                 case 1:
                     _selectedEmulator = new cmangosZero();
                     break;
+                case 2:
+                    _selectedEmulator = new Azeroth335a();
+                    break;
             }
         }
 
