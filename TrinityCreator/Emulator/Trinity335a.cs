@@ -88,6 +88,7 @@ namespace TrinityCreator.Emulator
                 {"socketBonus", item.SocketBonus.Id.ToString()},
                 {"FlagsExtra", item.FlagsExtra.BitmaskValue.ToString()},
                 {"StatsCount", item.StatsCount.ToString()},
+                {"ItemLevel", item.ItemLevel.ToString()},
             };
             item.GemSockets.AddValues(kvplist, "socketColor_", "socketContent_");
             item.Stats.AddValues(kvplist, "stat_type", "stat_value");

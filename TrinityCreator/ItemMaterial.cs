@@ -12,7 +12,7 @@
 
         internal static ItemMaterial GetUndefined()
         {
-            return new ItemMaterial(0, "Not Defined");
+            return new ItemMaterial(1, "Not Defined");
         }
 
         internal static ItemMaterial GetPlate()

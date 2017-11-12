@@ -5,7 +5,9 @@ namespace TrinityCreator
     public class ItemInventoryType : IKeyValue
     {
         public ItemInventoryType(int id, string description, int sheath = 0)
-            : base(id, description) { }
+            : base(id, description) {
+            Sheath = sheath;
+        }
 
         public int Sheath { get; set; }
 

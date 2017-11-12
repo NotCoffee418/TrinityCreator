@@ -149,7 +149,7 @@
                 </GroupBox>
                 <GroupBox Name="StatsBox" Header="Stats" Content="{Binding Stats, UpdateSourceTrigger=PropertyChanged}" />
 
-                <GroupBox Name="EquipmentBox" Header="Equipment Properties" Height="86">
+                <GroupBox Name="EquipmentBox" Header="Equipment Properties" Height="116">
                     <Grid>
                         <Label FontSize="12" Content="Level required" Height="30" Margin="0,5,0,0"
                                VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" />
@@ -157,10 +157,16 @@
                                  Text="{Binding MinLevel, UpdateSourceTrigger=PropertyChanged}" Height="25"
                                  Margin="85,6,9,0" VerticalAlignment="Top" />
 
-                        <Label FontSize="12" Content="Durability" Height="30" Margin="0,35,0,0" VerticalAlignment="Top"
+                        <Label FontSize="12" Content="Item level" Height="30" Margin="0,35,0,0"
+                               VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" />
+                        <TextBox Name="itemLevelTxt"
+                                 Text="{Binding ItemLevel, UpdateSourceTrigger=PropertyChanged}" Height="25"
+                                 Margin="85,36,9,0" VerticalAlignment="Top" />
+
+                        <Label FontSize="12" Content="Durability" Height="30" Margin="0,65,0,0" VerticalAlignment="Top"
                                HorizontalAlignment="Left" Width="84" />
                         <TextBox Name="DurabilityTxt" Text="{Binding Durability, UpdateSourceTrigger=PropertyChanged}"
-                                 Height="25" Margin="85,36,9,0" VerticalAlignment="Top" />
+                                 Height="25" Margin="85,66,9,0" VerticalAlignment="Top" />
 
                     </Grid>
                 </GroupBox>

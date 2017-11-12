@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*"
            Name="Trinity Creator"
-           Language="1033" Version="1.0.6.24"
+           Language="1033" Version="1.0.7.29"
            Manufacturer="Nadromar"
            UpgradeCode="7F3D3555-6622-43BB-A57B-3ADD4D2AFB0F">
 

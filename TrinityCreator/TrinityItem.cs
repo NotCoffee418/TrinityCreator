@@ -39,11 +39,12 @@ namespace TrinityCreator
         private string _quote;
         private DynamicDataControl _resistances;
         private XmlKeyValue _socketBonus;
-        private int _stackable;
+        private int _stackable = 1;
         private DynamicDataControl _stat;
         private Currency _valuebuy;
         private Currency _valuesell;
         private int _statsCount;
+        private int _itemLevel;
 
         public string Name
         {
@@ -72,6 +73,11 @@ namespace TrinityCreator
             {
                 _itemclass = value;
                 RaisePropertyChanged("Class");
+
+                // itemlevel for wep/armor
+                if ((_itemclass.Id == 2 || _itemclass.Id == 4) && ItemLevel == 0)
+                    ItemLevel = 1;
+                else ItemLevel = 0;
             }
         }
 
@@ -410,6 +416,15 @@ namespace TrinityCreator
             set { _bagFamily = value; }
         }
 
+        public int ItemLevel
+        {
+            get { return _itemLevel; }
+            set
+            {
+                _itemLevel = DataType.LimitLength(value, "smallint(3)");
+                RaisePropertyChanged("ItemLevel");
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
