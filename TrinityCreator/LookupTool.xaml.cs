@@ -292,5 +292,89 @@ namespace TrinityCreator
             }
             catch { /* Happens when clicking notification row, do nothing */ }
         }
+        
+        private void Context_Copy(object sender, RoutedEventArgs e)
+        {
+            // Usually copy target is col 0, add exceptions below
+            int copyColTarget = 0;
+            switch (SelectedTarget)
+            {
+                case Target.Item:
+                case Target.Creature:
+                    copyColTarget = 1;
+                    break;
+                default:
+                    copyColTarget = 0;
+                    break;
+            }
+
+            try
+            {
+                DataRowView r = dataGrid.SelectedItem as DataRowView;
+                Clipboard.SetText(r.Row[copyColTarget].ToString());
+            }
+            catch // Occurs when not selecting a row
+            {
+                MessageBox.Show("Failed to copy item. Type it out manually.", 
+                    "Failed to copy", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Context_Delete(object sender, RoutedEventArgs e)
+        {
+            // Generate delete query
+            List<string[]> qParts = new List<string[]>();
+            bool success = true;
+            switch (SelectedTarget)
+            {
+                case Target.Creature:
+                    qParts.Add(new string[2] { "creature_template", "entry" });
+                    qParts.Add(new string[2] { "creature_template_addon", "entry" });
+                    qParts.Add(new string[2] { "creature", "id" });
+                    break;
+                case Target.Item:
+                    qParts.Add(new string[2] { "item_template", "entry" });
+                    break;
+                case Target.Quest:
+                    qParts.Add(new string[2] { "quest_template", "ID" });
+                    qParts.Add(new string[2] { "quest_addon", "ID" });
+                    break;
+                default:
+                    success = false;
+                    MessageBox.Show(
+                        String.Format("Cannot delete a {0} in Trinity Creator.\nPlease delete it manually in the database.", Enum.GetName(typeof(Target), SelectedTarget)),
+                        "Failed to delete", MessageBoxButton.OK, MessageBoxImage.Information);
+                    break;
+            }
+
+            // Confirm & execute
+            try
+            {
+                DataRowView r = dataGrid.SelectedItem as DataRowView; // trigger possible error before asking confirmation
+                string id = r.Row[0].ToString();
+                string selectedTargetName = Enum.GetName(typeof(Target), SelectedTarget);
+                string extrawarning = "";
+
+                if (selectedTargetName == "Creature")
+                    extrawarning = " and all it's spawns in the world";
+
+                if (success && MessageBoxResult.Yes == MessageBox.Show(
+                    string.Format("Are you sure you want to delete {0} {1} {2}?", selectedTargetName, id, extrawarning),
+                    "Confirm delete", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning))
+                {
+                    string query = "";
+                    foreach (var qP in qParts)
+                        query += string.Format("DELETE FROM {0} WHERE {1}={2}; ", qP[0], qP[1], id);
+
+                    Database.Connection.ExecuteQuery(query);
+                    MessageBox.Show(string.Format("Successfully deleted id {0} from database.", id), "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch // Occurs when not selecting a row
+            {
+                MessageBox.Show("Failed to delete selected target. Please delete it manually.",
+                    "Failed to delete", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

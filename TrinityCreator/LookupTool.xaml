@@ -27,7 +27,14 @@
                 <Button Name="searchBtn" Content="Search" DockPanel.Dock="Right" Click="searchBtn_Click" IsDefault="True" Width="75"/>
                 <TextBox Name="searchTxt" />
             </DockPanel>
-            <DataGrid Name="dataGrid" IsReadOnly="True" MouseDoubleClick="dataGrid_MouseDoubleClick"/>
+            <DataGrid Name="dataGrid" IsReadOnly="True" MouseDoubleClick="dataGrid_MouseDoubleClick">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy" Click="Context_Copy" />
+                        <MenuItem Header="Delete" Click="Context_Delete" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

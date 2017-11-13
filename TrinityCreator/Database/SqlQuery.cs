@@ -56,7 +56,7 @@ namespace TrinityCreator.Database
         internal static DataTable FindGoByName(string partialName)
         {
             return ExecuteQuery(
-                "SELECT entry, name FROM gameobject_template WHERE name LIKE '%" + CleanText(partialName, false) + "%' ORDER BY entry DESC LIMIT 200;");
+                "SELECT entry, displayId, name FROM gameobject_template WHERE name LIKE '%" + CleanText(partialName, false) + "%' ORDER BY entry DESC LIMIT 200;");
         }
 
         internal static DataTable GetSpells(string partialName)
