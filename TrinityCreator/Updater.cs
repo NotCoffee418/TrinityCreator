@@ -45,7 +45,7 @@ namespace TrinityCreator
                 var updateFile = String.Format("TrinityUpdater-{0}.exe", DateTime.Now.ToString("yyyyMMdd-HHmmss"));
                 var c = new WebClient();
                 c.DownloadFile(
-                    "https://github.com/Nadromar/TrinityCreator/blob/master/Updater/bin/Release/TrinityCreatorUpdater.exe?raw=true",
+                    "https://github.com/Nadromar/TrinityCreator/blob/no-modelviewer/Updater/bin/Release/TrinityCreatorUpdater.exe?raw=true",
                     updateFile);
                 var currentExe = Assembly.GetExecutingAssembly().Location;
 
@@ -70,7 +70,7 @@ namespace TrinityCreator
             var client = new WebClient();
             var stream =
                 client.OpenRead(
-                    "https://raw.githubusercontent.com/Nadromar/TrinityCreator/master/TrinityCreator/Properties/AssemblyInfo.cs");
+                    "https://raw.githubusercontent.com/Nadromar/TrinityCreator/no-modelviewer/TrinityCreator/Properties/AssemblyInfo.cs");
             var reader = new StreamReader(stream);
             var lines = Regex.Split(reader.ReadToEnd(), "\r\n|\r|\n");
             foreach (var line in lines)
