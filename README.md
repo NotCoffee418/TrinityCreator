@@ -3,7 +3,7 @@ This tool allows you to easily create items, creatures and quests for WoW emulat
 Trinity Creator can be used by beginners to learn emulator server customization and by experts who just want to do it easier and faster.
 
 ### Getting started ###
-* [Download & install](https://github.com/RStijn/TrinityCreator/blob/master/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi?raw=true)
+* [Download Latest Version](https://github.com/Nadromar/TrinityCreator/blob/master/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi?raw=true)
 * Start creating!
 
 ### Supported emulators ###
@@ -13,8 +13,8 @@ Trinity Creator can be used by beginners to learn emulator server customization 
 * CMangos Zero 1.12 (Items, quests & creatures)
 
 ### Requirements ###
-* Windows 7 or newer
-* [.NET Framework 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
+* Windows 10 (has all requirements pre-installed)
+* Windows 7 (Make sure to install [.NET Framework 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653) and install the  [Windows 7 version of TrinityCreator](https://github.com/Nadromar/TrinityCreator/blob/no-modelviewer/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi)
 
 ### Development ###
 Please report any bugs and suggestions on GitHub.
