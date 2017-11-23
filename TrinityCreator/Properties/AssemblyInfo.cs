@@ -6,7 +6,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("TrinityCreator")]
+[assembly: AssemblyTitle("TrinityCreatorWin7")]
 [assembly: AssemblyDescription("Easily create content for a 3.3.5a TrinityCore emulator server.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Nadromar")]
