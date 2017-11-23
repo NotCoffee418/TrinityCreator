@@ -14,7 +14,7 @@ Trinity Creator can be used by beginners to learn emulator server customization 
 
 ### Requirements ###
 * Windows 10 (has all requirements pre-installed)
-* Windows 7 (Make sure to install [.NET Framework 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653) and install the  [Windows 7 version of TrinityCreator](https://github.com/Nadromar/TrinityCreator/blob/no-modelviewer/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi)
+* Windows 7 (Install [.NET Framework 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653) and use the  [Windows 7 version of TrinityCreator](https://github.com/Nadromar/TrinityCreator/blob/no-modelviewer/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi))
 
 ### Development ###
 Please report any bugs and suggestions on GitHub.
