@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CefSharp;
-using CefSharp.WinForms;
+//using CefSharp;
+//using CefSharp.WinForms;
 
 namespace TrinityCreator
 {
@@ -16,16 +16,16 @@ namespace TrinityCreator
     {
         public BrowserControl(string url)
         {
-            InitializeComponent();
+            InitializeComponent();/*
             Chromium = new ChromiumWebBrowser(url)
             {
                 Dock = DockStyle.Fill
             };
             Chromium.BackColor = Color.Black;
 
-            Controls.Add(Chromium);
+            Controls.Add(Chromium);*/
         }
 
-        public ChromiumWebBrowser Chromium { get; set; }
+        //public ChromiumWebBrowser Chromium { get; set; }
     }
 }

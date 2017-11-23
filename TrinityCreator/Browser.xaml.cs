@@ -30,13 +30,13 @@ namespace TrinityCreator
         public Browser()
         {
             InitializeComponent();
-
+            /*
             // might need this in loaded event
             // Use winforms because webgl issues in wpf
             ChromiumControl = new BrowserControl("about:blank");
             WindowsFormsHost host = new WindowsFormsHost();
             host.Child = ChromiumControl;
-            HostGrid.Children.Add(host);
+            HostGrid.Children.Add(host);*/
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace TrinityCreator
         /// <param name="url"></param>
         /// <param name="blankFirst">modelViewer requires blank page first because js</param>
         public void LoadUrl(string url, bool blankFirst = false)
-        {
+        {/*
             try
             {
                 if (blankFirst)
@@ -55,7 +55,8 @@ namespace TrinityCreator
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Unable to load URL", MessageBoxButton.OK, MessageBoxImage.Error);
-            }            
+            }  
+            */
         }
     }
 }

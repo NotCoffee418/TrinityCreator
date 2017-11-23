@@ -71,7 +71,7 @@
                 <TabItem Header="Vendor">
                     <Frame Name="VendorCreatorTab" />
                 </TabItem>
-                <TabItem Header="Model Viewer" Name="ModelViewer" Selector.Selected="modelViewerTab_Selected">
+                <TabItem Header="Model Viewer" Name="ModelViewer" Selector.Selected="modelViewerTab_Selected" Visibility="Collapsed">
                     <Frame Name="ModelViewerTabFrame" />
                 </TabItem>
                 

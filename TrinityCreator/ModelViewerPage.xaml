@@ -22,7 +22,6 @@
             </ComboBox>
             <Button Content="Load" Click="loadBtn_Click" Width="50" IsDefault="True" Margin="5"/>
         </StackPanel>
-        <local:Browser x:Name="mvBrowser" />
 
     </DockPanel>
 </Page>

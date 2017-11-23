@@ -30,54 +30,7 @@
       <Component Id="MySql.Data.dll">
         <File Id="MySql.Data.dll" Source="$(var.TrinityCreator.TargetDir)MySql.Data.dll" KeyPath="yes" />
       </Component>
-      <Component Id="CefSharp.BrowserSubprocess.exe">
-        <File Id="CefSharp.BrowserSubprocess.exe" Source="$(var.TrinityCreator.TargetDir)CefSharp.BrowserSubprocess.exe" KeyPath="yes" />
-      </Component>
-      <Component Id="CefSharp.BrowserSubprocess.Core.dll">
-        <File Id="CefSharp.BrowserSubprocess.Core.dll" Source="$(var.TrinityCreator.TargetDir)CefSharp.BrowserSubprocess.Core.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CefSharp.Core.dll">
-        <File Id="CefSharp.Core.dll" Source="$(var.TrinityCreator.TargetDir)CefSharp.Core.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CefSharp.dll">
-        <File Id="CefSharp.dll" Source="$(var.TrinityCreator.TargetDir)CefSharp.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CefSharp.WinForms.dll">
-        <File Id="CefSharp.WinForms.dll" Source="$(var.TrinityCreator.TargetDir)CefSharp.WinForms.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="d3dcompiler_43.dll">
-        <File Id="d3dcompiler_43.dll" Source="$(var.TrinityCreator.TargetDir)d3dcompiler_43.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="d3dcompiler_47.dll">
-        <File Id="d3dcompiler_47.dll" Source="$(var.TrinityCreator.TargetDir)d3dcompiler_47.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="libcef.dll">
-        <File Id="libcef.dll" Source="$(var.TrinityCreator.TargetDir)libcef.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="libEGL.dll">
-        <File Id="libEGL.dll" Source="$(var.TrinityCreator.TargetDir)libEGL.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="libGLESv2.dll">
-        <File Id="libGLESv2.dll" Source="$(var.TrinityCreator.TargetDir)libGLESv2.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="icudtl.dat">
-        <File Id="icudtl.dat" Source="$(var.TrinityCreator.TargetDir)icudtl.dat" KeyPath="yes" />
-      </Component>
-      <Component Id="cef.pak">
-        <File Id="cef.pak" Source="$(var.TrinityCreator.TargetDir)cef.pak" KeyPath="yes" />
-      </Component>
-      <Component Id="cef_100_percent.pak">
-        <File Id="cef_100_percent.pak" Source="$(var.TrinityCreator.TargetDir)cef_100_percent.pak" KeyPath="yes" />
-      </Component>
-      <Component Id="cef_200_percent.pak">
-        <File Id="cef_200_percent.pak" Source="$(var.TrinityCreator.TargetDir)cef_200_percent.pak" KeyPath="yes" />
-      </Component>
-      <Component Id="natives_blob.bin">
-        <File Id="natives_blob.bin" Source="$(var.TrinityCreator.TargetDir)natives_blob.bin" KeyPath="yes" />
-      </Component>
-      <Component Id="snapshot_blob.bin">
-        <File Id="snapshot_blob.bin" Source="$(var.TrinityCreator.TargetDir)snapshot_blob.bin" KeyPath="yes" />
-      </Component>
+      
     </DirectoryRef>
 
     <!-- Step 2: Add the shortcut to your installer package -->
@@ -98,22 +51,6 @@
     <Feature Id="MainApplication" Title="Main Application" Level="1">
       <ComponentRef Id="TrinityCreator.exe" />
       <ComponentRef Id="MySql.Data.dll" />
-      <ComponentRef Id="CefSharp.BrowserSubprocess.exe" />
-      <ComponentRef Id="CefSharp.BrowserSubprocess.Core.dll" />
-      <ComponentRef Id="CefSharp.Core.dll" />
-      <ComponentRef Id="CefSharp.dll" />
-      <ComponentRef Id="CefSharp.WinForms.dll" />
-      <ComponentRef Id="d3dcompiler_43.dll" />
-      <ComponentRef Id="d3dcompiler_47.dll" />
-      <ComponentRef Id="libcef.dll" />
-      <ComponentRef Id="libEGL.dll" />
-      <ComponentRef Id="libGLESv2.dll" />
-      <ComponentRef Id="icudtl.dat" />
-      <ComponentRef Id="cef.pak" />
-      <ComponentRef Id="cef_100_percent.pak" />
-      <ComponentRef Id="cef_200_percent.pak" />
-      <ComponentRef Id="natives_blob.bin" />
-      <ComponentRef Id="snapshot_blob.bin" />
       <!-- Step 3: Tell WiX to install the shortcut -->
       <ComponentRef Id="ApplicationShortcut" />
     </Feature>
