@@ -414,6 +414,8 @@ namespace TrinityCreator
             if (result == MessageBoxResult.Yes)
             {
                 _item = new TrinityItem();
+                _preview = new ItemPreview(_item);
+                PreviewBox.Content = _preview;
                 DataContext = null;
                 DataContext = _item;
                 PrepareItemPage();
