@@ -8,7 +8,7 @@ Trinity Creator can be used by beginners to learn emulator server customization 
 
 ### Supported emulators ###
 * TrinityCore WotLK 3.3.5a
-* CMangos WotLK 3.3.5a
+* CMangos WotLK 3.3.5a (Items, In progress...)
 * AzerothCore 3.3.5a (Items, quests & creatures)
 * CMangos Zero 1.12 (Items, quests & creatures)
 
