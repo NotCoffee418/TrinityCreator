@@ -8,9 +8,9 @@ using System.Windows.Controls;
 
 namespace TrinityCreator.Emulator
 {
-    class Trinity335a : IEmulator
+    class cMangos335a : IEmulator
     {
-        public Trinity335a()
+        public cMangos335a()
         {
             ID = 0;
         }
@@ -53,11 +53,11 @@ namespace TrinityCreator.Emulator
 
         private Dictionary<string, string> ItemTemplate(TrinityItem item)
         {
-            var kvplist = new Dictionary<string, string> 
+            var kvplist = new Dictionary<string, string>
             {
                 {"name", SqlQuery.CleanText(item.Name)},
                 { "entry", item.EntryId.ToString()},
-                
+
                 {"description", SqlQuery.CleanText(item.Quote)},
                 {"class", item.Class.Id.ToString()},
                 {"subclass", item.ItemSubClass.Id.ToString()},
@@ -87,7 +87,7 @@ namespace TrinityCreator.Emulator
                 {"block", item.Block.ToString()},
                 {"BagFamily", item.BagFamily.BitmaskValue.ToString()},
                 {"socketBonus", item.SocketBonus.Id.ToString()},
-                {"FlagsExtra", item.FlagsExtra.BitmaskValue.ToString()},
+                {"ExtraFlags", item.FlagsExtra.BitmaskValue.ToString()},
                 {"StatsCount", item.StatsCount.ToString()},
                 {"ItemLevel", item.ItemLevel.ToString()},
             };
@@ -108,7 +108,7 @@ namespace TrinityCreator.Emulator
             {
                 throw new Exception("Invalid value in magic resistance.");
             }
-            
+
             if (item.InventoryType.Id == 15 || item.InventoryType.Id == 26)
                 kvplist.Add("RangedModRange", "100");
 
@@ -226,55 +226,57 @@ namespace TrinityCreator.Emulator
                 {"subname", SqlQuery.CleanText(creature.Subname)},
                 {"minlevel", creature.MinLevel.ToString()},
                 {"maxlevel", creature.MaxLevel.ToString()},
-                {"faction", creature.Faction.ToString()},
-                {"npcflag", creature.NpcFlags.BitmaskValue.ToString()},
-                {"speed_walk", creature.SpeedWalk.ToString()},
-                {"speed_run", creature.SpeedRun.ToString()},
+                {"FactionAlliance", creature.Faction.ToString()},
+                {"FactionHorde", creature.Faction.ToString()}, // to do : pouvoir choisir 2 factions différentes
+                {"NpcFlags", creature.NpcFlags.BitmaskValue.ToString()},
+                {"SpeedWalk", creature.SpeedWalk.ToString()},
+                {"SpeedRun", creature.SpeedRun.ToString()},
                 {"scale", creature.Scale.ToString()},
                 {"rank", creature.Rank.Id.ToString()},
-                {"dmgschool", creature.DmgSchool.Id.ToString()},
-                {"BaseAttackTime", creature.BaseAttackTime.ToString()},
-                {"RangeAttackTime", creature.RangeAttackTime.ToString()},
-                {"unit_class", creature._UnitClass.Id.ToString()},
-                {"unit_flags", creature.UnitFlags.BitmaskValue.ToString()},
-                {"unit_flags2", creature.UnitFlags2.BitmaskValue.ToString()},
-                {"dynamicflags", creature.DynamicFlags.BitmaskValue.ToString()},
+                {"DamageSchool", creature.DmgSchool.Id.ToString()},
+                {"MeleeBaseAttackTime", creature.BaseAttackTime.ToString()},
+                {"RangedBaseAttackTime", creature.RangeAttackTime.ToString()},
+                {"UnitClass", creature._UnitClass.Id.ToString()},
+                {"UnitFlags", creature.UnitFlags.BitmaskValue.ToString()},
+                //{"unit_flags2", creature.UnitFlags2.BitmaskValue.ToString()},
+                {"DynamicFlags", creature.DynamicFlags.BitmaskValue.ToString()},
                 {"family", creature.Family.Id.ToString()},
-                {"trainer_type", creature.Trainer.TrainerType.ToString()},
-                {"trainer_spell", creature.Trainer.TrainerSpell.ToString()},
-                {"trainer_class", creature.Trainer.TrainerClass.ToString()},
-                {"trainer_race", creature.Trainer.TrainerRace.ToString()},
-                {"type", creature._CreatureType.Id.ToString()},
-                {"type_flags", creature.TypeFlags.BitmaskValue.ToString()},
+                {"trainertype", creature.Trainer.TrainerType.ToString()},
+                {"trainerspell", creature.Trainer.TrainerSpell.ToString()},
+                {"trainerclass", creature.Trainer.TrainerClass.ToString()},
+                {"trainerrace", creature.Trainer.TrainerRace.ToString()},
+                {"CreatureType", creature._CreatureType.Id.ToString()},
+                //{"InhabitType", creature.TypeFlags.BitmaskValue.ToString()},
                 {"lootid", creature.LootId.ToString()},
-                {"pickpocketloot", creature.PickpocketLoot.ToString()},
-                {"skinloot", creature.SkinLoot.ToString()},
+                {"pickpocketlootid", creature.PickpocketLoot.ToString()},
+                {"skinninglootid", creature.SkinLoot.ToString()},
                 {"PetSpellDataId", creature.PetDataId.ToString()},
-                {"VehicleId", creature.VehicleId.ToString()},
-                {"mingold", creature.MinGold.Amount.ToString()},
-                {"maxgold", creature.MaxGold.Amount.ToString()},
+                {"VehicleTemplateId", creature.VehicleId.ToString()},
+                {"minlootgold", creature.MinGold.Amount.ToString()},
+                {"maxlootgold", creature.MaxGold.Amount.ToString()},
                 {"AIName", SqlQuery.CleanText(creature.AIName.Description)},
                 {"MovementType", creature.Movement.Id.ToString()},
                 {"InhabitType", creature.Inhabit.BitmaskValue.ToString()},
-                {"HoverHeight", creature.HoverHeight.ToString()},
-                {"HealthModifier", creature.HealthModifier.ToString()},
-                {"ManaModifier", creature.ManaModifier.ToString()},
-                {"ArmorModifier", creature.ArmorModifier.ToString()},
-                {"DamageModifier", creature.DamageModifier.ToString()},
-                {"ExperienceModifier", creature.ExperienceModifier.ToString()},
+                //{"HoverHeight", creature.HoverHeight.ToString()},
+                {"HealthMultiplier", creature.HealthModifier.ToString()},
+                {"PowerMultiplier", creature.ManaModifier.ToString()},
+                {"ArmorMultiplier", creature.ArmorModifier.ToString()},
+                {"DamageMultiplier", creature.DamageModifier.ToString()},
+                {"ExperienceMultiplier", creature.ExperienceModifier.ToString()},
                 {"RacialLeader", Convert.ToInt16(creature.RacialLeader).ToString()},
-                {"RegenHealth", Convert.ToInt16(creature.RegenHealth).ToString()},
-                {"mechanic_immune_mask", creature.MechanicImmuneMask.BitmaskValue.ToString()},
-                {"flags_extra", creature.FlagsExtra.BitmaskValue.ToString()},
-                {"exp", creature.Exp.ToString()},
+                {"RegenerateStats", Convert.ToInt16(creature.RegenHealth).ToString()},
+                {"mechanicimmunemask", creature.MechanicImmuneMask.BitmaskValue.ToString()},
+                {"ExtraFlags", creature.FlagsExtra.BitmaskValue.ToString()},
+                //{"exp", creature.Exp.ToString()},
             };
 
             creature.ModelIds.AddValues(kvplist);
             creature.Resistances.AddValues(kvplist, "resistance");
-            creature.DifficultyEntry.AddValues(kvplist);
+            creature.DifficultyEntry.AddValues(kvplist, "");
             creature.Spells.AddValues(kvplist);
             return kvplist;
         }
+
         private Dictionary<string, string> CreatureTemplateAddon(TrinityCreature creature)
         {
             var kvplist = new Dictionary<string, string>

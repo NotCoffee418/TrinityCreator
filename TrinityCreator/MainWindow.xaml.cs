@@ -54,9 +54,13 @@ namespace TrinityCreator
                 case 1: // cMangos112
                     cMangos112Rb.IsChecked = true;
                     break;
-                case 2: // cMangos112
+                case 2: // azeroth335a
                     azeroth335aRb.IsChecked = true;
                     break;
+                case 3: // cMangos335a
+                    cMangos335aRb.IsChecked = true;
+                    break;
+
             }
 
             // Load randomTip
@@ -111,6 +115,11 @@ namespace TrinityCreator
                 ((CreatureCreatorPage)CreatureCreatorTab.Content).MinMaxDmgDp.Visibility = Visibility.Visible;
             }
             catch { /* will fail on startup, page load event also has one */ }
+        }
+        private void cMangos335aRb_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.emulator = 3;
+            Properties.Settings.Default.Save();
         }
         #endregion
 

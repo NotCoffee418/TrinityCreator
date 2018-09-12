@@ -130,6 +130,7 @@
     <Compile Include="Emulator\EmulatorHandler.cs" />
     <Compile Include="Emulator\IEmulator.cs" />
     <Compile Include="Emulator\Azeroth335a.cs" />
+    <Compile Include="Emulator\cMangos335a.cs" />
     <Compile Include="Emulator\Trinity335a.cs" />
     <Compile Include="ExportQuery.cs" />
     <Compile Include="LootPage.xaml.cs">
