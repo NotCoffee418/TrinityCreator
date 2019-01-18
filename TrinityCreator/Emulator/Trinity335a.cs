@@ -34,8 +34,15 @@ namespace TrinityCreator.Emulator
 
         public string GenerateQuery(TrinityCreature creature)
         {
-            return SqlQuery.GenerateInsert("creature_template", CreatureTemplate(creature)) +
+            string result = SqlQuery.GenerateInsert("creature_template", CreatureTemplate(creature)) +
                SqlQuery.GenerateInsert("creature_template_addon", CreatureTemplateAddon(creature));
+
+            if (creature.Trainer.TrainerType != 0)
+            {
+                result += SqlQuery.GenerateInsert("trainer", Trainer(creature)) +
+                    SqlQuery.GenerateInsert("trainer_spell", TrainerSpell(creature));
+            }
+            return result;
         }
 
         public string GenerateQuery(LootPage loot)
@@ -239,10 +246,6 @@ namespace TrinityCreator.Emulator
                 {"unit_flags2", creature.UnitFlags2.BitmaskValue.ToString()},
                 {"dynamicflags", creature.DynamicFlags.BitmaskValue.ToString()},
                 {"family", creature.Family.Id.ToString()},
-                {"trainer_type", creature.Trainer.TrainerType.ToString()},
-                {"trainer_spell", creature.Trainer.TrainerSpell.ToString()},
-                {"trainer_class", creature.Trainer.TrainerClass.ToString()},
-                {"trainer_race", creature.Trainer.TrainerRace.ToString()},
                 {"type", creature._CreatureType.Id.ToString()},
                 {"type_flags", creature.TypeFlags.BitmaskValue.ToString()},
                 {"lootid", creature.LootId.ToString()},
@@ -285,6 +288,31 @@ namespace TrinityCreator.Emulator
             };
 
             creature.Auras.AddValues(kvplist, "auras", ' ');
+
+            return kvplist;
+        }
+
+        private Dictionary<string, string> Trainer(TrinityCreature creature)
+        {
+            var kvplist = new Dictionary<string, string>
+            {
+                { "Id", creature.Entry.ToString()},
+                { "Type", creature.Trainer.TrainerType.ToString()},
+                //{ "trainer_class", creature.Trainer.TrainerClass.ToString()}, <-- removed?
+                //{ "trainer_race", creature.Trainer.TrainerRace.ToString()} <-- removed?
+            };
+
+            return kvplist;
+        }
+        private Dictionary<string, string> TrainerSpell(TrinityCreature creature)
+        {
+            var kvplist = new Dictionary<string, string>
+            {
+                { "TrainerId", creature.Entry.ToString()},
+                { "SpellId", creature.Trainer.TrainerSpell.ToString()},
+
+                // todo: This needs to be updated with price & reqs
+            };
 
             return kvplist;
         }
