@@ -385,6 +385,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Emulator\Reference\cmangos_zero.sql.txt" />
+    <Resource Include="Emulator\Reference\trinity335a201901.sql.txt" />
     <Content Include="Emulator\Reference\trinity335a.sql.txt" />
     <None Include="Resources\cb_data.xml">
       <SubType>Designer</SubType>

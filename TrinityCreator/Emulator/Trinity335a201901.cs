@@ -34,8 +34,19 @@ namespace TrinityCreator.Emulator
 
         public string GenerateQuery(TrinityCreature creature)
         {
-            return SqlQuery.GenerateInsert("creature_template", CreatureTemplate(creature)) +
+            string result = SqlQuery.GenerateInsert("creature_template", CreatureTemplate(creature)) +
                SqlQuery.GenerateInsert("creature_template_addon", CreatureTemplateAddon(creature));
+
+            if (creature.Weapon1 + creature.Weapon2 + creature.Weapon3 > 0)
+                result += SqlQuery.GenerateInsert("creature_equip_template", CreatureEquipTemplate(creature));
+
+            if (creature.Trainer.TrainerType != 0)
+            {
+                result += SqlQuery.GenerateInsert("trainer", Trainer(creature)) +
+                    SqlQuery.GenerateInsert("trainer_spell", TrainerSpell(creature));
+            }
+
+            return result;
         }
 
         public string GenerateQuery(LootPage loot)
@@ -239,10 +250,6 @@ namespace TrinityCreator.Emulator
                 {"unit_flags2", creature.UnitFlags2.BitmaskValue.ToString()},
                 {"dynamicflags", creature.DynamicFlags.BitmaskValue.ToString()},
                 {"family", creature.Family.Id.ToString()},
-                {"trainer_type", creature.Trainer.TrainerType.ToString()},
-                {"trainer_spell", creature.Trainer.TrainerSpell.ToString()},
-                {"trainer_class", creature.Trainer.TrainerClass.ToString()},
-                {"trainer_race", creature.Trainer.TrainerRace.ToString()},
                 {"type", creature._CreatureType.Id.ToString()},
                 {"type_flags", creature.TypeFlags.BitmaskValue.ToString()},
                 {"lootid", creature.LootId.ToString()},
@@ -254,7 +261,6 @@ namespace TrinityCreator.Emulator
                 {"maxgold", creature.MaxGold.Amount.ToString()},
                 {"AIName", SqlQuery.CleanText(creature.AIName.Description)},
                 {"MovementType", creature.Movement.Id.ToString()},
-                {"InhabitType", creature.Inhabit.BitmaskValue.ToString()},
                 {"HoverHeight", creature.HoverHeight.ToString()},
                 {"HealthModifier", creature.HealthModifier.ToString()},
                 {"ManaModifier", creature.ManaModifier.ToString()},
@@ -285,6 +291,76 @@ namespace TrinityCreator.Emulator
             };
 
             creature.Auras.AddValues(kvplist, "auras", ' ');
+
+            return kvplist;
+        }
+        private Dictionary<string, string> CreatureEquipTemplate(TrinityCreature creature)
+        {
+            var kvplist = new Dictionary<string, string>
+            {
+                {"CreatureID", creature.Entry.ToString()},
+                {"ItemID1", creature.Weapon1.ToString()},
+                {"ItemID2", creature.Weapon2.ToString()},
+                {"ItemID3", creature.Weapon3.ToString()},
+            };
+
+            return kvplist;
+        }
+
+        private Dictionary<string, string> Trainer(TrinityCreature creature)
+        {
+            var kvplist = new Dictionary<string, string>
+            {
+                { "Id", creature.Entry.ToString()},
+                { "Type", creature.Trainer.TrainerType.ToString()},
+                //{ "trainer_class", creature.Trainer.TrainerClass.ToString()}, <-- removed?
+                //{ "trainer_race", creature.Trainer.TrainerRace.ToString()} <-- removed?
+            };
+
+            return kvplist;
+        }
+        private Dictionary<string, string> TrainerSpell(TrinityCreature creature)
+        {
+            var kvplist = new Dictionary<string, string>
+            {
+                { "TrainerId", creature.Entry.ToString()},
+                { "SpellId", creature.Trainer.TrainerSpell.ToString()},
+
+                // todo: This needs to be updated with price & reqs
+            };
+
+            return kvplist;
+        }
+
+        private Dictionary<string, string> CreatureTemplateMovement(TrinityCreature creature)
+        {
+            // dodgy bitmask decode
+            int fly = 0, swim = 0, ground = 0;
+            long remain = creature.Inhabit.BitmaskValue;
+            if (remain - 4 <= 0)
+            {
+                fly = 1;
+                remain -= 4;
+            }
+            if (remain - 2 <= 0)
+            {
+                swim = 1;
+                remain -= 2;
+            }
+            if (remain - 1 <= 0)
+            {
+                ground = 1;
+                remain -= 1;
+            }
+
+            var kvplist = new Dictionary<string, string>
+            {
+                { "CreatureId", creature.Entry.ToString() },
+                { "Ground", ground.ToString() },
+                { "Swim", swim.ToString() },
+                { "Flight", fly.ToString() },
+                //{ "Rooted", rooted.ToString() }, // todo
+            };
 
             return kvplist;
         }
