@@ -133,6 +133,10 @@ namespace TrinityCreator
         {
             App._MainWindow.LootCreatorTabItem.IsSelected = true;
         }
+        private void findItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.LookupTool.SelectedTarget = LookupTool.Target.Item;
+        }
         #endregion
 
         private void ShowTemplateWindow()
@@ -146,6 +150,11 @@ namespace TrinityCreator
             // TODO: Lazy fix, take this out when updating emulator system
             if (Properties.Settings.Default.emulator == 2) // Azerothcore
                 MinMaxDmgDp.Visibility = Visibility.Visible;
+
+
+            // Compatability
+            if (!(Properties.Settings.Default.emulator == 0) && !(Properties.Settings.Default.emulator == 3)) // Azerothcore
+                equipmentGb.Visibility = Visibility.Hidden;
         }
     }
 }

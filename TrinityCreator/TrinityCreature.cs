@@ -68,6 +68,9 @@ namespace TrinityCreator
         private DynamicDataControl _difficultyEntry;
         private int _minDmg;
         private int _maxDmg;
+        private int _weapon1;
+        private int _weapon2;
+        private int _weapon3;
 
 
         #region Properties
@@ -644,6 +647,35 @@ namespace TrinityCreator
             {
                 _maxDmg = DataType.LimitLength(value, "int(10)");
                 RaisePropertyChanged("MaxDmg");
+            }
+        }
+        public int Weapon1
+        {
+            get { return _weapon1; }
+            set
+            {
+                _weapon1 = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("Weapon1");
+            }
+        }
+
+        public int Weapon2
+        {
+            get { return _weapon2; }
+            set
+            {
+                _weapon2 = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("Weapon2");
+            }
+        }
+
+        public int Weapon3
+        {
+            get { return _weapon3; }
+            set
+            {
+                _weapon3 = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("Weapon3");
             }
         }
 

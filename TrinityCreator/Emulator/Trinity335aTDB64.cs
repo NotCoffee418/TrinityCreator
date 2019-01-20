@@ -34,8 +34,13 @@ namespace TrinityCreator.Emulator
 
         public string GenerateQuery(TrinityCreature creature)
         {
-            return SqlQuery.GenerateInsert("creature_template", CreatureTemplate(creature)) +
+            string result = SqlQuery.GenerateInsert("creature_template", CreatureTemplate(creature)) +
                SqlQuery.GenerateInsert("creature_template_addon", CreatureTemplateAddon(creature));
+
+            if (creature.Weapon1 + creature.Weapon2 + creature.Weapon3 > 0)
+                result += SqlQuery.GenerateInsert("creature_equip_template", CreatureEquipTemplate(creature));
+
+            return result;
         }
 
         public string GenerateQuery(LootPage loot)
@@ -285,6 +290,18 @@ namespace TrinityCreator.Emulator
             };
 
             creature.Auras.AddValues(kvplist, "auras", ' ');
+
+            return kvplist;
+        }
+        private Dictionary<string, string> CreatureEquipTemplate(TrinityCreature creature)
+        {
+            var kvplist = new Dictionary<string, string>
+            {
+                {"CreatureID", creature.Entry.ToString()},
+                {"ItemID1", creature.Weapon1.ToString()},
+                {"ItemID2", creature.Weapon2.ToString()},
+                {"ItemID3", creature.Weapon3.ToString()},
+            };
 
             return kvplist;
         }
