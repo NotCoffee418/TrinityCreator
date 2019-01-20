@@ -8,9 +8,9 @@ using System.Windows.Controls;
 
 namespace TrinityCreator.Emulator
 {
-    class Trinity335a : IEmulator
+    class Trinity335aTDB64 : IEmulator
     {
-        public Trinity335a()
+        public Trinity335aTDB64()
         {
             ID = 0;
         }
@@ -20,7 +20,7 @@ namespace TrinityCreator.Emulator
         public string GenerateQuery(TrinityItem item)
         {
             return SqlQuery.GenerateInsert("item_template", ItemTemplate(item));
-        }        
+        }
 
         public string GenerateQuery(TrinityQuest quest)
         {
@@ -34,15 +34,8 @@ namespace TrinityCreator.Emulator
 
         public string GenerateQuery(TrinityCreature creature)
         {
-            string result = SqlQuery.GenerateInsert("creature_template", CreatureTemplate(creature)) +
+            return SqlQuery.GenerateInsert("creature_template", CreatureTemplate(creature)) +
                SqlQuery.GenerateInsert("creature_template_addon", CreatureTemplateAddon(creature));
-
-            if (creature.Trainer.TrainerType != 0)
-            {
-                result += SqlQuery.GenerateInsert("trainer", Trainer(creature)) +
-                    SqlQuery.GenerateInsert("trainer_spell", TrainerSpell(creature));
-            }
-            return result;
         }
 
         public string GenerateQuery(LootPage loot)
@@ -60,7 +53,7 @@ namespace TrinityCreator.Emulator
 
         private Dictionary<string, string> ItemTemplate(TrinityItem item)
         {
-            var kvplist = new Dictionary<string, string> 
+            var kvplist = new Dictionary<string, string>
             {
                 {"entry", item.EntryId.ToString()},
                 {"name", SqlQuery.CleanText(item.Name)},
@@ -114,7 +107,7 @@ namespace TrinityCreator.Emulator
             {
                 throw new Exception("Invalid value in magic resistance.");
             }
-            
+
             if (item.InventoryType.Id == 15 || item.InventoryType.Id == 26)
                 kvplist.Add("RangedModRange", "100");
 
@@ -246,6 +239,10 @@ namespace TrinityCreator.Emulator
                 {"unit_flags2", creature.UnitFlags2.BitmaskValue.ToString()},
                 {"dynamicflags", creature.DynamicFlags.BitmaskValue.ToString()},
                 {"family", creature.Family.Id.ToString()},
+                {"trainer_type", creature.Trainer.TrainerType.ToString()},
+                {"trainer_spell", creature.Trainer.TrainerSpell.ToString()},
+                {"trainer_class", creature.Trainer.TrainerClass.ToString()},
+                {"trainer_race", creature.Trainer.TrainerRace.ToString()},
                 {"type", creature._CreatureType.Id.ToString()},
                 {"type_flags", creature.TypeFlags.BitmaskValue.ToString()},
                 {"lootid", creature.LootId.ToString()},
@@ -292,35 +289,10 @@ namespace TrinityCreator.Emulator
             return kvplist;
         }
 
-        private Dictionary<string, string> Trainer(TrinityCreature creature)
-        {
-            var kvplist = new Dictionary<string, string>
-            {
-                { "Id", creature.Entry.ToString()},
-                { "Type", creature.Trainer.TrainerType.ToString()},
-                //{ "trainer_class", creature.Trainer.TrainerClass.ToString()}, <-- removed?
-                //{ "trainer_race", creature.Trainer.TrainerRace.ToString()} <-- removed?
-            };
-
-            return kvplist;
-        }
-        private Dictionary<string, string> TrainerSpell(TrinityCreature creature)
-        {
-            var kvplist = new Dictionary<string, string>
-            {
-                { "TrainerId", creature.Entry.ToString()},
-                { "SpellId", creature.Trainer.TrainerSpell.ToString()},
-
-                // todo: This needs to be updated with price & reqs
-            };
-
-            return kvplist;
-        }
-
 
         private Dictionary<string, string>[] LootTemplates(LootPage loot)
         {
-            List<Dictionary<string,string>> result = new List<Dictionary<string,string>>();
+            List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
             foreach (LootRowControl row in loot.lootRowSp.Children)
             {
                 var kvplist = new Dictionary<string, string>

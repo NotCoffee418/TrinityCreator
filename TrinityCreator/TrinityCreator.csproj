@@ -133,7 +133,8 @@
     <Compile Include="Emulator\EmulatorHandler.cs" />
     <Compile Include="Emulator\IEmulator.cs" />
     <Compile Include="Emulator\Azeroth335a.cs" />
-    <Compile Include="Emulator\Trinity335a.cs" />
+    <Compile Include="Emulator\Trinity335a201901.cs" />
+    <Compile Include="Emulator\Trinity335aTDB64.cs" />
     <Compile Include="ExportQuery.cs" />
     <Compile Include="LootPage.xaml.cs">
       <DependentUpon>LootPage.xaml</DependentUpon>

@@ -49,13 +49,16 @@ namespace TrinityCreator
             switch (Properties.Settings.Default.emulator)
             {
                 case 0: // trinity335a
-                    trinity335aRb.IsChecked = true;
+                    trinity335a64Rb.IsChecked = true;
                     break;
                 case 1: // cMangos112
                     cMangos112Rb.IsChecked = true;
                     break;
                 case 2: // cMangos112
                     azeroth335aRb.IsChecked = true;
+                    break;
+                case 3: // cMangos112
+                    trinity335a201901Rb.IsChecked = true;
                     break;
             }
 
@@ -90,7 +93,7 @@ namespace TrinityCreator
 
         #region Settings
         // select the emulator
-        private void trinity335aRb_Checked(object sender, RoutedEventArgs e)
+        private void trinity335a64Rb_Checked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.emulator = 0;
             Properties.Settings.Default.Save();
@@ -111,6 +114,11 @@ namespace TrinityCreator
                 ((CreatureCreatorPage)CreatureCreatorTab.Content).MinMaxDmgDp.Visibility = Visibility.Visible;
             }
             catch { /* will fail on startup, page load event also has one */ }
+        }
+        private void trinity335a201901Rb_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.emulator = 3;
+            Properties.Settings.Default.Save();
         }
         #endregion
 
