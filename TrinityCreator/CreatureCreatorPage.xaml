@@ -161,6 +161,59 @@
                     </StackPanel>
                 </GroupBox>
 
+                <GroupBox Name="cMangosZeroDetailedStatsGb" Header="Detailed Stats (required for cMangos Zero 1.12)">
+                    <StackPanel DockPanel.Dock="Left">
+                        
+                        <DockPanel Margin="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Health" DockPanel.Dock="Left" Width="120" />
+                                <TextBox Text="{Binding MinLevelHealth}" DockPanel.Dock="Left" Width="50"/>
+                                <Label Content=" - "/>
+                                <TextBox Text="{Binding MaxLevelHealth}" DockPanel.Dock="Left" Width="50"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Mana" DockPanel.Dock="Left" Width="120" />
+                                <TextBox Text="{Binding MinLevelMana}" DockPanel.Dock="Left" Width="50"/>
+                                <Label Content=" - "/>
+                                <TextBox Text="{Binding MaxLevelMana}" DockPanel.Dock="Left" Width="50"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Melee Damage" DockPanel.Dock="Left" Width="120" />
+                                <TextBox Text="{Binding MinMeleeDmg}" DockPanel.Dock="Left" Width="50"/>
+                                <Label Content=" - "/>
+                                <TextBox Text="{Binding MaxMeleeDmg}" DockPanel.Dock="Left" Width="50"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Ranged Damage" DockPanel.Dock="Left" Width="120" />
+                                <TextBox Text="{Binding MinRangedDmg}" DockPanel.Dock="Left" Width="50"/>
+                                <Label Content=" - "/>
+                                <TextBox Text="{Binding MaxRangedDmg}" DockPanel.Dock="Left" Width="50"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Melee Attack Power" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding MeleeAttackPower}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Ranged Attack Power" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding RangedAttackPower}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Armor" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding Armor}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <StackPanel Margin="2" Orientation="Horizontal">
+                            <CheckBox Content="Is civilian? (Dishonorable Kill)" IsChecked="{Binding Civilian}" Margin="0,0,10,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
                 <GroupBox Header="Stat modifiers" Visibility="{Binding ElementName=statModifierCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}">
                     <StackPanel DockPanel.Dock="Left">
                         <DockPanel Margin="2">

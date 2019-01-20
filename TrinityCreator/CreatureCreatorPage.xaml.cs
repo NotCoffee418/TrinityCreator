@@ -80,6 +80,7 @@ namespace TrinityCreator
                 FirstLoad = false;
                 ShowTemplateWindow();
             }
+
         }
         #endregion
 
@@ -154,7 +155,12 @@ namespace TrinityCreator
 
             // Compatability
             if (!(Properties.Settings.Default.emulator == 0) && !(Properties.Settings.Default.emulator == 3)) // Azerothcore
-                equipmentGb.Visibility = Visibility.Hidden;
+                equipmentGb.Visibility = Visibility.Collapsed;
+
+
+            // Emu support
+            if (Properties.Settings.Default.emulator != 1) // not cmangos zero
+                cMangosZeroDetailedStatsGb.Visibility = Visibility.Collapsed;
         }
     }
 }
