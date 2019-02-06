@@ -74,7 +74,7 @@ namespace TrinityCreator.Database
         internal static int GetNextId(string table, string primaryKey = "id")
         {
             object result = ExecuteScalar(string.Format("SELECT MAX({0}) FROM {1};", primaryKey, table), requestConfig:false);
-            if (result == null)
+            if (result == null || result is DBNull)
                 return 0;
             else return Convert.ToInt32(result) + 1;
         }

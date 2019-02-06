@@ -68,6 +68,21 @@ namespace TrinityCreator
         private DynamicDataControl _difficultyEntry;
         private int _minDmg;
         private int _maxDmg;
+        private int _weapon1;
+        private int _weapon2;
+        private int _weapon3;
+        private int _minLevelHealth;
+        private int _maxLevelHealth;
+        private int _minLevelMana;
+        private int _maxLevelMana;
+        private int _minMeleeDmg;
+        private int _maxMeleeDmg;
+        private int _minRangedDmg;
+        private int _maxRangedDmg;
+        private int _armor;
+        private int _meleeAttackPower;
+        private int _rangedAttackPower;
+        private bool _civilian;
 
 
         #region Properties
@@ -646,7 +661,144 @@ namespace TrinityCreator
                 RaisePropertyChanged("MaxDmg");
             }
         }
+        public int Weapon1
+        {
+            get { return _weapon1; }
+            set
+            {
+                _weapon1 = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("Weapon1");
+            }
+        }
 
+        public int Weapon2
+        {
+            get { return _weapon2; }
+            set
+            {
+                _weapon2 = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("Weapon2");
+            }
+        }
+
+        public int Weapon3
+        {
+            get { return _weapon3; }
+            set
+            {
+                _weapon3 = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("Weapon3");
+            }
+        }
+
+        public int MinLevelHealth
+        {
+            get { return _weapon3; }
+            set
+            {
+                _minLevelHealth = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("MinLevelHealth");
+            }
+        }
+        public int MaxLevelHealth
+        {
+            get { return _maxLevelHealth; }
+            set
+            {
+                _maxLevelHealth = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("MaxLevelHealth");
+            }
+        }
+        public int MinLevelMana
+        {
+            get { return _minLevelMana; }
+            set
+            {
+                _minLevelMana = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("MinLevelMana");
+            }
+        }
+        public int MaxLevelMana
+        {
+            get { return _maxLevelMana; }
+            set
+            {
+                _maxLevelMana = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("MaxLevelMana");
+            }
+        }
+        public int MinMeleeDmg
+        {
+            get { return _minMeleeDmg; }
+            set
+            {
+                _minMeleeDmg = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("MinMeleeDmg");
+            }
+        }
+        public int MaxMeleeDmg
+        {
+            get { return _maxMeleeDmg; }
+            set
+            {
+                _maxMeleeDmg = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("MaxMeleeDmg");
+            }
+        }
+        public int MinRangedDmg
+        {
+            get { return _minRangedDmg; }
+            set
+            {
+                _minRangedDmg = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("MinRangedDmg");
+            }
+        }
+        public int MaxRangedDmg
+        {
+            get { return _maxRangedDmg; }
+            set
+            {
+                _maxRangedDmg = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("MaxRangedDmg");
+            }
+        }
+        public int Armor
+        {
+            get { return _armor; }
+            set
+            {
+                _armor = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("Armor");
+            }
+        }
+        public int MeleeAttackPower
+        {
+            get { return _meleeAttackPower; }
+            set
+            {
+                _meleeAttackPower = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("MeleeAttackPower");
+            }
+        }
+        public int RangedAttackPower
+        {
+            get { return _rangedAttackPower; }
+            set
+            {
+                _rangedAttackPower = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("RangedAttackPower");
+            }
+        }
+        public bool Civilian
+        {
+            get { return _civilian; }
+            set
+            {
+                _civilian = value;
+                RaisePropertyChanged("Civilian");
+            }
+        }
 
         #endregion
 

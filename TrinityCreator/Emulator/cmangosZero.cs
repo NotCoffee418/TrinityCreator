@@ -29,7 +29,8 @@ namespace TrinityCreator.Emulator
 
         public string GenerateQuery(TrinityCreature creature)
         {
-            throw new NotImplementedException();
+            return SqlQuery.GenerateInsert("creature_template", CreatureTemplate(creature))
+                + SqlQuery.GenerateInsert("creature_template_addon", CreatureTemplateAddon(creature));
         }
 
         public string GenerateQuery(LootPage loot)
@@ -151,6 +152,87 @@ namespace TrinityCreator.Emulator
             quest.RequiredNpcOrGos.AddValues(kvplist, "ReqCreatureOrGOId", "ReqCreatureOrGOCount");
             quest.RequiredItems.AddValues(kvplist, "ReqItemId", "ReqItemCount");
 
+            return kvplist;
+        }
+
+        private Dictionary<string, string> CreatureTemplate(TrinityCreature creature)
+        {
+           var kvplist = new Dictionary<string, string>
+            {
+                {"entry", creature.Entry.ToString()},
+                {"Name", SqlQuery.CleanText(creature.Name)},
+                {"SubName", SqlQuery.CleanText(creature.Subname)},
+                {"MinLevel", creature.MinLevel.ToString()},
+                {"MaxLevel", creature.MaxLevel.ToString()},
+                {"FactionAlliance", creature.Faction.ToString()},
+                {"FactionHorde", creature.Faction.ToString()},
+                {"Scale", creature.Scale.ToString()},
+                {"Family", creature.Family.Id.ToString()},
+                {"CreatureType", creature._CreatureType.Id.ToString()},
+                {"InhabitType", creature.Inhabit.BitmaskValue.ToString()},
+                {"RegenerateStats", Convert.ToInt16(creature.RegenHealth).ToString()},
+                {"RacialLeader", creature.RacialLeader.ToString()},
+                {"NpcFlags", creature.NpcFlags.BitmaskValue.ToString()},
+                {"UnitFlags", creature.UnitFlags.BitmaskValue.ToString()},
+                {"DynamicFlags", creature.DynamicFlags.BitmaskValue.ToString()},
+                {"ExtraFlags", creature.FlagsExtra.BitmaskValue.ToString()},
+                {"CreatureTypeFlags", creature.TypeFlags.BitmaskValue.ToString()},
+                {"SpeedWalk", creature.SpeedWalk.ToString()},
+                {"SpeedRun", creature.SpeedRun.ToString()},
+                {"UnitClass", creature._UnitClass.Id.ToString()},
+                {"Rank", creature.Rank.Id.ToString()},
+                {"HealthMultiplier", creature.HealthModifier.ToString()},
+                {"DamageMultiplier", creature.DamageModifier.ToString()},
+                {"ExperienceMultiplier", creature.ExperienceModifier.ToString()},
+                {"MinLevelHealth", creature.MinLevelHealth.ToString()},
+                {"MaxLevelHealth", creature.MaxLevelHealth.ToString()},
+                {"MinLevelMana", creature.MinLevelMana.ToString()},
+                {"MaxLevelMana", creature.MaxLevelMana.ToString()},
+                {"MinMeleeDmg", creature.MinMeleeDmg.ToString()},
+                {"MaxMeleeDmg", creature.MaxMeleeDmg.ToString()},
+                {"MinRangedDmg", creature.MinRangedDmg.ToString()},
+                {"MaxRangedDmg", creature.MaxRangedDmg.ToString()},
+                {"Armor", creature.Armor.ToString()},
+                {"MeleeAttackPower", creature.MeleeAttackPower.ToString()},
+                {"RangedAttackPower", creature.RangedAttackPower.ToString()},
+                {"MeleeBaseAttackTime", creature.BaseAttackTime.ToString()},
+                {"RangedBaseAttackTime", creature.BaseAttackTime.ToString()}, // only seperate in cmangzero, using melee
+                {"DamageSchool", creature.DmgSchool.Id.ToString()},
+                {"MinLootGold", creature.MinGold.ToString()},
+                {"MaxLootGold", creature.MaxGold.ToString()},
+                {"LootId", creature.LootId.ToString()},
+                {"PickpocketLootId", creature.PickpocketLoot.ToString()},
+                {"SkinningLootId", creature.SkinLoot.ToString()},
+                {"MechanicImmuneMask", creature.MechanicImmuneMask.BitmaskValue.ToString()},
+                //{"SchoolImmuneMask", }, <-- not sure if used over individual resistance fields, no comment in db
+                {"PetSpellDataId", creature.PetDataId.ToString()},
+                {"MovementType", creature.Movement.Id.ToString()},
+                {"TrainerType", creature.Trainer.TrainerType.ToString()},
+                {"TrainerSpell", creature.Trainer.TrainerSpell.ToString()},
+                {"TrainerClass", creature.Trainer.TrainerClass.ToString()},
+                {"TrainerRace", creature.Trainer.TrainerRace.ToString()},
+                {"Civilian", Convert.ToInt16(creature.Civilian).ToString()},
+                
+                // Missing relevant: TrainerTemplateId, VendorTemplateId, GossipMenuId, EquipmentTemplateId
+            };
+
+            creature.ModelIds.AddValues(kvplist);
+            creature.Resistances.AddValues(kvplist, keyPrefix:"", valuePrefix: "Resistance");
+
+            return kvplist;
+        }
+
+        private Dictionary<string, string> CreatureTemplateAddon(TrinityCreature creature)
+        {
+            var kvplist = new Dictionary<string, string>
+            {
+                {"entry", creature.Entry.ToString()},
+                {"mount", creature.Mount.ToString()},
+                {"bytes1", creature.Bytes1.BitmaskValue.ToString()},
+                {"emote", creature.Emote.ToString()},
+            };
+
+            creature.Auras.AddValues(kvplist, "auras", ' ');
             return kvplist;
         }
     }

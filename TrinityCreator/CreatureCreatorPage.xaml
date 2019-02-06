@@ -83,6 +83,7 @@
                         </DockPanel>
                         <Button Content="Find Model ID" Click="findCreatureBtn_Click" Margin="2"/>
                         <GroupBox Name="ModelIdGb" Header="Display IDs" Content="{Binding ModelIds, UpdateSourceTrigger=PropertyChanged}" />
+                        
                         <DockPanel Margin="2">
                             <Label Content="Mount Display ID" DockPanel.Dock="Left" Width="120" />
                             <TextBox Text="{Binding Mount}" DockPanel.Dock="Left" />
@@ -91,6 +92,26 @@
                             <Button Content="Find Emote" Click="findEmoteBtn_Click" Width="75" DockPanel.Dock="Right" Margin="2,0,0,0"/>
                             <Label Content="Repeat Emote" DockPanel.Dock="Left" Width="120" />
                             <TextBox Text="{Binding Emote}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Equipment" Name="equipmentGb">
+
+                    <StackPanel DockPanel.Dock="Left">
+                        <DockPanel Margin="2">
+                            <Button Content="Find Item" Click="findItemBtn_Click" Width="75" DockPanel.Dock="Right" Margin="2,0,0,0"/>
+                            <Label Content="Weapon 1" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding Weapon1}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Button Content="Find Item" Click="findItemBtn_Click" Width="75" DockPanel.Dock="Right" Margin="2,0,0,0"/>
+                            <Label Content="Weapon 2" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding Weapon2}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Button Content="Find Item" Click="findItemBtn_Click" Width="75" DockPanel.Dock="Right" Margin="2,0,0,0"/>
+                            <Label Content="Ranged Weapon" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding Weapon3}" DockPanel.Dock="Left" />
                         </DockPanel>
                     </StackPanel>
                 </GroupBox>
@@ -137,6 +158,59 @@
                             <Label Content="Unit Class" DockPanel.Dock="Left" Width="120" />
                             <ComboBox Name="unitClassCb" SelectedValue="{Binding _UnitClass}" />
                         </DockPanel>                        
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Name="cMangosZeroDetailedStatsGb" Header="Detailed Stats (required for cMangos Zero 1.12)">
+                    <StackPanel DockPanel.Dock="Left">
+                        
+                        <DockPanel Margin="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Health" DockPanel.Dock="Left" Width="120" />
+                                <TextBox Text="{Binding MinLevelHealth}" DockPanel.Dock="Left" Width="50"/>
+                                <Label Content=" - "/>
+                                <TextBox Text="{Binding MaxLevelHealth}" DockPanel.Dock="Left" Width="50"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Mana" DockPanel.Dock="Left" Width="120" />
+                                <TextBox Text="{Binding MinLevelMana}" DockPanel.Dock="Left" Width="50"/>
+                                <Label Content=" - "/>
+                                <TextBox Text="{Binding MaxLevelMana}" DockPanel.Dock="Left" Width="50"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Melee Damage" DockPanel.Dock="Left" Width="120" />
+                                <TextBox Text="{Binding MinMeleeDmg}" DockPanel.Dock="Left" Width="50"/>
+                                <Label Content=" - "/>
+                                <TextBox Text="{Binding MaxMeleeDmg}" DockPanel.Dock="Left" Width="50"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Ranged Damage" DockPanel.Dock="Left" Width="120" />
+                                <TextBox Text="{Binding MinRangedDmg}" DockPanel.Dock="Left" Width="50"/>
+                                <Label Content=" - "/>
+                                <TextBox Text="{Binding MaxRangedDmg}" DockPanel.Dock="Left" Width="50"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Melee Attack Power" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding MeleeAttackPower}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Ranged Attack Power" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding RangedAttackPower}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <DockPanel Margin="2">
+                            <Label Content="Armor" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding Armor}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                        <StackPanel Margin="2" Orientation="Horizontal">
+                            <CheckBox Content="Is civilian? (Dishonorable Kill)" IsChecked="{Binding Civilian}" Margin="0,0,10,0"/>
+                        </StackPanel>
                     </StackPanel>
                 </GroupBox>
 

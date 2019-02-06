@@ -2,13 +2,15 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*"
            Name="Trinity Creator"
-           Language="1033" Version="1.0.7.29"
+           Language="1033" Version="1.0.8.31"
            Manufacturer="Nadromar"
            UpgradeCode="7F3D3555-6622-43BB-A57B-3ADD4D2AFB0F">
 
     <Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
 
-    <MajorUpgrade DowngradeErrorMessage="A newer version of Trinity Creator is already installed." />
+    <MajorUpgrade Schedule="afterInstallInitialize"
+                DowngradeErrorMessage="A later version of Trinity Creator is already installed"
+                AllowSameVersionUpgrades="yes" />
     <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
     <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)\License.rtf" />
 
@@ -60,6 +62,9 @@
       <Component Id="libGLESv2.dll">
         <File Id="libGLESv2.dll" Source="$(var.TrinityCreator.TargetDir)libGLESv2.dll" KeyPath="yes" />
       </Component>
+      <Component Id="chrome_elf.dll">
+        <File Id="chrome_elf.dll" Source="$(var.TrinityCreator.TargetDir)chrome_elf.dll" KeyPath="yes" />
+      </Component>
       <Component Id="icudtl.dat">
         <File Id="icudtl.dat" Source="$(var.TrinityCreator.TargetDir)icudtl.dat" KeyPath="yes" />
       </Component>
@@ -72,11 +77,17 @@
       <Component Id="cef_200_percent.pak">
         <File Id="cef_200_percent.pak" Source="$(var.TrinityCreator.TargetDir)cef_200_percent.pak" KeyPath="yes" />
       </Component>
+      <Component Id="cef_extensions.pak">
+        <File Id="cef_extensions.pak" Source="$(var.TrinityCreator.TargetDir)cef_extensions.pak" KeyPath="yes" />
+      </Component>
       <Component Id="natives_blob.bin">
         <File Id="natives_blob.bin" Source="$(var.TrinityCreator.TargetDir)natives_blob.bin" KeyPath="yes" />
       </Component>
       <Component Id="snapshot_blob.bin">
         <File Id="snapshot_blob.bin" Source="$(var.TrinityCreator.TargetDir)snapshot_blob.bin" KeyPath="yes" />
+      </Component>
+      <Component Id="v8_context_snapshot.bin">
+        <File Id="v8_context_snapshot.bin" Source="$(var.TrinityCreator.TargetDir)v8_context_snapshot.bin" KeyPath="yes" />
       </Component>
     </DirectoryRef>
 
@@ -108,12 +119,15 @@
       <ComponentRef Id="libcef.dll" />
       <ComponentRef Id="libEGL.dll" />
       <ComponentRef Id="libGLESv2.dll" />
+      <ComponentRef Id="chrome_elf.dll" />
       <ComponentRef Id="icudtl.dat" />
       <ComponentRef Id="cef.pak" />
       <ComponentRef Id="cef_100_percent.pak" />
       <ComponentRef Id="cef_200_percent.pak" />
+      <ComponentRef Id="cef_extensions.pak" />
       <ComponentRef Id="natives_blob.bin" />
       <ComponentRef Id="snapshot_blob.bin" />
+      <ComponentRef Id="v8_context_snapshot.bin" />
       <!-- Step 3: Tell WiX to install the shortcut -->
       <ComponentRef Id="ApplicationShortcut" />
     </Feature>

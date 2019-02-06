@@ -42,14 +42,13 @@ namespace TrinityCreator
         {
             try
             {
-                var updateFile = String.Format("TrinityUpdater-{0}.exe", DateTime.Now.ToString("yyyyMMdd-HHmmss"));
                 var c = new WebClient();
                 c.DownloadFile(
                     "https://github.com/Nadromar/TrinityCreator/blob/master/Updater/bin/Release/TrinityCreatorUpdater.exe?raw=true",
-                    updateFile);
+                    "TrinityCreatorUpdater.exe");
                 var currentExe = Assembly.GetExecutingAssembly().Location;
 
-                var proc = new ProcessStartInfo(updateFile);
+                var proc = new ProcessStartInfo("TrinityCreatorUpdater.exe");
                 proc.Arguments = "\"" + currentExe + "\"";
                 Process.Start(proc);
                 Environment.Exit(0);

@@ -19,7 +19,7 @@ namespace TrinityCreator.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -93,9 +93,8 @@ namespace TrinityCreator.Properties {
         ///        &lt;Item Id=&quot;6&quot; Description=&quot;EventAI&quot; /&gt;
         ///        &lt;Item Id=&quot;7&quot; Description=&quot;SmartAI&quot; /&gt;
         ///    &lt;/AI&gt;
-        ///    &lt;CreatureFamily&gt;
-        ///        &lt;Item Id=&quot;0&quot; Description=&quot;None&quot; /&gt;
-        ///        [rest of string was truncated]&quot;;.
+        ///    &lt;CreatureRank&gt;
+        ///        &lt;Item Id=&quot;0&quot; Description=&quot;Norma [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string cb_data {
             get {
@@ -114,7 +113,7 @@ namespace TrinityCreator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creator
+        ///   Looks up a localized string similar to Creator			Nadromar
         ///
         ///External libraries by:
         ///DBC Viewer		tomrus88

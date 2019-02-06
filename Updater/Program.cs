@@ -14,7 +14,7 @@ namespace TrinityCreatorUpdater
         {
             Console.WriteLine("- Trinity Creator Updater -");
             var c = new WebClient();
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\TrinityCreator.exe";
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"\TrinityCreator.exe";
             if (args.Length > 0)
                 path = args[0];
 
@@ -23,13 +23,14 @@ namespace TrinityCreatorUpdater
             if (File.Exists(path))
                 oldBuild = FileVersionInfo.GetVersionInfo(path).FilePrivatePart;
 
-            if (oldBuild == 0)
+            // force reinstall for old builds, also prevents running updater outside install folder
+            if (oldBuild <= 30)
             {
                 Reinstall();
                 return;
             }
             Console.WriteLine("Old build: " + oldBuild);
-            
+
             try
             {
                 while (Process.GetProcessesByName("TrinityCreator").Length != 0)
@@ -105,7 +106,7 @@ namespace TrinityCreatorUpdater
 
         private static void Reinstall()
         {
-            Console.WriteLine("A problem has occurred. Downloading installer...");
+            Console.WriteLine("A problem has occurred with auto-update. Please use the installer. Downloading installer...");
             string tempPath = Path.GetTempFileName() + ".msi";
             using (var c = new WebClient())
             c.DownloadFile("https://github.com/Nadromar/TrinityCreator/blob/master/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi?raw=true",
