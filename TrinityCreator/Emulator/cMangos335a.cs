@@ -12,7 +12,7 @@ namespace TrinityCreator.Emulator
     {
         public cMangos335a()
         {
-            ID = 0;
+            ID = 3;
         }
 
         public int ID { get; set; }
@@ -25,7 +25,6 @@ namespace TrinityCreator.Emulator
         public string GenerateQuery(TrinityQuest quest)
         {
             return SqlQuery.GenerateInsert("quest_template", QuestTemplate(quest)) +
-               SqlQuery.GenerateInsert("quest_template_addon", QuestAddon(quest)) +
                SqlQuery.GenerateInsert("creature_queststarter", QuestStarter(quest)) +
                SqlQuery.GenerateInsert("creature_questender", QuestEnder(quest)) +
                SqlQuery.GenerateInsert("quest_offer_reward", QuestOfferReward(quest)) +
@@ -55,9 +54,8 @@ namespace TrinityCreator.Emulator
         {
             var kvplist = new Dictionary<string, string>
             {
+                {"entry", item.EntryId.ToString()},
                 {"name", SqlQuery.CleanText(item.Name)},
-                { "entry", item.EntryId.ToString()},
-
                 {"description", SqlQuery.CleanText(item.Quote)},
                 {"class", item.Class.Id.ToString()},
                 {"subclass", item.ItemSubClass.Id.ToString()},
@@ -87,7 +85,7 @@ namespace TrinityCreator.Emulator
                 {"block", item.Block.ToString()},
                 {"BagFamily", item.BagFamily.BitmaskValue.ToString()},
                 {"socketBonus", item.SocketBonus.Id.ToString()},
-                {"ExtraFlags", item.FlagsExtra.BitmaskValue.ToString()},
+                //{"ExtraFlags", item.FlagsExtra.BitmaskValue.ToString()},
                 {"StatsCount", item.StatsCount.ToString()},
                 {"ItemLevel", item.ItemLevel.ToString()},
             };
@@ -118,63 +116,56 @@ namespace TrinityCreator.Emulator
 
         private Dictionary<string, string> QuestTemplate(TrinityQuest quest)
         {
+            throw new NotImplementedException(); // <-- needs work
             var kvplist = new Dictionary<string, string>
             {
-                {"ID", quest.EntryId.ToString()},
-                {"QuestType", "2"},
+                {"entry", quest.EntryId.ToString()},
+                {"Method", "2"},
                 {"QuestLevel", quest.QuestLevel.ToString()},
                 {"MinLevel", quest.MinLevel.ToString()},
-                {"QuestSortID", quest.PQuestSort.ToString()},
-                {"QuestInfoID", quest.PQuestInfo.Id.ToString()},
-                {"SuggestedGroupNum", quest.SuggestedGroupNum.ToString()},
-                {"TimeAllowed", quest.TimeAllowed.ToString()},
-                {"AllowableRaces", quest.AllowableRace.BitmaskValue.ToString()},
-                {"RewardXPDifficulty", quest.RewardXpDifficulty.Id.ToString()},
-                {"RewardMoney", quest.RewardMoney.Amount.ToString()},
-                {"RewardSpell", quest.RewardSpell.ToString()},
-                {"RewardDisplaySpell", quest.RewardSpell.ToString()},
-                {"RewardHonor", quest.RewardHonor.ToString()},
-                {"RewardTalents", quest.RewardTalents.ToString()},
-                {"StartItem", quest.StartItem.ToString()},
-                {"Flags", quest.Flags.BitmaskValue.ToString()},
-                {"RewardTitle", quest.RewardTitle.ToString()},
-                {"RequiredPlayerKills", quest.RequiredPlayerKills.ToString()},
-                {"RewardArenaPoints", quest.RewardArenaPoints.ToString()},
-                {"POIContinent", quest.PoiCoordinate.MapId.ToString()},
-                {"POIx", quest.PoiCoordinate.X.ToString()},
-                {"POIy", quest.PoiCoordinate.Y.ToString()},
-                {"LogTitle", SqlQuery.CleanText(quest.LogTitle)},
-                {"LogDescription", SqlQuery.CleanText(quest.LogDescription)},
-                {"QuestDescription", SqlQuery.CleanText(quest.QuestDescription)},
-                {"AreaDescription", SqlQuery.CleanText(quest.AreaDescription)},
-                {"QuestCompletionLog", SqlQuery.CleanText(quest.QuestCompletionLog)},
+                {"ZoneOrSort", quest.PQuestSort.ToString()},
+                {"Type", quest.PQuestInfo.Id.ToString()}, //not sure if this is right
+                {"SuggestedPlayers", quest.SuggestedGroupNum.ToString()},
+                {"LimitTime", quest.TimeAllowed.ToString()},
+                {"RequiredRaces", quest.AllowableRace.BitmaskValue.ToString()},
+                {"RequiredClasses", quest.AllowableClass.BitmaskValue.ToString()},
+                {"RewXPId", quest.RewardXpDifficulty.Id.ToString()},
+                {"RewOrReqMoney", quest.RewardMoney.Amount.ToString()},
+                {"RewSpell", quest.RewardSpell.ToString()},
+                //{"RewardDisplaySpell", quest.RewardSpell.ToString()},
+                {"RewHonorAddition", quest.RewardHonor.ToString()},
+                //{"RewardTalents", quest.RewardTalents.ToString()}, <-- where's this at?
+                {"SrcItemId", quest.StartItem.ToString()},
+                {"SrcItemCount", quest.StartItem == 0 ? (0).ToString() : (1).ToString()},
+                {"QuestFlags", quest.Flags.BitmaskValue.ToString()},
+                //{"RewTitle", quest.RewardTitle.ToString()},
+                //{"RequiredPlayerKills", quest.RequiredPlayerKills.ToString()}, <-- again, can't find it
+                //{"RewardArenaPoints", quest.RewardArenaPoints.ToString()},
+                {"PointMapId", quest.PoiCoordinate.MapId.ToString()},
+                {"PointX", quest.PoiCoordinate.X.ToString()},
+                {"PointY", quest.PoiCoordinate.Y.ToString()},
+                {"Title", SqlQuery.CleanText(quest.LogTitle)},
+                {"Objectives", SqlQuery.CleanText(quest.LogDescription)},
+                {"Details", SqlQuery.CleanText(quest.QuestDescription)},
+                //{"AreaDescription", SqlQuery.CleanText(quest.AreaDescription)},
+                {"CompletedText", SqlQuery.CleanText(quest.QuestCompletionLog)},
+
+                //{"MaxLevel", quest.MaxLevel.ToString()},
+                {"PrevQuestId", quest.PrevQuest.ToString()},
+                {"NextQuestId", quest.NextQuest.ToString()},
+                //{"RewardMailTemplateId", quest.RewardMailTemplateId.ToString()},
+                //{"RewardMailDelay", RewardMailDelay.ToString()},
+                //{"ProvidedItemCount", quest.ProvidedItemCount.ToString()},
+                {"SpecialFlags", quest.SpecialFlags.BitmaskValue.ToString()},
+                {"SrcSpell", quest.SourceSpell.ToString()},
             };
 
             // DDC values
-            quest.RewardItems.AddValues(kvplist, "RewardItem", "RewardAmount");
-            quest.RewardChoiceItems.AddValues(kvplist, "RewardChoiceItemID", "RewardChoiceItemQuantity");
-            quest.FactionRewards.AddValues(kvplist, "RewardFactionID", "RewardFactionOverride", 100);
-            quest.RequiredNpcOrGos.AddValues(kvplist, "RequiredNpcOrGo", "RequiredNpcOrGoCount");
-            quest.RequiredItems.AddValues(kvplist, "RequiredItemId", "RequiredItemCount");
-
-            return kvplist;
-        }
-
-        private Dictionary<string, string> QuestAddon(TrinityQuest quest)
-        {
-            var kvplist = new Dictionary<string, string>
-            {
-                {"ID", quest.EntryId.ToString()},
-                {"MaxLevel", quest.MaxLevel.ToString()},
-                {"AllowableClasses", quest.AllowableClass.BitmaskValue.ToString()},
-                {"PrevQuestId", quest.PrevQuest.ToString()},
-                {"NextQuestId", quest.NextQuest.ToString()},
-                //{"RewardMailTemplateId", RewardMailTemplateId.ToString()},
-                //{"RewardMailDelay", RewardMailDelay.ToString()},
-                {"ProvidedItemCount", quest.ProvidedItemCount.ToString()},
-                {"SpecialFlags", quest.SpecialFlags.BitmaskValue.ToString()},
-                {"SourceSpellID", quest.SourceSpell.ToString()},
-            };
+            quest.RewardItems.AddValues(kvplist, "RewItem", "RewardAmount");
+            quest.RewardChoiceItems.AddValues(kvplist, "RewChoiceItemID", "RewChoiceItemQuantity");
+            quest.FactionRewards.AddValues(kvplist, "RewFactionID", "RewFactionOverride", 100);
+            quest.RequiredNpcOrGos.AddValues(kvplist, "ReqNpcOrGo", "ReqNpcOrGoCount");
+            quest.RequiredItems.AddValues(kvplist, "ReqItemId", "ReqItemCount");
 
             return kvplist;
         }
@@ -324,6 +315,22 @@ namespace TrinityCreator.Emulator
                 {"extendedcost", vendor.extendedCostTb.Text},
             };
             return kvplist;
+        }
+
+        public Tuple<string, string> GetIdColumnName(string v)
+        {
+            switch (v)
+            {
+                case "Item":
+                    return new Tuple<string, string>("item_template", "entry");
+                case "Creature":
+                    return new Tuple<string, string>("creature_template", "Entry");
+                case "Quest":
+                    return new Tuple<string, string>("quest_template", "entry");
+                default:
+                    return new Tuple<string, string>("Undefined", "Undefined");
+
+            }
         }
     }
 }

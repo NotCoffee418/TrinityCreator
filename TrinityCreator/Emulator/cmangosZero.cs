@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using TrinityCreator.Database;
 
 namespace TrinityCreator.Emulator
@@ -35,12 +36,15 @@ namespace TrinityCreator.Emulator
 
         public string GenerateQuery(LootPage loot)
         {
-            throw new NotImplementedException();
+            string result = "";
+            foreach (var l in LootTemplates(loot))
+                result += SqlQuery.GenerateInsert(((ComboBoxItem)loot.lootTypeCb.SelectedValue).Content.ToString() + "_loot_template", l);
+            return result;
         }
 
         public string GenerateQuery(VendorPage vendor)
         {
-            throw new NotImplementedException();
+            return SqlQuery.GenerateInsert("npc_vendor", Vendor(vendor));
         }
 
         private Dictionary<string, string> ItemTemplate(TrinityItem item)
@@ -164,8 +168,7 @@ namespace TrinityCreator.Emulator
                 {"SubName", SqlQuery.CleanText(creature.Subname)},
                 {"MinLevel", creature.MinLevel.ToString()},
                 {"MaxLevel", creature.MaxLevel.ToString()},
-                {"FactionAlliance", creature.Faction.ToString()},
-                {"FactionHorde", creature.Faction.ToString()},
+                {"Faction", creature.Faction.ToString()},
                 {"Scale", creature.Scale.ToString()},
                 {"Family", creature.Family.Id.ToString()},
                 {"CreatureType", creature._CreatureType.Id.ToString()},
@@ -234,6 +237,55 @@ namespace TrinityCreator.Emulator
 
             creature.Auras.AddValues(kvplist, "auras", ' ');
             return kvplist;
+        }
+        
+        private Dictionary<string, string>[] LootTemplates(LootPage loot)
+        {
+            List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
+            foreach (LootRowControl row in loot.lootRowSp.Children)
+            {
+                var kvplist = new Dictionary<string, string>
+                {
+                    {"entry", loot.entryTb.Text},
+                    {"item", row.Item.ToString()},
+                    {"ChanceOrQuestChance", row.Chance.ToString()},
+                    //{"QuestRequired", Convert.ToInt16(row.QuestRequired).ToString()},
+                    {"MinCountOrRef", row.MinCount.ToString()},
+                    {"maxcount", row.MaxCount.ToString()},
+                };
+                result.Add(kvplist);
+            }
+            return result.ToArray();
+        }
+
+        public Dictionary<string, string> Vendor(VendorPage vendor)
+        {
+            var kvplist = new Dictionary<string, string>
+            {
+                {"entry", vendor.npcTb.Text},
+                //{"slot", vendor.slotTb.Text},
+                {"item", vendor.itemTb.Text},
+                {"maxcount", vendor.maxcountTb.Text},
+                {"incrtime", vendor.incrTimeTb.Text},
+                //{"extendedcost", vendor.extendedCostTb.Text},
+                // condition_id ?
+            };
+            return kvplist;
+        }
+
+        public Tuple<string, string> GetIdColumnName(string v)
+        {
+            switch (v)
+            {
+                case "Item":
+                    return new Tuple<string, string>("item_template", "entry");
+                case "Creature":
+                    return new Tuple<string, string>("creature_template", "entry");
+                case "Quest":
+                    return new Tuple<string, string>("quest_template", "entry");
+                default:
+                    return new Tuple<string, string>("Undefined", "Undefined");
+            }
         }
     }
 }

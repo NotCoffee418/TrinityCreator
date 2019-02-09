@@ -14,9 +14,9 @@
 
             <MenuItem Header="Select Emulator">
                 <RadioButton Content="TrinityCore/cMangos 3.3.5a (TDB 335.64)" Name="trinity335a64Rb" Checked="trinity335a64Rb_Checked"/>
-                <RadioButton Content="cMangos 1.12 (UNTESTED)" Name="cMangos112Rb" Checked="cMangos112Rb_Checked"/>
+                <RadioButton Content="cMangos 1.12" Name="cMangos112Rb" Checked="cMangos112Rb_Checked"/>
                 <RadioButton Content="AzerothCore 3.3.5a" Name="azeroth335aRb" Checked="azeroth335a_Checked"/>
-                <RadioButton Content="cMangos 3.3.5a" Name="cMangos335aRb" Checked="cMangos335aRb_Checked"/>
+                <RadioButton Content="cMangos 3.3.5a (UNTESTED)" Name="cMangos335aRb" Checked="cMangos335aRb_Checked"/>
                 <RadioButton Content="TrinityCore (TDB 2019-01)" Name="trinity335a201901Rb" Checked="trinity335a201901Rb_Checked"/>
             </MenuItem>
 

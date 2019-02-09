@@ -15,5 +15,6 @@ namespace TrinityCreator.Emulator
         string GenerateQuery(TrinityCreature creature);
         string GenerateQuery(LootPage loot);
         string GenerateQuery(VendorPage vendor);
+        Tuple<string, string> GetIdColumnName(string v);
     }
 }

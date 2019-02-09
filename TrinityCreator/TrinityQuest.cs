@@ -14,7 +14,8 @@ namespace TrinityCreator
     {
         public TrinityQuest()
         {
-            EntryId = SqlQuery.GetNextId("quest_template", "ID");
+            var espvars = Emulator.EmulatorHandler.SelectedEmulator.GetIdColumnName("Quest");
+            EntryId = SqlQuery.GetNextId(espvars.Item1, espvars.Item2);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

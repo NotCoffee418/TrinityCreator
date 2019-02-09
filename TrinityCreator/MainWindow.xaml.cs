@@ -60,7 +60,7 @@ namespace TrinityCreator
                 case 3: // cMangos335a
                     cMangos335aRb.IsChecked = true;
                     break;
-                case 4: // cMangos112
+                case 4: // trinity335a Latest
                     trinity335a201901Rb.IsChecked = true;
                     break;
             }

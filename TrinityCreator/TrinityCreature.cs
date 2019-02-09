@@ -12,7 +12,8 @@ namespace TrinityCreator
     {
         public TrinityCreature()
         {
-            Entry = SqlQuery.GetNextId("creature_template", "entry");
+            var espvars = Emulator.EmulatorHandler.SelectedEmulator.GetIdColumnName("Creature");
+            Entry = SqlQuery.GetNextId(espvars.Item1, espvars.Item2);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

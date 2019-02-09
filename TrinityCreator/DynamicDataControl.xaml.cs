@@ -165,8 +165,6 @@ namespace TrinityCreator
                     string key = "";
                     if (keyPrefix == "")
                         key = (string)line.Key;
-                    else if(keyPrefix == "resistance")
-                        key = keyPrefix + ((IKeyValue)line.Key).ToString();
                     else
                         key = keyPrefix + ((IKeyValue)line.Key).Id;
                     d.Add(key, int.Parse(line.Value).ToString());

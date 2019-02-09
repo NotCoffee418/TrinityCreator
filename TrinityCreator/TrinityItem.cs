@@ -10,7 +10,8 @@ namespace TrinityCreator
     {
         public TrinityItem()
         {
-            EntryId = SqlQuery.GetNextId("item_template", "entry");
+            var espvars = Emulator.EmulatorHandler.SelectedEmulator.GetIdColumnName("Item");
+            EntryId = SqlQuery.GetNextId(espvars.Item1, espvars.Item2);
         }
 
         private BitmaskStackPanel _allowedclass;

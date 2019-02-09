@@ -12,7 +12,7 @@ namespace TrinityCreator.Emulator
     {
         public Azeroth335a()
         {
-            ID = 0;
+            ID = 1;
         }
 
         public int ID { get; set; }
@@ -142,7 +142,7 @@ namespace TrinityCreator.Emulator
                 {"AreaDescription", SqlQuery.CleanText(quest.AreaDescription)},
                 {"QuestCompletionLog", SqlQuery.CleanText(quest.QuestCompletionLog)},
 
-                {"OfferRewardText", SqlQuery.CleanText(quest.RewardText)},
+                //{"OfferRewardText", SqlQuery.CleanText(quest.RewardText)}, // <- was removed?
                 //{"IncompleteText", SqlQuery.CleanText(quest.IncompleteText)},  I don't know where this goes
             };
 
@@ -298,6 +298,22 @@ namespace TrinityCreator.Emulator
                 {"extendedcost", vendor.extendedCostTb.Text},
             };
             return kvplist;
+        }
+
+        public Tuple<string, string> GetIdColumnName(string v)
+        {
+            switch (v)
+            {
+                case "Item":
+                    return new Tuple<string, string>("item_template", "entry");
+                case "Creature":
+                    return new Tuple<string, string>("creature_template", "entry");
+                case "Quest":
+                    return new Tuple<string, string>("quest_template", "ID");
+                default:
+                    return new Tuple<string, string>("Undefined", "Undefined");
+
+            }
         }
     }
 }
