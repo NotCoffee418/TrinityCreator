@@ -47,7 +47,7 @@
                 </TextBlock>
             </StatusBarItem>
             <StatusBarItem Grid.Column="1">
-                <TextBlock Text="© 2017 Nadromar"  TextAlignment="Right"/>
+                <TextBlock Text="© 2020 NotCoffee418"  TextAlignment="Right"/>
             </StatusBarItem>
         </StatusBar>
         

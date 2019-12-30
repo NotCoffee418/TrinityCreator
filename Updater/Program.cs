@@ -47,7 +47,7 @@ namespace TrinityCreatorUpdater
             // Start Update
             Console.WriteLine("Downloading latest version of Trinity Creator...");
             c.DownloadFile(
-                "https://github.com/Nadromar/TrinityCreator/blob/master/TrinityCreator/bin/Release/TrinityCreator.exe?raw=true",
+                "https://github.com/NotCoffee418/TrinityCreator/blob/master/TrinityCreator/bin/Release/TrinityCreator.exe?raw=true",
                 path);
 
             Console.WriteLine("Downloaded to {0}", path);
@@ -97,7 +97,7 @@ namespace TrinityCreatorUpdater
                 for (int i = 0; i < newFiles.Count; i++)
                 {
                     Console.WriteLine(string.Format("Downloading {0} of {1}: {2}", i, newFiles.Count, newFiles[i]));
-                    c.DownloadFile("https://github.com/Nadromar/TrinityCreator/blob/master/TrinityCreator/bin/Release/" + newFiles[i] + "?raw=true",
+                    c.DownloadFile("https://github.com/NotCoffee418/TrinityCreator/blob/master/TrinityCreator/bin/Release/" + newFiles[i] + "?raw=true",
                         dir + "\\" + newFiles[i]);
                 }
 
@@ -109,7 +109,7 @@ namespace TrinityCreatorUpdater
             Console.WriteLine("A problem has occurred with auto-update. Please use the installer. Downloading installer...");
             string tempPath = Path.GetTempFileName() + ".msi";
             using (var c = new WebClient())
-            c.DownloadFile("https://github.com/Nadromar/TrinityCreator/blob/master/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi?raw=true",
+            c.DownloadFile("https://github.com/NotCoffee418/TrinityCreator/blob/master/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi?raw=true",
             tempPath);
             Process.Start(tempPath);
         }

@@ -138,7 +138,7 @@ namespace TrinityCreator
 
         private void ReportBugs_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://github.com/Nadromar/TrinityCreator/issues/new");
+            Process.Start("https://github.com/NotCoffee418/TrinityCreator/issues/new");
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

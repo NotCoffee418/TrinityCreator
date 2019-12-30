@@ -111,9 +111,9 @@ namespace TrinityCreator.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         /// <summary>
-        ///   Looks up a localized string similar to Creator			Nadromar
+        ///   Looks up a localized string similar to Creator			NotCoffee418
         ///
         ///External libraries by:
         ///DBC Viewer		tomrus88

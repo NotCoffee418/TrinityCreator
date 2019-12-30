@@ -9,9 +9,9 @@ using System.Windows;
 [assembly: AssemblyTitle("TrinityCreator")]
 [assembly: AssemblyDescription("Easily create content for a 3.3.5a TrinityCore emulator server.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Nadromar")]
+[assembly: AssemblyCompany("NotCoffee418")]
 [assembly: AssemblyProduct("TrinityCreator")]
-[assembly: AssemblyCopyright("Copyright © Nadromar 2017")]
+[assembly: AssemblyCopyright("Copyright © NotCoffee418 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: Guid("7F3D3555-6622-43BB-A57B-3ADD4D2AFB0F")]
@@ -53,5 +53,5 @@ using System.Windows;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.0.8.33")]
-[assembly: AssemblyFileVersion("1.0.8.33")]
+[assembly: AssemblyVersion("1.1.0.100")]
+[assembly: AssemblyFileVersion("1.1.0.100")]
