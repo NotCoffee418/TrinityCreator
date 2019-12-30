@@ -25,7 +25,6 @@ namespace TrinityCreator
                 AutoUpdater.Start("https://raw.githubusercontent.com/NotCoffee418/TrinityCreator/master/TrinityCreator/Properties/AssemblyInfo.cs", Assembly.GetExecutingAssembly());
                 if (force)
                     AutoUpdater.ReportErrors = true;
-                AutoUpdater.ReportErrors = true;
             }
             catch (Exception ex)
             {
