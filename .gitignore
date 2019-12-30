@@ -20,6 +20,7 @@ x86/
 build/
 bld/
 [Bb]in/Debug/
+[Bb]in/Release/
 [Oo]bj/
 
 # Visual Studo 2015 cache/options directory
@@ -238,11 +239,6 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-TrinityCreator/ClassDiagram1.cd
-TrinityCreator/bin/Release/TrinityCreator.vshost.exe.manifest
-TrinityCreator/bin/Release/TrinityCreator.exe.config
-Updater/bin/Release/TrinityCreatorUpdater.exe.config
-TrinityCreator/bin/Release/TrinityCreator.vshost.exe.config
-TrinityCreator/bin/Release/TrinityCreator.vshost.exe
+
+# Manually added
 *.wixpdb
-TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.wixpdb

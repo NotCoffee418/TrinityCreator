@@ -1,90 +1,62 @@
-﻿using System;
+﻿using AutoUpdaterDotNET;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace TrinityCreator
-{
-    internal class Updater
+{    class Updater
     {
-        public static void CheckLatestVersion()
+        static Updater()
         {
-            var local = GetLocalVersionNumber();
-            var latest = string.Empty;
-            try
-            {
-                latest = GetLatestVersionNumber();
-            }
-            catch
-            {
-                MessageBox.Show("Could not check the latest version online", "Can't check version", MessageBoxButton.OK,
-                    MessageBoxImage.Information);
-                latest = local;
-            }
-
-            if (local != latest)
-            {
-                var msg =
-                    string.Format(
-                        "A newer version of Trinity Creator is available.{0}You are using v{1} while v{2} is available.{0}Click yes to update within seconds.",
-                        Environment.NewLine, local, latest);
-                var result = MessageBox.Show(msg, "Update available",
-                    MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                    StartUpdate();
-            }
+            AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
         }
 
-        private static void StartUpdate()
+        internal static void Run(bool force = false)
         {
             try
             {
-                var c = new WebClient();
-                c.DownloadFile(
-                    "https://github.com/NotCoffee418/TrinityCreator/blob/master/Updater/bin/Release/TrinityCreatorUpdater.exe?raw=true",
-                    "TrinityCreatorUpdater.exe");
-                var currentExe = Assembly.GetExecutingAssembly().Location;
-
-                var proc = new ProcessStartInfo("TrinityCreatorUpdater.exe");
-                proc.Arguments = "\"" + currentExe + "\"";
-                Process.Start(proc);
-                Environment.Exit(0);
+                AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
+                AutoUpdater.Start("https://raw.githubusercontent.com/NotCoffee418/TrinityCreator/master/TrinityCreator/Properties/AssemblyInfo.cs", Assembly.GetExecutingAssembly());
+                if (force)
+                    AutoUpdater.ReportErrors = true;
+                AutoUpdater.ReportErrors = true;
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Please update manually", "Update failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Updater Error: " + ex.Message, "Updater", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
         }
 
-        /// <summary>
-        ///     Reads AssemblyFileVersion from GitHub
-        /// </summary>
-        /// <returns></returns>
-        public static string GetLatestVersionNumber()
+
+        private static void AutoUpdaterOnParseUpdateInfoEvent(ParseUpdateInfoEventArgs args)
         {
-            var version = string.Empty;
-            var client = new WebClient();
-            var stream =
-                client.OpenRead(
-                    "https://raw.githubusercontent.com/NotCoffee418/TrinityCreator/master/TrinityCreator/Properties/AssemblyInfo.cs");
-            var reader = new StreamReader(stream);
-            var lines = Regex.Split(reader.ReadToEnd(), "\r\n|\r|\n");
-            foreach (var line in lines)
+            // Get latest version
+            string currentVersionLine =
+                args.RemoteData.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None) // Assembly.cs split by line
+                .Where(l => l.StartsWith("[assembly: AssemblyVersion")) // Find the correct line
+                .FirstOrDefault();
+
+            // Grab version
+            Regex rVersion = new Regex("AssemblyVersion\\(\"(\\S+)\"\\)");
+            Version latestVersion = Version.Parse(rVersion.Match(currentVersionLine).Groups[1].Value);
+
+            // Set update info
+            args.UpdateInfo = new UpdateInfoEventArgs
             {
-                if (line.Contains("AssemblyFileVersion"))
-                    return line.Replace("[assembly: AssemblyFileVersion(\"", string.Empty).Replace("\")]", string.Empty);
-            }
-            throw new Exception();
+                Mandatory = false,
+                InstalledVersion = Assembly.GetExecutingAssembly().GetName().Version,
+                CurrentVersion = latestVersion,
+                ChangelogURL = "https://github.com/NotCoffee418/TrinityCreator/commits/master#branch-select-menu",
+                DownloadURL = "https://github.com/NotCoffee418/TrinityCreator/raw/master/TrinityCreator/bin/Publish/TrinityCreator.zip"
+            };
         }
 
-        public static string GetLocalVersionNumber()
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-            var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            return fvi.FileVersion;
-        }
     }
 }

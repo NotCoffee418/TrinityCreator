@@ -13,22 +13,27 @@ namespace TrinityCreator
     {
         public App()
         {
+            // Related to not breaking float input on different locales
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof (FrameworkElement), new FrameworkPropertyMetadata(
                 XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
+            // Handle startup args
             HandleArgs();
+
+            // Check for updates
+            Updater.Run();
+
+            // Run application
+            MainWindow mw = new MainWindow();
+            mw.Show();
         }
 
         private void HandleArgs() // 0 is current exe path
         {
             string[] args = Environment.GetCommandLineArgs();
-            if (args.Length > 2)
-            {
-                if (args[1].Contains("-TrinityUpdater.exe") && System.IO.File.Exists(args[1])) // finished update
-                    System.IO.File.Delete(args[1]);
-            }
+            // niy
         }
 
         public static LookupTool LookupTool { get; internal set; }

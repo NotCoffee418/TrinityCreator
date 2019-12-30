@@ -21,10 +21,6 @@ namespace TrinityCreator
             InitializeComponent();
             App._MainWindow = this;
 
-            // Check for updates
-#if !DEBUG
-            Updater.CheckLatestVersion();
-#endif
             // presist settings on version change
             if (Settings.Default.UpgradeRequired)
             {
