@@ -167,6 +167,7 @@
     <Compile Include="ModelViewerPage.xaml.cs">
       <DependentUpon>ModelViewerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Profiles\Export.cs" />
     <Compile Include="Profiles\Profile.cs" />
     <Compile Include="TrainerData.cs" />
     <Compile Include="CreditsWindow.xaml.cs">

@@ -100,7 +100,7 @@ namespace TrinityCreator.Profiles
             result[1] = table.Value.Where(keys => keys.Key == appKey).First().Value;
 
             // Return result
-            return result
+            return result;
         }
 
 
