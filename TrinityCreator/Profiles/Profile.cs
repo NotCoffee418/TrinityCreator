@@ -52,6 +52,59 @@ namespace TrinityCreator.Profiles
         public Dictionary<string, Dictionary<string, string>> Loot { get; set; }
         public Dictionary<string, Dictionary<string, string>> Vendor { get; set; }
 
+        /// <summary>
+        /// Stands for "Get Table name and Key"
+        /// Returns the correct key for the current profile based on the app's equivalent of that key
+        /// </summary>
+        /// <param name="creationType"></param>
+        /// <param name="appKey"></param>
+        /// <returns>:0:Table - 1: Sql key</returns>
+        public String[] gtk(Export.C creationType, string appKey)
+        {
+            // Select correctt dictionary to searchfor creation
+            Dictionary<string, Dictionary<string, string>> targetDict = null;
+            switch (creationType)
+            {
+                case Export.C.Creature:
+                    targetDict = Creature;
+                    break;
+                case Export.C.Quest:
+                    targetDict = Quest;
+                    break;
+                case Export.C.Item:
+                    targetDict = Item;
+                    break;
+                case Export.C.Loot:
+                    targetDict = Loot;
+                    break;
+                case Export.C.Vendor:
+                    targetDict = Vendor;
+                    break;
+            }
+
+            // Check if the key exists in the profile
+            var table = targetDict.Where(t =>
+                // equals in this case is equivalent to null check
+                !t.Value.Where(keysDic => keysDic.Key == appKey).FirstOrDefault().Equals(default(KeyValuePair<string, string>))
+            ).FirstOrDefault();
+
+            // Key didn't exist in any table, return null
+            if (table.Equals(default(KeyValuePair<string, string>)))
+                return null;
+
+            // Key exists, generate result
+            var result = new String[2];
+            result[0] = table.Key; // Return table name
+
+            // Find appkey again and put sqlkey in result
+            result[1] = table.Value.Where(keys => keys.Key == appKey).First().Value;
+
+            // Return result
+            return result
+        }
+
+
+
 
         public static string teststructure()
         {
