@@ -62,15 +62,5 @@ namespace TrinityCreator.CreatureTemplates
                     break;
                 }
         }
-
-        /// <summary>
-        /// Set flags for the given DDC
-        /// </summary>
-        /// <param name="ddc"></param>
-        /// <param name="flags"></param>
-        public void SetDdcValues(DynamicDataControl ddc, string[] values, IKeyValue[] ikvKeys = null, string[] stringKeys = null)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

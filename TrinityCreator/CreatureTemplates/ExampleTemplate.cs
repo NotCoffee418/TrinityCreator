@@ -16,7 +16,6 @@ namespace TrinityCreator.CreatureTemplates
             MinLevel = 80;
             SetBmspValues(NpcFlags, new int[] { 1, 2, 4 });
             SetComboboxValue(Page.rankCb, 2); // Elite
-            SetDdcValues(Resistances, new string[] { "22", "123", "456" }); // Create key array when not unique as well
             SetIKVPValue(Page.movementCb, 1);
         }
     }
