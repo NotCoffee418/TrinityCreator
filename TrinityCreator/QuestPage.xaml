@@ -140,7 +140,7 @@
                         <GroupBox Name="RequiredNpcOrGoBox" Header="Required NPC or Game Object" Content="{Binding RequiredNpcOrGos, UpdateSourceTrigger=PropertyChanged}" />
                         <DockPanel Margin="2">
                                 <Label Content="Player kills" DockPanel.Dock="Left" Width="120" />
-                                <TextBox Text="{Binding TimeAllowed}" DockPanel.Dock="Left" ToolTip="Amount of PVP kills required" />
+                                <TextBox Text="{Binding RequiredPlayerKills}" DockPanel.Dock="Left" ToolTip="Amount of PVP kills required" />
                             </DockPanel>
                                         
                         <DockPanel Margin="2">
