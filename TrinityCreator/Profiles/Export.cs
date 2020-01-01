@@ -78,6 +78,13 @@ namespace TrinityCreator.Profiles
                     {
                         rowValuesReady.Add("'" + MySqlHelper.EscapeString((string)dt.Rows[0][col]) + "'");
                     }
+                    // Handle bool type
+                    else if (colType == typeof(bool))
+                    {
+                        if ((bool)dt.Rows[0][col] == true)
+                            rowValuesReady.Add("1");
+                        else rowValuesReady.Add("0");
+                    }
                     else // handle numeric types
                     {
                         rowValuesReady.Add(dt.Rows[0][col].ToString().Replace(',', '.'));
@@ -93,30 +100,19 @@ namespace TrinityCreator.Profiles
         // Loot is DDC based, loop through the entries
         public static string Loot(LootPage loot)
         {
-            /*
-            List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
+            // Loot supports multiple rows per "creation", hence the loop
+            string sql = String.Empty;
             foreach (LootRowControl row in loot.lootRowSp.Children)
-            {
-                // old
-                var kvplist = new Dictionary<string, string>
+                sql += GenerateSql(new Dictionary<string[], dynamic>()
                 {
-                    {"Entry", loot.entryTb.Text},
-                    {"Item", row.Item.ToString()},
-                    {"Chance", row.Chance.ToString()},
-                    {"QuestRequired", Convert.ToInt16(row.QuestRequired).ToString()},
-                    {"MinCount", row.MinCount.ToString()},
-                    {"MaxCount", row.MaxCount.ToString()},
-                };
-                result.Add(kvplist);
-
-
-                // new
-
-            }
-            return result.ToArray();
-
-            */
-            throw new NotImplementedException();
+                    { Profile.Active.gtk(C.Loot, "Entry"), loot.entryTb.Text },
+                    { Profile.Active.gtk(C.Loot, "Item"), row.Item },
+                    { Profile.Active.gtk(C.Loot, "Chance"), row.Chance },
+                    { Profile.Active.gtk(C.Loot, "QuestRequired"), row.QuestRequired },
+                    { Profile.Active.gtk(C.Loot, "MinCount"), row.MinCount },
+                    { Profile.Active.gtk(C.Loot, "MaxCount"), row.MaxCount },
+                }) + Environment.NewLine;
+            return sql;
         }
     }
 }
