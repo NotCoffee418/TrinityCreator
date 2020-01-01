@@ -32,7 +32,7 @@ namespace TrinityCreator.Profiles
             // Find table names
             List<string> tableNames = new List<string>();
             foreach (var entry in data)
-                if (!tableNames.Contains(entry.Key[0]))
+                if (entry.Key != null && !tableNames.Contains(entry.Key[0]))
                     tableNames.Add(entry.Key[0]);
 
             // Prepare datatables
@@ -43,12 +43,12 @@ namespace TrinityCreator.Profiles
             {
                 DataTable dt = new DataTable(tableName);
                 // Create columns
-                foreach (var entry in data.Where(e => e.Key[0] == tableName))
+                foreach (var entry in data.Where(e => e.Key != null && e.Key[0] == tableName))
                     dt.Columns.Add(entry.Key[1], entry.Value.GetType());
 
                 // Create row
                 DataRow row = dt.NewRow();
-                foreach (var entry in data.Where(e => e.Key[0] == tableName))
+                foreach (var entry in data.Where(e => e.Key != null && e.Key[0] == tableName))
                     row[entry.Key[1]] = entry.Value;
                 dt.Rows.Add(row);
 

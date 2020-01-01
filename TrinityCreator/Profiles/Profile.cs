@@ -86,7 +86,7 @@ namespace TrinityCreator.Profiles
             // Check if the key exists in the profile
             var table = targetDict.Where(t =>
                 // equals in this case is equivalent to null check
-                !t.Value.Where(keysDic => keysDic.Key == appKey).FirstOrDefault().Equals(default(KeyValuePair<string, string>))
+                !t.Value.Where(keysDic => keysDic.Key.ToLower() == appKey.ToLower()).FirstOrDefault().Equals(default(KeyValuePair<string, string>))
             ).FirstOrDefault();
 
             // Key didn't exist in any table, return null
@@ -102,7 +102,7 @@ namespace TrinityCreator.Profiles
                 result[0] = result[0].Replace("%t", specialTableName);
 
             // Find appkey again and put sqlkey in result
-            result[1] = table.Value.Where(keys => keys.Key == appKey).First().Value;
+            result[1] = table.Value.Where(keys => keys.Key.ToLower() == appKey.ToLower()).First().Value;
 
             // Return result
             return result;
