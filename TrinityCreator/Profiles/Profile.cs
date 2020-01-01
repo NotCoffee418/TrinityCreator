@@ -58,8 +58,9 @@ namespace TrinityCreator.Profiles
         /// </summary>
         /// <param name="creationType"></param>
         /// <param name="appKey"></param>
+        /// <param name="specialTableName">For table names that vary based on a setting, replaces %t with this string</param>
         /// <returns>:0:Table - 1: Sql key</returns>
-        public String[] gtk(Export.C creationType, string appKey)
+        public String[] gtk(Export.C creationType, string appKey, string specialTableName = "")
         {
             // Select correctt dictionary to searchfor creation
             Dictionary<string, Dictionary<string, string>> targetDict = null;
@@ -95,6 +96,10 @@ namespace TrinityCreator.Profiles
             // Key exists, generate result
             var result = new String[2];
             result[0] = table.Key; // Return table name
+
+            // Handle unusual table names
+            if (specialTableName != "")
+                result[0] = result[0].Replace("%t", specialTableName);
 
             // Find appkey again and put sqlkey in result
             result[1] = table.Value.Where(keys => keys.Key == appKey).First().Value;

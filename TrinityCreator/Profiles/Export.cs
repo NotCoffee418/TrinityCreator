@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using MySql.Data.MySqlClient;
 
 namespace TrinityCreator.Profiles
@@ -100,17 +101,20 @@ namespace TrinityCreator.Profiles
         // Loot is DDC based, loop through the entries
         public static string Loot(LootPage loot)
         {
+            // Loot table names are relative to a setting, use special table name in gtk
+            string sp = ((ComboBoxItem)loot.lootTypeCb.SelectedValue).Content.ToString();
+
             // Loot supports multiple rows per "creation", hence the loop
             string sql = String.Empty;
             foreach (LootRowControl row in loot.lootRowSp.Children)
                 sql += GenerateSql(new Dictionary<string[], dynamic>()
                 {
-                    { Profile.Active.gtk(C.Loot, "Entry"), loot.entryTb.Text },
-                    { Profile.Active.gtk(C.Loot, "Item"), row.Item },
-                    { Profile.Active.gtk(C.Loot, "Chance"), row.Chance },
-                    { Profile.Active.gtk(C.Loot, "QuestRequired"), row.QuestRequired },
-                    { Profile.Active.gtk(C.Loot, "MinCount"), row.MinCount },
-                    { Profile.Active.gtk(C.Loot, "MaxCount"), row.MaxCount },
+                    { Profile.Active.gtk(C.Loot, "Entry", sp), loot.entryTb.Text },
+                    { Profile.Active.gtk(C.Loot, "Item", sp), row.Item },
+                    { Profile.Active.gtk(C.Loot, "Chance", sp), row.Chance },
+                    { Profile.Active.gtk(C.Loot, "QuestRequired", sp), row.QuestRequired },
+                    { Profile.Active.gtk(C.Loot, "MinCount", sp), row.MinCount },
+                    { Profile.Active.gtk(C.Loot, "MaxCount", sp), row.MaxCount },
                 }) + Environment.NewLine;
             return sql;
         }
