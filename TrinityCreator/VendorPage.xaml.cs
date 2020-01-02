@@ -31,7 +31,7 @@ namespace TrinityCreator
             try
             {
                 string query = EmulatorHandler.GenerateQuery(this);
-                ExportQuery.ToFile("Vendor"+ npcTb.Text + " Item " + itemTb.Text + ".sql", query);
+                Query.ToFile("Vendor"+ npcTb.Text + " Item " + itemTb.Text + ".sql", query);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace TrinityCreator
             try
             {
                 string query = EmulatorHandler.GenerateQuery(this);
-                ExportQuery.ToDatabase(query);
+                Query.ToDatabase(query);
             }
             catch (Exception ex)
             {

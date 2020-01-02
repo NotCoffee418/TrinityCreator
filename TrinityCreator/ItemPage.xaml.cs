@@ -386,7 +386,7 @@ namespace TrinityCreator
             try
             {
                 string query = EmulatorHandler.GenerateQuery(_item);
-                ExportQuery.ToDatabase(query);
+                Query.ToDatabase(query);
             }
             catch (Exception ex)
             {
@@ -399,7 +399,7 @@ namespace TrinityCreator
             try
             {
                 string query = EmulatorHandler.GenerateQuery(_item);
-                ExportQuery.ToFile("Item " + _item.EntryId, query);
+                Query.ToFile("Item " + _item.EntryId, query);
             }
             catch (Exception ex)
             {

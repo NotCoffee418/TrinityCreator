@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TrinityCreator.Emulator;
+using TrinityCreator.Profiles;
 
 namespace TrinityCreator
 {
@@ -26,8 +27,7 @@ namespace TrinityCreator
             InitializeComponent();
             AddLootRow();
         }
-
-
+        
         public void AddLootRow()
         {
             lootRowSp.Children.Add(new LootRowControl());
@@ -50,28 +50,14 @@ namespace TrinityCreator
 
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                string query = EmulatorHandler.GenerateQuery(this);
-                ExportQuery.ToFile(((ComboBoxItem)lootTypeCb.SelectedValue).Content.ToString() + " Loot Template " + entryTb.Text + ".sql", query);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            string query = Export.Loot(this);
+            Query.ToFile(((ComboBoxItem)lootTypeCb.SelectedValue).Content.ToString() + " Loot Template " + entryTb.Text + ".sql", query);
         }
 
         private void exportDbBtn_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                string query = EmulatorHandler.GenerateQuery(this);
-                ExportQuery.ToDatabase(query);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            string query = Export.Loot(this);
+            Query.ToDatabase(query);
         }
     }
 }

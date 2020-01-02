@@ -158,7 +158,7 @@
     <Compile Include="Emulator\cMangos335a.cs" />
     <Compile Include="Emulator\Trinity335a201901.cs" />
     <Compile Include="Emulator\Trinity335aTDB64.cs" />
-    <Compile Include="ExportQuery.cs" />
+    <Compile Include="Query.cs" />
     <Compile Include="GHelper.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="LootPage.xaml.cs">

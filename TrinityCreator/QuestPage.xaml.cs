@@ -93,7 +93,7 @@ namespace TrinityCreator
             try
             {
                 string query = EmulatorHandler.GenerateQuery(Quest);
-                ExportQuery.ToDatabase(query);
+                Query.ToDatabase(query);
             }
             catch (Exception ex)
             {
@@ -105,7 +105,7 @@ namespace TrinityCreator
             try
             {
                 string query = EmulatorHandler.GenerateQuery(Quest);
-                ExportQuery.ToFile("Quest " + Quest.EntryId, query);
+                Query.ToFile("Quest " + Quest.EntryId, query);
             }
             catch (Exception ex)
             {
