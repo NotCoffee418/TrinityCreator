@@ -1,7 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,9 +20,19 @@ namespace TrinityCreator.Profiles
             private set { _activeProfile = value; }
         }
 
-        public static Profile LoadFile(string filePath)
+
+        public static Profile LoadFile(string filePath, bool showError = true)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string json = File.ReadAllText(filePath);
+                return JsonConvert.DeserializeObject<Profile>(json);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("Failed to load profile '" + filePath + ". This profile may be corrupt or for a different version of TrinityCreator. Please update TrinityCreator and try again.", Logger.Status.Error, showError);
+                return new Profile();
+            }
         }
 
         public static List<Profile> ListProfiles()

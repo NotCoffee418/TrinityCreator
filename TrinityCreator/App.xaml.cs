@@ -26,8 +26,11 @@ namespace TrinityCreator
             // Handle startup args
             HandleArgs();
 
-            // Check for updates
+            // Check for application update
             Updater.Run();
+
+            // Check for profile updates
+            Updater.UpdateProfiles();
 
             // Run application
             MainWindow mw = new MainWindow();
