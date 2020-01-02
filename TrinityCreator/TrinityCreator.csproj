@@ -172,6 +172,12 @@
     </Compile>
     <Compile Include="Profiles\Export.cs" />
     <Compile Include="Profiles\Profile.cs" />
+    <Compile Include="Profiles\ProfileOptionControl.xaml.cs">
+      <DependentUpon>ProfileOptionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profiles\ProfileSelectionWindow.xaml.cs">
+      <DependentUpon>ProfileSelectionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TrainerData.cs" />
     <Compile Include="CreditsWindow.xaml.cs">
       <DependentUpon>CreditsWindow.xaml</DependentUpon>
@@ -294,6 +300,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ModelViewerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profiles\ProfileOptionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profiles\ProfileSelectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

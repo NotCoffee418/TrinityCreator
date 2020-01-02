@@ -9,10 +9,10 @@ using MySql.Data.MySqlClient;
 
 namespace TrinityCreator.Profiles
 {
-    class Export
+    public class Export
     {
         // Creation type, used for requests to profile
-        internal enum C
+        public enum C
         {
             Creature,
             Quest,

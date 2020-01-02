@@ -10,15 +10,22 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator.Profiles
 {
-    class Profile
+    public class Profile
     {
         #region Static 
         static Profile _activeProfile = null;
 
         public static Profile Active {
             get { return _activeProfile; }
-            private set { _activeProfile = value; }
+            set { 
+                _activeProfile = value;
+                if (ActiveProfileChangedEvent != null)
+                    ActiveProfileChangedEvent(Profile.Active, new EventArgs());
+            }
         }
+
+        // Fires when Profile.Active changes
+        public static event EventHandler ActiveProfileChangedEvent;
 
 
         public static Profile LoadFile(string filePath, bool showError = true)

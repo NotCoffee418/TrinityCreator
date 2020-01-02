@@ -35,6 +35,10 @@ namespace TrinityCreator
             // Run application
             MainWindow mw = new MainWindow();
             mw.Show();
+
+            // test
+            var pwin = new Profiles.ProfileSelectionWindow();
+            pwin.Show();
         }
 
         private void HandleArgs() // 0 is current exe path
