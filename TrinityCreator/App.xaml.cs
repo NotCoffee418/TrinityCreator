@@ -19,6 +19,10 @@ namespace TrinityCreator
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof (FrameworkElement), new FrameworkPropertyMetadata(
                 XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
+            // Indicate that the app has started to shut down background thread when application closes
+            App.Current.Properties["IsRunning"] = true;
+            Logger.Log("Application Starting...");
+
             // Handle startup args
             HandleArgs();
 
