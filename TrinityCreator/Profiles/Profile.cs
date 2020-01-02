@@ -12,6 +12,30 @@ namespace TrinityCreator.Profiles
 {
     public class Profile
     {
+        public string Name { get; set; }
+
+        public string EmulatorName { get; set; }
+
+        public string GameVersion { get; set; }
+
+        public string DatabaseVersion { get; set; }
+
+        public int Revision { get; set; }
+
+        public string Author { get; set; }
+
+        public string UpdateUrl { get; set; }
+
+        [JsonIgnore]
+        public string LocalPath { get; set; }
+
+        // Tablename: application keys, db keys
+        public Dictionary<string, Dictionary<string, string>> Creature { get; set; }
+        public Dictionary<string, Dictionary<string, string>> Quest { get; set; }
+        public Dictionary<string, Dictionary<string, string>> Item { get; set; }
+        public Dictionary<string, Dictionary<string, string>> Loot { get; set; }
+        public Dictionary<string, Dictionary<string, string>> Vendor { get; set; }
+
         #region Static 
         static Profile _activeProfile = null;
 
@@ -81,31 +105,6 @@ namespace TrinityCreator.Profiles
             // return result
             return allProfiles;
         }
-        #endregion
-
-        public string Name { get; set; }
-
-        public string EmulatorName { get; set; }
-
-        public string GameVersion { get; set; }
-
-        public string DatabaseVersion { get; set; }
-
-        public int Revision { get; set; }
-
-        public string Author { get; set; }
-
-        public string UpdateUrl { get; set; }
-
-        [JsonIgnore] 
-        public string LocalPath { get; set; }
-
-        // Tablename: application keys, db keys
-        public Dictionary<string, Dictionary<string,string>> Creature { get; set; }
-        public Dictionary<string, Dictionary<string, string>> Quest { get; set; }
-        public Dictionary<string, Dictionary<string, string>> Item { get; set; }
-        public Dictionary<string, Dictionary<string, string>> Loot { get; set; }
-        public Dictionary<string, Dictionary<string, string>> Vendor { get; set; }
 
         /// <summary>
         /// Stands for "Get Table name and Key"
@@ -162,8 +161,14 @@ namespace TrinityCreator.Profiles
             // Return result
             return result;
         }
+        #endregion
 
 
+        public override bool Equals(object obj)
+        {
+            return obj.GetType().Equals(typeof(Profile)) &&
+                JsonConvert.SerializeObject((Profile)obj) == JsonConvert.SerializeObject(this);
+        }
 
 
         public static string teststructure()

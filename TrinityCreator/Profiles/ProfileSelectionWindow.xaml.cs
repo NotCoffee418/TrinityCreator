@@ -37,6 +37,9 @@ namespace TrinityCreator.Profiles
             Properties.Settings.Default.ActiveProfilePath = Profile.Active.LocalPath;
             Properties.Settings.Default.Save();
 
+            // Log the change
+            Logger.Log("User has chosen a new active profile: " + Profile.Active.LocalPath);
+
             // Close the window once a profile has been selected
             this.Close();
         }

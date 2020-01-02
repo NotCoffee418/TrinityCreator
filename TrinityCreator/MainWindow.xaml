@@ -8,6 +8,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Config">
+                <MenuItem Name="ConfigureProfile" Header="Choose _Emulator Profile" Click="configureProfile_Click" />
                 <MenuItem Name="ConfigureDbc" Header="Configure DB_C Path" Click="configureDbc_Click" />
                 <MenuItem Name="ConfigureMysql" Header="Configure _MySQL" Click="configureMysql_Click" />
             </MenuItem>

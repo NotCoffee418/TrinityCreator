@@ -8,6 +8,7 @@ using TrinityCreator.DBC;
 using System.Timers;
 using System.Collections.Generic;
 using System.Xml;
+using TrinityCreator.Profiles;
 
 namespace TrinityCreator
 {
@@ -20,14 +21,6 @@ namespace TrinityCreator
         {
             InitializeComponent();
             App._MainWindow = this;
-
-            // presist settings on version change
-            if (Settings.Default.UpgradeRequired)
-            {
-                Settings.Default.Upgrade();
-                Settings.Default.UpgradeRequired = false;
-                Settings.Default.Save();
-            }
 
             // prepare lookup tool
             ContentGrid.ColumnDefinitions[2].Width = new GridLength(25);
@@ -88,6 +81,11 @@ namespace TrinityCreator
         private void configureDbc_Click(object sender, RoutedEventArgs e)
         {
             new DBC.DbcConfigWindow().Show();
+        }
+
+        private void configureProfile_Click(object sender, RoutedEventArgs e)
+        {
+            new ProfileSelectionWindow().Show();
         }
 
         #region Settings
@@ -189,5 +187,6 @@ namespace TrinityCreator
         {
             ShowLookupTool();
         }
+
     }
 }

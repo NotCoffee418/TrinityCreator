@@ -24,6 +24,15 @@ namespace TrinityCreator
             App.Current.Properties["IsRunning"] = true;
             Logger.Log("Application Starting...");
 
+            // Upgrade settings
+            if (TrinityCreator.Properties.Settings.Default.UpgradeRequired)
+            {
+                Logger.Log("First run or version has changed since last run. Running Settings.Upgrade()");
+                TrinityCreator.Properties.Settings.Default.Upgrade();
+                TrinityCreator.Properties.Settings.Default.UpgradeRequired = false;
+                TrinityCreator.Properties.Settings.Default.Save();
+            }
+
             // Handle startup args
             HandleArgs();
 
@@ -42,6 +51,7 @@ namespace TrinityCreator
                 !System.IO.File.Exists(knownActiveProfilePath) ||
                 Profile.LoadFile(knownActiveProfilePath) == null)
             {
+                Logger.Log("First run or corrupt profile. Prompting user to select a profile before starting.");
                 var pwin = new ProfileSelectionWindow();
                 pwin.Show();
             }
