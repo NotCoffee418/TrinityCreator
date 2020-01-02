@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:l="clr-namespace:TrinityCreator"
       mc:Ignorable="d" d:DesignHeight="1500" d:DesignWidth="600"
-      Title="CreatureCreatorPage" Loaded="Page_Loaded">
+      Title="CreatureCreatorPage">
     <Page.Resources>
         <l:ValueToVisibilityConverter x:Key="ValueVisibilityConverter" />
     </Page.Resources>

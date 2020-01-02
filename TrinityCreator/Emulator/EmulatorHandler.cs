@@ -16,7 +16,7 @@ namespace TrinityCreator.Emulator
         {
             get
             {
-                if (_selectedEmulator == null || _selectedEmulator.ID != Properties.Settings.Default.emulator)
+                if (_selectedEmulator == null)
                     SetSelectedEmulator();
                 return _selectedEmulator;
             }
@@ -24,7 +24,8 @@ namespace TrinityCreator.Emulator
 
         private static void SetSelectedEmulator()
         {
-            switch (Properties.Settings.Default.emulator)
+            var rip = 0; // temporary until i can delete this whole system
+            switch (rip)
             {
                 case 0:
                     _selectedEmulator = new Trinity335aTDB64();

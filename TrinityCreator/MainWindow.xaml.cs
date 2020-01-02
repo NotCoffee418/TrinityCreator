@@ -33,26 +33,6 @@ namespace TrinityCreator
             CreatureCreatorTab.Content = new CreatureCreatorPage();
             LootCreatorTab.Content = new LootPage();
             VendorCreatorTab.Content = new VendorPage();
-            
-            // Set emulator
-            switch (Properties.Settings.Default.emulator)
-            {
-                case 0: // trinity335a
-                    trinity335a64Rb.IsChecked = true;
-                    break;
-                case 1: // cMangos112
-                    cMangos112Rb.IsChecked = true;
-                    break;
-                case 2: // azeroth335a
-                    azeroth335aRb.IsChecked = true;
-                    break;
-                case 3: // cMangos335a
-                    cMangos335aRb.IsChecked = true;
-                    break;
-                case 4: // trinity335a Latest
-                    trinity335a201901Rb.IsChecked = true;
-                    break;
-            }
 
             // Load randomTip
             tipTimer.Elapsed += ChangeRandomTip;
@@ -87,44 +67,7 @@ namespace TrinityCreator
         {
             new ProfileSelectionWindow().Show();
         }
-
-        #region Settings
-        // select the emulator
-        private void trinity335a64Rb_Checked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.emulator = 0;
-            Properties.Settings.Default.Save();
-        }
-        private void cMangos112Rb_Checked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.emulator = 1;
-            Properties.Settings.Default.Save();
-        }
-        private void azeroth335a_Checked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.emulator = 2;
-            Properties.Settings.Default.Save();
-
-            // TODO: Lazy fix, take this out when updating emulator system
-            try
-            {
-                ((CreatureCreatorPage)CreatureCreatorTab.Content).MinMaxDmgDp.Visibility = Visibility.Visible;
-            }
-            catch { /* will fail on startup, page load event also has one */ }
-        }
-        private void cMangos335aRb_Checked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.emulator = 3;
-            Properties.Settings.Default.Save();
-        }
-        private void trinity335a201901Rb_Checked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.emulator = 4;
-            Properties.Settings.Default.Save();
-        }
-        #endregion
-
-
+ 
         private void Credits_Click(object sender, RoutedEventArgs e)
         {
             new CreditsWindow().Show();

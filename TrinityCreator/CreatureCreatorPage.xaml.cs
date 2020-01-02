@@ -146,21 +146,5 @@ namespace TrinityCreator
             ctw.Show();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            // TODO: Lazy fix, take this out when updating emulator system
-            if (Properties.Settings.Default.emulator == 2) // Azerothcore
-                MinMaxDmgDp.Visibility = Visibility.Visible;
-
-
-            // Compatability
-            if (!(Properties.Settings.Default.emulator == 0) && !(Properties.Settings.Default.emulator == 3)) // Azerothcore
-                equipmentGb.Visibility = Visibility.Collapsed;
-
-
-            // Emu support
-            if (Properties.Settings.Default.emulator != 1) // not cmangos zero
-                cMangosZeroDetailedStatsGb.Visibility = Visibility.Collapsed;
-        }
     }
 }
