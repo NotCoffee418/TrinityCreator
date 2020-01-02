@@ -26,7 +26,9 @@ namespace TrinityCreator.Profiles
             try
             {
                 string json = File.ReadAllText(filePath);
-                return JsonConvert.DeserializeObject<Profile>(json);
+                Profile p = JsonConvert.DeserializeObject<Profile>(json);
+                p.LocalPath = filePath;
+                return p;
             }
             catch (Exception ex)
             {
@@ -37,7 +39,40 @@ namespace TrinityCreator.Profiles
 
         public static List<Profile> ListProfiles()
         {
-            throw new NotImplementedException();
+            // Prepare directories
+            string sysProfilesDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Profiles");
+            string usrProfilesDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TrinityCreator", "Profiles");
+            if (!Directory.Exists(usrProfilesDir))
+                Directory.CreateDirectory(usrProfilesDir);
+            if (!Directory.Exists(sysProfilesDir))
+                Directory.CreateDirectory(sysProfilesDir);
+
+            // Load all profiles:
+            List<Profile> allProfiles = new List<Profile>();
+            List<string> allFiles = new List<string>();
+            allFiles.AddRange(Directory.GetFiles(sysProfilesDir));
+            allFiles.AddRange(Directory.GetFiles(usrProfilesDir));
+            foreach (string path in allFiles)
+            {
+                if (Path.GetExtension(path).ToLower() != ".json")
+                    continue; // Not a valid profile file
+                allProfiles.Add(LoadFile(path));
+            }
+
+            // Warn user when user created profile has the same name as default profile (can create issues)
+            List<string> fileNames = new List<string>();
+            foreach (string path in allFiles)
+            {
+                string fn = Path.GetFileName(path).ToLower();
+                if (fileNames.Contains(fn))
+                    Logger.Log($"User-created profile {fn} has the same filename as a default profile.{Environment.NewLine}" + 
+                        $"Please rename or remove the user-created profile.{Environment.NewLine}" +
+                        $"User-created profiles can be found in My Documents\\TrinityCreator\\Profiles", Logger.Status.Warning, true);
+                fileNames.Add(fn);
+            }
+
+            // return result
+            return allProfiles;
         }
         #endregion
 
