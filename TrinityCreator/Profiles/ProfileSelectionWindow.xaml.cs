@@ -26,6 +26,19 @@ namespace TrinityCreator.Profiles
             // Load & list profiles
             foreach (Profile p in Profile.ListProfiles())
                 profileControlsSp.Children.Add(new ProfileSelectionControl(p));
+
+            // ActiveProfile changed handler
+            Profile.ActiveProfileChangedEvent += Profile_ActiveProfileChangedEvent;
+        }
+
+        private void Profile_ActiveProfileChangedEvent(object sender, EventArgs e)
+        {
+            // Store the local path of selected profile in Settings to remember between sessions
+            Properties.Settings.Default.ActiveProfilePath = Profile.Active.LocalPath;
+            Properties.Settings.Default.Save();
+
+            // Close the window once a profile has been selected
+            this.Close();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
+using TrinityCreator.Profiles;
 
 namespace TrinityCreator
 {
@@ -29,16 +30,36 @@ namespace TrinityCreator
             // Check for application update
             Updater.Run();
 
-            // Check for profile updates
+            // Check for and install profile updates
             Updater.UpdateProfiles();
 
-            // Run application
-            MainWindow mw = new MainWindow();
-            mw.Show();
+            // Ensure we have a valid profile before loading MainWindow
+            Profile.ActiveProfileChangedEvent += Profile_ActiveProfileChangedEvent;
 
-            // test
-            var pwin = new Profiles.ProfileSelectionWindow();
-            pwin.Show();
+            // Force profile input if it doesn't know a working one
+            string knownActiveProfilePath = TrinityCreator.Properties.Settings.Default.ActiveProfilePath;
+            if (knownActiveProfilePath == String.Empty ||
+                !System.IO.File.Exists(knownActiveProfilePath) ||
+                Profile.LoadFile(knownActiveProfilePath) == null)
+            {
+                var pwin = new ProfileSelectionWindow();
+                pwin.Show();
+            }
+            else Profile.Active = Profile.LoadFile(knownActiveProfilePath);
+        }
+        
+        // Open mainwindow when we have a valid profile active
+        private void Profile_ActiveProfileChangedEvent(object sender, EventArgs e)
+        {
+            var x = Profile.Active;
+            if (Profile.Active != null)
+            {
+                _MainWindow = new MainWindow();
+                _MainWindow.Show();
+
+                // Only once on launch.
+                Profile.ActiveProfileChangedEvent -= Profile_ActiveProfileChangedEvent;
+            }
         }
 
         private void HandleArgs() // 0 is current exe path

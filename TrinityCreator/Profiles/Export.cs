@@ -109,12 +109,12 @@ namespace TrinityCreator.Profiles
             foreach (LootRowControl row in loot.lootRowSp.Children)
                 sql += GenerateSql(new Dictionary<string[], dynamic>()
                 {
-                    { Profile.Active.gtk(C.Loot, "Entry", sp), loot.entryTb.Text },
-                    { Profile.Active.gtk(C.Loot, "Item", sp), row.Item },
-                    { Profile.Active.gtk(C.Loot, "Chance", sp), row.Chance },
-                    { Profile.Active.gtk(C.Loot, "QuestRequired", sp), row.QuestRequired },
-                    { Profile.Active.gtk(C.Loot, "MinCount", sp), row.MinCount },
-                    { Profile.Active.gtk(C.Loot, "MaxCount", sp), row.MaxCount },
+                    { Profile.gtk(C.Loot, "Entry", sp), loot.entryTb.Text },
+                    { Profile.gtk(C.Loot, "Item", sp), row.Item },
+                    { Profile.gtk(C.Loot, "Chance", sp), row.Chance },
+                    { Profile.gtk(C.Loot, "QuestRequired", sp), row.QuestRequired },
+                    { Profile.gtk(C.Loot, "MinCount", sp), row.MinCount },
+                    { Profile.gtk(C.Loot, "MaxCount", sp), row.MaxCount },
                 }) + Environment.NewLine;
             return sql;
         }

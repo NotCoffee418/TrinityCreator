@@ -40,7 +40,7 @@ namespace TrinityCreator.Profiles
             catch (Exception ex)
             {
                 Logger.Log("Failed to load profile '" + filePath + ". This profile may be corrupt or for a different version of TrinityCreator. Please update TrinityCreator and try again.", Logger.Status.Error, showError);
-                return new Profile();
+                return null;
             }
         }
 
@@ -115,26 +115,26 @@ namespace TrinityCreator.Profiles
         /// <param name="appKey"></param>
         /// <param name="specialTableName">For table names that vary based on a setting, replaces %t with this string</param>
         /// <returns>:0:Table - 1: Sql key</returns>
-        public String[] gtk(Export.C creationType, string appKey, string specialTableName = "")
+        public static String[] gtk(Export.C creationType, string appKey, string specialTableName = "")
         {
-            // Select correctt dictionary to searchfor creation
+            // Select correct dictionary to searchfor creation
             Dictionary<string, Dictionary<string, string>> targetDict = null;
             switch (creationType)
             {
                 case Export.C.Creature:
-                    targetDict = Creature;
+                    targetDict = Profile.Active.Creature;
                     break;
                 case Export.C.Quest:
-                    targetDict = Quest;
+                    targetDict = Profile.Active.Quest;
                     break;
                 case Export.C.Item:
-                    targetDict = Item;
+                    targetDict = Profile.Active.Item;
                     break;
                 case Export.C.Loot:
-                    targetDict = Loot;
+                    targetDict = Profile.Active.Loot;
                     break;
                 case Export.C.Vendor:
-                    targetDict = Vendor;
+                    targetDict = Profile.Active.Vendor;
                     break;
             }
 
