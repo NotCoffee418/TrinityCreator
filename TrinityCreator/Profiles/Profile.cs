@@ -166,7 +166,7 @@ namespace TrinityCreator.Profiles
 
         public override bool Equals(object obj)
         {
-            return obj.GetType().Equals(typeof(Profile)) &&
+            return obj != null && obj.GetType().Equals(typeof(Profile)) &&
                 JsonConvert.SerializeObject((Profile)obj) == JsonConvert.SerializeObject(this);
         }
 
