@@ -7,8 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CefSharp;
+using CefSharp; 
 using CefSharp.WinForms;
+
+// If CefSharp could not be found after cloning, reinstall CefSharp.Common nuget package.
+// It ships with dlls but \packages\ is gitignored.
+// https://github.com/cefsharp/CefSharp/wiki/Frequently-asked-questions
 
 namespace TrinityCreator
 {

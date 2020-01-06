@@ -27,31 +27,31 @@ namespace TrinityCreator.Profiles
         /// </summary>
         /// <param name="data">Dictionary of string[] generated through Profile.gtk() and value</param>
         /// <returns></returns>
-        private static string GenerateSql(Dictionary<string[], dynamic> data)
+        private static string GenerateSql(List<ExpKvp> data)
         {
             try
             {
                 // Find table names
-                List<string> tableNames = new List<string>();
-                foreach (var entry in data)
-                    if (entry.Key != null && !tableNames.Contains(entry.Key[0]))
-                        tableNames.Add(entry.Key[0]);
+                IEnumerable<string> tableNames = data
+                    .Where(e => e.IsValid)
+                    .GroupBy(e => e.SqlTableName)
+                    .Select(grp => grp.First().SqlTableName);
 
                 // Prepare datatables
                 List<DataTable> dtList = new List<DataTable>();
-
+                
                 // Generate Datatables
                 foreach (var tableName in tableNames)
                 {
                     DataTable dt = new DataTable(tableName);
                     // Create columns
-                    foreach (var entry in data.Where(e => e.Key != null && e.Key[0] == tableName))
-                        dt.Columns.Add(entry.Key[1], entry.Value.GetType());
+                    foreach (var entry in data.Where(e => e.IsValid && e.SqlTableName == tableName))
+                        dt.Columns.Add(entry.SqlKey, entry.Value.GetType());
 
                     // Create row
                     DataRow row = dt.NewRow();
-                    foreach (var entry in data.Where(e => e.Key != null && e.Key[0] == tableName))
-                        row[entry.Key[1]] = entry.Value;
+                    foreach (var entry in data.Where(e => e.IsValid && e.SqlTableName == tableName))
+                        row[entry.SqlKey] = entry.Value;
                     dt.Rows.Add(row);
 
                     // Add to result tables
@@ -127,14 +127,14 @@ namespace TrinityCreator.Profiles
                     return ""; // export/save won't happen
                 }
 
-                sql += GenerateSql(new Dictionary<string[], dynamic>()
+                sql += GenerateSql(new List<ExpKvp>()
                 {
-                    { Profile.gtk(C.Loot, "Entry", sp),  entry},
-                    { Profile.gtk(C.Loot, "Item", sp), row.Item },
-                    { Profile.gtk(C.Loot, "Chance", sp), row.Chance },
-                    { Profile.gtk(C.Loot, "QuestRequired", sp), row.QuestRequired },
-                    { Profile.gtk(C.Loot, "MinCount", sp), row.MinCount },
-                    { Profile.gtk(C.Loot, "MaxCount", sp), row.MaxCount },
+                    new ExpKvp("Entry", entry, C.Loot, sp),
+                    new ExpKvp("Item", row.Item, C.Loot, sp),
+                    new ExpKvp("Chance", row.Chance, C.Loot, sp),
+                    new ExpKvp("QuestRequired", row.QuestRequired, C.Loot, sp),
+                    new ExpKvp("MinCount", row.MinCount, C.Loot, sp),
+                    new ExpKvp("MaxCount", row.MaxCount, C.Loot, sp),
                 }) + Environment.NewLine;
 
             }                
