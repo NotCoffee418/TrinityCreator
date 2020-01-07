@@ -46,6 +46,7 @@ namespace TrinityCreator
         private Currency _valuesell;
         private int _statsCount;
         private int _itemLevel;
+        private int _rangedModRange;
 
         public string Name
         {
@@ -424,6 +425,15 @@ namespace TrinityCreator
             {
                 _itemLevel = DataType.LimitLength(value, "smallint(3)");
                 RaisePropertyChanged("ItemLevel");
+            }
+        }
+        public int RangedModRange
+        {
+            get { return _rangedModRange; }
+            set
+            {
+                _rangedModRange = DataType.LimitLength(value, "smallint(3)");
+                RaisePropertyChanged("RangedModRange");
             }
         }
 

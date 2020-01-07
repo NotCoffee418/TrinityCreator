@@ -106,6 +106,100 @@ namespace TrinityCreator.Profiles
             }
         }
 
+        public static string Item(TrinityItem item)
+        {
+            var data = new List<ExpKvp>()
+            {
+                new ExpKvp("EntryId", item.EntryId, C.Item),
+                new ExpKvp("Name", item.Name, C.Item),
+                new ExpKvp("Quote", item.Quote, C.Item),
+                new ExpKvp("Class", item.Class.Id, C.Item),
+                new ExpKvp("ItemSubClass", item.ItemSubClass.Id, C.Item),
+                new ExpKvp("Quality", item.Quality.Id, C.Item),
+                new ExpKvp("DisplayId", item.DisplayId, C.Item),
+                new ExpKvp("Binds", item.Binds.Id, C.Item),
+                new ExpKvp("MinLevel", item.MinLevel, C.Item),
+                new ExpKvp("MaxAllowed", item.MaxAllowed, C.Item),
+                new ExpKvp("AllowedClass", item.AllowedClass.BitmaskValue, C.Item),
+                new ExpKvp("AllowedRace", item.AllowedRace.BitmaskValue, C.Item),
+                new ExpKvp("ValueBuy", item.ValueBuy.Amount, C.Item),
+                new ExpKvp("ValueSell", item.ValueSell.Amount, C.Item),
+                new ExpKvp("InventoryType", item.InventoryType.Id, C.Item),
+                new ExpKvp("Flags", item.Flags.BitmaskValue, C.Item),
+                new ExpKvp("FlagsExtra", item.FlagsExtra.BitmaskValue, C.Item),
+                new ExpKvp("BuyCount", item.BuyCount, C.Item),
+                new ExpKvp("Stackable", item.Stackable, C.Item),
+                new ExpKvp("ContainerSlots", item.ContainerSlots, C.Item),
+                new ExpKvp("MinDamage", item.DamageInfo.MinDamage, C.Item),
+                new ExpKvp("MaxDamage", item.DamageInfo.MaxDamage, C.Item),
+                new ExpKvp("AttackSpeed", item.DamageInfo.Speed, C.Item),
+                new ExpKvp("DamageType", item.DamageInfo.Type.Id, C.Item),
+                new ExpKvp("AmmoType", item.AmmoType, C.Item),
+                new ExpKvp("Durability", item.Durability, C.Item),
+                new ExpKvp("SocketBonus", item.SocketBonus.Id, C.Item),
+                new ExpKvp("StatsCount", item.StatsCount, C.Item),
+                new ExpKvp("Armor", item.Armor, C.Item),
+                new ExpKvp("Block", item.Block, C.Item),
+                new ExpKvp("BagFamily", item.BagFamily.BitmaskValue, C.Item),
+                new ExpKvp("ItemLevel", item.ItemLevel, C.Item),
+            };
+
+            try // Handle resistances
+            {
+                foreach (var kvp in item.Resistances.GetUserInput())
+                {
+                    // Translates to HolyResistance, FireResistance...
+                    string appKey = ((DamageType)kvp.Key).Description + "Resistance";
+                    int value;
+                    if (!int.TryParse(kvp.Value, out value))
+                    {
+                        Logger.Log($"Invalid value enetered for {appKey}. Query was not saved.", Logger.Status.Error, true);
+                        return String.Empty;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing resistances data. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
+            
+
+            try // Handle gem sockets
+            {
+                // Translates to two columns: SocketColor1, SocketContent1, SocketColor2...
+                var gemData = new Dictionary<string, string>();
+                item.GemSockets.AddValues(gemData, "SocketColor", "SocketContent");
+                foreach (var gemColumn in gemData)
+                    data.Add(new ExpKvp(gemColumn.Key, gemColumn.Value, C.Item));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing gem socket data. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
+
+            try // Handle Stats
+            {
+                // Translates to two columns: StatType1, StatValue1, StatType2...
+                var statData = new Dictionary<string, string>();
+                item.Stats.AddValues(statData, "StatType", "StatValue");
+                foreach (var statColumn in statData)
+                    data.Add(new ExpKvp(statColumn.Key, statColumn.Value, C.Item));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing gem socket data. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
+
+
+            return GenerateSql(data);
+        }
+
         // Loot is DDC based, loop through the entries
         public static string Loot(LootPage loot)
         {

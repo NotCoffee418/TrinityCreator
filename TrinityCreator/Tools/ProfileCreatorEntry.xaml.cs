@@ -21,7 +21,7 @@ namespace TrinityCreator.Tools
     /// </summary>
     public partial class ProfileCreatorEntry : UserControl, INotifyPropertyChanged
     {
-        public ProfileCreatorEntry(string appKey)
+        public ProfileCreatorEntry(string appKey, string tooltip = "")
         {
             InitializeComponent();
             DataContext = this;
