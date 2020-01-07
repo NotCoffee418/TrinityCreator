@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="490">
     <WrapPanel Orientation="Horizontal">
-        <TextBox Text="{Binding AppKey}" IsEnabled="False" Width="170" Margin="5" ToolTip="AppKey - This is the identifier used in TrinityCreator's code."/>
+        <TextBox Text="{Binding AppKey}" IsReadOnly="True" Width="170" Margin="5" ToolTip="AppKey - This is the identifier used in TrinityCreator's code."/>
         <TextBox Text="{Binding SqlKey}" IsEnabled="{Binding IsIncluded}"  Width="170" Margin="5" ToolTip="SqlKey - This is the corresponding column name in the emulator you want to create this profile for."/>
-        <TextBox Text="{Binding TableName}" Width="100" Margin="5" ToolTip="Table Name - Use %t for dynamic table names (eg. creature_loot_template should be %t_loot_template"/>
+        <TextBox Text="{Binding TableName}" IsEnabled="{Binding IsIncluded}" Width="100" Margin="5" ToolTip="Table Name - Use %t for dynamic table names (eg. creature_loot_template should be %t_loot_template"/>
         <CheckBox IsChecked="{Binding IsIncluded}" VerticalAlignment="Center" ToolTip="Uncheck to ignore this AppKey when generating an sql query."/>
     </WrapPanel>
 </UserControl>

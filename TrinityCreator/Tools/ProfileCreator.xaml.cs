@@ -73,7 +73,7 @@ namespace TrinityCreator.Tools
 
             // Check if input data is valid (or.. won't cause the application to crash)
             var issues = sectionList.Where(e => (e.IsIncluded && 
-                (e.SqlKey == null || e.SqlKey == String.Empty)  || e.TableName == null || e.TableName == String.Empty));     
+                (e.SqlKey == null || e.SqlKey == String.Empty || e.TableName == null || e.TableName == String.Empty)));     
             
             if (issues.Count() > 0)
             {
@@ -85,6 +85,7 @@ namespace TrinityCreator.Tools
 
             // List distinct table names
             IEnumerable<string> tableNames = sectionList
+                    .Where(e => e.IsIncluded)
                     .GroupBy(e => e.TableName.ToLower())
                     .Select(grp => grp.First().TableName);
 
@@ -93,7 +94,7 @@ namespace TrinityCreator.Tools
             {
                 // Find entries in this table & add them to tableDict
                 var tableDict = new Dictionary<string, string>();
-                foreach(var entry in sectionList.Where(e => e.TableName.ToLower() == tableName.ToLower()))
+                foreach(var entry in sectionList.Where(e => e.IsIncluded && e.TableName.ToLower() == tableName.ToLower()))
                     tableDict.Add(entry.AppKey, entry.SqlKey);
 
                 // Add all fields in this table to result
