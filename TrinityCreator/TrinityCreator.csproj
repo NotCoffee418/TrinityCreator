@@ -179,6 +179,12 @@
     <Compile Include="Profiles\ProfileSelectionWindow.xaml.cs">
       <DependentUpon>ProfileSelectionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\ProfileCreator.xaml.cs">
+      <DependentUpon>ProfileCreator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ProfileCreatorEntry.xaml.cs">
+      <DependentUpon>ProfileCreatorEntry.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TrainerData.cs" />
     <Compile Include="CreditsWindow.xaml.cs">
       <DependentUpon>CreditsWindow.xaml</DependentUpon>
@@ -317,6 +323,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="QuestPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\ProfileCreator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\ProfileCreatorEntry.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

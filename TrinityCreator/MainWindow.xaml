@@ -12,6 +12,10 @@
                 <MenuItem Name="ConfigureDbc" Header="Configure DB_C Path" Click="configureDbc_Click" />
                 <MenuItem Name="ConfigureMysql" Header="Configure _MySQL" Click="configureMysql_Click" />
             </MenuItem>
+
+            <MenuItem Header="Advanced Tools">
+                <MenuItem Name="ProfileCreator" Header="_Profile Creator" Click="ProfileCreator_Click" />
+            </MenuItem>
             
             <MenuItem Header="Info" >
                 <MenuItem Header="Credits" Click="Credits_Click" />

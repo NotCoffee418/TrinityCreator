@@ -77,6 +77,11 @@ namespace TrinityCreator
         {
             Process.Start("https://github.com/NotCoffee418/TrinityCreator/issues/new");
         }
+        private void ProfileCreator_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new Tools.ProfileCreator();
+            win.Show();
+        }
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
