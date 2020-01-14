@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using MySql.Data.MySqlClient;
 using TrinityCreator.Data;
 using TrinityCreator.Helpers;
+using TrinityCreator.Tools.CreatureCreator;
 using TrinityCreator.Tools.ItemCreator;
 using TrinityCreator.Tools.LootCreator;
 using TrinityCreator.Tools.QuestCreator;
@@ -266,7 +267,7 @@ namespace TrinityCreator.Profiles
                 var requiredItemData = new Dictionary<string, string>();
                 quest.RequiredItems.AddValues(requiredItemData, "RequiredItem", "RequiredItemCount");
                 foreach (var reqItemCol in requiredItemData)
-                    data.Add(new ExpKvp(reqItemCol.Key, reqItemCol.Value, C.Item));
+                    data.Add(new ExpKvp(reqItemCol.Key, reqItemCol.Value, C.Quest));
             }
             catch (Exception ex)
             {
@@ -281,7 +282,7 @@ namespace TrinityCreator.Profiles
                 var requiredNpcOrGoData = new Dictionary<string, string>();
                 quest.RequiredItems.AddValues(requiredNpcOrGoData, "RequiredNpcOrGoItem", "RequiredNpcOrGoCount");
                 foreach (var reqNpcOrGoCol in requiredNpcOrGoData)
-                    data.Add(new ExpKvp(reqNpcOrGoCol.Key, reqNpcOrGoCol.Value, C.Item));
+                    data.Add(new ExpKvp(reqNpcOrGoCol.Key, reqNpcOrGoCol.Value, C.Quest));
             }
             catch (Exception ex)
             {
@@ -296,7 +297,7 @@ namespace TrinityCreator.Profiles
                 var rewardItemData = new Dictionary<string, string>();
                 quest.RequiredItems.AddValues(rewardItemData, "RewardItem", "RewardItemAmount");
                 foreach (var rewardItemCol in rewardItemData)
-                    data.Add(new ExpKvp(rewardItemCol.Key, rewardItemCol.Value, C.Item));
+                    data.Add(new ExpKvp(rewardItemCol.Key, rewardItemCol.Value, C.Quest));
             }
             catch (Exception ex)
             {
@@ -311,7 +312,7 @@ namespace TrinityCreator.Profiles
                 var rewardItemChoiceData = new Dictionary<string, string>();
                 quest.RequiredItems.AddValues(rewardItemChoiceData, "RewardChoiceItemID", "RewardChoiceItemAmount");
                 foreach (var rewardItemChoiceCol in rewardItemChoiceData)
-                    data.Add(new ExpKvp(rewardItemChoiceCol.Key, rewardItemChoiceCol.Value, C.Item));
+                    data.Add(new ExpKvp(rewardItemChoiceCol.Key, rewardItemChoiceCol.Value, C.Quest));
             }
             catch (Exception ex)
             {
@@ -327,7 +328,7 @@ namespace TrinityCreator.Profiles
                 // Value output is *100 (TrinityCore support)! see issue #72
                 quest.RequiredItems.AddValues(factionRewardData, "RewardChoiceItemID", "RewardChoiceItemAmount", 100); 
                 foreach (var factionRewardDataCol in factionRewardData)
-                    data.Add(new ExpKvp(factionRewardDataCol.Key, factionRewardDataCol.Value, C.Item));
+                    data.Add(new ExpKvp(factionRewardDataCol.Key, factionRewardDataCol.Value, C.Quest));
             }
             catch (Exception ex)
             {
@@ -371,6 +372,225 @@ namespace TrinityCreator.Profiles
                 }) + Environment.NewLine;
 
             }                
+            return sql;
+        }
+
+        // Vendor is dynamic, loop through the UI elements
+        public static string Creature(TrinityCreature creature)
+        {
+            var data = new List<ExpKvp>()
+            {
+                new ExpKvp("Entry", creature.Entry, C.Creature),
+                new ExpKvp("Name", creature.Name, C.Creature),
+                new ExpKvp("Subname", creature.Subname, C.Creature),
+                new ExpKvp("MinLevel", creature.MinLevel, C.Creature),
+                new ExpKvp("MaxLevel", creature.MaxLevel, C.Creature),
+                new ExpKvp("Faction", creature.Faction, C.Creature),
+                new ExpKvp("NpcFlags", creature.NpcFlags.BitmaskValue, C.Creature),
+                new ExpKvp("SpeedWalk", creature.SpeedWalk, C.Creature),
+                new ExpKvp("SpeedRun", creature.SpeedRun, C.Creature),
+                new ExpKvp("Scale", creature.Scale, C.Creature),
+                new ExpKvp("Rank", creature.Rank.Id, C.Creature),
+                new ExpKvp("DmgSchool", creature.DmgSchool.Id, C.Creature),
+                new ExpKvp("BaseAttackTime", creature.BaseAttackTime, C.Creature),
+                new ExpKvp("RangeAttackTime", creature.RangeAttackTime, C.Creature),
+                new ExpKvp("UnitClass", creature._UnitClass.Id, C.Creature),
+                new ExpKvp("UnitFlags", creature.UnitFlags.BitmaskValue, C.Creature),
+                new ExpKvp("UnitFlags2", creature.UnitFlags2.BitmaskValue, C.Creature),
+                new ExpKvp("DynamicFlags", creature.DynamicFlags.BitmaskValue, C.Creature),
+                new ExpKvp("Family", creature.Family.Id, C.Creature),
+                new ExpKvp("TrainerType", creature.Trainer.TrainerType, C.Creature),
+                new ExpKvp("TrainerSpell", creature.Trainer.TrainerSpell, C.Creature),
+                new ExpKvp("TrainerClass", creature.Trainer.TrainerClass, C.Creature),
+                new ExpKvp("TrainerRace", creature.Trainer.TrainerRace, C.Creature),
+                new ExpKvp("CreatureType", creature._CreatureType.Id, C.Creature),
+                new ExpKvp("TypeFlags", creature.TypeFlags.BitmaskValue, C.Creature),
+                new ExpKvp("LootId", creature.LootId, C.Creature),
+                new ExpKvp("PickpocketLoot", creature.PickpocketLoot, C.Creature),
+                new ExpKvp("SkinLoot", creature.SkinLoot, C.Creature),
+                new ExpKvp("PetDataId", creature.PetDataId, C.Creature),
+                new ExpKvp("VehicleId", creature.VehicleId, C.Creature),
+                new ExpKvp("MinGold", creature.MinGold.Amount, C.Creature),
+                new ExpKvp("MaxGold", creature.MaxGold.Amount, C.Creature),
+                new ExpKvp("AiName", creature.AIName.Description, C.Creature), // Points to description, eg. NullAI, not sure if this is still used
+                new ExpKvp("MovementType", creature.Movement.Id, C.Creature),
+                new ExpKvp("InhabitType", creature.Inhabit.BitmaskValue, C.Creature),
+                new ExpKvp("HoverHeight", creature.HoverHeight, C.Creature),
+                new ExpKvp("HealthModifier", creature.HealthModifier, C.Creature),
+                new ExpKvp("ManaModifier", creature.ManaModifier, C.Creature),
+                new ExpKvp("DamageModifier", creature.DamageModifier, C.Creature),
+                new ExpKvp("ArmorModifier", creature.ArmorModifier, C.Creature),
+                new ExpKvp("ExperienceModifier", creature.ExperienceModifier, C.Creature),
+                new ExpKvp("RacialLeader", creature.RacialLeader, C.Creature),
+                new ExpKvp("RegenHealth", creature.RegenHealth, C.Creature),
+                new ExpKvp("MechanicImmuneMask", creature.MechanicImmuneMask.BitmaskValue, C.Creature),
+                new ExpKvp("FlagsExtra", creature.FlagsExtra.BitmaskValue, C.Creature),
+                new ExpKvp("Mount", creature.Mount, C.Creature),
+                new ExpKvp("Bytes1", creature.Bytes1.BitmaskValue, C.Creature),
+                new ExpKvp("Emote", creature.Emote, C.Creature),
+                new ExpKvp("MinDmg", creature.MinDmg, C.Creature),
+                new ExpKvp("MaxDmg", creature.MaxDmg, C.Creature),
+                new ExpKvp("Weapon1", creature.Weapon1, C.Creature),
+                new ExpKvp("Weapon2", creature.Weapon2, C.Creature),
+                new ExpKvp("Weapon3", creature.Weapon3, C.Creature),
+                new ExpKvp("MinLevelHealth", creature.MinLevelHealth, C.Creature),
+                new ExpKvp("MaxLevelHealth", creature.MaxLevelHealth, C.Creature),
+                new ExpKvp("MinLevelMana", creature.MinLevelMana, C.Creature),
+                new ExpKvp("MaxLevelMana", creature.MaxLevelMana, C.Creature),
+                new ExpKvp("MinMeleeDmg", creature.MinMeleeDmg, C.Creature),
+                new ExpKvp("MaxMeleeDmg", creature.MaxMeleeDmg, C.Creature),
+                new ExpKvp("MinRangedDmg", creature.MinRangedDmg, C.Creature),
+                new ExpKvp("MaxRangedDmg", creature.MaxRangedDmg, C.Creature),
+                new ExpKvp("Armor", creature.Armor, C.Creature),
+                new ExpKvp("MeleeAttackPower", creature.MeleeAttackPower, C.Creature),
+                new ExpKvp("RangedAttackPower", creature.RangedAttackPower, C.Creature),
+                new ExpKvp("Civilian", creature.Civilian, C.Creature),
+            };
+
+            try // Handle ModelIds - Why is this a DDC? :(
+            {
+                // Translates to single columns: StatType1, StatValue1, StatType2...
+                var modelData = new Dictionary<string, string>();
+                creature.ModelIds.AddValues(modelData);
+                foreach (var modelIds in modelData)
+                    data.Add(new ExpKvp(modelIds.Key, modelIds.Value, C.Creature));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing model id data. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
+
+            try // Handle resistances
+            {
+                foreach (var kvp in creature.Resistances.GetUserInput())
+                {
+                    // Translates to HolyResistance, FireResistance...
+                    string appKey = ((DamageType)kvp.Key).Description + "Resistance";
+                    int value;
+                    if (!int.TryParse(kvp.Value, out value))
+                    {
+                        Logger.Log($"Invalid value enetered for {appKey}. Query was not saved.", Logger.Status.Error, true);
+                        return String.Empty;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing resistances data. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
+
+            try // Handle Auras
+            {
+                // Nonsense code because i refuse go near DynamicDataControl at this point...
+                // Auras is a space seperated list of spell IDs placed in one column
+                var auraData = new Dictionary<string, string>();
+                creature.Auras.AddValues(auraData, "irrelevant", ' ');
+                data.Add(new ExpKvp("Auras", auraData.First().Value, C.Creature));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing aura data. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
+
+            try // Handle Spells (some emulators use this)
+            {
+                // Spell1, Spell2, Spell3...
+                var spellData = new Dictionary<string, string>();
+                creature.Spells.AddValues(spellData);
+                foreach (var spell in spellData)
+                    data.Add(new ExpKvp(spell.Key, spell.Value, C.Creature));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing aura data. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
+
+            try // Handle DifficultyEntry
+            {
+                // DifficultyEntry1, DifficultyEntry2, DifficultyEntry2...
+                var diffData = new Dictionary<string, string>();
+                creature.DifficultyEntry.AddValues(diffData);
+                foreach (var diff in diffData)
+                    data.Add(new ExpKvp(diff.Key, diff.Value, C.Creature));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing DifficultyEntry. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
+
+            string sql = GenerateSql(data);
+
+            // Trinity 2020 Spell system (alternative to Spell1, Spell2, ...) - uses seperate table creature_template_spell
+            // Creature Spells. This can create multiple rows and is expected to be placed in a different table if it's used.
+            // Note that the alternative should be used for most other emulators and these fields can be disabled.
+            try
+            {
+                // todo: check if it's using old system before trying. (if key is in profile)
+                var spellsList = new Dictionary<string, string>();
+                creature.Spells.AddValues(spellsList);
+                for (int i = 0; i < spellsList.Count; i++)
+                {
+                    if (spellsList["Spell" + i] == "" || spellsList["Spell" + i] == "0")
+                    {
+                        Logger.Log("Creature export: No spells were input. Not inserting using modern system.");
+                        break; // No spell provided
+                    }
+
+                    // Create row in creature_template_spell or profile equivalennt
+                    sql += GenerateSql(new List<ExpKvp>() {
+                        new ExpKvp("SpellCreatureID", creature.Entry, C.Creature),
+                        new ExpKvp("SpellSpell", int.Parse(spellsList["Spell" + i]), C.Creature),
+                        new ExpKvp("SpellIndex", i, C.Creature)
+                        }) + Environment.NewLine;
+                }                    
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("Error exporting Spells using 2020 system: " + ex.Message);
+                Logger.Log("Error parsing spells data. Are all spells numeric values? Profile may be set up incorrectly.", Logger.Status.Error, true);
+            }
+
+            // Trinity 2020 Resistance system. Similar to Spells, it's in a seperate table.
+            // Old system still supported, will only insert if value is not empty or null
+            try
+            {
+                // todo: check if it's using old system before trying. (if key is in profile)
+                var resistanceList = new Dictionary<string, string>();
+                creature.Resistances.AddValues(resistanceList);
+                var dmgTypes = DamageType.GetDamageTypes(magicOnly:true);
+                foreach (DamageType dt in dmgTypes)
+                {
+                    var key = dt.Description + "Resistance";
+                    if (resistanceList[key] == "" || resistanceList[key] == "0")
+                    {
+                        Logger.Log("Creature export: {key} was 0 or empty. Not creating row in creature_temlate_resistance or equivalent.");
+                        continue; // This resistance type was empty, check the rest.
+                    }
+
+                    // Create row in creature_template_resistance or profile equivalent
+                    sql += GenerateSql(new List<ExpKvp>() {
+                        new ExpKvp("ResistanceCreatureId", creature.Entry, C.Creature),
+                        new ExpKvp("ResistanceSchool", dt.Id, C.Creature),
+                        new ExpKvp("ResistanceAmount", int.Parse(resistanceList[key]), C.Creature)
+                        }) + Environment.NewLine;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("Error exporting Resistances using 2020 system: " + ex.Message);
+                Logger.Log("Error parsing Resistances data. Are all resistances values numeric? Profile may be set up incorrectly.", Logger.Status.Error, true);
+            }
+
             return sql;
         }
 

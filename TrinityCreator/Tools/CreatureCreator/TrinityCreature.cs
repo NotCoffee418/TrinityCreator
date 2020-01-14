@@ -107,7 +107,7 @@ namespace TrinityCreator.Tools.CreatureCreator
             {
                 if (_modelIds == null)
                 {
-                    string[] fields = new string[] {"modelid1","modelid2","modelid3","modelid4"};
+                    string[] fields = new string[] {"ModelId1","ModelId2","ModelId3","ModelId4"};
                     _modelIds = new DynamicDataControl(fields, 4, true, defaultValue: "0", valueMySqlDt: "mediumint(8)");
                 }
                 return _modelIds;
@@ -393,7 +393,7 @@ namespace TrinityCreator.Tools.CreatureCreator
                 {
                     string[] spellCols = new string[]
                        {
-                           "spell1","spell2","spell3","spell4","spell5","spell6","spell7","spell8",
+                           "Spell1","Spell2","Spell3","Spell4","Spell5","Spell6","Spell7","Spell8",
                        };
                     _spells = new DynamicDataControl(spellCols, 8, true, defaultValue: "0", valueMySqlDt: "smallint(6)");
                 }
@@ -638,7 +638,7 @@ namespace TrinityCreator.Tools.CreatureCreator
             get
             {
                 if (_difficultyEntry == null)
-                    _difficultyEntry = new DynamicDataControl(new string[] { "difficulty_entry_1", "difficulty_entry_2", "difficulty_entry_3" }, 3, true, defaultValue: "0", valueMySqlDt: "smallint(6)");
+                    _difficultyEntry = new DynamicDataControl(new string[] { "DifficultyEntry1", "DifficultyEntry2", "DifficultyEntry3" }, 3, true, defaultValue: "0", valueMySqlDt: "smallint(6)");
                 return _difficultyEntry;
             }
             set

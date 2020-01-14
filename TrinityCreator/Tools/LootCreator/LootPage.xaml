@@ -26,7 +26,7 @@
             </ComboBox>
         </DockPanel>
         <DockPanel Margin="2">
-            <TextBlock Text="Target Entry ID"  Width="100" DockPanel.Dock="Left" Margin="5"/>
+            <TextBlock Text="Loot Template ID"  Width="100" DockPanel.Dock="Left" Margin="5"/>
             <TextBox Name="entryTb"/>
         </DockPanel>
         <StackPanel Name="lootRowSp"/>

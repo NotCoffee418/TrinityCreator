@@ -247,20 +247,20 @@
                         <StackPanel Orientation="Horizontal" Margin="2">
                             <Label Content="Min gold" DockPanel.Dock="Left" Width="120"/>
                             <TextBox Text="{Binding MinGold.Gold, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-                            <Image Width="15" Source="Resources/gold.gif" Margin="0,0,10,0" />
+                            <Image Width="15" Source="/TrinityCreator;component/Resources/gold.gif" Margin="0,0,10,0" />
                             <TextBox Text="{Binding MinGold.Silver, UpdateSourceTrigger=PropertyChanged}" MaxLength="2" Width="25"/>
-                            <Image  Width="15" Source="Resources/silver.gif" Margin="0,0,10,0" />
+                            <Image  Width="15" Source="/TrinityCreator;component/Resources/silver.gif" Margin="0,0,10,0" />
                             <TextBox Text="{Binding MinGold.Copper, UpdateSourceTrigger=PropertyChanged}" MaxLength="2" Width="25"/>
-                            <Image Width="15" Source="Resources/copper.gif" Margin="0,0,10,0" />
+                            <Image Width="15" Source="/TrinityCreator;component/Resources/copper.gif" Margin="0,0,10,0" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="2">
                             <Label Content="Max gold" DockPanel.Dock="Left" Width="120"/>
                             <TextBox Text="{Binding MaxGold.Gold, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-                            <Image Width="15" Source="Resources/gold.gif" Margin="0,0,10,0" />
+                            <Image Width="15" Source="/TrinityCreator;component/Resources/gold.gif" Margin="0,0,10,0" />
                             <TextBox Text="{Binding MaxGold.Silver, UpdateSourceTrigger=PropertyChanged}" MaxLength="2" Width="25"/>
-                            <Image  Width="15" Source="Resources/silver.gif" Margin="0,0,10,0" />
+                            <Image  Width="15" Source="/TrinityCreator;component/Resources/silver.gif" Margin="0,0,10,0" />
                             <TextBox Text="{Binding MaxGold.Copper, UpdateSourceTrigger=PropertyChanged}" MaxLength="2" Width="25"/>
-                            <Image Width="15" Source="Resources/copper.gif" Margin="0,0,10,0" />
+                            <Image Width="15" Source="/TrinityCreator;component/Resources/copper.gif" Margin="0,0,10,0" />
                         </StackPanel>
                         <DockPanel Margin="2">
                             <Button Content="Create Loot" Click="createLootBtn_Click" Width="75" DockPanel.Dock="Right" Margin="2,0,0,0"/>

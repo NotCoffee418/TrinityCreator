@@ -26,12 +26,13 @@ namespace TrinityCreator.Tools.ProfileCreator
         {
             InitializeComponent();
             DisplayEntries();
-            DataContext = this;
+            DataContext = EditingProfile;
         }
 
 
         List<ProfileCreatorEntry> ItemElements;
         List<ProfileCreatorEntry> QuestElements;
+        List<ProfileCreatorEntry> CreatureElements;
         List<ProfileCreatorEntry> LootElements;
         List<ProfileCreatorEntry> VendorElements;
         Profile EditingProfile = new Profile();
@@ -120,6 +121,106 @@ namespace TrinityCreator.Tools.ProfileCreator
             };
             foreach (var e in ItemElements)
                 itemSp.Children.Add(e);
+
+            // Creature Entries
+            VendorElements = new List<ProfileCreatorEntry>()
+            {
+                new ProfileCreatorEntry("Entry"),
+                new ProfileCreatorEntry("ModelId1"),
+                new ProfileCreatorEntry("ModelId2"),
+                new ProfileCreatorEntry("ModelId3"),
+                new ProfileCreatorEntry("ModelId4"),
+                new ProfileCreatorEntry("Name"),
+                new ProfileCreatorEntry("Subname"),
+                new ProfileCreatorEntry("MinLevel"),
+                new ProfileCreatorEntry("MaxLevel"),
+                new ProfileCreatorEntry("Faction"),
+                new ProfileCreatorEntry("NpcFlags"),
+                new ProfileCreatorEntry("SpeedWalk"),
+                new ProfileCreatorEntry("SpeedRun"),
+                new ProfileCreatorEntry("Scale"),
+                new ProfileCreatorEntry("Rank", "Normal, elite, boss..."),
+                new ProfileCreatorEntry("DmgSchool", "physical, holy, ..."),
+                new ProfileCreatorEntry("BaseAttackTime", "in miliseconds"),
+                new ProfileCreatorEntry("RangeAttackTime", "in miliseconds"),
+                new ProfileCreatorEntry("UnitClass", "warrior, paladin, rogue, mage"),
+                new ProfileCreatorEntry("UnitFlags"),
+                new ProfileCreatorEntry("UnitFlags2"),
+                new ProfileCreatorEntry("DynamicFlags"),
+                new ProfileCreatorEntry("Family"),
+                new ProfileCreatorEntry("TrainerType"),
+                new ProfileCreatorEntry("TrainerSpell"),
+                new ProfileCreatorEntry("TrainerClass"),
+                new ProfileCreatorEntry("TrainerRace"),
+                new ProfileCreatorEntry("CreatureType"),
+                new ProfileCreatorEntry("TypeFlags"),
+                new ProfileCreatorEntry("LootId", "ID of the creature_loot_template table to be used"),
+                new ProfileCreatorEntry("PickpocketLoot"),
+                new ProfileCreatorEntry("SkinLoot"),
+                new ProfileCreatorEntry("HolyResistance", "Old resistance system. Place value in the column with this name. Only use old or new system, not both."),
+                new ProfileCreatorEntry("FireResistance", "Old resistance system. Place value in the column with this name. Only use old or new system, not both."),
+                new ProfileCreatorEntry("NatureResistance", "Old resistance system. Place value in the column with this name. Only use old or new system, not both."),
+                new ProfileCreatorEntry("FrostResistance", "Old resistance system. Place value in the column with this name. Only use old or new system, not both."),
+                new ProfileCreatorEntry("ShadowResistance", "Old resistance system. Place value in the column with this name. Only use old or new system, not both."),
+                new ProfileCreatorEntry("ArcaneResistance", "Old resistance system. Place value in the column with this name. Only use old or new system, not both."),
+                new ProfileCreatorEntry("ResistanceCreatureId", "Modern system, creates rows in creature_template_resistance or equivalent. See documentation. Dont use both systems."),
+                new ProfileCreatorEntry("ResistanceSchool", "Modern system, creates rows in creature_template_resistance or equivalent. See documentation. Dont use both systems."),
+                new ProfileCreatorEntry("ResistanceAmount", "Modern system, creates rows in creature_template_resistance or equivalent. See documentation. Dont use both systems."),
+                new ProfileCreatorEntry("PetDataId", "Modern system, creates rows in creature_template_resistance or equivalent. See documentation. Dont use both systems."),
+                new ProfileCreatorEntry("VehicleId", "Modern system, creates rows in creature_template_resistance or equivalent. See documentation. Dont use both systems."),
+                new ProfileCreatorEntry("MinGold", "Modern system, creates rows in creature_template_resistance or equivalent. See documentation. Dont use both systems."),
+                new ProfileCreatorEntry("MaxGold", "Modern system, creates rows in creature_template_resistance or equivalent. See documentation. Dont use both systems."),
+                new ProfileCreatorEntry("AiName", "Modern system, creates rows in creature_template_resistance or equivalent. See documentation. Dont use both systems."),
+                new ProfileCreatorEntry("MovementType", "0=idle, 1=random, 2=waypoint movement"),
+                new ProfileCreatorEntry("InhabitType", "bitmask 1=ground, 2=water, 4=flying, 8=rooted"),
+                new ProfileCreatorEntry("HoverHeight", "requires MOVEMENTFLAG_DISABLE_GRAVITY"),
+                new ProfileCreatorEntry("HealthModifier", "1f by default"),
+                new ProfileCreatorEntry("ManaModifier", "1f by default"),
+                new ProfileCreatorEntry("DamageModifier", "1f by default"),
+                new ProfileCreatorEntry("ArmorModifier", "1f by default"),
+                new ProfileCreatorEntry("ExperienceModifier", "1f by default"),
+                new ProfileCreatorEntry("RacialLeader"),
+                new ProfileCreatorEntry("RegenHealth", "bool, 0 or 1 in db"),
+                new ProfileCreatorEntry("MechanicImmuneMask"),
+                new ProfileCreatorEntry("FlagsExtra"),
+                new ProfileCreatorEntry("Mount"),
+                new ProfileCreatorEntry("Bytes1"),
+                new ProfileCreatorEntry("Emote"),
+                new ProfileCreatorEntry("Auras", "space seperated list of spell IDs placed in one column."),
+                new ProfileCreatorEntry("Spell1", "Old spell system, simply puts up to 8 spells in different columns. Disable if modern system."),
+                new ProfileCreatorEntry("Spell2", "Old spell system, simply puts up to 8 spells in different columns. Disable if modern system."),
+                new ProfileCreatorEntry("Spell3", "Old spell system, simply puts up to 8 spells in different columns. Disable if modern system."),
+                new ProfileCreatorEntry("Spell4", "Old spell system, simply puts up to 8 spells in different columns. Disable if modern system."),
+                new ProfileCreatorEntry("Spell5", "Old spell system, simply puts up to 8 spells in different columns. Disable if modern system."),
+                new ProfileCreatorEntry("Spell6", "Old spell system, simply puts up to 8 spells in different columns. Disable if modern system."),
+                new ProfileCreatorEntry("Spell7", "Old spell system, simply puts up to 8 spells in different columns. Disable if modern system."),
+                new ProfileCreatorEntry("Spell8", "Old spell system, simply puts up to 8 spells in different columns. Disable if modern system."),
+                new ProfileCreatorEntry("SpellCreatureID", "WARNING: Read Documentation!! Alternative spell system (TC 2020 uses this)."),
+                new ProfileCreatorEntry("SpellSpell", "WARNING: Read Documentation!! Alternative spell system (TC 2020 uses this)."),
+                new ProfileCreatorEntry("SpellIndex", "WARNING: Read Documentation!! Alternative spell system (TC 2020 uses this)."),
+                new ProfileCreatorEntry("DifficultyEntry1"),
+                new ProfileCreatorEntry("DifficultyEntry2"),
+                new ProfileCreatorEntry("DifficultyEntry3"),
+                new ProfileCreatorEntry("MinDmg"),
+                new ProfileCreatorEntry("MaxDmg"),
+                new ProfileCreatorEntry("Weapon1"),
+                new ProfileCreatorEntry("Weapon2"),
+                new ProfileCreatorEntry("Weapon3"),
+                new ProfileCreatorEntry("MinLevelHealth"),
+                new ProfileCreatorEntry("MaxLevelHealth"),
+                new ProfileCreatorEntry("MinLevelMana"),
+                new ProfileCreatorEntry("MaxLevelMana"),
+                new ProfileCreatorEntry("MinMeleeDmg"),
+                new ProfileCreatorEntry("MaxMeleeDmg"),
+                new ProfileCreatorEntry("MinRangedDmg"),
+                new ProfileCreatorEntry("MaxRangedDmg"),
+                new ProfileCreatorEntry("Armor"),
+                new ProfileCreatorEntry("MeleeAttackPower"),
+                new ProfileCreatorEntry("RangedAttackPower"),
+                new ProfileCreatorEntry("Civilian"),
+            };
+            foreach (var e in VendorElements)
+                vendorSp.Children.Add(e);
 
             // Quest Entries
             QuestElements = new List<ProfileCreatorEntry>()
@@ -267,6 +368,7 @@ namespace TrinityCreator.Tools.ProfileCreator
             // Place data from UI in EditingProfile
             EditingProfile.Item = ToProfileFormat(ItemElements);
             EditingProfile.Quest = ToProfileFormat(QuestElements);
+            EditingProfile.Creature = ToProfileFormat(CreatureElements);
             EditingProfile.Loot = ToProfileFormat(LootElements);
             EditingProfile.Vendor = ToProfileFormat(VendorElements);
 
