@@ -35,6 +35,7 @@ namespace TrinityCreator.Tools.ProfileCreator
         List<ProfileCreatorEntry> CreatureElements;
         List<ProfileCreatorEntry> LootElements;
         List<ProfileCreatorEntry> VendorElements;
+        List<ProfileCreatorSetting> LookupToolElements;
         Profile EditingProfile = new Profile();
 
 
@@ -219,8 +220,8 @@ namespace TrinityCreator.Tools.ProfileCreator
                 new ProfileCreatorEntry("RangedAttackPower"),
                 new ProfileCreatorEntry("Civilian"),
             };
-            foreach (var e in VendorElements)
-                vendorSp.Children.Add(e);
+            foreach (var e in CreatureElements)
+                creatureSp.Children.Add(e);
 
             // Quest Entries
             QuestElements = new List<ProfileCreatorEntry>()
@@ -361,6 +362,13 @@ namespace TrinityCreator.Tools.ProfileCreator
             };
             foreach (var e in VendorElements)
                 vendorSp.Children.Add(e);
+
+            // LookupTool settings
+            LookupToolElements = new List<ProfileCreatorSetting>()
+            {
+            };
+            foreach (var e in LookupToolElements)
+                lookupToolSp.Children.Add(e);
         }
 
         private string GenerateJson()
@@ -371,6 +379,7 @@ namespace TrinityCreator.Tools.ProfileCreator
             EditingProfile.Creature = ToProfileFormat(CreatureElements);
             EditingProfile.Loot = ToProfileFormat(LootElements);
             EditingProfile.Vendor = ToProfileFormat(VendorElements);
+            EditingProfile.LookupTool = ToProfileFormat(LookupToolElements);
 
             // Convert to json & beautify
             return JsonConvert.SerializeObject(EditingProfile, Formatting.Indented);
@@ -415,6 +424,21 @@ namespace TrinityCreator.Tools.ProfileCreator
                 result.Add(tableName, tableDict);
             }
 
+            return result;
+        }
+
+        /// <summary>
+        /// Converts a settings section. This is simply keyvalue, no table name specified.
+        /// Can be used for anything that's not binding something directly to a trinity table.
+        /// </summary>
+        /// <param name="sectionList"></param>
+        /// <returns></returns>
+        private Dictionary<string, string> ToProfileFormat(List<ProfileCreatorSetting> sectionList)
+        {
+            var result = new Dictionary<string, string>();
+            foreach (var pSetting in sectionList)
+                if (pSetting.IsIncluded)
+                    result.Add(pSetting.SettingKey, pSetting.SettingValue);
             return result;
         }
 

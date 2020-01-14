@@ -36,6 +36,7 @@ namespace TrinityCreator.Profiles
         public Dictionary<string, Dictionary<string, string>> Item { get; set; }
         public Dictionary<string, Dictionary<string, string>> Loot { get; set; }
         public Dictionary<string, Dictionary<string, string>> Vendor { get; set; }
+        public Dictionary<string, string> LookupTool { get; internal set; }
 
         #region Static 
         static Profile _activeProfile = null;
@@ -48,6 +49,7 @@ namespace TrinityCreator.Profiles
                     ActiveProfileChangedEvent(Profile.Active, new EventArgs());
             }
         }
+
 
         // Fires when Profile.Active changes
         public static event EventHandler ActiveProfileChangedEvent;
@@ -106,8 +108,6 @@ namespace TrinityCreator.Profiles
             // return result
             return allProfiles;
         }
-
-        
         #endregion
 
 
@@ -115,110 +115,6 @@ namespace TrinityCreator.Profiles
         {
             return obj != null && obj.GetType().Equals(typeof(Profile)) &&
                 JsonConvert.SerializeObject((Profile)obj) == JsonConvert.SerializeObject(this);
-        }
-
-
-        public static string teststructure()
-        {
-            Profile p = new Profile();
-            p.Name = "Test Profile";
-            var table1 = new Dictionary<string, string>()
-            {
-                {"t1lk1", "t1ek1" },
-                {"t1lk2", "t1ek2" },
-            };
-            var table2 = new Dictionary<string, string>()
-            {
-                {"t2lk1", "t2ek1" },
-                {"t2lk2", "t2ek2" },
-            };
-            p.Creature = new Dictionary<string, Dictionary<string, string>>()
-            {
-                { "table1", table1 },
-                { "table2", table2 },
-            };
-            p.Quest = new Dictionary<string, Dictionary<string, string>>()
-            {
-                { "table1", table1 },
-                { "table2", table1 },
-            };
-            p.Item = new Dictionary<string, Dictionary<string, string>>()
-            {
-                { "table1", table1 },
-                { "table2", table2 },
-            };
-            p.Vendor = new Dictionary<string, Dictionary<string, string>>()
-            {
-                { "table1", table1 },
-                { "table2", table1 },
-            };
-            p.Loot = new Dictionary<string, Dictionary<string, string>>()
-            {
-                { "table1", table1 },
-                { "table2", table1 },
-            };
-            return JsonConvert.SerializeObject(p);
-            /* 
-             {
-                  "Name": "Test Profile",
-                  "EmulatorName": null,
-                  "GameVersion": null,
-                  "DatabaseVersion": null,
-                  "Revision": 0,
-                  "Author": null,
-                  "UpdateUrl": null,
-                  "Creature": {
-                    "table1": {
-                      "t1lk1": "t1ek1",
-                      "t1lk2": "t1ek2"
-                    },
-                    "table2": {
-                      "t2lk1": "t2ek1",
-                      "t2lk2": "t2ek2"
-                    }
-                  },
-                  "Quest": {
-                    "table1": {
-                      "t1lk1": "t1ek1",
-                      "t1lk2": "t1ek2"
-                    },
-                    "table2": {
-                      "t1lk1": "t1ek1",
-                      "t1lk2": "t1ek2"
-                    }
-                  },
-                  "Item": {
-                    "table1": {
-                      "t1lk1": "t1ek1",
-                      "t1lk2": "t1ek2"
-                    },
-                    "table2": {
-                      "t2lk1": "t2ek1",
-                      "t2lk2": "t2ek2"
-                    }
-                  },
-                  "Loot": {
-                    "table1": {
-                      "t1lk1": "t1ek1",
-                      "t1lk2": "t1ek2"
-                    },
-                    "table2": {
-                      "t1lk1": "t1ek1",
-                      "t1lk2": "t1ek2"
-                    }
-                  },
-                  "Vendor": {
-                    "table1": {
-                      "t1lk1": "t1ek1",
-                      "t1lk2": "t1ek2"
-                    },
-                    "table2": {
-                      "t1lk1": "t1ek1",
-                      "t1lk2": "t1ek2"
-                    }
-                  }
-                }
-              */
         }
     }
 }

@@ -114,6 +114,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Tools\LookupTool\TargetEnum.cs" />
+    <Compile Include="Tools\ProfileCreator\ProfileCreatorSetting.xaml.cs">
+      <DependentUpon>ProfileCreatorSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\VendorCreator\VendorEntryControl.xaml.cs">
       <DependentUpon>VendorEntryControl.xaml</DependentUpon>
     </Compile>
@@ -240,6 +243,10 @@
       <DependentUpon>VendorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\UIElements\XmlKeyValue.cs" />
+    <Page Include="Tools\ProfileCreator\ProfileCreatorSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tools\VendorCreator\VendorEntryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

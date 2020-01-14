@@ -7,18 +7,6 @@ namespace TrinityCreator.Database
 {
     internal class LookupQuery : Connection
     {
-        /// <summary>
-        /// Generate SQL query from Key,Value dictionary
-        /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="d">Dictionary</param>
-        /// <returns></returns>
-        internal static string GenerateInsert(string tableName, Dictionary<string, string> d)
-        {
-            return string.Format("INSERT INTO {0} ({1}) VALUES ({2});{3}",
-                tableName, string.Join(", ", d.Keys), string.Join(", ", d.Values), Environment.NewLine);
-        }
-
         internal static DataTable FindItemsByName(string partialName)
         {
             return ExecuteQuery(
@@ -51,11 +39,12 @@ namespace TrinityCreator.Database
 
         /// <summary>
         /// Returns next ID for the selected table
+        /// 
         /// </summary>
         /// <param name="table">table to check</param>
         /// <param name="primaryKey">usually id or entry</param>
         /// <returns></returns>
-        internal static int GetNextId(string table, string primaryKey = "id")
+        internal static int GetNextId(string table, string primaryKey)
         {
             object result = ExecuteScalar(string.Format("SELECT MAX({0}) FROM {1};", primaryKey, table), requestConfig:false);
             if (result == null || result is DBNull)

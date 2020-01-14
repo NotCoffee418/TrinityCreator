@@ -17,48 +17,38 @@ using System.Windows.Shapes;
 namespace TrinityCreator.Tools.ProfileCreator
 {
     /// <summary>
-    /// Interaction logic for ProfileCreatorEntry.xaml
+    /// Interaction logic for ProfileCreatorSetting.xaml
     /// </summary>
-    public partial class ProfileCreatorEntry : UserControl, INotifyPropertyChanged
+    public partial class ProfileCreatorSetting : UserControl, INotifyPropertyChanged
     {
-        public ProfileCreatorEntry(string appKey, string tooltip = "")
+        public ProfileCreatorSetting(string settingKey, string tooltip = "")
         {
             InitializeComponent();
             DataContext = this;
-            AppKey = appKey;
+            SettingKey = settingKey;
             Tooltip = tooltip;
         }
 
-        private string _appKey;
-        private string _sqlKey;
-        private string _tableName;
+        private string _settingKey;
+        private string _settingValue;
         private bool _isIncluded = true;
 
-        public string AppKey 
+        public string SettingKey
         {
-            get { return _appKey; }
+            get { return _settingKey; }
             set
             {
-                _appKey = value;
-                RaisePropertyChanged("AppKey");
+                _settingKey = value;
+                RaisePropertyChanged("SettingKey");
             }
         }
-        public string SqlKey
+        public string SettingValue
         {
-            get { return _sqlKey; }
+            get { return _settingValue; }
             set
             {
-                _sqlKey = value;
-                RaisePropertyChanged("SqlKey");
-            }
-        }
-        public string TableName
-        {
-            get { return _tableName; }
-            set
-            {
-                _tableName = value;
-                RaisePropertyChanged("TableName");
+                _settingValue = value;
+                RaisePropertyChanged("SettingValue");
             }
         }
         public bool IsIncluded
