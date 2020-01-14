@@ -9,6 +9,7 @@ using Microsoft.Win32;
 using TrinityCreator.Properties;
 using System.Data;
 using TrinityCreator.Emulator;
+using TrinityCreator.Profiles;
 
 namespace TrinityCreator
 {
@@ -385,7 +386,7 @@ namespace TrinityCreator
         {
             try
             {
-                string query = EmulatorHandler.GenerateQuery(_item);
+                string query = Export.Item(_item);
                 Query.ToDatabase(query);
             }
             catch (Exception ex)
@@ -398,7 +399,7 @@ namespace TrinityCreator
         {
             try
             {
-                string query = EmulatorHandler.GenerateQuery(_item);
+                string query = Export.Item(_item);
                 Query.ToFile("Item " + _item.EntryId, query);
             }
             catch (Exception ex)

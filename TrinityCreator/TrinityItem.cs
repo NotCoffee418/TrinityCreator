@@ -223,6 +223,11 @@ namespace TrinityCreator
             {
                 _inventoryType = value;
                 RaisePropertyChanged("InventoryType");
+
+                // Set RangedModRange to default for ranged weapons
+                if (value.Id == 15 || value.Id == 25 || value.Id == 26)
+                    RangedModRange = 100;
+                else RangedModRange = 0;
             }
         }
 

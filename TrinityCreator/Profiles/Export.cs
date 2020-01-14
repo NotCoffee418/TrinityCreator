@@ -142,6 +142,7 @@ namespace TrinityCreator.Profiles
                 new ExpKvp("Block", item.Block, C.Item),
                 new ExpKvp("BagFamily", item.BagFamily.BitmaskValue, C.Item),
                 new ExpKvp("ItemLevel", item.ItemLevel, C.Item),
+                new ExpKvp("RangedModRange", item.RangedModRange, C.Item),
             };
 
             try // Handle resistances
