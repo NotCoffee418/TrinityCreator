@@ -30,6 +30,7 @@ namespace TrinityCreator.Tools
 
 
         List<ProfileCreatorEntry> ItemElements;
+        List<ProfileCreatorEntry> QuestElements;
         List<ProfileCreatorEntry> LootElements;
         Profile EditingProfile = new Profile();
 
@@ -118,6 +119,120 @@ namespace TrinityCreator.Tools
             foreach (var e in ItemElements)
                 itemSp.Children.Add(e);
 
+            // Quest Entries
+            QuestElements = new List<ProfileCreatorEntry>()
+            {
+                new ProfileCreatorEntry("EntryId"),
+                new ProfileCreatorEntry("QuestSort"),
+                new ProfileCreatorEntry("QuestInfo"),
+                new ProfileCreatorEntry("SuggestedGroupNum"),
+                new ProfileCreatorEntry("Flags"),
+                new ProfileCreatorEntry("SpecialFlags"),
+                new ProfileCreatorEntry("LogTitle"),
+                new ProfileCreatorEntry("LogDescription"),
+                new ProfileCreatorEntry("QuestDescription"),
+                new ProfileCreatorEntry("AreaDescription"),
+                new ProfileCreatorEntry("QuestCompletionLog"),
+                new ProfileCreatorEntry("RewardText"),
+                new ProfileCreatorEntry("IncompleteText"),
+
+                new ProfileCreatorEntry("PrevQuest"),
+                new ProfileCreatorEntry("NextQuest"),
+                //new ProfileCreatorEntry("ExclusiveGroup"),
+                new ProfileCreatorEntry("Questgiver"),
+                new ProfileCreatorEntry("QuestCompleter"),
+
+                new ProfileCreatorEntry("QuestLevel"),
+                new ProfileCreatorEntry("MinLevel"),
+                new ProfileCreatorEntry("MaxLevel"),
+                //new ProfileCreatorEntry("RequiredMinRepFaction"),
+                //new ProfileCreatorEntry("RequiredMinRepValue"),
+                //new ProfileCreatorEntry("RequiredMaxRepFaction"),
+                //new ProfileCreatorEntry("RequiredMaxRepValue"),
+                //new ProfileCreatorEntry("RequiredSkillId"),
+                //new ProfileCreatorEntry("RequiredSkillPoints"),
+                new ProfileCreatorEntry("AllowableClass"),
+                new ProfileCreatorEntry("AllowableRace"),
+
+                new ProfileCreatorEntry("StartItem", "Item ID of item provided on accept"),
+                new ProfileCreatorEntry("ProvidedItemCount", "Amount of StartItem you get"),
+                new ProfileCreatorEntry("SourceSpell"),
+                new ProfileCreatorEntry("PoiCoordinateX"),
+                new ProfileCreatorEntry("PoiCoordinateY"),
+                new ProfileCreatorEntry("PoiCoordinateZ"),
+                new ProfileCreatorEntry("PoiCoordinateMap"),
+
+                new ProfileCreatorEntry("TimeAllowed"),
+                new ProfileCreatorEntry("RequiredPlayerKills"),
+                new ProfileCreatorEntry("RequiredItem1"),
+                new ProfileCreatorEntry("RequiredItemCount1"),
+                new ProfileCreatorEntry("RequiredItem2"),
+                new ProfileCreatorEntry("RequiredItemCount2"),
+                new ProfileCreatorEntry("RequiredItem3"),
+                new ProfileCreatorEntry("RequiredItemCount3"),
+                new ProfileCreatorEntry("RequiredItem4"),
+                new ProfileCreatorEntry("RequiredItemCount4"),
+                new ProfileCreatorEntry("RequiredItem5"),
+                new ProfileCreatorEntry("RequiredItemCount5"),
+                new ProfileCreatorEntry("RequiredItem6"),
+                new ProfileCreatorEntry("RequiredItemCount6"),
+                new ProfileCreatorEntry("RequiredNpcOrGo1"),
+                new ProfileCreatorEntry("RequiredNpcOrGoCount1"),
+                new ProfileCreatorEntry("RequiredNpcOrGo2"),
+                new ProfileCreatorEntry("RequiredNpcOrGoCount2"),
+                new ProfileCreatorEntry("RequiredNpcOrGo3"),
+                new ProfileCreatorEntry("RequiredNpcOrGoCount3"),
+                new ProfileCreatorEntry("RequiredNpcOrGo4"),
+                new ProfileCreatorEntry("RequiredNpcOrGoCount4"),
+                new ProfileCreatorEntry("RequiredNpcOrGo5"),
+                new ProfileCreatorEntry("RequiredNpcOrGoCount5"),
+                new ProfileCreatorEntry("RequiredNpcOrGo6"),
+                new ProfileCreatorEntry("RequiredNpcOrGoCount6"),
+
+
+                new ProfileCreatorEntry("RewardXpDifficulty"),
+                new ProfileCreatorEntry("RewardMoney"),
+                new ProfileCreatorEntry("RewardSpell"),
+                new ProfileCreatorEntry("RewardHonor"),
+                //new ProfileCreatorEntry("RewardMailTemplateId"),
+                //new ProfileCreatorEntry("RewardMailDelay"),
+                new ProfileCreatorEntry("RewardTitle"),
+                new ProfileCreatorEntry("RewardArenaPoints"),
+                new ProfileCreatorEntry("RewardTalents"),
+                new ProfileCreatorEntry("RewardItem1"),
+                new ProfileCreatorEntry("RewardItemAmount1"),
+                new ProfileCreatorEntry("RewardItem2"),
+                new ProfileCreatorEntry("RewardItemAmount2"),
+                new ProfileCreatorEntry("RewardItem3"),
+                new ProfileCreatorEntry("RewardItemAmount3"),
+                new ProfileCreatorEntry("RewardItem4"),
+                new ProfileCreatorEntry("RewardItemAmount4"),
+                new ProfileCreatorEntry("RewardChoiceItemID1"),
+                new ProfileCreatorEntry("RewardChoiceItemAmount1"),
+                new ProfileCreatorEntry("RewardChoiceItemID2"),
+                new ProfileCreatorEntry("RewardChoiceItemAmount2"),
+                new ProfileCreatorEntry("RewardChoiceItemID3"),
+                new ProfileCreatorEntry("RewardChoiceItemAmount3"),
+                new ProfileCreatorEntry("RewardChoiceItemID4"),
+                new ProfileCreatorEntry("RewardChoiceItemAmount4"),
+                new ProfileCreatorEntry("RewardChoiceItemID5"),
+                new ProfileCreatorEntry("RewardChoiceItemAmount5"),
+                new ProfileCreatorEntry("RewardChoiceItemID6"),
+                new ProfileCreatorEntry("RewardChoiceItemAmount6"),
+                new ProfileCreatorEntry("FactionRewardID1"),
+                new ProfileCreatorEntry("RewardFactionOverride1", "Specific rep input. User input value is multiplied by 100 (Trinitycore Support). Open ticket is this causes problems for your emulator."),
+                new ProfileCreatorEntry("FactionRewardID2"),
+                new ProfileCreatorEntry("RewardFactionOverride2", "Specific rep input. User input value is multiplied by 100 (Trinitycore Support). Open ticket is this causes problems for your emulator."),
+                new ProfileCreatorEntry("FactionRewardID3"),
+                new ProfileCreatorEntry("RewardFactionOverride3", "Specific rep input. User input value is multiplied by 100 (Trinitycore Support). Open ticket is this causes problems for your emulator."),
+                new ProfileCreatorEntry("FactionRewardID4"),
+                new ProfileCreatorEntry("RewardFactionOverride4", "Specific rep input. User input value is multiplied by 100 (Trinitycore Support). Open ticket is this causes problems for your emulator."),
+                new ProfileCreatorEntry("FactionRewardID5"),
+                new ProfileCreatorEntry("RewardFactionOverride5", "Specific rep input. User input value is multiplied by 100 (Trinitycore Support). Open ticket is this causes problems for your emulator."),
+            };
+            foreach (var e in QuestElements)
+                questSp.Children.Add(e);
+
             // Loot Entries
             LootElements = new List<ProfileCreatorEntry>()
             {
@@ -135,6 +250,8 @@ namespace TrinityCreator.Tools
         private string GenerateJson()
         {
             // Place data from UI in EditingProfile
+            EditingProfile.Item = ToProfileFormat(ItemElements);
+            EditingProfile.Quest = ToProfileFormat(QuestElements);
             EditingProfile.Loot = ToProfileFormat(LootElements);
 
             // Convert to json & beautify

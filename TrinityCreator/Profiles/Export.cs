@@ -79,7 +79,13 @@ namespace TrinityCreator.Profiles
                         // Handle string-y types
                         if (colType == typeof(String) || colType == typeof(string))
                         {
-                            rowValuesReady.Add("'" + MySqlHelper.EscapeString((string)dt.Rows[0][col]) + "'");
+                            // Wow client's interpretation of newline is $B
+                            string valStr = ((string)dt.Rows[0][col])
+                                .Replace(Environment.NewLine, "$B")
+                                .Replace("\n", "$B");
+
+                            // Clean the string & add it.
+                            rowValuesReady.Add("'" + MySqlHelper.EscapeString(valStr) + "'");
                         }
                         // Handle bool type
                         else if (colType == typeof(bool))
@@ -197,6 +203,132 @@ namespace TrinityCreator.Profiles
                 return String.Empty;
             }
 
+
+            return GenerateSql(data);
+        }
+
+        public static string Quest(TrinityQuest quest)
+        {
+            var data = new List<ExpKvp>()
+            {
+                new ExpKvp("EntryId", quest.EntryId, C.Quest),
+                new ExpKvp("QuestSort", quest.PQuestSort, C.Quest),
+                new ExpKvp("QuestInfo", quest.PQuestInfo.Id, C.Quest),
+                new ExpKvp("SuggestedGroupNum", quest.SuggestedGroupNum, C.Quest),
+                new ExpKvp("Flags", quest.Flags.BitmaskValue, C.Quest),
+                new ExpKvp("SpecialFlags", quest.SpecialFlags.BitmaskValue, C.Quest),
+                new ExpKvp("LogTitle", quest.LogTitle, C.Quest),
+                new ExpKvp("LogDescription", quest.LogDescription, C.Quest),
+                new ExpKvp("QuestDescription", quest.QuestDescription, C.Quest),
+                new ExpKvp("AreaDescription", quest.AreaDescription, C.Quest),
+                new ExpKvp("QuestCompletionLog", quest.QuestCompletionLog, C.Quest),
+                new ExpKvp("RewardText", quest.RewardText, C.Quest),
+                new ExpKvp("IncompleteText", quest.IncompleteText, C.Quest),
+                new ExpKvp("PrevQuest", quest.PrevQuest, C.Quest),
+                new ExpKvp("NextQuest", quest.NextQuest, C.Quest),
+                //new ExpKvp("ExclusiveGroup", quest.ExclusiveGroup.???, C.Quest),
+                new ExpKvp("Questgiver", quest.Questgiver, C.Quest),
+                new ExpKvp("QuestCompleter", quest.QuestCompleter, C.Quest),
+                new ExpKvp("QuestLevel", quest.QuestLevel, C.Quest),
+                new ExpKvp("MinLevel", quest.MinLevel, C.Quest),
+                new ExpKvp("MaxLevel", quest.MaxLevel, C.Quest),
+                new ExpKvp("AllowableClass", quest.AllowableClass.BitmaskValue, C.Quest),
+                new ExpKvp("AllowableRace", quest.AllowableRace.BitmaskValue, C.Quest),
+                new ExpKvp("StartItem", quest.StartItem, C.Quest),
+                new ExpKvp("ProvidedItemCount", quest.ProvidedItemCount, C.Quest),
+                new ExpKvp("SourceSpell", quest.SourceSpell, C.Quest),
+                new ExpKvp("PoiCoordinateX", quest.PoiCoordinate.X, C.Quest),
+                new ExpKvp("PoiCoordinateY", quest.PoiCoordinate.Y, C.Quest),
+                new ExpKvp("PoiCoordinateZ", quest.PoiCoordinate.Z, C.Quest),
+                new ExpKvp("PoiCoordinateMap", quest.PoiCoordinate.MapId, C.Quest),
+                new ExpKvp("TimeAllowed", quest.TimeAllowed, C.Quest),
+                new ExpKvp("RequiredPlayerKills", quest.RequiredPlayerKills, C.Quest),
+                new ExpKvp("RewardXpDifficulty", quest.RewardXpDifficulty.Id, C.Quest), // Emulator support? See issue #72
+                new ExpKvp("RewardMoney", quest.RewardMoney.Amount, C.Quest),
+                new ExpKvp("RewardSpell", quest.RewardSpell, C.Quest),
+                new ExpKvp("RewardHonor", quest.RewardHonor, C.Quest),
+                //new ExpKvp("RewardMailTemplateId", quest.RewardMailTemplateId.???, C.Quest),
+                //new ExpKvp("RewardMailDelay", quest.RewardMailDelay, C.Quest),
+                new ExpKvp("RewardTitle", quest.RewardTitle, C.Quest),
+                new ExpKvp("RewardArenaPoints", quest.RewardArenaPoints, C.Quest),
+                new ExpKvp("RewardTalents", quest.RewardTalents, C.Quest),
+            };
+
+            try // RequiredItem & RequiredItemCount (max 6)
+            {
+                // Translates to two columns: RequiredItem1, RequiredItemCount1, RequiredItem2...
+                var requiredItemData = new Dictionary<string, string>();
+                quest.RequiredItems.AddValues(requiredItemData, "RequiredItem", "RequiredItemCount");
+                foreach (var reqItemCol in requiredItemData)
+                    data.Add(new ExpKvp(reqItemCol.Key, reqItemCol.Value, C.Item));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing RequiredItem data. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
+
+            try // RequiredNpcOrGo & RequiredNpcOrGoCount (max 6)
+            {
+                // Translates to two columns: RequiredNpcOrGo1, RequiredNpcOrGoCount1, RequiredNpcOrGoItem2...
+                var requiredNpcOrGoData = new Dictionary<string, string>();
+                quest.RequiredItems.AddValues(requiredNpcOrGoData, "RequiredNpcOrGoItem", "RequiredNpcOrGoCount");
+                foreach (var reqNpcOrGoCol in requiredNpcOrGoData)
+                    data.Add(new ExpKvp(reqNpcOrGoCol.Key, reqNpcOrGoCol.Value, C.Item));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing RequiredNpcOrGo data. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
+
+            try // RewardItem & RewardItemAmount (max 4)
+            {
+                // Translates to two columns: RewardItem1, RewardItemAmount1, RewardItemItem2...
+                var rewardItemData = new Dictionary<string, string>();
+                quest.RequiredItems.AddValues(rewardItemData, "RewardItem", "RewardItemAmount");
+                foreach (var rewardItemCol in rewardItemData)
+                    data.Add(new ExpKvp(rewardItemCol.Key, rewardItemCol.Value, C.Item));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing RewardItem data. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
+
+            try // RewardChoiceItemID & RewardChoiceItemAmount (max 6)
+            {
+                // Translates to two columns: RewardChoiceItemID1, RewardChoiceItemAmount1, RewardChoiceItemID2...
+                var rewardItemChoiceData = new Dictionary<string, string>();
+                quest.RequiredItems.AddValues(rewardItemChoiceData, "RewardChoiceItemID", "RewardChoiceItemAmount");
+                foreach (var rewardItemChoiceCol in rewardItemChoiceData)
+                    data.Add(new ExpKvp(rewardItemChoiceCol.Key, rewardItemChoiceCol.Value, C.Item));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing RewardChoiceItem data. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
+
+            try // UNUSUAL!! - FactionRewardID & RewardFactionOverride (max 4)
+            {
+                // Translates to two columns: FactionRewardID1, RewardFactionOverride1, FactionRewardID2...
+                var factionRewardData = new Dictionary<string, string>();
+                // Value output is *100 (TrinityCore support)! see issue #72
+                quest.RequiredItems.AddValues(factionRewardData, "RewardChoiceItemID", "RewardChoiceItemAmount", 100); 
+                foreach (var factionRewardDataCol in factionRewardData)
+                    data.Add(new ExpKvp(factionRewardDataCol.Key, factionRewardDataCol.Value, C.Item));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.ToString());
+                Logger.Log("Something went wrong parsing FactionReward data. Query was not saved.", Logger.Status.Error, true);
+                return String.Empty;
+            }
 
             return GenerateSql(data);
         }

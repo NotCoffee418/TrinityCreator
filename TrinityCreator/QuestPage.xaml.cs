@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TrinityCreator.Emulator;
+using TrinityCreator.Profiles;
 
 namespace TrinityCreator
 {
@@ -92,7 +93,7 @@ namespace TrinityCreator
         {
             try
             {
-                string query = EmulatorHandler.GenerateQuery(Quest);
+                string query = Export.Quest(this.Quest);
                 Query.ToDatabase(query);
             }
             catch (Exception ex)
@@ -104,7 +105,7 @@ namespace TrinityCreator
         {
             try
             {
-                string query = EmulatorHandler.GenerateQuery(Quest);
+                string query = Export.Quest(this.Quest);
                 Query.ToFile("Quest " + Quest.EntryId, query);
             }
             catch (Exception ex)

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrinityCreator.Tools"
         mc:Ignorable="d"
-        Title="ProfileCreator" Height="450" Width="820">
+        Title="ProfileCreator" Height="600" Width="1100">
     <ScrollViewer>
         <WrapPanel>
             <GroupBox Header="Info" Width="500">
@@ -14,15 +14,20 @@
                     <Button Name="copyBtn" Content="Copy Json to clipboard" Margin="5" Height="25" Click="copyBtn_Click"/>
                 </StackPanel>
             </GroupBox>
+            <GroupBox Header="Loot" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <StackPanel x:Name="lootSp" Orientation="Vertical">
+                    <!-- ProfileCreatorEntries go here -->
+                </StackPanel>
+            </GroupBox>
             <GroupBox Header="Item" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <StackPanel x:Name="itemSp" Orientation="Vertical">
                     <!-- ProfileCreatorEntries go here -->
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="Loot" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <StackPanel x:Name="lootSp" Orientation="Vertical">
+            <GroupBox Header="Quest" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <StackPanel x:Name="questSp" Orientation="Vertical">
                     <!-- ProfileCreatorEntries go here -->
-                </StackPanel>                
+                </StackPanel>
             </GroupBox>
         </WrapPanel>
     </ScrollViewer>
