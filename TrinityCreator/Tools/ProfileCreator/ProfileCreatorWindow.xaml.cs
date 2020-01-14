@@ -123,7 +123,7 @@ namespace TrinityCreator.Tools.ProfileCreator
                 itemSp.Children.Add(e);
 
             // Creature Entries
-            VendorElements = new List<ProfileCreatorEntry>()
+            CreatureElements = new List<ProfileCreatorEntry>()
             {
                 new ProfileCreatorEntry("Entry"),
                 new ProfileCreatorEntry("ModelId1"),
