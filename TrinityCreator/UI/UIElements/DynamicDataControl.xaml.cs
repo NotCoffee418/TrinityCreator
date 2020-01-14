@@ -193,7 +193,7 @@ namespace TrinityCreator.UI.UIElements
 
                 if (result.Length > 0)
                     result.Substring(0, result.Length - 1);
-                d.Add(sqlKey, Database.SqlQuery.CleanText(result));
+                d.Add(sqlKey, result);
             }
             catch
             { throw new Exception("Invalid data in " + sqlKey); }

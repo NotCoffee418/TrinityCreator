@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TrinityCreator.DBC
 {
-    class Queries
+    class DBCQuery
     {
         /// <summary>
         /// Negative values from QuestSort & positive values from AreaTable

@@ -1,9 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 using MySql.Data.MySqlClient;
+using TrinityCreator.Database;
 using TrinityCreator.Properties;
 
-namespace TrinityCreator.Database
+namespace TrinityCreator.UI
 {
     /// <summary>
     ///     Interaction logic for DbConfigWindow.xaml

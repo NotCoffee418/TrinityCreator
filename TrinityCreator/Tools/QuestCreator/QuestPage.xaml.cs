@@ -95,7 +95,7 @@ namespace TrinityCreator.Tools.QuestCreator
             try
             {
                 string query = Export.Quest(this.Quest);
-                Query.ToDatabase(query);
+                SaveQuery.ToDatabase(query);
             }
             catch (Exception ex)
             {
@@ -107,7 +107,7 @@ namespace TrinityCreator.Tools.QuestCreator
             try
             {
                 string query = Export.Quest(this.Quest);
-                Query.ToFile("Quest " + Quest.EntryId, query);
+                SaveQuery.ToFile("Quest " + Quest.EntryId, query);
             }
             catch (Exception ex)
             {

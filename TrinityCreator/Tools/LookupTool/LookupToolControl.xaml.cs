@@ -66,22 +66,22 @@ namespace TrinityCreator.Tools.LookupTool
             switch (SelectedTarget)
             {
                 case Target.QuestSort:
-                    result = Queries.GetQuestSort();
+                    result = DBCQuery.GetQuestSort();
                     break;
 
                 case Target.Map:
-                    result = Queries.GetMap();
+                    result = DBCQuery.GetMap();
                     break;
 
                 case Target.Faction:
-                    result = Queries.GetFaction();
+                    result = DBCQuery.GetFaction();
                     break;
 
                 case Target.Title:
-                    result = Queries.GetCharTitles();
+                    result = DBCQuery.GetCharTitles();
                     break;
                 case Target.Emotes:
-                    result = Queries.GetEmotes();
+                    result = DBCQuery.GetEmotes();
                     break;
 
                 // SQL query will be handled in searchBtn_Click
@@ -108,16 +108,16 @@ namespace TrinityCreator.Tools.LookupTool
             switch (SelectedTarget)
             {
                 case Target.Item:
-                    SetGridSource(SqlQuery.FindItemsByName(search));
+                    SetGridSource(LookupQuery.FindItemsByName(search));
                     break;
                 case Target.Quest:
-                    SetGridSource(SqlQuery.FindQuestByName(search));
+                    SetGridSource(LookupQuery.FindQuestByName(search));
                     break;
                 case Target.Creature:
-                    SetGridSource(SqlQuery.FindCreatureByName(search));
+                    SetGridSource(LookupQuery.FindCreatureByName(search));
                     break;
                 case Target.GameObject:
-                    SetGridSource(SqlQuery.FindGoByName(search));
+                    SetGridSource(LookupQuery.FindGoByName(search));
                     break;
                 case Target.Spell: // Combined SQL & DBC
                     SetGridSource(FindSpell(search));
@@ -215,8 +215,8 @@ namespace TrinityCreator.Tools.LookupTool
             result.Columns.Add("Description", typeof(string));
 
             // Get data
-            DataTable dbc = Queries.GetSpells(); // "m_ID", "m_name_lang_1", "m_description_lang_1"
-            DataTable sql = SqlQuery.GetSpells(search); // Id, Comment(name)
+            DataTable dbc = DBCQuery.GetSpells(); // "m_ID", "m_name_lang_1", "m_description_lang_1"
+            DataTable sql = LookupQuery.GetSpells(search); // Id, Comment(name)
             DataRow newRow = null;
 
             // Add DBC spells

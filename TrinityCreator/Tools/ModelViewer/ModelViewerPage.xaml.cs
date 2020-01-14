@@ -85,14 +85,14 @@ namespace TrinityCreator.Tools.ModelViewer
             {
                 case "Item":
                     if (idType == "Entry ID")
-                        displayId = SqlQuery.GetItemDisplayFromEntry(displayId);
+                        displayId = LookupQuery.GetItemDisplayFromEntry(displayId);
                     mvBrowser.LoadUrl("http://www.wowhead.com/#modelviewer:4:13;" + displayId, blankFirst:true);
                     break;
                 case "Creature": // input should be entry instead of display
                     if (Connection.IsConfigured())
                     {
                         if (idType == "Display ID")
-                            displayId = SqlQuery.GetCreatureIdFromDisplayId(displayId);
+                            displayId = LookupQuery.GetCreatureIdFromDisplayId(displayId);
                         mvBrowser.LoadUrl("http://www.wowhead.com/npc=" + displayId + "/#modelviewer:10+0");
                     }
                     break;

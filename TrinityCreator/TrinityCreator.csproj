@@ -153,7 +153,7 @@
     <Compile Include="Data\DamageType.cs" />
     <Compile Include="Database\DataType.cs" />
     <Compile Include="Profiles\ExpKvp.cs" />
-    <Compile Include="Database\Query.cs" />
+    <Compile Include="Database\SaveQuery.cs" />
     <Compile Include="Helpers\GHelper.cs" />
     <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Tools\LootCreator\LootPage.xaml.cs">
@@ -167,10 +167,10 @@
     </Compile>
     <Compile Include="Profiles\Export.cs" />
     <Compile Include="Profiles\Profile.cs" />
-    <Compile Include="Profiles\ProfileOptionControl.xaml.cs">
+    <Compile Include="UI\ProfileOptionControl.xaml.cs">
       <DependentUpon>ProfileOptionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Profiles\ProfileSelectionWindow.xaml.cs">
+    <Compile Include="UI\ProfileSelectionWindow.xaml.cs">
       <DependentUpon>ProfileSelectionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\ProfileCreator\ProfileCreatorWindow.xaml.cs">
@@ -186,10 +186,10 @@
     <Compile Include="Data\Currency.cs" />
     <Compile Include="Data\Damage.cs" />
     <Compile Include="Database\Connection.cs" />
-    <Compile Include="Database\DbConfigWindow.xaml.cs">
+    <Compile Include="UI\DbConfigWindow.xaml.cs">
       <DependentUpon>DbConfigWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Database\SqlQuery.cs" />
+    <Compile Include="Database\LookupQuery.cs" />
     <Compile Include="DBC\DBCViewer\ADBReader.cs" />
     <Compile Include="DBC\DBCViewer\BinaryFormatter.cs" />
     <Compile Include="DBC\DBCViewer\BinaryFormatterExtensions.cs" />
@@ -202,11 +202,11 @@
     <Compile Include="DBC\DBCViewer\IWowClientDBReader.cs" />
     <Compile Include="DBC\DBCViewer\STLReader.cs" />
     <Compile Include="DBC\DBCViewer\WDBReader.cs" />
-    <Compile Include="DBC\DbcConfigWindow.xaml.cs">
+    <Compile Include="UI\DbcConfigWindow.xaml.cs">
       <DependentUpon>DbcConfigWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DBC\DbcHandler.cs" />
-    <Compile Include="DBC\Queries.cs" />
+    <Compile Include="DBC\DBCQuery.cs" />
     <Compile Include="UI\UIElements\DynamicDataControl.xaml.cs">
       <DependentUpon>DynamicDataControl.xaml</DependentUpon>
     </Compile>
@@ -253,11 +253,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Database\DbConfigWindow.xaml">
+    <Page Include="UI\DbConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DBC\DbcConfigWindow.xaml">
+    <Page Include="UI\DbcConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -304,11 +304,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Profiles\ProfileOptionControl.xaml">
+    <Page Include="UI\ProfileOptionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Profiles\ProfileSelectionWindow.xaml">
+    <Page Include="UI\ProfileSelectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

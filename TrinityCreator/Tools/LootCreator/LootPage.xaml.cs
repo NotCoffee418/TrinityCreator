@@ -50,13 +50,13 @@ namespace TrinityCreator.Tools.LootCreator
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
             string query = Export.Loot(this);
-            Query.ToFile(((ComboBoxItem)lootTypeCb.SelectedValue).Content.ToString() + " Loot Template " + entryTb.Text + ".sql", query);
+            SaveQuery.ToFile(((ComboBoxItem)lootTypeCb.SelectedValue).Content.ToString() + " Loot Template " + entryTb.Text + ".sql", query);
         }
 
         private void exportDbBtn_Click(object sender, RoutedEventArgs e)
         {
             string query = Export.Loot(this);
-            Query.ToDatabase(query);
+            SaveQuery.ToDatabase(query);
         }
     }
 }

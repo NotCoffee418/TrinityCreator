@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrinityCreator.Helpers;
+using TrinityCreator.Profiles;
 
-namespace TrinityCreator.Profiles
+namespace TrinityCreator.UI
 {
     /// <summary>
     /// Interaction logic for ProfileSelectionWindow.xaml

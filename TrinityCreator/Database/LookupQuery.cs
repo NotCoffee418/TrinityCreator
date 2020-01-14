@@ -1,28 +1,12 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
 namespace TrinityCreator.Database
 {
-    internal class SqlQuery : Connection
+    internal class LookupQuery : Connection
     {
-        /// <summary>
-        /// Makes text SQL ready, add quotation, fix newline & fix '
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="quotes"></param>
-        /// <returns></returns>
-        internal static string CleanText(string text, bool quotes = true)
-        {
-            if (text == null)
-                text = "";
-            text = text.Replace(Environment.NewLine, "$B").Replace("'", "\\'");
-            if (quotes)
-                return "'" + text + "'";
-            else
-                return text;
-        }
-
         /// <summary>
         /// Generate SQL query from Key,Value dictionary
         /// </summary>
@@ -38,31 +22,31 @@ namespace TrinityCreator.Database
         internal static DataTable FindItemsByName(string partialName)
         {
             return ExecuteQuery(
-                "SELECT entry, displayid, name FROM item_template WHERE name LIKE '%" + CleanText(partialName, false) + "%' ORDER BY entry DESC LIMIT 200;");
+                "SELECT entry, displayid, name FROM item_template WHERE name LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY entry DESC LIMIT 200;");
         }
 
         internal static DataTable FindQuestByName(string partialName)
         {
             return ExecuteQuery(
-                "SELECT Id, LogTitle FROM quest_template WHERE LogTitle LIKE '%" + CleanText(partialName, false) + "%' ORDER BY Id DESC LIMIT 200;");
+                "SELECT Id, LogTitle FROM quest_template WHERE LogTitle LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY Id DESC LIMIT 200;");
         }
 
         internal static DataTable FindCreatureByName(string partialName)
         {
             return ExecuteQuery(
-                "SELECT entry, modelid1, name FROM creature_template WHERE name LIKE '%" + CleanText(partialName, false) + "%' ORDER BY entry DESC LIMIT 200;");
+                "SELECT entry, modelid1, name FROM creature_template WHERE name LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY entry DESC LIMIT 200;");
         }
 
         internal static DataTable FindGoByName(string partialName)
         {
             return ExecuteQuery(
-                "SELECT entry, displayId, name FROM gameobject_template WHERE name LIKE '%" + CleanText(partialName, false) + "%' ORDER BY entry DESC LIMIT 200;");
+                "SELECT entry, displayId, name FROM gameobject_template WHERE name LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY entry DESC LIMIT 200;");
         }
 
         internal static DataTable GetSpells(string partialName)
         {
             return ExecuteQuery(
-                "SELECT Id, Comment FROM spell_dbc WHERE Comment LIKE '%" + CleanText(partialName, false) + "%' ORDER BY Id DESC LIMIT 200;");
+                "SELECT Id, Comment FROM spell_dbc WHERE Comment LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY Id DESC LIMIT 200;");
         }
 
         /// <summary>

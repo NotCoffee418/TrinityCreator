@@ -11,7 +11,7 @@ using TrinityCreator.Helpers;
 
 namespace TrinityCreator
 {
-    class Query
+    class SaveQuery
     {
         /// <summary>
         /// Export to sql file

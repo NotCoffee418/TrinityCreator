@@ -388,7 +388,7 @@ namespace TrinityCreator.Tools.ItemCreator
             try
             {
                 string query = Export.Item(_item);
-                Query.ToDatabase(query);
+                SaveQuery.ToDatabase(query);
             }
             catch (Exception ex)
             {
@@ -401,7 +401,7 @@ namespace TrinityCreator.Tools.ItemCreator
             try
             {
                 string query = Export.Item(_item);
-                Query.ToFile("Item " + _item.EntryId, query);
+                SaveQuery.ToFile("Item " + _item.EntryId, query);
             }
             catch (Exception ex)
             {

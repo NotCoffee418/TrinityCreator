@@ -67,7 +67,7 @@ namespace TrinityCreator.UI
 
         private void configureDbc_Click(object sender, RoutedEventArgs e)
         {
-            new DBC.DbcConfigWindow().Show();
+            new DbcConfigWindow().Show();
         }
 
         private void configureProfile_Click(object sender, RoutedEventArgs e)
