@@ -4,6 +4,10 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
 using TrinityCreator.Profiles;
+using TrinityCreator.Tools.LookupTool;
+using TrinityCreator.Tools.ModelViewer;
+using TrinityCreator.UI;
+using TrinityCreator.Helpers;
 
 namespace TrinityCreator
 {
@@ -78,7 +82,7 @@ namespace TrinityCreator
             // niy
         }
 
-        public static LookupTool LookupTool { get; internal set; }
+        public static LookupToolControl LookupTool { get; internal set; }
         public static MainWindow _MainWindow { get; internal set; }
         public static ModelViewerPage ModelViewer { get; internal set; }
     }

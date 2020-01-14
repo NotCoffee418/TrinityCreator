@@ -6,6 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using MySql.Data.MySqlClient;
+using TrinityCreator.Data;
+using TrinityCreator.Helpers;
+using TrinityCreator.Tools.ItemCreator;
+using TrinityCreator.Tools.LootCreator;
+using TrinityCreator.Tools.QuestCreator;
 
 namespace TrinityCreator.Profiles
 {
