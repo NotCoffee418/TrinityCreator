@@ -11,6 +11,7 @@ using TrinityCreator.Helpers;
 using TrinityCreator.Tools.ItemCreator;
 using TrinityCreator.Tools.LootCreator;
 using TrinityCreator.Tools.QuestCreator;
+using TrinityCreator.Tools.VendorCreator;
 
 namespace TrinityCreator.Profiles
 {
@@ -338,7 +339,7 @@ namespace TrinityCreator.Profiles
             return GenerateSql(data);
         }
 
-        // Loot is DDC based, loop through the entries
+        // Loot is DDC-based, can export multiple rows
         public static string Loot(LootPage loot)
         {
             // Loot table names are relative to a setting, use special table name in gtk
@@ -370,6 +371,46 @@ namespace TrinityCreator.Profiles
                 }) + Environment.NewLine;
 
             }                
+            return sql;
+        }
+
+        // Vendor is dynamic, loop through the UI elements
+        public static string Vendor(VendorPage vendor)
+        {
+            string sql = String.Empty;
+
+            int NpcEntry;
+            if (!int.TryParse(vendor.npcTb.Text, out NpcEntry))
+            {
+                Logger.Log("NPC ID was not numeric. Query was not saved.", Logger.Status.Error, true);
+                return "";
+            }
+
+
+            foreach (VendorEntryControl row in vendor.vendorEntriesWp.Children)
+            {
+                int Item, Slot, MaxCount, IncrTime, ExtendedCost;
+                if (int.TryParse(row.itemTb.Text, out Item) ||
+                    int.TryParse(row.slotTb.Text, out Slot) ||
+                    int.TryParse(row.maxcountTb.Text, out MaxCount) ||
+                    int.TryParse(row.incrTimeTb.Text, out IncrTime) ||
+                    int.TryParse(row.extendedCostTb.Text, out ExtendedCost))
+                {
+                    Logger.Log("All values in Vendor must be numeric. Query was not saved.", Logger.Status.Error, true);
+                    return "";
+                }
+
+                sql += GenerateSql(new List<ExpKvp>()
+                {
+                    new ExpKvp("NpcEntry", NpcEntry, C.Vendor),
+                    new ExpKvp("Item", Item, C.Vendor),
+                    new ExpKvp("Slot", Slot, C.Vendor),
+                    new ExpKvp("MaxCount", MaxCount, C.Vendor),
+                    new ExpKvp("IncrTime", IncrTime, C.Vendor),
+                    new ExpKvp("ExtendedCost", ExtendedCost, C.Vendor),
+                }) + Environment.NewLine;
+
+            }
             return sql;
         }
     }

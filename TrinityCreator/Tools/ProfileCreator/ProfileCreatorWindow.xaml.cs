@@ -33,6 +33,7 @@ namespace TrinityCreator.Tools.ProfileCreator
         List<ProfileCreatorEntry> ItemElements;
         List<ProfileCreatorEntry> QuestElements;
         List<ProfileCreatorEntry> LootElements;
+        List<ProfileCreatorEntry> VendorElements;
         Profile EditingProfile = new Profile();
 
 
@@ -246,6 +247,19 @@ namespace TrinityCreator.Tools.ProfileCreator
             };
             foreach (var e in LootElements)
                 lootSp.Children.Add(e);
+
+            // Vendor Entries
+            VendorElements = new List<ProfileCreatorEntry>()
+            {
+                new ProfileCreatorEntry("NpcEntry"),
+                new ProfileCreatorEntry("Item"),
+                new ProfileCreatorEntry("Slot"),
+                new ProfileCreatorEntry("MaxCount"),
+                new ProfileCreatorEntry("IncrTime"),
+                new ProfileCreatorEntry("ExtendedCost"),
+            };
+            foreach (var e in VendorElements)
+                vendorSp.Children.Add(e);
         }
 
         private string GenerateJson()
@@ -254,6 +268,7 @@ namespace TrinityCreator.Tools.ProfileCreator
             EditingProfile.Item = ToProfileFormat(ItemElements);
             EditingProfile.Quest = ToProfileFormat(QuestElements);
             EditingProfile.Loot = ToProfileFormat(LootElements);
+            EditingProfile.Vendor = ToProfileFormat(VendorElements);
 
             // Convert to json & beautify
             return JsonConvert.SerializeObject(EditingProfile, Formatting.Indented);

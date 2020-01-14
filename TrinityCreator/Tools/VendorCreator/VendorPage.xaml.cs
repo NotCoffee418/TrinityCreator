@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrinityCreator.Profiles;
 
 namespace TrinityCreator.Tools.VendorCreator
 {
@@ -23,14 +24,25 @@ namespace TrinityCreator.Tools.VendorCreator
         public VendorPage()
         {
             InitializeComponent();
+            addItemBtn_Click(null, null); // Create an item on first load
+        }
+
+        private void addItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            vendorEntriesWp.Children.Add(new VendorEntryControl());
+        }
+
+        private void removeItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            vendorEntriesWp.Children.RemoveAt(vendorEntriesWp.Children.Count - 1);
         }
 
         private void exportSqlBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //string query = EmulatorHandler.GenerateQuery(this);
-                //Query.ToFile("Vendor"+ npcTb.Text + " Item " + itemTb.Text + ".sql", query);
+                string query = Export.Vendor(this);
+                SaveQuery.ToFile("Vendor "+ npcTb.Text + ".sql", query);
             }
             catch (Exception ex)
             {
@@ -42,8 +54,8 @@ namespace TrinityCreator.Tools.VendorCreator
         {
             try
             {
-                //string query = EmulatorHandler.GenerateQuery(this);
-                //Query.ToDatabase(query);
+                string query = Export.Vendor(this);
+                SaveQuery.ToDatabase(query);
             }
             catch (Exception ex)
             {
@@ -56,9 +68,5 @@ namespace TrinityCreator.Tools.VendorCreator
             App.LookupTool.SelectedTarget = LookupTool.Target.Creature;
         }
 
-        private void itemLookupBtn_Click(object sender, RoutedEventArgs e)
-        {
-            App.LookupTool.SelectedTarget = LookupTool.Target.Item;
-        }
     }
 }

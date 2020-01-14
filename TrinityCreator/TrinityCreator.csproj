@@ -114,6 +114,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Tools\LookupTool\TargetEnum.cs" />
+    <Compile Include="Tools\VendorCreator\VendorEntryControl.xaml.cs">
+      <DependentUpon>VendorEntryControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UIElements\BitmaskStackPanel.cs" />
     <Compile Include="UI\UIElements\Browser.xaml.cs">
       <DependentUpon>Browser.xaml</DependentUpon>
@@ -237,6 +240,10 @@
       <DependentUpon>VendorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\UIElements\XmlKeyValue.cs" />
+    <Page Include="Tools\VendorCreator\VendorEntryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\UIElements\Browser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
