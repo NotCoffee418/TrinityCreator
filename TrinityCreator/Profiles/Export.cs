@@ -615,11 +615,11 @@ namespace TrinityCreator.Profiles
             foreach (VendorEntryControl row in vendor.vendorEntriesWp.Children)
             {
                 int Item, Slot, MaxCount, IncrTime, ExtendedCost;
-                if (int.TryParse(row.itemTb.Text, out Item) ||
-                    int.TryParse(row.slotTb.Text, out Slot) ||
-                    int.TryParse(row.maxcountTb.Text, out MaxCount) ||
-                    int.TryParse(row.incrTimeTb.Text, out IncrTime) ||
-                    int.TryParse(row.extendedCostTb.Text, out ExtendedCost))
+                if (!int.TryParse(row.itemTb.Text, out Item) ||
+                    !int.TryParse(row.slotTb.Text, out Slot) ||
+                    !int.TryParse(row.maxcountTb.Text, out MaxCount) ||
+                    !int.TryParse(row.incrTimeTb.Text, out IncrTime) ||
+                    !int.TryParse(row.extendedCostTb.Text, out ExtendedCost))
                 {
                     Logger.Log("All values in Vendor must be numeric. Query was not saved.", Logger.Status.Error, true);
                     return "";
