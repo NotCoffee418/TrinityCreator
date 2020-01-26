@@ -30,7 +30,7 @@ namespace TrinityCreator.Profiles
         [JsonIgnore]
         public string LocalPath { get; set; }
 
-        // Tablename: application keys, db keys
+        // <tableName, <appKey, sqlKey>>
         public Dictionary<string, Dictionary<string, string>> Creature { get; set; }
         public Dictionary<string, Dictionary<string, string>> Quest { get; set; }
         public Dictionary<string, Dictionary<string, string>> Item { get; set; }

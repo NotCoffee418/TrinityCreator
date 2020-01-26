@@ -15,6 +15,8 @@ using TrinityCreator.Profiles;
 using Newtonsoft.Json;
 using TrinityCreator.Helpers;
 using System.Diagnostics;
+using Microsoft.Win32;
+using System.IO;
 
 namespace TrinityCreator.Tools.ProfileCreator
 {
@@ -448,6 +450,80 @@ namespace TrinityCreator.Tools.ProfileCreator
             return result;
         }
 
+        // Load an existing profile into the UI
+        private void LoadProfile(Profile p)
+        {
+            // Load metadata
+            EditingProfile = p;
+            DataContext = EditingProfile;
+
+            // Call partial loads for each creator
+            _PartialLoad(creatureSp, p.Creature);
+            _PartialLoad(questSp, p.Quest);
+            _PartialLoad(itemSp, p.Item);
+            _PartialLoad(lootSp, p.Loot);
+            _PartialLoad(vendorSp, p.Vendor);
+            // todo: Lookup tool
+
+            // Manually set metadata fields because faster
+
+            // Add Custom Fields
+            customFieldsSp.Children.Clear();
+            CustomFieldsElements.Clear();
+            foreach (var custFieldPair in p.CustomFields)
+            {
+                foreach (var keys in custFieldPair.Value)
+                {
+                    // Prepare the ProfileCreatorEntry
+                    var ne = new ProfileCreatorEntry();
+                    ne.AppKey = keys.Key;
+                    ne.SqlKey = keys.Value;
+                    ne.TableName = custFieldPair.Key;
+                    ne.IsIncluded = true;
+
+                    // Add them to UI
+                    CustomFieldsElements.Add(ne);
+                    customFieldsSp.Children.Add(ne);
+                }
+            }
+        }
+
+        // Used by LoadProfile, shouldn't be used seperately.
+        private void _PartialLoad(StackPanel sp, Dictionary<string, Dictionary<string, string>> pData)
+        {
+            try
+            {
+                // Careful, this assumes that the stackpanel's only children are ProfileCreatorEntries
+                foreach (object pceObj in sp.Children)
+                {
+                    ProfileCreatorEntry pce = (ProfileCreatorEntry)pceObj;
+
+                    // Attempt to find a defined sqlKey for this appKEy in the profile segment.
+                    var matchTables = pData.Where(dd => dd.Value
+                        .Where(keys => keys.Key == pce.AppKey).Count() > 0
+                    );
+
+                    // No match found, clear the sqlKey and tablename and disable
+                    if (matchTables.Count() == 0)
+                    {
+                        pce.SqlKey = "";
+                        pce.TableName = "";
+                        pce.IsIncluded = false;
+                    }
+                    else // Match found, set known values to ui
+                    {
+                        pce.TableName = matchTables.First().Key;
+                        pce.SqlKey = matchTables.First().Value.Where(kvp => kvp.Key == pce.AppKey).First().Value; // I'm too deep in to change the structure now :P
+                        pce.IsIncluded = true;
+                    }
+                }
+            }
+            catch
+            {
+                Logger.Log("There was a problem loading this profile into the UI. Is the profile valid for this version of TrinityCreator?", Logger.Status.Error);
+            }
+        }
+
         private void copyBtn_Click(object sender, RoutedEventArgs e)
         {
             string json = GenerateJson();
@@ -455,6 +531,42 @@ namespace TrinityCreator.Tools.ProfileCreator
             {
                 Clipboard.SetDataObject(json);
                 Logger.Log("Profile copied to clipboard.", Logger.Status.Info, true);
+            }
+        }
+        
+        private void loadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // Select file dialog
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.DefaultExt = "json";
+            ofd.FilterIndex = 0;
+            ofd.Filter = "Profile Files (*.json)|*.json";
+            ofd.InitialDirectory = System.IO.Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.MyDoc‌​uments), "TrinityCreator", "Profiles");
+            if (ofd.ShowDialog() != true)
+                return; // No file or invalid file selected, do nothing
+
+            Profile p = Profile.LoadFile(ofd.FileName, true);
+            LoadProfile(p);
+        }
+
+
+        private void saveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string json = GenerateJson();
+            if (json != null)
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.DefaultExt = "json";
+                sfd.FilterIndex = 0;
+                sfd.Filter = "Profile Files (*.json)|*.json";
+                sfd.InitialDirectory = System.IO.Path.Combine(Environment.GetFolderPath(
+                    Environment.SpecialFolder.MyDoc‌​uments), "TrinityCreator", "Profiles");
+                if (sfd.ShowDialog() == true)
+                {
+                    File.WriteAllText(sfd.FileName, json);
+                    Logger.Log("Profile saved to file.", Logger.Status.Info, true);
+                }                
             }
         }
 
