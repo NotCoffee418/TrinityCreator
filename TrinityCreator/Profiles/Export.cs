@@ -679,10 +679,17 @@ namespace TrinityCreator.Profiles
                         continue;
                     }
 
-                    // Determine key, value and place it in data
-                    string propertyName = corrKeys.Key.Split('.')[1];
-                    dynamic propertyValue = subject.GetType().GetProperty(propertyName).GetValue(subject, null);
-                    data.Add(new ExpKvp(corrKeys.Value, propertyValue, tableKv.Key));
+                    try
+                    {
+                        // Determine key, value and place it in data
+                        string propertyName = corrKeys.Key.Split('.')[1];
+                        dynamic propertyValue = subject.GetType().GetProperty(propertyName).GetValue(subject, null);
+                        data.Add(new ExpKvp(corrKeys.Value, propertyValue, tableKv.Key));
+                    }
+                    catch 
+                    {
+                        Logger.Log("Profile Error: Invalid application key defined. Skipping this custom field.", Logger.Status.Error, true);
+                    }                    
                 }
         }
     }
