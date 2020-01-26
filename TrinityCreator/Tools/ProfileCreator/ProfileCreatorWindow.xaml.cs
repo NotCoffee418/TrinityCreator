@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using TrinityCreator.Profiles;
 using Newtonsoft.Json;
 using TrinityCreator.Helpers;
+using System.Diagnostics;
 
 namespace TrinityCreator.Tools.ProfileCreator
 {
@@ -462,6 +463,12 @@ namespace TrinityCreator.Tools.ProfileCreator
             var ne = new ProfileCreatorEntry();
             CustomFieldsElements.Add(ne);
             customFieldsSp.Children.Add(ne);
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
     }
 }

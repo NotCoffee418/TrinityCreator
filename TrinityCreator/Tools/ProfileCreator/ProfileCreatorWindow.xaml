@@ -10,7 +10,7 @@
         <WrapPanel>
             <GroupBox Header="Info" Width="1000">
                 <StackPanel Orientation="Vertical">
-                    <TextBlock>WARNING: This tool is for advanced users. Read the documentation before using it.</TextBlock>
+                    <TextBlock>WARNING: This tool is for advanced users. Read the documentation or <Hyperlink NavigateUri="https://www.youtube.com/watch?v=UNXz33NpTf0" RequestNavigate="Hyperlink_RequestNavigate">watch the video tutorial</Hyperlink> before using it.</TextBlock>
                     <Button Name="copyBtn" Content="Copy Json to clipboard" Margin="5" Height="25" Click="copyBtn_Click"/>
                 </StackPanel>
             </GroupBox>
