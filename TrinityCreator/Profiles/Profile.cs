@@ -37,6 +37,7 @@ namespace TrinityCreator.Profiles
         public Dictionary<string, Dictionary<string, string>> Loot { get; set; }
         public Dictionary<string, Dictionary<string, string>> Vendor { get; set; }
         public Dictionary<string, string> LookupTool { get; internal set; }
+        public Dictionary<string, Dictionary<string, string>> CustomFields { get; set; }
 
         #region Static 
         static Profile _activeProfile = null;

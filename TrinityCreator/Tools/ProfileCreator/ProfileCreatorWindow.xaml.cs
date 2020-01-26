@@ -36,6 +36,7 @@ namespace TrinityCreator.Tools.ProfileCreator
         List<ProfileCreatorEntry> LootElements;
         List<ProfileCreatorEntry> VendorElements;
         List<ProfileCreatorSetting> LookupToolElements;
+        List<ProfileCreatorEntry> CustomFieldsElements;
         Profile EditingProfile = new Profile();
 
 
@@ -369,6 +370,9 @@ namespace TrinityCreator.Tools.ProfileCreator
             };
             foreach (var e in LookupToolElements)
                 lookupToolSp.Children.Add(e);
+
+            // Custom Fields
+            CustomFieldsElements = new List<ProfileCreatorEntry>();
         }
 
         private string GenerateJson()
@@ -380,6 +384,7 @@ namespace TrinityCreator.Tools.ProfileCreator
             EditingProfile.Loot = ToProfileFormat(LootElements);
             EditingProfile.Vendor = ToProfileFormat(VendorElements);
             EditingProfile.LookupTool = ToProfileFormat(LookupToolElements);
+            EditingProfile.CustomFields = ToProfileFormat(CustomFieldsElements);
 
             // Convert to json & beautify
             return JsonConvert.SerializeObject(EditingProfile, Formatting.Indented);
@@ -401,7 +406,7 @@ namespace TrinityCreator.Tools.ProfileCreator
             if (issues.Count() > 0)
             {
                 Logger.Log($"You didn't enter an SqlKey or TableName for: " + string.Join(", ", issues.Select(e => e.AppKey)),
-                    Logger.Status.Error, true);
+                    Logger.Status.Warning, true);
                 return result;
             }
                 
@@ -450,6 +455,13 @@ namespace TrinityCreator.Tools.ProfileCreator
                 Clipboard.SetDataObject(json);
                 Logger.Log("Profile copied to clipboard.", Logger.Status.Info, true);
             }
+        }
+
+        private void addCustomFieldBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var ne = new ProfileCreatorEntry();
+            CustomFieldsElements.Add(ne);
+            customFieldsSp.Children.Add(ne);
         }
     }
 }

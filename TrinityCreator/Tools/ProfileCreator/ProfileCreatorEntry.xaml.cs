@@ -21,12 +21,28 @@ namespace TrinityCreator.Tools.ProfileCreator
     /// </summary>
     public partial class ProfileCreatorEntry : UserControl, INotifyPropertyChanged
     {
+        /// <summary>
+        /// Constructor for default fields using defined appkey
+        /// </summary>
+        /// <param name="appKey"></param>
+        /// <param name="tooltip"></param>
         public ProfileCreatorEntry(string appKey, string tooltip = "")
         {
             InitializeComponent();
             DataContext = this;
             AppKey = appKey;
             Tooltip = tooltip;
+        }
+
+        /// <summary>
+        /// Contructor for custom fields. Non-readonly AppKey, manually defined instead.
+        /// </summary>
+        public ProfileCreatorEntry()
+        {
+            InitializeComponent();
+            DataContext = this;
+            appKeyTb.IsReadOnly = false;
+            appKeyTb.ToolTip = "AppKey for custom - eg. Quest.EntryId - Case Sensitive!";
         }
 
         private string _appKey;
