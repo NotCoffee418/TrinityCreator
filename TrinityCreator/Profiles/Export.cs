@@ -210,7 +210,7 @@ namespace TrinityCreator.Profiles
                 return String.Empty;
             }
 
-
+            IncludeCustomFields(ref data, C.Item, item);
             return GenerateSql(data);
         }
 
@@ -337,6 +337,7 @@ namespace TrinityCreator.Profiles
                 return String.Empty;
             }
 
+            IncludeCustomFields(ref data, C.Quest, quest);
             return GenerateSql(data);
         }
 
@@ -371,7 +372,9 @@ namespace TrinityCreator.Profiles
                     new ExpKvp("MaxCount", row.MaxCount, C.Loot, sp),
                 }) + Environment.NewLine;
 
-            }                
+            }              
+            
+            // todo: Custom fields not supported for Loot
             return sql;
         }
 
@@ -528,6 +531,8 @@ namespace TrinityCreator.Profiles
                 return String.Empty;
             }
 
+
+            IncludeCustomFields(ref data, C.Creature, creature);
             string sql = GenerateSql(data);
 
             // Trinity 2020 Spell system (alternative to Spell1, Spell2, ...) - uses seperate table creature_template_spell
@@ -631,7 +636,54 @@ namespace TrinityCreator.Profiles
                 }) + Environment.NewLine;
 
             }
+
+            // todo: Custom fields not supported for vendor
             return sql;
+        }
+
+
+        /// <summary>
+        /// Include custom fields based on profile.
+        /// </summary>
+        /// <param name="data">Export data</param>
+        /// <param name="toolType"></param>
+        /// <param name="subject">TrinityQuest, Item etc to do grab values from and place in data</param>
+        private static void IncludeCustomFields(ref List<ExpKvp> data, C toolType, dynamic subject)
+        {
+            // Check for invalid custom fields
+            // See Profile.cs to explain confusing structure. <table, <appKey, sqlKey>>
+            var invalidCustoms = Profile.Active.CustomFields
+                .Where(v => v.Value
+                    .Where(k2 => k2.Key.Split('.').Length == 1).Count() > 0
+                );
+            if (invalidCustoms.Count() > 0)
+            {
+                Logger.Log("Profile Error: Invalid custom field reference detected. Custom fields must be structured like CreationType.AppKey (eg. Quest.EntryId).", Logger.Status.Error, true);
+                Logger.Log("Skipped custom fields, will export but only on primary table. Certain features will not be exported correctly.", Logger.Status.Warning, true);
+                return;
+            }
+
+            // Find customs relevant to this export (eg only grab items containing Quest.xyz if toolType is Quest)
+            var relevantFields = Profile.Active.CustomFields
+                .Where(v => v.Value
+                    .Where(k2 => k2.Key.Split('.')[0] == toolType.ToString()).Count() > 0
+                );
+
+            // Attempt to create new ExpKvps and add them to ref data
+            foreach (var tableKv in relevantFields)
+                foreach (var corrKeys in tableKv.Value)
+                {
+                    if (!corrKeys.Key.StartsWith(toolType.ToString()))
+                    {
+                        Logger.Log($"Unrelated custom key ({corrKeys.Key}) for a table that contains custom key(s) for another type somehow. Ignoring");
+                        continue;
+                    }
+
+                    // Determine key, value and place it in data
+                    string propertyName = corrKeys.Key.Split('.')[1];
+                    dynamic propertyValue = subject.GetType().GetProperty(propertyName).GetValue(subject, null);
+                    data.Add(new ExpKvp(corrKeys.Value, propertyValue, tableKv.Key));
+                }
         }
     }
 }

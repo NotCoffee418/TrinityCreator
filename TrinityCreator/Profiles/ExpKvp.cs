@@ -11,10 +11,31 @@ namespace TrinityCreator.Profiles
     /// </summary>
     public class ExpKvp
     {
+        /// <summary>
+        /// Constructor for default fields. Runs gtk to define properties
+        /// </summary>
+        /// <param name="appKey"></param>
+        /// <param name="value"></param>
+        /// <param name="c"></param>
+        /// <param name="specialTableName"></param>
         public ExpKvp(string appKey, dynamic value, Export.C c, string specialTableName = "")
         {
             Value = value;
             gtk(c, appKey, specialTableName);
+        }
+
+        /// <summary>
+        /// Constructor for custom fields. Manually define key, value and table
+        /// </summary>
+        /// <param name="sqlKey"></param>
+        /// <param name="value"></param>
+        /// <param name="table"></param>
+        public ExpKvp(string sqlKey, string value, string table)
+        {
+            SqlKey = sqlKey;
+            Value = value;
+            SqlTableName = table;
+            IsValid = true;
         }
 
         /// <summary>
