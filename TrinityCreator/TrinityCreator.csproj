@@ -125,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\ProfileHelper.cs" />
+    <Compile Include="Tools\ItemCreator\WeaponExportWindow.xaml.cs">
+      <DependentUpon>WeaponExportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\LookupTool\TargetEnum.cs" />
     <Compile Include="Tools\ProfileCreator\ProfileCreatorSetting.xaml.cs">
       <DependentUpon>ProfileCreatorSetting.xaml</DependentUpon>
@@ -249,6 +253,10 @@
       <DependentUpon>VendorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\UIElements\XmlKeyValue.cs" />
+    <Page Include="Tools\ItemCreator\WeaponExportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tools\ProfileCreator\ProfileCreatorSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -378,6 +386,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Resources\weapon-notice.rtf" />
     <Resource Include="Resources\ARIALN.TTF" />
     <Resource Include="Resources\FRIZQT__.TTF" />
     <Resource Include="Resources\MORPHEUS.TTF" />

@@ -11,6 +11,7 @@ using System.Data;
 using TrinityCreator.Profiles;
 using TrinityCreator.Data;
 using TrinityCreator.UI.UIElements;
+using TrinityCreator.Helpers;
 
 namespace TrinityCreator.Tools.ItemCreator
 {
@@ -215,6 +216,35 @@ namespace TrinityCreator.Tools.ItemCreator
             }
         }
 
+        /// <summary>
+        /// If weapon & lich king or higher, return true
+        /// </summary>
+        /// <returns></returns>
+        private bool NeedsWeaponExportWindow()
+        {
+            var expansion = ProfileHelper.GetProfileGameVersion();
+            return _item.Class.Id == 2 &&
+                (expansion == ProfileHelper.Expansion.Unknown || expansion >= ProfileHelper.Expansion.WrathOfTheLichKing);
+        }
+        private void OpenWeaponExportWindow(string query, WeaponExportWindow.SaveType saveType)
+        {
+            // Open the window
+            var weaponExportWindow = new WeaponExportWindow(query, _item.EntryId, saveType);
+
+            // Disable export buttons until weapon window closes
+            exportDbBtn.IsEnabled = false;
+            exportSqlBtn.IsEnabled = false;
+            weaponExportWindow.Closed += WeaponExportWindow_Closed;
+
+            // Show
+            weaponExportWindow.Show();
+        }
+        private void WeaponExportWindow_Closed(object sender, EventArgs e)
+        {
+            exportDbBtn.IsEnabled = true;
+            exportSqlBtn.IsEnabled = true;
+        }
+
         #region Changed event handlers
 
         private void itemQualityCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -394,7 +424,10 @@ namespace TrinityCreator.Tools.ItemCreator
             try
             {
                 string query = Export.Item(_item);
-                SaveQuery.ToDatabase(query);
+                if (NeedsWeaponExportWindow())
+                    OpenWeaponExportWindow(query, WeaponExportWindow.SaveType.Database);
+                else
+                    SaveQuery.ToDatabase(query);
             }
             catch (Exception ex)
             {
@@ -407,7 +440,10 @@ namespace TrinityCreator.Tools.ItemCreator
             try
             {
                 string query = Export.Item(_item);
-                SaveQuery.ToFile("Item " + _item.EntryId, query);
+                if (NeedsWeaponExportWindow())
+                    OpenWeaponExportWindow(query, WeaponExportWindow.SaveType.File);
+                else
+                    SaveQuery.ToFile("Item " + _item.EntryId, query);
             }
             catch (Exception ex)
             {
