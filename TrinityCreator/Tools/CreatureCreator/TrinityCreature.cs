@@ -697,7 +697,7 @@ namespace TrinityCreator.Tools.CreatureCreator
 
         public int MinLevelHealth
         {
-            get { return _weapon3; }
+            get { return _minLevelHealth; }
             set
             {
                 _minLevelHealth = DataType.LimitLength(value, "mediumint(8)");

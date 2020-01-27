@@ -181,19 +181,19 @@
                         <TextBox Name="BuyPriceGTxt"
                                  Text="{Binding ValueBuy.Gold, UpdateSourceTrigger=PropertyChanged}" Height="25"
                                  Margin="84,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" />
-                        <Image Margin="137,11,0,0" Width="15" Source="Resources/gold.gif" HorizontalAlignment="Left"
+                        <Image Margin="137,11,0,0" Width="15" Source="/TrinityCreator;component/Resources/gold.gif" HorizontalAlignment="Left"
                                Height="16" VerticalAlignment="Top" />
                         <TextBox Name="BuyPriceSTxt"
                                  Text="{Binding ValueBuy.Silver, UpdateSourceTrigger=PropertyChanged}" Height="25"
                                  Margin="157,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20"
                                  MaxLength="2" />
-                        <Image Margin="182,11,0,0" Width="15" Source="Resources/silver.gif" HorizontalAlignment="Left"
+                        <Image Margin="182,11,0,0" Width="15" Source="/TrinityCreator;component/Resources/silver.gif" HorizontalAlignment="Left"
                                Height="16" VerticalAlignment="Top" />
                         <TextBox Name="BuyPriceCTxt"
                                  Text="{Binding ValueBuy.Copper, UpdateSourceTrigger=PropertyChanged}" Height="25"
                                  Margin="202,6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20"
                                  MaxLength="2" />
-                        <Image Margin="228,11,0,0" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left"
+                        <Image Margin="228,11,0,0" Width="15" Source="/TrinityCreator;component/Resources/copper.gif" HorizontalAlignment="Left"
                                Height="16" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Sell price" Height="30" Margin="0,38,0,0" VerticalAlignment="Top"
@@ -201,19 +201,19 @@
                         <TextBox Name="SellPriceGTxt"
                                  Text="{Binding ValueSell.Gold, UpdateSourceTrigger=PropertyChanged}" Height="25"
                                  Margin="84,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" />
-                        <Image Margin="137,44,0,0" Width="15" Source="Resources/gold.gif" HorizontalAlignment="Left"
+                        <Image Margin="137,44,0,0" Width="15" Source="/TrinityCreator;component/Resources/gold.gif" HorizontalAlignment="Left"
                                Height="16" VerticalAlignment="Top" />
                         <TextBox Name="SellPriceSTxt"
                                  Text="{Binding ValueSell.Silver, UpdateSourceTrigger=PropertyChanged}" Height="25"
                                  Margin="157,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20"
                                  MaxLength="2" />
-                        <Image Margin="182,44,0,0" Width="15" Source="Resources/silver.gif" HorizontalAlignment="Left"
+                        <Image Margin="182,44,0,0" Width="15" Source="/TrinityCreator;component/Resources/silver.gif" HorizontalAlignment="Left"
                                Height="16" VerticalAlignment="Top" />
                         <TextBox Name="SellPriceCTxt"
                                  Text="{Binding ValueSell.Copper, UpdateSourceTrigger=PropertyChanged}" Height="25"
                                  Margin="202,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20"
                                  MaxLength="2" />
-                        <Image Margin="228,44,0,0" Width="15" Source="Resources/copper.gif" HorizontalAlignment="Left"
+                        <Image Margin="228,44,0,0" Width="15" Source="/TrinityCreator;component/Resources/copper.gif" HorizontalAlignment="Left"
                                Height="16" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Buy count" Height="30" Margin="0,71,0,0" VerticalAlignment="Top"

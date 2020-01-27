@@ -29,9 +29,17 @@ namespace TrinityCreator
 
             try
             {
+                // Prepare export dir
+                string exportDir = System.IO.Path.Combine(Environment.GetFolderPath(
+                    Environment.SpecialFolder.MyDoc‌​uments), "TrinityCreator", "Export");
+                if (!Directory.Exists(exportDir))
+                    Directory.CreateDirectory(exportDir);
+
+                // Save file
                 var sfd = new SaveFileDialog();
                 sfd.DefaultExt = ".sql";
                 sfd.FileName = filename;
+                sfd.InitialDirectory = exportDir;
                 sfd.Filter = "SQL File (.sql)|*.sql";
                 if (sfd.ShowDialog() == true)
                 {

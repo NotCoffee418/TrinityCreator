@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TrinityCreator.Data;
+using TrinityCreator.Profiles;
 using TrinityCreator.Tools.LookupTool;
 using TrinityCreator.UI.UIElements;
 
@@ -91,8 +92,8 @@ namespace TrinityCreator.Tools.CreatureCreator
         {
             try
             {
-                //string query = EmulatorHandler.GenerateQuery(Creature);
-                //Query.ToDatabase(query);
+                string query = Export.Creature(Creature);
+                SaveQuery.ToDatabase(query);
             }
             catch (Exception ex)
             {
@@ -104,8 +105,8 @@ namespace TrinityCreator.Tools.CreatureCreator
         {
             try
             {
-                //string query = EmulatorHandler.GenerateQuery(Creature);
-                //Query.ToFile("Creature " + Creature.Entry, query);
+                string query = Export.Creature(Creature);
+                SaveQuery.ToFile("Creature " + Creature.Entry, query);
             }
             catch (Exception ex)
             {
