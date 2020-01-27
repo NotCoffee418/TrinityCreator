@@ -99,6 +99,9 @@ namespace TrinityCreator.Tools.ItemCreator
         /// </summary>
         private void ShowCorrectClassBox()
         {
+            if (!IsLoaded) // Only run if UI is loaded
+                return;
+
             // Hide everything
             WeaponBox.Visibility = Visibility.Collapsed;
             ArmorBox.Visibility = Visibility.Collapsed;
@@ -178,6 +181,9 @@ namespace TrinityCreator.Tools.ItemCreator
 
         private void ShowCorrectInfoLabel()
         {
+            if (!IsLoaded)
+                return;
+
             var clid = _item.Class.Id;
             _preview.SubclassLeftNoteLbl.Visibility = Visibility.Visible;
 

@@ -61,11 +61,15 @@ namespace TrinityCreator.Tools.QuestCreator
             set { _quest = value; }
         }
 
-        
 
+        bool firstLoad = true;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            PrepareQuestControl();
+            if (firstLoad)
+            {
+                PrepareQuestControl();
+                firstLoad = false;
+            }
         }
 
         #region ChangedEvents
@@ -73,17 +77,13 @@ namespace TrinityCreator.Tools.QuestCreator
 
         private void questInfoCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
-            {
-                XmlKeyValue qi = (XmlKeyValue)questInfoCb.SelectedValue;
-                BitmaskStackPanel bmsp = (BitmaskStackPanel)questFlagsGb.Content;
+            XmlKeyValue qi = (XmlKeyValue)questInfoCb.SelectedValue;
+            BitmaskStackPanel bmsp = (BitmaskStackPanel)questFlagsGb.Content;
 
-                if (qi.Id == 88 || qi.Id == 89)
-                    bmsp.SetValueIsChecked(64, true);
-                else
-                    bmsp.SetValueIsChecked(64, false);
-            }
-            catch { /*fail on load*/ }
+            if (qi != null && (qi.Id == 88 || qi.Id == 89))
+                bmsp.SetValueIsChecked(64, true);
+            else
+                bmsp.SetValueIsChecked(64, false);
         }
 
 

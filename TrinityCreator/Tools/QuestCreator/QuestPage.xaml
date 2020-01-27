@@ -120,12 +120,14 @@
                                 <Button Content="Find Map" Width="75" DockPanel.Dock="Right" Click="findMapBtn_Click"/>
                                 <Label Content="Objective Coordinates" DockPanel.Dock="Left"/>
                             </DockPanel>
-                            <Label Content="X" DockPanel.Dock="Left" />
-                            <TextBox Text="{Binding PoiCoordinate.X, UpdateSourceTrigger=PropertyChanged}" Width="75" />
-                            <Label Content="Y"/>
-                            <TextBox Text="{Binding PoiCoordinate.Y, UpdateSourceTrigger=PropertyChanged}" Width="75" />
-                            <Label Content="Map"/>
-                            <TextBox Text="{Binding PoiCoordinate.MapId, UpdateSourceTrigger=PropertyChanged}" Width="75" />
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="X" />
+                                <TextBox Text="{Binding PoiCoordinate.X, UpdateSourceTrigger=PropertyChanged}" Width="75" Margin="0,2,5,2" />
+                                <Label Content="Y"/>
+                                <TextBox Text="{Binding PoiCoordinate.Y, UpdateSourceTrigger=PropertyChanged}" Width="75" Margin="0,2,5,2" />
+                                <Label Content="Map"/>
+                                <TextBox Text="{Binding PoiCoordinate.MapId, UpdateSourceTrigger=PropertyChanged}" Width="75" Margin="0,2"/>
+                            </StackPanel>
                         </DockPanel>
                     </StackPanel>
                 </GroupBox>
