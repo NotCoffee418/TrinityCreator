@@ -6,6 +6,3 @@ $fullName = $pwd.Path + "\..\Publish\" + $fileName
 
 Compress-Archive *.dll -Force $fullName
 Compress-Archive *.exe -Update $fullName
-Compress-Archive *.dat -Update $fullName
-Compress-Archive *.pak -Update $fullName
-Compress-Archive *.bin -Update $fullName

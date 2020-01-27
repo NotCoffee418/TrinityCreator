@@ -21,22 +21,10 @@ namespace TrinityCreator.UI.UIElements
     /// </summary>
     public partial class Browser : UserControl
     {
-        public BrowserControl ChromiumControl { get; private set; }
-
-        public Browser(string url) : this()
-        {
-            LoadUrl(url);
-        }
+        // Don't use cefsharp. Default browser control might work in the future, who knows.
         public Browser()
         {
             InitializeComponent();
-
-            // might need this in loaded event
-            // Use winforms because webgl issues in wpf
-            ChromiumControl = new BrowserControl("about:blank");
-            WindowsFormsHost host = new WindowsFormsHost();
-            host.Child = ChromiumControl;
-            HostGrid.Children.Add(host);
         }
 
         /// <summary>
@@ -46,16 +34,7 @@ namespace TrinityCreator.UI.UIElements
         /// <param name="blankFirst">modelViewer requires blank page first because js</param>
         public void LoadUrl(string url, bool blankFirst = false)
         {
-            try
-            {
-                if (blankFirst)
-                    ChromiumControl.Chromium.Load("about:blank");
-                ChromiumControl.Chromium.Load(url);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Unable to load URL", MessageBoxButton.OK, MessageBoxImage.Error);
-            }            
+            System.Diagnostics.Process.Start(url);
         }
     }
 }
