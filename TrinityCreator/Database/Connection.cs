@@ -5,6 +5,7 @@ using MySql.Data.MySqlClient;
 using TrinityCreator.Properties;
 using System.Windows.Threading;
 using System.Threading;
+using TrinityCreator.UI;
 
 namespace TrinityCreator.Database
 {

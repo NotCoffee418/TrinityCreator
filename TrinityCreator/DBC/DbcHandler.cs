@@ -11,6 +11,7 @@ using System.Data;
 using DBCViewer;
 using System.Globalization;
 using System.Xml;
+using TrinityCreator.UI;
 
 namespace TrinityCreator.DBC
 {

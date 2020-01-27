@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="TrinityCreator.Tools.LookupTool.LookupToolControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrinityCreator"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" >
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <DockPanel>
+                <Label Content="Find"/>
+                <ComboBox Name="targetSelectCb" SelectionChanged="targetSelectCb_SelectionChanged">
+                    <ComboBoxItem Content="Quest Sort" />
+                    <ComboBoxItem Content="Map" />
+                    <ComboBoxItem Content="Faction" />
+                    <ComboBoxItem Content="Title" />
+                    <ComboBoxItem Content="Item" />
+                    <ComboBoxItem Content="Quest" />
+                    <ComboBoxItem Content="Creature" />
+                    <ComboBoxItem Content="Game Object" />
+                    <ComboBoxItem Content="Spell" />
+                    <ComboBoxItem Content="Emote" />
+                </ComboBox>
+            </DockPanel>
+            <DockPanel Margin="0,5,0,5">
+                <Button Name="searchBtn" Content="Search" DockPanel.Dock="Right" Click="searchBtn_Click" IsDefault="True" Width="75"/>
+                <TextBox Name="searchTxt" />
+            </DockPanel>
+            <DataGrid Name="dataGrid" IsReadOnly="True" MouseDoubleClick="dataGrid_MouseDoubleClick">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy" Click="Context_Copy" />
+                        <MenuItem Header="Delete" Click="Context_Delete" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

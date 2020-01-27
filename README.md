@@ -18,7 +18,7 @@ NOTE: You need to reload tables or restart your server before you can see your n
 
 ### Requirements ###
 * Windows 10 (has all requirements pre-installed)
-* Windows 7 (Install [.NET Framework 4.5.2](https://www.microsoft.com/en-us/download/details.aspx?id=42642) and may need the  [Windows 7 version of TrinityCreator](https://github.com/Nadromar/TrinityCreator/blob/no-modelviewer/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi))
+* Windows 7 (Install [.NET Framework 4.7.2](https://dotnet.microsoft.com/download/dotnet-framework/net472) and may need the  [Windows 7 version of TrinityCreator](https://github.com/Nadromar/TrinityCreator/blob/no-modelviewer/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi))
 
 ### Development ###
 Please report any bugs and suggestions on GitHub.

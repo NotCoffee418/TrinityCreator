@@ -11,14 +11,14 @@
     <Setting Name="worldDb" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="emulator" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
     <Setting Name="DbcDir" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="lookupToolWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">400</Value>
+    </Setting>
+    <Setting Name="ActiveProfilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

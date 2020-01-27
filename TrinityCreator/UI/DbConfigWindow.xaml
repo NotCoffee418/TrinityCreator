@@ -1,0 +1,43 @@
+﻿<Window x:Class="TrinityCreator.UI.DbConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrinityCreator.Database"
+        mc:Ignorable="d"
+        Title="Configure Database" Height="300" Width="500" ResizeMode="NoResize">
+    <StackPanel Margin="10">
+        <DockPanel Margin="0,0,0,5">
+            <Label Content="MySQL Host" Width="100" HorizontalAlignment="Left" />
+            <TextBox Name="HostTxt" Text="127.0.0.1" />
+        </DockPanel>
+        <DockPanel Margin="0,0,0,5">
+            <Label Content="MySQL Port" Width="100" HorizontalAlignment="Left" />
+            <TextBox Name="PortTxt" Text="3306" />
+        </DockPanel>
+        <DockPanel Margin="0,0,0,5">
+            <Label Content="User" Width="100" HorizontalAlignment="Left" />
+            <TextBox Name="UserTxt" Text="trinity" />
+        </DockPanel>
+        <DockPanel Margin="0,0,0,5">
+            <Label Content="Password" Width="100" HorizontalAlignment="Left" />
+            <TextBox Name="PasswordTxt" Text="trinity" />
+        </DockPanel>
+        <DockPanel Margin="0,0,0,5">
+            <Label Content="World Database" Width="100" HorizontalAlignment="Left" />
+            <TextBox Name="DatabaseTxt" Text="trinity_world" />
+        </DockPanel>
+        <Label Width="500">
+            <TextBlock Name="StatusLbl" TextWrapping="Wrap" />
+        </Label>
+        <DockPanel Margin="0,0,0,5">
+            <Button Name="SaveBtn" Content="Save connection info" Width="150" HorizontalAlignment="Left"
+                    Click="saveBtn_Click" IsDefault="True" />
+            <Button Name="CloseBtn" Content="Close window" Width="90" HorizontalAlignment="Right"
+                    Click="closeBtn_Click" IsCancel="True" />
+        </DockPanel>
+        <DockPanel>
+            <Button x:Name="restoreDefaultBtn" Content="Reset to default" Width="100" HorizontalAlignment="Left" Click="restoreDefaultBtn_Click"/>
+        </DockPanel>
+    </StackPanel>
+</Window>

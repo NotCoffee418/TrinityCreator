@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="TrinityCreator.UI.ProfileSelectionControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrinityCreator.Profiles"
+             mc:Ignorable="d" d:DesignWidth="575" MinWidth="520" Height="80">
+    <Border BorderBrush="Black" BorderThickness="1">
+        <StackPanel Orientation="Vertical">
+            <DockPanel>
+                <Button Name="activateBrn" Content="Activate" Margin="5" Width="75" DockPanel.Dock="Right" Click="activateBrn_Click"/>
+                <TextBlock Name="pName" Text="{Binding Name}" FontSize="18" FontWeight="Bold" Margin="5,0,0,0" DockPanel.Dock="Left"/>
+            </DockPanel>
+            <DockPanel Margin="5,5,5,0">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Width="215">
+                    <TextBlock Text="Emulator Name: "/>
+                    <TextBlock Name="pEmulatorName" Text="{Binding EmulatorName}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Width="150">
+                    <TextBlock Text="Game Version: "/>
+                    <TextBlock Name="pGameVersion" Text="{Binding GameVersion}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Width="200">
+                    <TextBlock Text="Database Version: "/>
+                    <TextBlock Name="pDatabaseVersion" Text="{Binding DatabaseVersion}" />
+                </StackPanel>
+            </DockPanel>
+            
+            
+            <DockPanel Margin="5,0,5,5">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Width="215">
+                    <TextBlock Margin="2">Click to copy:</TextBlock>
+                    <TextBlock DockPanel.Dock="Right" Margin="10,2,10,2">
+                    <Hyperlink Name="pFilePath" NavigateUri="{Binding LocalPath}" RequestNavigate="Hyperlink_RequestNavigate">File Path</Hyperlink>
+                    </TextBlock>
+                    <TextBlock DockPanel.Dock="Right" Margin="2,2,10,2">
+                    <Hyperlink Name="pUpdateUrl" NavigateUri="{Binding UpdateUrl}" RequestNavigate="Hyperlink_RequestNavigate">Source Link</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Width="150">
+                    <TextBlock Text="Author: " />
+                    <TextBlock Name="pAuthor" Text="{Binding Author}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="2" DockPanel.Dock="Left" Width="200">
+                    <TextBlock Text="Revision: " />
+                    <TextBlock Name="pRevision" Text="{Binding Revision}"/>
+                </StackPanel>
+            </DockPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

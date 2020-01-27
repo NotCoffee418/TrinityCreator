@@ -2,8 +2,8 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*"
            Name="Trinity Creator"
-           Language="1033" Version="1.0.8.33"
-           Manufacturer="Nadromar"
+           Language="1033" Version="1.1.0.100"
+           Manufacturer="NotCoffee418"
            UpgradeCode="7F3D3555-6622-43BB-A57B-3ADD4D2AFB0F">
 
     <Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" />
@@ -46,9 +46,6 @@
       </Component>
       <Component Id="CefSharp.WinForms.dll">
         <File Id="CefSharp.WinForms.dll" Source="$(var.TrinityCreator.TargetDir)CefSharp.WinForms.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="d3dcompiler_43.dll">
-        <File Id="d3dcompiler_43.dll" Source="$(var.TrinityCreator.TargetDir)d3dcompiler_43.dll" KeyPath="yes" />
       </Component>
       <Component Id="d3dcompiler_47.dll">
         <File Id="d3dcompiler_47.dll" Source="$(var.TrinityCreator.TargetDir)d3dcompiler_47.dll" KeyPath="yes" />
@@ -99,9 +96,9 @@
                   Target="[#TrinityCreator.exe]"
                   WorkingDirectory="APPLICATIONROOTDIRECTORY" />
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
-        <RegistryValue Root="HKCU" Key="Software\Nadromar\TrinityCreator" Name="installed" Type="integer" Value="1"
+        <RegistryValue Root="HKCU" Key="Software\NotCoffee418\TrinityCreator" Name="installed" Type="integer" Value="1"
                        KeyPath="yes" />
-        <RegistryValue Root="HKCU" Key="Software\Nadromar\TrinityCreator" Name="installDirectory" Type="string"
+        <RegistryValue Root="HKCU" Key="Software\NotCoffee418\TrinityCreator" Name="installDirectory" Type="string"
                        Value="[APPLICATIONROOTDIRECTORY]" />
       </Component>
     </DirectoryRef>
@@ -114,16 +111,15 @@
       <ComponentRef Id="CefSharp.Core.dll" />
       <ComponentRef Id="CefSharp.dll" />
       <ComponentRef Id="CefSharp.WinForms.dll" />
-      <ComponentRef Id="d3dcompiler_43.dll" />
       <ComponentRef Id="d3dcompiler_47.dll" />
       <ComponentRef Id="libcef.dll" />
       <ComponentRef Id="libEGL.dll" />
       <ComponentRef Id="libGLESv2.dll" />
-      <ComponentRef Id="chrome_elf.dll" />
       <ComponentRef Id="icudtl.dat" />
       <ComponentRef Id="cef.pak" />
       <ComponentRef Id="cef_100_percent.pak" />
       <ComponentRef Id="cef_200_percent.pak" />
+      <ComponentRef Id="chrome_elf.dll" />
       <ComponentRef Id="cef_extensions.pak" />
       <ComponentRef Id="natives_blob.bin" />
       <ComponentRef Id="snapshot_blob.bin" />
