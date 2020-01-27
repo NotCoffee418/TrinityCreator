@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*"
            Name="Trinity Creator"
-           Language="1033" Version="1.1.0.100"
+           Language="1033" Version="1.1.0.102"
            Manufacturer="NotCoffee418"
            UpgradeCode="7F3D3555-6622-43BB-A57B-3ADD4D2AFB0F">
 
