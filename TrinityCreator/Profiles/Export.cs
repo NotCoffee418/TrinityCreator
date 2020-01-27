@@ -295,7 +295,7 @@ namespace TrinityCreator.Profiles
             {
                 // Translates to two columns: RequiredNpcOrGo1, RequiredNpcOrGoCount1, RequiredNpcOrGoItem2...
                 var requiredNpcOrGoData = new Dictionary<string, string>();
-                quest.RequiredItems.AddValues(requiredNpcOrGoData, "RequiredNpcOrGoItem", "RequiredNpcOrGoCount");
+                quest.RequiredNpcOrGos.AddValues(requiredNpcOrGoData, "RequiredNpcOrGo", "RequiredNpcOrGoCount");
                 foreach (var reqNpcOrGoCol in requiredNpcOrGoData)
                     data.Add(new ExpKvp(reqNpcOrGoCol.Key, reqNpcOrGoCol.Value, C.Quest));
             }
@@ -310,7 +310,7 @@ namespace TrinityCreator.Profiles
             {
                 // Translates to two columns: RewardItem1, RewardItemAmount1, RewardItemItem2...
                 var rewardItemData = new Dictionary<string, string>();
-                quest.RequiredItems.AddValues(rewardItemData, "RewardItem", "RewardItemAmount");
+                quest.RewardItems.AddValues(rewardItemData, "RewardItem", "RewardItemAmount");
                 foreach (var rewardItemCol in rewardItemData)
                     data.Add(new ExpKvp(rewardItemCol.Key, rewardItemCol.Value, C.Quest));
             }
@@ -325,7 +325,7 @@ namespace TrinityCreator.Profiles
             {
                 // Translates to two columns: RewardChoiceItemID1, RewardChoiceItemAmount1, RewardChoiceItemID2...
                 var rewardItemChoiceData = new Dictionary<string, string>();
-                quest.RequiredItems.AddValues(rewardItemChoiceData, "RewardChoiceItemID", "RewardChoiceItemAmount");
+                quest.RewardChoiceItems.AddValues(rewardItemChoiceData, "RewardChoiceItemID", "RewardChoiceItemAmount");
                 foreach (var rewardItemChoiceCol in rewardItemChoiceData)
                     data.Add(new ExpKvp(rewardItemChoiceCol.Key, rewardItemChoiceCol.Value, C.Quest));
             }
@@ -336,12 +336,12 @@ namespace TrinityCreator.Profiles
                 return String.Empty;
             }
 
-            try // UNUSUAL!! - FactionRewardID & RewardFactionOverride (max 4)
+            try // UNUSUAL!! - RewardFactionID & RewardFactionOverride (max 4)
             {
-                // Translates to two columns: FactionRewardID1, RewardFactionOverride1, FactionRewardID2...
+                // Translates to two columns: RewardFactionID1, RewardFactionOverride1, RewardFactionID2...
                 var factionRewardData = new Dictionary<string, string>();
                 // Value output is *100 (TrinityCore support)! see issue #72
-                quest.RequiredItems.AddValues(factionRewardData, "RewardChoiceItemID", "RewardChoiceItemAmount", 100); 
+                quest.FactionRewards.AddValues(factionRewardData, "RewardFactionID", "RewardFactionOverride", 100); 
                 foreach (var factionRewardDataCol in factionRewardData)
                     data.Add(new ExpKvp(factionRewardDataCol.Key, factionRewardDataCol.Value, C.Quest));
             }

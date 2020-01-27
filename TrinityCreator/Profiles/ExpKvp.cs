@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrinityCreator.Helpers;
 
 namespace TrinityCreator.Profiles
 {
@@ -86,10 +87,13 @@ namespace TrinityCreator.Profiles
                 t.Value.Where(keysDic => keysDic.Key.ToLower() == appKey.ToLower()).FirstOrDefault().Key != null
             ).FirstOrDefault();
 
-            // Key didn't exist in any table, return null
+            // Key didn't exist in any table, ignore column
             IsValid = table.Key != null;
-            if (!IsValid) 
+            if (!IsValid)
+            {
+                Logger.Log($"Notice: Export: {creationType.ToString()}.{appKey} not in profile. This isn't always an problem.");
                 return;
+            }
 
             // Key exists, generate result
             SqlTableName = table.Key; // Return table name
