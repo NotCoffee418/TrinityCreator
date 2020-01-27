@@ -30,7 +30,7 @@ namespace TrinityCreator.Profiles
         /// <param name="sqlKey"></param>
         /// <param name="value"></param>
         /// <param name="table"></param>
-        public ExpKvp(string sqlKey, string value, string table)
+        public ExpKvp(string sqlKey, dynamic value, string table)
         {
             SqlKey = sqlKey;
             Value = value;

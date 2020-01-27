@@ -165,7 +165,7 @@ namespace TrinityCreator.UI.UIElements
                 {
                     string key = "";
                     if (keyPrefix == "")
-                        key = (string)line.Key;
+                        key = (string)line.Key.ToString();
                     else
                         key = keyPrefix + ((IKeyValue)line.Key).Id;
                     d.Add(key, int.Parse(line.Value).ToString());

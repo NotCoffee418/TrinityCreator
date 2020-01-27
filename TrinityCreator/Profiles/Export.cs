@@ -53,7 +53,17 @@ namespace TrinityCreator.Profiles
                     DataTable dt = new DataTable(tableName);
                     // Create columns
                     foreach (var entry in data.Where(e => e.IsValid && e.SqlTableName == tableName))
-                        dt.Columns.Add(entry.SqlKey, entry.Value.GetType());
+                    {
+                        // WARNING: Null check, this would cause issues with non-defined strings being null instead of "" (eg creature subname)
+                        // If this causes other issues & needs changing, test this example.
+                        Type valueType = typeof(string);
+                        if (entry.Value != null)
+                            valueType = entry.Value.GetType();
+
+                        // Add to datatable
+                        dt.Columns.Add(entry.SqlKey, valueType);
+                    }
+                        
 
                     // Create row
                     DataRow row = dt.NewRow();
@@ -86,8 +96,13 @@ namespace TrinityCreator.Profiles
                         // Handle string-y types
                         if (colType == typeof(String) || colType == typeof(string))
                         {
+                            // Null check for string
+                            object valObj = dt.Rows[0][col];
+                            if (valObj.GetType() == typeof(DBNull) || valObj == null)
+                                valObj = string.Empty;
+
                             // Wow client's interpretation of newline is $B
-                            string valStr = ((string)dt.Rows[0][col])
+                            string valStr = ((string)valObj)
                                 .Replace(Environment.NewLine, "$B")
                                 .Replace("\n", "$B");
 
@@ -543,7 +558,7 @@ namespace TrinityCreator.Profiles
                 // todo: check if it's using old system before trying. (if key is in profile)
                 var spellsList = new Dictionary<string, string>();
                 creature.Spells.AddValues(spellsList);
-                for (int i = 0; i < spellsList.Count; i++)
+                for (int i = 1; i <= spellsList.Count; i++)
                 {
                     if (spellsList["Spell" + i] == "" || spellsList["Spell" + i] == "0")
                     {
@@ -555,7 +570,7 @@ namespace TrinityCreator.Profiles
                     sql += GenerateSql(new List<ExpKvp>() {
                         new ExpKvp("SpellCreatureID", creature.Entry, C.Creature),
                         new ExpKvp("SpellSpell", int.Parse(spellsList["Spell" + i]), C.Creature),
-                        new ExpKvp("SpellIndex", i, C.Creature)
+                        new ExpKvp("SpellIndex", i-1, C.Creature)
                         }) + Environment.NewLine;
                 }                    
             }
@@ -575,7 +590,7 @@ namespace TrinityCreator.Profiles
                 var dmgTypes = DamageType.GetDamageTypes(magicOnly:true);
                 foreach (DamageType dt in dmgTypes)
                 {
-                    var key = dt.Description + "Resistance";
+                    var key = dt.Description;
                     if (resistanceList[key] == "" || resistanceList[key] == "0")
                     {
                         Logger.Log("Creature export: {key} was 0 or empty. Not creating row in creature_temlate_resistance or equivalent.");
@@ -679,16 +694,18 @@ namespace TrinityCreator.Profiles
                         continue;
                     }
 
+                    string pname = "???"; // For error output
                     try
                     {
                         // Determine key, value and place it in data
                         string propertyName = corrKeys.Key.Split('.')[1];
                         dynamic propertyValue = subject.GetType().GetProperty(propertyName).GetValue(subject, null);
+                        pname = propertyName;
                         data.Add(new ExpKvp(corrKeys.Value, propertyValue, tableKv.Key));
                     }
                     catch 
                     {
-                        Logger.Log("Profile Error: Invalid application key defined. Skipping this custom field.", Logger.Status.Error, true);
+                        Logger.Log($"Profile Error: Invalid application key defined in custom fields (Name: {pname}). Skipping this custom field.", Logger.Status.Error, true);
                     }                    
                 }
         }

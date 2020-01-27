@@ -111,6 +111,29 @@ namespace TrinityCreator.Profiles
         }
         #endregion
 
+        /// <summary>
+        /// Checks if an appKey exists in the profile
+        /// This will not work for lookuptool
+        /// </summary>
+        /// <param name="toolName">Creature, Quest etc</param>
+        /// <param name="appKey">Name of the application key requested</param>
+        /// <returns></returns>
+        public bool HasAppKey(Export.C tool, string appKey)
+        {
+            try
+            {
+                // Find the correct Profile property (equest, creature etc) based on string
+                var targetTool = (Dictionary<string, Dictionary<string, string>>)this.GetType().GetProperty(tool.ToString()).GetValue(this, null);
+
+                // Return true if appkey exists in targetTool
+                return targetTool.Values.Where(keys => keys.ContainsKey(appKey)).Count() > 0;
+            }
+            catch
+            {
+                Logger.Log($"Application Error: Profile.HasAppKey failed to ({tool.ToString()}, {appKey}. Please report this issue.", Logger.Status.Error, true);
+                return false;
+            }
+        }
 
         public override bool Equals(object obj)
         {
