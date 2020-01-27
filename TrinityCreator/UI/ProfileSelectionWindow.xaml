@@ -5,6 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrinityCreator.Profiles"
         mc:Ignorable="d"
-        Title="ProfileSelectionWindow" Height="450" Width="800">
+        Title="Choose a profile" Height="450" Width="800">
     <StackPanel x:Name="profileControlsSp" Orientation="Vertical" />
 </Window>

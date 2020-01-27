@@ -12,7 +12,7 @@
                 <TextBlock Name="pName" Text="{Binding Name}" FontSize="18" FontWeight="Bold" Margin="5,0,0,0" DockPanel.Dock="Left"/>
             </DockPanel>
             <DockPanel Margin="5,5,5,0">
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Width="215">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Width="185">
                     <TextBlock Text="Emulator Name: "/>
                     <TextBlock Name="pEmulatorName" Text="{Binding EmulatorName}" />
                 </StackPanel>
@@ -20,7 +20,7 @@
                     <TextBlock Text="Game Version: "/>
                     <TextBlock Name="pGameVersion" Text="{Binding GameVersion}"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Width="200">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Width="230">
                     <TextBlock Text="Database Version: "/>
                     <TextBlock Name="pDatabaseVersion" Text="{Binding DatabaseVersion}" />
                 </StackPanel>
@@ -28,24 +28,21 @@
             
             
             <DockPanel Margin="5,0,5,5">
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Width="215">
-                    <TextBlock Margin="2">Click to copy:</TextBlock>
-                    <TextBlock DockPanel.Dock="Right" Margin="10,2,10,2">
-                    <Hyperlink Name="pFilePath" NavigateUri="{Binding LocalPath}" RequestNavigate="Hyperlink_RequestNavigate">File Path</Hyperlink>
-                    </TextBlock>
-                    <TextBlock DockPanel.Dock="Right" Margin="2,2,10,2">
-                    <Hyperlink Name="pUpdateUrl" NavigateUri="{Binding UpdateUrl}" RequestNavigate="Hyperlink_RequestNavigate">Source Link</Hyperlink>
-                    </TextBlock>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Width="150">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Width="183">
                     <TextBlock Text="Author: " />
                     <TextBlock Name="pAuthor" Text="{Binding Author}"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="2" DockPanel.Dock="Left" Width="200">
+                <StackPanel Orientation="Horizontal" Margin="2" DockPanel.Dock="Left" Width="132">
                     <TextBlock Text="Revision: " />
                     <TextBlock Name="pRevision" Text="{Binding Revision}"/>
+                </StackPanel>
+
+
+                <StackPanel x:Name="linkSp" Orientation="Horizontal" DockPanel.Dock="Left" Width="215">
+                    <TextBlock DockPanel.Dock="Right" Margin="2,2,10,2">
+                    <Hyperlink Name="pUpdateUrl" NavigateUri="{Binding UpdateUrl}" RequestNavigate="Hyperlink_RequestNavigate">Source Link</Hyperlink>
+                    </TextBlock>
                 </StackPanel>
             </DockPanel>
         </StackPanel>

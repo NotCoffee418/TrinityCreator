@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrinityCreator"
         mc:Ignorable="d"
-        Title="ProfileCreator" Height="600" Width="1100">
+        Title="Profile Creator" Height="600" Width="1100">
     <ScrollViewer>
         <WrapPanel>
             <GroupBox Header="Info" Width="1000">

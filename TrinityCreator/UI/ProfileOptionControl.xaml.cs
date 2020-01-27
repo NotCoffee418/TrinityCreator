@@ -28,14 +28,28 @@ namespace TrinityCreator.UI
             DataContext = profile;
             HighlightOnActive();
 
+            // Hide link if not available
+            if (profile.UpdateUrl == null || profile.UpdateUrl == string.Empty)
+                linkSp.Visibility = Visibility.Collapsed;
+
             Profile.ActiveProfileChangedEvent += Profile_ActiveProfileChangedEvent;
         }
 
         public Profile _Profile { get; private set; }
 
+
+        /// <summary>
+        /// Open url if it's valid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Clipboard.SetText(e.Uri.ToString());
+            Uri uriResult;
+            bool valid = Uri.TryCreate(e.Uri.ToString(), UriKind.Absolute, out uriResult)
+                && uriResult.Scheme == Uri.UriSchemeHttp;
+            if (valid) 
+                System.Diagnostics.Process.Start(uriResult.ToString());
         }
 
         private void activateBrn_Click(object sender, RoutedEventArgs e)

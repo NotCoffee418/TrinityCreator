@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrinityCreator.Tools.ItemCreator"
         mc:Ignorable="d"
-        Title="WeaponExportWindow" Height="500" Width="800" Loaded="Window_Loaded">
+        Title="Export Weapon" Height="500" Width="800" Loaded="Window_Loaded">
     <Grid>
         <RichTextBox x:Name="weaponNoticeRtb" Margin="0,0,0,50" VerticalScrollBarVisibility="Visible"/>
         <StackPanel Orientation="Horizontal" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right">
