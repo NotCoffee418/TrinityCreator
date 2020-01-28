@@ -185,6 +185,7 @@ namespace TrinityCreator.Profiles
                         Logger.Log($"Invalid value enetered for {appKey}. Query was not saved.", Logger.Status.Error, true);
                         return String.Empty;
                     }
+                    else data.Add(new ExpKvp(appKey, value, C.Item));
                 }
             }
             catch (Exception ex)
@@ -201,7 +202,8 @@ namespace TrinityCreator.Profiles
                 var gemData = new Dictionary<string, string>();
                 item.GemSockets.AddValues(gemData, "SocketColor", "SocketContent");
                 foreach (var gemColumn in gemData)
-                    data.Add(new ExpKvp(gemColumn.Key, gemColumn.Value, C.Item));
+                    data.Add(new ExpKvp(gemColumn.Key, int.Parse(gemColumn.Value)
+                        , C.Item));
             }
             catch (Exception ex)
             {
@@ -216,7 +218,7 @@ namespace TrinityCreator.Profiles
                 var statData = new Dictionary<string, string>();
                 item.Stats.AddValues(statData, "StatType", "StatValue");
                 foreach (var statColumn in statData)
-                    data.Add(new ExpKvp(statColumn.Key, statColumn.Value, C.Item));
+                    data.Add(new ExpKvp(statColumn.Key, int.Parse(statColumn.Value), C.Item));
             }
             catch (Exception ex)
             {
@@ -282,7 +284,7 @@ namespace TrinityCreator.Profiles
                 var requiredItemData = new Dictionary<string, string>();
                 quest.RequiredItems.AddValues(requiredItemData, "RequiredItem", "RequiredItemCount");
                 foreach (var reqItemCol in requiredItemData)
-                    data.Add(new ExpKvp(reqItemCol.Key, reqItemCol.Value, C.Quest));
+                    data.Add(new ExpKvp(reqItemCol.Key, int.Parse(reqItemCol.Value), C.Quest));
             }
             catch (Exception ex)
             {
@@ -297,7 +299,7 @@ namespace TrinityCreator.Profiles
                 var requiredNpcOrGoData = new Dictionary<string, string>();
                 quest.RequiredNpcOrGos.AddValues(requiredNpcOrGoData, "RequiredNpcOrGo", "RequiredNpcOrGoCount");
                 foreach (var reqNpcOrGoCol in requiredNpcOrGoData)
-                    data.Add(new ExpKvp(reqNpcOrGoCol.Key, reqNpcOrGoCol.Value, C.Quest));
+                    data.Add(new ExpKvp(reqNpcOrGoCol.Key, int.Parse(reqNpcOrGoCol.Value), C.Quest));
             }
             catch (Exception ex)
             {
@@ -312,7 +314,7 @@ namespace TrinityCreator.Profiles
                 var rewardItemData = new Dictionary<string, string>();
                 quest.RewardItems.AddValues(rewardItemData, "RewardItem", "RewardItemAmount");
                 foreach (var rewardItemCol in rewardItemData)
-                    data.Add(new ExpKvp(rewardItemCol.Key, rewardItemCol.Value, C.Quest));
+                    data.Add(new ExpKvp(rewardItemCol.Key, int.Parse(rewardItemCol.Value), C.Quest));
             }
             catch (Exception ex)
             {
@@ -327,7 +329,7 @@ namespace TrinityCreator.Profiles
                 var rewardItemChoiceData = new Dictionary<string, string>();
                 quest.RewardChoiceItems.AddValues(rewardItemChoiceData, "RewardChoiceItemID", "RewardChoiceItemAmount");
                 foreach (var rewardItemChoiceCol in rewardItemChoiceData)
-                    data.Add(new ExpKvp(rewardItemChoiceCol.Key, rewardItemChoiceCol.Value, C.Quest));
+                    data.Add(new ExpKvp(rewardItemChoiceCol.Key, int.Parse(rewardItemChoiceCol.Value), C.Quest));
             }
             catch (Exception ex)
             {
@@ -343,7 +345,7 @@ namespace TrinityCreator.Profiles
                 // Value output is *100 (TrinityCore support)! see issue #72
                 quest.FactionRewards.AddValues(factionRewardData, "RewardFactionID", "RewardFactionOverride", 100); 
                 foreach (var factionRewardDataCol in factionRewardData)
-                    data.Add(new ExpKvp(factionRewardDataCol.Key, factionRewardDataCol.Value, C.Quest));
+                    data.Add(new ExpKvp(factionRewardDataCol.Key, int.Parse(factionRewardDataCol.Value), C.Quest));
             }
             catch (Exception ex)
             {
@@ -471,7 +473,7 @@ namespace TrinityCreator.Profiles
                 var modelData = new Dictionary<string, string>();
                 creature.ModelIds.AddValues(modelData);
                 foreach (var modelIds in modelData)
-                    data.Add(new ExpKvp(modelIds.Key, modelIds.Value, C.Creature));
+                    data.Add(new ExpKvp(modelIds.Key, int.Parse(modelIds.Value), C.Creature));
             }
             catch (Exception ex)
             {
@@ -492,6 +494,7 @@ namespace TrinityCreator.Profiles
                         Logger.Log($"Invalid value enetered for {appKey}. Query was not saved.", Logger.Status.Error, true);
                         return String.Empty;
                     }
+                    else data.Add(new ExpKvp(appKey, value, C.Item));
                 }
             }
             catch (Exception ex)
@@ -522,7 +525,7 @@ namespace TrinityCreator.Profiles
                 var spellData = new Dictionary<string, string>();
                 creature.Spells.AddValues(spellData);
                 foreach (var spell in spellData)
-                    data.Add(new ExpKvp(spell.Key, spell.Value, C.Creature));
+                    data.Add(new ExpKvp(spell.Key, int.Parse(spell.Value), C.Creature));
             }
             catch (Exception ex)
             {
@@ -537,7 +540,7 @@ namespace TrinityCreator.Profiles
                 var diffData = new Dictionary<string, string>();
                 creature.DifficultyEntry.AddValues(diffData);
                 foreach (var diff in diffData)
-                    data.Add(new ExpKvp(diff.Key, diff.Value, C.Creature));
+                    data.Add(new ExpKvp(diff.Key, int.Parse(diff.Value), C.Creature));
             }
             catch (Exception ex)
             {
