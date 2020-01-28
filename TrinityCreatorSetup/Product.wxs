@@ -63,6 +63,9 @@
       <Component Id="Ubiety.Dns.Core.dll">
         <File Id="Ubiety.Dns.Core.dll" Source="$(var.TrinityCreator.TargetDir)Ubiety.Dns.Core.dll" KeyPath="yes" />
       </Component>
+      <Component Id="Microsoft.Toolkit.Wpf.UI.Controls.WebView.dll">
+        <File Id="Microsoft.Toolkit.Wpf.UI.Controls.WebView.dll" Source="$(var.TrinityCreator.TargetDir)Microsoft.Toolkit.Wpf.UI.Controls.WebView.dll" KeyPath="yes" />
+      </Component>      
     </DirectoryRef>
 
     <!-- Step 2: Add the shortcut to your installer package -->
@@ -93,6 +96,7 @@
       <ComponentRef Id="System.Numerics.Vectors.dll" />
       <ComponentRef Id="System.Runtime.CompilerServices.Unsafe.dll" />
       <ComponentRef Id="Ubiety.Dns.Core.dll" />
+      <ComponentRef Id="Microsoft.Toolkit.Wpf.UI.Controls.WebView.dll" />
       
       
       <!-- Step 3: Tell WiX to install the shortcut -->

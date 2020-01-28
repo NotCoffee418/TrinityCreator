@@ -34,7 +34,9 @@ namespace TrinityCreator.UI.UIElements
         /// <param name="blankFirst">modelViewer requires blank page first because js</param>
         public void LoadUrl(string url, bool blankFirst = false)
         {
-            System.Diagnostics.Process.Start(url);
+            //System.Diagnostics.Process.Start(url);
+            webViewControl.Source = new Uri(url);
+            webViewControl.BringIntoView();
         }
     }
 }
