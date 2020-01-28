@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TrinityCreator.Data;
 using TrinityCreator.Database;
+using TrinityCreator.Profiles;
 using TrinityCreator.UI.UIElements;
 
 namespace TrinityCreator.Tools.QuestCreator
@@ -15,9 +16,7 @@ namespace TrinityCreator.Tools.QuestCreator
     {
         public TrinityQuest()
         {
-            // See issue #73
-            //var espvars = Emulator.EmulatorHandler.SelectedEmulator.GetIdColumnName("Quest");
-            //EntryId = SqlQuery.GetNextId(espvars.Item1, espvars.Item2);
+            EntryId = LookupQuery.GetNextId(Export.C.Quest);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

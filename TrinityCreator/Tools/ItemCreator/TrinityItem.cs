@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using TrinityCreator.Data;
 using TrinityCreator.Database;
+using TrinityCreator.Profiles;
 using TrinityCreator.Properties;
 using TrinityCreator.UI.UIElements;
 
@@ -12,9 +13,7 @@ namespace TrinityCreator.Tools.ItemCreator
     {
         public TrinityItem()
         {
-            // See issue #73
-            //var espvars = Emulator.EmulatorHandler.SelectedEmulator.GetIdColumnName("Item");
-            //EntryId = SqlQuery.GetNextId(espvars.Item1, espvars.Item2);
+            EntryId = LookupQuery.GetNextId(Export.C.Item);
         }
 
         private BitmaskStackPanel _allowedclass;

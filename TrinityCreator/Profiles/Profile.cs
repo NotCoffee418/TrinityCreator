@@ -36,7 +36,7 @@ namespace TrinityCreator.Profiles
         public Dictionary<string, Dictionary<string, string>> Item { get; set; }
         public Dictionary<string, Dictionary<string, string>> Loot { get; set; }
         public Dictionary<string, Dictionary<string, string>> Vendor { get; set; }
-        public Dictionary<string, string> LookupTool { get; internal set; }
+        public Dictionary<string, string> LookupTool { get; internal set; } // Leave this, GameObjects, spells cant be grabbed from tool data
         public Dictionary<string, Dictionary<string, string>> CustomFields { get; set; }
 
         #region Static 
@@ -110,30 +110,6 @@ namespace TrinityCreator.Profiles
             return allProfiles;
         }
         #endregion
-
-        /// <summary>
-        /// Checks if an appKey exists in the profile
-        /// This will not work for lookuptool
-        /// </summary>
-        /// <param name="toolName">Creature, Quest etc</param>
-        /// <param name="appKey">Name of the application key requested</param>
-        /// <returns></returns>
-        public bool HasAppKey(Export.C tool, string appKey)
-        {
-            try
-            {
-                // Find the correct Profile property (equest, creature etc) based on string
-                var targetTool = (Dictionary<string, Dictionary<string, string>>)this.GetType().GetProperty(tool.ToString()).GetValue(this, null);
-
-                // Return true if appkey exists in targetTool
-                return targetTool.Values.Where(keys => keys.ContainsKey(appKey)).Count() > 0;
-            }
-            catch
-            {
-                Logger.Log($"Application Error: Profile.HasAppKey failed to ({tool.ToString()}, {appKey}. Please report this issue.", Logger.Status.Error, true);
-                return false;
-            }
-        }
 
         public override bool Equals(object obj)
         {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TrinityCreator.Data;
 using TrinityCreator.Database;
+using TrinityCreator.Profiles;
 using TrinityCreator.UI.UIElements;
 
 namespace TrinityCreator.Tools.CreatureCreator
@@ -14,9 +15,7 @@ namespace TrinityCreator.Tools.CreatureCreator
     {
         public TrinityCreature()
         {
-            // See issue #73
-            //var espvars = Emulator.EmulatorHandler.SelectedEmulator.GetIdColumnName("Creature");
-            //Entry = SqlQuery.GetNextId(espvars.Item1, espvars.Item2);
+            Entry = LookupQuery.GetNextId(Export.C.Creature);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

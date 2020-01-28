@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using TrinityCreator.Helpers;
+using TrinityCreator.Profiles;
 
 namespace TrinityCreator.Database
 {
@@ -9,20 +11,34 @@ namespace TrinityCreator.Database
     {
         internal static DataTable FindItemsByName(string partialName)
         {
+            string tableName = ProfileHelper.GetPrimaryTable(Profiles.Export.C.Item);
+            string entryId = ProfileHelper.GetSqlKey(Profiles.Export.C.Item, "EntryId");
+            string displayId = ProfileHelper.GetSqlKey(Profiles.Export.C.Item, "DisplayId");
+            string name = ProfileHelper.GetSqlKey(Profiles.Export.C.Item, "Name");
+
             return ExecuteQuery(
-                "SELECT entry, displayid, name FROM item_template WHERE name LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY entry DESC LIMIT 200;");
+                $"SELECT {entryId}, {displayId}, {name} FROM {tableName} WHERE {name} LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY entry DESC LIMIT 200;");
         }
 
         internal static DataTable FindQuestByName(string partialName)
         {
+            string tableName = ProfileHelper.GetPrimaryTable(Profiles.Export.C.Quest);
+            string entryId = ProfileHelper.GetSqlKey(Profiles.Export.C.Quest, "EntryId");
+            string logTitle = ProfileHelper.GetSqlKey(Profiles.Export.C.Quest, "LogTitle");
+
             return ExecuteQuery(
-                "SELECT Id, LogTitle FROM quest_template WHERE LogTitle LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY Id DESC LIMIT 200;");
+                $"SELECT {entryId}, {logTitle} FROM {tableName} WHERE {logTitle} LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY Id DESC LIMIT 200;");
         }
 
         internal static DataTable FindCreatureByName(string partialName)
         {
+            string tableName = ProfileHelper.GetPrimaryTable(Profiles.Export.C.Creature);
+            string entry = ProfileHelper.GetSqlKey(Profiles.Export.C.Creature, "Entry");
+            string modelId1 = ProfileHelper.GetSqlKey(Profiles.Export.C.Creature, "ModelId1");
+            string name = ProfileHelper.GetSqlKey(Profiles.Export.C.Creature, "Name");
+
             return ExecuteQuery(
-                "SELECT entry, modelid1, name FROM creature_template WHERE name LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY entry DESC LIMIT 200;");
+                $"SELECT {entry}, {modelId1}, {name} FROM {tableName} WHERE {name} LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY entry DESC LIMIT 200;");
         }
 
         internal static DataTable FindGoByName(string partialName)
@@ -38,15 +54,18 @@ namespace TrinityCreator.Database
         }
 
         /// <summary>
-        /// Returns next ID for the selected table
-        /// 
+        /// Returns next ID for the selected tool
         /// </summary>
-        /// <param name="table">table to check</param>
-        /// <param name="primaryKey">usually id or entry</param>
+        /// <param name="toolType"></param>
         /// <returns></returns>
-        internal static int GetNextId(string table, string primaryKey)
+        internal static int GetNextId(Export.C toolType)
         {
-            object result = ExecuteScalar(string.Format("SELECT MAX({0}) FROM {1};", primaryKey, table), requestConfig:false);
+            string toolIdAppKey = ProfileHelper.GetToolIdAppKey(toolType);
+            string toolSqlKey = ProfileHelper.GetSqlKey(toolType, toolIdAppKey);
+            string tableName = ProfileHelper.GetPrimaryTable(toolType);
+
+            string query = $"SELECT MAX({toolSqlKey}) FROM {tableName}";
+            object result = ExecuteScalar(query, requestConfig:false);
             if (result == null || result is DBNull)
                 return 0;
             else return Convert.ToInt32(result) + 1;
