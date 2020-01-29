@@ -94,5 +94,17 @@ namespace TrinityCreator.Properties {
                 this["ActiveProfilePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool disableWeaponCreationNotice {
+            get {
+                return ((bool)(this["disableWeaponCreationNotice"]));
+            }
+            set {
+                this["disableWeaponCreationNotice"] = value;
+            }
+        }
     }
 }

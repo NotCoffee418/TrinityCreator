@@ -8,6 +8,9 @@
         Title="Export Weapon" Height="500" Width="800" Loaded="Window_Loaded">
     <Grid>
         <RichTextBox x:Name="weaponNoticeRtb" Margin="0,0,0,50" VerticalScrollBarVisibility="Visible"/>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,17">
+            <CheckBox Name="neverShowAgainCb" Content="Never show this window again" />
+        </StackPanel>
         <StackPanel Orientation="Horizontal" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <Button Content="Copy DBC CSV to clipboard (NIY)" IsEnabled="False" Margin="5" Width="200"/>
             <Button x:Name="justExportBtn" Content="Just Export" Margin="5" Width="100" Click="justExportBtn_Click"/>

@@ -96,6 +96,9 @@ namespace TrinityCreator.Tools.ItemCreator
                     SaveQuery.ToDatabase(Query);
                 else SaveQuery.ToFile($"Item {ItemId}", Query);
 
+                // Change never show setting if checked
+                Properties.Settings.Default.disableWeaponCreationNotice = neverShowAgainCb.IsChecked == true;
+                Properties.Settings.Default.Save();
             }
             catch
             {

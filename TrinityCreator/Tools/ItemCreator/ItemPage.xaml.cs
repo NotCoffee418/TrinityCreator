@@ -223,7 +223,7 @@ namespace TrinityCreator.Tools.ItemCreator
         private bool NeedsWeaponExportWindow()
         {
             var expansion = ProfileHelper.GetProfileGameVersion();
-            return _item.Class.Id == 2 &&
+            return _item.Class.Id == 2 && !Properties.Settings.Default.disableWeaponCreationNotice &&
                 (expansion == ProfileHelper.Expansion.Unknown || expansion >= ProfileHelper.Expansion.WrathOfTheLichKing);
         }
         private void OpenWeaponExportWindow(string query, WeaponExportWindow.SaveType saveType)
@@ -250,7 +250,8 @@ namespace TrinityCreator.Tools.ItemCreator
         private void itemQualityCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var q = (ItemQuality) ItemQualityCb.SelectedValue;
-            _preview.ItemNameLbl.Foreground = new SolidColorBrush(q.QualityColor);
+            if (q != null)
+                _preview.ItemNameLbl.Foreground = new SolidColorBrush(q.QualityColor);
 
             // set/unset account bound flags
             try
