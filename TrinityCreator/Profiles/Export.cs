@@ -145,7 +145,7 @@ namespace TrinityCreator.Profiles
                 new ExpKvp("Quote", item.Quote, C.Item),
                 new ExpKvp("Class", item.Class.Id, C.Item),
                 new ExpKvp("ItemSubClass", item.ItemSubClass.Id, C.Item),
-                new ExpKvp("Material", item.ItemSubClass.Material, C.Item),
+                new ExpKvp("Material", item.ItemSubClass.Material.Id, C.Item),
                 new ExpKvp("Quality", item.Quality.Id, C.Item),
                 new ExpKvp("DisplayId", item.DisplayId, C.Item),
                 new ExpKvp("Binds", item.Binds.Id, C.Item),
