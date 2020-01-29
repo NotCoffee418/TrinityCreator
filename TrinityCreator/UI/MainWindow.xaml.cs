@@ -16,6 +16,7 @@ using TrinityCreator.Tools.CreatureCreator;
 using TrinityCreator.Tools.LootCreator;
 using TrinityCreator.Tools.VendorCreator;
 using TrinityCreator.Tools.ProfileCreator;
+using TrinityCreator.Helpers;
 
 namespace TrinityCreator.UI
 {
@@ -84,6 +85,14 @@ namespace TrinityCreator.UI
         {
             Process.Start("https://github.com/NotCoffee418/TrinityCreator/issues/new");
         }
+
+        private void ViewLogsDir_Click(object sender, RoutedEventArgs e)
+        {
+            string logsDir = Logger.GetLogsDirectory();
+            if (System.IO.Directory.Exists(logsDir))
+                Process.Start(logsDir);
+        }
+
         private void ProfileCreator_Click(object sender, RoutedEventArgs e)
         {
             var win = new ProfileCreatorWindow();

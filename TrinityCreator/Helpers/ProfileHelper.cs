@@ -126,18 +126,21 @@ namespace TrinityCreator.Helpers
             try 
             {
                 // Find the table containing the appkey
+                Logger.Log($"ProfileHelper: GetSqlKey({toolType.ToString()}, {appKey})");
                 var targetTool = GetToolDataFromC(toolType);
                 var table = targetTool.Where(kp => kp.Value
                     .Where(keys => keys.Key == appKey).Count() > 0
                 ).First().Value;
 
                 // Find it again & return sqlkey
-                return table.Where(keys => keys.Key == appKey).First().Value;
+                string result = table.Where(keys => keys.Key == appKey).First().Value;
+                Logger.Log("ProfileHelper: GetSqlKey found SQLKey: {result}");
+                return result;
             }
             catch
             {
-                Logger.Log("Profile Error: Lookup tool failed to find primary table. Profile is not set up correctly.");
-                return "InvalidTable";
+                Logger.Log($"Profile Error: Lookup tool failed to find sqlKey for appKey {appKey}. returning 'InvalidAppKey'");
+                return "InvalidAppKey";
             }
         }
 

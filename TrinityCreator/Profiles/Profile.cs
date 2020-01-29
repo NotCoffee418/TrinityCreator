@@ -44,7 +44,11 @@ namespace TrinityCreator.Profiles
 
         public static Profile Active {
             get { return _activeProfile; }
-            set { 
+            set {
+                if (value == null)
+                    Logger.Log($"Profile: Changing Profile.Active to NULL.");
+                else Logger.Log($"Profile: Changing Profile.Active to '{value.Name}'.");
+
                 _activeProfile = value;
                 if (ActiveProfileChangedEvent != null)
                     ActiveProfileChangedEvent(Profile.Active, new EventArgs());
@@ -60,6 +64,7 @@ namespace TrinityCreator.Profiles
         {
             try
             {
+                Logger.Log($"Profile: LoadFile: {filePath}");
                 string json = File.ReadAllText(filePath);
                 Profile p = JsonConvert.DeserializeObject<Profile>(json);
                 p.LocalPath = filePath;

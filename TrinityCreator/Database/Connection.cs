@@ -6,6 +6,7 @@ using TrinityCreator.Properties;
 using System.Windows.Threading;
 using System.Threading;
 using TrinityCreator.UI;
+using TrinityCreator.Helpers;
 
 namespace TrinityCreator.Database
 {
@@ -35,10 +36,12 @@ namespace TrinityCreator.Database
                 var c = new MySqlConnection(connString.ToString());
                 c.Open();
                 c.Close();
+                Logger.Log("MySQL: Connection.Test() successful.");
                 return null;
             }
             catch (Exception ex)
             {
+                Logger.Log($"MySQL: Connection.Test() failed with error: {ex.Message}");
                 return ex;
             }
         }
@@ -56,6 +59,7 @@ namespace TrinityCreator.Database
 
             if (!IsConfigured())
             {
+                Logger.Log("MySQL: Attempting to open connection but database login is not configured yet.");
                 if (requestConfig)
                     RequestConfiguration();
                 return false;
@@ -63,13 +67,16 @@ namespace TrinityCreator.Database
 
             try
             {
+                Logger.Log("MySQL: Attemption to open MySQL connection...");
                 _conn = new MySqlConnection(Settings.Default.worldDb.ToString());
                 _conn.Open();
                 IsAlive = true;
+                Logger.Log("MySQL: Successfully connected.");
                 return true;
             }
             catch (Exception ex)
             {
+                Logger.Log($"MySQL: Failed to connect to MySQL with previously valid credentials. Error: {ex.Message}", Logger.Status.Warning, false);
                 if (requestConfig) // important query
                 {
                     var msg = string.Format("Opening the database connection resulted in the following error:{0}{1}{0}{0}" +
@@ -77,10 +84,11 @@ namespace TrinityCreator.Database
                     var r = MessageBox.Show(msg, "Failed to connect", MessageBoxButton.YesNo, MessageBoxImage.Error);
                     if (r == MessageBoxResult.Yes)
                     {
-                        Open();
-                        return true;
+                        Logger.Log("MySQL: User prompted to retry...");                        
+                        return Open();
                     }
                 }
+                Logger.Log("MySQL: Connection.Open() User prompted to give up with these credentials.");
                 return false;
             }
         }
@@ -90,6 +98,7 @@ namespace TrinityCreator.Database
             if (!IsAlive)
                 return;
 
+            Logger.Log("MySQL: Connection manually closed.");
             _conn.Close();
             IsAlive = false;
         }
@@ -112,11 +121,16 @@ namespace TrinityCreator.Database
         /// <returns></returns>
         internal static bool IsConfigured()
         {
-            if (IsAlive)
-                return true;
             if (Settings.Default.worldDb == "")
+            {
+                Logger.Log("MySQL: Connection has not been configured yet.");
                 return false;
-            return true;
+            }
+            else
+            {
+                Logger.Log("MySQL: Connection was correctly configured at some point.");
+                return true;
+            }
         }
 
         internal static DataTable ExecuteQuery(string query, bool requestConfig = true)
@@ -124,36 +138,47 @@ namespace TrinityCreator.Database
             Open(requestConfig);
             try
             {
+                Logger.Log("MySQL: Attempting to ExecuteQuery: " + query);
                 if (!IsAlive)
+                {
+                    Logger.Log("MySQL: IsAlive was false. Returning empty datatable.");
                     return new DataTable();
+                }                    
                 var result = new DataTable();
                 var cmd = new MySqlCommand(query, _conn);
                 using (var rdr = cmd.ExecuteReader())
                 {
                     result.Load(rdr);
                 }
+                Logger.Log("MySQL: Successfully return data.");
                 return result;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Database Error: " + ex.Message);
+                Logger.Log($"Database Error: {ex.Message}", Logger.Status.Error, true);
                 return new DataTable();
             }
         }
 
         internal static object ExecuteScalar(string query, bool requestConfig = true)
         {
+            Open(requestConfig);
             try
             {
-                Open(requestConfig);
+                Logger.Log("MySQL: Attempting to ExecuteScalar: " + query);
                 if (!IsAlive)
+                {
+                    Logger.Log("MySQL: IsAlive was false. Returning null.");
                     return null;
+                }
                 var cmd = new MySqlCommand(query, _conn);
-                return cmd.ExecuteScalar();
+                var result = cmd.ExecuteScalar();
+                Logger.Log("MySQL: Successfully return data.");
+                return result;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Database Error: " + ex.Message);
+                Logger.Log($"Database Error: {ex.Message}", Logger.Status.Error, true);
                 return null;
             }
         }

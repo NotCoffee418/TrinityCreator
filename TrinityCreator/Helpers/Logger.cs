@@ -19,18 +19,10 @@ namespace TrinityCreator.Helpers
             //LogLevel = (Status)Properties.Settings.Default.LogLevel;
             LogLevel = Status.Info;
 
-            // Get working AppData Local directory
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "NotCoffee418\\TrinityCreator");
-            if (Debugger.IsAttached) // Seperate directory for debugger
-                path = Path.Combine(path, "Debug");
-
-            // Enter logs subdirectory & create if it doesn't exist.
-            path = Path.Combine(path, "Logs");
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
+            string logsDir = GetLogsDirectory();
 
             // Create log filename with timestamp
-            LogFilePath = Path.Combine(path, string.Format("tc-{0}.log", DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss")));
+            LogFilePath = Path.Combine(logsDir, string.Format("tc-{0}.log", DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss")));
 
             // Start log writer
             GHelper.SafeThreadStart(() => StartLogWriter());
@@ -122,6 +114,21 @@ namespace TrinityCreator.Helpers
             // Also helps to have these empty logfiles as an indication of unclean shutdown
             if (File.Exists(LogFilePath) && File.ReadAllText(LogFilePath) == "")
                 File.Delete(LogFilePath);
+        }
+
+        public static string GetLogsDirectory()
+        {
+            // Get working AppData Local directory
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "NotCoffee418\\TrinityCreator");
+            if (Debugger.IsAttached) // Seperate directory for debugger
+                path = Path.Combine(path, "Debug");
+
+            // Enter logs subdirectory & create if it doesn't exist.
+            path = Path.Combine(path, "Logs");
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            return path;
         }
     }
 }

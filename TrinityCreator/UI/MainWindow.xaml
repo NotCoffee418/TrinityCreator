@@ -21,6 +21,7 @@
             <MenuItem Header="Info" >
                 <MenuItem Header="Credits" Click="Credits_Click" />
                 <MenuItem Header="Report bug" Click="ReportBugs_Click" />
+                <MenuItem Header="View Log Files" Click="ViewLogsDir_Click" />
             </MenuItem>
         </Menu>
 

@@ -36,6 +36,7 @@ namespace TrinityCreator.Profiles
         /// <returns></returns>
         private static string GenerateSql(List<ExpKvp> data)
         {
+            Logger.Log($"Export: Called GenerateSql with profile: '{Profile.Active.Name}' - Revision {Profile.Active.Revision}");
             try
             {
                 // Find table names
@@ -129,13 +130,14 @@ namespace TrinityCreator.Profiles
             }
             catch (Exception ex)
             {
-                Logger.Log($"Error: {ex.Message}", Logger.Status.Error, true);
+                Logger.Log($"Export: GenerateSql(): {ex.Message}", Logger.Status.Error, true);
                 return "";
             }
         }
 
         public static string Item(TrinityItem item)
         {
+            Logger.Log($"Export: Called Item with profile: '{Profile.Active.Name}' - Revision {Profile.Active.Revision}");
             var data = new List<ExpKvp>()
             {
                 new ExpKvp("EntryId", item.EntryId, C.Item),
@@ -235,6 +237,7 @@ namespace TrinityCreator.Profiles
 
         public static string Quest(TrinityQuest quest)
         {
+            Logger.Log($"Export: Called Quest with profile: '{Profile.Active.Name}' - Revision {Profile.Active.Revision}");
             var data = new List<ExpKvp>()
             {
                 new ExpKvp("EntryId", quest.EntryId, C.Quest),
@@ -363,6 +366,7 @@ namespace TrinityCreator.Profiles
         // Loot is DDC-based, can export multiple rows
         public static string Loot(LootPage loot)
         {
+            Logger.Log($"Export: Called Loot with profile: '{Profile.Active.Name}' - Revision {Profile.Active.Revision}");
             // Loot table names are relative to a setting, use special table name in gtk
             string sp = ((ComboBoxItem)loot.lootTypeCb.SelectedValue).Content.ToString();
 
@@ -400,6 +404,7 @@ namespace TrinityCreator.Profiles
         // Vendor is dynamic, loop through the UI elements
         public static string Creature(TrinityCreature creature)
         {
+            Logger.Log($"Export: Called Creature with profile: '{Profile.Active.Name}' - Revision {Profile.Active.Revision}");
             var data = new List<ExpKvp>()
             {
                 new ExpKvp("Entry", creature.Entry, C.Creature),
@@ -622,6 +627,7 @@ namespace TrinityCreator.Profiles
         // Vendor is dynamic, loop through the UI elements
         public static string Vendor(VendorPage vendor)
         {
+            Logger.Log($"Export: Called Vendor with profile: '{Profile.Active.Name}' - Revision {Profile.Active.Revision}");
             string sql = String.Empty;
 
             int NpcEntry;
@@ -670,6 +676,7 @@ namespace TrinityCreator.Profiles
         /// <param name="subject">TrinityQuest, Item etc to do grab values from and place in data</param>
         private static void IncludeCustomFields(ref List<ExpKvp> data, C toolType, dynamic subject)
         {
+            Logger.Log($"Export: Called IncludeCustomFields for {toolType.ToString()} with profile: '{Profile.Active.Name}' - Revision {Profile.Active.Revision}");
             // Check for invalid custom fields
             // See Profile.cs to explain confusing structure. <table, <appKey, sqlKey>>
             var invalidCustoms = Profile.Active.CustomFields
