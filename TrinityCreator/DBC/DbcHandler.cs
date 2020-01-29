@@ -19,7 +19,7 @@ namespace TrinityCreator.DBC
     class DbcHandler
     {
 
-        public static bool VerifyDbcDir()
+        public static bool VerifyDbcDir(bool openConfigWindowOnError = true)
         {
             string dbcDir = Properties.Settings.Default.DbcDir;
 
@@ -56,15 +56,19 @@ namespace TrinityCreator.DBC
                         var r = MessageBox.Show("DBC files have not been extracted. Would you like to extract them now with ad.exe?", "Extract DBC", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                         if (r == MessageBoxResult.Yes)
                             ExtractDbc(dbcDir);
+                        return false;
                     }
                 }
-                else // invalid directory
+                
+                // invalid directory
+                else if (openConfigWindowOnError)
                 {
                     Logger.Log($"DBC: Known DBC directory ({dbcDir}) is invalid. Prompting for setup.");
                     var r = MessageBox.Show("WoW or DBC directory is not set correctly.\r\nWould you like to set it now?", "Invalid DBC Settings", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     if (r == MessageBoxResult.Yes)
                         new DbcConfigWindow().Show();
                 }
+                else Logger.Log("The selected DBC directory is not valid.", Logger.Status.Warning, true);
                 return false;
             }
         }
