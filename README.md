@@ -1,5 +1,6 @@
 # Trinity Creator #
 This tool allows you to easily create items, creatures and quests for WoW emulators.
+
 Trinity Creator can be used by beginners to learn emulator server customization and by experts who just want to do it easier and faster.
 
 ### Getting started ###
@@ -13,7 +14,9 @@ NOTE: You need to reload tables or restart your server before you can see your n
 * TrinityCore WotLK 3.3.5a (2020-01 database)
 
 You can create a profile to make Trinity Creator export to almost any emulator.
+
 There are specific fields set up for 1.12 emulators as well. But you may have issues with Cataclysm and newer versions of WoW.
+
 You can contribute any profiles you create at [NotCoffe418/TrinityCreatorProfiles](https://github.com/NotCoffee418/TrinityCreatorProfiles).
 
 ### Documentation ###
