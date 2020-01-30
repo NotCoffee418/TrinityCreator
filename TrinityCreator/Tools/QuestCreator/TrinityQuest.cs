@@ -60,6 +60,8 @@ namespace TrinityCreator.Tools.QuestCreator
         private string _rewardText;
         private int _rewardTalents;
         private string _incompleteText;
+        private string _questgiverType;
+        private string _questCompleterType;
 
 
         #region Quest info
@@ -264,6 +266,24 @@ namespace TrinityCreator.Tools.QuestCreator
             {
                 _questCompleter = DataType.LimitLength(value, "mediumint(8)");
                 RaisePropertyChanged("QuestCompleter");
+            }
+        }
+        public string QuestgiverType
+        {
+            get { return _questgiverType; }
+            set
+            {
+                _questgiverType = value;
+                RaisePropertyChanged("QuestgiverType");
+            }
+        }
+        public string QuestCompleterType
+        {
+            get { return _questCompleterType; }
+            set
+            {
+                _questCompleterType = value;
+                RaisePropertyChanged("QuestCompleterType");
             }
         }
         #endregion

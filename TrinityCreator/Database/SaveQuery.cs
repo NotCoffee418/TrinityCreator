@@ -20,12 +20,8 @@ namespace TrinityCreator
         /// <param name="query"></param>
         public static void ToFile(string filename, string query)
         {
-            // Something went wrong, throw an exception
-            if (query == "")
-            {
-                Logger.Log("Query is empty. Not saving to file.", Logger.Status.Warning, true);
+            if (QueryHasIssues(query))
                 return;
-            }
 
             try
             {
@@ -60,12 +56,8 @@ namespace TrinityCreator
         /// <param name="query"></param>
         public static void ToDatabase(string query)
         {
-            // Something went wrong, throw an exception
-            if (query == "")
-            {
-                Logger.Log("Query is empty. Not inserting to database.", Logger.Status.Warning, true);
+            if (QueryHasIssues(query))
                 return;
-            }
 
             try
             {
@@ -86,6 +78,27 @@ namespace TrinityCreator
                 Logger.Log("There was an error inserting the query to the database. See log file for more info.", Logger.Status.Error, true);
                 Logger.Log(ex.Message, Logger.Status.Error, false);
             }
+        }
+
+        /// <summary>
+        /// Displays errors or warnings if the query has issues and returns true if it found any
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        private static bool QueryHasIssues(string query)
+        {
+            if (query == "")
+            {
+                Logger.Log("Query is empty. Not inserting to database.", Logger.Status.Warning, true);
+                return true;
+            }
+            else if (query.Contains("%t"))
+            {
+                Logger.Log("Your export appears to contain an unhandled wildcard. You may need to update Trinity Creator to the latest version.",
+                    Logger.Status.Warning, true);
+                return true;
+            }
+            return false;
         }
     }
 }

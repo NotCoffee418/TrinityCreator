@@ -30,8 +30,6 @@ namespace TrinityCreator.Tools.QuestCreator
         {
             InitializeComponent();
             DataContext = Quest;
-
-            // Prepare controls
         }
 
 
@@ -44,6 +42,17 @@ namespace TrinityCreator.Tools.QuestCreator
             // RewardXpDifficulty
             rewardXpCb.ItemsSource = XmlKeyValue.FromXml("QuestXp");
             rewardXpCb.SelectedIndex = 0;
+
+            // QuestStarter & Ender types
+            string[] starterEnderTypes = new string[]
+            {
+                "creature",
+                "gameobject",
+            };
+            questStarterTypeCb.ItemsSource = starterEnderTypes;
+            questStarterTypeCb.SelectedIndex = 0;
+            questEnderTypeCb.ItemsSource = starterEnderTypes;
+            questEnderTypeCb.SelectedIndex = 0;
         }
 
         TrinityQuest _quest;
@@ -85,7 +94,16 @@ namespace TrinityCreator.Tools.QuestCreator
             else
                 bmsp.SetValueIsChecked(64, false);
         }
+        
+        private void questStarterTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Quest.QuestgiverType = (string)questStarterTypeCb.SelectedValue;
+        }
 
+        private void questEnderTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Quest.QuestCompleterType = (string)questEnderTypeCb.SelectedValue;
+        }
 
         #endregion
 
@@ -171,8 +189,7 @@ namespace TrinityCreator.Tools.QuestCreator
         {
             App.LookupTool.SelectedTarget = LookupTool.Target.Title;
         }
+
         #endregion
-
-
     }
 }

@@ -256,8 +256,8 @@ namespace TrinityCreator.Profiles
                 new ExpKvp("PrevQuest", quest.PrevQuest, C.Quest),
                 new ExpKvp("NextQuest", quest.NextQuest, C.Quest),
                 //new ExpKvp("ExclusiveGroup", quest.ExclusiveGroup.???, C.Quest),
-                new ExpKvp("Questgiver", quest.Questgiver, C.Quest),
-                new ExpKvp("QuestCompleter", quest.QuestCompleter, C.Quest),
+                new ExpKvp("Questgiver", quest.Questgiver, C.Quest, quest.QuestgiverType),
+                new ExpKvp("QuestCompleter", quest.QuestCompleter, C.Quest, quest.QuestCompleterType),
                 new ExpKvp("QuestLevel", quest.QuestLevel, C.Quest),
                 new ExpKvp("MinLevel", quest.MinLevel, C.Quest),
                 new ExpKvp("MaxLevel", quest.MaxLevel, C.Quest),
@@ -772,7 +772,34 @@ namespace TrinityCreator.Profiles
                             pname = propertyName;
                         }
 
-                        data.Add(new ExpKvp(corrKeys.Value, propertyValue, tableKv.Key));
+                        // Attempt to handle wildcard table names in a questionable manner
+                        // These need to be manually identified
+                        string tableName = tableKv.Key;
+                        if (tableName.Contains("%t"))
+                        {
+                            // Handle quest customs
+                            if (toolType == C.Quest)
+                            {
+                                if (tableName.Contains("queststarter"))
+                                    tableName = tableName.Replace("%t", ((TrinityQuest)subject).QuestgiverType);
+                                else if (tableName.Contains("questender"))
+                                    tableName = tableName.Replace("%t", ((TrinityQuest)subject).QuestCompleterType);
+                                else
+                                {
+                                    Logger.Log("Profile Error: QuestGiver customs with wildcard only accept tablenames containing 'queststarter' and 'questender'." + Environment.NewLine +
+                                        "This is because customs have no other way to identify that the custom is in relation to queststarter/ender." + Environment.NewLine +
+                                        "If this causes issues, it's preferable to just use 'creature_questender' instead of '%t_questender' and starter.",
+                                        Logger.Status.Error, true);
+                                }
+                            }
+                            else
+                            {
+                                Logger.Log($"Wildcards in custom fields have limited support and must conform to specific values. Custom for {corrKeys.Key} could not be processed.",
+                                    Logger.Status.Error, true);
+                            }
+                        }
+
+                        data.Add(new ExpKvp(corrKeys.Value, propertyValue, tableName));
                     }
                     catch 
                     {
