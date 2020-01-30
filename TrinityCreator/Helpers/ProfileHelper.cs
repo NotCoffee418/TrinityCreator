@@ -144,6 +144,20 @@ namespace TrinityCreator.Helpers
             }
         }
 
+        public static string GetDefinitionValue(string defKey)
+        {
+            try
+            {
+                Logger.Log($"ProfileHelper: GetDefinitionValue({defKey})");
+                return Profile.Active.Definitions[defKey];
+            }
+            catch
+            {
+                Logger.Log($"Profile Error: Failed to find value for definition with key {defKey}. Returning 'InvalidDefinition'");
+                return "InvalidDefinition";
+            }
+        }
+
         public static Dictionary<string, Dictionary<string, string>> GetToolDataFromC(Export.C toolType)
         {
             try

@@ -43,14 +43,23 @@ namespace TrinityCreator.Database
 
         internal static DataTable FindGoByName(string partialName)
         {
+            string tableName = ProfileHelper.GetDefinitionValue("GameObjectTableName");
+            string id = ProfileHelper.GetDefinitionValue("GameObjectIdColumn");
+            string displayId = ProfileHelper.GetDefinitionValue("GameObjectDisplayIdColumn");
+            string name = ProfileHelper.GetDefinitionValue("GameObjectNameColumn");
+
             return ExecuteQuery(
-                "SELECT entry, displayId, name FROM gameobject_template WHERE name LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY entry DESC LIMIT 200;");
+                $"SELECT {id}, {displayId}, {name} FROM {tableName} WHERE {name} LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY entry DESC LIMIT 200;");
         }
 
         internal static DataTable GetSpells(string partialName)
         {
+            string tableName = ProfileHelper.GetDefinitionValue("SpellTableName");
+            string id = ProfileHelper.GetDefinitionValue("SpellIdColumn");
+            string name = ProfileHelper.GetDefinitionValue("SpellNameColumn");
+
             return ExecuteQuery(
-                "SELECT Id, Comment FROM spell_dbc WHERE Comment LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY Id DESC LIMIT 200;");
+                $"SELECT {id}, {name} FROM {tableName} WHERE {name} LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY Id DESC LIMIT 200;");
         }
 
         /// <summary>
