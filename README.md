@@ -9,16 +9,16 @@ Trinity Creator can be used by beginners to learn emulator server customization 
 * Start creating!
 NOTE: You need to reload tables or restart your server before you can see your new creation.
 
-### Supported emulators ###
-* TrinityCore WotLK 3.3.5a (full, TDB 335.64 & latest version (2019-01-17))
-* CMangos WotLK 3.3.5a (full, 2016 DB)
-* AzerothCore 3.3.5a (Items, quests & creatures)
-* CMangos WotLK 3.3.5a (Items, In progress...)
-* CMangos Zero 1.12 (Items & quests)
+### Officially supported emulators ###
+* TrinityCore WotLK 3.3.5a (2020-01 database)
 
-### Requirements ###
-* Windows 10 (has all requirements pre-installed)
-* Windows 7 (Install [.NET Framework 4.7.2](https://dotnet.microsoft.com/download/dotnet-framework/net472) and may need the  [Windows 7 version of TrinityCreator](https://github.com/Nadromar/TrinityCreator/blob/no-modelviewer/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi))
+You can create a profile to make Trinity Creator export to almost any emulator.
+There are specific fields set up for 1.12 emulators as well. But you may have issues with Cataclysm and newer versions of WoW.
+You can contribute any profiles you create at [NotCoffe418/TrinityCreatorProfiles](https://github.com/NotCoffee418/TrinityCreatorProfiles).
+
+### Documentation ###
+- Using Trinity Creator (coming soon)
+- [Adding Emulator Support](https://github.com/NotCoffee418/TrinityCreator/wiki/Adding-Emulator-Support)
 
 ### Development ###
 Please report any bugs and suggestions on GitHub.
