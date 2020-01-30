@@ -382,6 +382,15 @@ namespace TrinityCreator.Tools.ProfileCreator
 
         private string GenerateJson()
         {
+            // Validate game version
+            int x;
+            if (!EditingProfile.GameVersion.Contains('.') || !int.TryParse(EditingProfile.GameVersion.Split('.')[0], out x))
+            {
+                Logger.Log("Profile Creation Error: GameVersion must conform to structure. Example: 3.3.5a. See documentation for more info. Profile will export with game version 0.0.",
+                    Logger.Status.Error, true);
+                EditingProfile.GameVersion = "0.0";
+            }
+
             // Place data from UI in EditingProfile
             EditingProfile.Item = ToProfileFormat(ItemElements);
             EditingProfile.Quest = ToProfileFormat(QuestElements);
