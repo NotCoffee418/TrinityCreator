@@ -19,36 +19,36 @@ namespace TrinityCreator.Tools.ProfileCreator
     /// <summary>
     /// Interaction logic for ProfileCreatorSetting.xaml
     /// </summary>
-    public partial class ProfileCreatorSetting : UserControl, INotifyPropertyChanged
+    public partial class ProfileCreatorDefinition : UserControl, INotifyPropertyChanged
     {
-        public ProfileCreatorSetting(string settingKey, string tooltip = "")
+        public ProfileCreatorDefinition(string settingKey, string tooltip = "")
         {
             InitializeComponent();
             DataContext = this;
-            SettingKey = settingKey;
+            DefinitionKey = settingKey;
             Tooltip = tooltip;
         }
 
-        private string _settingKey;
-        private string _settingValue;
+        private string _definitionKey;
+        private string _definitionValue;
         private bool _isIncluded = true;
 
-        public string SettingKey
+        public string DefinitionKey
         {
-            get { return _settingKey; }
+            get { return _definitionKey; }
             set
             {
-                _settingKey = value;
-                RaisePropertyChanged("SettingKey");
+                _definitionKey = value;
+                RaisePropertyChanged("DefinitionKey");
             }
         }
-        public string SettingValue
+        public string DefinitionValue
         {
-            get { return _settingValue; }
+            get { return _definitionValue; }
             set
             {
-                _settingValue = value;
-                RaisePropertyChanged("SettingValue");
+                _definitionValue = value;
+                RaisePropertyChanged("DefinitionValue");
             }
         }
         public bool IsIncluded

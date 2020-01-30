@@ -39,8 +39,8 @@ namespace TrinityCreator.Tools.ProfileCreator
         List<ProfileCreatorEntry> CreatureElements;
         List<ProfileCreatorEntry> LootElements;
         List<ProfileCreatorEntry> VendorElements;
-        List<ProfileCreatorSetting> LookupToolElements;
         List<ProfileCreatorEntry> CustomFieldsElements;
+        List<ProfileCreatorDefinition> DefinitionElements;
         Profile EditingProfile = new Profile();
 
 
@@ -374,15 +374,23 @@ namespace TrinityCreator.Tools.ProfileCreator
             foreach (var e in VendorElements)
                 vendorSp.Children.Add(e);
 
-            // LookupTool settings
-            LookupToolElements = new List<ProfileCreatorSetting>()
-            {
-            };
-            foreach (var e in LookupToolElements)
-                lookupToolSp.Children.Add(e);
-
             // Custom Fields
             CustomFieldsElements = new List<ProfileCreatorEntry>();
+
+
+            // LookupTool settings
+            DefinitionElements = new List<ProfileCreatorDefinition>()
+            {
+                new ProfileCreatorDefinition("GameObjectTableName", "(Optional) gameobject_template or equivalent"),
+                new ProfileCreatorDefinition("GameObjectIdColumn", "(Optional) Id column of the gameobject_template or equivalent table"),
+                new ProfileCreatorDefinition("GameObjectDisplayIdColumn", "(Optional) DisplayId column of the gameobject_template or equivalent table"),
+                new ProfileCreatorDefinition("GameObjectNameColumn", "(Optional) Object Name column of the gameobject_template or equivalent table"),
+                new ProfileCreatorDefinition("SpellTableName", "(Optional) spell_dbc or equivalent table. Used for lookup tool."),
+                new ProfileCreatorDefinition("SpellIdColumn", "(Optional) spell_dbc or equivalent's id column"),
+                new ProfileCreatorDefinition("SpellNameColumn", "spell_dbc or equivalent's name column"),
+            };
+            foreach (var e in DefinitionElements)
+                definitionsSp.Children.Add(e);
         }
 
         private string GenerateJson()
@@ -405,8 +413,8 @@ namespace TrinityCreator.Tools.ProfileCreator
             EditingProfile.Creature = ToProfileFormat(CreatureElements);
             EditingProfile.Loot = ToProfileFormat(LootElements);
             EditingProfile.Vendor = ToProfileFormat(VendorElements);
-            EditingProfile.LookupTool = ToProfileFormat(LookupToolElements);
             EditingProfile.CustomFields = ToProfileFormat(CustomFieldsElements);
+            EditingProfile.Definitions = ToProfileFormat(DefinitionElements);
 
             // Validate that addon tables have an ID specified in customfields
             ValidateAddonTableCustoms(EditingProfile.Item, Export.C.Item);
@@ -514,12 +522,12 @@ namespace TrinityCreator.Tools.ProfileCreator
         /// </summary>
         /// <param name="sectionList"></param>
         /// <returns></returns>
-        private Dictionary<string, string> ToProfileFormat(List<ProfileCreatorSetting> sectionList)
+        private Dictionary<string, string> ToProfileFormat(List<ProfileCreatorDefinition> sectionList)
         {
             var result = new Dictionary<string, string>();
-            foreach (var pSetting in sectionList)
-                if (pSetting.IsIncluded)
-                    result.Add(pSetting.SettingKey, pSetting.SettingValue);
+            foreach (var pDef in sectionList)
+                if (pDef.IsIncluded)
+                    result.Add(pDef.DefinitionKey, pDef.DefinitionValue);
             return result;
         }
 
@@ -536,7 +544,7 @@ namespace TrinityCreator.Tools.ProfileCreator
             _PartialLoad(itemSp, p.Item);
             _PartialLoad(lootSp, p.Loot);
             _PartialLoad(vendorSp, p.Vendor);
-            // todo: Lookup tool
+            _PartialLoadDefinitions(definitionsSp, p.Definitions);
 
             // Manually set metadata fields because faster
 
@@ -594,6 +602,44 @@ namespace TrinityCreator.Tools.ProfileCreator
             catch
             {
                 Logger.Log("There was a problem loading this profile into the UI. Is the profile valid for this version of TrinityCreator?", Logger.Status.Error);
+            }
+        }
+
+        private void _PartialLoadDefinitions(StackPanel sp, Dictionary<string, string> pData)
+        {
+            try
+            {
+                // Careful, this assumes that the stackpanel's only children are ProfileCreatorEntries
+                foreach (object pceObj in sp.Children)
+                {
+                    ProfileCreatorDefinition pce = (ProfileCreatorDefinition)pceObj;
+
+                    if (pData == null) // Happens when loading alpha profiles
+                    {
+                        pce.DefinitionValue = "";
+                        pce.IsIncluded = false;
+                        continue;
+                    }
+
+                    // Attempt to find a defined sqlKey for this appKEy in the profile segment.
+                    var matches = pData.Where(kvp => kvp.Key == pce.DefinitionKey);
+
+                    // No match found, clear the sqlKey and tablename and disable
+                    if (matches.Count() == 0)
+                    {
+                        pce.DefinitionValue = "";
+                        pce.IsIncluded = false;
+                    }
+                    else // Match found, set known values to ui
+                    {
+                        pce.DefinitionValue = matches.First().Value;
+                        pce.IsIncluded = true;
+                    }
+                }
+            }
+            catch
+            {
+                Logger.Log("There was a problem loading this profile into the UI. Is the profile valid for this version of TrinityCreator?", Logger.Status.Error, true);
             }
         }
 

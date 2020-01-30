@@ -99,8 +99,8 @@
       <DependentUpon>WeaponExportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\LookupTool\TargetEnum.cs" />
-    <Compile Include="Tools\ProfileCreator\ProfileCreatorSetting.xaml.cs">
-      <DependentUpon>ProfileCreatorSetting.xaml</DependentUpon>
+    <Compile Include="Tools\ProfileCreator\ProfileCreatorDefinition.xaml.cs">
+      <DependentUpon>ProfileCreatorDefinition.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\VendorCreator\VendorEntryControl.xaml.cs">
       <DependentUpon>VendorEntryControl.xaml</DependentUpon>
@@ -226,7 +226,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\ProfileCreator\ProfileCreatorSetting.xaml">
+    <Page Include="Tools\ProfileCreator\ProfileCreatorDefinition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
