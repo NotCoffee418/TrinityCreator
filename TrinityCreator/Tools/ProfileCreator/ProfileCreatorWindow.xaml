@@ -8,16 +8,6 @@
         Title="Profile Creator" Height="600" Width="1100">
     <ScrollViewer>
         <WrapPanel>
-            <GroupBox Header="Info" Width="1000">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock>WARNING: This tool is for advanced users. <Hyperlink NavigateUri="https://github.com/NotCoffee418/TrinityCreator/wiki/Adding-Emulator-Support" RequestNavigate="Hyperlink_RequestNavigate">Read the documentation</Hyperlink> or <Hyperlink NavigateUri="https://www.youtube.com/watch?v=UNXz33NpTf0" RequestNavigate="Hyperlink_RequestNavigate">watch the video tutorial</Hyperlink> before using it.</TextBlock>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Name="loadBtn" Content="Load profile from file" Margin="5" Height="25" Width="150" Click="loadBtn_Click"/>
-                        <Button Name="copyBtn" Content="Copy Json to clipboard" Margin="5" Height="25" Width="150" Click="copyBtn_Click"/>
-                        <Button Name="saveBtn" Content="Save To File" Margin="5" Height="25" Width="150" Click="saveBtn_Click"/>
-                    </StackPanel>                    
-                </StackPanel>
-            </GroupBox>
             <GroupBox Header="Profile Info" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <StackPanel x:Name="profileInfoSp" Orientation="Vertical">
                     <StackPanel Orientation="Horizontal"  Margin="5" >
@@ -46,19 +36,29 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="Loot" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <StackPanel x:Name="lootSp" Orientation="Vertical">
-                    <!-- ProfileCreatorEntries go here -->
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Header="Vendor" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <StackPanel x:Name="vendorSp" Orientation="Vertical">
-                    <!-- ProfileCreatorEntries go here -->
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Header="Item" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <StackPanel x:Name="itemSp" Orientation="Vertical">
-                    <!-- ProfileCreatorEntries go here -->
+
+            <GroupBox Header="Info" Width="500">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Margin=" 5">
+                        <TextBlock>
+                            WARNING: This tool is for advanced users.<LineBreak/>
+                            <Hyperlink NavigateUri="https://github.com/NotCoffee418/TrinityCreator/wiki/Adding-Emulator-Support" RequestNavigate="Hyperlink_RequestNavigate">Read the documentation</Hyperlink> or <Hyperlink NavigateUri="https://www.youtube.com/watch?v=UNXz33NpTf0" RequestNavigate="Hyperlink_RequestNavigate">watch the video tutorial</Hyperlink> before using it.
+                            <LineBreak/><LineBreak/>
+                            Key notes:<LineBreak/>                            
+                            Feel free to load an existing profile and modify it.<LineBreak/>
+                            Most emulators have similar structures so most of the work will be done for you.<LineBreak/>
+                            <LineBreak/>
+                            You don't need to fill out all fields.<LineBreak/>
+                            Some contradict eachother to support different emulators.<LineBreak/>
+                            <LineBreak/>
+                            Hover over textboxes for more information. Some provide extra info on how to handle it.
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Name="loadBtn" Content="Load profile from file" Margin="5" Height="25" Width="150" Click="loadBtn_Click"/>
+                        <Button Name="copyBtn" Content="Copy Json to clipboard" Margin="5" Height="25" Width="150" Click="copyBtn_Click"/>
+                        <Button Name="saveBtn" Content="Save To File" Margin="5" Height="25" Width="150" Click="saveBtn_Click"/>
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Quest" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -68,6 +68,21 @@
             </GroupBox>
             <GroupBox Header="Creature" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <StackPanel x:Name="creatureSp" Orientation="Vertical">
+                    <!-- ProfileCreatorEntries go here -->
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Item" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <StackPanel x:Name="itemSp" Orientation="Vertical">
+                    <!-- ProfileCreatorEntries go here -->
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Loot" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <StackPanel x:Name="lootSp" Orientation="Vertical">
+                    <!-- ProfileCreatorEntries go here -->
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Vendor" Width="500" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <StackPanel x:Name="vendorSp" Orientation="Vertical">
                     <!-- ProfileCreatorEntries go here -->
                 </StackPanel>
             </GroupBox>

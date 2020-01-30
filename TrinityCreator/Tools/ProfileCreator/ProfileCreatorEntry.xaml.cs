@@ -31,7 +31,7 @@ namespace TrinityCreator.Tools.ProfileCreator
             InitializeComponent();
             DataContext = this;
             AppKey = appKey;
-            Tooltip = tooltip;
+            Tooltip = tooltip == "" ? "AppKey" : tooltip;
         }
 
         /// <summary>
