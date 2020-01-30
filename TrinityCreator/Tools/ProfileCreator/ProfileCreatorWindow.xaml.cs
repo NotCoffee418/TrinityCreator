@@ -17,6 +17,7 @@ using TrinityCreator.Helpers;
 using System.Diagnostics;
 using Microsoft.Win32;
 using System.IO;
+using System.Reflection;
 
 namespace TrinityCreator.Tools.ProfileCreator
 {
@@ -394,6 +395,9 @@ namespace TrinityCreator.Tools.ProfileCreator
                     Logger.Status.Error, true);
                 EditingProfile.GameVersion = "0.0";
             }
+
+            // Define profile's TestedBuild
+            EditingProfile.TestedBuild = Assembly.GetExecutingAssembly().GetName().Version.Revision;
 
             // Place data from UI in EditingProfile
             EditingProfile.Item = ToProfileFormat(ItemElements);

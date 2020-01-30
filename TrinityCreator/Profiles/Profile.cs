@@ -27,6 +27,8 @@ namespace TrinityCreator.Profiles
 
         public string UpdateUrl { get; set; }
 
+        public int TestedBuild { get; set; }
+
         [JsonIgnore]
         public string LocalPath { get; set; }
 

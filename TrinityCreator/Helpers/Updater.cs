@@ -147,8 +147,19 @@ namespace TrinityCreator.Helpers
 
                         if (remoteVer.Revision > localVer.Revision) // New version found, install
                         {
-                            Logger.Log($"Updater: {fileName} - New version found. Updating from revision {localVer.Revision} to {remoteVer.Revision}.");
-                            File.Copy(tmpFilePath, profileDestPath, overwrite: true);
+                            Logger.Log($"Updater: {fileName} - New version found.");
+
+                            int runningAppBuild = Assembly.GetExecutingAssembly().GetName().Version.Revision;
+                            if (remoteVer.TestedBuild > runningAppBuild) // profile may not support this version of Tcreator
+                            {
+                                Logger.Log("Updater: Profile '{fileName}' was tested on a newer version of Trinity Creator. "+ 
+                                    "Please update Trinity Creator to update this profile and prevent potential issues.", Logger.Status.Warning, true);
+                            }
+                            else
+                            {
+                                Logger.Log("Updater: Updating {fileName} from revision {localVer.Revision} to {remoteVer.Revision}.");
+                                File.Copy(tmpFilePath, profileDestPath, overwrite: true);
+                            }
                         }
                         else // Up to date
                             Logger.Log($"{fileName}: Up to date.");
