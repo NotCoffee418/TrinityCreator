@@ -36,8 +36,9 @@ namespace TrinityCreator.Profiles
         public Dictionary<string, Dictionary<string, string>> Item { get; set; }
         public Dictionary<string, Dictionary<string, string>> Loot { get; set; }
         public Dictionary<string, Dictionary<string, string>> Vendor { get; set; }
-        public Dictionary<string, string> LookupTool { get; internal set; } // Leave this, GameObjects, spells cant be grabbed from tool data
+        public Dictionary<string, string> LookupTool { get; set; } // Leave this, GameObjects, spells cant be grabbed from tool data
         public Dictionary<string, Dictionary<string, string>> CustomFields { get; set; }
+        public Dictionary<string, string> CustomDefaultValues { get; set; } // NIY
 
         #region Static 
         static Profile _activeProfile = null;

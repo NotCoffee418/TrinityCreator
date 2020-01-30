@@ -709,10 +709,51 @@ namespace TrinityCreator.Profiles
                     string pname = "???"; // For error output
                     try
                     {
-                        // Determine key, value and place it in data
                         string propertyName = corrKeys.Key.Split('.')[1];
-                        dynamic propertyValue = subject.GetType().GetProperty(propertyName).GetValue(subject, null);
-                        pname = propertyName;
+                        dynamic propertyValue = null;
+
+                        if (propertyName == "Empty") // Can be used for columns with no default values
+                        {
+                            // Error if invalid empty
+                            if (corrKeys.Key.Count() < 3)
+                            {
+                                Logger.Log("Profile error: Attempted to call Empty incorrectly. You must define a type, eg: Creature.Empty.String. See documentation.",
+                                    Logger.Status.Error, true);
+                                continue; // Skip the blank.
+                            }
+
+                            switch (corrKeys.Key.Split('.')[2])
+                            {
+                                case "String":
+                                    propertyValue = string.Empty;
+                                    break;
+                                case "Int":
+                                    propertyValue = 0;
+                                    break;
+                                case "Float":
+                                    propertyValue = 0f;
+                                    break;
+                                default:
+                                    Logger.Log("Profile Error: Invalid empty type specified. See documentation.");
+                                    break;
+                            }
+                        }
+                        else if (propertyName == "Custom")
+                        {
+                            // todo: Allows custom default values to be defined other than blank.
+                            // should use a new groupbox with Key and Value with eg Creature.Custom.MyValue1 loading the "value" of the "key" with that name
+                            // Will use CustomDefaultValues portion of profile
+                            Logger.Log("Profile Error: Custom values are not implemented in this version of TrinityCreator. Please update to the latest version.",
+                                Logger.Status.Warning, true);
+                            continue;
+                        }
+                        else // Attempt to access Trinity* property by name
+                        {
+                            // Determine key, value and place it in data
+                            propertyValue = subject.GetType().GetProperty(propertyName).GetValue(subject, null);
+                            pname = propertyName;
+                        }
+
                         data.Add(new ExpKvp(corrKeys.Value, propertyValue, tableKv.Key));
                     }
                     catch 
