@@ -17,8 +17,9 @@
             <MenuItem Header="Advanced Tools">
                 <MenuItem Name="ProfileCreator" Header="_Profile Creator" Click="ProfileCreator_Click" />
             </MenuItem>
-            
+
             <MenuItem Header="Info" >
+                <MenuItem Header="Check for updates" Click="CheckForUpdates_Click" />
                 <MenuItem Header="Credits" Click="Credits_Click" />
                 <MenuItem Header="Report bug" Click="ReportBugs_Click" />
                 <MenuItem Header="View Log Files" Click="ViewLogsDir_Click" />

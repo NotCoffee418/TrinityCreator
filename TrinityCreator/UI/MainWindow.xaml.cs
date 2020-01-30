@@ -93,6 +93,11 @@ namespace TrinityCreator.UI
                 Process.Start(logsDir);
         }
 
+        private void CheckForUpdates_Click(object sender, RoutedEventArgs e)
+        {
+            Updater.Run(force: true);
+        }
+
         private void ProfileCreator_Click(object sender, RoutedEventArgs e)
         {
             var win = new ProfileCreatorWindow();
@@ -151,6 +156,5 @@ namespace TrinityCreator.UI
         {
             ShowLookupTool();
         }
-
     }
 }
