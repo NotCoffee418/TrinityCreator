@@ -384,7 +384,7 @@ namespace TrinityCreator.Tools.ProfileCreator
         {
             // Validate game version
             int x;
-            if (!EditingProfile.GameVersion.Contains('.') || !int.TryParse(EditingProfile.GameVersion.Split('.')[0], out x))
+            if (EditingProfile.GameVersion == null || !EditingProfile.GameVersion.Contains('.') || !int.TryParse(EditingProfile.GameVersion.Split('.')[0], out x))
             {
                 Logger.Log("Profile Creation Error: GameVersion must conform to structure. Example: 3.3.5a. See documentation for more info. Profile will export with game version 0.0.",
                     Logger.Status.Error, true);
@@ -400,8 +400,61 @@ namespace TrinityCreator.Tools.ProfileCreator
             EditingProfile.LookupTool = ToProfileFormat(LookupToolElements);
             EditingProfile.CustomFields = ToProfileFormat(CustomFieldsElements);
 
+            // Validate that addon tables have an ID specified in customfields
+            ValidateAddonTableCustoms(EditingProfile.Item, Export.C.Item);
+            ValidateAddonTableCustoms(EditingProfile.Quest, Export.C.Quest);
+            ValidateAddonTableCustoms(EditingProfile.Creature, Export.C.Creature);
+            ValidateAddonTableCustoms(EditingProfile.Loot, Export.C.Loot);
+            ValidateAddonTableCustoms(EditingProfile.Vendor, Export.C.Vendor);
+
             // Convert to json & beautify
             return JsonConvert.SerializeObject(EditingProfile, Formatting.Indented);
+        }
+
+        /// <summary>
+        /// Throws warning if an addon table doesn't have table ID defined in customs
+        /// It doesn't validate the values. Only checks for tablename in customs.
+        /// </summary>
+        /// <param name="item"></param>
+        private bool ValidateAddonTableCustoms(Dictionary<string, Dictionary<string, string>> item, Export.C c)
+        {
+            bool result = true;
+            if (item.Count == 1)
+                return true;
+
+            // Exceptions to the rule. These tables act differently and have a dedicated column in the profile
+            // Lists appkeys in tables which are treated as exceptions.
+            string[] exceptionalAppKeys = new string[] {
+                "ResistanceCreatureId",
+                "SpellCreatureID",
+            };
+            
+            foreach (var table in item.Keys)
+            {
+                string primaryAppKey = ProfileHelper.GetToolIdAppKey(c);
+                if (item[table].ContainsKey(primaryAppKey))
+                    continue; // this is the primary table & requires no custom
+
+                // Check exceptions to the rule
+                bool foundExceptional = false;
+                foreach (var except in exceptionalAppKeys)
+                    if (item[table].ContainsKey(except))
+                    {
+                        foundExceptional = true;
+                        continue; // Exceptional, move on
+                    }
+                if (foundExceptional)
+                    continue;                    
+
+                // Throw warning if no custom was found for this table
+                if (!EditingProfile.CustomFields.ContainsKey(table))
+                {
+                    Logger.Log($"Warning: You need to define custom keys for all addon tables. Custom key missing for '{table}'. See documentation for more info.",
+                        Logger.Status.Warning, true);
+                    result = false;
+                }
+            }
+            return result;
         }
 
         /// <summary>
