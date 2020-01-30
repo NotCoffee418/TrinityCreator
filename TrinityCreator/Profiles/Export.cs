@@ -501,7 +501,7 @@ namespace TrinityCreator.Profiles
                         Logger.Log($"Invalid value enetered for {appKey}. Query was not saved.", Logger.Status.Error, true);
                         return String.Empty;
                     }
-                    else data.Add(new ExpKvp(appKey, value, C.Item));
+                    else data.Add(new ExpKvp(appKey, value, C.Creature));
                 }
             }
             catch (Exception ex)
@@ -619,6 +619,24 @@ namespace TrinityCreator.Profiles
             {
                 Logger.Log("Error exporting Resistances using 2020 system: " + ex.Message);
                 Logger.Log("Error parsing Resistances data. Are all resistances values numeric? Profile may be set up incorrectly.", Logger.Status.Error, true);
+            }
+
+            // Trinity 2020 InhabitType alternative. Similar to Spells, it's in a seperate table.
+            // Old system still supported, will only insert if defined in profile
+            try
+            {
+                // Create row in creature_template_movement or profile equivalent
+                sql += GenerateSql(new List<ExpKvp>() {
+                        new ExpKvp("InhabitCreatureID", creature.Entry, C.Creature),
+                        new ExpKvp("InhabitGround", creature.Inhabit.HasValue(1), C.Creature),
+                        new ExpKvp("InhabitWater", creature.Inhabit.HasValue(2), C.Creature),
+                        new ExpKvp("InhabitFlight", creature.Inhabit.HasValue(4), C.Creature)
+                        }) + Environment.NewLine;
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("Error exporting Creature Inhabit using 2020 system: " + ex.Message);
+                Logger.Log("Error parsing Creature Inhabit data. Profile may be set up incorrectly.", Logger.Status.Error, true);
             }
 
             return sql;

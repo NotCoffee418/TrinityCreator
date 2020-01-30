@@ -179,7 +179,11 @@ namespace TrinityCreator.Tools.ProfileCreator
                 new ProfileCreatorEntry("MaxGold", "Modern system, creates rows in creature_template_resistance or equivalent. See documentation. Dont use both systems."),
                 new ProfileCreatorEntry("AiName", "Modern system, creates rows in creature_template_resistance or equivalent. See documentation. Dont use both systems."),
                 new ProfileCreatorEntry("MovementType", "0=idle, 1=random, 2=waypoint movement"),
-                new ProfileCreatorEntry("InhabitType", "bitmask 1=ground, 2=water, 4=flying, 8=rooted"),
+                new ProfileCreatorEntry("InhabitType", "Old System (bitmask) - 1=ground, 2=water, 4=flying, 8=rooted"),
+                new ProfileCreatorEntry("InhabitCreatureID", "Modern System - using creature_template_movement table"),
+                new ProfileCreatorEntry("InhabitGround", "Modern System - using creature_template_movement table"),
+                new ProfileCreatorEntry("InhabitWater", "Modern System - using creature_template_movement table"),
+                new ProfileCreatorEntry("InhabitFlight", "Modern System - using creature_template_movement table"),
                 new ProfileCreatorEntry("HoverHeight", "requires MOVEMENTFLAG_DISABLE_GRAVITY"),
                 new ProfileCreatorEntry("HealthModifier", "1f by default"),
                 new ProfileCreatorEntry("ManaModifier", "1f by default"),
@@ -427,6 +431,7 @@ namespace TrinityCreator.Tools.ProfileCreator
             string[] exceptionalAppKeys = new string[] {
                 "ResistanceCreatureId",
                 "SpellCreatureID",
+                "InhabitCreatureID",
             };
             
             foreach (var table in item.Keys)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using TrinityCreator.Helpers;
 
 namespace TrinityCreator.UI.UIElements
 {
@@ -463,6 +464,30 @@ namespace TrinityCreator.UI.UIElements
                 new BitmaskCheckBox(48, "Lay down"),
             };
             return new BitmaskStackPanel("creatureBytes1Sp", cbs);
+        }
+
+        /// <summary>
+        /// Returns true if checkbox with the specific bitmask value is checked
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        internal bool HasValue(int v)
+        {
+            try
+            {
+                foreach (BitmaskCheckBox bmcb in Children)
+                {
+                    if ((long)bmcb.Tag == v) // Attempt to find bmcb with the requested value (defined in Tag)
+                        return bmcb.IsChecked == true;
+                }
+                Logger.Log("BMSP: Failed to find BMCB with requested value in this BMSP.", Logger.Status.Warning, true);
+                return false;
+            }
+            catch
+            {
+                Logger.Log("Error parsing data from BitmaskStackpanel. Output data may be invalid.", Logger.Status.Error, true);
+                return false;
+            }
         }
     }
 
