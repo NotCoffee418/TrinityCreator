@@ -81,7 +81,7 @@ namespace TrinityCreator.Profiles
         public static List<Profile> ListProfiles()
         {
             // Prepare directories
-            string sysProfilesDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Profiles");
+            string sysProfilesDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "NotCoffee418", "TrinityCreator", "Profiles");
             string usrProfilesDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TrinityCreator", "Profiles");
             if (!Directory.Exists(usrProfilesDir))
                 Directory.CreateDirectory(usrProfilesDir);

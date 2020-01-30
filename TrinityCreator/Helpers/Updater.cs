@@ -94,7 +94,7 @@ namespace TrinityCreator.Helpers
             Logger.Log("Updater: Updating Profiles from GitHub.");
 
             // Get relevant directories
-            string sysProfilesDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Profiles");
+            string sysProfilesDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "NotCoffee418", "TrinityCreator", "Profiles");
             string usrProfilesDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TrinityCreator", "Profiles");
             string tmpDir = Path.Combine(Path.GetTempPath(), "tc-" + GHelper.RandomString(6));
 
