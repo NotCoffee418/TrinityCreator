@@ -51,11 +51,21 @@ namespace TrinityCreator.UI
             string dir = dbcDirTxt.Text;
             if (File.Exists(dir + @"\Wow.exe")) // Is wow dir, add dbc to path
                 dir += @"\dbc";
+
+            // Save path for verification
+            string oldDbcPath = Properties.Settings.Default.DbcDir;
+            Properties.Settings.Default.DbcDir = dir;
+            Properties.Settings.Default.Save();
+
+            // Verify & notify or undo
             if (DbcHandler.VerifyDbcDir(openConfigWindowOnError: false))
             {
-                Properties.Settings.Default.DbcDir = dir;
-                Properties.Settings.Default.Save();
                 MessageBox.Show("DBC Directory is configured correctly.", "Settings saved", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                Properties.Settings.Default.DbcDir = oldDbcPath;
+                Properties.Settings.Default.Save();
             }
         }
     }
