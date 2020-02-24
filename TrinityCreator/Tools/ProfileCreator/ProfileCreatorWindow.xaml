@@ -42,7 +42,7 @@
                     <StackPanel Margin=" 5">
                         <TextBlock>
                             WARNING: This tool is for advanced users.<LineBreak/>
-                            <Hyperlink NavigateUri="https://github.com/NotCoffee418/TrinityCreator/wiki/Adding-Emulator-Support" RequestNavigate="Hyperlink_RequestNavigate">Read the documentation</Hyperlink> or <Hyperlink NavigateUri="https://www.youtube.com/watch?v=UNXz33NpTf0" RequestNavigate="Hyperlink_RequestNavigate">watch the video tutorial</Hyperlink> before using it.
+                            <Hyperlink NavigateUri="https://github.com/NotCoffee418/TrinityCreator/wiki/Adding-Emulator-Support" RequestNavigate="Hyperlink_RequestNavigate">Read the documentation</Hyperlink> or <Hyperlink NavigateUri="https://youtu.be/uSX2G5NDf0c" RequestNavigate="Hyperlink_RequestNavigate">watch the video tutorial</Hyperlink> before using it.
                             <LineBreak/><LineBreak/>
                             Key notes:<LineBreak/>                            
                             Feel free to load an existing profile and modify it.<LineBreak/>
