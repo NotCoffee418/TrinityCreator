@@ -181,7 +181,7 @@
         <Item Id="35" Description="Resilience" />
         <Item Id="37" Description="Expertise" />
         <Item Id="38" Description="Attack power" />
-        <Item Id="39" Description="Ranged attach power" />
+        <Item Id="39" Description="Ranged attack power" />
         <Item Id="41" Description="Healing" />
         <Item Id="42" Description="Spell damage" />
         <Item Id="43" Description="Mana regeneration" />
