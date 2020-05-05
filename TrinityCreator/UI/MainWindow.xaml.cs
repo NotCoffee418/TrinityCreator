@@ -17,6 +17,7 @@ using TrinityCreator.Tools.LootCreator;
 using TrinityCreator.Tools.VendorCreator;
 using TrinityCreator.Tools.ProfileCreator;
 using TrinityCreator.Helpers;
+using System.Windows.Controls;
 
 namespace TrinityCreator.UI
 {
@@ -37,7 +38,6 @@ namespace TrinityCreator.UI
             // Load usable creators
             ItemTab.Content = new ItemPage();
             QuestTab.Content = new QuestPage();
-            ModelViewerTabFrame.Content = new ModelViewerPage();
             CreatureCreatorTab.Content = new CreatureCreatorPage();
             LootCreatorTab.Content = new LootPage();
             VendorCreatorTab.Content = new VendorPage();
@@ -46,6 +46,23 @@ namespace TrinityCreator.UI
             tipTimer.Elapsed += ChangeRandomTip;
             tipTimer.Interval = 200; // don't change interval here
             tipTimer.Start();
+
+            // Load model viewer on windows 10 or message on older
+            try
+            {
+                if (System.Environment.OSVersion.Version >= new Version(6, 2))
+                    ModelViewerTabFrame.Content = new ModelViewerPage();
+                else
+                {
+                    TextBox tb = new TextBox();
+                    tb.Text = "Model Viewer is not supported before Windows 10.";
+                    ModelViewerTabFrame.Content = tb;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("Exception has occurred loading model viewer: " + ex.Message);
+            }
         }
 
         static Random random = new Random();
