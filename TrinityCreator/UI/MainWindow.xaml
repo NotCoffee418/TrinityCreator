@@ -20,9 +20,10 @@
 
             <MenuItem Header="Info" >
                 <MenuItem Header="Check for updates" Click="CheckForUpdates_Click" />
-                <MenuItem Header="Credits" Click="Credits_Click" />
+                <MenuItem Header="Support (Discord)" Click="DiscordBtn_Click" />
                 <MenuItem Header="Report bug" Click="ReportBugs_Click" />
                 <MenuItem Header="View Log Files" Click="ViewLogsDir_Click" />
+                <MenuItem Header="About" Click="Credits_Click" />
             </MenuItem>
         </Menu>
 

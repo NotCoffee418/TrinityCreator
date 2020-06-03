@@ -103,6 +103,11 @@ namespace TrinityCreator.UI
             Process.Start("https://github.com/NotCoffee418/TrinityCreator/issues/new");
         }
 
+        private void DiscordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://discord.com/invite/gUXwShK");
+        }
+
         private void ViewLogsDir_Click(object sender, RoutedEventArgs e)
         {
             string logsDir = Logger.GetLogsDirectory();
