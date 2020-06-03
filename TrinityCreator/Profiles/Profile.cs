@@ -53,6 +53,12 @@ namespace TrinityCreator.Profiles
                     Logger.Log($"Profile: Changing Profile.Active to NULL.");
                 else Logger.Log($"Profile: Changing Profile.Active to '{value.Name}'.");
 
+                // Validate version
+                if (value.TestedBuild > Assembly.GetExecutingAssembly().GetName().Version.Revision)
+                    Logger.Log("Profile: The active profile was made for a newer version of Trinity Creator." +
+                         Environment.NewLine + "Values may export correctly until you update the application.",
+                        Logger.Status.Warning, showMessageBox:true);
+
                 _activeProfile = value;
                 if (ActiveProfileChangedEvent != null)
                     ActiveProfileChangedEvent(Profile.Active, new EventArgs());

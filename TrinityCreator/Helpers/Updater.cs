@@ -25,9 +25,12 @@ namespace TrinityCreator.Helpers
             {
                 Logger.Log("Updater: Running Updater.");
                 AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
-                AutoUpdater.Start("https://raw.githubusercontent.com/NotCoffee418/TrinityCreator/master/TrinityCreator/Properties/AssemblyInfo.cs", Assembly.GetExecutingAssembly());
                 if (force)
+                {
                     AutoUpdater.ReportErrors = true;
+                    AutoUpdater.Mandatory = true;
+                }
+                AutoUpdater.Start("https://raw.githubusercontent.com/NotCoffee418/TrinityCreator/master/TrinityCreator/Properties/AssemblyInfo.cs", Assembly.GetExecutingAssembly());
             }
             catch (Exception ex)
             {
@@ -129,6 +132,7 @@ namespace TrinityCreator.Helpers
 
                 // Check each file to see if it's updated (using revision)
                 Logger.Log("Updater: Installing updated profiles...");
+                bool isOutdatedTcForProfiles = false;
                 foreach (string tmpFilePath in Directory.GetFiles(Path.Combine(tmpDir, "TrinityCreatorProfiles-master")))
                 {
                     string fileName = Path.GetFileName(tmpFilePath);
@@ -152,12 +156,14 @@ namespace TrinityCreator.Helpers
                             int runningAppBuild = Assembly.GetExecutingAssembly().GetName().Version.Revision;
                             if (remoteVer.TestedBuild > runningAppBuild) // profile may not support this version of Tcreator
                             {
-                                Logger.Log($"Updater: Profile '{fileName}' was tested on a newer version of Trinity Creator. "+ 
-                                    "Please update Trinity Creator to update this profile and prevent potential issues.", Logger.Status.Warning, true);
+                                // used to show warning, doesn't update
+                                isOutdatedTcForProfiles = true;
+                                Logger.Log($"Updater: Profile {fileName} was tested on a newer version of Trinity Creator. Not updating or installing local file.",
+                                    Logger.Status.Warning, false);
                             }
                             else
                             {
-                                Logger.Log("Updater: Updating {fileName} from revision {localVer.Revision} to {remoteVer.Revision}.");
+                                Logger.Log($"Updater: Updating {fileName} from revision {localVer.Revision} to {remoteVer.Revision}.");
                                 File.Copy(tmpFilePath, profileDestPath, overwrite: true);
                             }
                         }
@@ -165,6 +171,11 @@ namespace TrinityCreator.Helpers
                             Logger.Log($"{fileName}: Up to date.");
                     }
                 }
+
+                // Show warning profiles are newer than build
+                if (isOutdatedTcForProfiles)
+                    Logger.Log("Profile: Some profiles were not installed or updated as this version of Trinity Creator may not support them." +
+                        Environment.NewLine + "Please update Trinity Creator to resolve this issue. (Help > Check for updates)", Logger.Status.Warning, true);
             }
             catch (Exception ex)
             {
