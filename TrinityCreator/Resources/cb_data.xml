@@ -90,7 +90,7 @@
 		<Item Id="-6" Description="-350" />
 		<Item Id="-7" Description="-500" />
 		<Item Id="-8" Description="-1000" />		
-	</RewardFactionId>
+	</QuestFactionReward>
     <SocketBonus>
         <Item Id="0" Description="No Bonus" />
         <Item Id="69" Description="+2 Strength" />

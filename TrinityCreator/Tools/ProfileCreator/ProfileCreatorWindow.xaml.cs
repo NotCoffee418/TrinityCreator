@@ -389,6 +389,7 @@ namespace TrinityCreator.Tools.ProfileCreator
                 new ProfileCreatorDefinition("SpellTableName", "(Optional) spell_dbc or equivalent table. Used for lookup tool."),
                 new ProfileCreatorDefinition("SpellIdColumn", "(Optional) spell_dbc or equivalent's id column"),
                 new ProfileCreatorDefinition("SpellNameColumn", "spell_dbc or equivalent's name column"),
+                new ProfileCreatorDefinition("RewardFactionOverrideModifier", "RewardFactionOverride: This should be 1 or 100. Modern Trinity will divide input value by 100 for some reason. Put 1 if database uses raw rep value, put 100 if your emulator divides input by 100."),
             };
             foreach (var e in DefinitionElements)
                 definitionsSp.Children.Add(e);
