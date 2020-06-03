@@ -69,6 +69,28 @@
         <Item Id="9" Description="End of quest chain (big reward)" />
         <Item Id="10" Description="Raid quests" />
     </QuestXp>
+	<QuestFactionReward> <!-- NIY, no emulator seems to require this -->
+		<Item Id="0" Description="None" />
+		<Item Id="0" Description="Manual" />
+		<Item Id="9" Description="+5" />
+		<Item Id="1" Description="+10" />
+		<Item Id="2" Description="+25" />
+		<Item Id="3" Description="+75" />
+		<Item Id="4" Description="+150" />
+		<Item Id="5" Description="+250" />
+		<Item Id="6" Description="+350" />
+		<Item Id="7" Description="+500" />
+		<Item Id="8" Description="+1000" />
+		<Item Id="-9" Description="-5" />
+		<Item Id="-1" Description="-10" />
+		<Item Id="-2" Description="-25" />
+		<Item Id="-3" Description="-75" />
+		<Item Id="-4" Description="-150" />
+		<Item Id="-5" Description="-250" />
+		<Item Id="-6" Description="-350" />
+		<Item Id="-7" Description="-500" />
+		<Item Id="-8" Description="-1000" />		
+	</RewardFactionId>
     <SocketBonus>
         <Item Id="0" Description="No Bonus" />
         <Item Id="69" Description="+2 Strength" />
