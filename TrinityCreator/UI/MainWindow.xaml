@@ -18,7 +18,7 @@
                 <MenuItem Name="ProfileCreator" Header="_Profile Creator" Click="ProfileCreator_Click" />
             </MenuItem>
 
-            <MenuItem Header="Info" >
+            <MenuItem Header="Help" >
                 <MenuItem Header="Check for updates" Click="CheckForUpdates_Click" />
                 <MenuItem Header="Support (Discord)" Click="DiscordBtn_Click" />
                 <MenuItem Header="Report bug" Click="ReportBugs_Click" />

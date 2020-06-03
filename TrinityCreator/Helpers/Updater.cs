@@ -152,7 +152,7 @@ namespace TrinityCreator.Helpers
                             int runningAppBuild = Assembly.GetExecutingAssembly().GetName().Version.Revision;
                             if (remoteVer.TestedBuild > runningAppBuild) // profile may not support this version of Tcreator
                             {
-                                Logger.Log("Updater: Profile '{fileName}' was tested on a newer version of Trinity Creator. "+ 
+                                Logger.Log($"Updater: Profile '{fileName}' was tested on a newer version of Trinity Creator. "+ 
                                     "Please update Trinity Creator to update this profile and prevent potential issues.", Logger.Status.Warning, true);
                             }
                             else

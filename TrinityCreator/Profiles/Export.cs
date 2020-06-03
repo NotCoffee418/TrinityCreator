@@ -348,7 +348,6 @@ namespace TrinityCreator.Profiles
             {
                 // Translates to two columns: RewardFactionID1, RewardFactionOverride1, RewardFactionID2...
                 var factionRewardData = new Dictionary<string, string>();
-                // Value output is *100 (TrinityCore support)! see issue #72
                 int multiplier = 1;
                 try
                 {
@@ -359,7 +358,7 @@ namespace TrinityCreator.Profiles
                     Logger.Log("Invalid Definition: RewardFactionOverrideModifier. This definition is not set or is invalid, which may cause reward reputation to be incorrect." +
                         Environment.NewLine + "Please update this profile.", Logger.Status.Warning, true);
                 }
-                quest.FactionRewards.AddValues(factionRewardData, "RewardFactionID", "RewardFactionOverride", 100); 
+                quest.FactionRewards.AddValues(factionRewardData, "RewardFactionID", "RewardFactionOverride", multiplier); 
                 foreach (var factionRewardDataCol in factionRewardData)
                     data.Add(new ExpKvp(factionRewardDataCol.Key, int.Parse(factionRewardDataCol.Value), C.Quest));
             }
