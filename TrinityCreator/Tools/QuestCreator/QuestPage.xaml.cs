@@ -53,6 +53,10 @@ namespace TrinityCreator.Tools.QuestCreator
             questStarterTypeCb.SelectedIndex = 0;
             questEnderTypeCb.ItemsSource = starterEnderTypes;
             questEnderTypeCb.SelectedIndex = 0;
+
+            // Enable profile-specific values
+            SetProfileValues();
+            Profile.ActiveProfileChangedEvent += Profile_ActiveProfileChangedEvent;
         }
 
         TrinityQuest _quest;
@@ -191,5 +195,21 @@ namespace TrinityCreator.Tools.QuestCreator
         }
 
         #endregion
+
+
+        private void Profile_ActiveProfileChangedEvent(object sender, EventArgs e)
+        {
+            SetProfileValues();
+        }
+
+        private void SetProfileValues()
+        {
+            var c = Export.C.Quest; // to shorten if statements
+
+            // Quest XP handling (modifier or raw)
+            RewardXpDifficultyDp.Visibility = Profile.Active.VisibileIfKeyDefined(c, "RewardXpDifficulty");
+            RewardXpRawDp.Visibility = Profile.Active.VisibileIfKeyDefined(c, "RewardXpRaw");
+        }
+
     }
 }

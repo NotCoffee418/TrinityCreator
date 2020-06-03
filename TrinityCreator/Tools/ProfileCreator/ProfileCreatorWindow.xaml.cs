@@ -305,7 +305,8 @@ namespace TrinityCreator.Tools.ProfileCreator
                 new ProfileCreatorEntry("RequiredNpcOrGoCount6"),
 
 
-                new ProfileCreatorEntry("RewardXpDifficulty"),
+                new ProfileCreatorEntry("RewardXpDifficulty", "Use this field or RewardXpRaw, not both."),
+                new ProfileCreatorEntry("RewardXpRaw", "Use this field or RewardXpDifficulty, not both."),
                 new ProfileCreatorEntry("RewardMoney"),
                 new ProfileCreatorEntry("RewardSpell"),
                 new ProfileCreatorEntry("RewardHonor"),

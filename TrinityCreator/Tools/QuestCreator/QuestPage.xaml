@@ -159,9 +159,13 @@
                 </GroupBox>
                 <GroupBox Header="Rewards">
                     <StackPanel>
-                        <DockPanel Margin="2">
+                        <DockPanel Margin="2" Name="RewardXpDifficultyDp">
                             <Label Content="XP Reward" DockPanel.Dock="Left" Width="120" />
                             <ComboBox Name="rewardXpCb" SelectedValue="{Binding RewardXpDifficulty}" />
+                        </DockPanel>
+                        <DockPanel Margin="2" Name="RewardXpRawDp">
+                            <Label Content="XP Reward" DockPanel.Dock="Left" Width="120" />
+                            <TextBox Text="{Binding RewardXpRaw}" DockPanel.Dock="Left" ToolTip="Raw XP player receives from completing the quest." />
                         </DockPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Money Reward" DockPanel.Dock="Left" Width="120"/>

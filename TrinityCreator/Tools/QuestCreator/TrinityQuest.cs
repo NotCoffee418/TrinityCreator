@@ -51,6 +51,7 @@ namespace TrinityCreator.Tools.QuestCreator
         private int _timeAllowed;
         private int _requiredPlayerKills;
         private XmlKeyValue _rewardXpDifficulty;
+        private int _rewardXpRaw;
         private Currency _rewardMoney;
         private int _rewardSpell;
         private int _rewardHonor;
@@ -445,13 +446,22 @@ namespace TrinityCreator.Tools.QuestCreator
 
 
         #region Rewards
-        public XmlKeyValue RewardXpDifficulty 
+        public XmlKeyValue RewardXpDifficulty // using modifier
         {
             get { return _rewardXpDifficulty; }
             set
             {
                 _rewardXpDifficulty = value;
                 RaisePropertyChanged("RewardXpDifficulty");
+            }
+        }
+        public int RewardXpRaw // using raw xp value
+        {
+            get { return _rewardXpRaw; }
+            set
+            {
+                _rewardXpRaw = value;
+                RaisePropertyChanged("RewardXpRaw");
             }
         }
         public Currency RewardMoney

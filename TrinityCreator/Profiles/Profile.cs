@@ -7,6 +7,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TrinityCreator.Helpers;
 
 namespace TrinityCreator.Profiles
@@ -123,6 +124,73 @@ namespace TrinityCreator.Profiles
         {
             return obj != null && obj.GetType().Equals(typeof(Profile)) &&
                 JsonConvert.SerializeObject((Profile)obj) == JsonConvert.SerializeObject(this);
+        }
+
+        public Dictionary<string, Dictionary<string, string>> GetToolDict(Export.C cType)
+        {
+            Dictionary<string, Dictionary<string, string>> targetDict = null;
+            switch (cType)
+            {
+                case Export.C.Item:
+                    targetDict = this.Item;
+                    break;
+                case Export.C.Quest:
+                    targetDict = this.Quest;
+                    break;
+                case Export.C.Creature:
+                    targetDict = this.Creature;
+                    break;
+                case Export.C.Loot:
+                    targetDict = this.Loot;
+                    break;
+                case Export.C.Vendor:
+                    targetDict = this.Vendor;
+                    break;
+                default:
+                    Logger.Log($"Creator type '{cType}' is not defined in Profile.IsKeyDefined(). Please report this issue on GitHub.", 
+                        Logger.Status.Error, true);
+                    return null;
+            }
+            return targetDict;
+        }
+
+        /// <summary>
+        /// Determines if an appkey is correctly defined in this profile.
+        /// </summary>
+        /// <param name="cType">Export.C type</param>
+        /// <param name="appKey">Valid AppKey</param>
+        /// <returns></returns>
+        internal bool IsKeyDefined(Export.C cType, string appKey)
+        {
+            var targetDir = GetToolDict(cType);
+            foreach (var subD in targetDir) // dictionary in table
+                if (subD.Value.ContainsKey(appKey)) // Has defiend appkey
+                {
+                    string match;
+                    subD.Value.TryGetValue(appKey, out match);
+                    if (match != null && match != string.Empty)
+                        return true;
+                    else
+                    {
+                        Logger.Log($"Profile Error: Appkey '{cType}.{appKey}' is has an invalid definition."+
+                            "Disable the AppKey, define a valid SqlKey or report this issue on GitHub.", Logger.Status.Error, true);
+                        return false;
+                    }
+                }
+
+            // None found, it's disabled
+            return false;
+        }
+
+        /// <summary>
+        /// Returns visibility if an appkey is correctly defined in this profile.
+        /// </summary>
+        /// <param name="cType">Export.C type</param>
+        /// <param name="appKey">Valid AppKey</param>
+        /// <returns></returns>
+        internal Visibility VisibileIfKeyDefined(Export.C cType, string appKey)
+        {
+            return IsKeyDefined(cType, appKey) ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

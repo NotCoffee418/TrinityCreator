@@ -272,7 +272,8 @@ namespace TrinityCreator.Profiles
                 new ExpKvp("PoiCoordinateMap", quest.PoiCoordinate.MapId, C.Quest),
                 new ExpKvp("TimeAllowed", quest.TimeAllowed, C.Quest),
                 new ExpKvp("RequiredPlayerKills", quest.RequiredPlayerKills, C.Quest),
-                new ExpKvp("RewardXpDifficulty", quest.RewardXpDifficulty.Id, C.Quest), // Emulator support? See issue #72
+                new ExpKvp("RewardXpDifficulty", quest.RewardXpDifficulty.Id, C.Quest),
+                new ExpKvp("RewardXpRaw", quest.RewardXpRaw, C.Quest),
                 new ExpKvp("RewardMoney", quest.RewardMoney.Amount, C.Quest),
                 new ExpKvp("RewardSpell", quest.RewardSpell, C.Quest),
                 new ExpKvp("RewardHonor", quest.RewardHonor, C.Quest),
