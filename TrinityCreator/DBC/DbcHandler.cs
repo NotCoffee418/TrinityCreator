@@ -227,74 +227,84 @@ namespace TrinityCreator.DBC
                 columns[idx++] = m_dataTable.Columns[index["primary"].InnerText];
             m_dataTable.PrimaryKey = columns;
             
-            // Create rows
-            foreach (var row in m_dbreader.Rows) // Add rows
+            try
             {
-                DataRow dataRow = m_dataTable.NewRow();
-
-                using (BinaryReader br = row)
+                // Create rows
+                foreach (var row in m_dbreader.Rows) // Add rows
                 {
-                    for (int j = 0; j < m_fields.Count; ++j)    // Add cells
+                    DataRow dataRow = m_dataTable.NewRow();
+
+                    using (BinaryReader br = row)
                     {
-                        switch (types[j])
+                        for (int j = 0; j < m_fields.Count; ++j)    // Add cells
                         {
-                            case "long":
-                                dataRow[j] = br.ReadInt64();
-                                break;
-                            case "ulong":
-                                dataRow[j] = br.ReadUInt64();
-                                break;
-                            case "int":
-                                dataRow[j] = br.ReadInt32();
-                                break;
-                            case "uint":
-                                dataRow[j] = br.ReadUInt32();
-                                break;
-                            case "short":
-                                dataRow[j] = br.ReadInt16();
-                                break;
-                            case "ushort":
-                                dataRow[j] = br.ReadUInt16();
-                                break;
-                            case "sbyte":
-                                dataRow[j] = br.ReadSByte();
-                                break;
-                            case "byte":
-                                dataRow[j] = br.ReadByte();
-                                break;
-                            case "float":
-                                dataRow[j] = br.ReadSingle();
-                                break;
-                            case "double":
-                                dataRow[j] = br.ReadDouble();
-                                break;
-                            case "string":
-                                if (m_dbreader is WDBReader)
-                                    dataRow[j] = br.ReadStringNull();
-                                else if (m_dbreader is STLReader)
-                                {
-                                    int offset = br.ReadInt32();
-                                    dataRow[j] = (m_dbreader as STLReader).ReadString(offset);
-                                }
-                                else
-                                {
-                                    try
+                            switch (types[j])
+                            {
+                                case "long":
+                                    dataRow[j] = br.ReadInt64();
+                                    break;
+                                case "ulong":
+                                    dataRow[j] = br.ReadUInt64();
+                                    break;
+                                case "int":
+                                    dataRow[j] = br.ReadInt32();
+                                    break;
+                                case "uint":
+                                    dataRow[j] = br.ReadUInt32();
+                                    break;
+                                case "short":
+                                    dataRow[j] = br.ReadInt16();
+                                    break;
+                                case "ushort":
+                                    dataRow[j] = br.ReadUInt16();
+                                    break;
+                                case "sbyte":
+                                    dataRow[j] = br.ReadSByte();
+                                    break;
+                                case "byte":
+                                    dataRow[j] = br.ReadByte();
+                                    break;
+                                case "float":
+                                    dataRow[j] = br.ReadSingle();
+                                    break;
+                                case "double":
+                                    dataRow[j] = br.ReadDouble();
+                                    break;
+                                case "string":
+                                    if (m_dbreader is WDBReader)
+                                        dataRow[j] = br.ReadStringNull();
+                                    else if (m_dbreader is STLReader)
                                     {
-                                        dataRow[j] = m_dbreader.StringTable[br.ReadInt32()];
+                                        int offset = br.ReadInt32();
+                                        dataRow[j] = (m_dbreader as STLReader).ReadString(offset);
                                     }
-                                    catch
+                                    else
                                     {
-                                        dataRow[j] = "Invalid string index!";
+                                        try
+                                        {
+                                            dataRow[j] = m_dbreader.StringTable[br.ReadInt32()];
+                                        }
+                                        catch
+                                        {
+                                            dataRow[j] = "Invalid string index!";
+                                        }
                                     }
-                                }
-                                break;
-                            default:
-                                throw new ArgumentException(String.Format(CultureInfo.InvariantCulture, "Unknown field type {0}!", types[j]));
+                                    break;
+                                default:
+                                    throw new ArgumentException(String.Format(CultureInfo.InvariantCulture, "Unknown field type {0}!", types[j]));
+                            }
                         }
                     }
-                }
 
-                m_dataTable.Rows.Add(dataRow);
+                    m_dataTable.Rows.Add(dataRow);
+                }
+            }
+            catch
+            {
+                // Lazy catch. See issue #104. Optimally relevant data should be hardcoded in the application with version restrictions
+                // or definitions for all DBC files of all wow versions should be added to the current system.
+                Logger.Log("DBC: Unexpected data structure or corrupt DBC file. Please ensure that you're using 3.3.5a DBC files.", 
+                    Logger.Status.Error, true);
             }
 
             Logger.Log($"DBC: Successfully prepared datatable for {dbcName}.dbc.");

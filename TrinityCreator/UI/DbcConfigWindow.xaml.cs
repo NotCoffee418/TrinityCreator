@@ -30,9 +30,10 @@ namespace TrinityCreator.UI
 
         private void ShowInfo()
         {
-            infoTxt.Text = string.Format("This setting is used to determine the location of your DBC files.{0}" +
-                "If you already have a DBC directory, you should point this setting there.{0}{0}" +
-                "Alternatively you can point to your WoW directory to extract the DBC files automatically."
+            infoTxt.Text = string.Format("This setting is optional and only used by the Lookup Tool in some instances.{0}" +
+                "If you already have a DBC directory, you should point this setting there.{0}" +
+                "Alternatively you can point to your WoW directory to extract the DBC files automatically.{0}{0}" +
+                "This must point to 3.3.5a DBC files to work correctly. Leaving this empty is fine as well."
                 , Environment.NewLine);
         }
 
@@ -61,6 +62,7 @@ namespace TrinityCreator.UI
             if (DbcHandler.VerifyDbcDir(openConfigWindowOnError: false))
             {
                 MessageBox.Show("DBC Directory is configured correctly.", "Settings saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                Close();
             }
             else
             {
