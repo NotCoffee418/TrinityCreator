@@ -54,8 +54,8 @@ namespace TrinityCreator.Data
         {
             return new[]
             {
-                new ItemClass(2, "Weapon"),
                 new ItemClass(4, "Armor"),
+                new ItemClass(2, "Weapon"),
                 new ItemClass(0, "Consumable"),
                 new ItemClass(1, "Container"),
                 new ItemClass(3, "Gem"),
