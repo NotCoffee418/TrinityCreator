@@ -23,7 +23,7 @@ namespace TrinityCreator.Tools.ItemCreator
         private BitmaskStackPanel _bagFamily;
         private XmlKeyValue _binds;
         private int _block;
-        private int _buyCount;
+        private int _buyCount = 1;
         private int _containerSlots;
         private Damage _damageInfo;
         private int _displayid;
