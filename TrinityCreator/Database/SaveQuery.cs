@@ -11,6 +11,7 @@ using System.Windows.Navigation;
 using TrinityCreator.Database;
 using TrinityCreator.Helpers;
 using TrinityCreator.Profiles;
+using TrinityCreator.Tools.QuestCreator;
 
 namespace TrinityCreator
 {
@@ -128,6 +129,9 @@ namespace TrinityCreator
                 // Query every relevant table to see if ID  already exists
                 foreach (var kvp in fieldsToCheck)
                 {
+                    if (kvp.Key.Contains("%t"))
+                        continue; // I'm not gonna even
+
                     var result = Connection.ExecuteScalar($"SELECT COUNT(*) AS matches FROM {kvp.Key} WHERE {kvp.Value} = {id};");
                     if ((dynamic)result > 0)
                     {
@@ -150,11 +154,57 @@ namespace TrinityCreator
                     "Already Exists", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning, MessageBoxResult.No);
                 if (dr == MessageBoxResult.Yes)
                 {
+                    
                     // Delete from database
                     foreach (var kvp in fieldsToCheck)
-                        Connection.ExecuteNonQuery($"DELETE FROM {kvp.Key} WHERE {kvp.Value} = {id}");
+                    {
+                        // Handle %t tablenames
+                        if (kvp.Key.Contains("%t"))
+                        {
+                            // Handle quest customs
+                            if (type == Export.C.Quest)
+                            {
+                                string[] starterEnderTypes = new string[]
+                                {
+                                    "creature",
+                                    "gameobject",
+                                };
 
-                    return true; // Duplicate, delete & permission to insert
+                                string overrideTableName = "";
+
+                                foreach (string replacement in starterEnderTypes)
+                                {
+                                    if (kvp.Key.Contains("queststarter"))
+                                    {
+                                        overrideTableName = kvp.Key.Replace("%t", replacement);
+                                        Connection.ExecuteNonQuery($"DELETE FROM {overrideTableName} WHERE {kvp.Value} = {id};");
+                                    }
+                                    else if (kvp.Key.Contains("questender"))
+                                    {
+                                        overrideTableName = kvp.Key.Replace("%t", replacement);
+                                        Connection.ExecuteNonQuery($"DELETE FROM {overrideTableName} WHERE {kvp.Value} = {id};");
+                                    }
+                                    else
+                                    {
+                                        Logger.Log("Profile Error: QuestGiver customs with wildcard only accept tablenames containing 'queststarter' and 'questender'." + Environment.NewLine +
+                                            "This is because customs have no other way to identify that the custom is in relation to queststarter/ender." + Environment.NewLine +
+                                            "If this causes issues, it's preferable to just use 'creature_questender' instead of '%t_questender' and starter.",
+                                            Logger.Status.Error, true);
+                                    }
+                                }                                
+                            }
+                            else
+                            {
+                                Logger.Log($"Wildcards in custom fields have limited support and must conform to specific values. Custom for {kvp.Key} could not be processed.",
+                                    Logger.Status.Error, true);
+                            }
+                        }
+
+                        // No special, just delete.
+                        else Connection.ExecuteNonQuery($"DELETE FROM {kvp.Key} WHERE {kvp.Value} = {id};");
+                    }                       
+
+                    return true; // Duplicate, deleted & permission to insert
                 }
                 else return false; // Duplicate found, user does not wish to override
             }
