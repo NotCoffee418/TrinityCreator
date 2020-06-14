@@ -158,11 +158,11 @@ namespace TrinityCreator
                     // Delete from database
                     foreach (var kvp in fieldsToCheck)
                     {
-                        // Handle %t tablenames
-                        if (kvp.Key.Contains("%t"))
+                        // Handle quest customs
+                        if (type == Export.C.Quest)
                         {
-                            // Handle quest customs
-                            if (type == Export.C.Quest)
+                            // Handle %t tablenames
+                            if (kvp.Key.Contains("%t"))
                             {
                                 string[] starterEnderTypes = new string[]
                                 {
@@ -193,15 +193,29 @@ namespace TrinityCreator
                                     }
                                 }                                
                             }
-                            else
+                        }
+                        else if (type == Export.C.Creature)
+                        {
+                            if (Profile.Active.IsKeyDefined(Export.C.Creature, "SpellCreatureID"))
                             {
-                                Logger.Log($"Wildcards in custom fields have limited support and must conform to specific values. Custom for {kvp.Key} could not be processed.",
-                                    Logger.Status.Error, true);
+                                var d = new ExpKvp("SpellCreatureID", null, Export.C.Creature);
+                                Connection.ExecuteNonQuery($"DELETE FROM {d.SqlTableName} WHERE {d.SqlKey} = {id};");
+                            }
+                            if (Profile.Active.IsKeyDefined(Export.C.Creature, "ResistanceCreatureId"))
+                            {
+                                var d = new ExpKvp("ResistanceCreatureId", null, Export.C.Creature);
+                                Connection.ExecuteNonQuery($"DELETE FROM {d.SqlTableName} WHERE {d.SqlKey} = {id};");
+                            }
+                            if (Profile.Active.IsKeyDefined(Export.C.Creature, "InhabitCreatureID"))
+                            {
+                                var d = new ExpKvp("InhabitCreatureID", null, Export.C.Creature);
+                                Connection.ExecuteNonQuery($"DELETE FROM {d.SqlTableName} WHERE {d.SqlKey} = {id};");
                             }
                         }
 
                         // No special, just delete.
-                        else Connection.ExecuteNonQuery($"DELETE FROM {kvp.Key} WHERE {kvp.Value} = {id};");
+                        if (!kvp.Key.Contains("%t"))
+                            Connection.ExecuteNonQuery($"DELETE FROM {kvp.Key} WHERE {kvp.Value} = {id};");
                     }                       
 
                     return true; // Duplicate, deleted & permission to insert
