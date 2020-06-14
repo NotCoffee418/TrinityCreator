@@ -14,8 +14,6 @@ namespace TrinityCreator.Database
     {
         private static MySqlConnection _conn;
 
-        public static bool IsAlive { get; private set; }
-
         /// <summary>
         ///     Input db info to test
         /// </summary>
@@ -28,7 +26,7 @@ namespace TrinityCreator.Database
         {
             if (connString == "")
                 connString = Settings.Default.worldDb;
-            else if (connString == Settings.Default.worldDb && IsAlive)
+            else if (connString == Settings.Default.worldDb && Open())
                 return null;
 
             try
@@ -54,9 +52,6 @@ namespace TrinityCreator.Database
         /// <returns></returns>
         internal static bool Open(bool requestConfig = true)
         {
-            if (IsAlive)
-                return true;
-
             if (!IsConfigured())
             {
                 Logger.Log("MySQL: Attempting to open connection but database login is not configured yet.");
@@ -70,7 +65,6 @@ namespace TrinityCreator.Database
                 Logger.Log("MySQL: Attemption to open MySQL connection...");
                 _conn = new MySqlConnection(Settings.Default.worldDb.ToString());
                 _conn.Open();
-                IsAlive = true;
                 Logger.Log("MySQL: Successfully connected.");
                 return true;
             }
@@ -95,12 +89,12 @@ namespace TrinityCreator.Database
 
         internal static void Close()
         {
-            if (!IsAlive)
+            if (_conn == null)
                 return;
 
             Logger.Log("MySQL: Connection manually closed.");
             _conn.Close();
-            IsAlive = false;
+            _conn = null;
         }
 
         internal static void RequestConfiguration()
@@ -139,7 +133,7 @@ namespace TrinityCreator.Database
             try
             {
                 Logger.Log("MySQL: Attempting to ExecuteQuery: " + query);
-                if (!IsAlive)
+                if (_conn.State != ConnectionState.Open)
                 {
                     Logger.Log("MySQL: IsAlive was false. Returning empty datatable.");
                     return new DataTable();
@@ -166,7 +160,7 @@ namespace TrinityCreator.Database
             try
             {
                 Logger.Log("MySQL: Attempting to ExecuteScalar: " + query);
-                if (!IsAlive)
+                if (_conn.State != ConnectionState.Open)
                 {
                     Logger.Log("MySQL: IsAlive was false. Returning null.");
                     return null;
@@ -189,7 +183,7 @@ namespace TrinityCreator.Database
             try
             {
                 Logger.Log("MySQL: Attempting to ExecuteNonQuery: " + query);
-                if (!IsAlive)
+                if (_conn.State != ConnectionState.Open)
                 {
                     Logger.Log("MySQL: IsAlive was false. Returning null.");
                     return;

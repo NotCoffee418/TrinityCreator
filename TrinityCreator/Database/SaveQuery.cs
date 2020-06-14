@@ -68,12 +68,9 @@ namespace TrinityCreator
                 // Insert to db
                 if (Connection.Open())
                 {
-                    if (Connection.IsAlive)
-                    {
-                        Connection.ExecuteNonQuery(query);
-                        Logger.Log("Your creation has been saved to the database.", Logger.Status.Info, true);
-                        return;
-                    }
+                    Connection.ExecuteNonQuery(query);
+                    Logger.Log("Your creation has been saved to the database.", Logger.Status.Info, true);
+                    return;
                 }
                 else Logger.Log("There was an error connecting to the database. Your creation was not saved.", Logger.Status.Error, true);
             }
