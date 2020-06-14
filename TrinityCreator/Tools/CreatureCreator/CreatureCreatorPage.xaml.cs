@@ -92,8 +92,11 @@ namespace TrinityCreator.Tools.CreatureCreator
         {
             try
             {
-                string query = Export.Creature(Creature);
-                SaveQuery.ToDatabase(query);
+                if (SaveQuery.CheckDuplicateHandleOverride(Export.C.Creature, Creature.Entry))
+                {
+                    string query = Export.Creature(Creature);
+                    SaveQuery.ToDatabase(query);
+                }                
             }
             catch (Exception ex)
             {

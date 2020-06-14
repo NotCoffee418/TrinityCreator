@@ -427,7 +427,7 @@ namespace TrinityCreator.Tools.ItemCreator
                 string query = Export.Item(_item);
                 if (NeedsWeaponExportWindow())
                     OpenWeaponExportWindow(query, WeaponExportWindow.SaveType.Database);
-                else
+                else if (SaveQuery.CheckDuplicateHandleOverride(Export.C.Item, _item.EntryId))
                     SaveQuery.ToDatabase(query);
             }
             catch (Exception ex)

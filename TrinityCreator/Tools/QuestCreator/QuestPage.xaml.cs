@@ -116,8 +116,11 @@ namespace TrinityCreator.Tools.QuestCreator
         {
             try
             {
-                string query = Export.Quest(this.Quest);
-                SaveQuery.ToDatabase(query);
+                if (SaveQuery.CheckDuplicateHandleOverride(Export.C.Quest, Quest.EntryId))
+                {
+                    string query = Export.Quest(this.Quest);
+                    SaveQuery.ToDatabase(query);
+                }
             }
             catch (Exception ex)
             {

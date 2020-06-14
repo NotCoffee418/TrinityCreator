@@ -182,5 +182,26 @@ namespace TrinityCreator.Database
                 return null;
             }
         }
+
+        internal static void ExecuteNonQuery(string query, bool requestConfig = true)
+        {
+            Open(requestConfig);
+            try
+            {
+                Logger.Log("MySQL: Attempting to ExecuteNonQuery: " + query);
+                if (!IsAlive)
+                {
+                    Logger.Log("MySQL: IsAlive was false. Returning null.");
+                    return;
+                }
+                var cmd = new MySqlCommand(query, _conn);
+                cmd.ExecuteNonQuery();
+                Logger.Log("MySQL: Successfully executed.");
+            }
+            catch (Exception ex)
+            {
+                Logger.Log($"Database Error: {ex.Message}", Logger.Status.Error, true);
+            }
+        }
     }
 }
