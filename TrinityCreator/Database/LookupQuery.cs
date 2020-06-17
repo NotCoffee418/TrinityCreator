@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -69,15 +70,19 @@ namespace TrinityCreator.Database
         /// <returns></returns>
         internal static int GetNextId(Export.C toolType)
         {
-            string toolIdAppKey = ProfileHelper.GetToolIdAppKey(toolType);
-            string toolSqlKey = ProfileHelper.GetSqlKey(toolType, toolIdAppKey);
-            string tableName = ProfileHelper.GetPrimaryTable(toolType);
+            if (Open(requestConfig:false))
+            {
+                string toolIdAppKey = ProfileHelper.GetToolIdAppKey(toolType);
+                string toolSqlKey = ProfileHelper.GetSqlKey(toolType, toolIdAppKey);
+                string tableName = ProfileHelper.GetPrimaryTable(toolType);
 
-            string query = $"SELECT MAX({toolSqlKey}) FROM {tableName}";
-            object result = ExecuteScalar(query, requestConfig:false);
-            if (result == null || result is DBNull)
-                return 0;
-            else return Convert.ToInt32(result) + 1;
+                string query = $"SELECT MAX({toolSqlKey}) FROM {tableName}";
+                object result = ExecuteScalar(query, requestConfig:false);
+                if (result == null || result is DBNull)
+                    return 0;
+                else return Convert.ToInt32(result) + 1;
+            }
+            return 0;
         }
 
         internal static int GetCreatureIdFromDisplayId(int targetDisplayId)

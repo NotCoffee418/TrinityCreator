@@ -25,7 +25,8 @@ namespace TrinityCreator.Profiles
             Quest,
             Item,
             Loot,
-            Vendor
+            Vendor,
+            GameObject,
         }
 
 

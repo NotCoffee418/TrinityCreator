@@ -17,6 +17,7 @@ using System.Data;
 using System.Threading;
 using System.Windows.Threading;
 using TrinityCreator.DBC;
+using TrinityCreator.Profiles;
 
 namespace TrinityCreator.Tools.LookupTool
 {
@@ -339,22 +340,38 @@ namespace TrinityCreator.Tools.LookupTool
             try
             {
                 DataRowView r = dataGrid.SelectedItem as DataRowView; // trigger possible error before asking confirmation
-                string id = r.Row[0].ToString();
+                int id = int.Parse(r.Row[0].ToString());
                 string selectedTargetName = Enum.GetName(typeof(Target), SelectedTarget);
-                string extrawarning = "";
-
-                if (selectedTargetName == "Creature")
-                    extrawarning = " and all it's spawns in the world";
+                Export.C type;
 
                 if (success && MessageBoxResult.Yes == MessageBox.Show(
-                    string.Format("Are you sure you want to delete {0} {1} {2}?", selectedTargetName, id, extrawarning),
+                    string.Format("Are you sure you want to delete {0} {1}?", selectedTargetName, id),
                     "Confirm delete", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning))
                 {
-                    string query = "";
-                    foreach (var qP in qParts)
-                        query += string.Format("DELETE FROM {0} WHERE {1}={2}; ", qP[0], qP[1], id);
+                    switch(SelectedTarget)
+                    {
+                        case Target.Creature:
+                            type = Export.C.Creature;
+                            break;
+                        case Target.Quest:
+                            type = Export.C.Quest;
+                            break;
+                        case Target.Item:
+                            type = Export.C.Item;
+                            break;
+                        case Target.GameObject:
+                            type = Export.C.GameObject;
+                            break;
+                        default:
+                            MessageBox.Show($"TrinityCreator is unable to delete {selectedTargetName}s.");
+                            return;
+                    }
 
-                    Database.Connection.ExecuteQuery(query);
+                    // Delete & refresh
+                    SaveQuery.DeleteCreation(type, id);
+                    searchBtn.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+
+                    // notify
                     MessageBox.Show(string.Format("Successfully deleted id {0} from database.", id), "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }

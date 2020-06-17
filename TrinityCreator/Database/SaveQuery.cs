@@ -290,5 +290,12 @@ namespace TrinityCreator
             }
         }
 
+        public static void DeleteCreation(Export.C type, int id)
+        {
+            Logger.Log($"Requesting to delete {type} {id}");
+            var relTabIds = GetRelevantTablesAndIds(type, id);
+            foreach (var kvp in relTabIds)
+                Connection.ExecuteNonQuery($"DELETE FROM {kvp.Key} WHERE {kvp.Value}={id};");
+        }
     }
 }
