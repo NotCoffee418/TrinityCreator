@@ -62,11 +62,16 @@ namespace TrinityCreator.Database
 
             try
             {
-                Logger.Log("MySQL: Attemption to open MySQL connection...");
-                _conn = new MySqlConnection(Settings.Default.worldDb.ToString());
-                _conn.Open();
-                Logger.Log("MySQL: Successfully connected.");
-                return true;
+                if (_conn != null && _conn.State == ConnectionState.Open)
+                    return true; // connection is still open
+                else
+                {
+                    Logger.Log("MySQL: Attemption to open MySQL connection...");
+                    _conn = new MySqlConnection(Settings.Default.worldDb.ToString());
+                    _conn.Open();
+                    Logger.Log("MySQL: Successfully connected.");
+                    return true;
+                }
             }
             catch (Exception ex)
             {
