@@ -31,7 +31,7 @@ Known issues: There are specific fields set up for 1.12 emulators as well. But y
 You can contribute any profiles you create at [NotCoffe418/TrinityCreatorProfiles](https://github.com/NotCoffee418/TrinityCreatorProfiles).
 
 ### Documentation ###
-- Using Trinity Creator (coming soon)
+- [Installing & Using Trinity Creator](https://github.com/NotCoffee418/TrinityCreator/wiki/Installing-&-Using-Trinity-Creator)
 - [Adding Emulator Support](https://github.com/NotCoffee418/TrinityCreator/wiki/Adding-Emulator-Support)
 
 ### Support ###
