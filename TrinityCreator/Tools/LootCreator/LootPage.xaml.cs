@@ -29,8 +29,17 @@ namespace TrinityCreator.Tools.LootCreator
         
         public void AddLootRow()
         {
-            lootRowSp.Children.Add(new LootRowControl());
+            var lrc = new LootRowControl();
+            lootRowSp.Children.Add(lrc);
+            lrc.RemoveRequestEvent += Lrc_RemoveRequestEvent;
         }
+
+        private void Lrc_RemoveRequestEvent(object sender, EventArgs e)
+        {
+            if (lootRowSp.Children.Count > 1)
+                lootRowSp.Children.Remove((LootRowControl)sender);
+        }
+
         public void RemoveLootRow()
         {
             if (lootRowSp.Children.Count > 1)

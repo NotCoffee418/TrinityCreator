@@ -28,6 +28,8 @@ namespace TrinityCreator.Tools.LootCreator
             DataContext = this;
         }
 
+
+        public event EventHandler RemoveRequestEvent;
         public event PropertyChangedEventHandler PropertyChanged;
         private int _item;
         private float _chance = 100;
@@ -90,6 +92,11 @@ namespace TrinityCreator.Tools.LootCreator
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+
+        private void removeMeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveRequestEvent(this, e);
         }
     }
 }

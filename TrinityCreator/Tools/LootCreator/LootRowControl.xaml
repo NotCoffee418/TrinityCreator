@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             Height="30" Width="610" >
+             Height="30" Width="700" >
     <DockPanel Margin="2">
         <Label Content="Item" Margin="0,0,0,0" />
         <TextBox Text="{Binding Item}" Width="75"/>
@@ -15,5 +15,8 @@
         <Label Content="Max count" Margin="15,0,0,0" />
         <TextBox Text="{Binding MaxCount}" Width="50"/>
         <CheckBox IsChecked="{Binding QuestRequired}" Content="Quest Required?" Margin="15,5,0,0"/>
+        <Button Width="24" Height="24" HorizontalAlignment="Right" Click="removeMeBtn_Click">
+            <Image Source="/TrinityCreator;component/Resources/remove-icon.png" />
+        </Button>
     </DockPanel>
 </UserControl>

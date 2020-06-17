@@ -29,10 +29,9 @@
                 </WrapPanel>
                 <Button Margin="5" HorizontalAlignment="Center" Click="addItemBtn_Click">
                     <StackPanel Orientation="Horizontal" Height="50">
-                        <Image Source="/TrinityCreator;component/Resources/Add-icon.png" Margin="10,0" Width="30px" Height="30px" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Image Source="/TrinityCreator;component/Resources/add-icon.png" Margin="10,0" Width="30px" Height="30px" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         <TextBlock Text="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,15,0" FontSize="20"/>
                     </StackPanel>
-                
                 </Button>
             </StackPanel>
         </ScrollViewer>
