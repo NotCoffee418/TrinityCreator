@@ -13,6 +13,7 @@ namespace TrinityCreator.UI.UIElements
     public partial class DynamicDataControl : UserControl
     {
         private List<DockPanel> _lines = new List<DockPanel>();
+        public event EventHandler RemoveRequestEvent;
 
         /// <summary>
         /// DDC With Combobox (key) & TextBox (value)
@@ -35,11 +36,10 @@ namespace TrinityCreator.UI.UIElements
             if (showAll)
             {
                 AddLineBtn.Visibility = Visibility.Collapsed;
-                RemoveLineBtn.Visibility = Visibility.Collapsed;
                 foreach (var key in KeyOptions)
-                    AddLine(key);
+                    AddLine(key, false);
             }
-            else AddLine();
+            else AddLine(null, true);
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace TrinityCreator.UI.UIElements
                 AddLine();
         }
 
-        private void AddLine(object key = null)
+        private void AddLine(object key = null, bool showRemoveBtn = true)
         {
             var dp = new DockPanel();
             dp.Margin = new Thickness(0, 2, 0, 2);
@@ -221,6 +221,7 @@ namespace TrinityCreator.UI.UIElements
                 tbKey.Width = 150;
                 tbKey.Text = DefaultValue;
                 tbKey.LostFocus += TbKey_LostFocus;
+                tbKey.Margin = new Thickness(5, 0, 0, 0);
                 dp.Children.Add(tbKey);
             }
             else // combobox key
@@ -236,14 +237,38 @@ namespace TrinityCreator.UI.UIElements
                 cb.SelectedIndex = 0;
                 cb.Width = 150;
                 cb.SelectionChanged += TriggerChangedEvent;
+                cb.Margin = new Thickness(5, 0, 0, 0);
                 dp.Children.Add(cb);
             }
 
+            // Add value textbox
             var tbValue = new TextBox();
             tbValue.Margin = new Thickness(5, 0, 0, 0);
             tbValue.Text = DefaultValue;
             tbValue.LostFocus += TbValue_LostFocus;
+            tbValue.MinWidth = 140;
             dp.Children.Add(tbValue);
+
+
+            // Add remove button
+            if (showRemoveBtn)
+            {
+                // Prepare img
+                Image removeImg = new Image();
+                removeImg.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(
+                    "pack://application:,,,/TrinityCreator;component/Resources/remove-icon.png", UriKind.Absolute));
+
+                // Prepare button
+                Button removeBtn = new Button();
+                removeBtn.Width = 24;
+                removeBtn.Height = 24;
+                removeBtn.Content = removeImg;
+                removeBtn.Margin = new Thickness(5, 0, 0, 0);
+                removeBtn.HorizontalAlignment = HorizontalAlignment.Left;
+                removeBtn.Click += RemoveBtn_Click;
+                
+                dp.Children.Add(removeBtn);
+            }
 
             _lines.Add(dp);
             DynamicSp.Children.Add(dp);
@@ -285,13 +310,14 @@ namespace TrinityCreator.UI.UIElements
                 tb.Text = newTxt;
         }
 
-        private void removeLineBtn_Click(object sender, RoutedEventArgs e)
+        private void RemoveBtn_Click(object sender, RoutedEventArgs e)
         {
             if (_lines.Count > 1 && _lines.Count <= MaxLines)
             {
-                var lastindex = _lines.Count - 1;
-                _lines.RemoveAt(lastindex);
-                DynamicSp.Children.RemoveAt(lastindex);
+                // I don't know either. I regret everything that happens in this class. :(
+                var target = (DockPanel)((Button)sender).Parent;
+                _lines.Remove(target);
+                DynamicSp.Children.Remove(target);
                 TriggerChangedEvent(this, new EventArgs());
             }
         }
