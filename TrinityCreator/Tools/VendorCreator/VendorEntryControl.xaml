@@ -18,7 +18,10 @@
                 <TextBox Name="itemTb"/>
             </DockPanel>
             <DockPanel Margin="2">
-                <CheckBox Margin="5" Content="Advanced Options" Name="advancedCb" />
+                <CheckBox Margin="5" Content="Advanced Options" Name="advancedCb" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button Name="removeMeBtn" Margin="5" Width="24" Height="24" HorizontalAlignment="Right" Click="removeMeBtn_Click">
+                    <Image Source="/TrinityCreator;component/Resources/remove-icon.png" />
+                </Button>
             </DockPanel>
             <StackPanel Visibility="{Binding ElementName=advancedCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}">
                 <DockPanel Margin="2" ToolTip="Position of the item when the vendor window opens.">

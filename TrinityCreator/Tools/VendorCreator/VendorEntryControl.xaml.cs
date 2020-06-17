@@ -25,6 +25,13 @@ namespace TrinityCreator.Tools.VendorCreator
             InitializeComponent();
         }
 
+        public event EventHandler RemoveRequestEvent;
+
+        private void removeMeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveRequestEvent(this, e);
+        }
+
         private void itemLookupBtn_Click(object sender, RoutedEventArgs e)
         {
             App.LookupTool.SelectedTarget = LookupTool.Target.Item;

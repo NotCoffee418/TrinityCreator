@@ -29,7 +29,19 @@ namespace TrinityCreator.Tools.VendorCreator
 
         private void addItemBtn_Click(object sender, RoutedEventArgs e)
         {
-            vendorEntriesWp.Children.Add(new VendorEntryControl());
+            var vec = new VendorEntryControl();
+            vec.RemoveRequestEvent += Vec_RemoveRequestEvent; ;
+            vendorEntriesWp.Children.Add(vec);
+        }
+
+        private void Vec_RemoveRequestEvent(object sender, EventArgs e)
+        {
+            // Remove the sender if it's not the last one
+            if (vendorEntriesWp.Children.Count > 1)
+            {
+                var vec = (VendorEntryControl)sender;
+                vendorEntriesWp.Children.Remove(vec);
+            }
         }
 
         private void removeItemBtn_Click(object sender, RoutedEventArgs e)
