@@ -220,7 +220,7 @@ namespace TrinityCreator.Data
         public static ItemSubClass[] GetArmorList()
         {
             var armorType = ItemInventoryType.GetArmor();
-            var relicType = ItemInventoryType.GetArmor();
+            var relicType = ItemInventoryType.GetRelic();
 
             return new[]
             {
@@ -273,7 +273,7 @@ namespace TrinityCreator.Data
                     lockedInventoryType: ItemInventoryType.GetOneHandWeapon()),
                 new ItemSubClass(8, "2h Sword", previewNoteRight: "Sword",
                     lockedInventoryType: ItemInventoryType.GetTwoHandWeapon()),
-                new ItemSubClass(10, "Staff", lockedInventoryType: ItemInventoryType.GetStaff()),
+                new ItemSubClass(10, "Staff", lockedInventoryType: ItemInventoryType.GetTwoHandWeapon()),
                 new ItemSubClass(13, "Fist Weapon", lockedInventoryType: ItemInventoryType.GetOneHandWeapon()),
                 new ItemSubClass(14, "Miscellaneous", lockedInventoryType: ItemInventoryType.GetAllInventoryTypes()),
                 new ItemSubClass(15, "Dagger", lockedInventoryType: ItemInventoryType.GetOneHandWeapon()),

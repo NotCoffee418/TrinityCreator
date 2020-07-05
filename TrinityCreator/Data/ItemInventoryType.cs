@@ -21,7 +21,6 @@ namespace TrinityCreator.Data
             result.AddRange(GetRangedWandGun());
             result.AddRange(GetRangedBow());
             result.AddRange(GetTwoHandWeapon());
-            result.AddRange(GetStaff());
             result.AddRange(GetBag());
             result.AddRange(GetThrown());
             result.AddRange(GetAmmo());
@@ -80,14 +79,6 @@ namespace TrinityCreator.Data
             };
         }
 
-        public static ItemInventoryType[] GetStaff()
-        {
-            return new[]
-            {
-                new ItemInventoryType(17, "Two-Hand", 2)
-            };
-        }
-
         public static ItemInventoryType[] GetBag()
         {
             return new[]
@@ -129,6 +120,14 @@ namespace TrinityCreator.Data
                 new ItemInventoryType(11, "Finger"),
                 new ItemInventoryType(12, "Trinket"),
                 new ItemInventoryType(16, "Cloak")
+            };
+        }
+        
+        public static ItemInventoryType[] GetRelic()
+        {
+            return new[]
+            {
+                new ItemInventoryType(28, "Relic")
             };
         }
     }
