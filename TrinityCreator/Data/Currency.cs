@@ -8,9 +8,9 @@ namespace TrinityCreator.Data
     public class Currency : INotifyPropertyChanged
     {
         private int _copper;
-
         private int _gold;
         private int _silver;
+        private int _amount;
 
         public Currency(string g, string s, string c)
         {
@@ -19,19 +19,7 @@ namespace TrinityCreator.Data
 
         public Currency(int amount)
         {
-            string g = "", s = "", c = "", amountstr = amount.ToString();
-            if (amountstr.Length > 4)
-                g = amountstr.Substring(0, amountstr.Length - 4);
-            if (amountstr.Length > 3)
-                s += amountstr[amountstr.Length - 4];
-            if (amountstr.Length > 2)
-                s += amountstr[amountstr.Length - 3];
-            if (amountstr.Length > 1)
-                c += amountstr[amountstr.Length - 2];
-            c += amountstr[amountstr.Length - 1];
-
-            // Set values
-            StringsToCurrency(g, s, c);
+            SetCurrencyFromAmount(amount);
         }
 
         public int Gold
@@ -40,9 +28,9 @@ namespace TrinityCreator.Data
             set
             {
                 _gold = value;
+                UpdateAmount();
                 RaisePropertyChanged("Gold");
                 RaisePropertyChanged("Amount");
-                UpdateAmount();
             }
         }
 
@@ -52,9 +40,9 @@ namespace TrinityCreator.Data
             set
             {
                 _silver = value;
+                UpdateAmount();
                 RaisePropertyChanged("Silver");
                 RaisePropertyChanged("Amount");
-                UpdateAmount();
             }
         }
 
@@ -64,16 +52,26 @@ namespace TrinityCreator.Data
             set
             {
                 _copper = value;
+                UpdateAmount();
                 RaisePropertyChanged("Copper");
                 RaisePropertyChanged("Amount");
-                UpdateAmount();
             }
         }
 
         /// <summary>
         ///     integer value as it should be placed in the database
         /// </summary>
-        public int Amount { get; private set; }
+        public int Amount {
+            get { return _amount; }
+            set {  
+                _amount = value;
+                SetCurrencyFromAmount(value);
+                RaisePropertyChanged("Gold");
+                RaisePropertyChanged("Silver");
+                RaisePropertyChanged("Copper");
+                RaisePropertyChanged("Amount");
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -104,19 +102,37 @@ namespace TrinityCreator.Data
 
                 try
                 {
-                    Amount = int.Parse(g + s + c);
+                    _amount = int.Parse(g + s + c);
                 }
                 catch // too big, set max
                 {
-                    Gold = 214748;
-                    Silver = 36;
-                    Copper = 47;
+                    _gold = 214748;
+                    _silver = 36;
+                    _copper = 47;
+                    _amount = int.MaxValue;
                 }
             }
             catch
             {
                 throw new Exception("Currency must be numeric.");
             }
+        }
+
+        private void SetCurrencyFromAmount(int amount)
+        {
+            string g = "", s = "", c = "", amountstr = amount.ToString();
+            if (amountstr.Length > 4)
+                g = amountstr.Substring(0, amountstr.Length - 4);
+            if (amountstr.Length > 3)
+                s += amountstr[amountstr.Length - 4];
+            if (amountstr.Length > 2)
+                s += amountstr[amountstr.Length - 3];
+            if (amountstr.Length > 1)
+                c += amountstr[amountstr.Length - 2];
+            c += amountstr[amountstr.Length - 1];
+
+            // Set values
+            StringsToCurrency(g, s, c);
         }
 
         public override string ToString()

@@ -12,6 +12,7 @@
     d:DesignHeight="1152.55" MinWidth="655">
     <UserControl.Resources>
         <conv:ValueToVisibilityConverter x:Key="ValueVisibilityConverter" />
+        <conv:BoolInverter x:Key="BoolInverter" />
         <ObjectDataProvider x:Key="ClassList"
                             ObjectType="{x:Type data:ItemClass}"
                             MethodName="GetClassList" />
@@ -200,19 +201,20 @@
                                HorizontalAlignment="Left" Width="84" />
                         <TextBox Name="SellPriceGTxt"
                                  Text="{Binding ValueSell.Gold, UpdateSourceTrigger=PropertyChanged}" Height="25"
-                                 Margin="84,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48" />
+                                 Margin="84,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48"
+                                 IsEnabled="{Binding ElementName=autoSetSellCb, Path=IsChecked, Converter={StaticResource BoolInverter}}"/>
                         <Image Margin="137,44,0,0" Width="15" Source="/TrinityCreator;component/Resources/gold.gif" HorizontalAlignment="Left"
                                Height="16" VerticalAlignment="Top" />
                         <TextBox Name="SellPriceSTxt"
                                  Text="{Binding ValueSell.Silver, UpdateSourceTrigger=PropertyChanged}" Height="25"
-                                 Margin="157,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20"
-                                 MaxLength="2" />
+                                 Margin="157,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2"                                  
+                                 IsEnabled="{Binding ElementName=autoSetSellCb, Path=IsChecked, Converter={StaticResource BoolInverter}}"/>
                         <Image Margin="182,44,0,0" Width="15" Source="/TrinityCreator;component/Resources/silver.gif" HorizontalAlignment="Left"
                                Height="16" VerticalAlignment="Top" />
                         <TextBox Name="SellPriceCTxt"
                                  Text="{Binding ValueSell.Copper, UpdateSourceTrigger=PropertyChanged}" Height="25"
-                                 Margin="202,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20"
-                                 MaxLength="2" />
+                                 Margin="202,39,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MaxLength="2" 
+                                 IsEnabled="{Binding ElementName=autoSetSellCb, Path=IsChecked, Converter={StaticResource BoolInverter}}"/>
                         <Image Margin="228,44,0,0" Width="15" Source="/TrinityCreator;component/Resources/copper.gif" HorizontalAlignment="Left"
                                Height="16" VerticalAlignment="Top" />
 
@@ -220,7 +222,11 @@
                                HorizontalAlignment="Left" Width="84"
                                ToolTip="The size of the item stack when sold by vendors. Also if a vendor has limited copies of this item available, everytime the vendor list is refreshed." />
                         <TextBox Name="BuyCountTxt" Text="{Binding BuyCount, UpdateSourceTrigger=PropertyChanged}"
-                                 Height="25" Margin="85,72,9,0" VerticalAlignment="Top" />
+                                 Height="25" Margin="84,72,9,0" VerticalAlignment="Top" />
+
+                        <CheckBox Name="autoSetSellCb" Content="Automatically set sell price to 25%" 
+                                  IsChecked="{Binding AutoSetValueSell, UpdateSourceTrigger=PropertyChanged}"
+                                  Margin="5,105,9,5"/>
 
                     </Grid>
                 </GroupBox>

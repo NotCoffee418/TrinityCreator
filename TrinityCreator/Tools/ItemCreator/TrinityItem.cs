@@ -14,6 +14,7 @@ namespace TrinityCreator.Tools.ItemCreator
         public TrinityItem()
         {
             EntryId = LookupQuery.GetNextId(Export.C.Item);
+            ValueBuy.PropertyChanged += ValueBuy_PropertyChanged;
         }
 
         private BitmaskStackPanel _allowedclass;
@@ -51,7 +52,7 @@ namespace TrinityCreator.Tools.ItemCreator
         private int _rangedModRange;
         private int _requiredDisenchantSkill;
         private int _disenchantLootId;
-        private bool _autoSetDisenchantData;
+        private bool _autoSetValueSell = true;
 
         public string Name
         {
@@ -218,6 +219,20 @@ namespace TrinityCreator.Tools.ItemCreator
             {
                 _valuesell = new Currency(DataType.LimitLength(value.Amount, "int(10)"));
                 RaisePropertyChanged("ValueSell");
+            }
+        }
+
+        // Not exported, UI value.
+        public bool AutoSetValueSell
+        {
+            get
+            {
+                return _autoSetValueSell;
+            }
+            set
+            {
+                _autoSetValueSell = value;
+                RaisePropertyChanged("AutoSetValueSell");
             }
         }
 
@@ -466,6 +481,20 @@ namespace TrinityCreator.Tools.ItemCreator
                 RaisePropertyChanged("DisenchantLootId");
             }
         }
+
+        #region Logic
+
+        private void ValueBuy_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (!AutoSetValueSell)
+                return;
+
+            if (ValueBuy.Amount <= 0)
+                ValueSell.Amount = 0;
+            else
+                ValueSell.Amount = Math.Abs(ValueBuy.Amount / 4);
+        }
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
 
