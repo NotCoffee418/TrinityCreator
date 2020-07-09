@@ -270,7 +270,7 @@ namespace TrinityCreator
                 // Add secondary tables
                 foreach (var tablesDict in Profile.Active.CustomFields)
                     foreach (var keysDict in tablesDict.Value)
-                        if (keysDict.Key.StartsWith(type.ToString()))
+                        if (keysDict.Key.StartsWith(type.ToString()) && !fieldsToCheck.ContainsKey(tablesDict.Key))
                             fieldsToCheck.Add(tablesDict.Key, keysDict.Value);
 
                 // Add special cases
@@ -285,7 +285,7 @@ namespace TrinityCreator
             catch (Exception ex)
             {
                 Logger.Log($"Profile: CanWriteHandleOverride failed to determine ID of a table for {type}. Export failed.", Logger.Status.Error, true);
-                Logger.Log(ex.Message);
+                 Logger.Log(ex.Message);
                 return null; // Failed, cancel insert
             }
         }
