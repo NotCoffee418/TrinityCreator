@@ -49,6 +49,9 @@ namespace TrinityCreator.Tools.ItemCreator
         private int _statsCount;
         private int _itemLevel;
         private int _rangedModRange;
+        private int _requiredDisenchantSkill;
+        private int _disenchantLootId;
+        private bool _autoSetDisenchantData;
 
         public string Name
         {
@@ -441,6 +444,26 @@ namespace TrinityCreator.Tools.ItemCreator
             {
                 _rangedModRange = DataType.LimitLength(value, "smallint(3)");
                 RaisePropertyChanged("RangedModRange");
+            }
+        }
+
+        public int RequiredDisenchantSkill
+        {
+            get { return _requiredDisenchantSkill; }
+            set
+            {
+                _requiredDisenchantSkill = DataType.LimitLength(value, "smallint(3)");
+                RaisePropertyChanged("RequiredDisenchantSkill");
+            }
+        }
+        
+        public int DisenchantLootId
+        {
+            get { return _disenchantLootId; }
+            set
+            {
+                _disenchantLootId = DataType.LimitLength(value, "mediumint(8)");
+                RaisePropertyChanged("DisenchantLootId");
             }
         }
 

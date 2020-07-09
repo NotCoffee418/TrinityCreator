@@ -115,5 +115,54 @@ namespace TrinityCreator.Database
                 return 0;
             else return Convert.ToInt32(result);
         }
+
+        /// <summary>
+        /// Attempt to find a blizzlike required skill and DE loot template in database
+        /// </summary>
+        /// <param name="qualityValue">Item quality int value</param>
+        /// <param name="reqLevelValue">Minimum level</param>
+        /// <returns>Tuple<DisenchantID, RequiredDisenchantSkill></returns>
+        internal static int GetDisenchantLootId(int qualityValue, int reqLevelValue)
+        {
+            Logger.Log($"LookupQuery.GetDisenchantData({qualityValue}, {reqLevelValue})");
+            string tableName = ProfileHelper.GetPrimaryTable(Export.C.Item);
+            string DisenchantID = ProfileHelper.GetSqlKey(Export.C.Item, "DisenchantLootId");
+            string MinLevel = ProfileHelper.GetSqlKey(Export.C.Item, "MinLevel");
+            string Quality = ProfileHelper.GetSqlKey(Export.C.Item, "Quality");
+
+            // Handle invalid (caused by missing value in profile)
+            string invalid = "InvalidAppKey";
+            if (tableName == "InvalidTable" || DisenchantID == invalid || MinLevel == invalid || Quality == invalid)
+            {
+                Logger.Log("LookupQuery.GetDisenchantData: A required appkey for this feature is not assigned in the profile.", Logger.Status.Warning, true);
+                return 0;
+            }
+
+            // Match level & quality, Find closest level match at level or lower, ASC sort DisenchantID to get blizzlike.
+            string query = $"SELECT {DisenchantID} FROM {tableName} " +
+                $"WHERE {MinLevel} <= {reqLevelValue} AND {Quality} = {qualityValue} AND {DisenchantID} > 0 " +
+                $"GROUP BY {Quality}, {MinLevel} ORDER BY {MinLevel} DESC, {DisenchantID} ASC LIMIT 1;";
+
+            // Execute
+            DataTable result = ExecuteQuery(query, true);
+
+            // Return invalid result as 0
+            if (result == null || result.Rows.Count == 0)
+            {
+                Logger.Log("LookupQuery.GetDisenchantData: No results or null result. Returning 0,0.");
+                return 0;
+            }
+
+            try
+            {
+                // Parse values to int & return
+                return Convert.ToInt32(result.Rows[0][DisenchantID]);
+            }
+            catch
+            {
+                Logger.Log("LookupQuery.GetDisenchantData: Failed to parse result to int. Please report this issue.");
+                return 0;
+            }
+        }
     }
 }

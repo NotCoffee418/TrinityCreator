@@ -126,6 +126,10 @@ namespace TrinityCreator.Tools.ProfileCreator
                 new ProfileCreatorEntry("StatType10"),
                 new ProfileCreatorEntry("StatValue10"),
                 new ProfileCreatorEntry("StatsCount"),
+
+                // Disenchanting Data
+                new ProfileCreatorEntry("RequiredDisenchantSkill"),
+                new ProfileCreatorEntry("DisenchantLootId"),
             };
             foreach (var e in ItemElements)
                 itemSp.Children.Add(e);

@@ -142,7 +142,7 @@
                         <Label FontSize="12" Content="Armor" Height="30" Margin="0,5,0,0" VerticalAlignment="Top"
                                HorizontalAlignment="Left" Width="84" />
                         <TextBox Name="ItemArmorTxt" Text="{Binding Armor, UpdateSourceTrigger=PropertyChanged}"
-                                 Height="25" Margin="85,5,6,0" VerticalAlignment="Top" />
+                                 Height="25" Margin="85,5,9,0" VerticalAlignment="Top" />
 
                         <Label FontSize="12" Content="Item Block" Height="30" Margin="0,35,0,0" VerticalAlignment="Top"
                                HorizontalAlignment="Left" Width="84" />
@@ -222,6 +222,21 @@
                         <TextBox Name="BuyCountTxt" Text="{Binding BuyCount, UpdateSourceTrigger=PropertyChanged}"
                                  Height="25" Margin="85,72,9,0" VerticalAlignment="Top" />
 
+                    </Grid>
+                </GroupBox>
+                <GroupBox Name="DisenchantBox" Header="Disenchanting Properties">
+                    <Grid>
+                        <Label FontSize="12" Content="Required Skill" Height="30" Margin="0,5,0,0" VerticalAlignment="Top"
+                               HorizontalAlignment="Left" Width="84" />
+                        <TextBox Name="RequiredDisenchantSkillTxt" Text="{Binding RequiredDisenchantSkill, UpdateSourceTrigger=PropertyChanged}"
+                                 Height="25" Margin="85,5,9,0" VerticalAlignment="Top" />
+
+                        <Label FontSize="12" Content="Loot Id" Height="30" Margin="0,35,0,0" VerticalAlignment="Top"
+                               HorizontalAlignment="Left" Width="84" />
+                        <TextBox Name="DisenchantLootIdTxt" Text="{Binding DisenchantLootId, UpdateSourceTrigger=PropertyChanged}"
+                                 Height="25" Margin="85,36,9,0" VerticalAlignment="Top" />
+
+                        <Button Name="autoSetDisenchantBtn" Margin="5,65,5,5" Content="Automatically set blizzlike" Height="25" ToolTip="Sets values similar to other blizzlike items of this level and quality." Click="autoSetDisenchantBtn_Click"/>
                     </Grid>
                 </GroupBox>
 

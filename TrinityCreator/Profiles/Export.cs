@@ -176,6 +176,8 @@ namespace TrinityCreator.Profiles
                 new ExpKvp("BagFamily", item.BagFamily.BitmaskValue, C.Item),
                 new ExpKvp("ItemLevel", item.ItemLevel, C.Item),
                 new ExpKvp("RangedModRange", item.RangedModRange, C.Item),
+                new ExpKvp("RequiredDisenchantSkill", item.RequiredDisenchantSkill, C.Item),
+                new ExpKvp("DisenchantLootId", item.DisenchantLootId, C.Item)
             };
 
             try // Handle resistances

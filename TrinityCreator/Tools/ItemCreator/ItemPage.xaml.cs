@@ -12,6 +12,7 @@ using TrinityCreator.Profiles;
 using TrinityCreator.Data;
 using TrinityCreator.UI.UIElements;
 using TrinityCreator.Helpers;
+using TrinityCreator.Database;
 
 namespace TrinityCreator.Tools.ItemCreator
 {
@@ -473,6 +474,13 @@ namespace TrinityCreator.Tools.ItemCreator
             App.LookupTool.SelectedTarget = LookupTool.Target.Item;
         }
 
+        private void autoSetDisenchantBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int deLootId = LookupQuery.GetDisenchantLootId(_item.Quality.Id, _item.MinLevel);
+            _item.DisenchantLootId = deLootId;
+            int skillReq = (_item.MinLevel * 5) - 25;
+            _item.RequiredDisenchantSkill = skillReq < 0 ? 0 : skillReq;
+        }
         #endregion
 
     }
