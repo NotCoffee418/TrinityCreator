@@ -67,7 +67,7 @@ namespace TrinityCreator.Database
                 else
                 {
                     Logger.Log("MySQL: Attemption to open MySQL connection...");
-                    _conn = new MySqlConnection(Settings.Default.worldDb.ToString());
+                    _conn = new MySqlConnection(Settings.Default.worldDb.ToString() +"charset=utf8;");
                     _conn.Open();
                     Logger.Log("MySQL: Successfully connected.");
                     return true;
