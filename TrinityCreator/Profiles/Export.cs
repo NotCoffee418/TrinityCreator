@@ -85,9 +85,18 @@ namespace TrinityCreator.Profiles
                         .Select(x => x.ColumnName)
                         .ToArray();
 
+                    // Change exceptional column names
+                    string[] exportColNames = (string[])colNames.Clone();
+                    for (int i = 0; i < exportColNames.Count(); i++)
+                    {
+                        // 'rank' as a column name causes syntax error, its a reserved keyword, needs backtick
+                        if (exportColNames[i].ToLower() == "rank")
+                            exportColNames[i] = "`rank`";
+                    }
+
                     // Generate query
                     sql += "INSERT INTO " + dt.TableName +
-                        " (" + string.Join(", ", colNames) + ") VALUES ";
+                        " (" + string.Join(", ", exportColNames) + ") VALUES ";
 
                     // Datermine how to write values into the query based on type
                     List<string> rowValuesReady = new List<string>();
