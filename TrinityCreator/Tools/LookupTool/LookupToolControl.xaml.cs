@@ -109,16 +109,16 @@ namespace TrinityCreator.Tools.LookupTool
             switch (SelectedTarget)
             {
                 case Target.Item:
-                    SetGridSource(LookupQuery.FindItemsByName(search));
+                    SetGridSource(LookupQuery.FindItemsByName(search).Item1);
                     break;
                 case Target.Quest:
-                    SetGridSource(LookupQuery.FindQuestByName(search));
+                    SetGridSource(LookupQuery.FindQuestByName(search).Item1);
                     break;
                 case Target.Creature:
-                    SetGridSource(LookupQuery.FindCreatureByName(search));
+                    SetGridSource(LookupQuery.FindCreatureByName(search).Item1);
                     break;
                 case Target.GameObject:
-                    SetGridSource(LookupQuery.FindGoByName(search));
+                    SetGridSource(LookupQuery.FindGoByName(search).Item1);
                     break;
                 case Target.Spell: // Combined SQL & DBC
                     SetGridSource(FindSpell(search));
@@ -217,7 +217,7 @@ namespace TrinityCreator.Tools.LookupTool
 
             // Get data
             DataTable dbc = DBCQuery.GetSpells(); // "m_ID", "m_name_lang_1", "m_description_lang_1"
-            DataTable sql = LookupQuery.GetSpells(search); // Id, Comment(name)
+            (DataTable sql, bool _) = LookupQuery.GetSpells(search); // Id, Comment(name)
             DataRow newRow = null;
 
             // Add DBC spells

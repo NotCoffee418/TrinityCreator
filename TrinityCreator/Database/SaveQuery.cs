@@ -68,9 +68,8 @@ namespace TrinityCreator
                 // Insert to db
                 if (Connection.Open())
                 {
-                    Connection.ExecuteNonQuery(query);
-                    Logger.Log("Your creation has been saved to the database.", Logger.Status.Info, true);
-                    return;
+                    if (Connection.ExecuteNonQuery(query))
+                        Logger.Log("Your creation has been saved to the database.", Logger.Status.Info, true);
                 }
                 else Logger.Log("There was an error connecting to the database. Your creation was not saved.", Logger.Status.Error, true);
             }
@@ -129,7 +128,8 @@ namespace TrinityCreator
                     if (kvp.Key.Contains("%t"))
                         continue; // I'm not gonna even
 
-                    var result = Connection.ExecuteScalar($"SELECT COUNT(*) AS matches FROM {kvp.Key} WHERE {kvp.Value} = {id};");
+                    (var result, bool isValidResult) = Connection.ExecuteScalar(
+                        $"SELECT COUNT(*) AS matches FROM {kvp.Key} WHERE {kvp.Value} = {id};");
                     if ((dynamic)result > 0)
                     {
                         alreadyExists = true;

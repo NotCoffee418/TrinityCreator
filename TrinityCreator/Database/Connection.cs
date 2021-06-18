@@ -7,6 +7,8 @@ using System.Windows.Threading;
 using System.Threading;
 using TrinityCreator.UI;
 using TrinityCreator.Helpers;
+using TrinityCreator.Data;
+using System.Text.RegularExpressions;
 
 namespace TrinityCreator.Database
 {
@@ -132,7 +134,7 @@ namespace TrinityCreator.Database
             }
         }
 
-        internal static DataTable ExecuteQuery(string query, bool requestConfig = true)
+        internal static (DataTable, bool) ExecuteQuery(string query, bool requestConfig = true)
         {
             Open(requestConfig);
             try
@@ -141,7 +143,8 @@ namespace TrinityCreator.Database
                 if (_conn.State != ConnectionState.Open)
                 {
                     Logger.Log("MySQL: IsAlive was false. Returning empty datatable.");
-                    return new DataTable();
+                    HandleException(new CExceptions.DatabaseOffline());
+                    return (new DataTable(), false);
                 }                    
                 var result = new DataTable();
                 var cmd = new MySqlCommand(query, _conn);
@@ -150,16 +153,16 @@ namespace TrinityCreator.Database
                     result.Load(rdr);
                 }
                 Logger.Log("MySQL: Successfully return data.");
-                return result;
+                return (result, true);
             }
             catch (Exception ex)
             {
-                Logger.Log($"Database Error: {ex.Message}", Logger.Status.Error, true);
-                return new DataTable();
+                HandleException(ex);
+                return (new DataTable(), false);
             }
         }
 
-        internal static object ExecuteScalar(string query, bool requestConfig = true)
+        internal static (object, bool) ExecuteScalar(string query, bool requestConfig = true)
         {
             Open(requestConfig);
             try
@@ -168,21 +171,22 @@ namespace TrinityCreator.Database
                 if (_conn.State != ConnectionState.Open)
                 {
                     Logger.Log("MySQL: IsAlive was false. Returning null.");
-                    return null;
+                    HandleException(new CExceptions.DatabaseOffline());
+                    return (null, false);
                 }
                 var cmd = new MySqlCommand(query, _conn);
                 var result = cmd.ExecuteScalar();
                 Logger.Log("MySQL: Successfully return data.");
-                return result;
+                return (result, true);
             }
             catch (Exception ex)
             {
-                Logger.Log($"Database Error: {ex.Message}", Logger.Status.Error, true);
-                return null;
+                HandleException(ex);
+                return (null, false);
             }
         }
 
-        internal static void ExecuteNonQuery(string query, bool requestConfig = true)
+        internal static bool ExecuteNonQuery(string query, bool requestConfig = true)
         {
             Open(requestConfig);
             try
@@ -190,17 +194,48 @@ namespace TrinityCreator.Database
                 Logger.Log("MySQL: Attempting to ExecuteNonQuery: " + query);
                 if (_conn.State != ConnectionState.Open)
                 {
-                    Logger.Log("MySQL: IsAlive was false. Returning null.");
-                    return;
+                    Logger.Log("MySQL: IsAlive was false. Returning false.");
+                    HandleException(new CExceptions.DatabaseOffline());
+                    return false;
                 }
                 var cmd = new MySqlCommand(query, _conn);
                 cmd.ExecuteNonQuery();
                 Logger.Log("MySQL: Successfully executed.");
+                return true;
             }
             catch (Exception ex)
             {
-                Logger.Log($"Database Error: {ex.Message}", Logger.Status.Error, true);
+                HandleException(ex);
+                return false;
             }
+        }
+
+        private static void HandleException(Exception ex)
+        {
+            // Log always to file
+            Logger.Log("Raw DB Error: " + ex.Message, Logger.Status.Info, false);
+
+            // If database offline
+            if (ex.GetType() == typeof(CExceptions.DatabaseOffline))
+            {
+                Logger.Log("Connection to the database has failed. Try reconnecting.", Logger.Status.Error, showMessageBox: true);
+                return;
+            }
+
+            // Unknown column
+            Regex unknownColumnRx = new Regex(@"Unknown column '(\S+)' in 'field list'");
+            if (unknownColumnRx.IsMatch(ex.Message))
+            {
+                var rxResult = unknownColumnRx.Match(ex.Message);
+                Logger.Log($"Column not found in database: {rxResult.Groups[1]}" + Environment.NewLine +
+                    "This error is usually caused by not using the correct profile for your emulator/repack." + Environment.NewLine +
+                    "You can change your profile in Top Menu > Config > Choose Emulator Profile.", Logger.Status.Error, showMessageBox: true);
+
+                return;
+            }
+
+            // else
+            Logger.Log("Undefined database exception: " + ex.Message, Logger.Status.Error, showMessageBox: true);
         }
     }
 }

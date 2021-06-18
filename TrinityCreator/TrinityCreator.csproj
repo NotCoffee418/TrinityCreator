@@ -94,6 +94,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\CExceptions.cs" />
     <Compile Include="Helpers\ProfileHelper.cs" />
     <Compile Include="Tools\ItemCreator\WeaponExportWindow.xaml.cs">
       <DependentUpon>WeaponExportWindow.xaml</DependentUpon>

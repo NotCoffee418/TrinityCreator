@@ -10,7 +10,7 @@ namespace TrinityCreator.Database
 {
     internal class LookupQuery : Connection
     {
-        internal static DataTable FindItemsByName(string partialName)
+        internal static (DataTable, bool) FindItemsByName(string partialName)
         {
             string tableName = ProfileHelper.GetPrimaryTable(Export.C.Item);
             string entryId = ProfileHelper.GetSqlKey(Export.C.Item, "EntryId");
@@ -21,7 +21,7 @@ namespace TrinityCreator.Database
                 $"SELECT {entryId}, {displayId}, {name} FROM {tableName} WHERE {name} LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY entry DESC LIMIT 200;");
         }
 
-        internal static DataTable FindQuestByName(string partialName)
+        internal static (DataTable, bool) FindQuestByName(string partialName)
         {
             string tableName = ProfileHelper.GetPrimaryTable(Export.C.Quest);
             string entryId = ProfileHelper.GetSqlKey(Export.C.Quest, "EntryId");
@@ -31,7 +31,7 @@ namespace TrinityCreator.Database
                 $"SELECT {entryId}, {logTitle} FROM {tableName} WHERE {logTitle} LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY Id DESC LIMIT 200;");
         }
 
-        internal static DataTable FindCreatureByName(string partialName)
+        internal static (DataTable, bool) FindCreatureByName(string partialName)
         {
             string tableName = ProfileHelper.GetPrimaryTable(Export.C.Creature);
             string entry = ProfileHelper.GetSqlKey(Export.C.Creature, "Entry");
@@ -42,7 +42,7 @@ namespace TrinityCreator.Database
                 $"SELECT {entry}, {modelId1}, {name} FROM {tableName} WHERE {name} LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY entry DESC LIMIT 200;");
         }
 
-        internal static DataTable FindGoByName(string partialName)
+        internal static (DataTable, bool) FindGoByName(string partialName)
         {
             string tableName = ProfileHelper.GetDefinitionValue("GameObjectTableName");
             string id = ProfileHelper.GetDefinitionValue("GameObjectIdColumn");
@@ -53,7 +53,7 @@ namespace TrinityCreator.Database
                 $"SELECT {id}, {displayId}, {name} FROM {tableName} WHERE {name} LIKE '%" + MySqlHelper.EscapeString(partialName) + "%' ORDER BY entry DESC LIMIT 200;");
         }
 
-        internal static DataTable GetSpells(string partialName)
+        internal static (DataTable, bool) GetSpells(string partialName)
         {
             string tableName = ProfileHelper.GetDefinitionValue("SpellTableName");
             string id = ProfileHelper.GetDefinitionValue("SpellIdColumn");
@@ -77,8 +77,8 @@ namespace TrinityCreator.Database
                 string tableName = ProfileHelper.GetPrimaryTable(toolType);
 
                 string query = $"SELECT MAX({toolSqlKey}) FROM {tableName}";
-                object result = ExecuteScalar(query, requestConfig:false);
-                if (result == null || result is DBNull)
+                (object result, bool isValid) = ExecuteScalar(query, requestConfig:false);
+                if (!isValid || result == null || result is DBNull)
                     return 0;
                 else return Convert.ToInt32(result) + 1;
             }
@@ -95,9 +95,9 @@ namespace TrinityCreator.Database
             string modelId3 = ProfileHelper.GetSqlKey(Export.C.Creature, "ModelId3");
             string modelId4 = ProfileHelper.GetSqlKey(Export.C.Creature, "ModelId4");
 
-            object result = ExecuteScalar(
+            (object result, bool isSuccess) = ExecuteScalar(
                 $"SELECT {entry} FROM creature_template WHERE {modelId1} = {targetDisplayId} OR {modelId2} = {targetDisplayId} OR {modelId3} = {targetDisplayId} OR {modelId4} = {targetDisplayId};");
-            if (result == null)
+            if (!isSuccess || result == null)
                 return 0;
             else return Convert.ToInt32(result);
         }
@@ -109,9 +109,9 @@ namespace TrinityCreator.Database
             string displayId = ProfileHelper.GetSqlKey(Export.C.Item, "DisplayId");
             string name = ProfileHelper.GetSqlKey(Export.C.Item, "Name");
 
-            object result = ExecuteScalar(
+            (object result, bool isSuccess) = ExecuteScalar(
                 $"SELECT {displayId} FROM {tableName} WHERE {entryId} = {targetEntryId};");
-            if (result == null)
+            if (!isSuccess || result == null)
                 return 0;
             else return Convert.ToInt32(result);
         }
@@ -144,10 +144,10 @@ namespace TrinityCreator.Database
                 $"GROUP BY {Quality}, {MinLevel} ORDER BY {MinLevel} DESC, {DisenchantID} ASC LIMIT 1;";
 
             // Execute
-            DataTable result = ExecuteQuery(query, true);
+            (DataTable result, bool isValid) = ExecuteQuery(query, true);
 
             // Return invalid result as 0
-            if (result == null || result.Rows.Count == 0)
+            if (!isValid || result == null || result.Rows.Count == 0)
             {
                 Logger.Log("LookupQuery.GetDisenchantData: No results or null result. Returning 0,0.");
                 return 0;
