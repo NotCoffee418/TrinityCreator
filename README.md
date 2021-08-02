@@ -11,7 +11,7 @@ Trinity Creator can be used by beginners to learn emulator server customization 
 [![Trinity Creator Preview](https://user-images.githubusercontent.com/9306304/83597121-c21ab980-a566-11ea-980b-0163f1dd7518.png "Item Creator")](https://user-images.githubusercontent.com/9306304/83596693-921ee680-a565-11ea-87c2-9d975710b577.png)
 
 ### Getting started ###
-* [Download & install the latest version](https://github.com/Nadromar/TrinityCreator/blob/master/TrinityCreatorSetup/bin/Release/TrinityCreatorSetup.msi?raw=true)
+* [Download & install the latest version](https://github.com/NotCoffee418/TrinityCreator/releases/latest)
 * Use the top menu to select your emulator
 * Enter your database info & DBC directory (optional, adds extra features)
 * Start creating!
@@ -20,6 +20,8 @@ NOTE: You need to reload tables or restart your server before you can see your n
 ### Currently supported emulators ###
 * TrinityCore WotLK 3.3.5a (2020-01 database)
 * TrinityCore WotLK 3.3.5a (2016-06 database)
+* AzerothCore WotLK 3.3.5a
+* cMangos WotLK 303.5a (Latest compiled)
 * Light's Hope Emulator 1.12.2 (Brotalnia repack v16)
 * VMaNGOS 1.12.2 (Brotalnia Repack v17)
 
