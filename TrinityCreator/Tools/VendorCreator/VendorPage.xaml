@@ -22,7 +22,7 @@
         </StackPanel>
 
 
-        <ScrollViewer MinWidth="300">
+        <ScrollViewer MinWidth="300" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
                 <WrapPanel x:Name="vendorEntriesWp" FlowDirection="LeftToRight">
                     <!-- VendorEntryControls go here-->
