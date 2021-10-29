@@ -4,11 +4,16 @@
 [![Discord Chat](https://img.shields.io/discord/717556942071005305.svg)](https://discord.gg/gUXwShK)
 [![Donate](https://img.shields.io/liberapay/patrons/NotCoffee418.svg?logo=liberapay)](https://liberapay.com/NotCoffee418/donate)
 
-This tool allows you to easily create items, creatures and quests for WoW emulators.  
-Trinity Creator can be used by beginners to learn emulator server customization and by experts who just want to do it easier and faster.
+Trinity Creator is a database interface that helps World of Warcraft server developers with creating items, creatures, quests and more.  
+This tool is useful for both beginners; supporting a variety of vanilla through Wrath of the Lich King emulators.  
+It is possible to add support for custom emulators, specific versions of emulators or repacks.
 
 ### Preview ###
 [![Trinity Creator Preview](https://user-images.githubusercontent.com/9306304/83597121-c21ab980-a566-11ea-980b-0163f1dd7518.png "Item Creator")](https://user-images.githubusercontent.com/9306304/83596693-921ee680-a565-11ea-87c2-9d975710b577.png)
+
+### Before you download ###
+Trinity Creator is NOT a hack. You cannot use it to insert items in the private server you play on.  
+It's strictly used to help server admins with custom content development.  
 
 ### Getting started ###
 * [Download & install the latest version](https://github.com/NotCoffee418/TrinityCreator/releases/latest)
