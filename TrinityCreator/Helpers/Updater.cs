@@ -44,9 +44,8 @@ namespace TrinityCreator.Helpers
             // Default data in case of problem
             args.UpdateInfo = new UpdateInfoEventArgs
             {
-                Mandatory = false,
                 InstalledVersion = Assembly.GetExecutingAssembly().GetName().Version,
-                CurrentVersion = Assembly.GetExecutingAssembly().GetName().Version,
+                CurrentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
             };
 
             Logger.Log($"Updater: Currently running on version {args.UpdateInfo.InstalledVersion}");
@@ -77,9 +76,8 @@ namespace TrinityCreator.Helpers
                 // Set update info
                 args.UpdateInfo = new UpdateInfoEventArgs
                 {
-                    Mandatory = false,
                     InstalledVersion = Assembly.GetExecutingAssembly().GetName().Version,
-                    CurrentVersion = latestVersion,
+                    CurrentVersion = latestVersion.ToString(),
                     ChangelogURL = "https://github.com/NotCoffee418/TrinityCreator/commits/master#branch-select-menu",
                     DownloadURL = "https://github.com/NotCoffee418/TrinityCreator/raw/master/TrinityCreator/bin/Publish/TrinityCreator.zip"
                 };
