@@ -3,11 +3,13 @@ using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
-using TrinityCreator.Profiles;
-using TrinityCreator.Tools.LookupTool;
-using TrinityCreator.Tools.ModelViewer;
-using TrinityCreator.UI;
-using TrinityCreator.Helpers;
+using TrinityCreator.Shared.Tools.LookupTool;
+using TrinityCreator.Shared.Tools.ModelViewer;
+using TrinityCreator.Shared.UI;
+using TrinityCreator.Shared.Helpers;
+using TrinityCreator.Shared.Profiles;
+using TrinityCreator.Shared.Properties;
+using TrinityCreator.Shared;
 
 namespace TrinityCreator
 {
@@ -29,12 +31,12 @@ namespace TrinityCreator
             Logger.Log("Application Starting...");
 
             // Upgrade settings
-            if (TrinityCreator.Properties.Settings.Default.UpgradeRequired)
+            if (Settings.Default.UpgradeRequired)
             {
                 Logger.Log("First run or version has changed since last run. Running Settings.Upgrade()");
-                TrinityCreator.Properties.Settings.Default.Upgrade();
-                TrinityCreator.Properties.Settings.Default.UpgradeRequired = false;
-                TrinityCreator.Properties.Settings.Default.Save();
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeRequired = false;
+                Settings.Default.Save();
             }
 
             // Handle startup args
@@ -50,7 +52,7 @@ namespace TrinityCreator
             Profile.ActiveProfileChangedEvent += Profile_ActiveProfileChangedEvent;
 
             // Force profile input if it doesn't know a working one
-            string knownActiveProfilePath = TrinityCreator.Properties.Settings.Default.ActiveProfilePath;
+            string knownActiveProfilePath = Settings.Default.ActiveProfilePath;
             if (knownActiveProfilePath == String.Empty ||
                 !System.IO.File.Exists(knownActiveProfilePath) ||
                 Profile.LoadFile(knownActiveProfilePath) == null)
@@ -68,8 +70,8 @@ namespace TrinityCreator
             var x = Profile.Active;
             if (Profile.Active != null)
             {
-                _MainWindow = new MainWindow();
-                _MainWindow.Show();
+                Global._MainWindow = new MainWindow();
+                Global._MainWindow.Show();
 
                 // Only once on launch.
                 Profile.ActiveProfileChangedEvent -= Profile_ActiveProfileChangedEvent;
@@ -81,9 +83,5 @@ namespace TrinityCreator
             string[] args = Environment.GetCommandLineArgs();
             // niy
         }
-
-        public static LookupToolControl LookupTool { get; internal set; }
-        public static MainWindow _MainWindow { get; internal set; }
-        public static ModelViewerPage ModelViewer { get; internal set; }
     }
 }

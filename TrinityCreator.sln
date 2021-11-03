@@ -1,24 +1,38 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31825.309
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrinityCreator", "TrinityCreator\TrinityCreator.csproj", "{47CB1223-637A-4CBE-8842-CE204B2395B6}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TrinityCreatorInstaller", "TrinityCreatorInstaller\TrinityCreatorInstaller.vdproj", "{3A2CF424-F9FF-48F5-AA36-AD3701DC4DC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrinityCreator.Tests", "TrinityCreator.Tests\TrinityCreator.Tests.csproj", "{97940C3D-3E5A-40F0-A97B-BBCDE2FB6CFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrinityCreator.Shared", "TrinityCreator.Shared\TrinityCreator.Shared.csproj", "{15F1B410-5835-43B1-89B8-197CC6105535}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x86 = Debug|x86
-		Release|x86 = Release|x86
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{47CB1223-637A-4CBE-8842-CE204B2395B6}.Debug|x86.ActiveCfg = Debug|x86
-		{47CB1223-637A-4CBE-8842-CE204B2395B6}.Debug|x86.Build.0 = Debug|x86
-		{47CB1223-637A-4CBE-8842-CE204B2395B6}.Release|x86.ActiveCfg = Release|x86
-		{47CB1223-637A-4CBE-8842-CE204B2395B6}.Release|x86.Build.0 = Release|x86
-		{3A2CF424-F9FF-48F5-AA36-AD3701DC4DC6}.Debug|x86.ActiveCfg = Debug
-		{3A2CF424-F9FF-48F5-AA36-AD3701DC4DC6}.Release|x86.ActiveCfg = Release
+		{47CB1223-637A-4CBE-8842-CE204B2395B6}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{47CB1223-637A-4CBE-8842-CE204B2395B6}.Debug|Any CPU.Build.0 = Debug|x86
+		{47CB1223-637A-4CBE-8842-CE204B2395B6}.Release|Any CPU.ActiveCfg = Release|x86
+		{47CB1223-637A-4CBE-8842-CE204B2395B6}.Release|Any CPU.Build.0 = Release|x86
+		{3A2CF424-F9FF-48F5-AA36-AD3701DC4DC6}.Debug|Any CPU.ActiveCfg = Debug
+		{3A2CF424-F9FF-48F5-AA36-AD3701DC4DC6}.Debug|Any CPU.Build.0 = Debug
+		{3A2CF424-F9FF-48F5-AA36-AD3701DC4DC6}.Release|Any CPU.ActiveCfg = Release
+		{3A2CF424-F9FF-48F5-AA36-AD3701DC4DC6}.Release|Any CPU.Build.0 = Release
+		{97940C3D-3E5A-40F0-A97B-BBCDE2FB6CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97940C3D-3E5A-40F0-A97B-BBCDE2FB6CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97940C3D-3E5A-40F0-A97B-BBCDE2FB6CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97940C3D-3E5A-40F0-A97B-BBCDE2FB6CFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15F1B410-5835-43B1-89B8-197CC6105535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15F1B410-5835-43B1-89B8-197CC6105535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15F1B410-5835-43B1-89B8-197CC6105535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15F1B410-5835-43B1-89B8-197CC6105535}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
