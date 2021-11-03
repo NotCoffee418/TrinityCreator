@@ -124,6 +124,7 @@
     <Compile Include="Data\Coordinate.cs" />
     <Compile Include="Data\CreatureFamily.cs" />
     <Compile Include="Data\Currency.cs" />
+    <Compile Include="Data\CustomDisplayField.cs" />
     <Compile Include="Data\Damage.cs" />
     <Compile Include="Data\DamageType.cs" />
     <Compile Include="Data\IKeyValue.cs" />
