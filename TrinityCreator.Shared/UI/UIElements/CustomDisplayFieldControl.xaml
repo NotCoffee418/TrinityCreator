@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="TrinityCreator.Shared.UI.UIElements.CustomDisplayFieldControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrinityCreator.Shared.UI.UIElements"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Label FontSize="12" Content="{Binding DisplayName}" Height="30" VerticalAlignment="Top"
+                               HorizontalAlignment="Left" Width="147" />
+        <TextBox Name="ItemQuoteTxt" Text="{Binding InputValue, UpdateSourceTrigger=PropertyChanged}"
+                                 Height="25" Margin="150,0,9,0" VerticalAlignment="Top" />
+    </Grid>
+</UserControl>

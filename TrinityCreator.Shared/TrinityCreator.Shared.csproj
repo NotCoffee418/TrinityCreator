@@ -1,0 +1,464 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{15F1B410-5835-43B1-89B8-197CC6105535}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TrinityCreator.Shared</RootNamespace>
+    <AssemblyName>TrinityCreator.Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoUpdater.NET, Version=1.7.0.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autoupdater.NET.Official.1.7.0\lib\net45\AutoUpdater.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.19.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.19.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.2.15.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.2.15\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.15.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.2.15\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1020.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1020.30\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1020.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1020.30\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1020.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1020.30\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.27.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net48\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net48\Ubiety.Dns.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net48\ZstdNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Database\Connection.cs" />
+    <Compile Include="Database\DataType.cs" />
+    <Compile Include="Database\LookupQuery.cs" />
+    <Compile Include="Database\SaveQuery.cs" />
+    <Compile Include="Data\CExceptions.cs" />
+    <Compile Include="Data\Coordinate.cs" />
+    <Compile Include="Data\CreatureFamily.cs" />
+    <Compile Include="Data\Currency.cs" />
+    <Compile Include="Data\CustomDisplayField.cs" />
+    <Compile Include="Data\Damage.cs" />
+    <Compile Include="Data\DamageType.cs" />
+    <Compile Include="Data\IKeyValue.cs" />
+    <Compile Include="Data\ItemClass.cs" />
+    <Compile Include="Data\ItemInventoryType.cs" />
+    <Compile Include="Data\ItemMaterial.cs" />
+    <Compile Include="Data\ItemQuality.cs" />
+    <Compile Include="Data\ItemSubClass.cs" />
+    <Compile Include="Data\Socket.cs" />
+    <Compile Include="Data\TrainerData.cs" />
+    <Compile Include="DBC\DbcHandler.cs" />
+    <Compile Include="DBC\DBCQuery.cs" />
+    <Compile Include="DBC\DBCViewer\ADBReader.cs" />
+    <Compile Include="DBC\DBCViewer\BinaryFormatter.cs" />
+    <Compile Include="DBC\DBCViewer\BinaryFormatterExtensions.cs" />
+    <Compile Include="DBC\DBCViewer\DB2Reader.cs" />
+    <Compile Include="DBC\DBCViewer\DB3Reader.cs" />
+    <Compile Include="DBC\DBCViewer\DB4Reader.cs" />
+    <Compile Include="DBC\DBCViewer\DBCReader.cs" />
+    <Compile Include="DBC\DBCViewer\DBCReaderGeneric.cs" />
+    <Compile Include="DBC\DBCViewer\DBReaderFactory.cs" />
+    <Compile Include="DBC\DBCViewer\IWowClientDBReader.cs" />
+    <Compile Include="DBC\DBCViewer\STLReader.cs" />
+    <Compile Include="DBC\DBCViewer\WDBReader.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="Helpers\GHelper.cs" />
+    <Compile Include="Helpers\Logger.cs" />
+    <Compile Include="Helpers\ProfileHelper.cs" />
+    <Compile Include="Helpers\UiHelper.cs" />
+    <Compile Include="Helpers\Updater.cs" />
+    <Compile Include="Profiles\ExpKvp.cs" />
+    <Compile Include="Profiles\Export.cs" />
+    <Compile Include="Profiles\Profile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Tools\CreatureCreator\CreatureCreatorPage.xaml.cs">
+      <DependentUpon>CreatureCreatorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\CreatureCreator\CreatureTemplateWindow.xaml.cs">
+      <DependentUpon>CreatureTemplateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\CreatureCreator\Templates\BeastEnemyTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\BlankTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\BossTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\ClassTrainerTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\DeadQuestgiverTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\EscorteeTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\ExampleTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\HumanoidEnemyTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\MountTrainerTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\ProfessionTrainerTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\QuestgiverTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\RepairVendorTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\TemplateBase.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\TemplateHandler.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\TrainerTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\Templates\VendorTemplate.cs" />
+    <Compile Include="Tools\CreatureCreator\TrinityCreature.cs" />
+    <Compile Include="Tools\ItemCreator\ItemPage.xaml.cs">
+      <DependentUpon>ItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ItemCreator\ItemPreview.xaml.cs">
+      <DependentUpon>ItemPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ItemCreator\TrinityItem.cs" />
+    <Compile Include="Tools\ItemCreator\WeaponExportWindow.xaml.cs">
+      <DependentUpon>WeaponExportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\LookupTool\LookupToolControl.xaml.cs">
+      <DependentUpon>LookupToolControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\LookupTool\TargetEnum.cs" />
+    <Compile Include="Tools\LootCreator\LootPage.xaml.cs">
+      <DependentUpon>LootPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\LootCreator\LootRowControl.xaml.cs">
+      <DependentUpon>LootRowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ModelViewer\ModelViewerPage.xaml.cs">
+      <DependentUpon>ModelViewerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ProfileCreator\ProfileCreatorDefinition.xaml.cs">
+      <DependentUpon>ProfileCreatorDefinition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ProfileCreator\ProfileCreatorEntry.xaml.cs">
+      <DependentUpon>ProfileCreatorEntry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ProfileCreator\ProfileCreatorWindow.xaml.cs">
+      <DependentUpon>ProfileCreatorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\QuestCreator\QuestPage.xaml.cs">
+      <DependentUpon>QuestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\QuestCreator\QuestPreview.xaml.cs">
+      <DependentUpon>QuestPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\QuestCreator\TrinityQuest.cs" />
+    <Compile Include="Tools\VendorCreator\VendorEntryControl.xaml.cs">
+      <DependentUpon>VendorEntryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\VendorCreator\VendorPage.xaml.cs">
+      <DependentUpon>VendorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Converters\BoolInverter.cs" />
+    <Compile Include="UI\Converters\ValueToVisibilityConverter.cs" />
+    <Compile Include="UI\Converters\WeaponSpeedToStringConverter.cs" />
+    <Compile Include="UI\CreditsWindow.xaml.cs">
+      <DependentUpon>CreditsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DbcConfigWindow.xaml.cs">
+      <DependentUpon>DbcConfigWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DbConfigWindow.xaml.cs">
+      <DependentUpon>DbConfigWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProfileOptionControl.xaml.cs">
+      <DependentUpon>ProfileOptionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProfileSelectionWindow.xaml.cs">
+      <DependentUpon>ProfileSelectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UIElements\BitmaskStackPanel.cs" />
+    <Compile Include="UI\UIElements\Browser.xaml.cs">
+      <DependentUpon>Browser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UIElements\CustomDisplayFieldControl.xaml.cs">
+      <DependentUpon>CustomDisplayFieldControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UIElements\DynamicDataControl.xaml.cs">
+      <DependentUpon>DynamicDataControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UIElements\XmlKeyValue.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Tools\CreatureCreator\CreatureCreatorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\CreatureCreator\CreatureTemplateWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\ItemCreator\ItemPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\ItemCreator\ItemPreview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\ItemCreator\WeaponExportWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\LookupTool\LookupToolControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\LootCreator\LootPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\LootCreator\LootRowControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\ModelViewer\ModelViewerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\ProfileCreator\ProfileCreatorDefinition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\ProfileCreator\ProfileCreatorEntry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\ProfileCreator\ProfileCreatorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\QuestCreator\QuestPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\QuestCreator\QuestPreview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\VendorCreator\VendorEntryControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\VendorCreator\VendorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\CreditsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\DbcConfigWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\DbConfigWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\ProfileOptionControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\ProfileSelectionWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\UIElements\Browser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\UIElements\CustomDisplayFieldControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UIElements\DynamicDataControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ARIALN.TTF" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\bluesocket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\cb_data.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\weapon-notice.rtf" />
+    <Resource Include="Resources\SKURRI.TTF" />
+    <Resource Include="Resources\MORPHEUS.TTF" />
+    <Resource Include="Resources\FRIZQT__.TTF" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\copper.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Credits.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DailyActiveQuestIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DailyQuestIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dbclayout.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\gold.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\IncompleteQuestIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\metasocket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\QuestGreeting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RandomTips.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\redsocket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\remove-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\silver.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\tclogo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\tclogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\yellowsocket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets'))" />
+  </Target>
+</Project>

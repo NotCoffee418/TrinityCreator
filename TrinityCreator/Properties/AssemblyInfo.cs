@@ -53,5 +53,7 @@ using System.Windows;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.1.3.121")]
-[assembly: AssemblyFileVersion("1.1.3.121")]
+
+// Don' change this version. Keep it, change the one in Shared!!
+[assembly: AssemblyVersion("1.1.4.122")]
+[assembly: AssemblyFileVersion("1.1.4.122")]
