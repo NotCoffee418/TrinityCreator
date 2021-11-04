@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TrinityCreator.Shared.Data;
+using TrinityCreator.Shared.Helpers;
 using TrinityCreator.Shared.Profiles;
 using TrinityCreator.Shared.Tools.LookupTool;
 using TrinityCreator.Shared.UI.UIElements;
@@ -50,6 +51,13 @@ namespace TrinityCreator.Shared.Tools.CreatureCreator
             PrepCb(creatureTypeCb, XmlKeyValue.FromXml("CreatureType"));
             PrepCb(aiNameCb, XmlKeyValue.FromXml("AI"));
             PrepCb(movementCb, XmlKeyValue.FromXml("MovementType"));
+            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Export.C.Creature);
+            Profile.ActiveProfileChangedEvent += Profile_ActiveProfileChangedEvent;
+        }
+
+        private void Profile_ActiveProfileChangedEvent(object sender, EventArgs e)
+        {
+            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Export.C.Creature);
         }
 
         private void PrepCb(ComboBox cb, IKeyValue[] src)

@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using TrinityCreator.Shared.Data;
 using TrinityCreator.Shared.Helpers;
 
 namespace TrinityCreator.Shared.Profiles
@@ -32,6 +33,10 @@ namespace TrinityCreator.Shared.Profiles
 
         [JsonIgnore]
         public string LocalPath { get; set; }
+
+        [JsonIgnore]
+        public List<CustomDisplayField> CustomDisplayFields { get; set; } 
+            = new List<CustomDisplayField>();
 
         // <tableName, <appKey, sqlKey>>
         public Dictionary<string, Dictionary<string, string>> Creature { get; set; }
@@ -59,6 +64,7 @@ namespace TrinityCreator.Shared.Profiles
                          Environment.NewLine + "Values may export correctly until you update the application.",
                         Logger.Status.Warning, showMessageBox:true);
 
+                // Set active profile & fire event
                 _activeProfile = value;
                 if (ActiveProfileChangedEvent != null)
                     ActiveProfileChangedEvent(Profile.Active, new EventArgs());
@@ -74,10 +80,29 @@ namespace TrinityCreator.Shared.Profiles
         {
             try
             {
+                // Load profile from file
                 Logger.Log($"Profile: LoadFile: {filePath}");
                 string json = File.ReadAllText(filePath);
                 Profile p = JsonConvert.DeserializeObject<Profile>(json);
+
+                // Define additional implied properties
                 p.LocalPath = filePath;
+
+                // Load CustomDisplayFields
+                // example format:
+                //"creature_template_spells": {
+                //    "Creature.Entry": "entry"
+                //}
+                p.CustomDisplayFields = new List<CustomDisplayField>();
+                foreach (var tableData in p.CustomFields)
+                    foreach (var kvp in tableData.Value)
+                    {
+                        var customDisplayField = CustomDisplayField.Create(tableData.Key, kvp.Value, kvp.Key);
+                        if (customDisplayField != null)
+                            p.CustomDisplayFields.Add(customDisplayField);
+                    }
+
+                // Return result
                 return p;
             }
             catch (Exception ex)

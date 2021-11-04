@@ -93,6 +93,16 @@ namespace TrinityCreator.Shared.Tools.ItemCreator
 
             // show resistances in preview
             _item.Resistances.DynamicDataChanged += ResistanceChangedHandler;
+
+            // Custom Display Field
+            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Export.C.Item);
+            Profile.ActiveProfileChangedEvent += Profile_ActiveProfileChangedEvent;
+        }
+
+        private void Profile_ActiveProfileChangedEvent(object sender, EventArgs e)
+        {
+            // Custom Display Field
+            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Export.C.Item);
         }
 
 

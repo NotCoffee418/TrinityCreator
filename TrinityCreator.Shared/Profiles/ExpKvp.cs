@@ -15,10 +15,10 @@ namespace TrinityCreator.Shared.Profiles
         /// <summary>
         /// Constructor for default fields. Runs gtk to define properties
         /// </summary>
-        /// <param name="appKey"></param>
-        /// <param name="value"></param>
-        /// <param name="c"></param>
-        /// <param name="specialTableName"></param>
+        /// <param name="appKey">Column name</param>
+        /// <param name="value">Cell data to insert</param>
+        /// <param name="c">Creator type</param>
+        /// <param name="specialTableName">???</param>
         public ExpKvp(string appKey, dynamic value, Export.C c, string specialTableName = "")
         {
             Value = value;

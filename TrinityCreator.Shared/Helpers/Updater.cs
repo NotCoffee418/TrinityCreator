@@ -31,7 +31,7 @@ namespace TrinityCreator.Shared.Helpers
                     AutoUpdater.ReportErrors = true;
                     AutoUpdater.Mandatory = true;
                 }
-                AutoUpdater.Start("https://raw.githubusercontent.com/NotCoffee418/TrinityCreator/master/TrinityCreator/Properties/AssemblyInfo.cs", Assembly.GetExecutingAssembly());
+                AutoUpdater.Start("https://raw.githubusercontent.com/NotCoffee418/TrinityCreator/master/TrinityCreator.Shared/Properties/AssemblyInfo.cs", Assembly.GetExecutingAssembly());
             }
             catch (Exception ex)
             {

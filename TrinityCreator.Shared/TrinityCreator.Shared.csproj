@@ -153,6 +153,7 @@
     <Compile Include="Helpers\GHelper.cs" />
     <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Helpers\ProfileHelper.cs" />
+    <Compile Include="Helpers\UiHelper.cs" />
     <Compile Include="Helpers\Updater.cs" />
     <Compile Include="Profiles\ExpKvp.cs" />
     <Compile Include="Profiles\Export.cs" />
@@ -261,6 +262,9 @@
     <Compile Include="UI\UIElements\Browser.xaml.cs">
       <DependentUpon>Browser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UIElements\CustomDisplayFieldControl.xaml.cs">
+      <DependentUpon>CustomDisplayFieldControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UIElements\DynamicDataControl.xaml.cs">
       <DependentUpon>DynamicDataControl.xaml</DependentUpon>
     </Compile>
@@ -358,6 +362,10 @@
     <Page Include="UI\UIElements\Browser.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\UIElements\CustomDisplayFieldControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\UIElements\DynamicDataControl.xaml">
       <Generator>MSBuild:Compile</Generator>

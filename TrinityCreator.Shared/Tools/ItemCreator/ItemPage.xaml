@@ -246,6 +246,9 @@
                     </Grid>
                 </GroupBox>
 
+
+                <GroupBox x:Name="customDisplayFieldGb" Header="Custom Display Fields" />
+
                 <GroupBox Name="GemsGroupBox" Header="Gem Sockets"
                           Visibility="{Binding ElementName=AddGemSocketsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}">
                     <StackPanel>

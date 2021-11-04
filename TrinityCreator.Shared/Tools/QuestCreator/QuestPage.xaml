@@ -204,6 +204,8 @@
 
                         <Button Content="Find Faction ID" Click="findFactionBtn_Click" Margin="0,10,0,0"/>
                         <GroupBox Name="FactionRewardsBox" Header="Reward reputation" Content="{Binding FactionRewards, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <GroupBox x:Name="customDisplayFieldGb" Header="Custom Display Fields" />
                         
                         <GroupBox Name="questFlagsGb" Header="Quest Flags" Content="{Binding Flags}" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
                         <GroupBox Name="questSpecialFlagsGb" Header="Quest Special Flags" Content="{Binding SpecialFlags}" Visibility="{Binding ElementName=setFlagsCb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />

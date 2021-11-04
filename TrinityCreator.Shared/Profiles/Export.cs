@@ -11,6 +11,7 @@ using TrinityCreator.Shared.Tools.QuestCreator;
 using TrinityCreator.Shared.Tools.LootCreator;
 using TrinityCreator.Shared.Tools.VendorCreator;
 using TrinityCreator.Shared.Data;
+using System.Text.RegularExpressions;
 
 namespace TrinityCreator.Shared.Profiles
 {
@@ -715,18 +716,7 @@ namespace TrinityCreator.Shared.Profiles
         private static void IncludeCustomFields(ref List<ExpKvp> data, C toolType, dynamic subject)
         {
             Logger.Log($"Export: Called IncludeCustomFields for {toolType.ToString()} with profile: '{Profile.Active.Name}' - Revision {Profile.Active.Revision}");
-            // Check for invalid custom fields
-            // See Profile.cs to explain confusing structure. <table, <appKey, sqlKey>>
-            var invalidCustoms = Profile.Active.CustomFields
-                .Where(v => v.Value
-                    .Where(k2 => k2.Key.Split('.').Length == 1).Count() > 0
-                );
-            if (invalidCustoms.Count() > 0)
-            {
-                Logger.Log("Profile Error: Invalid custom field reference detected. Custom fields must be structured like CreationType.AppKey (eg. Quest.EntryId).", Logger.Status.Error, true);
-                Logger.Log("Skipped custom fields, will export but only on primary table. Certain features will not be exported correctly.", Logger.Status.Warning, true);
-                return;
-            }
+            Regex rCustomDisplay = new Regex(@"(Creature|Item|Quest).(CustomText|CustomInt|CustomFloat).(\S+)");
 
             // Find customs relevant to this export (eg only grab items containing Quest.xyz if toolType is Quest)
             var relevantFields = Profile.Active.CustomFields
@@ -738,93 +728,147 @@ namespace TrinityCreator.Shared.Profiles
             foreach (var tableKv in relevantFields)
                 foreach (var corrKeys in tableKv.Value)
                 {
-                    if (!corrKeys.Key.StartsWith(toolType.ToString()))
+                    // Match Custom DISPLAY Field
+                    if (rCustomDisplay.IsMatch(corrKeys.Key))
+                    {
+                        // Find associated CustomDisplay
+                        CustomDisplayField cdf = Profile.Active.CustomDisplayFields
+                            .Where(x => x.FullCustomFieldName == corrKeys.Key)
+                            .FirstOrDefault();
+                        if (cdf == null)
+                        {
+                            Logger.Log(
+                                $"Failed to find custom key in profile for {corrKeys.Key}. Exporting without this column.", 
+                                Logger.Status.Warning, showMessageBox:true);
+                            continue;
+                        }
+
+                        // Define value in it's correct type
+                        dynamic parsedValue = null;
+                        var rMatch = rCustomDisplay.Match(corrKeys.Key);
+                        switch (rMatch.Groups[2].Value)
+                        {
+                            case "CustomInt":
+                                int parsedInt;
+                                if (int.TryParse(cdf.InputValue, out parsedInt))
+                                    parsedValue = parsedInt;
+                                break;
+                            case "CustomFloat":
+                                double parsedFloat;
+                                if (double.TryParse(cdf.InputValue, out parsedFloat))
+                                    parsedValue = parsedFloat;
+                                break;
+                            default: // string
+                                parsedValue = cdf.InputValue;
+                                break;
+                        }
+
+                        // Validate parse
+                        if (parsedValue == null)
+                        {
+                            Logger.Log(
+                                $"Failed to parse input value for {corrKeys.Key} as {rMatch.Groups[2].Value}. Exporting without this column.", 
+                                Logger.Status.Warning, showMessageBox:true);
+                            continue;
+                        }
+
+                        data.Add(new ExpKvp(cdf.Column, parsedValue, cdf.Table));
+
+                    }
+
+                    // Handle invalid tool
+                    else if (!corrKeys.Key.StartsWith(toolType.ToString()))
                     {
                         Logger.Log($"Unrelated custom key ({corrKeys.Key}) for a table that contains custom key(s) for another type somehow. Ignoring");
                         continue;
                     }
 
-                    string pname = "???"; // For error output
-                    try
+                    // Handle regular custom field
+                    else
                     {
-                        string propertyName = corrKeys.Key.Split('.')[1];
-                        dynamic propertyValue = null;
-
-                        if (propertyName == "Empty") // Can be used for columns with no default values
+                        string pname = "???"; // For error output
+                        try
                         {
-                            // Error if invalid empty
-                            if (corrKeys.Key.Count() < 3)
+                            string propertyName = corrKeys.Key.Split('.')[1];
+                            dynamic propertyValue = null;
+
+                            if (propertyName == "Empty") // Can be used for columns with no default values
                             {
-                                Logger.Log("Profile error: Attempted to call Empty incorrectly. You must define a type, eg: Creature.Empty.String. See documentation.",
-                                    Logger.Status.Error, true);
-                                continue; // Skip the blank.
+                                // Error if invalid empty
+                                if (corrKeys.Key.Count() < 3)
+                                {
+                                    Logger.Log("Profile error: Attempted to call Empty incorrectly. You must define a type, eg: Creature.Empty.String. See documentation.",
+                                        Logger.Status.Error, true);
+                                    continue; // Skip the blank.
+                                }
+
+                                switch (corrKeys.Key.Split('.')[2])
+                                {
+                                    case "String":
+                                        propertyValue = string.Empty;
+                                        break;
+                                    case "Int":
+                                        propertyValue = 0;
+                                        break;
+                                    case "Float":
+                                        propertyValue = 0f;
+                                        break;
+                                    default:
+                                        Logger.Log("Profile Error: Invalid empty type specified. See documentation.");
+                                        break;
+                                }
+                            }
+                            else if (propertyName == "Custom")
+                            {
+                                // todo: Allows custom default values to be defined other than blank.
+                                // should use a new groupbox with Key and Value with eg Creature.Custom.MyValue1 loading the "value" of the "key" with that name
+                                // Will use CustomDefaultValues portion of profile
+                                Logger.Log("Profile Error: Custom values are not implemented in this version of TrinityCreator. Please update to the latest version.",
+                                    Logger.Status.Warning, true);
+                                continue;
+                            }
+                            else // Attempt to access Trinity* property by name
+                            {
+                                // Determine key, value and place it in data
+                                propertyValue = subject.GetType().GetProperty(propertyName).GetValue(subject, null);
+                                pname = propertyName;
                             }
 
-                            switch (corrKeys.Key.Split('.')[2])
+                            // Attempt to handle wildcard table names in a questionable manner
+                            // These need to be manually identified
+                            string tableName = tableKv.Key;
+                            if (tableName.Contains("%t"))
                             {
-                                case "String":
-                                    propertyValue = string.Empty;
-                                    break;
-                                case "Int":
-                                    propertyValue = 0;
-                                    break;
-                                case "Float":
-                                    propertyValue = 0f;
-                                    break;
-                                default:
-                                    Logger.Log("Profile Error: Invalid empty type specified. See documentation.");
-                                    break;
-                            }
-                        }
-                        else if (propertyName == "Custom")
-                        {
-                            // todo: Allows custom default values to be defined other than blank.
-                            // should use a new groupbox with Key and Value with eg Creature.Custom.MyValue1 loading the "value" of the "key" with that name
-                            // Will use CustomDefaultValues portion of profile
-                            Logger.Log("Profile Error: Custom values are not implemented in this version of TrinityCreator. Please update to the latest version.",
-                                Logger.Status.Warning, true);
-                            continue;
-                        }
-                        else // Attempt to access Trinity* property by name
-                        {
-                            // Determine key, value and place it in data
-                            propertyValue = subject.GetType().GetProperty(propertyName).GetValue(subject, null);
-                            pname = propertyName;
-                        }
-
-                        // Attempt to handle wildcard table names in a questionable manner
-                        // These need to be manually identified
-                        string tableName = tableKv.Key;
-                        if (tableName.Contains("%t"))
-                        {
-                            // Handle quest customs
-                            if (toolType == C.Quest)
-                            {
-                                if (tableName.Contains("queststarter"))
-                                    tableName = tableName.Replace("%t", ((TrinityQuest)subject).QuestgiverType);
-                                else if (tableName.Contains("questender"))
-                                    tableName = tableName.Replace("%t", ((TrinityQuest)subject).QuestCompleterType);
+                                // Handle quest customs
+                                if (toolType == C.Quest)
+                                {
+                                    if (tableName.Contains("queststarter"))
+                                        tableName = tableName.Replace("%t", ((TrinityQuest)subject).QuestgiverType);
+                                    else if (tableName.Contains("questender"))
+                                        tableName = tableName.Replace("%t", ((TrinityQuest)subject).QuestCompleterType);
+                                    else
+                                    {
+                                        Logger.Log("Profile Error: QuestGiver customs with wildcard only accept tablenames containing 'queststarter' and 'questender'." + Environment.NewLine +
+                                            "This is because customs have no other way to identify that the custom is in relation to queststarter/ender." + Environment.NewLine +
+                                            "If this causes issues, it's preferable to just use 'creature_questender' instead of '%t_questender' and starter.",
+                                            Logger.Status.Error, true);
+                                    }
+                                }
                                 else
                                 {
-                                    Logger.Log("Profile Error: QuestGiver customs with wildcard only accept tablenames containing 'queststarter' and 'questender'." + Environment.NewLine +
-                                        "This is because customs have no other way to identify that the custom is in relation to queststarter/ender." + Environment.NewLine +
-                                        "If this causes issues, it's preferable to just use 'creature_questender' instead of '%t_questender' and starter.",
+                                    Logger.Log($"Wildcards in custom fields have limited support and must conform to specific values. Custom for {corrKeys.Key} could not be processed.",
                                         Logger.Status.Error, true);
                                 }
                             }
-                            else
-                            {
-                                Logger.Log($"Wildcards in custom fields have limited support and must conform to specific values. Custom for {corrKeys.Key} could not be processed.",
-                                    Logger.Status.Error, true);
-                            }
-                        }
 
-                        data.Add(new ExpKvp(corrKeys.Value, propertyValue, tableName));
+                            data.Add(new ExpKvp(corrKeys.Value, propertyValue, tableName));
+                        }
+                        catch
+                        {
+                            Logger.Log($"Profile Error: Invalid application key defined in custom fields (Name: {pname}). Skipping this custom field.", Logger.Status.Error, true);
+                        }
                     }
-                    catch 
-                    {
-                        Logger.Log($"Profile Error: Invalid application key defined in custom fields (Name: {pname}). Skipping this custom field.", Logger.Status.Error, true);
-                    }                    
+                                     
                 }
         }
     }

@@ -338,6 +338,8 @@
                         <GroupBox Header="Bytes1" Content="{Binding Bytes1}" Visibility="{Binding ElementName=setByte1Cb, Path=IsChecked, Converter={StaticResource ValueVisibilityConverter}}" />
                     </StackPanel>
                 </GroupBox>
+
+                <GroupBox x:Name="customDisplayFieldGb" Header="Custom Display Fields" />
             </StackPanel>
         </ScrollViewer>
     </DockPanel>

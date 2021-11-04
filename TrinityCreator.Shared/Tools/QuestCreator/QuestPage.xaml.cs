@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrinityCreator.Shared.Helpers;
 using TrinityCreator.Shared.Profiles;
 using TrinityCreator.Shared.Tools.LookupTool;
 using TrinityCreator.Shared.UI.UIElements;
@@ -212,6 +213,9 @@ namespace TrinityCreator.Shared.Tools.QuestCreator
             // Quest XP handling (modifier or raw)
             RewardXpDifficultyDp.Visibility = Profile.Active.VisibileIfKeyDefined(c, "RewardXpDifficulty");
             RewardXpRawDp.Visibility = Profile.Active.VisibileIfKeyDefined(c, "RewardXpRaw");
+
+            // Custom Display Field
+            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Export.C.Quest);
         }
 
     }
