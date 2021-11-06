@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using TrinityCreator.Shared.Data;
 using TrinityCreator.Shared.Profiles;
 using TrinityCreator.Shared.UI.UIElements;
 
@@ -15,16 +16,11 @@ namespace TrinityCreator.Shared.Helpers
         /// <summary>
         /// Display CustomDisplayFields to a groupbox
         /// </summary>
-        public static void PrepareCustomDisplayFields(GroupBox cdfGb, Export.C type)
+        public static void PrepareCustomDisplayFields(GroupBox cdfGb, ICreator creator)
         {
-            // Grab all custom display fields for defined type
-            var customDisplayFields = Profile.Active.CustomDisplayFields
-                .Where(x => x.ExportType == type)
-                .ToList();
-
             // Clear groupbox, hide if CustomDisplayFields is not applicable
             cdfGb.Content = null;
-            if (!customDisplayFields.Any())
+            if (!creator.CustomDisplayFields.Any())
             {
                 cdfGb.Visibility = Visibility.Collapsed;
                 return;
@@ -33,7 +29,7 @@ namespace TrinityCreator.Shared.Helpers
             // Display all relevant customdisplayfields
             cdfGb.Visibility = Visibility.Visible;
             StackPanel content = new StackPanel();
-            foreach (var field in customDisplayFields)
+            foreach (var field in creator.CustomDisplayFields)
                 content.Children.Add(new CustomDisplayFieldControl(field));
             cdfGb.Content = content;
         }

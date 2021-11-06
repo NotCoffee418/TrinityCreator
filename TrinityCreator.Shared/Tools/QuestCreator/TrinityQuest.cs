@@ -12,11 +12,12 @@ using TrinityCreator.Shared.UI.UIElements;
 
 namespace TrinityCreator.Shared.Tools.QuestCreator
 {
-    public class TrinityQuest : INotifyPropertyChanged
+    public class TrinityQuest : INotifyPropertyChanged, ICreator
     {
         public TrinityQuest()
         {
             EntryId = LookupQuery.GetNextId(Export.C.Quest);
+            CustomDisplayFields = Profile.Active.GetCustomDisplayFields(Export.C.Quest);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -563,8 +564,15 @@ namespace TrinityCreator.Shared.Tools.QuestCreator
                 RaisePropertyChanged("FactionRewards");
             }
         }
-        #endregion       
-        
+        #endregion
+
+
+
+        public Export.C ExportType { get; } = Export.C.Quest;
+        public List<CustomDisplayField> CustomDisplayFields { get; set; }
+            = new List<CustomDisplayField>();
+
+
         public void RaisePropertyChanged(string property)
         {
             if (PropertyChanged != null)

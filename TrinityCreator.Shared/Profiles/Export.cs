@@ -690,7 +690,8 @@ namespace TrinityCreator.Shared.Profiles
                     return "";
                 }
 
-                sql += GenerateSql(new List<ExpKvp>()
+                // Default values
+                var vendorEntry = new List<ExpKvp>()
                 {
                     new ExpKvp("NpcEntry", NpcEntry, C.Vendor),
                     new ExpKvp("Item", Item, C.Vendor),
@@ -698,11 +699,15 @@ namespace TrinityCreator.Shared.Profiles
                     new ExpKvp("MaxCount", MaxCount, C.Vendor),
                     new ExpKvp("IncrTime", IncrTime, C.Vendor),
                     new ExpKvp("ExtendedCost", ExtendedCost, C.Vendor),
-                }) + Environment.NewLine;
+                };
 
+                // Add Custom fields
+                IncludeCustomFields(ref vendorEntry, C.Vendor, row);
+
+                // Generate vendor entry
+                sql += GenerateSql(vendorEntry) + Environment.NewLine;
             }
 
-            // todo: Custom fields not supported for vendor
             return sql;
         }
 
@@ -716,7 +721,7 @@ namespace TrinityCreator.Shared.Profiles
         private static void IncludeCustomFields(ref List<ExpKvp> data, C toolType, dynamic subject)
         {
             Logger.Log($"Export: Called IncludeCustomFields for {toolType.ToString()} with profile: '{Profile.Active.Name}' - Revision {Profile.Active.Revision}");
-            Regex rCustomDisplay = new Regex(@"(Creature|Item|Quest).(CustomText|CustomInt|CustomFloat).(\S+)");
+            Regex rCustomDisplay = new Regex(@"(Creature|Item|Quest|Vendor).(CustomText|CustomInt|CustomFloat).(\S+)");
 
             // Find customs relevant to this export (eg only grab items containing Quest.xyz if toolType is Quest)
             var relevantFields = Profile.Active.CustomFields
@@ -731,8 +736,15 @@ namespace TrinityCreator.Shared.Profiles
                     // Match Custom DISPLAY Field
                     if (rCustomDisplay.IsMatch(corrKeys.Key))
                     {
+                        // Validate creator as ICreatorData
+                        if (!((Type)subject.GetType()).GetInterfaces().Contains(typeof(ICreator)))
+                        {
+                            throw new Exception("Failed to assign CustomDisplayField. " +
+                                "This creator does not implement ICreatorData.");
+                        }
+
                         // Find associated CustomDisplay
-                        CustomDisplayField cdf = Profile.Active.CustomDisplayFields
+                        CustomDisplayField cdf = ((ICreator)subject).CustomDisplayFields
                             .Where(x => x.FullCustomFieldName == corrKeys.Key)
                             .FirstOrDefault();
                         if (cdf == null)

@@ -35,8 +35,8 @@ namespace TrinityCreator.Shared.Profiles
         public string LocalPath { get; set; }
 
         [JsonIgnore]
-        public List<CustomDisplayField> CustomDisplayFields { get; set; } 
-            = new List<CustomDisplayField>();
+        private Dictionary<Export.C, List<(string, string, string)>> CustomDisplayFieldStructure
+            = new Dictionary<Export.C, List<(string, string, string)>>();
 
         // <tableName, <appKey, sqlKey>>
         public Dictionary<string, Dictionary<string, string>> Creature { get; set; }
@@ -93,13 +93,22 @@ namespace TrinityCreator.Shared.Profiles
                 //"creature_template_spells": {
                 //    "Creature.Entry": "entry"
                 //}
-                p.CustomDisplayFields = new List<CustomDisplayField>();
                 foreach (var tableData in p.CustomFields)
                     foreach (var kvp in tableData.Value)
                     {
                         var customDisplayField = CustomDisplayField.Create(tableData.Key, kvp.Value, kvp.Key);
                         if (customDisplayField != null)
-                            p.CustomDisplayFields.Add(customDisplayField);
+                        {
+                            // Create export type if not known
+                            if (!p.CustomDisplayFieldStructure.ContainsKey(customDisplayField.ExportType))
+                                p.CustomDisplayFieldStructure.Add(
+                                    customDisplayField.ExportType,
+                                    new List<(string, string, string)>());
+
+                            // Add structure to it
+                            p.CustomDisplayFieldStructure[customDisplayField.ExportType]
+                                .Add((tableData.Key, kvp.Value, kvp.Key));
+                        }
                     }
 
                 // Return result
@@ -107,11 +116,15 @@ namespace TrinityCreator.Shared.Profiles
             }
             catch (Exception ex)
             {
-                Logger.Log("Failed to load profile '" + filePath + ". This profile may be corrupt or for a different version of TrinityCreator. Please update TrinityCreator and try again.", Logger.Status.Error, showError);
+                Logger.Log("Failed to load profile '" + filePath + 
+                    ". This profile may be corrupt or for a different version of TrinityCreator. " +
+                    "Please update TrinityCreator and try again." + Environment.NewLine
+                    + "Error Details: " + ex.Message, Logger.Status.Error, showError);
                 return null;
             }
         }
 
+        
         public static List<Profile> ListProfiles()
         {
             // Prepare directories
@@ -222,6 +235,26 @@ namespace TrinityCreator.Shared.Profiles
         public Visibility VisibileIfKeyDefined(Export.C cType, string appKey)
         {
             return IsKeyDefined(cType, appKey) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Gets the custom display fields for a new instance of a ICreator class.
+        /// </summary>
+        /// <param name="CreatorType"></param>
+        /// <returns></returns>
+        public List<CustomDisplayField> GetCustomDisplayFields(Export.C CreatorType)
+        {
+            List<CustomDisplayField> result = new List<CustomDisplayField>();
+
+            // Creator has no custom display fields
+            if (!CustomDisplayFieldStructure.ContainsKey(CreatorType))
+                return result;
+
+            // Create instance of custom display field for this creator and return
+            foreach (var structure in CustomDisplayFieldStructure[CreatorType])
+                result.Add(CustomDisplayField.Create(structure.Item1, structure.Item2, structure.Item3));
+
+            return result;
         }
     }
 }

@@ -12,23 +12,41 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrinityCreator.Shared.Data;
+using TrinityCreator.Shared.Helpers;
+using TrinityCreator.Shared.Profiles;
 
 namespace TrinityCreator.Shared.Tools.VendorCreator
 {
     /// <summary>
     /// Interaction logic for VendorEntryControl.xaml
     /// </summary>
-    public partial class VendorEntryControl : UserControl
+    public partial class VendorEntryControl : UserControl, ICreator
     {
         public VendorEntryControl()
         {
             InitializeComponent();
+            CustomDisplayFields = Profile.Active.GetCustomDisplayFields(Export.C.Vendor);
+            Profile.ActiveProfileChangedEvent += Profile_ActiveProfileChangedEvent;
+            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, this);
+        }
+
+
+
+        public Export.C ExportType { get; } = Export.C.Creature;
+        public List<CustomDisplayField> CustomDisplayFields { get; set; }
+            = new List<CustomDisplayField>();
+
+        private void Profile_ActiveProfileChangedEvent(object sender, EventArgs e)
+        {
+            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, this);
         }
 
         public event EventHandler RemoveRequestEvent;
 
         private void removeMeBtn_Click(object sender, RoutedEventArgs e)
         {
+            Profile.ActiveProfileChangedEvent -= Profile_ActiveProfileChangedEvent;
             RemoveRequestEvent(this, e);
         }
 

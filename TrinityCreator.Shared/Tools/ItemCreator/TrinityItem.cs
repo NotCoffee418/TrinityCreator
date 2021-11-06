@@ -9,12 +9,13 @@ using TrinityCreator.Shared.UI.UIElements;
 
 namespace TrinityCreator.Shared.Tools.ItemCreator
 {
-    public class TrinityItem : INotifyPropertyChanged
+    public class TrinityItem : INotifyPropertyChanged, ICreator
     {
         public TrinityItem()
         {
             EntryId = LookupQuery.GetNextId(Export.C.Item);
             ValueBuy.PropertyChanged += ValueBuy_PropertyChanged;
+            CustomDisplayFields = Profile.Active.GetCustomDisplayFields(Export.C.Item);
         }
 
         private BitmaskStackPanel _allowedclass;
@@ -53,6 +54,12 @@ namespace TrinityCreator.Shared.Tools.ItemCreator
         private int _requiredDisenchantSkill;
         private int _disenchantLootId;
         private bool _autoSetValueSell = true;
+
+
+
+        public Export.C ExportType { get; } = Export.C.Creature;
+        public List<CustomDisplayField> CustomDisplayFields { get; set; }
+            = new List<CustomDisplayField>();
 
         public string Name
         {
@@ -481,6 +488,8 @@ namespace TrinityCreator.Shared.Tools.ItemCreator
                 RaisePropertyChanged("DisenchantLootId");
             }
         }
+
+
 
         #region Logic
 

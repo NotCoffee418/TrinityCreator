@@ -215,7 +215,7 @@ namespace TrinityCreator.Shared.Tools.QuestCreator
             RewardXpRawDp.Visibility = Profile.Active.VisibileIfKeyDefined(c, "RewardXpRaw");
 
             // Custom Display Field
-            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Export.C.Quest);
+            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Quest);
         }
 
     }

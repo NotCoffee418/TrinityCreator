@@ -51,13 +51,13 @@ namespace TrinityCreator.Shared.Tools.CreatureCreator
             PrepCb(creatureTypeCb, XmlKeyValue.FromXml("CreatureType"));
             PrepCb(aiNameCb, XmlKeyValue.FromXml("AI"));
             PrepCb(movementCb, XmlKeyValue.FromXml("MovementType"));
-            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Export.C.Creature);
+            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Creature);
             Profile.ActiveProfileChangedEvent += Profile_ActiveProfileChangedEvent;
         }
 
         private void Profile_ActiveProfileChangedEvent(object sender, EventArgs e)
         {
-            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Export.C.Creature);
+            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Creature);
         }
 
         private void PrepCb(ComboBox cb, IKeyValue[] src)
