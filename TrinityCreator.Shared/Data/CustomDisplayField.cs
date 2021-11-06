@@ -70,7 +70,7 @@ namespace TrinityCreator.Shared.Data
             string fullCustomFieldName)
         {
             Regex regex = new Regex(
-                @"(Item|Quest|Creature)\.Custom(Int|Float|Text)\.(.+)");
+                @"(Creature|Item|Quest|Vendor)\.Custom(Int|Float|Text)\.(.+)");
 
             // return null if not valid or not custom DISPLAY
             if (!regex.IsMatch(fullCustomFieldName))
@@ -95,6 +95,9 @@ namespace TrinityCreator.Shared.Data
                     break;
                 case "Creature":
                     result.ExportType = Export.C.Creature;
+                    break;
+                case "Vendor":
+                    result.ExportType = Export.C.Vendor;
                     break;
                 default:
                     throw new ArgumentException(

@@ -17,6 +17,7 @@
                 <Button Content="Lookup" Width="80" Click="itemLookupBtn_Click" DockPanel.Dock="Right" Margin="2,0,0,0"/>
                 <TextBox Name="itemTb"/>
             </DockPanel>
+            <GroupBox x:Name="customDisplayFieldGb" Header="Custom Display Fields" />
             <DockPanel Margin="2">
                 <CheckBox Margin="5" Content="Advanced Options" Name="advancedCb" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Button Name="removeMeBtn" Margin="5" Width="24" Height="24" HorizontalAlignment="Right" Click="removeMeBtn_Click">

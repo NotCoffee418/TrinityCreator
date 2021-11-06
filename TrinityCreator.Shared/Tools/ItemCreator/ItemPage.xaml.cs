@@ -95,14 +95,14 @@ namespace TrinityCreator.Shared.Tools.ItemCreator
             _item.Resistances.DynamicDataChanged += ResistanceChangedHandler;
 
             // Custom Display Field
-            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Export.C.Item);
+            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, _item);
             Profile.ActiveProfileChangedEvent += Profile_ActiveProfileChangedEvent;
         }
 
         private void Profile_ActiveProfileChangedEvent(object sender, EventArgs e)
         {
             // Custom Display Field
-            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, Export.C.Item);
+            UiHelper.PrepareCustomDisplayFields(customDisplayFieldGb, _item);
         }
 
 

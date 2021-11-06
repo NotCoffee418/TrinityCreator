@@ -127,6 +127,7 @@
     <Compile Include="Data\CustomDisplayField.cs" />
     <Compile Include="Data\Damage.cs" />
     <Compile Include="Data\DamageType.cs" />
+    <Compile Include="Data\ICreator.cs" />
     <Compile Include="Data\IKeyValue.cs" />
     <Compile Include="Data\ItemClass.cs" />
     <Compile Include="Data\ItemInventoryType.cs" />

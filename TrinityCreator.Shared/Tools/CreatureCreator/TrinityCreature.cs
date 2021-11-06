@@ -11,11 +11,12 @@ using TrinityCreator.Shared.UI.UIElements;
 
 namespace TrinityCreator.Shared.Tools.CreatureCreator
 {
-    public class TrinityCreature : INotifyPropertyChanged
+    public class TrinityCreature : INotifyPropertyChanged, ICreator
     {
         public TrinityCreature()
         {
             Entry = LookupQuery.GetNextId(Export.C.Creature);
+            CustomDisplayFields = Profile.Active.GetCustomDisplayFields(Export.C.Creature);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -89,6 +90,14 @@ namespace TrinityCreator.Shared.Tools.CreatureCreator
 
 
         #region Properties
+
+
+
+        public Export.C ExportType { get; } = Export.C.Creature;
+        public List<CustomDisplayField> CustomDisplayFields { get; set; }
+            = new List<CustomDisplayField>();
+
+
         public int Entry
         {
             get { return _entry; }
@@ -802,7 +811,6 @@ namespace TrinityCreator.Shared.Tools.CreatureCreator
                 RaisePropertyChanged("Civilian");
             }
         }
-
         #endregion
 
 
