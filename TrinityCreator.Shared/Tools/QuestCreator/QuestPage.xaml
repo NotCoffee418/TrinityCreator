@@ -177,7 +177,7 @@
                             <Image Width="15" Source="/TrinityCreator.Shared;component/Resources/copper.gif" Margin="0,0,10,0" />
                         </StackPanel>
                         <DockPanel Margin="2">
-                            <Label Content="Spell Cast" DockPanel.Dock="Left" Width="120" />
+                            <Label Content="Teach Spell" DockPanel.Dock="Left" Width="120" />
                             <Button Content="Find" DockPanel.Dock="Right" Width="75" Click="findSpellBtn_Click"/>
                             <TextBox Text="{Binding RewardSpell}" DockPanel.Dock="Left" ToolTip="Spell is cast on player when quest is completed."/>
                         </DockPanel>
