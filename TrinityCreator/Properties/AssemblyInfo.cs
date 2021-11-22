@@ -54,6 +54,6 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 
 
-// Don' change this version. Keep it, change the one in Shared!!
-[assembly: AssemblyVersion("1.1.4.123")]
-[assembly: AssemblyFileVersion("1.1.4.123")]
+// change shared version also
+[assembly: AssemblyVersion("1.1.4.124")]
+[assembly: AssemblyFileVersion("1.1.4.124")]
