@@ -91,6 +91,8 @@ namespace TrinityCreator.Shared.Profiles
                         // 'rank' as a column name causes syntax error, its a reserved keyword, needs backtick
                         if (exportColNames[i].ToLower() == "rank")
                             exportColNames[i] = "`rank`";
+                        else if (exportColNames[i].ToLower() == "index")
+                            exportColNames[i] = "`index`";
                     }
 
                     // Generate query
