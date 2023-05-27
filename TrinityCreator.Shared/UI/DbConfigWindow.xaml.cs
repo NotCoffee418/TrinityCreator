@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Media;
-using MySql.Data.MySqlClient;
 using TrinityCreator.Shared.Database;
 using TrinityCreator.Shared.Properties;
 

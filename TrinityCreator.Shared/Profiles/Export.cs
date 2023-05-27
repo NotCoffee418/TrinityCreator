@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Controls;
-using MySql.Data.MySqlClient;
 using TrinityCreator.Shared.Helpers;
 using TrinityCreator.Shared.Tools.CreatureCreator;
 using TrinityCreator.Shared.Tools.ItemCreator;
@@ -12,6 +11,7 @@ using TrinityCreator.Shared.Tools.LootCreator;
 using TrinityCreator.Shared.Tools.VendorCreator;
 using TrinityCreator.Shared.Data;
 using System.Text.RegularExpressions;
+using MySqlConnector;
 
 namespace TrinityCreator.Shared.Profiles
 {
