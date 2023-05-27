@@ -210,40 +210,48 @@ namespace TrinityCreator.Shared.Tools.LookupTool
         {
             LocalSearch = true;
             DataTable result = new DataTable();
-            List<uint> listed = new List<uint>();
-            result.Columns.Add("ID", typeof(int));
-            result.Columns.Add("Name", typeof(string));
-            result.Columns.Add("Description", typeof(string));
 
-            // Get data
-            DataTable dbc = DBCQuery.GetSpells(); // "m_ID", "m_name_lang_1", "m_description_lang_1"
-            (DataTable sql, bool _) = LookupQuery.GetSpells(search); // Id, Comment(name)
-            DataRow newRow = null;
-
-            // Add DBC spells
-            if (dbc.Rows.Count != 1 && dbc.Columns.Count != 1) // Invalid DBC config
+            try
             {
-                foreach (DataRow dr in dbc.Rows)
-                    if (dr["m_name_lang_1"].ToString().Contains(search))
+                List<uint> listed = new List<uint>();
+                result.Columns.Add("ID", typeof(int));
+                result.Columns.Add("Name", typeof(string));
+                result.Columns.Add("Description", typeof(string));
+
+                // Get data
+                DataTable dbc = DBCQuery.GetSpells(); // "m_ID", "m_name_lang_1", "m_description_lang_1"
+                (DataTable sql, bool _) = LookupQuery.GetSpells(search); // Id, Comment(name)
+                DataRow newRow = null;
+
+                // Add DBC spells
+                if (dbc.Rows.Count != 1 && dbc.Columns.Count != 1) // Invalid DBC config
+                {
+                    foreach (DataRow dr in dbc.Rows)
+                        if (dr["m_name_lang_1"].ToString().Contains(search))
+                        {
+                            newRow = result.NewRow();
+                            newRow["ID"] = dr["m_ID"];
+                            newRow["Name"] = dr["m_name_lang_1"];
+                            newRow["Description"] = dr["m_description_lang_1"];
+                            result.Rows.Add(newRow);
+                            listed.Add((uint)dr["m_ID"]);
+                        }
+                }
+
+                // Add unlisted SQL spells
+                foreach (DataRow dr in sql.Rows)
+                    if (!listed.Contains((uint)dr["Id"]))
                     {
                         newRow = result.NewRow();
-                        newRow["ID"] = dr["m_ID"];
-                        newRow["Name"] = dr["m_name_lang_1"];
-                        newRow["Description"] = dr["m_description_lang_1"];
+                        newRow["ID"] = dr["Id"];
+                        newRow["Name"] = dr["SpellName"];
                         result.Rows.Add(newRow);
-                        listed.Add((uint)dr["m_ID"]);
                     }
             }
-
-            // Add unlisted SQL spells
-            foreach (DataRow dr in sql.Rows)
-                if (!listed.Contains((uint)dr["Id"]))
-                {
-                    newRow = result.NewRow();
-                    newRow["ID"] = dr["Id"];
-                    newRow["Name"] = dr["Comment"];
-                    result.Rows.Add(newRow);
-                }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading spell info: " + ex.Message);
+            }
 
             FullDbcTable = result.Copy();
             return result;
