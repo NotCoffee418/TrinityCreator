@@ -55,5 +55,5 @@ using System.Windows;
 
 
 // change shared version also
-[assembly: AssemblyVersion("1.1.4.127")]
-[assembly: AssemblyFileVersion("1.1.4.127")]
+[assembly: AssemblyVersion("1.1.5.128")]
+[assembly: AssemblyFileVersion("1.1.5.128")]
