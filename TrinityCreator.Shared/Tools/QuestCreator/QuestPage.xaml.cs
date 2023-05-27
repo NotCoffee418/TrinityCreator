@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrinityCreator.Shared.Database;
 using TrinityCreator.Shared.Helpers;
 using TrinityCreator.Shared.Profiles;
 using TrinityCreator.Shared.Tools.LookupTool;
@@ -117,6 +118,11 @@ namespace TrinityCreator.Shared.Tools.QuestCreator
         {
             try
             {
+                // Ensure connection is set up
+                if (!Connection.Open(true))
+                    return;
+
+                // Export
                 if (SaveQuery.CheckDuplicateHandleOverride(Export.C.Quest, Quest.EntryId))
                 {
                     string query = Export.Quest(this.Quest);

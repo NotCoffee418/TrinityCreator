@@ -105,7 +105,7 @@ namespace TrinityCreator.Shared.Database
         {
             var r =
                 MessageBox.Show(
-                    "You can only use this feature by configuring and connecting to your world database. Would you like to configure your connection now?",
+                    "You must configure your database before you can access the world database. Would you like to configure your connection now?",
                     "Failed to connect", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             if (r == MessageBoxResult.OK)
                 new DbConfigWindow().Show();

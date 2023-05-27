@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrinityCreator.Shared.Database;
 using TrinityCreator.Shared.Profiles;
 
 namespace TrinityCreator.Shared.Tools.VendorCreator
@@ -66,6 +67,11 @@ namespace TrinityCreator.Shared.Tools.VendorCreator
         {
             try
             {
+                // Ensure connection is set up
+                if (!Connection.Open(true))
+                    return;
+
+                // Export
                 string query = Export.Vendor(this);
                 SaveQuery.ToDatabase(query);
             }

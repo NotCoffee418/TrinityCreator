@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TrinityCreator.Shared.Data;
+using TrinityCreator.Shared.Database;
 using TrinityCreator.Shared.Helpers;
 using TrinityCreator.Shared.Profiles;
 using TrinityCreator.Shared.Tools.LookupTool;
@@ -100,6 +101,11 @@ namespace TrinityCreator.Shared.Tools.CreatureCreator
         {
             try
             {
+                // Ensure connection is set up
+                if (!Connection.Open(true))
+                    return;
+
+                // Export
                 if (SaveQuery.CheckDuplicateHandleOverride(Export.C.Creature, Creature.Entry))
                 {
                     string query = Export.Creature(Creature);

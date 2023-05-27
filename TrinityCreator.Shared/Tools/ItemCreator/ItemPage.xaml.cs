@@ -435,6 +435,11 @@ namespace TrinityCreator.Shared.Tools.ItemCreator
         {
             try
             {
+                // Ensure connection is set up
+                if (!Connection.Open(true))
+                    return;
+
+                // Export
                 string query = Export.Item(_item);
                 if (NeedsWeaponExportWindow())
                     OpenWeaponExportWindow(query, WeaponExportWindow.SaveType.Database);

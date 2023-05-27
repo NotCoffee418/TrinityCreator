@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrinityCreator.Shared.Database;
 using TrinityCreator.Shared.Profiles;
 
 namespace TrinityCreator.Shared.Tools.LootCreator
@@ -64,8 +65,19 @@ namespace TrinityCreator.Shared.Tools.LootCreator
 
         private void exportDbBtn_Click(object sender, RoutedEventArgs e)
         {
-            string query = Export.Loot(this);
-            SaveQuery.ToDatabase(query);
+            try
+            {
+                // Ensure connection is set up
+                if (!Connection.Open(true))
+                    return;
+
+                // Export
+                string query = Export.Loot(this);
+                SaveQuery.ToDatabase(query);
+            }            
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message, "Failed to generate query", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
