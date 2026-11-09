@@ -405,7 +405,7 @@
       <Version>1.0.1774.30</Version>
     </PackageReference>
     <PackageReference Include="MySqlConnector">
-      <Version>2.2.6</Version>
+      <Version>2.6.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
